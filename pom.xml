@@ -1,0 +1,233 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.unitsofmeasurement.impl</groupId>
+	<artifactId>unit-impl-se</artifactId>
+	<version>0.1-SNAPSHOT</version>
+
+	<packaging>bundle</packaging>
+	<name>Units of Measurement Implementation for Java SE</name>
+	<url>https://github.com/unitsofmeasurement/unit-impl-se</url>
+	<description>Units of Measurement Implementation for Java SE JDK Integration of Unit-API / JSR 363</description>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/unitsofmeasurement/unit-impl-se/issues</url>
+    </issueManagement>
+	<organization>
+		<name>Units of Measurement project</name>
+		<url>http://unitsofmeasurement.github.io</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+			<url>LICENSE.txt</url>
+		</license>
+	</licenses>
+	
+     <repositories>
+        <repository>
+            <id>unitsofmeasurement-github-repo</id>
+            <name>Local repository for Unit-API or other Units of Measurement artifacts we depend on</name>
+            <url>https://github.com/unitsofmeasurement/repository/raw/master</url>
+        </repository>
+    </repositories>
+    
+	<!-- ======================================================= -->
+	<!-- Build Settings -->
+	<!-- ======================================================= -->
+	<properties>
+		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
+		<project.build.javaVersion>1.7</project.build.javaVersion>
+		<jsr.version>0.5-SNAPSHOT</jsr.version>
+		<jdkVersion>1.8</jdkVersion>
+		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
+		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.measure</groupId>
+			<artifactId>unit-api-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.measure</groupId>
+			<artifactId>unit-api-format</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>javax.measure</groupId>
+            <artifactId>unit-api-util</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>javax.measure</groupId>
+			<artifactId>unit-api-quantity</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-all</artifactId>
+				<version>1.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.measure</groupId>
+				<artifactId>unit-api-core</artifactId>
+				<version>${jsr.version}</version>
+			</dependency>
+			<dependency>
+                <groupId>javax.measure</groupId>
+                <artifactId>unit-api-util</artifactId>
+                <version>${jsr.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>javax.measure</groupId>
+				<artifactId>unit-api-format</artifactId>
+				<version>${jsr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.measure</groupId>
+				<artifactId>unit-api-quantity</artifactId>
+				<version>${jsr.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<!-- ======================================================= -->
+			<!-- Compilation -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${project.build.javaVersion}</source>
+					<target>${project.build.javaVersion}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- ======================================================= -->
+			<!-- JAR packaging -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Specification-Title>Units of Measurement Implementation fof Java SE</Specification-Title>
+							<Specification-Version>${project.version}</Specification-Version>
+							<Specification-Vendor>${project.organization.name}</Specification-Vendor>
+							<Implementation-Vendor>Unit-API contributors</Implementation-Vendor>
+							<Implementation-URL>${project.organization.url}</Implementation-URL>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+
+			<!-- ======================================================= -->
+			<!-- Packaging (OSGi bundle) -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Export-Package>org.unitsofmeasurement.impl.*</Export-Package>
+						<Private-Package>org.unitsofmeasurement.impl.format.internal.*</Private-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>license</id>
+			<activation>
+				<property>
+					<name>license</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<!-- ======================================================= -->
+						<!-- License -->
+						<!-- ======================================================= -->
+						<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>license-maven-plugin</artifactId> 
+							<version>1.4</version> </plugin> -->
+						<plugin>
+							<groupId>com.google.code.maven-license-plugin</groupId>
+							<artifactId>maven-license-plugin</artifactId>
+							<version>1.4.0</version>
+							<configuration>
+								<basedir>${basedir}</basedir>
+								<header>src/etc/header.txt</header>
+								<quiet>false</quiet>
+								<failIfMissing>true</failIfMissing>
+								<aggregate>false</aggregate>
+								<encoding>UTF-8</encoding>
+								<excludes>
+									<exclude>target/**</exclude>
+									<exclude>nbproject/**</exclude>
+									<exclude>LICENSE*.txt</exclude>
+									<exclude>README.*</exclude>
+									<exclude>checkstyle*.*</exclude>
+									<exclude>*.css</exclude>
+									<exclude>*.launch</exclude>
+								</excludes>
+							</configuration>
+						</plugin>
+						<!-- TODO enable this only for major upgrades (ensure to copy LICENSE.txt 
+							to LICENSE.bak first) -->
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>com.google.code.maven-license-plugin</groupId>
+						<artifactId>maven-license-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>compile</phase>
+								<goals>
+									<goal>format</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<parent>
+		<version>0.5-SNAPSHOT</version>
+		<groupId>org.unitsofmeasurement</groupId>
+		<artifactId>unitsofmeasurement-parent</artifactId>
+	</parent>
+</project>
