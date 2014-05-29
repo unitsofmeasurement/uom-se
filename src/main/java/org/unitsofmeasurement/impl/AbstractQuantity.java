@@ -17,6 +17,7 @@ package org.unitsofmeasurement.impl;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
@@ -653,12 +654,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         return new DecimalQuantity<Q>(decimalValue, unit);
     }
     
-    private static final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+    private static final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
 
         /**
 		 * 
 		 */
-//		private static final long serialVersionUID = 6504081836032983882L;
+		private static final long serialVersionUID = 6504081836032983882L;
+		
 		final BigDecimal value;
 
         public DecimalQuantity(BigDecimal value, Unit<T> unit) {
@@ -731,7 +733,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
 		@Override
 		public boolean isBig() {
-			return false;
+			return true;
 		}
     }   
 
