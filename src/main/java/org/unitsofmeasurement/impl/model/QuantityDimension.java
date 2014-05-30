@@ -22,8 +22,10 @@ import org.unitsofmeasurement.impl.util.SI;
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -229,16 +231,21 @@ public class QuantityDimension implements Dimension {
         return pseudoUnit.toString();
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that)
-            return true;
-        return (that instanceof QuantityDimension) && pseudoUnit.equals(((QuantityDimension) that).pseudoUnit);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof QuantityDimension) {
+			QuantityDimension other = (QuantityDimension) obj;
+			return Objects.equals(pseudoUnit, other.pseudoUnit);
+		}
+		return false;
+	}
 
     @Override
     public int hashCode() {
-        return pseudoUnit.hashCode();
+        return Objects.hashCode(pseudoUnit);
     }
 
 }

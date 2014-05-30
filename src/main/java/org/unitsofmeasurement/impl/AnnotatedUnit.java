@@ -18,7 +18,9 @@ package org.unitsofmeasurement.impl;
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
+
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p> This class represents an annotated unit.</p>
@@ -103,16 +105,19 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 
     @Override
     public int hashCode() {
-        return actualUnit.hashCode() + annotation.hashCode();
+        return Objects.hash(actualUnit, annotation);
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) return true;
-        if (!(that instanceof AnnotatedUnit<?>))
-            return false;
-        AnnotatedUnit<?> thatUnit = (AnnotatedUnit<?>) that;
-        return this.actualUnit.equals(thatUnit.actualUnit) &&
-                this.annotation.equals(thatUnit.annotation);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof AnnotatedUnit<?>) {
+			AnnotatedUnit<?> other = (AnnotatedUnit<?>) obj;
+			return Objects.equals(actualUnit, other.actualUnit)
+					&& Objects.equals(annotation, other.annotation);
+		}
+		return false;
+	}
 }

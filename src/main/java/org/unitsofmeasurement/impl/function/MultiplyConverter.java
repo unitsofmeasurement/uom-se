@@ -17,8 +17,10 @@ package org.unitsofmeasurement.impl.function;
 
 import javax.measure.function.UnitConverter;
 import javax.measure.function.ValueSupplier;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Objects;
 
 /**
  * <p>
@@ -99,16 +101,19 @@ public final class MultiplyConverter extends AbstractConverter implements
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof MultiplyConverter))
-			return false;
-		MultiplyConverter that = (MultiplyConverter) obj;
-		return this.factor == that.factor;
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof MultiplyConverter) {
+			MultiplyConverter that = (MultiplyConverter) obj;
+			return Objects.equals(factor, that.factor);
+		}
+		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		long bits = Double.doubleToLongBits(factor);
-		return (int) (bits ^ (bits >>> 32));
+		return Objects.hashCode(factor);
 	}
 
 	@Override

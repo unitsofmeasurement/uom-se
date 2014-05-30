@@ -24,9 +24,11 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.quantity.Dimensionless;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
+import java.util.Objects;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
@@ -224,13 +226,17 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      *         && this.getValue().equals(obj.getValue())</code>
      */
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof AbstractMeasurement<?>)) {
-            return false;
-        }
-        AbstractMeasurement<?> that = (AbstractMeasurement<?>) obj;
-        return this.getUnit().equals(that.getUnit()) && this.getValue().equals(that.getValue());
-    }
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj instanceof AbstractMeasurement<?>) {
+			AbstractMeasurement<?> that = (AbstractMeasurement<?>) obj;
+			return Objects.equals(getUnit(), that.getUnit())
+					&& Objects.equals(getValue(), that.getValue());
+		}
+		return false;
+	}
 
     /**
      * Compares this measure and the specified Measurement to the given accuracy.
@@ -254,7 +260,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      */
     @Override
     public int hashCode() {
-        return getUnit().hashCode() + getValue().hashCode();
+        return Objects.hash(getUnit(), getValue());
     }
 
     public abstract boolean isBig();

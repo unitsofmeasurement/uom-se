@@ -23,8 +23,11 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>  This class represents units formed by the product of rational powers of
@@ -239,45 +242,21 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         return units;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that)
-            return true;
-        if (!(that instanceof ProductUnit<?>))
-            return false;
-        // Two products are equals if they have the same elements
-        // regardless of the elements' order.
-        Element[] elems = ((ProductUnit<?>) that).elements;
-        if (elements.length != elems.length)
-            return false;
-        for (Element element : elements) {
-            boolean unitFound = false;
-            Element e = element;
-            for (Element elem : elems) {
-                if (e.unit.equals(elem.unit))
-                    if ((e.pow != elem.pow) || (e.root != elem.root))
-                        return false;
-                    else {
-                        unitFound = true;
-                        break;
-                    }
-            }
-            if (!unitFound)
-                return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof ProductUnit<?>) {
+			Element[] elems = ((ProductUnit<?>) obj).elements;
+			return Arrays.equals(elements, elems);
+		}
+		return false;
+	}
 
     @Override
     public int hashCode() {
-        if (this.hashCode != 0)
-            return this.hashCode;
-        int code = 0;
-        for (Element element : elements) {
-            code += element.unit.hashCode() * (element.pow * 3 - element.root * 2);
-        }
-        this.hashCode = code;
-        return code;
+        return Objects.hash( (Object[])elements);
     }
 
     @SuppressWarnings("unchecked")

@@ -19,9 +19,11 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 import javax.measure.*;
 import javax.measure.function.UnitConverter;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.Objects;
 
 /**
  * An amount of measurement, consisting of a Number and a Unit. BaseMeasurement
@@ -36,12 +38,6 @@ import java.math.MathContext;
  */
 public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
 		implements Measurement<Q, Number>, Comparable<BaseMeasurement<Q>> {
-//FIXME Bug 338334 overwrite equals()
-    
-	/**
-	 * 
-	 */
-//	private static final long serialVersionUID = 1794798190459768561L;
 
 	private final Number value;
 	
@@ -52,28 +48,15 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj == this)
+		if (this == obj) {
 			return true;
-		if (this.getClass() == obj.getClass()) {
-			return super.equals(obj);
-		} else {
-			if (obj instanceof Quantity) {
-				@SuppressWarnings("rawtypes")
-				Quantity m = (Quantity) obj;
-				if (m.getValue().getClass() == this.getValue().getClass()
-						&& m.getUnit().getClass() == this.getUnit().getClass()) {
-					return super.equals(obj);
-				} else {
-					// if (this.getQuantityUnit() instanceof AbstractUnit<?>) {
-					// if
-					// }
-					return super.equals(obj);
-				}
-			}
-			return false;
 		}
+		if (obj instanceof Quantity) {
+			Quantity<?> other = (Quantity<?>) obj;
+			return Objects.equals(getValue(), other.getValue())
+					&& Objects.equals(getUnit(), other.getUnit());
+		}
+		return false;
 	}
 
 	/**
@@ -123,9 +106,7 @@ public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<
 			return converter.convert(getValue().doubleValue());
 		} catch (UnconvertibleException e) {
 			throw e;
-		} // catch (IncommensurableException e) {
-		// throw new IllegalArgumentException(e.getMessage());
-		// }
+		} 
 	}
 
 	/*

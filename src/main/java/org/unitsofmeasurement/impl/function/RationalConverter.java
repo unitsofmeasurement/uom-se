@@ -17,9 +17,11 @@ package org.unitsofmeasurement.impl.function;
 
 import javax.measure.function.UnitConverter;
 import javax.measure.function.ValueSupplier;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.Objects;
 
 
 /**
@@ -140,18 +142,23 @@ public final class RationalConverter extends AbstractConverter
         return "RationalConverter(" + dividend + "," + divisor + ")";
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof RationalConverter))
-            return false;
-        RationalConverter that = (RationalConverter) obj;
-        return this.dividend.equals(that.dividend)
-                && this.divisor.equals(that.divisor);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof RationalConverter) {
+
+			RationalConverter that = (RationalConverter) obj;
+			return Objects.equals(dividend, that.dividend)
+					&& Objects.equals(divisor, that.divisor);
+		}
+		return false;
+	}
 
     @Override
     public int hashCode() {
-        return dividend.hashCode() + divisor.hashCode();
+        return Objects.hash(dividend, divisor);
     }
 
     @Override

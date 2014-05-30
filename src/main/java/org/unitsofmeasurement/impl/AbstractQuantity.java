@@ -25,10 +25,12 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.quantity.Dimensionless;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
+import java.util.Objects;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
@@ -225,11 +227,15 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AbstractQuantity<?>)) {
-            return false;
+    	if (this == obj) {
+    		return true;
+    	}
+        if (obj instanceof AbstractQuantity<?>) {
+        	AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
+			return Objects.equals(getUnit(), that.getUnit())
+					&& Objects.equals(getValue(), that.getValue());
         }
-        AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
-        return this.getUnit().equals(that.getUnit()) && this.getValue().equals(that.getValue());
+        return false;
     }
 
     /**
@@ -254,7 +260,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     @Override
     public int hashCode() {
-        return getUnit().hashCode() + getValue().hashCode();
+        return Objects.hash(getUnit(), getValue());
     }
 
     public abstract boolean isBig();

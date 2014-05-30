@@ -16,8 +16,10 @@
 package org.unitsofmeasurement.impl.function;
 
 import javax.measure.function.ValueSupplier;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Objects;
 
 /**
  * <p> This class represents a exponential converter of limited precision.
@@ -83,18 +85,21 @@ final class ExpConverter extends AbstractConverter
         }
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof ExpConverter))
-            return false;
-        ExpConverter that = (ExpConverter) obj;
-        return this.base == that.base;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof ExpConverter) {
+			ExpConverter that = (ExpConverter) obj;
+			return Objects.equals(base, that.base);
+		}
+		return false;
+	}
 
     @Override
     public int hashCode() {
-        long bits = Double.doubleToLongBits(base);
-        return (int) (bits ^ (bits >>> 32));
+        return Objects.hash(base);
     }
 
     @Override
