@@ -15,14 +15,13 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
-import static org.junit.Assert.*;
-import static org.unitsofmeasurement.impl.util.SI.*;
+import org.junit.Test;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.*;
 
-import org.junit.Test;
-import org.unitsofmeasurement.impl.quantity.QuantityFactory;
+import static org.junit.Assert.*;
+import static org.unitsofmeasurement.impl.util.SI.*;
 
 /**
  * @author Werner Keil

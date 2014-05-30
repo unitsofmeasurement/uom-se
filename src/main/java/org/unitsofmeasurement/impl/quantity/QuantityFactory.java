@@ -15,22 +15,21 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
-import static org.unitsofmeasurement.impl.util.SI.*;
+import org.unitsofmeasurement.impl.AbstractMeasurement;
+import org.unitsofmeasurement.impl.BaseQuantity;
+import org.unitsofmeasurement.impl.util.SI;
 
+import javax.measure.Quantity;
+import javax.measure.Unit;
+import javax.measure.function.BiFactory;
+import javax.measure.quantity.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.measure.Quantity;
-import javax.measure.Unit;
-import javax.measure.function.BiFactory;
-import javax.measure.quantity.*;
-
-import org.unitsofmeasurement.impl.AbstractMeasurement;
-import org.unitsofmeasurement.impl.BaseQuantity;
-import org.unitsofmeasurement.impl.util.SI;
+import static org.unitsofmeasurement.impl.util.SI.*;
 
 
 /**

@@ -15,14 +15,13 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
-import static org.junit.Assert.*;
-import static org.unitsofmeasurement.impl.util.SI.METRE;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.measure.quantity.Length;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.unitsofmeasurement.impl.quantity.LengthAmount;
+import static org.junit.Assert.*;
+import static org.unitsofmeasurement.impl.util.SI.METRE;
 
 public class LengthTest {
 

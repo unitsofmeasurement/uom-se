@@ -15,10 +15,10 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 import javax.measure.Unit;
 import javax.measure.quantity.Mass;
-
-import org.unitsofmeasurement.impl.BaseQuantity;
 
 /**
  * Represents the measure of the quantity of matter that a body or an object contains.

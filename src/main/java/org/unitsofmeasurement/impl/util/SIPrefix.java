@@ -15,14 +15,13 @@
  */
 package org.unitsofmeasurement.impl.util;
 
-import java.math.BigInteger;
+import org.unitsofmeasurement.impl.function.ConverterSupplier;
+import org.unitsofmeasurement.impl.function.RationalConverter;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.impl.function.ConverterSupplier;
-import org.unitsofmeasurement.impl.function.RationalConverter;
+import java.math.BigInteger;
 
 /**
  * <p> This class provides support for the 20 SI prefixes used in the metric

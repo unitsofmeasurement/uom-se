@@ -15,17 +15,16 @@
  */
 package org.unitsofmeasurement.impl.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
+import org.unitsofmeasurement.impl.AbstractUnit;
+import org.unitsofmeasurement.impl.BaseUnit;
+import org.unitsofmeasurement.impl.util.SI;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
-
-import org.unitsofmeasurement.impl.AbstractUnit;
-import org.unitsofmeasurement.impl.BaseUnit;
-import org.unitsofmeasurement.impl.util.SI;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 /**
 *  <p> This class represents a quantity dimension (dimension of a physical

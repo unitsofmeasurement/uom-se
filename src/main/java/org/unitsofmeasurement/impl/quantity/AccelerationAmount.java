@@ -15,10 +15,10 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 import javax.measure.Unit;
 import javax.measure.quantity.Acceleration;
-
-import org.unitsofmeasurement.impl.BaseQuantity;
 
 /**
  * Represents the rate of change of velocity with respect to time.

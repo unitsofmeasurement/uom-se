@@ -15,22 +15,6 @@
  */
 package org.unitsofmeasurement.impl.format;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.text.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.measure.Quantity;
-import javax.measure.Unit;
-import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
-import javax.measure.function.UnitConverter;
-
 import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.AnnotatedUnit;
 import org.unitsofmeasurement.impl.format.internal.ParseException;
@@ -41,6 +25,17 @@ import org.unitsofmeasurement.impl.function.MultiplyConverter;
 import org.unitsofmeasurement.impl.function.RationalConverter;
 import org.unitsofmeasurement.impl.util.SI;
 import org.unitsofmeasurement.impl.util.SIPrefix;
+
+import javax.measure.Quantity;
+import javax.measure.Unit;
+import javax.measure.format.ParserException;
+import javax.measure.format.UnitFormat;
+import javax.measure.function.UnitConverter;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.text.ParsePosition;
+import java.util.*;
 
 
 /**

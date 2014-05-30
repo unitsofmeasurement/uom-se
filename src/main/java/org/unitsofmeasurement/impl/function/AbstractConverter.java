@@ -15,12 +15,11 @@
  */
 package org.unitsofmeasurement.impl.function;
 
+import javax.measure.function.UnitConverter;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.measure.function.UnitConverter;
 
 /**
  * <p> The base class for our {@link UnitConverter} physics implementations.</p>

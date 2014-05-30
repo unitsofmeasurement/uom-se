@@ -15,27 +15,17 @@
  */
 package org.unitsofmeasurement.impl.util;
 
-import static org.unitsofmeasurement.impl.util.SI.*;
-import static org.unitsofmeasurement.impl.util.SIPrefix.MICRO;
-
 import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.ProductUnit;
 import org.unitsofmeasurement.impl.TransformedUnit;
 import org.unitsofmeasurement.impl.function.RationalConverter;
 
 import javax.measure.Unit;
-import javax.measure.quantity.Angle;
-import javax.measure.quantity.Area;
-import javax.measure.quantity.Information;
-import javax.measure.quantity.Energy;
-import javax.measure.quantity.Length;
-import javax.measure.quantity.Mass;
-import javax.measure.quantity.Power;
-import javax.measure.quantity.Temperature;
-import javax.measure.quantity.Time;
-import javax.measure.quantity.Speed;
-import javax.measure.quantity.Volume;
+import javax.measure.quantity.*;
 import javax.measure.util.SystemOfUnits;
+
+import static org.unitsofmeasurement.impl.util.SI.*;
+import static org.unitsofmeasurement.impl.util.SIPrefix.MICRO;
 
 /**
  * <p>

@@ -15,11 +15,10 @@
  */
 package org.unitsofmeasurement.impl.function;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-
 import javax.measure.function.UnitConverter;
 import javax.measure.function.ValueSupplier;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * <p>

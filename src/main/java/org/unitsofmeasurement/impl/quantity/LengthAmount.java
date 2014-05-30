@@ -15,10 +15,10 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 import javax.measure.Unit;
 import javax.measure.quantity.Length;
-
-import org.unitsofmeasurement.impl.BaseQuantity;
 
 /**
  * Represents the extent of something along its greatest

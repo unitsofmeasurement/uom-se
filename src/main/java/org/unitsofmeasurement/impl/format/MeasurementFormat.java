@@ -15,13 +15,8 @@
  */
 package org.unitsofmeasurement.impl.format;
 
-import java.math.BigDecimal;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
-import java.io.IOException;
-import java.math.MathContext;
+import org.unitsofmeasurement.impl.AbstractMeasurement;
+import org.unitsofmeasurement.impl.util.SI;
 
 import javax.measure.Measurement;
 import javax.measure.Unit;
@@ -29,9 +24,13 @@ import javax.measure.format.FormatBehavior;
 import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
-
-import org.unitsofmeasurement.impl.AbstractMeasurement;
-import org.unitsofmeasurement.impl.util.SI;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 
 
 

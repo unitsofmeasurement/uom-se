@@ -15,21 +15,20 @@
  */
 package org.unitsofmeasurement.impl;
 
-import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.text.ParsePosition;
+import org.unitsofmeasurement.impl.format.MeasurementFormat;
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+import org.unitsofmeasurement.impl.util.SI;
 
 import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.quantity.Dimensionless;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.ParsePosition;
 
-import org.unitsofmeasurement.impl.format.MeasurementFormat;
-import org.unitsofmeasurement.impl.function.AbstractConverter;
-import org.unitsofmeasurement.impl.util.SI;
+import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated

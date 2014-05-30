@@ -15,20 +15,6 @@
  */
 package org.unitsofmeasurement.impl.format;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.math.BigInteger;
-import java.text.ParsePosition;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.measure.Quantity;
-import javax.measure.Unit;
-import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
-import javax.measure.function.UnitConverter;
-
 import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.AnnotatedUnit;
 import org.unitsofmeasurement.impl.format.internal.ParseException;
@@ -39,6 +25,19 @@ import org.unitsofmeasurement.impl.function.MultiplyConverter;
 import org.unitsofmeasurement.impl.function.RationalConverter;
 import org.unitsofmeasurement.impl.util.SI;
 import org.unitsofmeasurement.impl.util.SIPrefix;
+
+import javax.measure.Quantity;
+import javax.measure.Unit;
+import javax.measure.format.ParserException;
+import javax.measure.format.UnitFormat;
+import javax.measure.function.UnitConverter;
+import java.io.IOException;
+import java.io.StringReader;
+import java.math.BigInteger;
+import java.text.ParsePosition;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * <p> This class represents the local sensitive format.</p>

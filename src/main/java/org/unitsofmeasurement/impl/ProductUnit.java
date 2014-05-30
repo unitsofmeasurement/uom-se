@@ -15,17 +15,16 @@
  */
 package org.unitsofmeasurement.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+import org.unitsofmeasurement.impl.model.QuantityDimension;
+import org.unitsofmeasurement.impl.util.SI;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.impl.function.AbstractConverter;
-import org.unitsofmeasurement.impl.model.QuantityDimension;
-import org.unitsofmeasurement.impl.util.SI;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>  This class represents units formed by the product of rational powers of

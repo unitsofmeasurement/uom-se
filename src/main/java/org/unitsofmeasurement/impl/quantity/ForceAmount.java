@@ -15,10 +15,10 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 import javax.measure.Unit;
 import javax.measure.quantity.Force;
-
-import org.unitsofmeasurement.impl.BaseQuantity;
 
 /**
  * Represents a quantity that tends to produce an acceleration of a body in the
