@@ -280,7 +280,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 			else if (number instanceof Long)
 				return AbstractMeasurement.of(((Long) number).longValue(), unit);
 			else if (number instanceof Double)
-				return AbstractMeasurement.of(((Double) number).doubleValue(), unit);
+				return AbstractMeasurement.of((Double) number, unit);
 			else
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");
