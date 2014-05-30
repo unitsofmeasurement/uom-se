@@ -234,7 +234,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      *         from the {@link SI} dimension of the specified type.
      * @see    SI#getUnit(Class)
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public final <T extends Quantity<T>> AbstractUnit<T> asType(Class<T> type) {
         Dimension typeDimension = QuantityDimension.getInstance(type);
         if ((typeDimension != null) && (!this.getDimension().equals(typeDimension)))
