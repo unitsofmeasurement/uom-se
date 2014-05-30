@@ -27,7 +27,9 @@ import org.unitsofmeasurement.impl.util.SI;
 
 import javax.measure.*;
 import javax.measure.function.UnitConverter;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Map;
 
@@ -48,14 +50,14 @@ import static org.unitsofmeasurement.impl.format.UCUMFormat.Variant.CASE_INSENSI
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, May 22, 2014
+ * @version 0.5, May 31, 2014
  */
-public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
+public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Serializable {
 
     /**
 	 * 
 	 */
-//	private static final long serialVersionUID = -4344589505537030204L;
+	private static final long serialVersionUID = -4344589505537030204L;
 
 	/**
 	 * Holds the name.
