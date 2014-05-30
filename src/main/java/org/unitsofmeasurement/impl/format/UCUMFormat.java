@@ -225,14 +225,14 @@ public abstract class UCUMFormat implements UnitFormat {
 
         appendable.append(symbol);
         if (annotation != null && annotation.length() > 0) {
-            appendAnnotation(unit, symbol, annotation, appendable);
+            appendAnnotation(symbol, annotation, appendable);
         }
 
         return appendable;
     }
 
-    void appendAnnotation(AbstractUnit<?> unit, CharSequence symbol,
-            CharSequence annotation, Appendable appendable) throws IOException {
+    void appendAnnotation(CharSequence symbol,
+                          CharSequence annotation, Appendable appendable) throws IOException {
         appendable.append('{');
         appendable.append(annotation);
         appendable.append('}');
@@ -368,8 +368,8 @@ public abstract class UCUMFormat implements UnitFormat {
         }
 
         @Override
-        void appendAnnotation(AbstractUnit<?> unit, CharSequence symbol,
-                CharSequence annotation, Appendable appendable)
+        void appendAnnotation(CharSequence symbol,
+                              CharSequence annotation, Appendable appendable)
                 throws IOException {
             if (symbol != null && symbol.length() > 0) {
                 appendable.append('(');
