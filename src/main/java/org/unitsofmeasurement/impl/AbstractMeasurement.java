@@ -363,7 +363,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      */
     public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(int intValue,
             Unit<Q> unit) {
-        return new IntegerMeasurement<Q>(intValue, unit);
+        return new IntegerMeasurement<>(intValue, unit);
     }
 
     private static final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
@@ -461,7 +461,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      */
     public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(float floatValue,
             Unit<Q> unit) {
-        return new FloatMeasurement<Q>(floatValue, unit);
+        return new FloatMeasurement<>(floatValue, unit);
     }
 
     private static final class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
@@ -558,7 +558,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      */
     public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(double doubleValue,
             Unit<Q> unit) {
-        return new DoubleMeasurement<Q>(doubleValue, unit);
+        return new DoubleMeasurement<>(doubleValue, unit);
     }
 
     private static final class DoubleMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
@@ -650,7 +650,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      */
     public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(
             BigDecimal decimalValue, Unit<Q> unit) {
-        return new DecimalMeasurement<Q>(decimalValue, unit);
+        return new DecimalMeasurement<>(decimalValue, unit);
     }
 
     private static final class DecimalMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {

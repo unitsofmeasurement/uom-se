@@ -82,7 +82,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
 	                // This exception is not documented because it should never happen if the
 	                // user don't try to trick the Java generic types system with unsafe cast.
 	                throw new ClassCastException();
-	            factory = new Default<Q>((Class<Q>)type2);
+	            factory = new Default<>((Class<Q>)type2);
 	            INSTANCES.put(type2, factory);
         	 } else {
                  factory = INSTANCES.get(type);
@@ -91,7 +91,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
                      // This exception is not documented because it should never happen if the
                      // user don't try to trick the Java generic types system with unsafe cast.
                      throw new ClassCastException();
-                 factory = new Default<Q>(type);
+                 factory = new Default<>(type);
                  INSTANCES.put(type, factory);
         	 }
          } else {
@@ -101,7 +101,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
                 // This exception is not documented because it should never happen if the
                 // user don't try to trick the Java generic types system with unsafe cast.
                 throw new ClassCastException();
-            factory = new Default<Q>(type);
+            factory = new Default<>(type);
             INSTANCES.put(type, factory);
          }
         return factory;
@@ -170,7 +170,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
             metricUnit = CLASS_TO_METRIC_UNIT.get(type);
         }
         @SuppressWarnings("rawtypes")
-		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
+		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
         static {
             CLASS_TO_METRIC_UNIT.put(Dimensionless.class, SI.ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
@@ -212,7 +212,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
         @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {
-            return (Q) new BaseQuantity<Q>(value, unit);
+            return (Q) new BaseQuantity<>(value, unit);
         }
 
         @Override

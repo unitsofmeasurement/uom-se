@@ -363,7 +363,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue,
             Unit<Q> unit) {
-        return new IntegerQuantity<Q>(intValue, unit);
+        return new IntegerQuantity<>(intValue, unit);
     }
 
     private static final class IntegerQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
@@ -464,7 +464,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(float floatValue,
             Unit<Q> unit) {
-        return new FloatQuantity<Q>(floatValue, unit);
+        return new FloatQuantity<>(floatValue, unit);
     }
 
     private static final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
@@ -561,7 +561,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(double doubleValue,
             Unit<Q> unit) {
-        return new DoubleQuantity<Q>(doubleValue, unit);
+        return new DoubleQuantity<>(doubleValue, unit);
     }
 
     private static final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
@@ -651,7 +651,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
             BigDecimal decimalValue, Unit<Q> unit) {
-        return new DecimalQuantity<Q>(decimalValue, unit);
+        return new DecimalQuantity<>(decimalValue, unit);
     }
     
     private static final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
