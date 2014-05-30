@@ -70,7 +70,7 @@ public abstract class DimensionalModel {
     /**
      * Holds the current model.
      */
-    private static Reference<DimensionalModel> Current = new SoftReference<DimensionalModel>(new StandardModel());
+    private static Reference<DimensionalModel> Current = new SoftReference<>(new StandardModel());
 
     /**
      * Returns the physics model used by the current thread

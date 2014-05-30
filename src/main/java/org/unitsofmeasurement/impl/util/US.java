@@ -261,7 +261,7 @@ public final class US extends AbstractSystemOfUnits {
 	 * A unit of area (standard name <code>sft</code>
 	 * ).
 	 */
-	public static final Unit<Area> SQUARE_FOOT = addUnit(new ProductUnit<Area>(
+	public static final Unit<Area> SQUARE_FOOT = addUnit(new ProductUnit<>(
 			(AbstractUnit<?>) FOOT.multiply(FOOT)));
 
 	/**
@@ -331,7 +331,7 @@ public final class US extends AbstractSystemOfUnits {
 	 * <code>L</code>, also recognized <code>µL, mL, cL, dL</code>).
 	 */
     public static final TransformedUnit<Volume> LITER
-        = new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000));
+        = new TransformedUnit<>(CUBIC_METRE, new RationalConverter(1, 1000));
 
 	/**
 	 * A unit of volume equal to one cubic inch (<code>in³</code>).

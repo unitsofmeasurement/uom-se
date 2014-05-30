@@ -132,7 +132,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
      * @return the annotated unit.
      */
     public AnnotatedUnit<Q> annotate(String annotation) {
-        return new AnnotatedUnit<Q>(this, annotation);
+        return new AnnotatedUnit<>(this, annotation);
     }
     
     /**
@@ -301,7 +301,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
         UnitConverter cvtr = this.getConverterToSI().concatenate(operation);
         if (cvtr.equals(AbstractConverter.IDENTITY))
             return systemUnit;
-        return new TransformedUnit<Q>(systemUnit, cvtr);
+        return new TransformedUnit<>(systemUnit, cvtr);
     }
 
     @Override

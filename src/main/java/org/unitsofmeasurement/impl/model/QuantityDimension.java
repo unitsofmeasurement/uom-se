@@ -218,7 +218,7 @@ public class QuantityDimension implements Dimension {
 	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
         Map<? extends AbstractUnit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
         if (pseudoUnit == null) return null;
-        Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<QuantityDimension, Integer>();
+        Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();
         for (Map.Entry<? extends AbstractUnit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
         }
