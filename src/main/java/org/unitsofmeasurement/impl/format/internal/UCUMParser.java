@@ -234,15 +234,11 @@ public class UCUMParser {
     private boolean jj_3_1() {
         if (jj_3R_2())
             return true;
-        if (jj_scan_token(ANNOTATION))
-            return true;
-        return false;
+        return jj_scan_token(ANNOTATION);
     }
 
     private boolean jj_3R_5() {
-        if (jj_3R_3())
-            return true;
-        return false;
+        return jj_3R_3();
     }
 
     private boolean jj_3R_4() {
@@ -252,9 +248,7 @@ public class UCUMParser {
         xsp = jj_scanpos;
         if (jj_scan_token(10))
             jj_scanpos = xsp;
-        if (jj_scan_token(FACTOR))
-            return true;
-        return false;
+        return jj_scan_token(FACTOR);
     }
 
     private boolean jj_3_2() {
@@ -264,15 +258,11 @@ public class UCUMParser {
         xsp = jj_scanpos;
         if (jj_scan_token(10))
             jj_scanpos = xsp;
-        if (jj_scan_token(FACTOR))
-            return true;
-        return false;
+        return jj_scan_token(FACTOR);
     }
 
     private boolean jj_3R_3() {
-        if (jj_scan_token(ATOM))
-            return true;
-        return false;
+        return jj_scan_token(ATOM);
     }
 
     private boolean jj_3R_2() {
@@ -549,7 +539,7 @@ public class UCUMParser {
                         }
                     }
                     jj_expentries.add(jj_expentry);
-                    break jj_entries_loop;
+                    break;
                 }
             }
             if (pos != 0)

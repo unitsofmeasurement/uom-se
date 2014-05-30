@@ -134,7 +134,7 @@ public abstract class AbstractConverter implements UnitConverter {
 
         @Override
         public boolean equals(Object cvtr) {
-            return (cvtr instanceof Identity) ? true : false;
+            return (cvtr instanceof Identity);
         }
 
         @Override
