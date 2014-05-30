@@ -15,11 +15,11 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 import javax.measure.Measurement;
 import javax.measure.Unit;
 import javax.measure.quantity.Temperature;
-
-import org.unitsofmeasurement.impl.BaseQuantity;
 
 /**
  * @author Werner Keil

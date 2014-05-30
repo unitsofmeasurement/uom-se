@@ -15,13 +15,12 @@
  */
 package org.unitsofmeasurement.impl.model;
 
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+
+import javax.measure.Dimension;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Map;
-
-import javax.measure.Dimension;
-
-import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 /**
  * <p> This class represents the physical model used for dimensional analysis.</p>

@@ -15,19 +15,6 @@
  */
 package org.unitsofmeasurement.impl;
 
-import static org.unitsofmeasurement.impl.format.UCUMFormat.Variant.CASE_INSENSITIVE;
-
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.Map;
-
-import javax.measure.Dimension;
-import javax.measure.Quantity;
-import javax.measure.Unit;
-import javax.measure.IncommensurableException;
-import javax.measure.UnconvertibleException;
-import javax.measure.function.UnitConverter;
-
 import org.unitsofmeasurement.impl.format.LocalUnitFormat;
 import org.unitsofmeasurement.impl.format.UCUMFormat;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
@@ -37,6 +24,14 @@ import org.unitsofmeasurement.impl.function.RationalConverter;
 import org.unitsofmeasurement.impl.model.DimensionalModel;
 import org.unitsofmeasurement.impl.model.QuantityDimension;
 import org.unitsofmeasurement.impl.util.SI;
+
+import javax.measure.*;
+import javax.measure.function.UnitConverter;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Map;
+
+import static org.unitsofmeasurement.impl.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 
 
 /**

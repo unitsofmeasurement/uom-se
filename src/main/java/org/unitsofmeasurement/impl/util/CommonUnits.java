@@ -15,13 +15,13 @@
  */
 package org.unitsofmeasurement.impl.util;
 
-import static org.unitsofmeasurement.impl.util.SI.METRES_PER_SECOND;
+import org.unitsofmeasurement.impl.AbstractUnit;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
 import javax.measure.util.SystemOfUnits;
 
-import org.unitsofmeasurement.impl.AbstractUnit;
+import static org.unitsofmeasurement.impl.util.SI.METRES_PER_SECOND;
 
 
 public class CommonUnits extends AbstractSystemOfUnits {

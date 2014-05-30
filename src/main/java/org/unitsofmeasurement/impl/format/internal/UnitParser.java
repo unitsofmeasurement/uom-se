@@ -51,8 +51,7 @@ public final class UnitParser implements UnitParserConstants {
         result = CompoundExpr();
         jj_consume_token(0);
         {
-            if (true)
-                return result;
+            return result;
         }
         throw new Error("Missing return statement in function");
     }
@@ -96,8 +95,7 @@ public final class UnitParser implements UnitParserConstants {
             result = result.shift(offset);
         }
         {
-            if (true)
-                return result;
+            return result;
         }
         throw new Error("Missing return statement in function");
     }
@@ -147,8 +145,7 @@ public final class UnitParser implements UnitParserConstants {
             }
         }
         {
-            if (true)
-                return result;
+            return result;
         }
         throw new Error("Missing return statement in function");
     }
@@ -180,8 +177,7 @@ public final class UnitParser implements UnitParserConstants {
                 base = StrictMath.E;
             }
             {
-                if (true)
-                    return result.transform(new LogConverter(base).inverse());
+                return result.transform(new LogConverter(base).inverse());
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -206,8 +202,7 @@ public final class UnitParser implements UnitParserConstants {
                             result = result.root(exponent.root);
                         }
                     } {
-                    if (true)
-                        return result;
+                    return result;
                 }
                 break;
                 case LOG:
@@ -242,8 +237,7 @@ public final class UnitParser implements UnitParserConstants {
                             base = StrictMath.E;
                         }
                     } {
-                    if (true)
-                        return result.transform(new LogConverter(base));
+                    return result.transform(new LogConverter(base));
                 }
                 break;
                 default:
@@ -266,13 +260,11 @@ public final class UnitParser implements UnitParserConstants {
                 n = NumberExpr();
                 if (n instanceof Integer) {
                     {
-                        if (true)
-                            return result.multiply(n.intValue());
+                        return result.multiply(n.intValue());
                     }
                 } else {
                     {
-                        if (true)
-                            return result.multiply(n.doubleValue());
+                        return result.multiply(n.doubleValue());
                     }
                 }
                 break;
@@ -286,19 +278,16 @@ public final class UnitParser implements UnitParserConstants {
                         unit = _symbols.getUnit(token.image.substring(prefixSymbol.length()));
                         if (unit != null) {
                             {
-                                if (true)
-                                    return unit.transform(prefix.getConverter());
+                                return unit.transform(prefix.getConverter());
                             }
                         }
                     }
                     {
-                        if (true)
-                            throw new ParseException();
+                        throw new ParseException();
                     }
                 } else {
                     {
-                        if (true)
-                            return unit;
+                        return unit;
                     }
                 }
                 break;
@@ -306,8 +295,7 @@ public final class UnitParser implements UnitParserConstants {
                 jj_consume_token(OPEN_PAREN);
                 result = AddExpr();
                 jj_consume_token(CLOSE_PAREN); {
-                if (true)
-                    return result;
+                return result;
             }
             break;
             default:
@@ -333,8 +321,7 @@ public final class UnitParser implements UnitParserConstants {
                 throw new ParseException();
         }
         {
-            if (true)
-                return result;
+            return result;
         }
         throw new Error("Missing return statement in function");
     }
@@ -344,14 +331,12 @@ public final class UnitParser implements UnitParserConstants {
         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
             case INTEGER:
                 token = jj_consume_token(INTEGER); {
-                if (true)
-                    return Long.valueOf(token.image);
+                return Long.valueOf(token.image);
             }
             break;
             case FLOATING_POINT:
                 token = jj_consume_token(FLOATING_POINT); {
-                if (true)
-                    return Double.valueOf(token.image);
+                return Double.valueOf(token.image);
             }
             break;
             default:
@@ -387,8 +372,7 @@ public final class UnitParser implements UnitParserConstants {
                         if ((powSign != null) && powSign.image.equals("-")) {
                             pow = -pow;
                         } {
-                        if (true)
-                            return new Exponent(pow, 1);
+                        return new Exponent(pow, 1);
                     }
                     break;
                     case OPEN_PAREN:
@@ -430,8 +414,7 @@ public final class UnitParser implements UnitParserConstants {
                                 root = -root;
                             }
                         } {
-                        if (true)
-                            return new Exponent(pow, root);
+                        return new Exponent(pow, root);
                     }
                     break;
                     default:
@@ -475,8 +458,7 @@ public final class UnitParser implements UnitParserConstants {
                             break;
                     }
                 } {
-                if (true)
-                    return new Exponent(pow, 1);
+                return new Exponent(pow, 1);
             }
             break;
             default:

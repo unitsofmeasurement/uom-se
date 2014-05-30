@@ -15,14 +15,13 @@
  */
 package org.unitsofmeasurement.impl;
 
-import java.util.Map;
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+import org.unitsofmeasurement.impl.model.QuantityDimension;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.impl.function.AbstractConverter;
-import org.unitsofmeasurement.impl.model.QuantityDimension;
+import java.util.Map;
 
 
 /**

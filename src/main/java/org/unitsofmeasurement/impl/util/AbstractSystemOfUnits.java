@@ -15,18 +15,13 @@
  */
 package org.unitsofmeasurement.impl.util;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import org.unitsofmeasurement.impl.AbstractUnit;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.util.SystemOfUnits;
-
-import org.unitsofmeasurement.impl.AbstractUnit;
+import java.util.*;
 
 /**
  * <p>An abstract base class for unit systems.</p>

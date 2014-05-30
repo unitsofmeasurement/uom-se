@@ -15,18 +15,13 @@
  */
 package org.unitsofmeasurement.impl;
 
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+
+import javax.measure.*;
+import javax.measure.function.UnitConverter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
-
-import javax.measure.Measurement;
-import javax.measure.Quantity;
-import javax.measure.Unit;
-import javax.measure.IncommensurableException;
-import javax.measure.UnconvertibleException;
-import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 /**
  * An amount of measurement, consisting of a Number and a Unit. BaseMeasurement

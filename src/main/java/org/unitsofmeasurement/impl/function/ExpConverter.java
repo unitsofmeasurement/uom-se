@@ -15,10 +15,9 @@
  */
 package org.unitsofmeasurement.impl.function;
 
+import javax.measure.function.ValueSupplier;
 import java.math.BigDecimal;
 import java.math.MathContext;
-
-import javax.measure.function.ValueSupplier;
 
 /**
  * <p> This class represents a exponential converter of limited precision.

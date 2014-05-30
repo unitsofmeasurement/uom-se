@@ -15,12 +15,12 @@
  */
 package org.unitsofmeasurement.impl.format.internal;
 
-import static org.unitsofmeasurement.impl.format.internal.UCUMParserConstants.*;
-
 import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.format.SymbolMap;
 import org.unitsofmeasurement.impl.util.SI;
 import org.unitsofmeasurement.impl.util.SIPrefix;
+
+import static org.unitsofmeasurement.impl.format.internal.UCUMParserConstants.*;
 
 /**
  * <p> 
@@ -50,8 +50,7 @@ public class UCUMParser {
         u = Term();
         jj_consume_token(0);
         {
-            if (true)
-                return u;
+            return u;
         }
         throw new Error("Missing return statement in function");
     }
@@ -88,8 +87,7 @@ public class UCUMParser {
             }
         }
         {
-            if (true)
-                return result;
+            return result;
         }
         throw new Error("Missing return statement in function");
     }
@@ -101,43 +99,37 @@ public class UCUMParser {
             result = Annotatable();
             token = jj_consume_token(ANNOTATION);
             {
-                if (true)
-                    return result.annotate(token.image.substring(1, token.image.length() - 1));
+                return result.annotate(token.image.substring(1, token.image.length() - 1));
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
                 case ATOM:
                     result = Annotatable(); {
-                    if (true)
-                        return result;
+                    return result;
                 }
                 break;
                 case ANNOTATION:
                     token = jj_consume_token(ANNOTATION); {
-                    if (true)
-                        return  result.annotate(token.image.substring(1, token.image.length() - 1));
+                    return result.annotate(token.image.substring(1, token.image.length() - 1));
                 }
                 break;
                 case FACTOR:
                     token = jj_consume_token(FACTOR);
                     long factor = Long.parseLong(token.image); {
-                    if (true)
-                        return result.multiply(factor);
+                    return result.multiply(factor);
                 }
                 break;
                 case SOLIDUS:
                     jj_consume_token(SOLIDUS);
                     result = Component(); {
-                    if (true)
-                        return SI.ONE.divide(result);
+                    return SI.ONE.divide(result);
                 }
                 break;
                 case 14:
                     jj_consume_token(14);
                     result = Term();
                     jj_consume_token(15); {
-                    if (true)
-                        return result;
+                    return result;
                 }
                 break;
                 default:
@@ -166,21 +158,18 @@ public class UCUMParser {
             int exponent = Integer.parseInt(token2.image);
             if ((token1 != null) && token1.image.equals("-")) {
                 {
-                    if (true)
-                        return result.pow(-exponent);
+                    return result.pow(-exponent);
                 }
             } else {
                 {
-                    if (true)
-                        return result.pow(exponent);
+                    return result.pow(exponent);
                 }
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
                 case ATOM:
                     result = SimpleUnit(); {
-                    if (true)
-                        return result;
+                    return result;
                 }
                 break;
                 default:
@@ -203,19 +192,16 @@ public class UCUMParser {
                 unit = symbols.getUnit(token.image.substring(prefixSymbol.length()));
                 if (unit != null) {
                     {
-                        if (true)
-                            return unit.transform(prefix.getConverter());
+                        return unit.transform(prefix.getConverter());
                     }
                 }
             }
             {
-                if (true)
-                    throw new ParseException();
+                throw new ParseException();
             }
         } else {
             {
-                if (true)
-                    return unit;
+                return unit;
             }
         }
         throw new Error("Missing return statement in function");

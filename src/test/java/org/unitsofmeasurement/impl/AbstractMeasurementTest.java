@@ -15,17 +15,15 @@
  */
 package org.unitsofmeasurement.impl;
 
-import java.math.BigDecimal;
-
-import javax.measure.quantity.Pressure;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.unitsofmeasurement.impl.AbstractMeasurement;
 
-import static org.unitsofmeasurement.impl.util.SI.*;
+import javax.measure.quantity.Pressure;
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
+import static org.unitsofmeasurement.impl.util.SI.PASCAL;
 
 /**
  *

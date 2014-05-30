@@ -15,27 +15,21 @@
  */
 package org.unitsofmeasurement.impl.format;
 
-import static org.junit.Assert.*;
-import static org.unitsofmeasurement.impl.format.UCUMFormat.Variant.*;
-import static org.unitsofmeasurement.impl.util.SI.KILOGRAM;
-import static org.unitsofmeasurement.impl.util.SI.METRE;
-import static org.unitsofmeasurement.impl.util.SI.MINUTE;
-import static org.unitsofmeasurement.impl.util.SI.SECOND;
-
-import java.io.IOException;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.unitsofmeasurement.impl.quantity.LengthAmount;
 
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
+import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.unitsofmeasurement.impl.format.LocalUnitFormat;
-import org.unitsofmeasurement.impl.format.UCUMFormat;
-import org.unitsofmeasurement.impl.quantity.LengthAmount;
+import static org.junit.Assert.*;
+import static org.unitsofmeasurement.impl.format.UCUMFormat.Variant.*;
+import static org.unitsofmeasurement.impl.util.SI.*;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>

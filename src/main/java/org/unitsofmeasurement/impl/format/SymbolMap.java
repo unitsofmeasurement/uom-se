@@ -15,20 +15,18 @@
  */
 package org.unitsofmeasurement.impl.format;
 
+import org.unitsofmeasurement.impl.AbstractUnit;
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+import org.unitsofmeasurement.impl.util.SIPrefix;
+
+import javax.measure.function.UnitConverter;
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.measure.function.UnitConverter;
-
-import org.unitsofmeasurement.impl.AbstractUnit;
-import org.unitsofmeasurement.impl.function.AbstractConverter;
-import org.unitsofmeasurement.impl.util.SIPrefix;
 
 /**
  * <p> This class provides a set of mappings between
