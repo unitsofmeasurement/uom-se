@@ -50,7 +50,7 @@ final class SimpleCharStream
   protected int tabSize = 8;
 
   protected void setTabSize(int i) { tabSize = i; }
-  protected int getTabSize(int i) { return tabSize; }
+  protected int getTabSize() { return tabSize; }
 
 
   protected void ExpandBuff(boolean wrapAround)
