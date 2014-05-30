@@ -18,7 +18,9 @@ package org.unitsofmeasurement.impl;
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.function.UnitConverter;
+
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -101,18 +103,20 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 
     @Override
     public int hashCode() {
-        return symbol.hashCode();
+        return Objects.hashCode(symbol);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof AlternateUnit))
-            return false;
-        AlternateUnit that = (AlternateUnit) obj;
-        return this.parentUnit.equals(that.parentUnit) &&
-                this.symbol.equals(that.symbol);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof AlternateUnit) {
+			AlternateUnit that = (AlternateUnit) obj;
+			return Objects.equals(parentUnit, that.parentUnit)
+					&& Objects.equals(symbol, that.symbol);
+		}
+		return false;
+	}
 
 }

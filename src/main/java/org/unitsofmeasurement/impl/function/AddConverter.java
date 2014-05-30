@@ -15,9 +15,11 @@
  */
 package org.unitsofmeasurement.impl.function;
 
-import javax.measure.function.UnitConverter;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Objects;
+
+import javax.measure.function.UnitConverter;
 
 
 /**
@@ -91,17 +93,20 @@ public final class AddConverter extends AbstractConverter {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AddConverter)) {
-            return false;
+    	if (this == obj) {
+    		return true;
+    	}
+        if (obj instanceof AddConverter) {
+        	AddConverter other = (AddConverter) obj;
+            return Objects.equals(offset, other.offset);
         }
-        AddConverter that = (AddConverter) obj;
-        return this.offset == that.offset;
+        
+        return false;
     }
 
     @Override
     public int hashCode() {
-        long bits = Double.doubleToLongBits(offset);
-        return (int) (bits ^ (bits >>> 32));
+        return Objects.hashCode(offset);
     }
 
     @Override

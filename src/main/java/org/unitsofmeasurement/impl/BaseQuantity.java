@@ -19,10 +19,12 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 import javax.measure.*;
 import javax.measure.function.UnitConverter;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.Objects;
 
 /**
  * An amount of quantity, consisting of a Number and a Unit. <type>BaseQuantity</type>
@@ -54,28 +56,15 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj == this)
+		if (this == obj) {
 			return true;
-		if (this.getClass() == obj.getClass()) {
-			return super.equals(obj);
-		} else {
-			if (obj instanceof Quantity) {
-				@SuppressWarnings("rawtypes")
-				Quantity m = (Quantity) obj;
-				if (m.getValue().getClass() == this.getValue().getClass()
-						&& m.getUnit().getClass() == this.getUnit().getClass()) {
-					return super.equals(obj);
-				} else {
-					// if (this.getQuantityUnit() instanceof AbstractUnit<?>) {
-					// if
-					// }
-					return super.equals(obj);
-				}
-			}
-			return false;
 		}
+		if (obj instanceof Quantity) {
+			Quantity<?> other = (Quantity<?>) obj;
+			return Objects.equals(getUnit(), other.getUnit())
+					&& Objects.equals(getValue(), other.getValue());
+		}
+		return false;
 	}
 
 	/**

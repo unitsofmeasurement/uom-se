@@ -16,10 +16,12 @@
 package org.unitsofmeasurement.impl.function;
 
 import javax.measure.function.UnitConverter;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p> The base class for our {@link UnitConverter} physics implementations.</p>
@@ -215,16 +217,21 @@ public abstract class AbstractConverter implements UnitConverter {
         }
 
         @Override
-        public boolean equals(Object cvtr) {
-            if (this == cvtr) return true;
-            if (!(cvtr instanceof Compound)) return false;
-            Compound that = (Compound) cvtr;
-            return (this.left.equals(that.left)) && (this.right.equals(that.right));
+        public boolean equals(Object obj) {
+            if (this == obj) {
+            	return true;
+            }
+			if (obj instanceof Compound) {
+				Compound that = (Compound) obj;
+				return Objects.equals(left, that.left)
+						&& Objects.equals(right, that.right);
+			}
+            return false;
         }
 
         @Override
         public int hashCode() {
-            return left.hashCode() + right.hashCode();
+            return Objects.hash(left, right);
         }
 
     }
