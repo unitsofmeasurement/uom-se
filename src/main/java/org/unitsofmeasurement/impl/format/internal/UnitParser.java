@@ -53,7 +53,6 @@ public final class UnitParser implements UnitParserConstants {
         {
             return result;
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit CompoundExpr() throws ParseException {
@@ -97,7 +96,6 @@ public final class UnitParser implements UnitParserConstants {
         {
             return result;
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit MulExpr() throws ParseException {
@@ -147,7 +145,6 @@ public final class UnitParser implements UnitParserConstants {
         {
             return result;
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit ExponentExpr() throws ParseException {
@@ -204,7 +201,6 @@ public final class UnitParser implements UnitParserConstants {
                     } {
                     return result;
                 }
-                break;
                 case LOG:
                 case NAT_LOG:
                     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -239,14 +235,12 @@ public final class UnitParser implements UnitParserConstants {
                     } {
                     return result.transform(new LogConverter(base));
                 }
-                break;
                 default:
                     jj_la1[9] = jj_gen;
                     jj_consume_token(-1);
                     throw new ParseException();
             }
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit AtomicExpr() throws ParseException {
@@ -267,7 +261,6 @@ public final class UnitParser implements UnitParserConstants {
                         return result.multiply(n.doubleValue());
                     }
                 }
-                break;
             case UNIT_IDENTIFIER:
                 token = jj_consume_token(UNIT_IDENTIFIER);
                 AbstractUnit unit = _symbols.getUnit(token.image);
@@ -290,20 +283,17 @@ public final class UnitParser implements UnitParserConstants {
                         return unit;
                     }
                 }
-                break;
             case OPEN_PAREN:
                 jj_consume_token(OPEN_PAREN);
                 result = AddExpr();
                 jj_consume_token(CLOSE_PAREN); {
                 return result;
             }
-            break;
             default:
                 jj_la1[10] = jj_gen;
                 jj_consume_token(-1);
                 throw new ParseException();
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public Token Sign() throws ParseException {
@@ -323,7 +313,6 @@ public final class UnitParser implements UnitParserConstants {
         {
             return result;
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public Number NumberExpr() throws ParseException {
@@ -333,18 +322,15 @@ public final class UnitParser implements UnitParserConstants {
                 token = jj_consume_token(INTEGER); {
                 return Long.valueOf(token.image);
             }
-            break;
             case FLOATING_POINT:
                 token = jj_consume_token(FLOATING_POINT); {
                 return Double.valueOf(token.image);
             }
-            break;
             default:
                 jj_la1[12] = jj_gen;
                 jj_consume_token(-1);
                 throw new ParseException();
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public Exponent Exp() throws ParseException {
@@ -374,7 +360,6 @@ public final class UnitParser implements UnitParserConstants {
                         } {
                         return new Exponent(pow, 1);
                     }
-                    break;
                     case OPEN_PAREN:
                         jj_consume_token(OPEN_PAREN);
                         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -416,13 +401,11 @@ public final class UnitParser implements UnitParserConstants {
                         } {
                         return new Exponent(pow, root);
                     }
-                    break;
                     default:
                         jj_la1[17] = jj_gen;
                         jj_consume_token(-1);
                         throw new ParseException();
                 }
-                break;
             case SUPERSCRIPT_INTEGER:
                 powToken = jj_consume_token(SUPERSCRIPT_INTEGER);
                 int pow = 0;
@@ -460,13 +443,11 @@ public final class UnitParser implements UnitParserConstants {
                 } {
                 return new Exponent(pow, 1);
             }
-            break;
             default:
                 jj_la1[18] = jj_gen;
                 jj_consume_token(-1);
                 throw new ParseException();
         }
-        throw new Error("Missing return statement in function");
     }
 
     private boolean jj_2_1(int xla) {

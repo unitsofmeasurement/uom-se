@@ -52,7 +52,6 @@ public class UCUMParser {
         {
             return u;
         }
-        throw new Error("Missing return statement in function");
     }
     
     final public AbstractUnit Term() throws ParseException {
@@ -89,7 +88,6 @@ public class UCUMParser {
         {
             return result;
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit Component() throws ParseException {
@@ -107,38 +105,32 @@ public class UCUMParser {
                     result = Annotatable(); {
                     return result;
                 }
-                break;
                 case ANNOTATION:
                     token = jj_consume_token(ANNOTATION); {
                     return result.annotate(token.image.substring(1, token.image.length() - 1));
                 }
-                break;
                 case FACTOR:
                     token = jj_consume_token(FACTOR);
                     long factor = Long.parseLong(token.image); {
                     return result.multiply(factor);
                 }
-                break;
                 case SOLIDUS:
                     jj_consume_token(SOLIDUS);
                     result = Component(); {
                     return SI.ONE.divide(result);
                 }
-                break;
                 case 14:
                     jj_consume_token(14);
                     result = Term();
                     jj_consume_token(15); {
                     return result;
                 }
-                break;
                 default:
                     jj_la1[2] = jj_gen;
                     jj_consume_token(-1);
                     throw new ParseException();
             }
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit Annotatable() throws ParseException {
@@ -171,14 +163,12 @@ public class UCUMParser {
                     result = SimpleUnit(); {
                     return result;
                 }
-                break;
                 default:
                     jj_la1[4] = jj_gen;
                     jj_consume_token(-1);
                     throw new ParseException();
             }
         }
-        throw new Error("Missing return statement in function");
     }
 
     final public AbstractUnit SimpleUnit() throws ParseException {
@@ -204,7 +194,6 @@ public class UCUMParser {
                 return unit;
             }
         }
-        throw new Error("Missing return statement in function");
     }
 
     private boolean jj_2_1(int xla) {
