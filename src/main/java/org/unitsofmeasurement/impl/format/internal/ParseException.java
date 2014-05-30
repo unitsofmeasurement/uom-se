@@ -198,7 +198,6 @@ public class ParseException extends MeasurementException {
               } else {
                  retval.append(ch);
               }
-              continue;
         }
       }
       return retval.toString();

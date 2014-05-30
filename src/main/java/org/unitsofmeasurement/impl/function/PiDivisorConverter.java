@@ -69,7 +69,7 @@ final class PiDivisorConverter extends AbstractConverter
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof PiDivisorConverter) ? true : false;
+        return (obj instanceof PiDivisorConverter);
     }
 
     @Override

@@ -17,6 +17,7 @@
 package org.unitsofmeasurement.impl.format.internal;
 
 /** Token Manager. */
+@SuppressWarnings("RedundantIfStatement")
 public class UnitParserTokenManager implements UnitParserConstants
 {
 

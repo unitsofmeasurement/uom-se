@@ -109,11 +109,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		super(unit);
 		value = number;
 		isExact = false;
-		if (number instanceof BigDecimal || number instanceof BigInteger) {
-			isBig = true;
-		} else {
-			isBig = false;
-		}
+        isBig = number instanceof BigDecimal || number instanceof BigInteger;
     }
 
 	/*
