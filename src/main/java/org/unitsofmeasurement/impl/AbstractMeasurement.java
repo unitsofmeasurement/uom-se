@@ -89,7 +89,7 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
  * @version 1.2, $Date: 2014-04-16 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number> {
-// TODO do we want to restrict Measurement to Number here? 
+	// TODO this should not be restricted to Number (AbstractQuantity is)
 	
     /**
 	 * 

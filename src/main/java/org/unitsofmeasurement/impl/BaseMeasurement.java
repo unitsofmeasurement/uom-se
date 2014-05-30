@@ -20,6 +20,7 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
 import javax.measure.*;
 import javax.measure.function.UnitConverter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -34,11 +35,16 @@ import java.util.Objects;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.4.4, $Date: 2014-05-22 $
+ * @version 0.4.5, $Date: 2014-05-31 $
  */
 public class BaseMeasurement<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
-		implements Measurement<Q, Number>, Comparable<BaseMeasurement<Q>> {
+		implements Measurement<Q, Number>, Comparable<BaseMeasurement<Q>>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1589872234631923122L;
 
+	// TODO this should not be restricted to Number (BaseQuantity is)
 	private final Number value;
 	
 	/*
