@@ -249,10 +249,28 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 		}
 		if (obj instanceof ProductUnit<?>) {
 			Element[] elems = ((ProductUnit<?>) obj).elements;
-			return Arrays.equals(elements, elems);
+			if (elements.length != elems.length)
+				return false;
+			for (Element element : elements) {
+				boolean unitFound = false;
+				Element e = element;
+				for (Element elem : elems) {
+					if (e.unit.equals(elem.unit))
+						if ((e.pow != elem.pow) || (e.root != elem.root))
+							return false;
+						else {
+							unitFound = true;
+							break;
+						}
+				}
+				if (!unitFound)
+					return false;
+			}
+			return true;
 		}
 		return false;
 	}
+    
 
     @Override
     public int hashCode() {
