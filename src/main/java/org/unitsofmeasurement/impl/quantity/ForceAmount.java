@@ -15,8 +15,6 @@
  */
 package org.unitsofmeasurement.impl.quantity;
 
-import org.unitsofmeasurement.impl.BaseQuantity;
-
 import javax.measure.Unit;
 import javax.measure.quantity.Force;
 
