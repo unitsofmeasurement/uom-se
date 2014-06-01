@@ -1,0 +1,94 @@
+package org.unitsofmeasurement.impl;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.MathContext;
+
+import javax.measure.Measurement;
+import javax.measure.Quantity;
+import javax.measure.Unit;
+
+import org.unitsofmeasurement.impl.function.AbstractConverter;
+
+class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6504081836032983882L;
+	
+	private final BigDecimal value;
+
+    public DecimalQuantity(BigDecimal value, Unit<T> unit) {
+    	super(unit);
+    	this.value = value;
+    }
+
+    @Override
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    // Implements AbstractMeasurement
+    public double doubleValue(Unit<T> unit) {
+        return (unit.equals(unit)) ? value.doubleValue() : unit.getConverterTo(unit).convert(value.doubleValue());
+    }
+
+    // Implements AbstractMeasurement
+    public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
+            throws ArithmeticException {
+        return (super.getUnit().equals(unit)) ? value :
+        	((AbstractConverter)unit.getConverterTo(unit)).convert(value, ctx);
+    }
+
+	@Override
+	public Measurement<T, Number> add(Measurement<T, Number> that) {
+		return of(value.add((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
+	}
+
+	@Override
+	public Measurement<T, Number> substract(Measurement<T, Number> that) {
+		return of(value.subtract((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
+	}
+
+	@Override
+	public AbstractQuantity<?> multiply(Measurement<?, Number> that) {
+		return of(value.multiply((BigDecimal)that.getValue()), 
+				getUnit().multiply(that.getUnit()));
+	}
+
+	@Override
+	public Measurement<?, Number> multiply(Number that) {
+		return of(value.multiply((BigDecimal)that), getUnit());
+	}
+
+	@Override
+	public Measurement<?, Number> divide(Measurement<?, Number> that) {
+		return of(value.divide((BigDecimal)that.getValue()), getUnit());
+	}
+
+	@Override
+	public Measurement<?, Number> divide(Number that) {
+		return of(value.divide((BigDecimal)that), getUnit());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public AbstractQuantity<T> inverse() {
+		//return of(value.negate(), getUnit());
+		return (AbstractQuantity<T>) of(value, getUnit().inverse());
+	}
+
+	protected long longValue(Unit<T> unit) {
+        double result = doubleValue(unit);
+        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+            throw new ArithmeticException("Overflow (" + result + ")");
+        }
+        return (long) result;
+	}
+
+	@Override
+	public boolean isBig() {
+		return true;
+	}
+}   
