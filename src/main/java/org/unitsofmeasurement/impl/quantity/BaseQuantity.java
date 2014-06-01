@@ -13,18 +13,24 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.unitsofmeasurement.impl;
-
-import org.unitsofmeasurement.impl.function.AbstractConverter;
-
-import javax.measure.*;
-import javax.measure.function.UnitConverter;
+package org.unitsofmeasurement.impl.quantity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Objects;
+
+import javax.measure.IncommensurableException;
+import javax.measure.Measurement;
+import javax.measure.Quantity;
+import javax.measure.UnconvertibleException;
+import javax.measure.Unit;
+import javax.measure.function.UnitConverter;
+
+import org.unitsofmeasurement.impl.AbstractMeasurement;
+import org.unitsofmeasurement.impl.AbstractQuantity;
+import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 /**
  * An amount of quantity, consisting of a Number and a Unit. <type>BaseQuantity</type>
@@ -37,9 +43,8 @@ import java.util.Objects;
  *            The type of the quantity.
  * @version 0.6.1, $Date: 2014-05-29 $
  */
-public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
+class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Quantity<Q>, Comparable<BaseQuantity<Q>>, Serializable {
-//FIXME Bug 338334 overwrite equals() and compareTo()
     
 
 	/**
