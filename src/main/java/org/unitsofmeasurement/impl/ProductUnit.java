@@ -66,7 +66,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     private final String symbol;
     
     /**
-     * Default constructor (used solely to create <code>ONE</code> instance).
+     * DefaultQuantityFactory constructor (used solely to create <code>ONE</code> instance).
      */
     public ProductUnit() {
     	this.symbol = "";

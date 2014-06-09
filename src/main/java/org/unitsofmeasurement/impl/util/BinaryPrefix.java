@@ -29,7 +29,7 @@ public final class BinaryPrefix {
 // FIXME change to enum like SIPrefix
 	
      /**
-     * Default constructor (private).
+     * DefaultQuantityFactory constructor (private).
      */
 	private BinaryPrefix() {
 		// Utility class no visible constructor.

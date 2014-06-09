@@ -28,10 +28,11 @@ import static org.unitsofmeasurement.impl.util.SI.PASCAL;
 /**
  *
  * @author Werner Keil
+ * @version 0.1
  */
-public class AbstractMeasurementTest {
+public class AbstractQuantityTest {
 
-    public AbstractMeasurementTest() {
+    public AbstractQuantityTest() {
     }
 
     @BeforeClass
@@ -44,7 +45,7 @@ public class AbstractMeasurementTest {
 
     @Test
     public void testOf() {
-    	AbstractMeasurement<Pressure> pressure = AbstractMeasurement.of(BigDecimal.ONE, PASCAL); 
+    	AbstractQuantity<Pressure> pressure = AbstractQuantity.of(BigDecimal.ONE, PASCAL); 
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 

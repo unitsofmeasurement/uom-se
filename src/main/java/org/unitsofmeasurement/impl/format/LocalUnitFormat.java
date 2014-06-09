@@ -94,7 +94,7 @@ public class LocalUnitFormat implements UnitFormat {
     // Class variables                                  //
     //////////////////////////////////////////////////////
     /**
-     * Default locale instance. If the default locale is changed after the class
+     * DefaultQuantityFactory locale instance. If the default locale is changed after the class
      * is initialized, this instance will no longer be used.
      */
     private static LocalUnitFormat DEFAULT_INSTANCE = new LocalUnitFormat(SymbolMap.of(

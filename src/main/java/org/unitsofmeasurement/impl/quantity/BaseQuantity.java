@@ -28,7 +28,6 @@ import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
-import org.unitsofmeasurement.impl.AbstractMeasurement;
 import org.unitsofmeasurement.impl.AbstractQuantity;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
@@ -41,7 +40,7 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.6.1, $Date: 2014-05-29 $
+ * @version 0.6.2, $Date: 2014-06-09 $
  */
 class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Quantity<Q>, Comparable<BaseQuantity<Q>>, Serializable {
@@ -188,8 +187,8 @@ class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public BaseQuantity<Q> add(AbstractMeasurement<Q> that) {
-		final AbstractMeasurement<Q> thatToUnit = that.to(getUnit());
+	public BaseQuantity<Q> add(AbstractQuantity<Q> that) {
+		final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), 
                                   getUnit());
@@ -212,28 +211,27 @@ class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return null;
 	}
 
-	@Override
-	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
 		return of((getValue().doubleValue() * that.getValue()
 				.doubleValue()), unit);	
 	}
         
         @Override
-	public BaseQuantity<?> multiply(Number that) {
+	public Quantity<Q> multiply(Number that) {
 		return (BaseQuantity<Q>) of((getValue().doubleValue() * that
 				.doubleValue()), getUnit());	
 	}
         
 	@Override
-	public Measurement<?, Number> divide(Measurement<?, Number> that) {
+	public Quantity<?> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
 		return of((getValue().doubleValue() / that.getValue()
 				.doubleValue()), unit);	
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Quantity<Q> divide(Number that) {
 		// TODO may use isBig() here, too
 		if (value instanceof BigDecimal && that instanceof BigDecimal) {
 			return of(((BigDecimal)value).divide((BigDecimal)that), 

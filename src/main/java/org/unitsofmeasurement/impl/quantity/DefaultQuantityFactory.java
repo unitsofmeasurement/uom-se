@@ -75,16 +75,15 @@ import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Time;
 import javax.measure.quantity.Volume;
 
-import org.unitsofmeasurement.impl.AbstractMeasurement;
 import org.unitsofmeasurement.impl.util.SI;
 
 /**
  * The default factory implementation. This factory uses reflection for providing
- * a default implementation for every {@link AbstractMeasurement} sub-types.
+ * a default implementation for every {@link AbstractQuantity} sub-types.
  *
  * @param <Q> The type of the quantity
  */
-class Default<Q extends Quantity<Q>>  extends QuantityFactory<Q> {
+class DefaultQuantityFactory<Q extends Quantity<Q>>  extends QuantityFactory<Q> {
 
     /**
      * The type of the quantities created by this factory.
@@ -103,7 +102,7 @@ class Default<Q extends Quantity<Q>>  extends QuantityFactory<Q> {
      * @param type The type of the quantities created by this factory.
      */
     @SuppressWarnings("unchecked")
-	Default(final Class<Q> type) {
+	DefaultQuantityFactory(final Class<Q> type) {
         this.type = type;
         metricUnit = CLASS_TO_METRIC_UNIT.get(type);
     }

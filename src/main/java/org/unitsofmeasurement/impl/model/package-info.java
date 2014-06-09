@@ -38,7 +38,7 @@
     <th>	Model</th>
     <th>	Class</th>
     <th>	Defining Characteristics</th>
-    <th>	Default Output Units</th>
+    <th>	DefaultQuantityFactory Output Units</th>
   </tr>
 
   <tr align="left" valign="middle">

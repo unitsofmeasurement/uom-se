@@ -9,7 +9,7 @@ import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
     /**
 	 * 
@@ -58,21 +58,21 @@ class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 		return of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public AbstractQuantity<T> multiply(Measurement<?, Number> that) {
-		return (AbstractQuantity<T>) of(value * that.getValue().floatValue(), 
-				getUnit().multiply(that.getUnit()));
-	}
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public AbstractQuantity<T> multiply(Measurement<T, Number> that) {
+//		return (AbstractQuantity<T>) of(value * that.getValue().floatValue(), 
+//				getUnit().multiply(that.getUnit()));
+//	}
 
 	@Override
-	public Measurement<?, Number> multiply(Number that) {
+	public Quantity<T> multiply(Number that) {
 		return of(value * that.floatValue(), 
-				getUnit().multiply(that.doubleValue()));
+				getUnit().multiply(that.floatValue()));
 	}
 
 	@Override
-	public Quantity<?> divide(Measurement<?, Number> that) {
+	public Quantity<?> divide(Quantity<?> that) {
 		return of(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
 	}
 
@@ -88,7 +88,11 @@ class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Quantity<T> divide(Number that) {
 		return of(value / that.floatValue(), getUnit());
+	}
+
+	public Quantity<?> multiply(Quantity<?> that) {
+		return of(value * that.getValue().floatValue(), getUnit().multiply(that.getUnit()));
 	}
 }

@@ -51,24 +51,19 @@ class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> impleme
 		return of(value.subtract((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
 	}
 
-	@Override
-	public AbstractQuantity<?> multiply(Measurement<?, Number> that) {
-		return of(value.multiply((BigDecimal)that.getValue()), 
-				getUnit().multiply(that.getUnit()));
-	}
+//	@Override
+//	public Quantity<?> multiply(Quantity<?> that) {
+//		return of(value.multiply((BigDecimal)that.getValue()), 
+//				getUnit().multiply(that.getUnit()));
+//	}
 
 	@Override
-	public Measurement<?, Number> multiply(Number that) {
+	public Measurement<T, Number> multiply(Number that) {
 		return of(value.multiply((BigDecimal)that), getUnit());
 	}
 
 	@Override
-	public Measurement<?, Number> divide(Measurement<?, Number> that) {
-		return of(value.divide((BigDecimal)that.getValue()), getUnit());
-	}
-
-	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Quantity<T> divide(Number that) {
 		return of(value.divide((BigDecimal)that), getUnit());
 	}
 	
@@ -90,5 +85,11 @@ class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> impleme
 	@Override
 	public boolean isBig() {
 		return true;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Quantity<?> divide(Quantity<?> that) {
+		return new DecimalQuantity(value.divide((BigDecimal)that.getValue()), getUnit());
 	}
 }   

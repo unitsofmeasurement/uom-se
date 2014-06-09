@@ -15,9 +15,7 @@
  */
 package org.unitsofmeasurement.impl;
 
-import org.unitsofmeasurement.impl.format.MeasurementFormat;
 import org.unitsofmeasurement.impl.format.QuantityFormat;
-import org.unitsofmeasurement.impl.function.AbstractConverter;
 import org.unitsofmeasurement.impl.util.SI;
 
 import javax.measure.Measurement;
@@ -26,7 +24,6 @@ import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.quantity.Dimensionless;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.ParsePosition;
@@ -87,7 +84,7 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2014-06-09 $
+ * @version 0.5, $Date: 2014-06-09 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 	

@@ -16,10 +16,10 @@
 package org.unitsofmeasurement.impl.util;
 
 import org.unitsofmeasurement.impl.AbstractUnit;
-import org.unitsofmeasurement.impl.ProductUnit;
 import org.unitsofmeasurement.impl.TransformedUnit;
 import org.unitsofmeasurement.impl.function.RationalConverter;
 
+import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.util.SystemOfUnits;
@@ -45,7 +45,7 @@ import static org.unitsofmeasurement.impl.util.SIPrefix.MICRO;
 public final class US extends AbstractSystemOfUnits {
 
 	/**
-	 * Default constructor (prevents this class from being instantiated).
+	 * DefaultQuantityFactory constructor (prevents this class from being instantiated).
 	 */
 	private US() {
 	}
@@ -169,7 +169,7 @@ public final class US extends AbstractSystemOfUnits {
 	 * {@link SI#RADIAN}</code> (standard name <code>rev</code>).
 	 */
 	public static final Unit<Angle> REVOLUTION = addUnit(RADIAN.multiply(2)
-			.multiply(Math.PI).asType(Angle.class));
+			.multiply(Math.PI), Angle.class);
 
 	/**
 	 * A unit of angle equal to <code>1/360 {@link #REVOLUTION}</code> (standard
@@ -251,8 +251,8 @@ public final class US extends AbstractSystemOfUnits {
 	 * A unit of area (standard name <code>sft</code>
 	 * ).
 	 */
-	public static final Unit<Area> SQUARE_FOOT = addUnit(new ProductUnit<>(
-			(AbstractUnit<?>) FOOT.multiply(FOOT)));
+	@SuppressWarnings("unchecked")
+	public static final Unit<Area> SQUARE_FOOT = (Unit<Area>) addUnit(FOOT.multiply(FOOT));
 
 	/**
 	 * A unit of area equal to <code>100 m²</code> (standard name <code>a</code>
@@ -326,8 +326,8 @@ public final class US extends AbstractSystemOfUnits {
 	/**
 	 * A unit of volume equal to one cubic inch (<code>in³</code>).
 	 */
-	public static final Unit<Volume> CUBIC_INCH = addUnit(INCH.pow(3).asType(
-			Volume.class));
+	@SuppressWarnings("unchecked")
+	public static final Unit<Volume> CUBIC_INCH = (Unit<Volume>) addUnit(INCH.pow(3));
 
 	/**
 	 * A unit of volume equal to one US dry gallon. (standard name
@@ -428,10 +428,23 @@ public final class US extends AbstractSystemOfUnits {
 	 *            the unit being added.
 	 * @return <code>unit</code>.
 	 */
-	protected static <U extends Unit<?>> U addUnit(U unit) {
+	private static <U extends Unit<?>> U addUnit(U unit) {
 		INSTANCE.units.add(unit);
 		return unit;
 	}
+	
+    /**
+     * Adds a new unit and maps it to the specified quantity type.
+     *
+     * @param  unit the unit being added.
+     * @param type the quantity type.
+     * @return <code>unit</code>.
+     */
+    private static <U extends AbstractUnit<?>>  U addUnit(U unit, Class<? extends Quantity<?>> type) {
+        INSTANCE.units.add(unit);
+        INSTANCE.quantityToUnit.put(type, unit);
+        return unit;
+    }
 	
 	@Override
 	public String getName() {

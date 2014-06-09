@@ -54,23 +54,24 @@ class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 		return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	@Override
-	public Measurement<?, Number> multiply(Measurement<?, Number> that) {
-		return of(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
-	}
+//	@Override
+//	public Quantity<?> multiply(Quantity<?> that) {
+//		return of(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
+//	}
 
 	@Override
-	public Measurement<?, Number> multiply(Number that) {
+	public Measurement<T, Number> multiply(Number that) {
 		return of(value * that.doubleValue(), getUnit());
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Measurement<?, Number> divide(Measurement<?, Number> that) {
-		return of(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+	public Quantity<?> divide(Quantity<?> that) {
+		return new DoubleQuantity(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 	
 	@Override
-	public Measurement<?, Number> divide(Number that) {
+	public Quantity<T> divide(Number that) {
 		return of(value / that.doubleValue(), getUnit());
 	}
 

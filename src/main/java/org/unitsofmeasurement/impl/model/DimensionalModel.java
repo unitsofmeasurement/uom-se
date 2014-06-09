@@ -94,7 +94,7 @@ public abstract class DimensionalModel {
 //    }
 
     /**
-     * Default constructor (allows for derivation).
+     * DefaultQuantityFactory constructor (allows for derivation).
      */
     protected DimensionalModel() {
     }

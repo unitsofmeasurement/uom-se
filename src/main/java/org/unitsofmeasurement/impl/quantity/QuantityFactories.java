@@ -12,10 +12,10 @@ import javax.measure.Quantity;
  * Utils for Quantity factory
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-class QuantitYFactorys {
+class QuantityFactories {
 
 	private static final Logger logger = Logger
-			.getLogger(QuantitYFactorys.class.getName());
+			.getLogger(QuantityFactories.class.getName());
 
 	private static final Level LOG_LEVEL = Level.FINE;
 
@@ -51,11 +51,11 @@ class QuantitYFactorys {
 				Class<?> type2 = type.getInterfaces()[0];
 
 				factory = Optional.ofNullable(instance.get(type2)).orElse(
-						new Default<>((Class<Q>) type2));
+						new DefaultQuantityFactory<>((Class<Q>) type2));
 				instance.putIfAbsent(type2, factory);
 			} else {
 				factory = Optional.ofNullable(instance.get(type)).orElse(
-						new Default<>(type));
+						new DefaultQuantityFactory<>(type));
 				instance.putIfAbsent(type, factory);
 			}
 			return factory;
@@ -71,7 +71,7 @@ class QuantitYFactorys {
 		public <Q extends Quantity<Q>> QuantityFactory<Q> create(Class<Q> type,
 				Map<Class, QuantityFactory> instance) {
 			QuantityFactory<Q> factory = Optional
-					.ofNullable(instance.get(type)).orElse(new Default<>(type));
+					.ofNullable(instance.get(type)).orElse(new DefaultQuantityFactory<>(type));
 			instance.putIfAbsent(type, factory);
 			return factory;
 		}

@@ -22,8 +22,8 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.BiFactory;
 
-import org.unitsofmeasurement.impl.AbstractMeasurement;
-import org.unitsofmeasurement.impl.quantity.QuantitYFactorys.QuantityBuilder;
+import org.unitsofmeasurement.impl.AbstractQuantity;
+import org.unitsofmeasurement.impl.quantity.QuantityFactories.QuantityBuilder;
 
 
 /**
@@ -38,7 +38,7 @@ import org.unitsofmeasurement.impl.quantity.QuantitYFactorys.QuantityBuilder;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.5.3, $Date: 2014-05-28 $
+ * @version 0.5.4, $Date: 2014-05-28 $
  */
 public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
 	
@@ -56,7 +56,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @return the quantity factory for the specified type
      */
 	public static <Q extends Quantity<Q>>  QuantityFactory<Q> getInstance(final Class<Q> type) {
-    	QuantityBuilder builder = QuantitYFactorys.of(type);
+    	QuantityBuilder builder = QuantityFactories.of(type);
     	return builder.create(type, INSTANCES);
     }
 
@@ -69,7 +69,7 @@ public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactor
      * @param factory the quantity factory
      */
     protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, QuantityFactory<Q> factory) {
-        if (!AbstractMeasurement.class.isAssignableFrom(type))
+        if (!AbstractQuantity.class.isAssignableFrom(type))
             // This exception is not documented because it should never happen if the
             // user don't try to trick the Java generic types system with unsafe cast.
             throw new ClassCastException();

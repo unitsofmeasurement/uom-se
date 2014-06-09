@@ -65,7 +65,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
 	protected String name;
 	
 	/**
-     * Default constructor.
+     * DefaultQuantityFactory constructor.
      */
     protected AbstractUnit() {
     }

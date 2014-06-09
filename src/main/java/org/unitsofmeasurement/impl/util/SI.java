@@ -45,7 +45,7 @@ public final class SI extends AbstractSystemOfUnits {
     private static final SI INSTANCE = new SI();
 
      /**
-     * Default constructor (prevents this class from being instantiated).
+     * DefaultQuantityFactory constructor (prevents this class from being instantiated).
      */
     private SI() {
     }

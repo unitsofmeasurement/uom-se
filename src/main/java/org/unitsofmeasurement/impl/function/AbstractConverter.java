@@ -48,7 +48,7 @@ public abstract class AbstractConverter implements UnitConverter {
     public static final AbstractConverter IDENTITY = new Identity();
 
     /**
-     * Default constructor.
+     * DefaultQuantityFactory constructor.
      */
     protected AbstractConverter() {
     }

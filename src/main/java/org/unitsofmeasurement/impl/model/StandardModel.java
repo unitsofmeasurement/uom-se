@@ -25,7 +25,7 @@ package org.unitsofmeasurement.impl.model;
 public class StandardModel extends DimensionalModel {
 
     /**
-     * Default constructor.
+     * DefaultQuantityFactory constructor.
      */
     public StandardModel() {
     }
