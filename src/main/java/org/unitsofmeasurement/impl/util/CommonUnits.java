@@ -58,7 +58,7 @@ public class CommonUnits extends AbstractSystemOfUnits {
      * @param  unit the unit being added.
      * @return <code>unit</code>.
      */
-    private static <U extends AbstractUnit<?>>  U addUnit(U unit) {
+    private static <U extends Unit<?>>  U addUnit(U unit) {
         INSTANCE.units.add(unit);
         return unit;
     }

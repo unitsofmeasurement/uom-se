@@ -241,7 +241,7 @@ public final class UCUM extends AbstractSystemOfUnits {
     public static final Unit<MagneticPermeability> PERMEABILITY_OF_VACUUM 
             = addUnit(SI.NEWTONS_PER_SQUARE_AMPERE.multiply(PI).multiply(4).divide(1E7).asType(MagneticPermeability.class));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-    public static final Unit<ElectricCharge> ELEMENTARY_CHARGE = addUnit(SI.COULOMB.transform(SI.ELECTRON_VOLT.getConverterToSI()));
+    public static final Unit<ElectricCharge> ELEMENTARY_CHARGE = addUnit(SI.COULOMB.transform(((AbstractUnit)SI.ELECTRON_VOLT).getConverterToSI()));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
     public static final Unit<Mass> ELECTRON_MASS = addUnit(GRAM.multiply(9.1093897E-28));
     /** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
@@ -628,17 +628,6 @@ public final class UCUM extends AbstractSystemOfUnits {
 //        return SI.getInstance().getUnit(quantityType);
 //    }
 
-
-    /**
-     * Adds a new unit not mapped to any specified quantity type.
-     *
-     * @param  unit the unit being added.
-     * @return <code>unit</code>.
-     */
-    private static <U extends AbstractUnit<?>>  U addUnit(U unit) {
-        INSTANCE.units.add(unit);
-        return unit;
-    }
     
     /**
      * Adds a new unit not mapped to any specified quantity type.

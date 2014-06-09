@@ -32,11 +32,16 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, May 22, 2014
+ * @version 0.3, June 09, 2014
  */
 public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5676462045106887728L;
+
+	/**
      * Holds the actual unit.
      */
     private final AbstractUnit<Q> actualUnit;

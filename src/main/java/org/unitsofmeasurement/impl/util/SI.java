@@ -20,6 +20,7 @@ import org.unitsofmeasurement.impl.function.*;
 import org.unitsofmeasurement.impl.model.QuantityDimension;
 
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.quantity.*;
 
 /**
@@ -607,7 +608,7 @@ public final class SI extends AbstractSystemOfUnits {
      * @param  unit the unit being added.
      * @return <code>unit</code>.
      */
-    private static <U extends AbstractUnit<?>>  U addUnit(U unit) {
+    private static <U extends Unit<?>>  U addUnit(U unit) {
         INSTANCE.units.add(unit);
         return unit;
     }
