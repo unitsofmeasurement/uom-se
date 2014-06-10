@@ -19,7 +19,9 @@ import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 import org.unitsofmeasurement.impl.util.SIPrefix;
 
+import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
+
 import java.lang.reflect.Field;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -53,8 +55,8 @@ import java.util.logging.Logger;
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class.getName());
 	
-    private final Map<String, AbstractUnit<?>> symbolToUnit;
-    private final Map<AbstractUnit<?>, String> unitToSymbol;
+    private final Map<String, Unit<?>> symbolToUnit;
+    private final Map<Unit<?>, String> unitToSymbol;
     private final Map<String, Object> symbolToPrefix;
     private final Map<Object, String> prefixToSymbol;
     private final Map<UnitConverter, SIPrefix> converterToPrefix;
@@ -95,9 +97,9 @@ public final class SymbolMap {
                 Class<?> c = Class.forName(className);
                 Field field = c.getField(fieldName);
                 Object value = field.get(null);
-                if (value instanceof AbstractUnit<?>) {
+                if (value instanceof Unit<?>) {
                     if (isAlias) {
-                        alias((AbstractUnit<?>) value, symbol);
+                        alias((Unit)value, symbol);
                     } else {
                         label((AbstractUnit<?>) value, symbol);
                     }
@@ -148,7 +150,7 @@ public final class SymbolMap {
      * @param unit the unit to label.
      * @param symbol the new symbol for the unit.
      */
-    public void alias(AbstractUnit<?> unit, String symbol) {
+    public void alias(Unit<?> unit, String symbol) {
         symbolToUnit.put(symbol, unit);
     }
 
@@ -170,7 +172,7 @@ public final class SymbolMap {
      * @param symbol the symbol.
      * @return the corresponding unit or <code>null</code> if none.
      */
-    public AbstractUnit<?> getUnit(String symbol) {
+    public Unit<?> getUnit(String symbol) {
         return symbolToUnit.get(symbol);
     }
 

@@ -9,7 +9,7 @@ import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
     final double value;
 
@@ -54,10 +54,11 @@ class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 		return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-//	@Override
-//	public Quantity<?> multiply(Quantity<?> that) {
-//		return of(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
-//	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Quantity<?> multiply(Measurement<?, Number> that) {
+		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
+	}
 
 	@Override
 	public Measurement<T, Number> multiply(Number that) {

@@ -15,6 +15,8 @@
  */
 package org.unitsofmeasurement.impl.format.internal;
 
+import javax.measure.Unit;
+
 import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.format.SymbolMap;
 import org.unitsofmeasurement.impl.util.SI;
@@ -45,8 +47,8 @@ public class UCUMParser {
 //
 // Parser productions
 //
-    final public AbstractUnit parseUnit() throws ParseException {
-        AbstractUnit u;
+    final public Unit parseUnit() throws ParseException {
+        Unit u;
         u = Term();
         jj_consume_token(0);
         {
@@ -54,9 +56,9 @@ public class UCUMParser {
         }
     }
     
-    final public AbstractUnit Term() throws ParseException {
-        AbstractUnit result = SI.ONE;
-        AbstractUnit temp = SI.ONE;
+    final public Unit Term() throws ParseException {
+        Unit result = SI.ONE;
+        Unit temp = SI.ONE;
         result = Component();
         label_1:
         while (true) {
@@ -90,14 +92,14 @@ public class UCUMParser {
         }
     }
 
-    final public AbstractUnit Component() throws ParseException {
-        AbstractUnit result = SI.ONE;
+    final public Unit Component() throws ParseException {
+        Unit result = (AbstractUnit) SI.ONE;
         Token token = null;
         if (jj_2_1(2147483647)) {
             result = Annotatable();
             token = jj_consume_token(ANNOTATION);
             {
-                return result.annotate(token.image.substring(1, token.image.length() - 1));
+                return ((AbstractUnit)result).annotate(token.image.substring(1, token.image.length() - 1));
             }
         } else {
             switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -107,7 +109,7 @@ public class UCUMParser {
                 }
                 case ANNOTATION:
                     token = jj_consume_token(ANNOTATION); {
-                    return result.annotate(token.image.substring(1, token.image.length() - 1));
+                    return ((AbstractUnit)result).annotate(token.image.substring(1, token.image.length() - 1));
                 }
                 case FACTOR:
                     token = jj_consume_token(FACTOR);
@@ -133,8 +135,8 @@ public class UCUMParser {
         }
     }
 
-    final public AbstractUnit Annotatable() throws ParseException {
-        AbstractUnit result = SI.ONE;
+    final public Unit Annotatable() throws ParseException {
+    	Unit result = SI.ONE;
         Token token1 = null;
         Token token2 = null;
         if (jj_2_2(2147483647)) {
@@ -171,10 +173,10 @@ public class UCUMParser {
         }
     }
 
-    final public AbstractUnit SimpleUnit() throws ParseException {
+    final public Unit SimpleUnit() throws ParseException {
         Token token = null;
         token = jj_consume_token(ATOM);
-        AbstractUnit unit = symbols.getUnit(token.image);
+        Unit unit = symbols.getUnit(token.image);
         if (unit == null) {
             SIPrefix prefix = symbols.getPrefix(token.image);
             if (prefix != null) {

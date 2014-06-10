@@ -10,7 +10,7 @@ import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
+final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
 
     /**
 	 * 
@@ -51,14 +51,15 @@ class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> impleme
 		return of(value.subtract((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
 	}
 
-//	@Override
-//	public Quantity<?> multiply(Quantity<?> that) {
-//		return of(value.multiply((BigDecimal)that.getValue()), 
-//				getUnit().multiply(that.getUnit()));
-//	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Quantity<?> multiply(Measurement<?, Number> that) {
+		return new DecimalQuantity(value.multiply((BigDecimal)that.getValue()), 
+				getUnit().multiply(that.getUnit()));
+	}
 
 	@Override
-	public Measurement<T, Number> multiply(Number that) {
+	public Quantity<T> multiply(Number that) {
 		return of(value.multiply((BigDecimal)that), getUnit());
 	}
 
@@ -69,7 +70,7 @@ class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> impleme
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public AbstractQuantity<T> inverse() {
+	public Quantity<T> inverse() {
 		//return of(value.negate(), getUnit());
 		return (AbstractQuantity<T>) of(value, getUnit().inverse());
 	}

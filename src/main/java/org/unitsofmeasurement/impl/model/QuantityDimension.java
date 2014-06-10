@@ -15,7 +15,6 @@
  */
 package org.unitsofmeasurement.impl.model;
 
-import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.BaseUnit;
 import org.unitsofmeasurement.impl.util.SI;
 
@@ -98,7 +97,7 @@ public class QuantityDimension implements Dimension {
     /**
      * Holds the pseudo unit associated to this dimension.
      */
-    private final AbstractUnit<?> pseudoUnit;
+    private final Unit<?> pseudoUnit;
 
     /**
      * Returns the dimension for the specified quantity type by aggregating
@@ -140,7 +139,7 @@ public class QuantityDimension implements Dimension {
      *
      * @param pseudoUnit the pseudo-unit.
      */
-    private QuantityDimension(AbstractUnit<?> pseudoUnit) {
+    private QuantityDimension(Unit<?> pseudoUnit) {
         this.pseudoUnit = pseudoUnit;
     }
 
@@ -217,10 +216,10 @@ public class QuantityDimension implements Dimension {
      */
     @SuppressWarnings("rawtypes")
 	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
-        Map<? extends AbstractUnit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
+        Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
         if (pseudoUnit == null) return null;
         Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();
-        for (Map.Entry<? extends AbstractUnit, Integer> entry : pseudoUnits.entrySet()) {
+        for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
         }
         return fundamentalDimensions;

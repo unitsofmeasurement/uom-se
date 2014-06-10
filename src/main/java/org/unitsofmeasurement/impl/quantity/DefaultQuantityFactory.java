@@ -75,6 +75,7 @@ import javax.measure.quantity.Temperature;
 import javax.measure.quantity.Time;
 import javax.measure.quantity.Volume;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
 import org.unitsofmeasurement.impl.util.SI;
 
 /**

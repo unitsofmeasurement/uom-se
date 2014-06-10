@@ -19,6 +19,8 @@ import javax.measure.Measurement;
 import javax.measure.Unit;
 import javax.measure.quantity.Temperature;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 /**
  * @author Werner Keil
  * @version 1.5, $Date: 2014-04-03 $

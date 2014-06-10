@@ -40,7 +40,7 @@ import org.unitsofmeasurement.impl.quantity.QuantityFactories.QuantityBuilder;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.5.4, $Date: 2014-05-28 $
  */
-public abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
+abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
 	
     /**
      * Holds the current instances.

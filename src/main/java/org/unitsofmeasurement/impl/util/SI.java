@@ -203,7 +203,7 @@ public final class SI extends AbstractSystemOfUnits {
      * the French philosopher and mathematician Blaise Pascal (1623-1662).
      */
     public static final AlternateUnit<Pressure> PASCAL
-            = addUnit(new AlternateUnit<>(
+            = addUnit(new AlternateUnit(
              NEWTON.divide(METRE.pow(2)), "Pa"), Pressure.class);
 
     /**

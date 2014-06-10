@@ -149,7 +149,7 @@ public class LocalUnitFormat implements UnitFormat {
     ////////////////////////
     /**
      * The symbol map used by this instance to map between
-     * {@link AbstractUnit Unit}s and
+     * {@link Unit Unit}s and
      * <code>String</code>s, etc...
      */
     private transient SymbolMap symbolMap;
@@ -190,7 +190,7 @@ public class LocalUnitFormat implements UnitFormat {
         return appendable;
     }
 
-    public AbstractUnit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
+    public Unit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
         // Parsing reads the whole character sequence from the parse position.
         int start = cursor.getIndex();
         int end = csq.length();
@@ -220,7 +220,7 @@ public class LocalUnitFormat implements UnitFormat {
     }
 
     @Override
-    public AbstractUnit<? extends Quantity> parse(CharSequence csq) throws ParserException {
+    public Unit<? extends Quantity<?>> parse(CharSequence csq) throws ParserException {
     	return parse(csq, new ParsePosition(0));
     }
     
@@ -234,20 +234,20 @@ public class LocalUnitFormat implements UnitFormat {
      * @return the operator precedence of the outermost operator in the unit 
      *   expression that was output
      */
-    private int formatInternal(AbstractUnit<?> unit, Appendable buffer) throws IOException {
+    private int formatInternal(Unit<?> unit, Appendable buffer) throws IOException {
         if (unit instanceof AnnotatedUnit) {
             unit = ((AnnotatedUnit) unit).getActualUnit();
         }
-        String symbol = symbolMap.getSymbol(unit);
+        String symbol = symbolMap.getSymbol((AbstractUnit<?>) unit);
         if (symbol != null) {
             buffer.append(symbol);
             return NOOP_PRECEDENCE;
         } else if (unit.getProductUnits() != null) {
-            Map<? extends AbstractUnit, Integer> productUnits = unit.getProductUnits();
+            Map<? extends Unit, Integer> productUnits = unit.getProductUnits();
             int negativeExponentCount = 0;
             // Write positive exponents first...
             boolean start = true;
-            for (AbstractUnit u : productUnits.keySet()) {
+            for (Unit u : productUnits.keySet()) {
                 int pow = productUnits.get(u);
                 if (pow >= 0) {
                     formatExponent(u, pow, 1, !start, buffer);
@@ -266,7 +266,7 @@ public class LocalUnitFormat implements UnitFormat {
                     buffer.append('(');
                 }
                 start = true;
-                for (AbstractUnit u : productUnits.keySet()) {
+                for (Unit u : productUnits.keySet()) {
                     int pow = productUnits.get(u);
                     if (pow < 0) {
                         formatExponent(u, -pow, 1, !start, buffer);
@@ -278,7 +278,7 @@ public class LocalUnitFormat implements UnitFormat {
                 }
             }
             return PRODUCT_PRECEDENCE;
-        } else if ((!unit.isSI()) || unit.equals(SI.KILOGRAM)) {
+        } else if ((!((AbstractUnit)unit).isSI()) || unit.equals(SI.KILOGRAM)) {
             UnitConverter converter = null;
             boolean printSeparator = false;
             StringBuffer temp = new StringBuffer();
@@ -290,7 +290,7 @@ public class LocalUnitFormat implements UnitFormat {
                 unitPrecedence = formatInternal(SI.GRAM, temp);
                 printSeparator = true;
             } else {
-                AbstractUnit parentUnit = unit.getSystemUnit();
+                Unit parentUnit = unit.getSystemUnit();
                 converter = unit.getConverterTo(parentUnit);
                 if (parentUnit.equals(SI.KILOGRAM)) {
                     // More special-case hackery to work around gram/kilogram 
@@ -324,7 +324,7 @@ public class LocalUnitFormat implements UnitFormat {
      * @param buffer StringBuffer the buffer to append to. No assumptions should
      *    be made about its content.
      */
-    private void formatExponent(AbstractUnit<?> unit, int pow, int root, boolean continued, Appendable buffer) throws IOException {
+    private void formatExponent(Unit<?> unit, int pow, int root, boolean continued, Appendable buffer) throws IOException {
         if (continued) {
             buffer.append(MIDDLE_DOT);
         }

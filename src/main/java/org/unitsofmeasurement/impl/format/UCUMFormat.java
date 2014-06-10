@@ -128,11 +128,11 @@ public abstract class UCUMFormat implements UnitFormat {
     /////////////
     // Parsing //
     /////////////
-    public abstract AbstractUnit<? extends Quantity> parse(CharSequence csq,
+    public abstract Unit<? extends Quantity<?>> parse(CharSequence csq,
             ParsePosition cursor) throws ParserException;
     
     @Override
-    public abstract AbstractUnit<? extends Quantity> parse(CharSequence csq) throws ParserException;
+    public abstract Unit<? extends Quantity<?>> parse(CharSequence csq) throws ParserException;
 
     ////////////////
     // Formatting //
@@ -356,7 +356,7 @@ public abstract class UCUMFormat implements UnitFormat {
         }
 
         @Override
-        public AbstractUnit<? extends Quantity> parse(CharSequence csq,
+        public Unit<? extends Quantity<?>> parse(CharSequence csq,
                 ParsePosition pos) throws IllegalArgumentException {
             throw new UnsupportedOperationException(
                     "The print format is for pretty-printing of units only. Parsing is not supported.");
@@ -376,7 +376,7 @@ public abstract class UCUMFormat implements UnitFormat {
         }
 
         @Override
-        public AbstractUnit<? extends Quantity> parse(CharSequence csq) throws IllegalArgumentException {
+        public Unit<? extends Quantity<?>> parse(CharSequence csq) throws IllegalArgumentException {
         	return parse(csq, new ParsePosition(0));
         
 		}
@@ -437,7 +437,7 @@ public abstract class UCUMFormat implements UnitFormat {
         }
 
         @Override
-        public AbstractUnit<? extends Quantity<?>> parse(CharSequence csq,
+        public Unit<? extends Quantity<?>> parse(CharSequence csq,
                 ParsePosition cursor) throws ParserException {
             // Parsing reads the whole character sequence from the parse
             // position.
@@ -456,7 +456,7 @@ public abstract class UCUMFormat implements UnitFormat {
             UCUMParser parser = new UCUMParser(symbolMap,
                     new ByteArrayInputStream(source.getBytes()));
             try {
-                AbstractUnit<?> result = parser.parseUnit();
+                Unit<?> result = parser.parseUnit();
                 cursor.setIndex(end);
                 return result;
             } catch (ParseException e) {
@@ -474,7 +474,7 @@ public abstract class UCUMFormat implements UnitFormat {
         
         @SuppressWarnings("rawtypes")
 		@Override
-        public AbstractUnit<? extends Quantity> parse(CharSequence csq) throws ParserException {
+        public Unit<? extends Quantity<?>> parse(CharSequence csq) throws ParserException {
         	return parse(csq, new ParsePosition(0));
         }
     }

@@ -27,14 +27,15 @@ class QuantityFactories {
 			return new QuantityUtilsInterface();
 		}
 	}
+
 	/**
-	 * A abstraction to factory producing simple quantities instances
+	 * An abstraction to factory producing simple quantities instances
 	 */
 	public interface QuantityBuilder {
 		<Q extends Quantity<Q>> QuantityFactory<Q> create(Class<Q> type,
 				Map<Class, QuantityFactory> instance);
 	}
-	
+
 	/**
 	 * Quantity utils Factory to concrete class
 	 */
@@ -62,6 +63,7 @@ class QuantityFactories {
 		}
 
 	}
+
 	/**
 	 * Quantity utils Factory to interface class
 	 */
@@ -71,7 +73,8 @@ class QuantityFactories {
 		public <Q extends Quantity<Q>> QuantityFactory<Q> create(Class<Q> type,
 				Map<Class, QuantityFactory> instance) {
 			QuantityFactory<Q> factory = Optional
-					.ofNullable(instance.get(type)).orElse(new DefaultQuantityFactory<>(type));
+					.ofNullable(instance.get(type)).orElse(
+							new DefaultQuantityFactory<>(type));
 			instance.putIfAbsent(type, factory);
 			return factory;
 		}

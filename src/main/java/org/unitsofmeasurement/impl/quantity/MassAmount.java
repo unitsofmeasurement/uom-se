@@ -18,6 +18,8 @@ package org.unitsofmeasurement.impl.quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Mass;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 /**
  * Represents the measure of the quantity of matter that a body or an object contains.
  * The mass of the body is not dependent on gravity and therefore is different from but

@@ -21,6 +21,7 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.util.SystemOfUnits;
+
 import java.util.*;
 
 /**
@@ -33,7 +34,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
      * Holds the units.
      */
-    protected final Set<Unit<?>> units = new HashSet<>(); // Diamond, Java 7+
+	protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
 
     /**
      * Holds the mapping quantity to unit.

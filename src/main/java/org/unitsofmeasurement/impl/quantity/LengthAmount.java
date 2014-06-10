@@ -18,6 +18,8 @@ package org.unitsofmeasurement.impl.quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Length;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 /**
  * Represents the extent of something along its greatest
  * dimension or the extent of space between two objects or places.

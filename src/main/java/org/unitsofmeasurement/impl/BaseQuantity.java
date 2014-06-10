@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.unitsofmeasurement.impl.quantity;
+package org.unitsofmeasurement.impl;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,7 +28,6 @@ import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
-import org.unitsofmeasurement.impl.AbstractQuantity;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 /**
@@ -40,9 +39,9 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.6.2, $Date: 2014-06-09 $
+ * @version 0.7, $Date: 2014-06-10 $
  */
-class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
+public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Quantity<Q>, Comparable<BaseQuantity<Q>>, Serializable {
     
 
@@ -109,7 +108,7 @@ class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * Measurement#doubleValue(javax.measure.Unit)
+	 * AbstractQuantity#doubleValue(javax.measure.Unit)
 	 */
 	public double doubleValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
@@ -200,33 +199,35 @@ class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@Override
-	public Measurement<Q, Number> add(Measurement<Q, Number> that) {
+	public Quantity<Q> add(Measurement<Q, Number> that) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Measurement<Q, Number> substract(Measurement<Q, Number> that) {
+	public Quantity<Q> substract(Measurement<Q, Number> that) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Quantity<?> multiply(Quantity<?> that) {
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public Quantity<?> multiply(Measurement<?, Number> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
-		return of((getValue().doubleValue() * that.getValue()
+		return new BaseQuantity((getValue().doubleValue() * that.getValue()
 				.doubleValue()), unit);	
 	}
         
-        @Override
+    @Override
 	public Quantity<Q> multiply(Number that) {
 		return (BaseQuantity<Q>) of((getValue().doubleValue() * that
 				.doubleValue()), getUnit());	
 	}
         
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
 		final Unit<?> unit = getUnit().divide(that.getUnit());
-		return of((getValue().doubleValue() / that.getValue()
+		return new BaseQuantity((getValue().doubleValue() / that.getValue()
 				.doubleValue()), unit);	
 	}
 
@@ -242,9 +243,9 @@ class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 	
 	@Override
-	public Measurement<Q, Number> inverse() {
+	public Quantity<Q> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Measurement<Q, Number> m = new BaseQuantity(getValue(),
+		final Quantity<Q> m = new BaseQuantity(getValue(),
 				getUnit().inverse()); // TODO keep value same?
 		return m;
 	}

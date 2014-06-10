@@ -150,7 +150,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      * @throws ParserException if the specified character sequence
      *         cannot be correctly parsed (e.g. not UCUM compliant).
      */
-    public static AbstractUnit<?> of(CharSequence charSequence) {
+    public static Unit<?> of(CharSequence charSequence) {
         return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
     }
 
@@ -244,7 +244,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
     }
 
     @Override
-    public abstract Map<? extends AbstractUnit<?>, Integer> getProductUnits();
+    public abstract Map<? extends Unit<?>, Integer> getProductUnits();
 
     @Override
     public abstract Dimension getDimension();
@@ -344,7 +344,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      * @param that the physical unit multiplicand.
      * @return <code>this * that</code>
      */
-    public final AbstractUnit<?> multiply(AbstractUnit<?> that) {
+    public final Unit<?> multiply(AbstractUnit<?> that) {
         if (this.equals(SI.ONE))
             return that;
         if (that.equals(SI.ONE))
@@ -358,7 +358,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      * @return <code>1 / this</code>
      */
     @Override
-    public final AbstractUnit<?> inverse() {
+    public final Unit<?> inverse() {
         if (this.equals(SI.ONE))
             return this;
         return ProductUnit.getQuotientInstance(SI.ONE, this);
@@ -399,7 +399,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      * @param that the physical unit divisor.
      * @return <code>this.multiply(that.inverse())</code>
      */
-    public final AbstractUnit<?> divide(AbstractUnit<?> that) {
+    public final Unit<?> divide(AbstractUnit<?> that) {
         return this.multiply(that.inverse());
     }
 
@@ -412,7 +412,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      *         would result in an unit with a fractional exponent.
      */
     @Override
-    public final AbstractUnit<?> root(int n) {
+    public final Unit<?> root(int n) {
         if (n > 0)
             return ProductUnit.getRootInstance(this, n);
         else if (n == 0)
@@ -428,7 +428,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      * @return the result of raising this unit to the exponent.
      */
     @Override
-    public final AbstractUnit<?> pow(int n) {
+    public final Unit<?> pow(int n) {
         if (n > 0)
             return this.multiply(this.pow(n - 1));
         else if (n == 0)

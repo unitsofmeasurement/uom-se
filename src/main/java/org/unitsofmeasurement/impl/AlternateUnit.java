@@ -17,6 +17,7 @@ package org.unitsofmeasurement.impl;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
 import java.util.Map;
@@ -41,7 +42,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 	/**
      * Holds the parent unit (a system unit).
      */
-    private final AbstractUnit<?> parentUnit;
+    private final Unit<?> parentUnit;
 
     /**
      * Holds the symbol for this unit.
@@ -57,8 +58,8 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      * @throws IllegalArgumentException if the specified parent unit is not an
      *         {@link AbstractUnit#isSystemUnit() system unit}
      */
-    public AlternateUnit(AbstractUnit<?> parentUnit, String symbol) {
-        if (!parentUnit.isSI())
+    public AlternateUnit(Unit<?> parentUnit, String symbol) {
+        if (!((AbstractUnit)parentUnit).isSI())
             throw new IllegalArgumentException("The parent unit: " +  parentUnit
                     + " is not an unscaled SI unit");
         this.parentUnit = (parentUnit instanceof AlternateUnit) ?
@@ -72,7 +73,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
      *
      * @return the parent unit.
      */
-    public AbstractUnit<?> getParentUnit() {
+    public Unit<?> getParentUnit() {
         return parentUnit;
     }
 
@@ -88,7 +89,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
 
     @Override
     public UnitConverter getConverterToSI() {
-        return parentUnit.getConverterToSI();
+        return ((AbstractUnit)parentUnit).getConverterToSI();
     }
 
     @Override
@@ -97,7 +98,7 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public Map<? extends AbstractUnit<?>, Integer> getProductUnits() {
+    public Map<? extends Unit<?>, Integer> getProductUnits() {
         return parentUnit.getProductUnits();
     }
 

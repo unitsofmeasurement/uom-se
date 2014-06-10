@@ -24,7 +24,6 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -41,14 +40,14 @@ import java.util.Objects;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, May 9, 2014
+ * @version 0.3, June 10, 2014
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 962983585531030093L;
+	private static final long serialVersionUID = 962983585531030093L;
 
 	/**
      * Holds the units composing this product unit.
@@ -79,7 +78,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param productUnit the product unit source.
      * @throws ClassCastException if the specified unit is not a product unit.
      */
-    public ProductUnit(AbstractUnit<?> productUnit) {
+    public ProductUnit(Unit<?> productUnit) {
     	this.symbol = productUnit.getSymbol();
         this.elements = ((ProductUnit<?>) productUnit).elements;
     }
@@ -102,7 +101,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param right the right unit operand.
      * @return <code>left * right</code>
      */
-    public static AbstractUnit<?> getProductInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
+    public static Unit<?> getProductInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
         Element[] leftElems;
         if (left instanceof ProductUnit<?>)
             leftElems = ((ProductUnit<?>) left).elements;
@@ -123,12 +122,12 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param right the divisor unit operand.
      * @return <code>dividend / divisor</code>
      */
-    public static AbstractUnit<?> getQuotientInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
+    public static Unit<?> getQuotientInstance(Unit<?> left, Unit<?> right) {
         Element[] leftElems;
         if (left instanceof ProductUnit<?>)
             leftElems = ((ProductUnit<?>) left).elements;
         else
-            leftElems = new Element[]{new Element(left, 1, 1)};
+            leftElems = new Element[]{new Element((AbstractUnit<?>) left, 1, 1)};
         Element[] rightElems;
         if (right instanceof ProductUnit<?>) {
             Element[] elems = ((ProductUnit<?>) right).elements;
@@ -138,7 +137,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
                         elems[i].root);
             }
         } else
-            rightElems = new Element[]{new Element(right, -1, 1)};
+            rightElems = new Element[]{new Element((AbstractUnit<?>) right, -1, 1)};
         return getInstance(leftElems, rightElems);
     }
 
@@ -151,7 +150,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @return <code>unit^(1/nn)</code>
      * @throws ArithmeticException if <code>n == 0</code>.
      */
-    public static AbstractUnit<?> getRootInstance(AbstractUnit<?> unit, int n) {
+    public static Unit<?> getRootInstance(AbstractUnit<?> unit, int n) {
         Element[] unitElems;
         if (unit instanceof ProductUnit<?>) {
             Element[] elems = ((ProductUnit<?>) unit).elements;
@@ -174,7 +173,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param nn the exponent (nn &gt; 0).
      * @return <code>unit^n</code>
      */
-    static AbstractUnit<?> getPowInstance(AbstractUnit<?> unit, int n) {
+    static Unit<?> getPowInstance(AbstractUnit<?> unit, int n) {
         Element[] unitElems;
         if (unit instanceof ProductUnit<?>) {
             Element[] elems = ((ProductUnit<?>) unit).elements;
@@ -331,7 +330,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @return the corresponding unit.
      */
     @SuppressWarnings("rawtypes")
-	private static AbstractUnit<?> getInstance(Element[] leftElems, Element[] rightElems) {
+	private static Unit<?> getInstance(Element[] leftElems, Element[] rightElems) {
 
         // Merges left elements with right elements.
         Element[] result = new Element[leftElems.length + rightElems.length];

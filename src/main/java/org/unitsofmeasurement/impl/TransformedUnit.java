@@ -17,6 +17,7 @@ package org.unitsofmeasurement.impl;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
 import java.util.Map;
@@ -100,7 +101,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
 
     @Override
-    public Map<? extends AbstractUnit<?>, Integer> getProductUnits() {
+    public Map<? extends Unit<?>, Integer> getProductUnits() {
         return parentUnit.getProductUnits();
     }
 

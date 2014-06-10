@@ -18,6 +18,8 @@ package org.unitsofmeasurement.impl.quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Force;
 
+import org.unitsofmeasurement.impl.BaseQuantity;
+
 /**
  * Represents a quantity that tends to produce an acceleration of a body in the
  * direction of its application. The metric system unit for this quantity is "N"
