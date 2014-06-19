@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.unitsofmeasurement.impl</groupId>
 	<artifactId>unit-impl-se</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.2</version>
 
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Implementation for Java SE</name>
@@ -39,7 +39,7 @@
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
-		<jsr.version>0.5-SNAPSHOT</jsr.version>
+		<jsr.version>0.5</jsr.version>
 		<jdkVersion>1.8</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
@@ -226,7 +226,7 @@
 		</profile>
 	</profiles>
 	<parent>
-		<version>0.5-SNAPSHOT</version>
+		<version>0.5</version>
 		<groupId>org.unitsofmeasurement</groupId>
 		<artifactId>unitsofmeasurement-parent</artifactId>
 	</parent>

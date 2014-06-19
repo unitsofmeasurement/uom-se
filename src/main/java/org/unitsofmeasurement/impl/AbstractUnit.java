@@ -15,6 +15,8 @@
  */
 package org.unitsofmeasurement.impl;
 
+import static org.unitsofmeasurement.impl.format.UCUMFormat.Variant.CASE_SENSITIVE;
+
 import org.unitsofmeasurement.impl.format.LocalUnitFormat;
 import org.unitsofmeasurement.impl.format.UCUMFormat;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
@@ -172,8 +174,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
     public String toString() {
         final Appendable tmp = new StringBuilder();
         try {
-            //return UCUMFormat.getCaseSensitiveInstance().format(this, tmp).toString();
-        	return LocalUnitFormat.getInstance().format(this, tmp).toString();
+            return UCUMFormat.getInstance(CASE_SENSITIVE).format(this, tmp).toString();
+        	//return LocalUnitFormat.getInstance().format(this, tmp).toString();
         } catch (IOException ioException) {
              throw new Error(ioException); // Should never happen.
         } finally {
