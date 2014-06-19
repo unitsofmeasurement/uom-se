@@ -241,9 +241,10 @@ public final class UCUM extends AbstractSystemOfUnits {
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Pressure> BAR = addUnit(SI.PASCAL.multiply(100000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Mass> ATOMIC_MASS_UNIT = addUnit(
-			new AlternateUnit<Mass>(SI.UNIFIED_ATOMIC_MASS,
-					SI.UNIFIED_ATOMIC_MASS.getSymbol()), Mass.class);
+	public static final Unit<Mass> ATOMIC_MASS_UNIT = addUnit(SI.UNIFIED_ATOMIC_MASS);
+//	public static final Unit<Mass> ATOMIC_MASS_UNIT = addUnit(
+//			new AlternateUnit<Mass>(SI.UNIFIED_ATOMIC_MASS,
+//					SI.UNIFIED_ATOMIC_MASS.getSymbol()), Mass.class);
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Energy> ELECTRON_VOLT = addUnit(SI.ELECTRON_VOLT);
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
@@ -269,8 +270,12 @@ public final class UCUM extends AbstractSystemOfUnits {
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<MagneticPermeability> PERMEABILITY_OF_VACUUM = addUnit(
 			new ProductUnit<MagneticPermeability>(SI.NEWTONS_PER_SQUARE_AMPERE
-					.multiply(PI).multiply(4).divide(1E7)),
+					.multiply(PI.multiply(4).divide(1E7))),
 			MagneticPermeability.class);
+//	public static final Unit<MagneticPermeability> PERMEABILITY_OF_VACUUM = addUnit(
+//			new ProductUnit<MagneticPermeability>(SI.NEWTONS_PER_SQUARE_AMPERE
+//					.multiply(PI).multiply(4).divide(1E7)),
+//			MagneticPermeability.class);
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<ElectricCharge> ELEMENTARY_CHARGE = addUnit(SI.COULOMB
 			.transform(SI.ELECTRON_VOLT.getConverterToSI()));
@@ -310,8 +315,11 @@ public final class UCUM extends AbstractSystemOfUnits {
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static final Unit<Force> DYNE = addUnit(new ProductUnit<Force>(
-			SI.GRAM.multiply(new ProductUnit(CENTI(SI.METRE)).divide(SI.SECOND
+			SI.GRAM.multiply(CENTI(SI.METRE).divide(SI.SECOND
 					.pow(2)))));
+//	public static final Unit<Force> DYNE = addUnit(new ProductUnit<Force>(
+//			SI.GRAM.multiply(new ProductUnit(CENTI(SI.METRE)).divide(SI.SECOND
+//					.pow(2)))));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Energy> ERG = addUnit(new ProductUnit<Energy>(
 			DYNE.multiply(CENTI(SI.METRE))));
@@ -352,10 +360,14 @@ public final class UCUM extends AbstractSystemOfUnits {
 			.multiply(2.58E-4));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<RadiationDoseAbsorbed> RAD = addUnit(new ProductUnit<RadiationDoseAbsorbed>(
-			ERG.divide(SI.GRAM).multiply(100)));
+			ERG.divide(SI.GRAM.multiply(100))));
+//	public static final Unit<RadiationDoseAbsorbed> RAD = addUnit(new ProductUnit<RadiationDoseAbsorbed>(
+//			ERG.divide(SI.GRAM).multiply(100)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<RadiationDoseEffective> REM = addUnit(new AlternateUnit<RadiationDoseEffective>(
-			RAD, RAD.getSymbol())); // TODO are symbols for RAD and REM same?
+	public static final Unit<RadiationDoseEffective> REM = addUnit(new ProductUnit<RadiationDoseEffective>(
+			ERG.divide(SI.GRAM.multiply(100))));
+//	public static final Unit<RadiationDoseEffective> REM = addUnit(new AlternateUnit<RadiationDoseEffective>(
+//			RAD, RAD.getSymbol())); // TODO are symbols for RAD and REM same?
 	// ///////////////////////////////////////////////
 	// INTERNATIONAL CUSTOMARY UNITS: UCUM 4.4 §31 //
 	// ///////////////////////////////////////////////
@@ -409,7 +421,9 @@ public final class UCUM extends AbstractSystemOfUnits {
 			.divide(1000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Area> CIRCULAR_MIL_INTERNATIONAL = addUnit(new ProductUnit<Area>(
-			MIL_INTERNATIONAL.pow(2).multiply(PI).divide(4)));
+			MIL_INTERNATIONAL.pow(2).multiply(PI.divide(4))));
+//	public static final Unit<Area> CIRCULAR_MIL_INTERNATIONAL = addUnit(new ProductUnit<Area>(
+//			MIL_INTERNATIONAL.pow(2).multiply(PI).divide(4)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Length> HAND_INTERNATIONAL = addUnit(INCH_INTERNATIONAL
 			.multiply(4));
@@ -451,7 +465,9 @@ public final class UCUM extends AbstractSystemOfUnits {
 			.multiply(8));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Area> ACRE_US_SURVEY = addUnit(new ProductUnit<Area>(
-			ROD_US_SURVEY.pow(2).multiply(160)));
+			ROD_US_SURVEY.pow(2)).multiply(160));
+//	public static final Unit<Area> ACRE_US_SURVEY = addUnit(new ProductUnit<Area>(
+//			ROD_US_SURVEY.pow(2).multiply(160)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Area> SQUARE_ROD_US_SURVEY = addUnit(new ProductUnit<Area>(
 			ROD_US_SURVEY.pow(2)));
@@ -505,7 +521,9 @@ public final class UCUM extends AbstractSystemOfUnits {
 			NAUTICAL_MILE_BRITISH.divide(HOUR)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Area> ACRE_BRITISH = addUnit(new ProductUnit<Area>(
-			YARD_BRITISH.pow(2).multiply(4840)));
+			YARD_BRITISH.pow(2)).multiply(4840));
+//	public static final Unit<Area> ACRE_BRITISH = addUnit(new ProductUnit<Area>(
+//			YARD_BRITISH.pow(2).multiply(4840)));
 	// /////////////////////////////////
 	// US VOLUME UNITS: UCUM 4.4 §34 //
 	// /////////////////////////////////
@@ -736,7 +754,9 @@ public final class UCUM extends AbstractSystemOfUnits {
 	public static final Unit<Length> ANGSTROM = addUnit(NANO(METER).divide(10));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Area> BARN = addUnit(new ProductUnit<Area>(FEMTO(
-			METER).pow(2).multiply(100)));
+			METER).pow(2)).multiply(100));
+//	public static final Unit<Area> BARN = addUnit(new ProductUnit<Area>(FEMTO(
+//			METER).pow(2).multiply(100)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Pressure> ATMOSPHERE_TECHNICAL = addUnit(new ProductUnit<Pressure>(
 			KILO(GRAM_FORCE).divide(CENTI(METER).pow(2))));
@@ -748,10 +768,14 @@ public final class UCUM extends AbstractSystemOfUnits {
 			POUND_FORCE.divide(INCH_INTERNATIONAL.pow(2))));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Angle> CIRCLE = addUnit(new ProductUnit<Angle>(PI
-			.multiply(RADIAN).multiply(2)));
+			.multiply(RADIAN.multiply(2))));
+//	public static final Unit<Angle> CIRCLE = addUnit(new ProductUnit<Angle>(PI
+//			.multiply(RADIAN).multiply(2)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<SolidAngle> SPHERE = addUnit(new ProductUnit<SolidAngle>(
-			PI.multiply(STERADIAN).multiply(4)));
+			PI.multiply(STERADIAN.multiply(4))));
+//	public static final Unit<SolidAngle> SPHERE = addUnit(new ProductUnit<SolidAngle>(
+//			PI.multiply(STERADIAN).multiply(4)));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Mass> CARAT_METRIC = addUnit(GRAM.divide(5));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
