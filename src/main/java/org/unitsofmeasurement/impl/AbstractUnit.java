@@ -221,7 +221,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
         Dimension thisDimension = this.getDimension();
         Dimension thatDimension = that.getDimension();
         if (thisDimension.equals(thatDimension)) return true;
-        DimensionalModel model = DimensionalModel.getCurrent(); // Use dimensional analysis model.
+        DimensionalModel model = DimensionalModel.getInstance(); // Use dimensional analysis model.
         return model.getFundamentalDimension(thisDimension).equals(model.getFundamentalDimension(thatDimension));
     }
 
@@ -281,7 +281,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
         if (!isCompatible(that))
             throw new IncommensurableException(this + " is not compatible with " + that);
         AbstractUnit thatAbstr = (AbstractUnit)that; // Since both units are compatible they must be both physics units.
-        DimensionalModel model = DimensionalModel.getCurrent();
+        DimensionalModel model = DimensionalModel.getInstance();
         AbstractUnit thisSystemUnit = this.getSystemUnit();
         UnitConverter thisToDimension = model.getDimensionalTransform(thisSystemUnit.getDimension()).concatenate(this.getConverterToSI());
         AbstractUnit thatSystemUnit = thatAbstr.getSystemUnit();

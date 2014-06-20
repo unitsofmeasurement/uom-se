@@ -72,13 +72,12 @@ public abstract class DimensionalModel {
     private static Reference<DimensionalModel> Current = new SoftReference<>(new StandardModel());
 
     /**
-     * Returns the physics model used by the current thread
+     * Returns the current model
      * (by default an instance of {@link StandardModel}).
      *
-     * @return the getCurrent physical model.
-     * @see LocalContext
+     * @return the current dimensional model.
      */
-    public static DimensionalModel getCurrent() {
+    public static DimensionalModel getInstance() {
         return DimensionalModel.Current.get();
     }
 
