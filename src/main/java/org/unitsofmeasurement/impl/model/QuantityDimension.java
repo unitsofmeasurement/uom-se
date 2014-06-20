@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  *     quantity).</p>
  *
  * <p> The dimension associated to any given quantity are given by the
- *     OSGi published {@link PhysicsDimensionService} instances.
+ *     OSGi published {@link DimensionService} instances.
  *     For convenience, a static method {@link QuantityDimension#getInstance(Class)
  *     aggregating the results of all {@link DimensionService} instances
  *     is provided.<br/><br/>
