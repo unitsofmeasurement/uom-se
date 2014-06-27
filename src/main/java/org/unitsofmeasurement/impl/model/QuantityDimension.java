@@ -22,6 +22,7 @@ import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -32,7 +33,7 @@ import java.util.logging.Logger;
  *     quantity).</p>
  *
  * <p> The dimension associated to any given quantity are given by the
- *     OSGi published {@link DimensionService} instances.
+ *     published {@link DimensionService} instances.
  *     For convenience, a static method {@link QuantityDimension#getInstance(Class)
  *     aggregating the results of all {@link DimensionService} instances
  *     is provided.<br/><br/>
@@ -44,15 +45,15 @@ import java.util.logging.Logger;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.4, $Date: 2014-05-09 $
+ * @version 0.5, $Date: 2014-06-27 $
  */
-public class QuantityDimension implements Dimension {
-	private static final Logger logger = Logger.getLogger(Dimension.class.getName());
+public final class QuantityDimension implements Dimension, Serializable {
+	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
 	
     /**
 	 * 
 	 */
-//	private static final long serialVersionUID = 123289037718650030L;
+	private static final long serialVersionUID = 123289037718650030L;
 
 	/**
      * Holds dimensionless.
