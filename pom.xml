@@ -1,10 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.unitsofmeasurement.impl</groupId>
-	<artifactId>unit-impl-se</artifactId>
+	<artifactId>unit-ri</artifactId>
 	<version>0.3-SNAPSHOT</version>
-
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Implementation for Java SE</name>
 	<url>https://github.com/unitsofmeasurement/unit-impl-se</url>
@@ -17,21 +15,21 @@
 		<name>Units of Measurement project</name>
 		<url>http://unitsofmeasurement.github.io</url>
 	</organization>
+	<parent>
+		<groupId>org.unitsofmeasurement</groupId>
+		<artifactId>unitsofmeasurement-parent</artifactId>
+		<version>0.6-SNAPSHOT</version>
+	</parent>
+    <scm>
+        <url>https://github.com/unitsofmeasurement/unit-ri.git</url>
+    </scm>
 	<licenses>
 		<license>
 			<name>Apache 2.0</name>
 			<url>LICENSE.txt</url>
 		</license>
 	</licenses>
-	
-     <repositories>
-        <repository>
-            <id>unitsofmeasurement-github-repo</id>
-            <name>Local repository for Unit-API or other Units of Measurement artifacts we depend on</name>
-            <url>https://github.com/unitsofmeasurement/repository/raw/master</url>
-        </repository>
-    </repositories>
-    
+
 	<!-- ======================================================= -->
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
@@ -39,7 +37,6 @@
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
-		<jsr.version>0.5</jsr.version>
 		<jdkVersion>1.8</jdkVersion>
 		<project.build.javaVersion>${jdkVersion}</project.build.javaVersion>
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
@@ -49,19 +46,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-format</artifactId>
-		</dependency>
-		<dependency>
-            <groupId>javax.measure</groupId>
-            <artifactId>unit-api-util</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>javax.measure</groupId>
-			<artifactId>unit-api-quantity</artifactId>
+			<artifactId>unit-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
@@ -74,6 +59,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -87,26 +73,6 @@
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-core</artifactId>
-				<version>${jsr.version}</version>
-			</dependency>
-			<dependency>
-                <groupId>javax.measure</groupId>
-                <artifactId>unit-api-util</artifactId>
-                <version>${jsr.version}</version>
-            </dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-format</artifactId>
-				<version>${jsr.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.measure</groupId>
-				<artifactId>unit-api-quantity</artifactId>
-				<version>${jsr.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -160,6 +126,119 @@
 						<Export-Package>org.unitsofmeasurement.impl.*</Export-Package>
 						<Private-Package>org.unitsofmeasurement.impl.format.internal.*</Private-Package>
 					</instructions>
+				</configuration>
+			</plugin>
+
+			<!-- ======================================================= -->
+			<!-- Maven web site -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<locales>en</locales>
+					<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+					<outputEncoding>UTF-8</outputEncoding>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.7</version>
+							<reportSets>
+								<reportSet>
+									<reports>
+										<report>index</report>
+										<report>summary</report>
+										<report>license</report>
+										<report>scm</report>
+										<report>cim</report>
+										<report>project-team</report>
+										<report>mailing-list</report>
+										<report>issue-tracking</report>
+									</reports>
+								</reportSet>
+							</reportSets>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Javadoc generation -->
+						<!-- -->
+						<!-- Do not set <docfilessubdirs> to true, since this -->
+						<!-- cause the unwanted copy of .svn sub-directories. -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<version>2.9.1</version>
+							<configuration>
+								<source>${project.build.javaVersion}</source>             <!-- Enables javadoc to handle assertions present in J2SE 1.4. -->
+								<encoding>${project.build.sourceEncoding}</encoding>       <!-- The encoding of the source files. -->
+								<docencoding>${project.build.sourceEncoding}</docencoding> <!-- The encoding of the generated HTML files. -->
+								<charset>${sourceEncoding}</charset>         <!-- Specifies the HTML character set for this document. -->
+								<locale>en</locale>              <!-- Locale that javadoc uses when generating documentation. -->
+								<noqualifier>all</noqualifier>   <!-- Omit qualifying package name before class names in output. -->
+								<quiet>true</quiet>              <!-- Shuts off non-error and non-warning messages. -->
+								<keywords>true</keywords>        <!-- Adds HTML meta keyword tags to the generated files. -->
+								<!-- Creates links to existing javadoc-generated documentation of 
+									external referenced classes. -->
+								<links>
+									<link>http://docs.oracle.com/javase/7/docs/api/</link>
+								</links>
+							</configuration>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Code analysis -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-pmd-plugin</artifactId>
+							<version>3.0.1</version>
+							<configuration>
+								<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+								<targetJdk>${project.build.javaVersion}</targetJdk>
+							</configuration>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Report on test results -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-report-plugin</artifactId>
+							<version>2.16</version>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Report on test coverage -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>emma-maven-plugin</artifactId>
+							<version>1.0-alpha-3</version>
+							<reportSets>
+								<reportSet></reportSet>
+								<reportSet></reportSet>
+							</reportSets>
+						</plugin>
+
+						<!-- ======================================================= -->
+						<!-- Static analysis for occurences of bug patterns -->
+						<!-- ======================================================= -->
+						<!--  plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>findbugs-maven-plugin</artifactId>
+							<version>2.5.2</version>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-checkstyle-plugin</artifactId>
+							<version>2.11</version>
+							<configuration>
+								<configLocation>src/etc/checkstyle.xml</configLocation>
+							</configuration>
+						</plugin -->
+					</reportPlugins>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -225,9 +304,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<parent>
-		<version>0.5</version>
-		<groupId>org.unitsofmeasurement</groupId>
-		<artifactId>unitsofmeasurement-parent</artifactId>
-	</parent>
 </project>
