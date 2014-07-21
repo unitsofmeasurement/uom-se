@@ -38,7 +38,7 @@ import org.unitsofmeasurement.impl.quantity.QuantityFactories.QuantityBuilder;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.5.4, $Date: 2014-05-28 $
+ * @version 0.5.5, $Date: 2014-07-22 $
  */
 abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
 	
@@ -57,7 +57,7 @@ abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Numbe
      */
 	public static <Q extends Quantity<Q>>  QuantityFactory<Q> getInstance(final Class<Q> type) {
     	QuantityBuilder builder = QuantityFactories.of(type);
-    	return builder.create(type, INSTANCES);
+    	return builder.build(type, INSTANCES);
     }
 
     /**
