@@ -28,7 +28,7 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, April 16, 2014
+ * @version 0.4, August 03, 2014
  */
 public abstract class AbstractConverter implements UnitConverter {
 	

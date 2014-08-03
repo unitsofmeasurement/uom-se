@@ -19,7 +19,7 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 import javax.measure.Dimension;
 import java.lang.ref.Reference;
-import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.Map;
 
 /**
@@ -69,7 +69,7 @@ public abstract class DimensionalModel {
     /**
      * Holds the current model.
      */
-    private static Reference<DimensionalModel> Current = new SoftReference<>(new StandardModel());
+    private static Reference<DimensionalModel> Current = new WeakReference<>(new StandardModel());
 
     /**
      * Returns the current model
