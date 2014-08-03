@@ -1,17 +1,34 @@
 package org.unitsofmeasurement.impl;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+/**
+ * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
+ * objects are immutable.
+ * 
+ * @see AbstractQuantity
+ * @see Quantity
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author Otavio de Santana
+ * @param <Q>
+ *            The type of the quantity.
+ * @version 0.2, $Date: 2014-08-03 $
+ */
+final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
 
-    final double value;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8660843078156312278L;
+	
+	final double value;
 
     public DoubleQuantity(double value, Unit<T> unit) {
     	super(unit);
@@ -45,23 +62,23 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Measurement<T, Number> add(Measurement<T, Number> that) {
+	public Quantity<T> add(Quantity<T> that) {
 		return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Measurement<T, Number> substract(Measurement<T, Number> that) {
+	public  Quantity<T> subtract( Quantity<T> that) {
 		return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
-	public Measurement<T, Number> multiply(Number that) {
+	public Quantity<T> multiply(Number that) {
 		return of(value * that.doubleValue(), getUnit());
 	}
 

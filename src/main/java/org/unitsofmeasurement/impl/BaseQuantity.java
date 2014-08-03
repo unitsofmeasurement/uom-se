@@ -39,7 +39,7 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.8, $Date: 2014-06-18 $
+ * @version 0.9, $Date: 2014-08-03 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Comparable<BaseQuantity<Q>>, Serializable {
@@ -193,18 +193,6 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 	}
 
-	@Override
-	public Quantity<Q> add(Measurement<Q, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Quantity<Q> substract(Measurement<Q, Number> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Measurement<?, Number> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
@@ -261,5 +249,23 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	public int compareTo(BaseQuantity<Q> o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Quantity<Q> subtract(Quantity<Q> that) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Quantity<Q> add(Quantity<Q> that) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Quantity<?> multiply(Quantity<?> that) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

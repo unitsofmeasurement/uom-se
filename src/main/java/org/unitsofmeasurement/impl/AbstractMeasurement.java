@@ -405,24 +405,20 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	        return (long) result;
 		}
 
-		@Override
 		public Measurement<T, Number> add(Measurement<T, Number> that) {
 			return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 		}
 
-		@Override
 		public Measurement<T, Number> substract(Measurement<T, Number> that) {
 			return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		@Override
 		public Measurement<?, Number> multiply(Measurement<?, Number> that) {
 			return new IntegerMeasurement(value * that.getValue().intValue(), 
 					getUnit().multiply(that.getUnit()));
 		}
 
-		@Override
 		public Measurement<T, Number> multiply(Number that) {
 			return of(value * that.intValue(), 
 					getUnit().multiply(that.intValue()));
@@ -434,7 +430,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@SuppressWarnings("unchecked")
-		@Override
 		public AbstractMeasurement<T> inverse() {
 			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
 		}
@@ -444,7 +439,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 			return false;
 		}
 
-		@Override
 		public Measurement<T, Number> divide(Number that) {
 			return of(value / that.intValue(), getUnit());
 		}
@@ -503,24 +497,20 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	        return (long) result;
 		}
 
-		@Override
 		public AbstractMeasurement<T> add(Measurement<T, Number> that) {
 			return of(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 		}
 
-		@Override
-		public AbstractMeasurement<T> substract(Measurement<T, Number> that) {
+		public AbstractMeasurement<T> subtract(Measurement<T, Number> that) {
 			return of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@SuppressWarnings("unchecked")
-		@Override
 		public AbstractMeasurement<T> multiply(Measurement<?, Number> that) {
 			return (AbstractMeasurement<T>) of(value * that.getValue().floatValue(), 
 					getUnit().multiply(that.getUnit()));
 		}
 
-		@Override
 		public Measurement<T, Number> multiply(Number that) {
 			return new FloatMeasurement<T>(value * that.floatValue(), 
 					getUnit().multiply(that.floatValue()));
@@ -532,17 +522,14 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@SuppressWarnings("unchecked")
-		@Override
 		public AbstractMeasurement<T> inverse() {
 			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
 		}
 
-		@Override
 		public boolean isBig() {
 			return false;
 		}
 
-		@Override
 		public Measurement<T, Number> divide(Number that) {
 			return of(value / that.floatValue(), getUnit());
 		}
@@ -598,23 +585,19 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	        return (long) result;
 		}
 
-		@Override
 		public Measurement<T, Number> add(Measurement<T, Number> that) {
 			return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 		}
 
-		@Override
-		public Measurement<T, Number> substract(Measurement<T, Number> that) {
+		public Measurement<T, Number> subtract(Measurement<T, Number> that) {
 			return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		@Override
 		public Measurement<?, Number> multiply(Measurement<?, Number> that) {
 			return new DoubleMeasurement(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 		}
 
-		@Override
 		public Measurement<T, Number> multiply(Number that) {
 			return of(value * that.doubleValue(), getUnit());
 		}
@@ -624,13 +607,11 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 			return new DoubleMeasurement(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 		}
 		
-		@Override
 		public Measurement<T, Number> divide(Number that) {
 			return of(value / that.doubleValue(), getUnit());
 		}
 
 		@SuppressWarnings("unchecked")
-		@Override
 		public AbstractMeasurement<T> inverse() {
 			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
 		}

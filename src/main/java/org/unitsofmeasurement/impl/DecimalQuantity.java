@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
@@ -42,18 +41,18 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
     }
 
 	@Override
-	public Measurement<T, Number> add(Measurement<T, Number> that) {
+	public Quantity<T> add(Quantity<T> that) {
 		return of(value.add((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Measurement<T, Number> substract(Measurement<T, Number> that) {
+	public Quantity<T> subtract(Quantity<T> that) {
 		return of(value.subtract((BigDecimal)that.getValue()), getUnit()); // TODO use shift of the unit?
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		return new DecimalQuantity(value.multiply((BigDecimal)that.getValue()), 
 				getUnit().multiply(that.getUnit()));
 	}

@@ -1,20 +1,33 @@
 package org.unitsofmeasurement.impl;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+/**
+ * An amount of quantity, consisting of a double and a Unit. IntegerQuantity
+ * objects are immutable.
+ * 
+ * @see AbstractQuantity
+ * @see Quantity
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author Otavio de Santana
+ * @param <Q>
+ *            The type of the quantity.
+ * @version 0.2, $Date: 2014-08-03 $
+ */
+final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> 
+   implements Serializable{
 
 	/**
 	 * 
 	 */
-	// private static final long serialVersionUID = 7857472738562215118L;
+	private static final long serialVersionUID = 7857472738562215118L;
 
 	final float value;
 
@@ -55,14 +68,14 @@ final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public AbstractQuantity<T> add(Measurement<T, Number> that) {
+	public Quantity<T> add( Quantity<T> that) {
 		return of(value + that.getValue().floatValue(), getUnit()); // TODO use
 																	// shift of
 																	// the unit?
 	}
 
 	@Override
-	public AbstractQuantity<T> substract(Measurement<T, Number> that) {
+	public Quantity<T> subtract(Quantity<T> that) {
 		return of(value - that.getValue().floatValue(), getUnit()); // TODO use
 																	// shift of
 																	// the unit?
@@ -70,7 +83,7 @@ final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Quantity<?> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		return (AbstractQuantity<T>) of(value * that.getValue().floatValue(),
 				getUnit().multiply(that.getUnit()));
 	}
@@ -102,11 +115,5 @@ final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	@Override
 	public Quantity<T> divide(Number that) {
 		return of(value / that.floatValue(), getUnit());
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Quantity<?> multiply(Quantity<?> that) {
-		return new FloatQuantity(value * that.getValue().floatValue(),
-				getUnit().multiply(that.getUnit()));
 	}
 }
