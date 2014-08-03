@@ -85,7 +85,7 @@ import org.unitsofmeasurement.impl.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, $Date: 2014-05-29 $
+ * @version 0.3, $Date: 2014-08-03 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number> {
 // TODO do we want to restrict Measurement to Number here? 
@@ -257,7 +257,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         return getUnit().hashCode() + getValue().hashCode();
     }
 
-    public abstract boolean isBig();
+    protected abstract boolean isBig();
     
     /**
      * Returns the <code>String</code> representation of this measure. The
@@ -275,14 +275,14 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
     	return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
     }
 
-    public abstract BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
+    protected abstract BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
             throws ArithmeticException;
     
-    public abstract  double doubleValue(Unit<Q> unit)
+    protected abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
     
     // Implements AbstractMeasurement
-    public final int intValue(Unit<Q> unit) throws ArithmeticException {
+    protected final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
         if ((longValue < Integer.MIN_VALUE) || (longValue > Integer.MAX_VALUE)) {
             throw new ArithmeticException("Cannot convert " + longValue + " to int (overflow)");
@@ -612,7 +612,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@SuppressWarnings("unchecked")
-		public AbstractMeasurement<T> inverse() {
+		protected AbstractMeasurement<T> inverse() {
 			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
 		}
 
