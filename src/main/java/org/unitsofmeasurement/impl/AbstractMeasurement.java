@@ -139,7 +139,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @throws ArithmeticException if the result is inexact and the quotient
      *         has a non-terminating decimal expansion.
      */
-    public AbstractMeasurement<Q> toSI() {
+    protected AbstractMeasurement<Q> toSI() {
         return to(this.getUnit().getSystemUnit());
     }
 
@@ -198,7 +198,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @return <code>Double.compare(this.doubleValue(getUnit()),
      *         that.doubleValue(getUnit()))</code>
      */
-    public int compareTo(Measurement<Q, Number> that) {
+    public int compareTo(AbstractMeasurement<Q> that) {
         Unit<Q> unit = getUnit();
         return Double.compare(doubleValue(unit), that.getValue().doubleValue());
     }
@@ -405,16 +405,16 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	        return (long) result;
 		}
 
-		public Measurement<T, Number> add(Measurement<T, Number> that) {
+		protected Measurement<T, Number> add(AbstractMeasurement<T> that) {
 			return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 		}
 
-		public Measurement<T, Number> substract(Measurement<T, Number> that) {
+		protected Measurement<T, Number> subtract(AbstractMeasurement<T> that) {
 			return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Measurement<?, Number> multiply(Measurement<?, Number> that) {
+		public Measurement<?, Number> multiply(AbstractMeasurement<T> that) {
 			return new IntegerMeasurement(value * that.getValue().intValue(), 
 					getUnit().multiply(that.getUnit()));
 		}
@@ -425,7 +425,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
-		public Measurement<?, Number> divide(Measurement<?, Number> that) {
+		public Measurement<?, Number> divide(AbstractMeasurement<T> that) {
 			return new DoubleMeasurement((double)value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 		}
 
@@ -483,7 +483,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         }
 
         // Implements AbstractMeasurement
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
+        protected BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
                 throws ArithmeticException {
             BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
             return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
@@ -497,27 +497,27 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	        return (long) result;
 		}
 
-		public AbstractMeasurement<T> add(Measurement<T, Number> that) {
+		protected AbstractMeasurement<T> add(AbstractMeasurement<T> that) {
 			return of(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 		}
 
-		public AbstractMeasurement<T> subtract(Measurement<T, Number> that) {
+		protected AbstractMeasurement<T> subtract(AbstractMeasurement<T> that) {
 			return of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@SuppressWarnings("unchecked")
-		public AbstractMeasurement<T> multiply(Measurement<?, Number> that) {
+		protected AbstractMeasurement<T> multiply(AbstractMeasurement<T> that) {
 			return (AbstractMeasurement<T>) of(value * that.getValue().floatValue(), 
 					getUnit().multiply(that.getUnit()));
 		}
 
-		public Measurement<T, Number> multiply(Number that) {
+		protected Measurement<T, Number> multiply(Number that) {
 			return new FloatMeasurement<T>(value * that.floatValue(), 
 					getUnit().multiply(that.floatValue()));
 		}
 
 		@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
-		public Measurement<?, Number> divide(Measurement<?, Number> that) {
+		protected Measurement<?, Number> divide(AbstractMeasurement<T> that) {
 			return new FloatMeasurement(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
 		}
 
@@ -585,16 +585,16 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	        return (long) result;
 		}
 
-		public Measurement<T, Number> add(Measurement<T, Number> that) {
+		protected Measurement<T, Number> add(AbstractMeasurement<T> that) {
 			return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 		}
 
-		public Measurement<T, Number> subtract(Measurement<T, Number> that) {
+		protected Measurement<T, Number> subtract(AbstractMeasurement<T> that) {
 			return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Measurement<?, Number> multiply(Measurement<?, Number> that) {
+		public Measurement<?, Number> multiply(AbstractMeasurement<T> that) {
 			return new DoubleMeasurement(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 		}
 
@@ -603,7 +603,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 		}
 
 		@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
-		public Measurement<?, Number> divide(Measurement<?, Number> that) {
+		protected Measurement<?, Number> divide(AbstractMeasurement<T> that) {
 			return new DoubleMeasurement(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 		}
 		

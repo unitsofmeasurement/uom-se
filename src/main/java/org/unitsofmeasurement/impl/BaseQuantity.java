@@ -183,8 +183,8 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public BaseQuantity<Q> add(AbstractQuantity<Q> that) {
-		final AbstractQuantity<Q> thatToUnit = that.to(getUnit());
+	public Quantity<Q> add(Quantity<Q> that) {
+		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), getUnit());
 	}
@@ -194,7 +194,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Quantity<?> multiply(Measurement<?, Number> that) {
+	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
 		return new BaseQuantity((getValue().doubleValue() * that.getValue()
 				.doubleValue()), unit);
@@ -253,18 +253,6 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Quantity<Q> add(Quantity<Q> that) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
 		// TODO Auto-generated method stub
 		return null;
 	}

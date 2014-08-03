@@ -84,7 +84,7 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
  * <p> All instances of this class shall be immutable.</p>
  * 
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-06-09 $
+ * @version 0.6, $Date: 2014-08-03 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 	
@@ -137,7 +137,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      * @throws ArithmeticException if the result is inexact and the quotient
      *         has a non-terminating decimal expansion.
      */
-    public AbstractQuantity<Q> toSI() {
+    public Quantity<Q> toSI() {
         return to(this.getUnit().getSystemUnit());
     }
 
@@ -154,7 +154,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
-    public AbstractQuantity<Q> to(Unit<Q> unit) {
+    public Quantity<Q> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
@@ -197,7 +197,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      * @return <code>Double.compare(this.doubleValue(getUnit()),
      *         that.doubleValue(getUnit()))</code>
      */
-    public int compareTo(Measurement<Q, Number> that) {
+    public int compareTo(Quantity<Q> that) {
         Unit<Q> unit = getUnit();
         return Double.compare(doubleValue(unit), that.getValue().doubleValue());
     }
