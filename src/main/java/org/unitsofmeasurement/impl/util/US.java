@@ -15,14 +15,15 @@
  */
 package org.unitsofmeasurement.impl.util;
 
+import org.unitsofmeasurement.impl.AbstractSystemOfUnits;
 import org.unitsofmeasurement.impl.AbstractUnit;
 import org.unitsofmeasurement.impl.TransformedUnit;
 import org.unitsofmeasurement.impl.function.RationalConverter;
 
 import javax.measure.Quantity;
+import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.*;
-import javax.measure.util.SystemOfUnits;
 
 import static org.unitsofmeasurement.impl.util.SI.*;
 import static org.unitsofmeasurement.impl.util.SIPrefix.MICRO;

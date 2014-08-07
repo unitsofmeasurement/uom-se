@@ -15,11 +15,12 @@
  */
 package org.unitsofmeasurement.impl.util;
 
+import org.unitsofmeasurement.impl.AbstractSystemOfUnits;
 import org.unitsofmeasurement.impl.AbstractUnit;
 
+import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
-import javax.measure.util.SystemOfUnits;
 
 import static org.unitsofmeasurement.impl.util.SI.METRES_PER_SECOND;
 

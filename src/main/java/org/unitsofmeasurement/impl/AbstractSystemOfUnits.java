@@ -13,14 +13,12 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.unitsofmeasurement.impl.util;
-
-import org.unitsofmeasurement.impl.AbstractUnit;
+package org.unitsofmeasurement.impl;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
-import javax.measure.util.SystemOfUnits;
 
 import java.util.*;
 
