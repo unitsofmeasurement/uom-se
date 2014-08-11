@@ -18,7 +18,6 @@ package org.unitsofmeasurement.impl.format;
 import java.math.BigDecimal;
 import java.text.FieldPosition;
 import java.text.Format;
-import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.io.IOException;
 import javax.measure.Measurement;
@@ -43,7 +42,7 @@ import org.unitsofmeasurement.impl.util.SI;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-05-29 $
+ * @version 0.4, $Date: 2014-08-11 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class MeasurementFormat extends Format implements Parser<CharSequence, Measurement> {
@@ -52,12 +51,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * 
 	 */
 	private static final long serialVersionUID = -4628006924354248662L;
-
-	/**
-	 * Holds the default format instance.
-	 */
-	private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(
-			NumberFormat.getInstance(), LocalUnitFormat.getInstance());
 
 	/**
 	 * Holds the standard format instance.
@@ -72,20 +65,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 * @return <code>MeasureFormat.getInstance(NumberFormat.getInstance(), UnitFormat.getInstance())</code>
 	 */
 	public static MeasurementFormat getInstance() {
-		return DEFAULT;
-	}
-
-	/**
-	 * Returns the measure format using the specified number format and unit
-	 * format (the number and unit are separated by one space).
-	 * 
-	 * @param numberFormat the number format.
-	 * @param unitFormat the unit format.
-	 * @return the corresponding format.
-	 */
-	public static MeasurementFormat getInstance(NumberFormat numberFormat,
-			UnitFormat unitFormat) {
-		return new NumberSpaceUnit(numberFormat, unitFormat);
+		return STANDARD;
 	}
 
 	/**
@@ -102,12 +82,8 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 	 */
 	public static MeasurementFormat getInstance(FormatBehavior style) {
 		switch (style) {
-		case LOCALE_NEUTRAL:
-			return STANDARD;
-		case LOCALE_SENSITIVE:
-			return DEFAULT;
 		default:
-			return DEFAULT;
+			return STANDARD;
 		}
 	}
 
@@ -234,64 +210,6 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 		} catch (IOException ex) {
 			throw new RuntimeException(ex); // Should not happen.
 		}
-	}
-
-	// Holds default implementation.
-	private static final class NumberSpaceUnit extends MeasurementFormat {
-
-		private final NumberFormat _numberFormat;
-
-		private final UnitFormat _unitFormat;
-
-		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
-			_numberFormat = numberFormat;
-			_unitFormat = unitFormat;
-		}
-
-		@Override
-		public Appendable format(AbstractMeasurement<?> measure, Appendable dest)
-				throws IOException {
-//			Unit unit = measure.getUnit();
-//			if (unit instanceof CompoundUnit)
-//				return formatCompound(measure.doubleValue(unit),
-//						(CompoundUnit) unit, dest);
-//			else {
-				dest.append(_numberFormat.format(measure.getValue()));
-				if (measure.getUnit().equals(SI.ONE))
-					return dest;
-				dest.append(' ');
-				return _unitFormat.format(measure.getUnit(), dest);
-//			}
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public AbstractMeasurement<?> parse(CharSequence csq, ParsePosition cursor)
-				throws IllegalArgumentException, ParserException {
-			String str = csq.toString();
-			Number number = _numberFormat.parse(str, cursor);
-			if (number == null)
-				throw new IllegalArgumentException("Number cannot be parsed");
-			Unit unit = _unitFormat.parse(csq);
-//			if (number instanceof BigDecimal)
-//				return AbstractMeasurement.of((BigDecimal) number, unit);
-			if (number instanceof Long)
-				return AbstractMeasurement.of(((Long) number).longValue(), unit);
-			else if (number instanceof Double)
-				return AbstractMeasurement.of(number.doubleValue(), unit);
-			else if (number instanceof Integer)
-				return AbstractMeasurement.of(number.intValue(), unit);
-			else
-				throw new UnsupportedOperationException("Number of type "
-						+ number.getClass() + " are not supported");
-		}
-		
-		public AbstractMeasurement<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
-			return parse(csq, new ParsePosition(0));
-		}
-
-		private static final long serialVersionUID = 1L;
-
 	}
 
 	// Holds standard implementation.
