@@ -74,10 +74,9 @@ public class CommonUnits extends AbstractSystemOfUnits {
 	@SuppressWarnings("unchecked")
 	private static <U extends AbstractUnit<?>> U addUnit(U unit, String name) {
 		if (name != null && unit instanceof AbstractUnit) {
-			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
-			//aUnit.setName(name);
-			INSTANCE.units.add(aUnit);
-			return (U) aUnit;
+            //aUnit.setName(name);
+			INSTANCE.units.add(unit);
+			return (U) unit;
 		}
 		INSTANCE.units.add(unit);
 		return unit;

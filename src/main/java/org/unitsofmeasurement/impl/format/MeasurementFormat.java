@@ -180,7 +180,7 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 			throw new NullPointerException();
 		try {
 			return (StringBuffer) format((AbstractMeasurement<?>) obj,
-					(Appendable) toAppendTo);
+                    toAppendTo);
 		} catch (IOException ex) {
 			throw new Error(ex); // Cannot happen.
 		}

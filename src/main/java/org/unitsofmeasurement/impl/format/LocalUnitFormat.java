@@ -186,7 +186,7 @@ public class LocalUnitFormat implements UnitFormat {
         if (!(unit instanceof AbstractUnit)) {
             return appendable.append(unit.toString()); // Unknown unit (use intrinsic toString() method)
         }
-        formatInternal((AbstractUnit) unit, appendable);
+        formatInternal(unit, appendable);
         return appendable;
     }
 

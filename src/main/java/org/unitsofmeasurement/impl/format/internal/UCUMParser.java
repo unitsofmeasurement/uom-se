@@ -223,9 +223,7 @@ public class UCUMParser {
     }
 
     private boolean jj_3_1() {
-        if (jj_3R_2())
-            return true;
-        return jj_scan_token(ANNOTATION);
+        return jj_3R_2() || jj_scan_token(ANNOTATION);
     }
 
     private boolean jj_3R_5() {
@@ -522,10 +520,9 @@ public class UCUMParser {
             System.arraycopy(jj_lasttokens, 0, jj_expentry, 0, jj_endpos);
             jj_entries_loop:
             for (int[] jj_expentry1 : jj_expentries) {
-                int[] oldentry = (int[]) (jj_expentry1);
-                if (oldentry.length == jj_expentry.length) {
+                if (jj_expentry1.length == jj_expentry.length) {
                     for (int i = 0; i < jj_expentry.length; i++) {
-                        if (oldentry[i] != jj_expentry[i]) {
+                        if (jj_expentry1[i] != jj_expentry[i]) {
                             continue jj_entries_loop;
                         }
                     }
