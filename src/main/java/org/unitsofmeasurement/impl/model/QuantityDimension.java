@@ -108,7 +108,7 @@ public final class QuantityDimension implements Dimension, Serializable {
      * @param quantityType the quantity type.
      * @return the dimension for the quantity type or <code>null</code>.
      */
-    public static final <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
+    public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
         // TODO: Track OSGi services and aggregate results.
         Unit<Q> siUnit = SI.getInstance().getUnit(quantityType);
         if (siUnit == null) logger.warning("Quantity type: " + quantityType + " unknown");
@@ -131,7 +131,7 @@ public final class QuantityDimension implements Dimension, Serializable {
      * @param sambol the quantity symbol.
      * @return the dimension for the given symbol.
      */
-    static final QuantityDimension getInstance(char symbol) {
+    static QuantityDimension getInstance(char symbol) {
     	return new QuantityDimension(symbol);
     }
 

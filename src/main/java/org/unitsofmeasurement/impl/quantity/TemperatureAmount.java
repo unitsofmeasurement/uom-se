@@ -48,16 +48,11 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 	}
 
 	public TemperatureAmount add(TemperatureAmount d1) {
-		final TemperatureAmount dn = new TemperatureAmount(
-                this.value
-                        + d1.value, getUnit());
-		return dn;
+        return new TemperatureAmount(this.value+ d1.value, getUnit());
 	}
 
 	public TemperatureAmount subtract(TemperatureAmount d1) {
-		final TemperatureAmount dn = new TemperatureAmount(
-                this.value - d1.value, getUnit());
-		return dn;
+        return new TemperatureAmount(this.value - d1.value, getUnit());
 	}
 
 	protected boolean eq(TemperatureAmount dq) {
@@ -67,23 +62,23 @@ public final class TemperatureAmount extends BaseQuantity<Temperature>
 	}
 
 	boolean ne(TemperatureAmount d1) {
-		return ne((TemperatureAmount) d1);
+		return ne(d1);
 	}
 
 	boolean gt(TemperatureAmount d1) {
-		return gt((TemperatureAmount) d1);
+		return gt(d1);
 	}
 
 	public boolean lt(TemperatureAmount d1) {
-		return lt((TemperatureAmount) d1);
+		return lt(d1);
 	}
 
 	public boolean ge(TemperatureAmount d1) {
-		return ge((TemperatureAmount) d1);
+		return ge(d1);
 	}
 
 	public boolean le(TemperatureAmount d1) {
-		return le((TemperatureAmount) d1);
+		return le(d1);
 	}
 
 	public TemperatureAmount divide(Double v) {

@@ -252,10 +252,9 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 				return false;
 			for (Element element : elements) {
 				boolean unitFound = false;
-				Element e = element;
-				for (Element elem : elems) {
-					if (e.unit.equals(elem.unit))
-						if ((e.pow != elem.pow) || (e.root != elem.root))
+                for (Element elem : elems) {
+					if (element.unit.equals(elem.unit))
+						if ((element.pow != elem.pow) || (element.root != elem.root))
 							return false;
 						else {
 							unitFound = true;

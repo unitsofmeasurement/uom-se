@@ -205,7 +205,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 			throw new NullPointerException();
 		try {
 			return (StringBuffer) format((AbstractQuantity<?>) obj,
-					(Appendable) toAppendTo);
+                    toAppendTo);
 		} catch (IOException ex) {
 			throw new Error(ex); // Cannot happen.
 		}

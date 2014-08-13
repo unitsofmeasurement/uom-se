@@ -24,7 +24,7 @@ public class UCUMParserTokenManager implements UCUMParserConstants
   public  java.io.PrintStream debugStream = System.out;
   /** Set debug output. */
   public  void setDebugStream(java.io.PrintStream ds) { debugStream = ds; }
-private final int jjStopStringLiteralDfa_0(int pos)
+private int jjStopStringLiteralDfa_0(int pos)
 {
    switch (pos)
    {
@@ -32,7 +32,7 @@ private final int jjStopStringLiteralDfa_0(int pos)
          return -1;
    }
 }
-private final int jjStartNfa_0(int pos, long active0)
+private int jjStartNfa_0(int pos, long active0)
 {
    return jjMoveNfa_0(jjStopStringLiteralDfa_0(pos), pos + 1);
 }

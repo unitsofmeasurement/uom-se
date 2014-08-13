@@ -208,7 +208,7 @@ public final class SymbolMap {
      * @return the corresponding prefix or <code>null</code> if none.
      */
     public SIPrefix getPrefix(UnitConverter converter) {
-        return (SIPrefix) converterToPrefix.get(converter);
+        return converterToPrefix.get(converter);
     }
 
     /**
