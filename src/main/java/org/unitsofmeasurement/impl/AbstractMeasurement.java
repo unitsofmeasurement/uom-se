@@ -28,85 +28,79 @@ import javax.measure.format.ParserException;
 import javax.measure.quantity.Dimensionless;
 
 import org.unitsofmeasurement.impl.format.MeasurementFormat;
-import org.unitsofmeasurement.impl.function.AbstractConverter;
 import org.unitsofmeasurement.impl.util.SI;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
  *     in a known unit.</p>
- * 
- * <p> To avoid any lost of precision, known exact measure (e.g. physical 
+ *
+ * <p> To avoid any lost of precision, known exact measure (e.g. physical
  *     constants) should not be created from <code>double</code> constants but
  *     from their decimal representation.<br/><code>
  *         public static final Measurement<Number, Velocity> C = AbstractMeasurement.of("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code></p>
- * 
+ *
  * <p> Measures can be converted to different units, the conversion precision is
  *     determined by the specified {@link MathContext}.<br/><code>
  *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
  *         System.out.println(milesPerHour);
- * 
+ *
  *         > 670616629.3843951324266284896206156 [mi_i]/h
  *     </code>
  *     If no precision is specified <code>double</code> precision is assumed.<code>
  *         Measurement<Double, Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
- * 
+ *
  *         > 670616629.3843951 [mi_i]/h
  *     </code></p>
- * 
+ *
  * <p> Applications may sub-class {@link AbstractMeasurement} for particular measurements
  *     types.<br/><code>
  *         // Measurement of type Mass based on <code>double</code> primitive types.
- *         public class MassAmount extends AbstractMeasurement<Mass> { 
- *             private final double _kilograms; // Internal SI representation. 
+ *         public class MassAmount extends AbstractMeasurement<Mass> {
+ *             private final double _kilograms; // Internal SI representation.
  *             private Mass(double kilograms) { _kilograms = kilograms; }
  *             public static Mass of(double value, Unit<Mass> unit) {
  *                 return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));
- *             } 
- *             public Unit<Mass> getUnit() { return SI.KILOGRAM; } 
- *             public Double getValue() { return _kilograms; } 
+ *             }
+ *             public Unit<Mass> getUnit() { return SI.KILOGRAM; }
+ *             public Double getValue() { return _kilograms; }
  *             ...
  *         }
- * 
+ *
  *         // Complex numbers measurements.
  *         public class ComplexMeasurement<Q extends Quantity> extends AbstractMeasurement<Q> {
  *             public Complex getValue() { ... } // Assuming Complex is a Number.
- *             ... 
+ *             ...
  *         }
- * 
+ *
  *         // Specializations of complex numbers measurements.
- *         public class Current extends ComplexMeasurement<ElectricCurrent> {...} 
+ *         public class Current extends ComplexMeasurement<ElectricCurrent> {...}
  *         public class Tension extends ComplexMeasurement<ElectricPotential> {...}
  *         </code></p>
- * 
+ *
  * <p> All instances of this class shall be immutable.</p>
- * 
+ *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.3, $Date: 2014-08-03 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number> {
-// TODO do we want to restrict Measurement to Number here? 
-	
-    /**
-	 * 
-	 */
-//	private static final long serialVersionUID = -4993173119977931016L;
-    
-	private final Unit<Q> unit;
-	
+// TODO do we want to restrict Measurement to Number here?
+
+	protected final Unit<Q> unit;
+
 	/**
 	 * Holds a dimensionless measurement of none (exact).
 	 */
 	public static final AbstractMeasurement<Dimensionless> NONE = of(0, SI.ONE);
-	
+
 	/**
 	 * Holds a dimensionless measurement of one (exact).
 	 */
 	public static final AbstractMeasurement<Dimensionless> ONE = of(1, SI.ONE);
-	
+
 	/**
      * constructor.
      */
@@ -126,6 +120,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      *
      * @return the measurement unit.
      */
+    @Override
     public Unit<Q> getUnit() {
     	return unit;
     }
@@ -156,6 +151,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
+    @Override
     public AbstractMeasurement<Q> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
@@ -258,7 +254,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
     }
 
     protected abstract boolean isBig();
-    
+
     /**
      * Returns the <code>String</code> representation of this measure. The
      * string produced for a given measure is always the same; it is not
@@ -277,10 +273,10 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 
     protected abstract BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
             throws ArithmeticException;
-    
+
     protected abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
-    
+
     // Implements AbstractMeasurement
     protected final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
@@ -351,7 +347,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 			throw new IllegalArgumentException(e); // TODO could we handle this differently?
 		}
     }
-
     /**
      * Returns the scalar measure for the specified <code>int</code> stated in
      * the specified unit.
@@ -364,87 +359,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
             Unit<Q> unit) {
         return new IntegerMeasurement<Q>(intValue, unit);
     }
-
-    private static final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
-
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 5355395476874521709L;
-		
-		final int value;
-
-        public IntegerMeasurement(int value, Unit<T> unit) {
-        	super(unit);
-        	this.value = value;
-        }
-
-        @Override
-        public Integer getValue() {
-            return value;
-        }
-
-        // Implements Measurement
-        public double doubleValue(Unit<T> unit) {
-            return (super.unit.equals(unit)) ? value : super.unit.getConverterTo(unit).convert(value);
-        }
-
-        // Implements Measurement
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            BigDecimal decimal = BigDecimal.valueOf(value);
-            return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
-        }
-
-		@Override
-		public long longValue(Unit<T> unit) {
-	        double result = doubleValue(unit);
-	        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-	            throw new ArithmeticException("Overflow (" + result + ")");
-	        }
-	        return (long) result;
-		}
-
-		protected Measurement<T, Number> add(AbstractMeasurement<T> that) {
-			return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
-		}
-
-		protected Measurement<T, Number> subtract(AbstractMeasurement<T> that) {
-			return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
-		}
-
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Measurement<?, Number> multiply(AbstractMeasurement<T> that) {
-			return new IntegerMeasurement(value * that.getValue().intValue(), 
-					getUnit().multiply(that.getUnit()));
-		}
-
-		public Measurement<T, Number> multiply(Number that) {
-			return of(value * that.intValue(), 
-					getUnit().multiply(that.intValue()));
-		}
-
-		@SuppressWarnings({ "rawtypes", "unused", "unchecked" })
-		public Measurement<?, Number> divide(AbstractMeasurement<T> that) {
-			return new DoubleMeasurement((double)value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
-		}
-
-		@SuppressWarnings("unchecked")
-		public AbstractMeasurement<T> inverse() {
-			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
-		}
-
-		@Override
-		public boolean isBig() {
-			return false;
-		}
-
-		public Measurement<T, Number> divide(Number that) {
-			return of(value / that.intValue(), getUnit());
-		}
-
-    }
-    
     /**
      * Returns the scalar measure for the specified <code>float</code> stated in
      * the specified unit.
@@ -456,83 +370,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
     public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(float floatValue,
             Unit<Q> unit) {
         return new FloatMeasurement<Q>(floatValue, unit);
-    }
-
-    private static final class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
-
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 7857472738562215118L;
-		
-		final float value;
-
-        public FloatMeasurement(float value, Unit<T> unit) {
-        	super(unit);
-            this.value = value;
-        }
-
-        @Override
-        public Float getValue() {
-            return value;
-        }
-
-        // Implements AbstractMeasurement
-        public double doubleValue(Unit<T> unit) {
-            return (super.unit.equals(unit)) ? value : super.unit.getConverterTo(unit).convert(value);
-        }
-
-        // Implements AbstractMeasurement
-        protected BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
-            return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
-        }
-
-		public long longValue(Unit<T> unit) {
-	        double result = doubleValue(unit);
-	        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-	            throw new ArithmeticException("Overflow (" + result + ")");
-	        }
-	        return (long) result;
-		}
-
-		protected AbstractMeasurement<T> add(AbstractMeasurement<T> that) {
-			return of(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
-		}
-
-		protected AbstractMeasurement<T> subtract(AbstractMeasurement<T> that) {
-			return of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
-		}
-
-		@SuppressWarnings("unchecked")
-		protected AbstractMeasurement<T> multiply(AbstractMeasurement<T> that) {
-			return (AbstractMeasurement<T>) of(value * that.getValue().floatValue(), 
-					getUnit().multiply(that.getUnit()));
-		}
-
-		protected Measurement<T, Number> multiply(Number that) {
-			return new FloatMeasurement<T>(value * that.floatValue(), 
-					getUnit().multiply(that.floatValue()));
-		}
-
-		@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
-		protected Measurement<?, Number> divide(AbstractMeasurement<T> that) {
-			return new FloatMeasurement(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
-		}
-
-		@SuppressWarnings("unchecked")
-		public AbstractMeasurement<T> inverse() {
-			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
-		}
-
-		public boolean isBig() {
-			return false;
-		}
-
-		public Measurement<T, Number> divide(Number that) {
-			return of(value / that.floatValue(), getUnit());
-		}
     }
 
     /**
@@ -548,77 +385,4 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
         return new DoubleMeasurement<Q>(doubleValue, unit);
     }
 
-    private static final class DoubleMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
-
-        final double value;
-
-        public DoubleMeasurement(double value, Unit<T> unit) {
-        	super(unit);
-            this.value = value;
-        }
-
-        @Override
-        public Double getValue() {
-            return value;
-        }
-
-
-        public double doubleValue(Unit<T> unit) {
-            return (super.unit.equals(unit)) ? value : super.unit.getConverterTo(unit).convert(value);
-        }
-
-        @Override
-        public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
-                throws ArithmeticException {
-            BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
-            return (super.unit.equals(unit)) ? decimal : ((AbstractConverter)super.unit.getConverterTo(unit)).convert(decimal, ctx);
-        }
-        private static final long serialVersionUID = 1L;
-
-
-		@Override
-		public long longValue(Unit<T> unit) {
-	        double result = doubleValue(unit);
-	        if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-	            throw new ArithmeticException("Overflow (" + result + ")");
-	        }
-	        return (long) result;
-		}
-
-		protected Measurement<T, Number> add(AbstractMeasurement<T> that) {
-			return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
-		}
-
-		protected Measurement<T, Number> subtract(AbstractMeasurement<T> that) {
-			return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
-		}
-
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Measurement<?, Number> multiply(AbstractMeasurement<T> that) {
-			return new DoubleMeasurement(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
-		}
-
-		public Measurement<T, Number> multiply(Number that) {
-			return of(value * that.doubleValue(), getUnit());
-		}
-
-		@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
-		protected Measurement<?, Number> divide(AbstractMeasurement<T> that) {
-			return new DoubleMeasurement(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
-		}
-		
-		public Measurement<T, Number> divide(Number that) {
-			return of(value / that.doubleValue(), getUnit());
-		}
-
-		@SuppressWarnings("unchecked")
-		protected AbstractMeasurement<T> inverse() {
-			return (AbstractMeasurement<T>) of(value, getUnit().inverse());
-		}
-
-		@Override
-		public boolean isBig() {
-			return false;
-		}
-    }
 }
