@@ -51,7 +51,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	// Collection View //
 	// ///////////////////
     @Override
-    public Set<? extends Unit<?>> getUnits() {
+    public Set<Unit<?>> getUnits() {
         return Collections.unmodifiableSet(units);
     }
 
