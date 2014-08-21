@@ -9,7 +9,7 @@ import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-class DoubleMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
+final class DoubleMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Double> {
 
     final double value;
 
@@ -45,35 +45,35 @@ class DoubleMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
         return (long) result;
 	}
 
-	protected Measurement<T, Number> add(AbstractMeasurement<T> that) {
-		return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
+	protected Measurement<T, Number> add(AbstractMeasurement<T, Double> that) {
+		return new DoubleMeasurement(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	protected Measurement<T, Number> subtract(AbstractMeasurement<T> that) {
-		return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
+	protected Measurement<T, Number> subtract(AbstractMeasurement<T, Number> that) {
+		return new DoubleMeasurement(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Measurement<?, Number> multiply(AbstractMeasurement<T> that) {
+	public Measurement<?, Number> multiply(AbstractMeasurement<T, Number> that) {
 		return new DoubleMeasurement(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
 	public Measurement<T, Number> multiply(Number that) {
-		return of(value * that.doubleValue(), getUnit());
+		return new DoubleMeasurement(value * that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected Measurement<?, Number> divide(AbstractMeasurement<T> that) {
+	protected Measurement<?, Number> divide(AbstractMeasurement<T, Number> that) {
 		return new DoubleMeasurement(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 
 	public Measurement<T, Number> divide(Number that) {
-		return of(value / that.doubleValue(), getUnit());
+		return new DoubleMeasurement(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
-	protected AbstractMeasurement<T> inverse() {
-		return (AbstractMeasurement<T>) of(value, getUnit().inverse());
+	protected AbstractMeasurement<T, Double> inverse() {
+		return (AbstractMeasurement<T, Double>) of(value, getUnit().inverse());
 	}
 
 	@Override

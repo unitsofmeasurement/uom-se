@@ -9,7 +9,7 @@ import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
+class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Float> {
 
 
 	final float value;
@@ -47,33 +47,35 @@ class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
         return (long) result;
 	}
 
-	protected AbstractMeasurement<T> add(AbstractMeasurement<T> that) {
-		return of(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected AbstractMeasurement<T, Float> add(AbstractMeasurement<T, Float> that) {
+		return new FloatMeasurement(value + that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	protected AbstractMeasurement<T> subtract(AbstractMeasurement<T> that) {
-		return of(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected AbstractMeasurement<T, Float> subtract(AbstractMeasurement<T, Float> that) {
+		return new FloatMeasurement(value - that.getValue().floatValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	@SuppressWarnings("unchecked")
-	protected AbstractMeasurement<T> multiply(AbstractMeasurement<T> that) {
-		return (AbstractMeasurement<T>) of(value * that.getValue().floatValue(),
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected AbstractMeasurement<T, Float> multiply(AbstractMeasurement<T, Float> that) {
+		return new FloatMeasurement(value * that.getValue().floatValue(),
 				getUnit().multiply(that.getUnit()));
 	}
 
-	protected Measurement<T, Number> multiply(Number that) {
+	protected Measurement<T, Float> multiply(Number that) {
 		return new FloatMeasurement<T>(value * that.floatValue(),
 				getUnit().multiply(that.floatValue()));
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected Measurement<?, Number> divide(AbstractMeasurement<T> that) {
+	protected Measurement<?, Number> divide(AbstractMeasurement<T, Float> that) {
 		return new FloatMeasurement(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
 	}
 
-	@SuppressWarnings("unchecked")
-	public AbstractMeasurement<T> inverse() {
-		return (AbstractMeasurement<T>) of(value, getUnit().inverse());
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public AbstractMeasurement<T, Float> inverse() {
+		return new FloatMeasurement(value, getUnit().inverse());
 	}
 
 	@Override
@@ -81,7 +83,8 @@ class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
 		return false;
 	}
 
-	public Measurement<T, Number> divide(Number that) {
-		return of(value / that.floatValue(), getUnit());
+	@SuppressWarnings("rawtypes")
+	public Measurement<T, Float> divide(Number that) {
+		return new FloatMeasurement(value / that.floatValue(), getUnit());
 	}
 }

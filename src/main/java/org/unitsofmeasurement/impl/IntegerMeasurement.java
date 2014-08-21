@@ -1,3 +1,19 @@
+/**
+ *  Unit-API - Units of Measurement API for Java
+ *  Copyright 2010-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  contributors by the @author tag.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package org.unitsofmeasurement.impl;
 
 import java.math.BigDecimal;
@@ -9,7 +25,7 @@ import javax.measure.Unit;
 
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
-class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
+final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Integer> {
 
 
 	final int value;
@@ -47,33 +63,33 @@ class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
         return (long) result;
 	}
 
-	protected Measurement<T, Number> add(AbstractMeasurement<T> that) {
-		return of(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+	protected Measurement<T, Number> add(AbstractMeasurement<T, Number> that) {
+		return new IntegerMeasurement(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	protected Measurement<T, Number> subtract(AbstractMeasurement<T> that) {
-		return of(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
+	protected Measurement<T, Number> subtract(AbstractMeasurement<T, Number> that) {
+		return new IntegerMeasurement(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Measurement<?, Number> multiply(AbstractMeasurement<T> that) {
+	public Measurement<?, Number> multiply(AbstractMeasurement<T, Number> that) {
 		return new IntegerMeasurement(value * that.getValue().intValue(),
 				getUnit().multiply(that.getUnit()));
 	}
 
 	public Measurement<T, Number> multiply(Number that) {
-		return of(value * that.intValue(),
+		return new IntegerMeasurement(value * that.intValue(),
 				getUnit().multiply(that.intValue()));
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Measurement<?, Number> divide(AbstractMeasurement<T> that) {
+	public Measurement<?, Number> divide(AbstractMeasurement<T, Number> that) {
 		return new DoubleMeasurement(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
-	public AbstractMeasurement<T> inverse() {
-		return (AbstractMeasurement<T>) of(value, getUnit().inverse());
+	public Measurement<T, Number> inverse() {
+		return new IntegerMeasurement(value, getUnit().inverse());
 	}
 
 	@Override
@@ -82,7 +98,7 @@ class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T> {
 	}
 
 	public Measurement<T, Number> divide(Number that) {
-		return of(value / that.intValue(), getUnit());
+		return new IntegerMeasurement(value / that.intValue(), getUnit());
 	}
 
 }

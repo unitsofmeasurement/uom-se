@@ -84,9 +84,9 @@ import org.unitsofmeasurement.impl.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-08-03 $
+ * @version 0.4, $Date: 2014-08-22 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q, Number> {
+public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q, V> {
 // TODO do we want to restrict Measurement to Number here?
 
 	protected final Unit<Q> unit;
@@ -94,12 +94,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
 	/**
 	 * Holds a dimensionless measurement of none (exact).
 	 */
-	public static final AbstractMeasurement<Dimensionless> NONE = of(0, SI.ONE);
+	public static final AbstractMeasurement<Dimensionless, ?> NONE = of(0, SI.ONE);
 
 	/**
 	 * Holds a dimensionless measurement of one (exact).
 	 */
-	public static final AbstractMeasurement<Dimensionless> ONE = of(1, SI.ONE);
+	public static final AbstractMeasurement<Dimensionless, ?> ONE = of(1, SI.ONE);
 
 	/**
      * constructor.
@@ -113,7 +113,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      *
      * @return the measurement value.
      */
-    public abstract Number getValue();
+    public abstract V getValue();
 
     /**
      * Returns the measurement unit.
@@ -134,7 +134,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @throws ArithmeticException if the result is inexact and the quotient
      *         has a non-terminating decimal expansion.
      */
-    protected AbstractMeasurement<Q> toSI() {
+    protected AbstractMeasurement<Q, V> toSI() {
         return to(this.getUnit().getSystemUnit());
     }
 
@@ -151,12 +151,13 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
-    @Override
-    public AbstractMeasurement<Q> to(Unit<Q> unit) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+    public AbstractMeasurement<Q, V> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return AbstractMeasurement.of(doubleValue(unit), unit);
+        return new DoubleMeasurement(doubleValue(unit), unit);
     }
 
     /**
@@ -175,11 +176,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      *         <code>mathContext.precision == 0</code> and the quotient has
      *         a non-terminating decimal expansion.
      */
-    public AbstractMeasurement<Q> to(Unit<Q> unit, MathContext ctx) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public AbstractMeasurement<Q,V> to(Unit<Q> unit, MathContext ctx) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return AbstractMeasurement.of(doubleValue(unit), unit);
+        return new DoubleMeasurement(doubleValue(unit), unit);
     }
 
     /**
@@ -194,9 +196,9 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @return <code>Double.compare(this.doubleValue(getUnit()),
      *         that.doubleValue(getUnit()))</code>
      */
-    public int compareTo(AbstractMeasurement<Q> that) {
+    public int compareTo(AbstractMeasurement<Q, V> that) {
         Unit<Q> unit = getUnit();
-        return Double.compare(doubleValue(unit), that.getValue().doubleValue());
+        return Double.compare(doubleValue(unit), doubleValue(that.getUnit()));
     }
 
     /**
@@ -221,10 +223,10 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AbstractMeasurement<?>)) {
+        if (!(obj instanceof AbstractMeasurement<?, ?>)) {
             return false;
         }
-        AbstractMeasurement<?> that = (AbstractMeasurement<?>) obj;
+        AbstractMeasurement<?,?> that = (AbstractMeasurement<?, ?>) obj;
         return this.getUnit().equals(that.getUnit()) && this.getValue().equals(that.getValue());
     }
 
@@ -239,7 +241,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @param epsilonUnit the epsilon unit.
      * @return <code>abs(this.doubleValue(epsilonUnit) - that.doubleValue(epsilonUnit)) &lt;= epsilon</code>
      */
-    public boolean equals(AbstractMeasurement<Q> that, double epsilon, Unit<Q> epsilonUnit) {
+    public boolean equals(AbstractMeasurement<Q, V> that, double epsilon, Unit<Q> epsilonUnit) {
         return Math.abs(this.doubleValue(epsilonUnit) - that.doubleValue(epsilonUnit)) <= epsilon;
     }
 
@@ -316,11 +318,11 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @see Unit#asType(Class)
      */
     @SuppressWarnings("unchecked")
-    public final <T extends Quantity<T>> AbstractMeasurement<T> asType(Class<T> type)
+    public final <T extends Quantity<T>> AbstractMeasurement<T,V> asType(Class<T> type)
             throws ClassCastException {
         this.getUnit().asType(type); // Raises ClassCastException is dimension
         // mismatches.
-        return (AbstractMeasurement<T>) this;
+        return (AbstractMeasurement<T,V>) this;
     }
 
     /**
@@ -340,7 +342,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @param csq the decimal value and its unit (if any) separated by space(s).
      * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
      */
-    public static AbstractMeasurement<?> of(CharSequence csq) {
+    public static AbstractMeasurement<?, ?> of(CharSequence csq) {
         try {
 			return MeasurementFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
 		} catch (IllegalArgumentException | ParserException e) {
@@ -355,7 +357,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @param unit the measurement unit.
      * @return the corresponding <code>int</code> measure.
      */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(int intValue,
+    public static <Q extends Quantity<Q>> AbstractMeasurement<Q, Integer> of(int intValue,
             Unit<Q> unit) {
         return new IntegerMeasurement<Q>(intValue, unit);
     }
@@ -367,7 +369,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @param unit the measurement unit.
      * @return the corresponding <code>float</code> measure.
      */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(float floatValue,
+    public static <Q extends Quantity<Q>> AbstractMeasurement<Q, Float> of(float floatValue,
             Unit<Q> unit) {
         return new FloatMeasurement<Q>(floatValue, unit);
     }
@@ -380,7 +382,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Meas
      * @param unit the measurement unit.
      * @return the corresponding <code>double</code> measure.
      */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q> of(double doubleValue,
+    public static <Q extends Quantity<Q>> AbstractMeasurement<Q, Double> of(double doubleValue,
             Unit<Q> unit) {
         return new DoubleMeasurement<Q>(doubleValue, unit);
     }
