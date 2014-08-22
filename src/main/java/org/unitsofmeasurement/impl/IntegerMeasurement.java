@@ -13,7 +13,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
 package org.unitsofmeasurement.impl;
 
 import java.math.BigDecimal;
@@ -26,7 +25,6 @@ import javax.measure.Unit;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Integer> {
-
 
 	final int value;
 

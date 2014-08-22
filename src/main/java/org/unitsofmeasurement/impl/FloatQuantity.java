@@ -10,7 +10,7 @@ import javax.measure.Unit;
 import org.unitsofmeasurement.impl.function.AbstractConverter;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. IntegerQuantity
+ * An amount of quantity, consisting of a float and a Unit. FloatQuantity
  * objects are immutable.
  * 
  * @see AbstractQuantity
@@ -22,7 +22,7 @@ import org.unitsofmeasurement.impl.function.AbstractConverter;
  * @version 0.2, $Date: 2014-08-03 $
  */
 final class FloatQuantity<T extends Quantity<T>> extends AbstractQuantity<T> 
-   implements Serializable{
+   implements Serializable {
 
 	/**
 	 * 
