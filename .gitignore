@@ -3,6 +3,10 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.next
 release.properties
+unit-impl-se.iml
+nb-configuration.xml
 /.classpath
 /.project
 /.settings
+/.idea
+.project

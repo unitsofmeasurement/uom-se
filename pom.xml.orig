@@ -1,8 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>uom-se</artifactId>
+<<<<<<< HEAD
+	<artifactId>unit-impl-se</artifactId>
+	<version>0.4</version>
+=======
+	<artifactId>tec.uom-se</artifactId>
 	<version>0.5-SNAPSHOT</version>
+>>>>>>> rename namespace
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Implementation for Java SE</name>
 	<url>https://github.com/unitsofmeasurement/unit-impl-se</url>
@@ -16,9 +21,15 @@
 		<url>http://unitsofmeasurement.github.io</url>
 	</organization>
 	<parent>
+<<<<<<< HEAD
+		<groupId>org.unitsofmeasurement</groupId>
+		<artifactId>unitsofmeasurement-parent</artifactId>
+		<version>0.6.3</version>
+=======
 		<groupId>tec.uom</groupId>
-		<artifactId>uom-parent</artifactId>
-		<version>0.7-SNAPSHOT</version>
+		<artifactId>tec.uom-parent</artifactId>
+		<version>0.8-SNAPSHOT</version>
+>>>>>>> rename namespace
 	</parent>
     <scm>
         <url>https://github.com/unitsofmeasurement/unit-ri.git</url>
