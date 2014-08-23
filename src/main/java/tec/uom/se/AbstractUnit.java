@@ -39,7 +39,7 @@ import static tec.uom.se.format.UCUMFormat.Variant.CASE_SENSITIVE;
 
 /**
  * <p> The class represents units founded on the seven
- *     {@link org.org.unitsofmeasurement.impl.system.SI SI} base units for
+ *     {@link org.tec.uom.se.system.SI SI} base units for
  *     seven base quantities assumed to be mutually independent.</p>
  *
  * <p> For all physics units, units conversions are symmetrical:

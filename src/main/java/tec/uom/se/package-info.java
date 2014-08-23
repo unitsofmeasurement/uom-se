@@ -23,12 +23,12 @@
  *
  * import javax.measure.quantity.*; // Holds quantity types.
  * 
- * import org.unitsofmeasurement.impl.AbstractUnit;
- * import org.unitsofmeasurement.impl.function.AbstractConverter;
+ * import tec.uom.se.AbstractUnit;
+ * import tec.uom.se.function.AbstractConverter;
  * 
- * import static org.unitsofmeasurement.impl.util.SI.*; // Standard Units.
- * import static org.unitsofmeasurement.impl.util.SIPrefix.*;
- * import static org.unitsofmeasurement.impl.util.UCUM.*; // Standard & Non-Standard Units.
+ * import static tec.uom.se.util.SI.*; // Standard Units.
+ * import static tec.uom.se.util.SIPrefix.*;
+ * import static tec.uom.se.util.UCUM.*; // Standard & Non-Standard Units.
  *
  * public class Main {
  *     public void main(String[] args) {

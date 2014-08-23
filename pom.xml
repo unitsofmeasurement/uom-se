@@ -123,8 +123,8 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Export-Package>org.unitsofmeasurement.impl.*</Export-Package>
-						<Private-Package>org.unitsofmeasurement.impl.format.internal.*</Private-Package>
+						<Export-Package>tec.uom.se.*</Export-Package>
+						<Private-Package>tec.uom.se.format.internal.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -304,5 +304,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<groupId>org.unitsofmeasurement.impl</groupId>
 </project>

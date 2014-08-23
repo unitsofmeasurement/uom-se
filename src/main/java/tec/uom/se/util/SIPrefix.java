@@ -28,8 +28,8 @@ import java.math.BigInteger;
  * <p> This class provides support for the 20 SI prefixes used in the metric
  *     system (decimal multiples and submultiples of SI units).
  *     For example:<pre><code>
- *     import static org.unitsofmeasurement.impl.util.SI.*;  // Static import.
- *     import static org.unitsofmeasurement.impl.util.SIPrefix.*; // Static import.
+ *     import static tec.uom.se.util.SI.*;  // Static import.
+ *     import static tec.uom.se.util.SIPrefix.*; // Static import.
  *     import org.unitsofmeasurement.quantity.*;
  *     ...
  *     Unit<Pressure> HECTOPASCAL = HECTO(PASCAL);

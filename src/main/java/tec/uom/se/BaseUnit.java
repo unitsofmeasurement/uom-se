@@ -30,7 +30,7 @@ import java.util.Map;
  *     physical units are created. Base units are always unscaled SI units.</p>
  * 
  * <p> When using the {@link tec.uom.se.model.StandardModel standard model},
- *     all seven {@link org.org.unitsofmeasurement.impl.system.SI SI} base units
+ *     all seven {@link org.tec.uom.se.system.SI SI} base units
  *     are dimensionally independent.</p>
  *
  * @see <a href="http://en.wikipedia.org/wiki/SI_base_unit">
