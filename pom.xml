@@ -7,10 +7,6 @@
 	<name>Units of Measurement Implementation for Java SE</name>
 	<url>https://github.com/unitsofmeasurement/unit-impl-se</url>
 	<description>Units of Measurement Implementation for Java SE JDK Integration of Unit-API / JSR 363</description>
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/unitsofmeasurement/unit-impl-se/issues</url>
-    </issueManagement>
 	<organization>
 		<name>Units of Measurement project</name>
 		<url>http://unitsofmeasurement.github.io</url>
@@ -20,9 +16,13 @@
 		<artifactId>uom-parent</artifactId>
 		<version>0.7-SNAPSHOT</version>
 	</parent>
-    <scm>
-        <url>https://github.com/unitsofmeasurement/unit-ri.git</url>
-    </scm>
+	<scm>
+		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
+	</scm>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>https://java.net/jira/browse/UNITSOFMEASUREMENT</url>
+	</issueManagement>
 	<licenses>
 		<license>
 			<name>Apache 2.0</name>
@@ -59,7 +59,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -103,7 +103,8 @@
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
-							<Specification-Title>Units of Measurement Implementation fof Java SE</Specification-Title>
+							<Specification-Title>Units of Measurement Implementation fof Java
+								SE</Specification-Title>
 							<Specification-Version>${project.version}</Specification-Version>
 							<Specification-Vendor>${project.organization.name}</Specification-Vendor>
 							<Implementation-Vendor>Unit-API contributors</Implementation-Vendor>
@@ -225,19 +226,11 @@
 						<!-- ======================================================= -->
 						<!-- Static analysis for occurences of bug patterns -->
 						<!-- ======================================================= -->
-						<!--  plugin>
-							<groupId>org.codehaus.mojo</groupId>
-							<artifactId>findbugs-maven-plugin</artifactId>
-							<version>2.5.2</version>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-checkstyle-plugin</artifactId>
-							<version>2.11</version>
-							<configuration>
-								<configLocation>src/etc/checkstyle.xml</configLocation>
-							</configuration>
-						</plugin -->
+						<!-- plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>findbugs-maven-plugin</artifactId> 
+							<version>2.5.2</version> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+							<artifactId>maven-checkstyle-plugin</artifactId> <version>2.11</version> 
+							<configuration> <configLocation>src/etc/checkstyle.xml</configLocation> </configuration> 
+							</plugin -->
 					</reportPlugins>
 				</configuration>
 			</plugin>
@@ -283,8 +276,6 @@
 								</excludes>
 							</configuration>
 						</plugin>
-						<!-- TODO enable this only for major upgrades (ensure to copy LICENSE.txt 
-							to LICENSE.bak first) -->
 					</plugins>
 				</pluginManagement>
 				<plugins>
