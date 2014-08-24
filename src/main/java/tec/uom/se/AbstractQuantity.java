@@ -83,8 +83,8 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
  * 
  * <p> All instances of this class shall be immutable.</p>
  * 
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2014-08-03 $
+ * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
+ * @version 0.6.1, $Date: 2014-08-24 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 	
@@ -367,8 +367,20 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             Unit<Q> unit) {
         return new IntegerQuantity<>(intValue, unit);
     }
-
     
+    /**
+     * Returns the scalar measure for the specified <code>long</code> stated in
+     * the specified unit.
+     *
+     * @param longValue the measurement value.
+     * @param unit the measurement unit.
+     * @return the corresponding <code>int</code> measure.
+     */
+    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(long longValue,
+            Unit<Q> unit) {
+        return new LongQuantity<Q>(longValue, unit);
+    }
+
     /**
      * Returns the scalar measure for the specified <code>float</code> stated in
      * the specified unit.
