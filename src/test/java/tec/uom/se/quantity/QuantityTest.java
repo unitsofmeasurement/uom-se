@@ -12,9 +12,9 @@ import tec.uom.se.util.US;
 public class QuantityTest {
 
     @Test
-    public void asf() {
+    public void toTest() {
         Quantity len = AbstractQuantity.of(10, SI.METRE);
-        Quantity len2 = (Quantity)len.to(US.FOOT);
+        Quantity len2 = len.to(US.FOOT);
         System.out.println(len2);
     }
 }
