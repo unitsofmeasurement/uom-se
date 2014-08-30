@@ -34,77 +34,77 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
  *     in a known unit.</p>
- * 
- * <p> To avoid any lost of precision, known exact measure (e.g. physical 
+ *
+ * <p> To avoid any lost of precision, known exact measure (e.g. physical
  *     constants) should not be created from <code>double</code> constants but
  *     from their decimal representation.<br/><code>
  *         public static final Measurement<Number, Velocity> C = AbstractMeasurement.of("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code></p>
- * 
+ *
  * <p> Measures can be converted to different units, the conversion precision is
  *     determined by the specified {@link MathContext}.<br/><code>
  *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
  *         System.out.println(milesPerHour);
- * 
+ *
  *         > 670616629.3843951324266284896206156 [mi_i]/h
  *     </code>
  *     If no precision is specified <code>double</code> precision is assumed.<code>
  *         Measurement<Double, Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
- * 
+ *
  *         > 670616629.3843951 [mi_i]/h
  *     </code></p>
- * 
+ *
  * <p> Applications may sub-class {@link AbstractQuantity} for particular measurements
  *     types.<br/><code>
  *         // Quantity of type Mass based on <code>double</code> primitive types.
- *         public class MassAmount extends AbstractQuantity<Mass> { 
- *             private final double _kilograms; // Internal SI representation. 
+ *         public class MassAmount extends AbstractQuantity<Mass> {
+ *             private final double _kilograms; // Internal SI representation.
  *             private Mass(double kilograms) { _kilograms = kilograms; }
  *             public static Mass of(double value, Unit<Mass> unit) {
  *                 return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));
- *             } 
- *             public Unit<Mass> getUnit() { return SI.KILOGRAM; } 
- *             public Double getValue() { return _kilograms; } 
+ *             }
+ *             public Unit<Mass> getUnit() { return SI.KILOGRAM; }
+ *             public Double getValue() { return _kilograms; }
  *             ...
  *         }
- * 
+ *
  *         // Complex numbers measurements.
  *         public class ComplexQuantity<Q extends Quantity> extends AbstractQuantity<Q> {
  *             public Complex getValue() { ... } // Assuming Complex is a Number.
- *             ... 
+ *             ...
  *         }
- * 
+ *
  *         // Specializations of complex numbers measurements.
- *         public class Current extends ComplexQuantity<ElectricCurrent> {...} 
+ *         public class Current extends ComplexQuantity<ElectricCurrent> {...}
  *         public class Tension extends ComplexQuantity<ElectricPotential> {...}
  *         </code></p>
- * 
+ *
  * <p> All instances of this class shall be immutable.</p>
- * 
+ *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @version 0.6.1, $Date: 2014-08-24 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
-	
+
     /**
-	 * 
+	 *
 	 */
 //	private static final long serialVersionUID = -4993173119977931016L;
-    
+
 	private final Unit<Q> unit;
-	
+
 	/**
 	 * Holds a dimensionless measure of none (exact).
 	 */
 	public static final AbstractQuantity<Dimensionless> NONE = of(0, SI.ONE);
-	
+
 	/**
 	 * Holds a dimensionless measure of one (exact).
 	 */
 	public static final AbstractQuantity<Dimensionless> ONE = of(1, SI.ONE);
-	
+
 	/**
      * constructor.
      */
@@ -117,6 +117,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      *
      * @return the measurement value.
      */
+    @Override
     public abstract Number getValue();
 
     /**
@@ -124,6 +125,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      *
      * @return the measurement unit.
      */
+    @Override
     public Unit<Q> getUnit() {
     	return unit;
     }
@@ -154,12 +156,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
+    @Override
     public Quantity<Q> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
         //return AbstractMeasurement.of(doubleValue(unit), unit);
-        return AbstractQuantity.of(decimalValue(unit, MathContext.UNLIMITED), unit);
+        return AbstractQuantity.of(decimalValue(unit, MathContext.DECIMAL128), unit);
     }
 
     /**
@@ -261,7 +264,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     }
 
     public abstract boolean isBig();
-    
+
     /**
      * Returns the <code>String</code> representation of this measure. The
      * string produced for a given measure is always the same; it is not
@@ -280,10 +283,10 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
     public abstract BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
             throws ArithmeticException;
-    
+
     public abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
-    
+
     // Implements AbstractMeasurement
     public final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
@@ -367,7 +370,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
             Unit<Q> unit) {
         return new IntegerQuantity<>(intValue, unit);
     }
-    
+
     /**
      * Returns the scalar measure for the specified <code>long</code> stated in
      * the specified unit.
