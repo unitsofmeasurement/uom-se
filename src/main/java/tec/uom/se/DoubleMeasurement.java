@@ -9,6 +9,14 @@ import javax.measure.Unit;
 
 import tec.uom.se.function.AbstractConverter;
 
+/**
+ * 
+ * @author Werner
+ *
+ * @param <T>
+ * 
+ * @deprecated We probably don't need this as it duplicates DoubleQuantity?
+ */
 final class DoubleMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Double> {
 
     final double value;

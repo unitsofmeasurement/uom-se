@@ -24,6 +24,14 @@ import javax.measure.Unit;
 
 import tec.uom.se.function.AbstractConverter;
 
+/**
+ * 
+ * @author Werner
+ *
+ * @param <T>
+ * 
+ * @deprecated We probably don't need this as it duplicates IntegerQuantity?
+ */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Integer> {
 

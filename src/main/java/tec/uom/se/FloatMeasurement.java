@@ -24,6 +24,14 @@ import javax.measure.Unit;
 
 import tec.uom.se.function.AbstractConverter;
 
+/**
+ * 
+ * @author Werner
+ *
+ * @param <T>
+ * 
+ * @deprecated We probably don't need this as it duplicates FloatQuantity?
+ */
 final class FloatMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Float> {
 
 	final float value;
