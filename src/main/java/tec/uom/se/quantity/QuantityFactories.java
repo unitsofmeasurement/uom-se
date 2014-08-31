@@ -13,7 +13,10 @@ import javax.measure.Quantity;
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 class QuantityFactories {
-
+/* FIXME the name of both this class and the of() method are misleading
+	"*Factories" suggests a static method facade like JDK Collections or JSR 354 MonetaryAmounts,...
+	However the of() method doesn't return an instance of QuantityFactories but a QuantityBuilder.
+	Some renaming required either of() into something more appropriate or the whole class */
 	private static final Logger logger = Logger
 			.getLogger(QuantityFactories.class.getName());
 

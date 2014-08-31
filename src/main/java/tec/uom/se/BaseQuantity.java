@@ -22,7 +22,6 @@ import java.math.MathContext;
 import java.util.Objects;
 
 import javax.measure.IncommensurableException;
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
@@ -39,7 +38,7 @@ import tec.uom.se.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9, $Date: 2014-08-03 $
+ * @version 0.9.1, $Date: 2014-08-31 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Comparable<BaseQuantity<Q>>, Serializable {
@@ -251,9 +250,11 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return 0;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		// TODO Auto-generated method stub
-		return null;
+		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
+		return new BaseQuantity(this.getValue().doubleValue()
+				- thatToUnit.getValue().doubleValue(), getUnit());
 	}
 }

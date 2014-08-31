@@ -30,13 +30,13 @@ import javax.measure.Unit;
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.1, $Date: 2014-08-24 $
+ * @version 0.2, $Date: 2014-09-01 $
  */
-final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
+final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
 	final long value;
 
-	public LongQuantity(long value, Unit<T> unit) {
+	public LongQuantity(long value, Unit<Q> unit) {
 		super(unit);
 		this.value = value;
 	}
@@ -46,13 +46,13 @@ final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 		return value;
 	}
 
-	public double doubleValue(Unit<T> unit) {
+	public double doubleValue(Unit<Q> unit) {
 		return (super.getUnit().equals(unit)) ? value : super.getUnit()
 				.getConverterTo(unit).convert(value);
 	}
 
 	@Override
-	public long longValue(Unit<T> unit) {
+	public long longValue(Unit<Q> unit) {
 		double result = doubleValue(unit);
 		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
 			throw new ArithmeticException("Overflow (" + result + ")");
@@ -61,39 +61,39 @@ final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public Quantity<T> add(Quantity<T> that) {
+	public Quantity<Q> add(Quantity<Q> that) {
 		return of(value + that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
-	public Quantity<T> subtract(Quantity<T> that) {
+	public Quantity<Q> subtract(Quantity<Q> that) {
 		return of(value - that.getValue().longValue(), getUnit()); // TODO use shift of the unit?
 	}
 
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
-		return of(value * that.getValue().longValue(), getUnit());
+		return new LongQuantity(value * that.getValue().longValue(), getUnit());
 	}
 
 	@Override
-	public Quantity<T> multiply(Number that) {
-		return of(value * that.intValue(), getUnit());
+	public Quantity<Q> multiply(Number that) {
+		return new LongQuantity(value * that.intValue(), getUnit());
 	}
 
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
-		return of((double) value / that.getValue().doubleValue(), getUnit()
+		return new DoubleQuantity((double) value / that.getValue().doubleValue(), getUnit()
 				.divide(that.getUnit()));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) of(value, getUnit().inverse());
+	public AbstractQuantity<Q> inverse() {
+		return (AbstractQuantity<Q>) of(value, getUnit().inverse());
 	}
 
 	@Override
-	public Quantity<T> divide(Number that) {
+	public Quantity<Q> divide(Number that) {
 		return of(value / that.doubleValue(), getUnit());
 	}
 
@@ -104,7 +104,7 @@ final class LongQuantity<T extends Quantity<T>> extends AbstractQuantity<T> {
 	}
 
 	@Override
-	public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
+	public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
 			throws ArithmeticException {
 		return BigDecimal.valueOf(doubleValue(unit));
 	}
