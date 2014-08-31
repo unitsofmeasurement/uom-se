@@ -38,11 +38,11 @@ import java.text.ParsePosition;
 /**
  * <p> This class provides the interface for formatting and parsing {@link AbstractQuantity
  *     measurements}.</p>
- * 
+ *
  * <p> Instances of this class should be able to format measurements stated in
  *     {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
  * </p>
- * 
+ *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 1.0, $Date: 2014-02-07 22:28:20 +0100 (Fr, 07 Feb 2014) $
@@ -51,7 +51,7 @@ import java.text.ParsePosition;
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -4628006924354248662L;
 
@@ -70,7 +70,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 * Returns the measure format for the default locale. The default format
 	 * assumes the measure is composed of a decimal number and a {@link Unit}
 	 * separated by whitespace(s).
-	 * 
+	 *
 	 * @return <code>MeasureFormat.getInstance(NumberFormat.getInstance(), UnitFormat.getInstance())</code>
 	 */
 	public static QuantityFormat getInstance() {
@@ -80,7 +80,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	/**
 	 * Returns the measure format using the specified number format and unit
 	 * format (the number and unit are separated by one space).
-	 * 
+	 *
 	 * @param numberFormat the number format.
 	 * @param unitFormat the unit format.
 	 * @return the corresponding format.
@@ -98,7 +98,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 * units without loss of information. For example:
 	 * <code>"1.23456789 kg.m/s2"</code> returns
 	 * <code>Measure.valueOf(new BigDecimal("1.23456789"), Unit.valueOf("kg.m/s2")));</code>
-	 * 
+	 *
 	 * @param style the format style to apply.
 	 * @return the desired format.
 	 */
@@ -115,7 +115,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 	/**
 	 * Formats the specified measure into an <code>Appendable</code>.
-	 * 
+	 *
 	 * @param measure the measure to format.
 	 * @param dest the appendable destination.
 	 * @return the specified <code>Appendable</code>.
@@ -129,7 +129,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 * specified position to produce an object. If parsing succeeds, then the
 	 * index of the <code>cursor</code> argument is updated to the index after
 	 * the last character used.
-	 * 
+	 *
 	 * @param csq the <code>CharSequence</code> to parse.
 	 * @param cursor the cursor holding the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
@@ -139,13 +139,13 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 */
 	public abstract AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException, ParserException;
-	
+
 	/**
 	 * Parses a portion of the specified <code>CharSequence</code> from the
 	 * specified position to produce an object. If parsing succeeds, then the
 	 * index of the <code>cursor</code> argument is updated to the index after
 	 * the last character used.
-	 * 
+	 *
 	 * @param csq the <code>CharSequence</code> to parse.
 	 * @param cursor the cursor holding the current parsing index.
 	 * @return the object parsed from the specified character sub-sequence.
@@ -153,7 +153,8 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract AbstractQuantity<?> parse(CharSequence csq)
+	@Override
+    public abstract AbstractQuantity<?> parse(CharSequence csq)
 			throws IllegalArgumentException, ParserException;
 
 	/**
@@ -163,16 +164,16 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *     Unit<Length> FOOT_INCH = FOOT.compound(INCH);
 	 *     Measure<Length> height = Measure.valueOf(1.81, METER);
 	 *     System.out.println(height.to(FOOT_INCH));
-	 * 
+	 *
 	 *     > 5ft11,26in // French Local
-	 * 
+	 *
 	 *     Unit<Angle> DMS = DEGREE_ANGLE.compound(MINUTE_ANGLE).compound(SECOND_ANGLE);
 	 *     Measure<Angle> rotation = Measure.valueOf(35.857497, DEGREE_ANGLE);
 	 *     System.out.println(rotation.to(DMS));
-	 * 
-	 *     > 35°51'26,989" // French Local 
+	 *
+	 *     > 35°51'26,989" // French Local
 	 * [/code]
-	 * 
+	 *
 	 * @param value the value to format using compound units.
 	 * @param unit the compound unit.
 	 * @param dest the appendable destination.
@@ -225,7 +226,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	/**
 	 * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)}
 	 * except it does not raise an IOException.
-	 * 
+	 *
 	 * @param measure the measure to format.
 	 * @param dest the appendable destination.
 	 * @return the specified <code>StringBuilder</code>.
@@ -275,20 +276,26 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 			if (number == null)
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
-//			if (number instanceof BigDecimal)
-//				return AbstractQuantity.of((BigDecimal) number, unit);
-			if (number instanceof Long)
+			if (number instanceof BigDecimal) {
+				return AbstractQuantity.of((BigDecimal) number, unit);
+			}
+			if (number instanceof Long) {
 				return AbstractQuantity.of(number.longValue(), unit);
-			else if (number instanceof Double)
+			}
+			else if (number instanceof Double) {
 				return AbstractQuantity.of(number.doubleValue(), unit);
-			else if (number instanceof Integer)
+			}
+			else if (number instanceof Integer) {
 				return AbstractQuantity.of(number.intValue(), unit);
-			else
+			}
+			else {
 				throw new UnsupportedOperationException("Number of type "
 						+ number.getClass() + " are not supported");
+			}
 		}
-		
-		public AbstractQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
+
+		@Override
+        public AbstractQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
 			return parse(csq, new ParsePosition(0));
 		}
 
@@ -300,7 +307,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	private static final class Standard extends QuantityFormat {
 
 		/**
-		 * 
+		 *
 		 */
 		private static final long serialVersionUID = 2758248665095734058L;
 
@@ -313,7 +320,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //				return formatCompound(measure.doubleValue(unit),
 //						(CompoundUnit) unit, dest);
 //			else {
-				
+
 				if (measure.isBig()) { // TODO SE only
 					BigDecimal decimal = measure.decimalValue(unit,
 						MathContext.UNLIMITED);
@@ -349,8 +356,9 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
 			return AbstractQuantity.of(decimal, unit);
 		}
-		
-		public AbstractQuantity<?> parse(CharSequence csq)
+
+		@Override
+        public AbstractQuantity<?> parse(CharSequence csq)
 				throws ParserException {
 			return parse(csq, new ParsePosition(0));
 		}
