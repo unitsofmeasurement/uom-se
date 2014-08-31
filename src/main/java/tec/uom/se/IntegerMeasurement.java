@@ -24,6 +24,7 @@ import javax.measure.Unit;
 
 import tec.uom.se.function.AbstractConverter;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasurement<T, Integer> {
 
 	final int value;
@@ -61,7 +62,7 @@ final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasuremen
         return (long) result;
 	}
 
-	protected Measurement<T, Number> add(AbstractMeasurement<T, Number> that) {
+    protected Measurement<T, Number> add(AbstractMeasurement<T, Number> that) {
 		return new IntegerMeasurement(value + that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
@@ -69,7 +70,6 @@ final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasuremen
 		return new IntegerMeasurement(value - that.getValue().intValue(), getUnit()); // TODO use shift of the unit?
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Measurement<?, Number> multiply(AbstractMeasurement<T, Number> that) {
 		return new IntegerMeasurement(value * that.getValue().intValue(),
 				getUnit().multiply(that.getUnit()));
@@ -80,12 +80,10 @@ final class IntegerMeasurement<T extends Quantity<T>> extends AbstractMeasuremen
 				getUnit().multiply(that.intValue()));
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Measurement<?, Number> divide(AbstractMeasurement<T, Number> that) {
 		return new DoubleMeasurement(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 
-	@SuppressWarnings("unchecked")
 	public Measurement<T, Number> inverse() {
 		return new IntegerMeasurement(value, getUnit().inverse());
 	}
