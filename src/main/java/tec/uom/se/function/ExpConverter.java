@@ -17,6 +17,7 @@ package tec.uom.se.function;
 
 import javax.measure.function.ValueSupplier;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -30,15 +31,15 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, April 22, 2014
+ * @version 0.5.4, Sep 06, 2014
  */
 final class ExpConverter extends AbstractConverter 
-	implements ValueSupplier<String> { //implements Immutable {
+	implements ValueSupplier<String>, Serializable { //implements Immutable {
 
     /**
 	 * 
 	 */
-//	private static final long serialVersionUID = -8851436813812059827L;
+	private static final long serialVersionUID = -8851436813812059827L;
 
 	/**
      * Holds the logarithmic base.

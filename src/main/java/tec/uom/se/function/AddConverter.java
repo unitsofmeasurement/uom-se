@@ -15,11 +15,13 @@
  */
 package tec.uom.se.function;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
 import javax.measure.function.UnitConverter;
+import javax.measure.function.ValueSupplier;
 
 
 /**
@@ -28,9 +30,10 @@ import javax.measure.function.UnitConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 5.1, March 18, 2014
+ * @version 0.5.2, Sep 06, 2014
  */
-public final class AddConverter extends AbstractConverter {
+public final class AddConverter extends AbstractConverter implements ValueSupplier<Double>, 
+ Serializable {
 
     /**
 	 * 
@@ -114,7 +117,7 @@ public final class AddConverter extends AbstractConverter {
         return false;
     }
 
-	public Double value() {
+	public Double getValue() {
 		return offset;
 	}
     
