@@ -18,6 +18,7 @@ package tec.uom.se.function;
 import javax.measure.function.UnitConverter;
 import javax.measure.function.ValueSupplier;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -30,15 +31,15 @@ import java.util.Objects;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 22, 2014
+ * @version 0.6, Sep 06, 2014
  */
 public final class MultiplyConverter extends AbstractConverter implements
-		ValueSupplier<Double> {
+		ValueSupplier<Double>, DoubleFactorSupplier, Serializable {
 
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 6588759878444545649L;
+	private static final long serialVersionUID = 6588759878444545649L;
 
 	/**
 	 * Holds the scale factor.

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  Copyright 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
  *  contributors by the @author tag.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +16,22 @@
 package tec.uom.se.function;
 
 /**
- * Provides String description to implementations
+ * Provides String name to implementations
  *
  * <p>There is no requirement that a distinct result be returned each
  * time the supplier is invoked, unless implementing classes enforce it.
  * 
- * <p>This is a <a href="http://download.java.net/jdk8/docs/api/java/util/function/package-summary.html">functional interface</a>
- * whose functional method is {@link #getDescription()}.
+ * <p>This is a <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html#package.description">functional interface</a>
+ * whose functional method is {@link #getName()}.
  * 
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.6, 2014-09-06
+ * @author Werner Keil
  */
 @FunctionalInterface
-public interface DescriptionSupplier {
+public interface Nameable {
 	
     /**
-     * @return a description
+     * @return a name
      */
-    String getDescription();
+    String getName();
 }

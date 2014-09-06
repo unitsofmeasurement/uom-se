@@ -19,7 +19,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import javax.measure.function.Nameable;
+import tec.uom.se.function.Nameable;
 
 /**
  * TimedData is a container for a data value that keeps track of its age. This class keeps track of the birth time of a bit of data, i.e. time the object is instantiated.<br/>The TimedData MUST be immutable.
@@ -28,7 +28,7 @@ import javax.measure.function.Nameable;
  *            The data value.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4 ($Revision: 428 $)
+ * @version 0.4.1
  * @see <a href="http://en.wikipedia.org/wiki/Time_series"> Wikipedia:
  *      Time Series</a>
  */

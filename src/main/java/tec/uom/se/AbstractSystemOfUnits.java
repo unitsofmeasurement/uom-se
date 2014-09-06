@@ -26,7 +26,7 @@ import java.util.*;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 2.2, $Date: 2014-02-09 01:16:54 +0100 (So, 09 Feb 2014) $
+ * @version 0.3, $Date: 2014-09-06 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
@@ -46,6 +46,12 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      **/
     protected static final double E = 2.71828182845904523536028747135266;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see SystemOfUnits#getName()
+	 */
+    public abstract String getName();
     
 	// ///////////////////
 	// Collection View //

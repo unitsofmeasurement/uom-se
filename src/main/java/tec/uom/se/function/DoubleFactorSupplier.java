@@ -27,10 +27,9 @@ package tec.uom.se.function;
  *
  * @see <a href="http://download.java.net/jdk8/docs/api/java/util/function/DoubleSupplier.html">DoubleSupplier</a>
  * @author Werner Keil
- * @version 0.4, $Date: 2014-03-18 23:55:19 +0100 (Di, 18 Mär 2014) $
- * @deprecated So far only used by Enum impl, consider removing
+ * @version 0.5, $Date: 2014-09-06 $
  */
-//equivalent to @FunctionalInterface
+@FunctionalInterface
 public interface DoubleFactorSupplier {
     double getFactor();
 }

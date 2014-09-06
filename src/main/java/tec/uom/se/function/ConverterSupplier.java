@@ -28,7 +28,7 @@ import javax.measure.function.UnitConverter;
  * 
  * @author Werner Keil
  */
-//equivalent to @FunctionalInterface
+@FunctionalInterface
 public interface ConverterSupplier {
 	
     /**

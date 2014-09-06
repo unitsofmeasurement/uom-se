@@ -17,10 +17,10 @@ package tec.uom.se.function;
  * whose functional method is {@link #getMaximum()}.
  * 
  * @author Werner Keil
- * @version 0.4, $Date: 2014-06-28 $
+ * @version 0.5, $Date: 2014-09-06 $
  * @param <T> the type of values supplied by this supplier
  */
-//@FunctionalInterface
+@FunctionalInterface
 public interface MaximumSupplier<T> {
 	
     /**
