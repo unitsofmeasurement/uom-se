@@ -18,7 +18,7 @@
  * {@link javax.measure.function.UnitConverter} interface.
  * 
  * As well as concrete implementations of 
- * {@link javax.measure.service.UnitformatService}.
+ * {@link javax.measure.spi.UnitformatService}.
  * Clients can also obtain concrete implementations from their OSGi bundle 
  * context or service tracker.
  */
