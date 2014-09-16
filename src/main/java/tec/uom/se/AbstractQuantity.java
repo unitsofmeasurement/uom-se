@@ -25,6 +25,7 @@ import javax.measure.format.ParserException;
 import javax.measure.quantity.Dimensionless;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 import java.text.ParsePosition;
 import java.util.Objects;
@@ -88,10 +89,6 @@ import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 
-    /**
-	 *
-	 */
-//	private static final long serialVersionUID = -4993173119977931016L;
 
 	private final Unit<Q> unit;
 
@@ -161,7 +158,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        //return AbstractMeasurement.of(doubleValue(unit), unit);
         return AbstractQuantity.of(decimalValue(unit, MathContext.DECIMAL128), unit);
     }
 
@@ -277,7 +273,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      */
     @Override
     public String toString() {
-        //return MeasureFormat.getStandard().format(this); TODO improve MeasureFormat
     	return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
     }
 
@@ -287,11 +282,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     public abstract  double doubleValue(Unit<Q> unit)
             throws ArithmeticException;
 
-    // Implements AbstractMeasurement
     public final int intValue(Unit<Q> unit) throws ArithmeticException {
         long longValue = longValue(unit);
         if ((longValue < Integer.MIN_VALUE) || (longValue > Integer.MAX_VALUE)) {
-            throw new ArithmeticException("Cannot convert " + longValue + " to int (overflow)");
+            throw new ArithmeticException("Cannot convert " + longValue
+                    + " to int (overflow)");
         }
         return (int) longValue;
     }
@@ -359,67 +354,23 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     }
 
     /**
-     * Returns the scalar measure for the specified <code>int</code> stated in
-     * the specified unit.
-     *
-     * @param intValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>int</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue,
-            Unit<Q> unit) {
-        return new IntegerQuantity<>(intValue, unit);
-    }
-
-    /**
-     * Returns the scalar measure for the specified <code>long</code> stated in
-     * the specified unit.
-     *
-     * @param longValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>int</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(long longValue,
-            Unit<Q> unit) {
-        return new LongQuantity<Q>(longValue, unit);
-    }
-
-    /**
-     * Returns the scalar measure for the specified <code>float</code> stated in
-     * the specified unit.
-     *
-     * @param floatValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>float</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(float floatValue,
-            Unit<Q> unit) {
-        return new FloatQuantity<>(floatValue, unit);
-    }
-
-    /**
-     * Returns the scalar measure for the specified <code>double</code> stated
+     * Returns the scalar measure.
      * in the specified unit.
-     *
-     * @param doubleValue the measurement value.
+     * @param value the measurement value.
      * @param unit the measurement unit.
      * @return the corresponding <code>double</code> measure.
+     * @throws NullPointerException when value or unit were null
      */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(double doubleValue,
+    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(Number value,
             Unit<Q> unit) {
-        return new DoubleQuantity<>(doubleValue, unit);
-    }
 
-    /**
-     * Returns the scalar measure for the specified <code>BigDecimal</code>
-     * stated in the specified unit.
-     *
-     * @param decimalValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>BigDecimal</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(
-            BigDecimal decimalValue, Unit<Q> unit) {
-        return new DecimalQuantity<>(decimalValue, unit);
+        Objects.requireNonNull(value);
+        Objects.requireNonNull(unit);
+        if (BigDecimal.class.isInstance(value)) {
+            return new DecimalQuantity<>(BigDecimal.class.cast(value), unit);
+        } else  if (BigInteger.class.isInstance(value)) {
+            return new DecimalQuantity<>(new BigDecimal(BigInteger.class.cast(value)), unit);
+        }
+        return new DoubleQuantity<>(value.doubleValue(), unit);
     }
 }

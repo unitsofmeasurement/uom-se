@@ -45,7 +45,7 @@ import java.util.Objects;
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 962983585531030093L;
 
@@ -55,15 +55,10 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     private final Element[] elements;
 
     /**
-     * Holds the hashcode (optimization).
-     */
-    private int hashCode;
-
-    /**
      * Holds the symbol for this unit.
      */
     private final String symbol;
-    
+
     /**
      * DefaultQuantityFactory constructor (used solely to create <code>ONE</code> instance).
      */
@@ -103,15 +98,19 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      */
     public static Unit<?> getProductInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
         Element[] leftElems;
-        if (left instanceof ProductUnit<?>)
+        if (left instanceof ProductUnit<?>) {
             leftElems = ((ProductUnit<?>) left).elements;
-        else
+        }
+        else {
             leftElems = new Element[]{new Element(left, 1, 1)};
+        }
         Element[] rightElems;
-        if (right instanceof ProductUnit<?>)
+        if (right instanceof ProductUnit<?>) {
             rightElems = ((ProductUnit<?>) right).elements;
-        else
+        }
+        else {
             rightElems = new Element[]{new Element(right, 1, 1)};
+        }
         return getInstance(leftElems, rightElems);
     }
 
@@ -268,7 +267,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 		}
 		return false;
 	}
-    
+
 
     @Override
     public int hashCode() {
@@ -288,6 +287,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         return (AbstractUnit<Q>) systemUnit;
     }
 
+    @Override
     public UnitConverter getConverterToSI() {
         UnitConverter converter = AbstractConverter.IDENTITY;
         for (Element e : elements) {
@@ -402,7 +402,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     private final static class Element {
 
         /**
-		 * 
+		 *
 		 */
 //		private static final long serialVersionUID = 452938412398890507L;
 
