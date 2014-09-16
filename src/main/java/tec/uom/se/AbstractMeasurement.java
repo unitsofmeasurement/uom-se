@@ -84,7 +84,7 @@ import tec.uom.se.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2014-08-22 $
+ * @version 0.5, $Date: 2014-09-17 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q, V> {
 // TODO do we want to restrict Measurement to Number here?
@@ -94,12 +94,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
 	/**
 	 * Holds a dimensionless measurement of none (exact).
 	 */
-	public static final AbstractMeasurement<Dimensionless, ?> NONE = of(0, SI.ONE);
+//	public static final AbstractMeasurement<Dimensionless, ?> NONE = of(0, SI.ONE);
 
 	/**
 	 * Holds a dimensionless measurement of one (exact).
 	 */
-	public static final AbstractMeasurement<Dimensionless, ?> ONE = of(1, SI.ONE);
+//	public static final AbstractMeasurement<Dimensionless, ?> ONE = of(1, SI.ONE);
 
 	/**
      * constructor.
@@ -157,7 +157,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return new DoubleMeasurement(doubleValue(unit), unit);
+        return new BaseMeasurement(doubleValue(unit), unit);
     }
 
     /**
@@ -177,12 +177,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      *         a non-terminating decimal expansion.
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	public AbstractMeasurement<Q,V> to(Unit<Q> unit, MathContext ctx) {
-        if (unit.equals(this.getUnit())) {
-            return this;
-        }
-        return new DoubleMeasurement(doubleValue(unit), unit);
-    }
+//	public AbstractMeasurement<Q,V> to(Unit<Q> unit, MathContext ctx) {
+//        if (unit.equals(this.getUnit())) {
+//            return this;
+//        }
+//        return new DoubleMeasurement(doubleValue(unit), unit);
+//    }
 
     /**
      * Compares this measure to the specified Measurement quantity. The default
@@ -324,67 +324,4 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
         // mismatches.
         return (AbstractMeasurement<T,V>) this;
     }
-
-    /**
-     * Returns the
-     * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
-     * measure of unknown type corresponding to the specified representation.
-     * This method can be used to parse dimensionless quantities.<br/><code>
-     *     Measurement<Number, Dimensionless> proportion = Measure.valueOf("0.234").asType(Dimensionless.class);
-     * </code>
-     *
-     * <p> Note: This method handles only
-     * {@link javax.measure.unit.UnitFormat#getStandard standard} unit format
-     * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
-     * measure formatting and parsing are handled by the {@link MeasurementFormat}
-     * class and its subclasses.</p>
-     *
-     * @param csq the decimal value and its unit (if any) separated by space(s).
-     * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
-     */
-    public static AbstractMeasurement<?, ?> of(CharSequence csq) {
-        try {
-			return MeasurementFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
-		} catch (IllegalArgumentException | ParserException e) {
-			throw new IllegalArgumentException(e); // TODO could we handle this differently?
-		}
-    }
-    /**
-     * Returns the scalar measure for the specified <code>int</code> stated in
-     * the specified unit.
-     *
-     * @param intValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>int</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q, Integer> of(int intValue,
-            Unit<Q> unit) {
-        return new IntegerMeasurement<Q>(intValue, unit);
-    }
-    /**
-     * Returns the scalar measure for the specified <code>float</code> stated in
-     * the specified unit.
-     *
-     * @param floatValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>float</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q, Float> of(float floatValue,
-            Unit<Q> unit) {
-        return new FloatMeasurement<Q>(floatValue, unit);
-    }
-
-    /**
-     * Returns the scalar measure for the specified <code>double</code> stated
-     * in the specified unit.
-     *
-     * @param doubleValue the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>double</code> measure.
-     */
-    public static <Q extends Quantity<Q>> AbstractMeasurement<Q, Double> of(double doubleValue,
-            Unit<Q> unit) {
-        return new DoubleMeasurement<Q>(doubleValue, unit);
-    }
-
 }

@@ -15,14 +15,20 @@
  */
 package tec.uom.se;
 
+import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.text.ParsePosition;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.IncommensurableException;
 import javax.measure.UnconvertibleException;
+import javax.measure.format.ParserException;
 import javax.measure.function.UnitConverter;
+
+import tec.uom.se.format.MeasurementFormat;
 
 /**
  * An amount of measurement, consisting of a V and a Unit. BaseMeasurement
@@ -32,7 +38,7 @@ import javax.measure.function.UnitConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.6, $Date: 2014-08-03 $
+ * @version 0.6.1, $Date: 2014-09-17 $
  */
 public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 		AbstractMeasurement<Q, V> implements Comparable<BaseMeasurement<Q, V>> {
@@ -203,5 +209,35 @@ public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 			throws ArithmeticException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+    /**
+     * Returns the
+     * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
+     * measure of unknown type corresponding to the specified representation.
+     * This method can be used to parse dimensionless measurements.<br/><code>
+     *     Measurement<Number, Dimensionless> proportion = BaseMeasurement.of("0.234").asType(Dimensionless.class);
+     * </code>
+     *
+     * <p> Note: This method handles only
+     * {@link javax.measure.unit.UnitFormat#getStandard standard} unit format
+     * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
+     * measure formatting and parsing are handled by the {@link MeasurementFormat}
+     * class and its subclasses.</p>
+     *
+     * @param csq the decimal value and its unit (if any) separated by space(s).
+     * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
+     */
+    public static AbstractMeasurement<?, ?> of(CharSequence csq) {
+        try {
+			return MeasurementFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
+		} catch (IllegalArgumentException | ParserException e) {
+			throw new IllegalArgumentException(e); // TODO could we handle this differently?
+		}
+    }
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static final BaseMeasurement of(Object v, Unit<?> u) {
+		return new BaseMeasurement(v, u);
 	}
 }

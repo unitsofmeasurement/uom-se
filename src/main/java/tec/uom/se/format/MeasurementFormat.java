@@ -29,6 +29,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractMeasurement;
+import tec.uom.se.BaseMeasurement;
 import tec.uom.se.util.SI;
 
 
@@ -263,7 +264,8 @@ public abstract class MeasurementFormat extends Format implements Parser<CharSeq
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return AbstractMeasurement.of(decimal.doubleValue(), unit);
+//			return AbstractMeasurement.of(decimal, unit);
+			return BaseMeasurement.of(decimal, unit);
 		}
 		
 		public AbstractMeasurement<?, ?> parse(CharSequence csq)
