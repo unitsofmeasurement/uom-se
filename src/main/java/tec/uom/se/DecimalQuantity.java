@@ -40,12 +40,20 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 
 	@Override
 	public Quantity<T> add(Quantity<T> that) {
-		return of(value.add(toBigDecimal(that.getValue())), getUnit()); // TODO use shift of the unit?
+	    if (getUnit().equals(that.getUnit())) {
+	        return of(value.add(toBigDecimal(that.getValue())), getUnit());
+	    }
+	    Quantity<T> converted = that.to(getUnit());
+	    return of(value.add(toBigDecimal(converted.getValue())), getUnit());
 	}
 
 	@Override
 	public Quantity<T> subtract(Quantity<T> that) {
-		return of(value.subtract(toBigDecimal(that.getValue())), getUnit()); // TODO use shift of the unit?
+	    if (getUnit().equals(that.getUnit())) {
+	        return of(value.subtract(toBigDecimal(that.getValue())), getUnit());
+	    }
+	    Quantity<T> converted = that.to(getUnit());
+        return of(value.subtract(toBigDecimal(converted.getValue())), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

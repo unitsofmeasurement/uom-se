@@ -39,12 +39,31 @@ public class DecimalQuantityTest {
     }
 
     @Test
+    public void addQuantityTest() {
+        Quantity<Time> day = AbstractQuantity.of(BigDecimal.ONE, SI.DAY);
+        Quantity<Time> hours = AbstractQuantity.of(BigDecimal.valueOf(12), SI.HOUR);
+        Quantity<Time> result = day.add(hours);
+        Assert.assertTrue(result.getValue().doubleValue() == 1.5);
+        Assert.assertEquals(result.getUnit(), SI.DAY);
+    }
+
+    @Test
     public void subtractTest() {
         Quantity<Length> m = AbstractQuantity.of(BigDecimal.TEN, SI.METRE);
         Quantity<Length> m2 = AbstractQuantity.of(12.5, SI.METRE);
         Quantity<Length> result = m.subtract(m2);
         Assert.assertTrue(result.getValue().doubleValue() == -2.5);
         Assert.assertEquals(result.getUnit(), SI.METRE);
+    }
+
+
+    @Test
+    public void subtractQuantityTest() {
+        Quantity<Time> day = AbstractQuantity.of(BigDecimal.ONE, SI.DAY);
+        Quantity<Time> hours = AbstractQuantity.of(BigDecimal.valueOf(12), SI.HOUR);
+        Quantity<Time> result = day.subtract(hours);
+        Assert.assertTrue(result.getValue().doubleValue() == 0.5);
+        Assert.assertEquals(result.getUnit(), SI.DAY);
     }
 
     @Test
@@ -56,6 +75,18 @@ public class DecimalQuantityTest {
         @SuppressWarnings("unchecked")
         Quantity<Length> result2 = (Quantity<Length>) metre.multiply(AbstractQuantity.of(BigDecimal.TEN, SI.METRE));
         Assert.assertTrue(result2.getValue().intValue() == 100);
+    }
+
+    @Test
+    public void toTest() {
+        Quantity<Time> day = AbstractQuantity.of(BigDecimal.ONE, SI.DAY);
+        Quantity<Time> hour = day.to(SI.HOUR);
+        Assert.assertEquals(hour.getValue().intValue(), 24);
+        Assert.assertEquals(hour.getUnit(), SI.HOUR);
+
+        Quantity<Time> dayResult = hour.to(SI.DAY);
+        Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+        Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     }
 
     @Test

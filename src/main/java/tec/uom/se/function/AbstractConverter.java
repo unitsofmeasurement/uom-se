@@ -31,9 +31,9 @@ import java.util.Objects;
  * @version 0.4, August 03, 2014
  */
 public abstract class AbstractConverter implements UnitConverter {
-	
+
     /**
-	 * 
+	 *
 	 */
 //	private static final long serialVersionUID = 5790242858468427131L;
 
@@ -41,7 +41,7 @@ public abstract class AbstractConverter implements UnitConverter {
      * The ratio of the circumference of a circle to its diameter.
      **/
     protected static final double PI = 3.1415926535897932384626433832795;
-    
+
     /**
      * Holds identity converter.
      */
@@ -95,15 +95,16 @@ public abstract class AbstractConverter implements UnitConverter {
     @Override
     public Number convert(Number value) {
         if (value instanceof BigDecimal) {
-        	return convert((BigDecimal)value, MathContext.UNLIMITED);
+        	return convert((BigDecimal)value, MathContext.DECIMAL128);
         }
         return convert(value.doubleValue());
     }
 
+    @Override
     public abstract double convert(double value);
-    		
+
     public abstract BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException;
-    
+
     /**
      * This class represents the identity converter (singleton).
      */

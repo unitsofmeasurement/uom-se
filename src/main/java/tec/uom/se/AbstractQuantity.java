@@ -22,6 +22,7 @@ import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
+import javax.measure.function.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import java.math.BigDecimal;
@@ -158,7 +159,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return AbstractQuantity.of(decimalValue(unit, MathContext.DECIMAL128), unit);
+        UnitConverter t = getUnit().getConverterTo(unit);
+        Number convertedValue = t.convert(getValue());
+        return AbstractQuantity.of(convertedValue, unit);
     }
 
     /**

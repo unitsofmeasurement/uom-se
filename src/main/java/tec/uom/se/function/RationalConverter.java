@@ -33,11 +33,11 @@ import java.util.Objects;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 5.2, April 22, 2014
  */
-public final class RationalConverter extends AbstractConverter 
+public final class RationalConverter extends AbstractConverter
 	implements ValueSupplier<Double> { //implements Immutable<Double> {
 
     /**
-	 * 
+	 *
 	 */
 //	private static final long serialVersionUID = 1L;
 
