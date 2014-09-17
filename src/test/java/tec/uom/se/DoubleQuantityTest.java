@@ -14,12 +14,12 @@ import tec.uom.se.util.SI;
 public class DoubleQuantityTest {
     @Test
     public void divideTest() {
-        Quantity<Length> metre = AbstractQuantity.of(10D, SI.METRE);
+        Quantity<Length> metre = QuantityFactory.of(10D, SI.METRE);
         Quantity<Length> result = metre.divide(10D);
         Assert.assertTrue(result.getValue().intValue() == 1);
         Assert.assertEquals(result.getUnit(), SI.METRE);
 
-        AbstractQuantity<Time> day = AbstractQuantity.of(10D, SI.DAY);
+        AbstractQuantity<Time> day = QuantityFactory.of(10D, SI.DAY);
         Quantity<Time> dayResult = day.divide(BigDecimal.valueOf(2.5D));
         Assert.assertTrue(dayResult.getValue().intValue() == 4);
         Assert.assertEquals(dayResult.getUnit(), SI.DAY);
@@ -27,10 +27,10 @@ public class DoubleQuantityTest {
 
     @Test
     public void addTest() {
-        Quantity<Length> m = AbstractQuantity.of(10D, SI.METRE);
-        Quantity<Length> m2 = AbstractQuantity.of(BigDecimal.valueOf(12.5), SI.METRE);
-        Quantity<Length> m3 = AbstractQuantity.of(2.5, SI.METRE);
-        Quantity<Length> m4 = AbstractQuantity.of(5L, SI.METRE);
+        Quantity<Length> m = QuantityFactory.of(10D, SI.METRE);
+        Quantity<Length> m2 = QuantityFactory.of(BigDecimal.valueOf(12.5), SI.METRE);
+        Quantity<Length> m3 = QuantityFactory.of(2.5, SI.METRE);
+        Quantity<Length> m4 = QuantityFactory.of(5L, SI.METRE);
         Quantity<Length> result = m.add(m2).add(m3).add(m4);
         Assert.assertTrue(result.getValue().doubleValue() == 30.0);
         Assert.assertEquals(result.getUnit(), SI.METRE);
@@ -38,8 +38,8 @@ public class DoubleQuantityTest {
 
     @Test
     public void addQuantityTest() {
-        Quantity<Time> day = AbstractQuantity.of(1, SI.DAY);
-        Quantity<Time> hours = AbstractQuantity.of(12D, SI.HOUR);
+        Quantity<Time> day = QuantityFactory.of(1, SI.DAY);
+        Quantity<Time> hours = QuantityFactory.of(12D, SI.HOUR);
         Quantity<Time> result = day.add(hours);
         Assert.assertTrue(result.getValue().doubleValue() == 1.5);
         Assert.assertEquals(result.getUnit(), SI.DAY);
@@ -47,8 +47,8 @@ public class DoubleQuantityTest {
 
     @Test
     public void subtractTest() {
-        Quantity<Length> m = AbstractQuantity.of(10D, SI.METRE);
-        Quantity<Length> m2 = AbstractQuantity.of(12.5, SI.METRE);
+        Quantity<Length> m = QuantityFactory.of(10D, SI.METRE);
+        Quantity<Length> m2 = QuantityFactory.of(12.5, SI.METRE);
         Quantity<Length> result = m.subtract(m2);
         Assert.assertTrue(result.getValue().doubleValue() == -2.5);
         Assert.assertEquals(result.getUnit(), SI.METRE);
@@ -56,8 +56,8 @@ public class DoubleQuantityTest {
 
     @Test
     public void subtractQuantityTest() {
-        Quantity<Time> day = AbstractQuantity.of(1, SI.DAY);
-        Quantity<Time> hours = AbstractQuantity.of(12F, SI.HOUR);
+        Quantity<Time> day = QuantityFactory.of(1, SI.DAY);
+        Quantity<Time> hours = QuantityFactory.of(12F, SI.HOUR);
         Quantity<Time> result = day.subtract(hours);
         Assert.assertTrue(result.getValue().doubleValue() == 0.5);
         Assert.assertEquals(result.getUnit(), SI.DAY);
@@ -65,12 +65,13 @@ public class DoubleQuantityTest {
 
     @Test
     public void multiplyTest() {
-        Quantity<Length> metre = AbstractQuantity.of(10D, SI.METRE);
+        Quantity<Length> metre = QuantityFactory.of(10D, SI.METRE);
         Quantity<Length> result = metre.multiply(10D);
         Assert.assertTrue(result.getValue().intValue() == 100);
         Assert.assertEquals(result.getUnit(), SI.METRE);
         @SuppressWarnings("unchecked")
-        Quantity<Length> result2 = (Quantity<Length>) metre.multiply(AbstractQuantity.of(10D, SI.HOUR));
+        Quantity<Length> result2 = (Quantity<Length>) metre
+                .multiply(QuantityFactory.of(10D, SI.HOUR));
         Assert.assertTrue(result2.getValue().intValue() == 100);
 
 
@@ -78,7 +79,7 @@ public class DoubleQuantityTest {
 
     @Test
     public void toTest() {
-        Quantity<Time> day = AbstractQuantity.of(1D, SI.DAY);
+        Quantity<Time> day = QuantityFactory.of(1D, SI.DAY);
         Quantity<Time> hour = day.to(SI.HOUR);
         Assert.assertEquals(hour.getValue().intValue(), 24);
         Assert.assertEquals(hour.getUnit(), SI.HOUR);
@@ -90,7 +91,7 @@ public class DoubleQuantityTest {
 
     @Test
     public void inverseTest() {
-        Quantity<Length> metre = AbstractQuantity.of(BigDecimal.TEN, SI.METRE).inverse();
+        Quantity<Length> metre = QuantityFactory.of(BigDecimal.TEN, SI.METRE).inverse();
         Assert.assertTrue(metre.getValue().intValue() == 10);
     }
 
