@@ -29,7 +29,7 @@ import static tec.uom.se.util.SI.*;
  * @author Werner Keil
  *
  */
-public class QuantityFactoryTest {
+public class AbstractQuantityFactoryTest {
 
 	@Test
 	public void testLength() {
