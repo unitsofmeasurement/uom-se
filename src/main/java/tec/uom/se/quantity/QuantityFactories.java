@@ -35,8 +35,8 @@ class QuantityFactories {
 	 * An abstraction to producing simple quantities instances
 	 */
 	public interface QuantityBuilder {
-		<Q extends Quantity<Q>> QuantityFactory<Q> build(Class<Q> type,
-				Map<Class, QuantityFactory> instance);
+		<Q extends Quantity<Q>> AbstractQuantityFactory<Q> build(Class<Q> type,
+				Map<Class, AbstractQuantityFactory> instance);
 	}
 
 	/**
@@ -45,9 +45,9 @@ class QuantityFactories {
 	static class QuantityUtilsClass implements QuantityBuilder {
 
 		@Override
-		public <Q extends Quantity<Q>> QuantityFactory<Q> build(Class<Q> type,
-				Map<Class, QuantityFactory> instance) {
-			QuantityFactory<Q> factory;
+		public <Q extends Quantity<Q>> AbstractQuantityFactory<Q> build(Class<Q> type,
+				Map<Class, AbstractQuantityFactory> instance) {
+			AbstractQuantityFactory<Q> factory;
 
 			if (Objects.nonNull(type) && Objects.nonNull(type.getInterfaces())
 					& type.getInterfaces().length > 0) {
@@ -73,9 +73,9 @@ class QuantityFactories {
 	static class QuantityUtilsInterface implements QuantityBuilder {
 
 		@Override
-		public <Q extends Quantity<Q>> QuantityFactory<Q> build(Class<Q> type,
-				Map<Class, QuantityFactory> instance) {
-			QuantityFactory<Q> factory = Optional
+		public <Q extends Quantity<Q>> AbstractQuantityFactory<Q> build(Class<Q> type,
+				Map<Class, AbstractQuantityFactory> instance) {
+			AbstractQuantityFactory<Q> factory = Optional
 					.ofNullable(instance.get(type)).orElse(
 							new DefaultQuantityFactory<>(type));
 			instance.putIfAbsent(type, factory);

@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.BiFactory;
+import javax.measure.function.QuantityFactory;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.quantity.QuantityFactories.QuantityBuilder;
@@ -40,14 +40,14 @@ import tec.uom.se.quantity.QuantityFactories.QuantityBuilder;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.5.5, $Date: 2014-07-22 $
  */
-abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Number, Unit<Q>, Q> {
-	
+abstract class AbstractQuantityFactory<Q extends Quantity<Q>>  implements QuantityFactory<Number, Unit<Q>, Q>{
+
     /**
      * Holds the current instances.
      */
     @SuppressWarnings("rawtypes")
-	private static final Map<Class, QuantityFactory> INSTANCES = new ConcurrentHashMap<>();
-    
+	private static final Map<Class, AbstractQuantityFactory> INSTANCES = new ConcurrentHashMap<>();
+
     /**
      * Returns the default instance for the specified quantity type.
      *
@@ -55,7 +55,7 @@ abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Numbe
      * @param type the quantity type
      * @return the quantity factory for the specified type
      */
-	public static <Q extends Quantity<Q>>  QuantityFactory<Q> getInstance(final Class<Q> type) {
+	public static <Q extends Quantity<Q>>  AbstractQuantityFactory<Q> getInstance(final Class<Q> type) {
     	QuantityBuilder builder = QuantityFactories.of(type);
     	return builder.build(type, INSTANCES);
     }
@@ -68,7 +68,7 @@ abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Numbe
      * @param type the quantity type
      * @param factory the quantity factory
      */
-    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, QuantityFactory<Q> factory) {
+    protected static <Q extends Quantity<Q>>  void setInstance(final Class<Q> type, AbstractQuantityFactory<Q> factory) {
         if (!AbstractQuantity.class.isAssignableFrom(type))
             // This exception is not documented because it should never happen if the
             // user don't try to trick the Java generic types system with unsafe cast.
@@ -92,6 +92,6 @@ abstract class QuantityFactory<Q extends Quantity<Q>> implements BiFactory<Numbe
      * @return the metric units for this factory quantities.
      */
     public abstract Unit<Q> getMetricUnit();
-    
+
 
 }
