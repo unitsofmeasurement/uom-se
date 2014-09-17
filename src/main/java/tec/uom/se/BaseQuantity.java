@@ -32,7 +32,7 @@ import tec.uom.se.function.AbstractConverter;
 /**
  * An amount of quantity, consisting of a Number and a Unit.
  * <type>BaseQuantity</type> objects are immutable.
- * 
+ *
  * @see AbstractQuantity
  * @see Quantity
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -44,7 +44,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Comparable<BaseQuantity<Q>>, Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 7312161895652321241L;
 
@@ -52,7 +52,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see AbstractMeasurement#equals(java.lang.Object)
 	 */
 	@Override
@@ -104,10 +104,11 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see AbstractQuantity#doubleValue(javax.measure.Unit)
 	 */
-	public double doubleValue(Unit<Q> unit) {
+	@Override
+    public double doubleValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterTo(myUnit);
@@ -121,11 +122,12 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.uomo.units.AbstractMeasurement#longValue(javax.measure
 	 * .Unit)
 	 */
-	public long longValue(Unit<Q> unit) {
+	@Override
+    public long longValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterToAny(myUnit);
@@ -150,10 +152,11 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see javax.measure.Quantity#getValue()
 	 */
-	public Number getValue() {
+	@Override
+    public Number getValue() {
 		return value;
 	}
 
@@ -162,7 +165,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 * exact only when stated in this measure unit (e.g.
 	 * <code>this.longValue()</code>); stating the amount in any other unit may
 	 * introduce conversion errors.
-	 * 
+	 *
 	 * @return <code>true</code> if this measure is exact; <code>false</code>
 	 *         otherwise.
 	 */
@@ -173,26 +176,30 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	/**
 	 * Indicates if this measured amount is a big number, i.E. BigDecimal or
 	 * BigInteger. In all other cases this would be false.
-	 * 
+	 *
 	 * @return <code>true</code> if this measure is big; <code>false</code>
 	 *         otherwise.
 	 */
-	public boolean isBig() {
+	@Override
+    public boolean isBig() {
 		return isBig;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<Q> add(Quantity<Q> that) {
-		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
+		final Quantity<Q> thatToUnit = that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
 				+ thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
-	public String toString() {
+	@Override
+    public String toString() {
 		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	public Quantity<?> multiply(Quantity<?> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
 		return new BaseQuantity((getValue().doubleValue() * that.getValue()
@@ -201,7 +208,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	@Override
 	public Quantity<Q> multiply(Number that) {
-		return (BaseQuantity<Q>) of(
+		return QuantityFactory.of(
 				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
 
@@ -217,9 +224,9 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	public Quantity<Q> divide(Number that) {
 		// TODO may use isBig() here, too
 		if (value instanceof BigDecimal && that instanceof BigDecimal) {
-			return of(((BigDecimal) value).divide((BigDecimal) that), getUnit());
+			return QuantityFactory.of(((BigDecimal) value).divide((BigDecimal) that), getUnit());
 		}
-		return of(getValue().doubleValue() / that.doubleValue(), getUnit());
+		return QuantityFactory.of(getValue().doubleValue() / that.doubleValue(), getUnit());
 	}
 
 	@Override
@@ -253,7 +260,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
-		final Quantity<Q> thatToUnit = (Quantity<Q>) that.to(getUnit());
+		final Quantity<Q> thatToUnit = that.to(getUnit());
 		return new BaseQuantity(this.getValue().doubleValue()
 				- thatToUnit.getValue().doubleValue(), getUnit());
 	}

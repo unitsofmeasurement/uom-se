@@ -48,7 +48,7 @@ public class AbstractQuantityTest {
 
     @Test
     public void testOf() {
-    	AbstractQuantity<Pressure> pressure = AbstractQuantity.of(BigDecimal.ONE, PASCAL); 
+    	AbstractQuantity<Pressure> pressure = QuantityFactory.of(BigDecimal.ONE, PASCAL);
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 

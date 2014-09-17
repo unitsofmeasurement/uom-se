@@ -12,7 +12,7 @@ import tec.uom.se.function.AbstractConverter;
 /**
  * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
  * objects are immutable.
- * 
+ *
  * @see AbstractQuantity
  * @see Quantity
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -24,10 +24,10 @@ import tec.uom.se.function.AbstractConverter;
 final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
 
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 8660843078156312278L;
-	
+
 	final double value;
 
     public DoubleQuantity(double value, Unit<T> unit) {
@@ -41,6 +41,7 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
     }
 
 
+    @Override
     public double doubleValue(Unit<T> unit) {
         return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
     }
@@ -61,15 +62,23 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
         return (long) result;
 	}
 
-	@Override
-	public Quantity<T> add(Quantity<T> that) {
-		return of(value + that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
-	}
+    @Override
+    public Quantity<T> add(Quantity<T> that) {
+        if (getUnit().equals(that.getUnit())) {
+            return QuantityFactory.of(value + that.getValue().doubleValue(), getUnit());
+        }
+        Quantity<T> converted = that.to(getUnit());
+        return QuantityFactory.of(value + converted.getValue().doubleValue(), getUnit());
+    }
 
-	@Override
-	public  Quantity<T> subtract( Quantity<T> that) {
-		return of(value - that.getValue().doubleValue(), getUnit()); // TODO use shift of the unit?
-	}
+    @Override
+    public Quantity<T> subtract(Quantity<T> that) {
+        if (getUnit().equals(that.getUnit())) {
+            return QuantityFactory.of(value - that.getValue().doubleValue(), getUnit());
+        }
+        Quantity<T> converted = that.to(getUnit());
+        return QuantityFactory.of(value - converted.getValue().doubleValue(), getUnit());
+    }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -79,7 +88,7 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 
 	@Override
 	public Quantity<T> multiply(Number that) {
-		return of(value * that.doubleValue(), getUnit());
+		return QuantityFactory.of(value * that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -87,16 +96,16 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 	public Quantity<?> divide(Quantity<?> that) {
 		return new DoubleQuantity(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
-	
+
 	@Override
 	public Quantity<T> divide(Number that) {
-		return of(value / that.doubleValue(), getUnit());
+		return QuantityFactory.of(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) of(value, getUnit().inverse());
+		return (AbstractQuantity<T>) QuantityFactory.of(value, getUnit().inverse());
 	}
 
 	@Override

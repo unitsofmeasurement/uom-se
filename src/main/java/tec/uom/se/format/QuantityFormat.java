@@ -15,8 +15,13 @@
  */
 package tec.uom.se.format;
 
-import tec.uom.se.AbstractQuantity;
-import tec.uom.se.util.SI;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -25,13 +30,9 @@ import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.NumberFormat;
-import java.text.ParsePosition;
+import tec.uom.se.AbstractQuantity;
+import tec.uom.se.QuantityFactory;
+import tec.uom.se.util.SI;
 
 
 
@@ -277,16 +278,16 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
 			if (number instanceof BigDecimal) {
-				return AbstractQuantity.of((BigDecimal) number, unit);
+				return QuantityFactory.of((BigDecimal) number, unit);
 			}
 			if (number instanceof Long) {
-				return AbstractQuantity.of(number.longValue(), unit);
+				return QuantityFactory.of(number.longValue(), unit);
 			}
 			else if (number instanceof Double) {
-				return AbstractQuantity.of(number.doubleValue(), unit);
+				return QuantityFactory.of(number.doubleValue(), unit);
 			}
 			else if (number instanceof Integer) {
-				return AbstractQuantity.of(number.intValue(), unit);
+				return QuantityFactory.of(number.intValue(), unit);
 			}
 			else {
 				throw new UnsupportedOperationException("Number of type "
@@ -354,7 +355,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return AbstractQuantity.of(decimal, unit);
+			return QuantityFactory.of(decimal, unit);
 		}
 
 		@Override
