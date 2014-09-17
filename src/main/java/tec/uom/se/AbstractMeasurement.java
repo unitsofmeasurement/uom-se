@@ -301,12 +301,12 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
     }
 
     /**
-     * Casts this measure to a parameterized unit of specified nature or throw a
+     * Casts this measurement to a parameterized unit of specified nature or throw a
      * <code>ClassCastException</code> if the dimension of the specified
-     * quantity and this measure unit's dimension do not match. For
-     * example:<br/><code>
-     *     Measure<Length> length = Measure.valueOf("2 km").asType(Length.class);
-     * </code>
+     * quantity and this measurement unit's dimension do not match. For
+     * example:[code]
+     *     Measurement<Length> length = AbstractMeasurement.of("2 km").asType(Length.class);
+     * [/code]
      *
      * @param type the quantity class identifying the nature of the measure.
      * @return this measure parameterized with the specified type.
@@ -320,7 +320,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
     @SuppressWarnings("unchecked")
     public final <T extends Quantity<T>> AbstractMeasurement<T,V> asType(Class<T> type)
             throws ClassCastException {
-        this.getUnit().asType(type); // Raises ClassCastException is dimension
+        this.getUnit().asType(type); // Raises ClassCastException if dimension
         // mismatches.
         return (AbstractMeasurement<T,V>) this;
     }
