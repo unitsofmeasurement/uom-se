@@ -15,36 +15,41 @@
  */
 package tec.uom.se.format;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
+import static tec.uom.se.format.UCUMFormat.Variant.CASE_SENSITIVE;
+import static tec.uom.se.format.UCUMFormat.Variant.PRINT;
+import static tec.uom.se.util.SI.KILOGRAM;
+import static tec.uom.se.util.SI.METRE;
+import static tec.uom.se.util.SI.MINUTE;
+import static tec.uom.se.util.SI.SECOND;
 
-import tec.uom.se.format.LocalUnitFormat;
-import tec.uom.se.format.UCUMFormat;
-import tec.uom.se.quantity.LengthAmount;
+import java.io.IOException;
 
+import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 
-import java.io.IOException;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static tec.uom.se.format.UCUMFormat.Variant.*;
-import static tec.uom.se.util.SI.*;
+import tec.uom.se.quantity.QuantityFactoryProvider;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  *
  */
 public class UnitFormatTest {
-	private Length sut;
+	private Quantity<Length> sut;
 
 	@Before
 	public void init() {
-		sut = new LengthAmount(10, METRE);
+		sut = QuantityFactoryProvider.of(Length.class).create(10, METRE);
 	}
 
 	@Test
@@ -155,7 +160,7 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	@Ignore
 	public void testParseUCUMCI() {
@@ -167,7 +172,7 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	@Test(expected = UnsupportedOperationException.class)
 	@Ignore
 	public void testParseUCUMPrint() {

@@ -15,43 +15,45 @@
  */
 package tec.uom.se.quantity;
 
-import org.junit.Test;
-
-import tec.uom.se.quantity.AbstractQuantityFactory;
+import static org.junit.Assert.assertEquals;
+import static tec.uom.se.util.SI.KILOGRAM;
+import static tec.uom.se.util.SI.METRE;
+import static tec.uom.se.util.SI.MINUTE;
 
 import javax.measure.Quantity;
-import javax.measure.quantity.*;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.Mass;
+import javax.measure.quantity.Time;
 
-import static org.junit.Assert.*;
-import static tec.uom.se.util.SI.*;
+import org.junit.Test;
 
 /**
  * @author Werner Keil
  *
  */
-public class AbstractQuantityFactoryTest {
+public class QuantityFactoryProviderTest {
 
 	@Test
 	public void testLength() {
-		Quantity<Length> l =  AbstractQuantityFactory.getInstance(Length.class).create(23.5, METRE); // 23.0 km
+		Quantity<Length> l =  QuantityFactoryProvider.of(Length.class).create(23.5, METRE); // 23.0 km
 		assertEquals(23.5d, l.getValue());
 		assertEquals(METRE, l.getUnit());
 		assertEquals("m", l.getUnit().getSymbol());
 	}
 
-	
+
 	@Test
 	public void testMass() {
-		Quantity<Mass> m = AbstractQuantityFactory.getInstance(Mass.class).create(10, KILOGRAM); // 10 kg
+		Quantity<Mass> m = QuantityFactoryProvider.of(Mass.class).create(10, KILOGRAM); // 10 kg
 		assertEquals(10, m.getValue());
 		assertEquals(KILOGRAM, m.getUnit());
 		assertEquals("kg", m.getUnit().getSymbol());
 		assertEquals("10 kg", m.toString());
 	}
-	
+
 	@Test
 	public void testTime() {
-		Quantity<Time> t = AbstractQuantityFactory.getInstance(Time.class).create(40, MINUTE); // 40 min
+		Quantity<Time> t = QuantityFactoryProvider.of(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(40, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
 		assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be "min", tweak for TransformedUnit
