@@ -95,13 +95,17 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	 */
 	// private double maximum;
 
-	public BaseQuantity(Number number, Unit<Q> unit) {
+	protected BaseQuantity(Number number, Unit<Q> unit) {
 		super(unit);
 		value = number;
 		isExact = false;
 		isBig = number instanceof BigDecimal || number instanceof BigInteger;
 	}
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static Quantity<?> of(Number number, Unit<?> unit) {
+        return new BaseQuantity(number, unit);
+    }
 	/*
 	 * (non-Javadoc)
 	 *
@@ -251,7 +255,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return BigDecimal.valueOf(value.doubleValue());
 	}
 
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<Q> subtract(Quantity<Q> that) {
