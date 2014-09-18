@@ -56,7 +56,7 @@ abstract class AbstractQuantityFactory<Q extends Quantity<Q>>  implements Quanti
      * @return the quantity factory for the specified type
      */
 	public static <Q extends Quantity<Q>>  AbstractQuantityFactory<Q> getInstance(final Class<Q> type) {
-    	QuantityBuilder builder = QuantityFactories.of(type);
+    	QuantityBuilder builder = QuantityFactories.getBuilder(type);
     	return builder.build(type, INSTANCES);
     }
 

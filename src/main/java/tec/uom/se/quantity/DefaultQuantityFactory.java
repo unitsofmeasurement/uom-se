@@ -150,7 +150,7 @@ class DefaultQuantityFactory<Q extends Quantity<Q>>  extends AbstractQuantityFac
     @Override
     @SuppressWarnings("unchecked")
     public Q create(final Number value, final Unit<Q> unit) {
-        return (Q) new BaseQuantity<>(value, unit);
+        return (Q) BaseQuantity.of(value, unit);
     }
 
     @Override

@@ -22,7 +22,7 @@ class QuantityFactories {
 
 	private static final Level LOG_LEVEL = Level.FINE;
 
-	public static QuantityBuilder of(final Class<?> type) {
+	public static QuantityBuilder getBuilder(final Class<?> type) {
 		logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
 		if (!type.isInterface()) {
 			return new QuantityUtilsClass();
