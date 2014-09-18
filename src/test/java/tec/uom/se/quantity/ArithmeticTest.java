@@ -15,43 +15,46 @@
  */
 package tec.uom.se.quantity;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static tec.uom.se.util.SI.METRE;
 
 import javax.measure.Quantity;
+import javax.measure.function.QuantityFactory;
 import javax.measure.quantity.Length;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.uom.se.quantity.LengthAmount;
-
 public class ArithmeticTest {
 
-	private Length sut;
-	
+	private Quantity<Length> sut;
+
+	private QuantityFactory<Length> lenghtFactory;
+
 	@Before
 	public void init() {
-		sut = new LengthAmount(10, METRE);
+	    lenghtFactory =  QuantityFactoryProvider.of(Length.class);
+		sut = lenghtFactory.create(10, METRE);
 	}
-	
+
 	@Test
 	public void testAdd() {
-		Quantity<Length> len = new LengthAmount(5, METRE);
+		Quantity<Length> len = lenghtFactory.create(5, METRE);
 		Quantity<Length> result = sut.add(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
 		assertEquals(Double.valueOf(15), result.getValue());
 	}
-	
+
 	@Test
 	public void testValue() {
-		assertEquals(Integer.valueOf(10), sut.getValue());
+		assertEquals(Double.valueOf(10), sut.getValue());
 	}
-	
+
 	@Test
 	public void testToString() {
-		assertEquals("10 m", sut.toString());
+		assertEquals("10.0 m", sut.toString());
 	}
 
 }
