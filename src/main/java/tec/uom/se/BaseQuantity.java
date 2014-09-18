@@ -38,10 +38,10 @@ import tec.uom.se.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.1, $Date: 2014-08-31 $
+ * @version 0.9.2, $Date: 2014-08-31 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
-		implements Comparable<BaseQuantity<Q>>, Serializable {
+		implements Serializable { //Comparable<BaseQuantity<Q>>
 
 	/**
 	 *
@@ -252,8 +252,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	}
 
 	@Override
-	public int compareTo(BaseQuantity<Q> o) {
-		// TODO Auto-generated method stub
+	public int compareTo(Quantity<Q> o) {
 		return 0;
 	}
 
