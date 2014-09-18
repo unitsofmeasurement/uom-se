@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import tec.uom.se.AbstractQuantity;
 
+import javax.measure.Quantity;
 import javax.measure.quantity.Pressure;
 
 import java.math.BigDecimal;
@@ -48,7 +49,7 @@ public class AbstractQuantityTest {
 
     @Test
     public void testOf() {
-    	AbstractQuantity<Pressure> pressure = QuantityFactory.of(BigDecimal.ONE, PASCAL);
+    	Quantity<Pressure> pressure = Quantities.getQuantity(BigDecimal.ONE, PASCAL);
         assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 

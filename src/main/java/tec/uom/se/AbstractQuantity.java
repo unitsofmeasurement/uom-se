@@ -91,12 +91,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	/**
 	 * Holds a dimensionless measure of none (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> NONE = QuantityFactory.of(0, SI.ONE);
+	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(0, SI.ONE);
 
 	/**
 	 * Holds a dimensionless measure of one (exact).
 	 */
-	public static final AbstractQuantity<Dimensionless> ONE = QuantityFactory.of(1, SI.ONE);
+	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, SI.ONE);
 
 	/**
      * constructor.
@@ -156,7 +156,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
         }
         UnitConverter t = getUnit().getConverterTo(unit);
         Number convertedValue = t.convert(getValue());
-        return QuantityFactory.of(convertedValue, unit);
+        return Quantities.getQuantity(convertedValue, unit);
     }
 
     /**
@@ -175,11 +175,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      *         <code>mathContext.precision == 0</code> and the quotient has
      *         a non-terminating decimal expansion.
      */
-    public AbstractQuantity<Q> to(Unit<Q> unit, MathContext ctx) {
+    public Quantity<Q> to(Unit<Q> unit, MathContext ctx) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return QuantityFactory.of(decimalValue(unit, ctx), unit);
+        return Quantities.getQuantity(decimalValue(unit, ctx), unit);
     }
 
     /**

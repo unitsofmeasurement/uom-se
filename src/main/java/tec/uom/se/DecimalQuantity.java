@@ -41,19 +41,19 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 	@Override
 	public Quantity<T> add(Quantity<T> that) {
 	    if (getUnit().equals(that.getUnit())) {
-	        return QuantityFactory.of(value.add(toBigDecimal(that.getValue())), getUnit());
+	        return Quantities.getQuantity(value.add(toBigDecimal(that.getValue())), getUnit());
 	    }
 	    Quantity<T> converted = that.to(getUnit());
-	    return QuantityFactory.of(value.add(toBigDecimal(converted.getValue())), getUnit());
+	    return Quantities.getQuantity(value.add(toBigDecimal(converted.getValue())), getUnit());
 	}
 
 	@Override
 	public Quantity<T> subtract(Quantity<T> that) {
 	    if (getUnit().equals(that.getUnit())) {
-	        return QuantityFactory.of(value.subtract(toBigDecimal(that.getValue())), getUnit());
+	        return Quantities.getQuantity(value.subtract(toBigDecimal(that.getValue())), getUnit());
 	    }
 	    Quantity<T> converted = that.to(getUnit());
-        return QuantityFactory.of(value.subtract(toBigDecimal(converted.getValue())), getUnit());
+        return Quantities.getQuantity(value.subtract(toBigDecimal(converted.getValue())), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -65,19 +65,19 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 
 	@Override
 	public Quantity<T> multiply(Number that) {
-		return QuantityFactory.of(value.multiply(toBigDecimal(that)), getUnit());
+		return Quantities.getQuantity(value.multiply(toBigDecimal(that)), getUnit());
 	}
 
 	@Override
 	public Quantity<T> divide(Number that) {
-		return QuantityFactory.of(value.divide(toBigDecimal(that)), getUnit());
+		return Quantities.getQuantity(value.divide(toBigDecimal(that)), getUnit());
 	}
 
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Quantity<T> inverse() {
-		return (Quantity<T>) QuantityFactory.of(value, getUnit().inverse());
+		return (Quantity<T>) Quantities.getQuantity(value, getUnit().inverse());
 	}
 
 	@Override

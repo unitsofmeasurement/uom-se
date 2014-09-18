@@ -212,7 +212,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 
 	@Override
 	public Quantity<Q> multiply(Number that) {
-		return QuantityFactory.of(
+		return Quantities.getQuantity(
 				(getValue().doubleValue() * that.doubleValue()), getUnit());
 	}
 
@@ -228,9 +228,9 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	public Quantity<Q> divide(Number that) {
 		// TODO may use isBig() here, too
 		if (value instanceof BigDecimal && that instanceof BigDecimal) {
-			return QuantityFactory.of(((BigDecimal) value).divide((BigDecimal) that), getUnit());
+			return Quantities.getQuantity(((BigDecimal) value).divide((BigDecimal) that), getUnit());
 		}
-		return QuantityFactory.of(getValue().doubleValue() / that.doubleValue(), getUnit());
+		return Quantities.getQuantity(getValue().doubleValue() / that.doubleValue(), getUnit());
 	}
 
 	@Override

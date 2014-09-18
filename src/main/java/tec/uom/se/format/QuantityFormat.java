@@ -31,7 +31,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractQuantity;
-import tec.uom.se.QuantityFactory;
+import tec.uom.se.Quantities;
 import tec.uom.se.util.SI;
 
 
@@ -138,7 +138,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+	public abstract Quantity<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException, ParserException;
 
 	/**
@@ -155,7 +155,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             sequence (e.g. illegal syntax).
 	 */
 	@Override
-    public abstract AbstractQuantity<?> parse(CharSequence csq)
+    public abstract Quantity<?> parse(CharSequence csq)
 			throws IllegalArgumentException, ParserException;
 
 	/**
@@ -215,7 +215,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	}
 
 	@Override
-	public final AbstractQuantity<?> parseObject(String source, ParsePosition pos) {
+	public final Quantity<?> parseObject(String source, ParsePosition pos) {
 		try {
 			return parse(source, pos);
 		} catch (IllegalArgumentException | ParserException e) {
@@ -270,7 +270,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+		public Quantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws IllegalArgumentException, ParserException {
 			String str = csq.toString();
 			Number number = numberFormat.parse(str, cursor);
@@ -278,16 +278,16 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 				throw new IllegalArgumentException("Number cannot be parsed");
 			Unit unit = unitFormat.parse(csq);
 			if (number instanceof BigDecimal) {
-				return QuantityFactory.of((BigDecimal) number, unit);
+				return Quantities.getQuantity((BigDecimal) number, unit);
 			}
 			if (number instanceof Long) {
-				return QuantityFactory.of(number.longValue(), unit);
+				return Quantities.getQuantity(number.longValue(), unit);
 			}
 			else if (number instanceof Double) {
-				return QuantityFactory.of(number.doubleValue(), unit);
+				return Quantities.getQuantity(number.doubleValue(), unit);
 			}
 			else if (number instanceof Integer) {
-				return QuantityFactory.of(number.intValue(), unit);
+				return Quantities.getQuantity(number.intValue(), unit);
 			}
 			else {
 				throw new UnsupportedOperationException("Number of type "
@@ -296,7 +296,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		}
 
 		@Override
-        public AbstractQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
+        public Quantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
 			return parse(csq, new ParsePosition(0));
 		}
 
@@ -339,7 +339,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public AbstractQuantity<?> parse(CharSequence csq, ParsePosition cursor)
+		public Quantity<?> parse(CharSequence csq, ParsePosition cursor)
 				throws ParserException {
 			int startDecimal = cursor.getIndex();
 			while ((startDecimal < csq.length())
@@ -355,11 +355,11 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 					endDecimal).toString());
 			cursor.setIndex(endDecimal + 1);
 			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return QuantityFactory.of(decimal, unit);
+			return Quantities.getQuantity(decimal, unit);
 		}
 
 		@Override
-        public AbstractQuantity<?> parse(CharSequence csq)
+        public Quantity<?> parse(CharSequence csq)
 				throws ParserException {
 			return parse(csq, new ParsePosition(0));
 		}

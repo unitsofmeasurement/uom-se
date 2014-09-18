@@ -1,3 +1,18 @@
+/**
+ *  Unit-API - Units of Measurement API for Java
+ *  Copyright 2013-2014, Jean-Marie Dautelle, Werner Keil, V2COM and individual
+ *  contributors by the @author tag.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package tec.uom.se;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
@@ -14,13 +29,15 @@ import javax.measure.format.ParserException;
 import tec.uom.se.format.QuantityFormat;
 
 /**
- * Factory of Quantity
+ * Singleton class for accessing {@link Quantity} instances.
  * @author werner
  * @author otaviojava
  */
-public final class QuantityFactory {
-
-    private QuantityFactory() {}
+public final class Quantities {
+	/**
+     * Private singleton constructor.
+     */
+    private Quantities() {}
     /**
      * Returns the
      * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
@@ -38,7 +55,7 @@ public final class QuantityFactory {
      * @param csq the decimal value and its unit (if any) separated by space(s).
      * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
      */
-    public static AbstractQuantity<?> of(CharSequence csq) {
+    public static Quantity<?> getQuantity(CharSequence csq) {
         try {
             return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
         } catch (IllegalArgumentException | ParserException e) {
@@ -54,7 +71,7 @@ public final class QuantityFactory {
      * @return the corresponding <code>double</code> measure.
      * @throws NullPointerException when value or unit were null
      */
-    public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(Number value,
+    public static <Q extends Quantity<Q>> Quantity<Q> getQuantity(Number value,
             Unit<Q> unit) {
 
         Objects.requireNonNull(value);

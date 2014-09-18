@@ -10,8 +10,8 @@ import javax.measure.function.QuantityFactory;
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
  *
  * For example:<br/><code>
- *      Mass m = QuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
- *      Time m = QuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
+ *      Mass m = Quantities.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Time m = Quantities.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * @param <Q> The type of the quantity.
  *
@@ -52,6 +52,6 @@ class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityFactory<
 
     @SuppressWarnings("unchecked")
     public <T extends Number, U extends Unit<Q>> Q create(T number, U unit) {
-        return (Q) tec.uom.se.QuantityFactory.of(number, unit);
+        return (Q) tec.uom.se.Quantities.getQuantity(number, unit);
     }
 }

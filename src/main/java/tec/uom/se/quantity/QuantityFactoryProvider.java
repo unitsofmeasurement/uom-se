@@ -7,7 +7,7 @@ import javax.measure.Quantity;
 import javax.measure.function.QuantityFactory;
 
 /**
- * Provider of QuantityFactory
+ * Provider of Quantities
  * @author otaviojava
  * @author werner
  */
@@ -20,9 +20,9 @@ public final class QuantityFactoryProvider {
     private static final Map<Class, QuantityFactory> INSTANCE = new HashMap<>();
 
     /**
-     * return a factory QuantityFactory from this unit
+     * return a factory Quantities from this unit
      * @param unit the unit
-     * @return the QuantityFactory
+     * @return the Quantities
      * @throws NullPointerException
      */
     @SuppressWarnings("unchecked")

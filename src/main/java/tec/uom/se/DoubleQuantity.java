@@ -65,19 +65,19 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
     @Override
     public Quantity<T> add(Quantity<T> that) {
         if (getUnit().equals(that.getUnit())) {
-            return QuantityFactory.of(value + that.getValue().doubleValue(), getUnit());
+            return Quantities.getQuantity(value + that.getValue().doubleValue(), getUnit());
         }
         Quantity<T> converted = that.to(getUnit());
-        return QuantityFactory.of(value + converted.getValue().doubleValue(), getUnit());
+        return Quantities.getQuantity(value + converted.getValue().doubleValue(), getUnit());
     }
 
     @Override
     public Quantity<T> subtract(Quantity<T> that) {
         if (getUnit().equals(that.getUnit())) {
-            return QuantityFactory.of(value - that.getValue().doubleValue(), getUnit());
+            return Quantities.getQuantity(value - that.getValue().doubleValue(), getUnit());
         }
         Quantity<T> converted = that.to(getUnit());
-        return QuantityFactory.of(value - converted.getValue().doubleValue(), getUnit());
+        return Quantities.getQuantity(value - converted.getValue().doubleValue(), getUnit());
     }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -88,7 +88,7 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 
 	@Override
 	public Quantity<T> multiply(Number that) {
-		return QuantityFactory.of(value * that.doubleValue(), getUnit());
+		return Quantities.getQuantity(value * that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -99,13 +99,13 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 
 	@Override
 	public Quantity<T> divide(Number that) {
-		return QuantityFactory.of(value / that.doubleValue(), getUnit());
+		return Quantities.getQuantity(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) QuantityFactory.of(value, getUnit().inverse());
+		return (AbstractQuantity<T>) Quantities.getQuantity(value, getUnit().inverse());
 	}
 
 	@Override
