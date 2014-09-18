@@ -84,7 +84,7 @@ import tec.uom.se.util.SI;
  *
  * @param <Q> The type of the quantity
  */
-class DefaultQuantityFactory<Q extends Quantity<Q>>  extends QuantityFactory<Q> {
+class DefaultQuantityFactory<Q extends Quantity<Q>>  extends AbstractQuantityFactory<Q> {
 
     /**
      * The type of the quantities created by this factory.

@@ -15,20 +15,14 @@
  */
 package tec.uom.se;
 
-import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.text.ParsePosition;
 
 import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.format.ParserException;
-import javax.measure.quantity.Dimensionless;
 
 import tec.uom.se.format.MeasurementFormat;
-import tec.uom.se.util.SI;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
@@ -86,7 +80,7 @@ import tec.uom.se.util.SI;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5, $Date: 2014-09-17 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q, V> {
+public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q> {
 // TODO do we want to restrict Measurement to Number here?
 
 	protected final Unit<Q> unit;
@@ -176,13 +170,6 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      *         <code>mathContext.precision == 0</code> and the quotient has
      *         a non-terminating decimal expansion.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-//	public AbstractMeasurement<Q,V> to(Unit<Q> unit, MathContext ctx) {
-//        if (unit.equals(this.getUnit())) {
-//            return this;
-//        }
-//        return new DoubleMeasurement(doubleValue(unit), unit);
-//    }
 
     /**
      * Compares this measure to the specified Measurement quantity. The default
