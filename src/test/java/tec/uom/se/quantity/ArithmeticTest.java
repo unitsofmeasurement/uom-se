@@ -28,7 +28,7 @@ import org.junit.Test;
 
 public class ArithmeticTest {
 
-	private Length sut;
+	private Quantity<Length> sut;
 
 	private QuantityFactory<Length> lenghtFactory;
 
@@ -49,12 +49,12 @@ public class ArithmeticTest {
 
 	@Test
 	public void testValue() {
-		assertEquals(Integer.valueOf(10), sut.getValue());
+		assertEquals(Double.valueOf(10), sut.getValue());
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("10 m", sut.toString());
+		assertEquals("10.0 m", sut.toString());
 	}
 
 }
