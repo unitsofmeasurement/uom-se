@@ -34,7 +34,7 @@ public class QuantityFactoryProviderTest {
 
 	@Test
 	public void testLength() {
-		Quantity<Length> l =  QuantityFactoryProvider.of(Length.class).create(23.5, METRE); // 23.0 km
+		Quantity<Length> l =  QuantityFactoryProvider.getQuantityFactory(Length.class).create(23.5, METRE); // 23.0 km
 		assertEquals(23.5d, l.getValue());
 		assertEquals(METRE, l.getUnit());
 		assertEquals("m", l.getUnit().getSymbol());
@@ -43,7 +43,7 @@ public class QuantityFactoryProviderTest {
 
 	@Test
 	public void testMass() {
-		Quantity<Mass> m = QuantityFactoryProvider.of(Mass.class).create(10, KILOGRAM); // 10 kg
+		Quantity<Mass> m = QuantityFactoryProvider.getQuantityFactory(Mass.class).create(10, KILOGRAM); // 10 kg
 		assertEquals(10.0, m.getValue());
 		assertEquals(KILOGRAM, m.getUnit());
 		assertEquals("kg", m.getUnit().getSymbol());
@@ -52,7 +52,7 @@ public class QuantityFactoryProviderTest {
 
 	@Test
 	public void testTime() {
-		Quantity<Time> t = QuantityFactoryProvider.of(Time.class).create(40, MINUTE); // 40 min
+		Quantity<Time> t = QuantityFactoryProvider.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(40.0, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
 		assertEquals("min", t.getUnit().getSymbol());

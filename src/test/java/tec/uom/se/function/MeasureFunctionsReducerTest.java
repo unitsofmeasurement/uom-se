@@ -26,7 +26,7 @@ public class MeasureFunctionsReducerTest {
 
     @Before
     public void init() {
-        timeFactory = QuantityFactoryProvider.of(Time.class);
+        timeFactory = QuantityFactoryProvider.getQuantityFactory(Time.class);
         minutes = timeFactory.create(15, SI.MINUTE);
         hours = timeFactory.create(18, SI.HOUR);
         day = timeFactory.create(1, SI.DAY);

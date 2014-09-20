@@ -34,7 +34,7 @@ public class ArithmeticTest {
 
 	@Before
 	public void init() {
-	    lenghtFactory =  QuantityFactoryProvider.of(Length.class);
+	    lenghtFactory =  QuantityFactoryProvider.getQuantityFactory(Length.class);
 		sut = lenghtFactory.create(10, METRE);
 	}
 

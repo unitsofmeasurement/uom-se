@@ -26,7 +26,7 @@ public final class QuantityFactoryProvider {
      * @throws NullPointerException
      */
     @SuppressWarnings("unchecked")
-    public static final <Q extends Quantity<Q>>  QuantityFactory<Q>  of(Class<Q> unit){
+    public static final <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> unit){
         Objects.requireNonNull(unit);
         if(!INSTANCE.containsKey(unit)) {
             synchronized (INSTANCE) {

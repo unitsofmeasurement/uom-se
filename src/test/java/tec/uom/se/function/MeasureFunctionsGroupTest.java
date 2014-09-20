@@ -28,7 +28,7 @@ public class MeasureFunctionsGroupTest {
 
     @Before
     public void init() {
-        timeFactory = QuantityFactoryProvider.of(Time.class);
+        timeFactory = QuantityFactoryProvider.getQuantityFactory(Time.class);
         minutes = timeFactory.create(BigDecimal.valueOf(15), SI.MINUTE);
         hours = timeFactory.create(BigDecimal.valueOf(18), SI.HOUR);
         day = timeFactory.create(BigDecimal.ONE, SI.DAY);

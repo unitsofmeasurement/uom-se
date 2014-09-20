@@ -49,7 +49,7 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		sut = QuantityFactoryProvider.of(Length.class).create(10, METRE);
+		sut = QuantityFactoryProvider.getQuantityFactory(Length.class).create(10, METRE);
 	}
 
 	@Test
