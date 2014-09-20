@@ -1,6 +1,8 @@
 package tec.uom.se.function;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +35,9 @@ public class MeasureFunctionsSortTest {
     }
 
     @Test
-    public void sortByNumberTest() {
+    public void sortNumberTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortByNumber())
+                .sorted(MeasureFunctions.sortNumber())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(day, times.get(0));
@@ -46,9 +48,9 @@ public class MeasureFunctionsSortTest {
     }
 
     @Test
-    public void sortByNumberDescTest() {
+    public void sortNumberDescTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortByNumberDesc())
+                .sorted(MeasureFunctions.sortNumberDesc())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(seconds, times.get(0));
@@ -58,9 +60,9 @@ public class MeasureFunctionsSortTest {
     }
 
     @Test
-    public void sortBySymbolTest() {
+    public void sortSymbolTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortBySymbol())
+                .sorted(MeasureFunctions.sortSymbol())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(day, times.get(0));
@@ -71,9 +73,9 @@ public class MeasureFunctionsSortTest {
     }
 
     @Test
-    public void sortBySymbolDesctTest() {
+    public void sortSymbolDesctTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortBySymbolDesc())
+                .sorted(MeasureFunctions.sortSymbolDesc())
                 .collect(Collectors.toList());
         Assert.assertEquals(seconds, times.get(0));
         Assert.assertEquals(minutes, times.get(1));
@@ -104,6 +106,24 @@ public class MeasureFunctionsSortTest {
         Assert.assertEquals(seconds, times.get(3));
     }
 
+    @Test
+    public void sortNaturalAndSymbolTest() {
+        List<Quantity<Time>> times = new ArrayList<>(getTimes());
+        Quantity<Time> dayinHour = timeFactory.create(24, SI.HOUR);
+        times.add(dayinHour);
+
+        Comparator<Quantity<Time>> sortNatural = MeasureFunctions.sortNatural();
+        Comparator<Quantity<Time>> sortSymbol = MeasureFunctions.sortSymbol();
+
+        List<Quantity<Time>> result = times.stream()
+                .sorted(sortNatural.thenComparing(sortSymbol))
+                .collect(Collectors.toList());
+        Assert.assertEquals(seconds, result.get(0));
+        Assert.assertEquals(minutes, result.get(1));
+        Assert.assertEquals(hours, result.get(2));
+        Assert.assertEquals(day, result.get(3));
+        Assert.assertEquals(dayinHour, result.get(4));
+    }
     private List<Quantity<Time>> getTimes() {
         return Arrays.asList(day, hours, minutes, seconds);
     }

@@ -26,7 +26,7 @@ public final class MeasureFunctions {
      * will return: day, hours, minutes, seconds
      * @throws NullPointerException
      */
-    public static  Comparator<? super Quantity<? extends Quantity>> sortByNumber() {
+    public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
         return (q1, q2) -> Double.compare(q1.getValue().doubleValue(), q2
                 .getValue().doubleValue());
     }
@@ -41,8 +41,9 @@ public final class MeasureFunctions {
      * will return: seconds, hours, minutes, day
      * @throws NullPointerException
      */
-    public static Comparator<? super Quantity<? extends Quantity>> sortByNumberDesc() {
-        return sortByNumber().reversed();
+    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumberDesc() {
+        Comparator<Quantity<Q>> sortNumber = sortNumber();
+        return sortNumber.reversed();
     }
 
     /**
@@ -56,7 +57,7 @@ public final class MeasureFunctions {
      * will return: day, hours, minutes, seconds
      * @throws NullPointerException
      */
-    public static  Comparator<? super Quantity<? extends Quantity>> sortBySymbol() {
+    public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
         return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
     }
     /**
@@ -70,8 +71,9 @@ public final class MeasureFunctions {
      * will return: seconds, minutes, hour,  day
      * @throws NullPointerException
      */
-    public static <Q extends Quantity<Q>> Comparator<? super Quantity<? extends Quantity>> sortBySymbolDesc() {
-        return sortBySymbol().reversed();
+    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbolDesc() {
+        Comparator<Quantity<Q>> sortSymbol = sortSymbol();
+        return sortSymbol.reversed();
     }
 
     /**
@@ -86,7 +88,7 @@ public final class MeasureFunctions {
      * @throws NullPointerException
      */
     @SuppressWarnings("unchecked")
-    public static Comparator<Quantity<? extends Quantity>> sortNatural() {
+    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNatural() {
         return new NaturalOrder();
     }
     /**
@@ -100,8 +102,9 @@ public final class MeasureFunctions {
      * will return: day, hours, minutes, seconds
      * @throws NullPointerException
      */
-    public static <Q extends Quantity<Q>> Comparator<? super Quantity<? extends Quantity>> sortNaturalDesc() {
-        return sortNatural().reversed();
+    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNaturalDesc() {
+        Comparator<Quantity<Q>> sortNatural = sortNatural();
+        return sortNatural.reversed();
     }
 
     /**
