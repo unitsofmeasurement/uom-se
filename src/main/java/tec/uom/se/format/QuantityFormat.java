@@ -30,7 +30,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractQuantity;
-import tec.uom.se.Quantities;
+import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
 

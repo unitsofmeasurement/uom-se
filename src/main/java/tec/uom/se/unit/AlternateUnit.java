@@ -13,12 +13,14 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.uom.se;
+package tec.uom.se.unit;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
+
+import tec.uom.se.AbstractUnit;
 
 import java.util.Map;
 import java.util.Objects;

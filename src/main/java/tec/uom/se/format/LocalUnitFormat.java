@@ -16,13 +16,13 @@
 package tec.uom.se.format;
 
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.AnnotatedUnit;
 import tec.uom.se.format.internal.ParseException;
 import tec.uom.se.format.internal.TokenMgrError;
 import tec.uom.se.format.internal.UnitParser;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
+import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.util.SI;
 import tec.uom.se.util.SIPrefix;
 

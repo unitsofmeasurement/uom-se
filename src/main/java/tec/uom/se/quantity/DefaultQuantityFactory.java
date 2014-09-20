@@ -52,6 +52,6 @@ class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityFactory<
 
     @SuppressWarnings("unchecked")
     public <T extends Number, U extends Unit<Q>> Q create(T number, U unit) {
-        return (Q) tec.uom.se.Quantities.getQuantity(number, unit);
+        return (Q) tec.uom.se.quantity.Quantities.getQuantity(number, unit);
     }
 }

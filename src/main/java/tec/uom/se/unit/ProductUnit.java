@@ -13,8 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.uom.se;
+package tec.uom.se.unit;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.AbstractConverter;
 import tec.uom.se.model.QuantityDimension;
 import tec.uom.se.util.SI;

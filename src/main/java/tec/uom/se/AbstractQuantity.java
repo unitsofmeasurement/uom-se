@@ -26,6 +26,7 @@ import javax.measure.function.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.uom.se.format.MeasurementFormat;
+import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
 /**

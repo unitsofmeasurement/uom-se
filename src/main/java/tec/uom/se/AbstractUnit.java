@@ -23,6 +23,10 @@ import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
 import tec.uom.se.model.DimensionalModel;
 import tec.uom.se.model.QuantityDimension;
+import tec.uom.se.unit.AlternateUnit;
+import tec.uom.se.unit.AnnotatedUnit;
+import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.util.SI;
 
 import javax.measure.*;
@@ -34,8 +38,6 @@ import java.math.BigInteger;
 import java.util.Map;
 
 import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
-import static tec.uom.se.format.UCUMFormat.Variant.CASE_SENSITIVE;
-
 
 /**
  * <p> The class represents units founded on the seven

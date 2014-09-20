@@ -1,4 +1,4 @@
-package tec.uom.se;
+package tec.uom.se.quantity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -7,6 +7,7 @@ import java.math.MathContext;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+import tec.uom.se.AbstractQuantity;
 import tec.uom.se.function.AbstractConverter;
 
 /**

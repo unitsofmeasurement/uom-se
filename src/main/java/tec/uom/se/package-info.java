@@ -70,8 +70,8 @@
  *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(PASCAL); // Ok.
  *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(NEWTON); // Compile error.
  *
- *     Quantity<Time> duration = AbstractQuantity.of(2, MINUTE); // Ok.
- *     Quantity<Time> duration = AbstractQuantity.of(2, CELSIUS); // Compile error.
+ *     Quantity<Time> duration = BaseQuantity.of(2, MINUTE); // Ok.
+ *     Quantity<Time> duration = BaseQuantity.of(2, CELSIUS); // Compile error.
  *
  *     long milliseconds = duration.longValue(MILLI(SECOND)); // Ok.
  *     long milliseconds = duration.longValue(POUND); // Compile error.

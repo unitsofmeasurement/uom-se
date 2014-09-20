@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.uom.se;
+package tec.uom.se.quantity;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 

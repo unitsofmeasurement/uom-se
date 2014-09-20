@@ -15,7 +15,7 @@
  */
 package tec.uom.se.model;
 
-import tec.uom.se.BaseUnit;
+import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.util.SI;
 
 import javax.measure.Dimension;

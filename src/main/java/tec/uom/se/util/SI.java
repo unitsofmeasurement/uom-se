@@ -18,6 +18,10 @@ package tec.uom.se.util;
 import tec.uom.se.*;
 import tec.uom.se.function.*;
 import tec.uom.se.model.QuantityDimension;
+import tec.uom.se.unit.AlternateUnit;
+import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

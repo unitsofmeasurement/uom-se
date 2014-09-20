@@ -28,6 +28,7 @@ import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 
 import tec.uom.se.function.AbstractConverter;
+import tec.uom.se.quantity.Quantities;
 
 /**
  * An amount of quantity, consisting of a Number and a Unit.

@@ -17,6 +17,8 @@ package tec.uom.se.util;
 
 import tec.uom.se.*;
 import tec.uom.se.function.PiMultiplierConverter;
+import tec.uom.se.unit.AlternateUnit;
+import tec.uom.se.unit.ProductUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

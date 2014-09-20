@@ -9,7 +9,6 @@ import javax.measure.quantity.Length;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tec.uom.se.Quantities;
 import tec.uom.se.util.SI;
 import tec.uom.se.util.US;
 

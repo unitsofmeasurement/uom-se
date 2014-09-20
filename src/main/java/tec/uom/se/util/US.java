@@ -17,8 +17,8 @@ package tec.uom.se.util;
 
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.TransformedUnit;
 import tec.uom.se.function.RationalConverter;
+import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.Quantity;
 import javax.measure.SystemOfUnits;

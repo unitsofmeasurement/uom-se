@@ -6,7 +6,7 @@ import java.util.function.BinaryOperator;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import tec.uom.se.Quantities;
+import tec.uom.se.quantity.Quantities;
 
 public class QuantitySummaryStatistics<Q extends Quantity<Q>> {
 

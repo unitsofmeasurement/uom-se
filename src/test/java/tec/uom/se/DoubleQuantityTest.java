@@ -9,6 +9,7 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
 public class DoubleQuantityTest {
