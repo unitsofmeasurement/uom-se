@@ -26,6 +26,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 
+import tec.uom.se.format.MeasurementFormat;
 import tec.uom.se.format.QuantityFormat;
 
 /**
@@ -78,8 +79,9 @@ public final class Quantities {
         Objects.requireNonNull(unit);
         if (BigDecimal.class.isInstance(value)) {
             return new DecimalQuantity<>(BigDecimal.class.cast(value), unit);
-        } else  if (BigInteger.class.isInstance(value)) {
-            return new DecimalQuantity<>(new BigDecimal(BigInteger.class.cast(value)), unit);
+        } else if (BigInteger.class.isInstance(value)) {
+            return new DecimalQuantity<>(new BigDecimal(
+                    BigInteger.class.cast(value)), unit);
         }
         return new DoubleQuantity<>(value.doubleValue(), unit);
     }

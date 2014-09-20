@@ -38,39 +38,50 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
         	((AbstractConverter)unit.getConverterTo(unit)).convert(value, ctx);
     }
 
-	@Override
-	public Quantity<T> add(Quantity<T> that) {
-	    if (getUnit().equals(that.getUnit())) {
-	        return Quantities.getQuantity(value.add(toBigDecimal(that.getValue())), getUnit());
-	    }
-	    Quantity<T> converted = that.to(getUnit());
-	    return Quantities.getQuantity(value.add(toBigDecimal(converted.getValue())), getUnit());
-	}
+    @Override
+    public Quantity<T> add(Quantity<T> that) {
+        if (getUnit().equals(that.getUnit())) {
+            return Quantities.getQuantity(value.add(
+                    toBigDecimal(that.getValue()), MathContext.DECIMAL128),
+                    getUnit());
+        }
+        Quantity<T> converted = that.to(getUnit());
+        return Quantities.getQuantity(
+                value.add(toBigDecimal(converted.getValue())), getUnit());
+    }
 
-	@Override
-	public Quantity<T> subtract(Quantity<T> that) {
-	    if (getUnit().equals(that.getUnit())) {
-	        return Quantities.getQuantity(value.subtract(toBigDecimal(that.getValue())), getUnit());
-	    }
-	    Quantity<T> converted = that.to(getUnit());
-        return Quantities.getQuantity(value.subtract(toBigDecimal(converted.getValue())), getUnit());
-	}
+    @Override
+    public Quantity<T> subtract(Quantity<T> that) {
+        if (getUnit().equals(that.getUnit())) {
+            return Quantities.getQuantity(value.subtract(
+                    toBigDecimal(that.getValue()), MathContext.DECIMAL128),
+                    getUnit());
+        }
+        Quantity<T> converted = that.to(getUnit());
+        return Quantities.getQuantity(value.subtract(
+                toBigDecimal(converted.getValue()), MathContext.DECIMAL128),
+                getUnit());
+    }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<?> multiply(Quantity<?> that) {
-		return new DecimalQuantity(value.multiply(toBigDecimal(that.getValue())),
+		return new DecimalQuantity(value.multiply(toBigDecimal(that.getValue()), MathContext.DECIMAL128),
 				getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
 	public Quantity<T> multiply(Number that) {
-		return Quantities.getQuantity(value.multiply(toBigDecimal(that)), getUnit());
+        return Quantities.getQuantity(
+                value.multiply(toBigDecimal(that), MathContext.DECIMAL128),
+                getUnit());
 	}
 
 	@Override
 	public Quantity<T> divide(Number that) {
-		return Quantities.getQuantity(value.divide(toBigDecimal(that)), getUnit());
+        return Quantities.getQuantity(
+                value.divide(toBigDecimal(that), MathContext.DECIMAL128),
+                getUnit());
 	}
 
 
@@ -97,12 +108,8 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
-		return new DecimalQuantity(value.divide((BigDecimal)that.getValue()), getUnit());
-	}
-
-	@Override
-	public String toString() {
-	    return value + " " + getUnit();
+        return new DecimalQuantity(value.divide(toBigDecimal(that.getValue()),
+                MathContext.DECIMAL128), getUnit());
 	}
 
 	private BigDecimal toBigDecimal(Number value) {

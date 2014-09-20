@@ -47,9 +47,9 @@ import java.util.Objects;
  * @version 5.3, March 20, 2014
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
-  
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -61,8 +61,8 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     /**
      * Holds the converter to the parent unit.
      */
-    private final UnitConverter toParentUnit;
-    
+    private final UnitConverter unitConverter;
+
     /**
      * Holds the symbol.
      */
@@ -70,21 +70,25 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     /**
      * Creates a transformed unit from the specified system unit.
-     *
+     * using the parent as symbol
      * @param parentUnit the system unit from which this unit is derived.
-     * @param toParentUnit the converter to the parent units.
+     * @param unitConverter the converter to the parent units.
      * @throws IllegalArgumentException if the specified parent unit is not an
      *         {@link AbstractUnit#isSystemUnit() system unit}
      */
-    public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter toParentUnit) {
-        if (!parentUnit.isSI())
-            throw new IllegalArgumentException("The parent unit: " +  parentUnit
-                    + " is not a system unit");
-        this.parentUnit = parentUnit;
-        this.toParentUnit = toParentUnit;
-        this.symbol = parentUnit.getSymbol();
+    public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
+        this(parentUnit.getSymbol(), parentUnit, unitConverter);
     }
 
+    public TransformedUnit(String symbol, AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
+        if (!parentUnit.isSI()) {
+            throw new IllegalArgumentException("The parent unit: " + parentUnit
+                    + " is not a system unit");
+        }
+        this.parentUnit = parentUnit;
+        this.unitConverter = unitConverter;
+        this.symbol = symbol;
+    }
     @Override
     public Dimension getDimension() {
         return parentUnit.getDimension();
@@ -92,7 +96,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     @Override
     public UnitConverter getConverterToSI() {
-        return parentUnit.getConverterToSI().concatenate(toParentUnit);
+        return parentUnit.getConverterToSI().concatenate(unitConverter);
     }
 
     @Override
@@ -107,7 +111,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     @Override
     public int hashCode() {
-        return Objects.hash(parentUnit, toParentUnit);
+        return Objects.hash(parentUnit, unitConverter);
     }
 
 	@Override
@@ -118,7 +122,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 		if (obj instanceof TransformedUnit) {
 			TransformedUnit<?> other = (TransformedUnit<?>) obj;
 			return Objects.equals(parentUnit, other.parentUnit)
-					&& Objects.equals(toParentUnit, other.toParentUnit);
+					&& Objects.equals(unitConverter, other.unitConverter);
 		}
 		return false;
 	}

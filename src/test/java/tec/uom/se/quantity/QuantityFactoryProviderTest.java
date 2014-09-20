@@ -55,7 +55,7 @@ public class QuantityFactoryProviderTest {
 		Quantity<Time> t = QuantityFactoryProvider.of(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(40.0, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
-		assertEquals("s", t.getUnit().getSymbol()); // FIXME this should be "min", tweak for TransformedUnit
+		assertEquals("min", t.getUnit().getSymbol());
 		assertEquals("40.0 min", t.toString());
 	}
 
