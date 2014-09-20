@@ -36,7 +36,7 @@ public class MeasureFunctionsReducerTest {
     @Test
     public void minTest() {
         List<Quantity<Time>> times = getTimes();
-        Quantity<Time> quantity = times.stream().reduce(MeasureFunctions.min()).get();
+        Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.min()).get();
         Assert.assertEquals(seconds, quantity);
 
          List<Quantity<Time>> secondsList = Arrays.asList(
@@ -44,14 +44,14 @@ public class MeasureFunctionsReducerTest {
          timeFactory.create(130, SI.SECOND), seconds,
          timeFactory.create(10000, SI.SECOND));
          Quantity<Time> minSeconds =
-         secondsList.stream().reduce(MeasureFunctions.min()).get();
+         secondsList.stream().reduce(QuantityFunctions.min()).get();
          Assert.assertEquals(seconds, minSeconds);
     }
 
     @Test
     public void maxTest() {
         List<Quantity<Time>> times = getTimes();
-        Quantity<Time> quantity = times.stream().reduce(MeasureFunctions.max()).get();
+        Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.max()).get();
         Assert.assertEquals(day, quantity);
         Quantity<Time> max = timeFactory.create(20, SI.DAY);
          List<Quantity<Time>> dayList = Arrays.asList(
@@ -59,7 +59,7 @@ public class MeasureFunctionsReducerTest {
          timeFactory.create(5, SI.DAY),
          max);
          Quantity<Time> maxDay =
-                 dayList.stream().reduce(MeasureFunctions.max()).get();
+                 dayList.stream().reduce(QuantityFunctions.max()).get();
          Assert.assertEquals(max, maxDay);
     }
 
@@ -69,7 +69,7 @@ public class MeasureFunctionsReducerTest {
         timeFactory.create(3, SI.DAY),
         timeFactory.create(5, SI.DAY),
         timeFactory.create(20, SI.DAY));
-        Quantity<Time> sumDay = dayList.stream().reduce(MeasureFunctions.sum()).get();
+        Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum()).get();
         assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(28));
         assertEquals(sumDay.getUnit(), SI.DAY);
     }
@@ -80,7 +80,7 @@ public class MeasureFunctionsReducerTest {
         timeFactory.create(48, SI.HOUR),
         timeFactory.create(5, SI.DAY),
         timeFactory.create(1440, SI.MINUTE));
-        Quantity<Time> sumHour = dayList.stream().reduce(MeasureFunctions.sum()).get();
+        Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum()).get();
         assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
         assertEquals(sumHour.getUnit(), SI.HOUR);
     }
@@ -93,10 +93,10 @@ public class MeasureFunctionsReducerTest {
         timeFactory.create(5, SI.DAY),
         timeFactory.create(1440, SI.MINUTE));
 
-        Quantity<Time> sumHour = dayList.stream().reduce(MeasureFunctions.sum(SI.HOUR)).get();
-        Quantity<Time> sumDay = dayList.stream().reduce(MeasureFunctions.sum(SI.DAY)).get();
-        Quantity<Time> sumMinute = dayList.stream().reduce(MeasureFunctions.sum(SI.MINUTE)).get();
-        Quantity<Time> sumSecond = dayList.stream().reduce(MeasureFunctions.sum(SI.SECOND)).get();
+        Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum(SI.HOUR)).get();
+        Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum(SI.DAY)).get();
+        Quantity<Time> sumMinute = dayList.stream().reduce(QuantityFunctions.sum(SI.MINUTE)).get();
+        Quantity<Time> sumSecond = dayList.stream().reduce(QuantityFunctions.sum(SI.SECOND)).get();
 
         assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
         assertEquals(sumHour.getUnit(), SI.HOUR);

@@ -40,7 +40,7 @@ public class MeasureFunctionsGroupTest {
     public void groupByTest() {
         List<Quantity<Time>> times = createTimes();
         Map<Unit<Time>, List<Quantity<Time>>> timeMap = times.stream().collect(
-                Collectors.groupingBy(MeasureFunctions.groupByUnit()));
+                Collectors.groupingBy(QuantityFunctions.groupByUnit()));
 
         Assert.assertEquals(4, timeMap.keySet().size());
         Assert.assertEquals(1, timeMap.get(SI.MINUTE).size());
@@ -54,7 +54,7 @@ public class MeasureFunctionsGroupTest {
     public void groupBsyTest() {
         List<Quantity<Time>> times = createTimes();
         Map<Boolean, List<Quantity<Time>>> timeMap = times.stream().collect(
-                Collectors.partitioningBy(MeasureFunctions.fiterByUnit(SI.MINUTE)));
+                Collectors.partitioningBy(QuantityFunctions.fiterByUnit(SI.MINUTE)));
 
         Assert.assertEquals(2, timeMap.keySet().size());
         Assert.assertEquals(1, timeMap.get(Boolean.TRUE).size());
@@ -65,7 +65,7 @@ public class MeasureFunctionsGroupTest {
     @Test
     public void summaryTest() {
         List<Quantity<Time>> times = createTimes();
-        QuantitySummaryStatistics<Time> summary = times.stream().collect(MeasureFunctions.summarizingMeasure(SI.HOUR));
+        QuantitySummaryStatistics<Time> summary = times.stream().collect(QuantityFunctions.summarizingMeasure(SI.HOUR));
 
         Assert.assertEquals(4, summary.getCount());
         Assert.assertNotNull(summary.getAverage());

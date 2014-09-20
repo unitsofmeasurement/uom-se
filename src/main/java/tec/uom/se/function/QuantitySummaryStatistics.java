@@ -22,9 +22,9 @@ public class QuantitySummaryStatistics<Q extends Quantity<Q>> {
 
     private Quantity<Q> average;
 
-    private final BinaryOperator<Quantity<Q>> minFunctions = MeasureFunctions.min();
+    private final BinaryOperator<Quantity<Q>> minFunctions = QuantityFunctions.min();
 
-    private final BinaryOperator<Quantity<Q>> maxFunctions = MeasureFunctions.max();
+    private final BinaryOperator<Quantity<Q>> maxFunctions = QuantityFunctions.max();
 
     /**
      * Creates a new instance, targeting the given {@link javax.measure.Unit}.

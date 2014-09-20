@@ -37,7 +37,7 @@ public class MeasureFunctionsSortTest {
     @Test
     public void sortNumberTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortNumber())
+                .sorted(QuantityFunctions.sortNumber())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(day, times.get(0));
@@ -50,7 +50,7 @@ public class MeasureFunctionsSortTest {
     @Test
     public void sortNumberDescTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortNumberDesc())
+                .sorted(QuantityFunctions.sortNumberDesc())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(seconds, times.get(0));
@@ -62,7 +62,7 @@ public class MeasureFunctionsSortTest {
     @Test
     public void sortSymbolTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortSymbol())
+                .sorted(QuantityFunctions.sortSymbol())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(day, times.get(0));
@@ -75,7 +75,7 @@ public class MeasureFunctionsSortTest {
     @Test
     public void sortSymbolDesctTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortSymbolDesc())
+                .sorted(QuantityFunctions.sortSymbolDesc())
                 .collect(Collectors.toList());
         Assert.assertEquals(seconds, times.get(0));
         Assert.assertEquals(minutes, times.get(1));
@@ -86,7 +86,7 @@ public class MeasureFunctionsSortTest {
     @Test
     public void sortNaturalTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortNatural())
+                .sorted(QuantityFunctions.sortNatural())
                 .collect(Collectors.toList());
         Assert.assertEquals(seconds, times.get(0));
         Assert.assertEquals(minutes, times.get(1));
@@ -97,7 +97,7 @@ public class MeasureFunctionsSortTest {
     @Test
     public void sortNaturalDescTest() {
         List<Quantity<Time>> times = getTimes().stream()
-                .sorted(MeasureFunctions.sortNaturalDesc())
+                .sorted(QuantityFunctions.sortNaturalDesc())
                 .collect(Collectors.toList());
 
         Assert.assertEquals(day, times.get(0));
@@ -112,8 +112,8 @@ public class MeasureFunctionsSortTest {
         Quantity<Time> dayinHour = timeFactory.create(24, SI.HOUR);
         times.add(dayinHour);
 
-        Comparator<Quantity<Time>> sortNatural = MeasureFunctions.sortNatural();
-        Comparator<Quantity<Time>> sortSymbol = MeasureFunctions.sortSymbol();
+        Comparator<Quantity<Time>> sortNatural = QuantityFunctions.sortNatural();
+        Comparator<Quantity<Time>> sortSymbol = QuantityFunctions.sortSymbol();
 
         List<Quantity<Time>> result = times.stream()
                 .sorted(sortNatural.thenComparing(sortSymbol))

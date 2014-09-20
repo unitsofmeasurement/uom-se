@@ -11,9 +11,9 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 
 @SuppressWarnings("rawtypes")
-public final class MeasureFunctions {
+public final class QuantityFunctions {
 
-    private MeasureFunctions() {}
+    private QuantityFunctions() {}
 
     /**
      * Creates a comparator to sort by number, ignoring the unit.
