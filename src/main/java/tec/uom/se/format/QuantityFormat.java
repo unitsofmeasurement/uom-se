@@ -17,7 +17,6 @@ package tec.uom.se.format;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.text.FieldPosition;
 import java.text.Format;
 import java.text.NumberFormat;
@@ -122,7 +121,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 * @return the specified <code>Appendable</code>.
 	 * @throws IOException if an I/O exception occurs.
 	 */
-	public abstract Appendable format(AbstractQuantity<?> measure, Appendable dest)
+	public abstract Appendable format(Quantity<?> measure, Appendable dest)
 			throws IOException;
 
 	/**
@@ -253,7 +252,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		}
 
 		@Override
-		public Appendable format(AbstractQuantity<?> measure, Appendable dest)
+		public Appendable format(Quantity<?> measure, Appendable dest)
 				throws IOException {
 //			Unit unit = measure.getUnit();
 //			if (unit instanceof CompoundUnit)
@@ -312,30 +311,17 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		 */
 		private static final long serialVersionUID = 2758248665095734058L;
 
-		@SuppressWarnings("unchecked")
 		@Override
-		public Appendable format(AbstractQuantity measure, Appendable dest)
-				throws IOException {
-			Unit unit = measure.getUnit();
-//			if (unit instanceof CompoundUnit)
-//				return formatCompound(measure.doubleValue(unit),
-//						(CompoundUnit) unit, dest);
-//			else {
+        public Appendable format(Quantity measure, Appendable dest)
+                throws IOException {
+            Unit unit = measure.getUnit();
 
-				if (measure.isBig()) { // TODO SE only
-					BigDecimal decimal = measure.decimalValue(unit,
-						MathContext.UNLIMITED);
-					dest.append(decimal.toString());
-				} else {
-					Number number = measure.getValue();
-					dest.append(number.toString());
-				}
-				if (measure.getUnit().equals(SI.ONE))
-					return dest;
-				dest.append(' ');
-				return LocalUnitFormat.getInstance().format(unit, dest);
-//			}
-		}
+            dest.append(measure.getValue().toString());
+            if (measure.getUnit().equals(SI.ONE))
+                return dest;
+            dest.append(' ');
+            return LocalUnitFormat.getInstance().format(unit, dest);
+        }
 
 		@SuppressWarnings("unchecked")
 		@Override

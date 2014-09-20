@@ -77,7 +77,7 @@ public final class SI extends AbstractSystemOfUnits {
      * these conductors a force equal to 2 * 10-7 newton per meter of length.
      * It is named after the French physicist Andre Ampere (1775-1836).
      */
-    public static final BaseUnit<ElectricCurrent> AMPERE 
+    public static final BaseUnit<ElectricCurrent> AMPERE
             = addUnit(new BaseUnit<ElectricCurrent>("A", QuantityDimension.ELECTRIC_CURRENT), ElectricCurrent.class);
 
     /**
@@ -89,7 +89,7 @@ public final class SI extends AbstractSystemOfUnits {
      * @see <a href="http://en.wikipedia.org/wiki/Candela">
      *      Wikipedia: Candela</a>
      */
-    public static final BaseUnit<LuminousIntensity> CANDELA 
+    public static final BaseUnit<LuminousIntensity> CANDELA
             = addUnit(new BaseUnit<LuminousIntensity>("cd", QuantityDimension.LUMINOUS_INTENSITY), LuminousIntensity.class);
 
     /**
@@ -133,7 +133,7 @@ public final class SI extends AbstractSystemOfUnits {
      * corresponding to the transition between two hyperfine levels of
      * the ground state of cesium (1967 Standard).
      */
-    public static final BaseUnit<Time> SECOND 
+    public static final BaseUnit<Time> SECOND
             = addUnit(new BaseUnit<Time>("s", QuantityDimension.TIME), Time.class);
 
 
@@ -406,7 +406,7 @@ public final class SI extends AbstractSystemOfUnits {
      */
     public static final ProductUnit<Volume> CUBIC_METRE
             = addUnit(new ProductUnit<Volume>(
-            SQUARE_METRE.multiply(METRE)), Volume.class);   
+            SQUARE_METRE.multiply(METRE)), Volume.class);
 
     /**
      * The SI unit for action quantities (standard name <code>j.s</code>).
@@ -491,19 +491,19 @@ public final class SI extends AbstractSystemOfUnits {
      * A time unit accepted for use with SI units (standard name <code>min</code>).
      */
     public static final TransformedUnit<Time> MINUTE
-        = new TransformedUnit<Time>(SECOND, new RationalConverter(60, 1));
+        = new TransformedUnit<Time>("min", SECOND, new RationalConverter(60, 1));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>h/code>).
      */
     public static final TransformedUnit<Time> HOUR
-        = new TransformedUnit<Time>(SECOND, new RationalConverter(60 * 60, 1));
+        = new TransformedUnit<Time>("h", SECOND, new RationalConverter(60 * 60, 1));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>d/code>).
      */
     public static final TransformedUnit<Time> DAY
-        = new TransformedUnit<>(SECOND, new RationalConverter(24 * 60 * 60, 1));
+        = new TransformedUnit<>("d", SECOND, new RationalConverter(24 * 60 * 60, 1));
 
     /**
      * An angle unit accepted for use with SI units (standard name <code>deg/code>).
@@ -554,13 +554,13 @@ public final class SI extends AbstractSystemOfUnits {
     /**
      * An energy unit accepted for use with SI units (standard name <code>eV</code>).
      * The electronvolt is the kinetic energy acquired by an electron passing
-     * through a potential difference of 1 V in vacuum. 
+     * through a potential difference of 1 V in vacuum.
      * The value must be obtained by experiment, and is therefore not known exactly.
      */
     public static final TransformedUnit<Energy> ELECTRON_VOLT
         = new TransformedUnit<Energy>(JOULE, new MultiplyConverter(1.602176487E-19));
         // CODATA 2006 - http://physics.nist.gov/cuu/Constants/codata.pdf
-            
+
     /**
      * A mass unit accepted for use with SI units (standard name <code>u</code>).
      *  The unified atomic mass unit is equal to 1/12 of the mass of an unbound
@@ -581,7 +581,7 @@ public final class SI extends AbstractSystemOfUnits {
     public static final TransformedUnit<Length> ASTRONOMICAL_UNIT
         = new TransformedUnit<Length>(METRE, new MultiplyConverter(149597871000.0));
         // Best estimate source: http://maia.usno.navy.mil/NSFA/CBE.html
-    
+
     /**
      *  An angle unit accepted for use with SI units (standard name <code>rev</code>).
      */
