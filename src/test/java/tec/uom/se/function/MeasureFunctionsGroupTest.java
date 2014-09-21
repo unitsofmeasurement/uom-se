@@ -65,7 +65,7 @@ public class MeasureFunctionsGroupTest {
     @Test
     public void summaryTest() {
         List<Quantity<Time>> times = createTimes();
-        QuantitySummaryStatistics<Time> summary = times.stream().collect(QuantityFunctions.summarizingMeasure(SI.HOUR));
+        QuantitySummaryStatistics<Time> summary = times.stream().collect(QuantityFunctions.summarizeQuantity(SI.HOUR));
 
         Assert.assertEquals(4, summary.getCount());
         Assert.assertNotNull(summary.getAverage());

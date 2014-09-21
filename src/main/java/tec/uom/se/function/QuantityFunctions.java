@@ -94,11 +94,12 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by natural order descending, looking to both the unit and the value.
      * @return
-     * <b>Given:</b>
-     * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
-     * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
-     * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
-     * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
+     * <p>
+     * <b>Given:</b><br>
+     * <code>Quantity<Time> day = timeFactory.create(1, SI.DAY);<br>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br></code>
      * will return: day, hours, minutes, seconds
      * @throws NullPointerException
      */
@@ -283,11 +284,11 @@ public final class QuantityFunctions {
     }
 
     /**
-     * Summary of Measure
+     * Summary of Quantity
      * @return the QuantitySummaryStatistics
      */
     public static <Q extends Quantity<Q>> Collector<Quantity<Q>, QuantitySummaryStatistics<Q>, QuantitySummaryStatistics<Q>>
-    summarizingMeasure(Unit<Q> unit){
+    summarizeQuantity(Unit<Q> unit){
         Supplier<QuantitySummaryStatistics<Q>> supplier = () -> new QuantitySummaryStatistics<>(unit);
         return Collector.of(supplier, QuantitySummaryStatistics<Q>::accept,
                 QuantitySummaryStatistics<Q>::combine);
