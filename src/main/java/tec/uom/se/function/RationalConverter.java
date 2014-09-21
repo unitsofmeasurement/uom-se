@@ -22,6 +22,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Objects;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 
 /**
@@ -31,10 +33,10 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 22, 2014
+ * @version 0.6, Sep 21, 2014
  */
 public final class RationalConverter extends AbstractConverter
-	implements ValueSupplier<Double> { //implements Immutable<Double> {
+	implements ValueSupplier<Double>, Supplier<Double>, DoubleSupplier { //implements Immutable<Double> {
 
     /**
 	 *
@@ -168,6 +170,16 @@ public final class RationalConverter extends AbstractConverter
 
     @Override
 	public Double getValue() {
+		return getAsDouble();
+	}
+
+	@Override
+	public double getAsDouble() {
 		return toDouble(dividend) / toDouble(divisor);
+	}
+
+	@Override
+	public Double get() {
+		return getValue();
 	}
 }
