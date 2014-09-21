@@ -17,7 +17,7 @@ import org.junit.Test;
 import tec.uom.se.quantity.QuantityFactoryProvider;
 import tec.uom.se.util.SI;
 
-public class MeasureFunctionsSortTest {
+public class QuantityFunctionsSortTest {
 
     private QuantityFactory<Time> timeFactory;
     private Quantity<Time> day;

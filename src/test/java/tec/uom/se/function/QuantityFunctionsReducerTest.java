@@ -16,7 +16,7 @@ import org.junit.Test;
 import tec.uom.se.quantity.QuantityFactoryProvider;
 import tec.uom.se.util.SI;
 
-public class MeasureFunctionsReducerTest {
+public class QuantityFunctionsReducerTest {
 
     private QuantityFactory<Time> timeFactory;
     private Quantity<Time> day;

@@ -17,7 +17,7 @@ import org.junit.Test;
 import tec.uom.se.quantity.QuantityFactoryProvider;
 import tec.uom.se.util.SI;
 
-public class MeasureFunctionsFilterTest {
+public class QuantityFunctionsFilterTest {
 
     private QuantityFactory<Time> timeFactory;
     private Quantity<Time> day;
@@ -43,11 +43,27 @@ public class MeasureFunctionsFilterTest {
     }
 
     @Test
+    public void shouldReturnAllWhenUnitEmpty() {
+        List<Quantity<Time>> times = new ArrayList<>(getTimes());
+        times.add(timeFactory.create(30, SI.HOUR));
+        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit()).collect(Collectors.toList());
+        assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
+    }
+
+    @Test
     public void filterByNotUnitTest() {
         List<Quantity<Time>> times = new ArrayList<>(getTimes());
         times.add(timeFactory.create(30, SI.HOUR));
         List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit(SI.HOUR)).collect(Collectors.toList());
         assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+    }
+
+    @Test
+    public void shouldReturnAllWhenNotUnitEmpty() {
+        List<Quantity<Time>> times = new ArrayList<>(getTimes());
+        times.add(timeFactory.create(30, SI.HOUR));
+        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByNotUnit()).collect(Collectors.toList());
+        assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
     }
 
     @Test

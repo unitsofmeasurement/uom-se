@@ -1,6 +1,7 @@
 package tec.uom.se.function;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -167,10 +168,18 @@ public final class QuantityFunctions {
      * @return A predicate to filter one or more units
      */
     @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q> unit, Unit<Q>... units) {
-        Predicate<Quantity<Q>> predicate = q -> q.getUnit().equals(unit);
-        for (Unit<Q> u: units){
-            predicate = predicate.or(q -> q.getUnit().equals(u));
+    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q>... units) {
+
+        if (Objects.isNull(units) || units.length == 0) {
+            return q -> true;
+        }
+        Predicate<Quantity<Q>> predicate = null;
+        for (Unit<Q> u : units) {
+            if (Objects.isNull(predicate)) {
+                predicate = q -> q.getUnit().equals(u);
+            } else {
+                predicate = predicate.or(q -> q.getUnit().equals(u));
+            }
         }
         return predicate;
     }
@@ -182,8 +191,11 @@ public final class QuantityFunctions {
      * @return A predicate to filter to not be these units
      */
     @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q> unit, Unit<Q>... units) {
-       return fiterByUnit(unit, units).negate();
+    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByNotUnit(Unit<Q>... units) {
+        if (Objects.isNull(units) || units.length == 0) {
+            return q -> true;
+        }
+       return fiterByUnit(units).negate();
     }
 
     /**
