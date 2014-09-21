@@ -175,13 +175,13 @@ public final class QuantityFunctions {
     }
 
     /**
-     * Predicate to filter to not be these units
+     * Predicate to filter excluding these units
      * @param unit - a unit to be filtered
      * @param units - units to be filtered (optional)
      * @return A predicate to filter to not be these units
      */
     @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByNotUnit(Unit<Q> unit, Unit<Q>... units) {
+    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q> unit, Unit<Q>... units) {
        return fiterByUnit(unit, units).negate();
     }
 

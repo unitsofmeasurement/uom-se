@@ -46,7 +46,7 @@ public class MeasureFunctionsFilterTest {
     public void filterByNotUnitTest() {
         List<Quantity<Time>> times = new ArrayList<>(getTimes());
         times.add(timeFactory.create(30, SI.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByNotUnit(SI.HOUR)).collect(Collectors.toList());
+        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit(SI.HOUR)).collect(Collectors.toList());
         assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
     }
 
