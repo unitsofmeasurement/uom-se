@@ -29,7 +29,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractMeasurement;
-import tec.uom.se.BaseMeasurement;
+import tec.uom.se.model.BaseMeasurement;
 import tec.uom.se.util.SI;
 
 

@@ -23,6 +23,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import tec.uom.se.format.MeasurementFormat;
+import tec.uom.se.model.BaseMeasurement;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
@@ -78,10 +79,9 @@ import tec.uom.se.format.MeasurementFormat;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-09-17 $
+ * @version 0.5.1, $Date: 2014-09-21 $
  */
 public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q> {
-// TODO do we want to restrict Measurement to Number here?
 
 	protected final Unit<Q> unit;
 
@@ -145,13 +145,13 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements M
      * @throws ArithmeticException if the result is inexact and the quotient has
      *         a non-terminating decimal expansion.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked" })
 	@Override
     public AbstractMeasurement<Q, V> to(Unit<Q> unit) {
         if (unit.equals(this.getUnit())) {
             return this;
         }
-        return new BaseMeasurement(doubleValue(unit), unit);
+        return BaseMeasurement.of(doubleValue(unit), unit);
     }
 
     /**

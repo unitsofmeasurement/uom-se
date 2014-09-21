@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.uom.se;
+package tec.uom.se.model;
 
 import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
 
@@ -28,6 +28,7 @@ import javax.measure.UnconvertibleException;
 import javax.measure.format.ParserException;
 import javax.measure.function.UnitConverter;
 
+import tec.uom.se.AbstractMeasurement;
 import tec.uom.se.format.MeasurementFormat;
 
 /**
