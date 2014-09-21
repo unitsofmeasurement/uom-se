@@ -99,8 +99,8 @@ public final class QuantityFunctions {
      * <code>Quantity<Time> day = timeFactory.create(1, SI.DAY);<br>
      * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br>
      * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br></code>
-     * will return: day, hours, minutes, seconds
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br></code><br>
+     * will return: <code>day, hour, minute, second</code>
      * @throws NullPointerException
      */
     public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNaturalDesc() {
