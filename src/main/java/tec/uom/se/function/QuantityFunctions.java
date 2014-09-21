@@ -191,7 +191,7 @@ public final class QuantityFunctions {
      * @return A predicate to filter to not be these units
      */
     @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByNotUnit(Unit<Q>... units) {
+    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q>... units) {
         if (Objects.isNull(units) || units.length == 0) {
             return q -> true;
         }

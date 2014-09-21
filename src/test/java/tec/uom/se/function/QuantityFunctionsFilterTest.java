@@ -62,7 +62,7 @@ public class QuantityFunctionsFilterTest {
     public void shouldReturnAllWhenNotUnitEmpty() {
         List<Quantity<Time>> times = new ArrayList<>(getTimes());
         times.add(timeFactory.create(30, SI.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByNotUnit()).collect(Collectors.toList());
+        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit()).collect(Collectors.toList());
         assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
     }
 
