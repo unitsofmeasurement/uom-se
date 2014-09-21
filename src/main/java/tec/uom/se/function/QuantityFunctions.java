@@ -1,6 +1,7 @@
 package tec.uom.se.function;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -18,12 +19,14 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by number, ignoring the unit.
      * @return
-     * <b>Given:</b>
-     * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
-     * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
-     * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
-     * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
-     * will return: day, hours, minutes, seconds
+     * <p><b>Given:</b><p>
+     * <code>
+     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * </code>
+     * <p>will return: <code>day, hours, minutes, seconds</code></p>
      * @throws NullPointerException
      */
     public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
@@ -33,12 +36,14 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by number descending, ignoring the unit.
      * @return
-     * <b>Given:</b>
-     * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
-     * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
-     * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
-     * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
-     * will return: seconds, hours, minutes, day
+     * <p><b>Given:</b><p>
+     * <code>
+     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * </code>
+     * <p>will return: <code>seconds, hours, minutes, day</code></p>
      * @throws NullPointerException
      */
     public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumberDesc() {
@@ -49,12 +54,14 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by name, ignoring the value.
      * @return
-     * <b>Given:</b>
-     * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
-     * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
-     * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
-     * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
-     * will return: day, hours, minutes, seconds
+     * <p><b>Given:</b><p>
+     * <code>
+     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * </code>
+     * <p>will return: <code>day, hours, minutes, seconds</code></p>
      * @throws NullPointerException
      */
     public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
@@ -63,12 +70,14 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by name descending, ignoring the value.
      * @return
-     * <b>Given:</b>
-     * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
-     * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
-     * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
-     * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
-     * will return: seconds, minutes, hour,  day
+     * <p><b>Given:</b></p>
+     * <code>
+     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * </code>
+     * <p>will return: <code>seconds, minutes, hour,  day</code></p>
      * @throws NullPointerException
      */
     public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbolDesc() {
@@ -79,12 +88,14 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by natural order, looking to both the unit and the value.
      * @return
-     * <b>Given:</b>
-     * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
-     * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
-     * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
-     * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
-     * will return: seconds, minutes, hours, day
+     * <p><b>Given:</b></p>
+     * <code>
+     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * </code>
+     * <p>will return: <code>seconds, minutes, hours, day</code></p>
      * @throws NullPointerException
      */
     @SuppressWarnings("unchecked")
@@ -94,13 +105,14 @@ public final class QuantityFunctions {
     /**
      * Creates a comparator to sort by natural order descending, looking to both the unit and the value.
      * @return
-     * <p>
-     * <b>Given:</b><br>
-     * <code>Quantity<Time> day = timeFactory.create(1, SI.DAY);<br>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br></code><br>
-     * will return: <code>day, hour, minute, second</code>
+     * <p><b>Given:</b></p>
+     * <code>
+     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * </code>
+     * <p>will return: <code>day, hour, minute, second</code></p>
      * @throws NullPointerException
      */
     public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNaturalDesc() {
@@ -167,10 +179,18 @@ public final class QuantityFunctions {
      * @return A predicate to filter one or more units
      */
     @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q> unit, Unit<Q>... units) {
-        Predicate<Quantity<Q>> predicate = q -> q.getUnit().equals(unit);
-        for (Unit<Q> u: units){
-            predicate = predicate.or(q -> q.getUnit().equals(u));
+    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q>... units) {
+
+        if (Objects.isNull(units) || units.length == 0) {
+            return q -> true;
+        }
+        Predicate<Quantity<Q>> predicate = null;
+        for (Unit<Q> u : units) {
+            if (Objects.isNull(predicate)) {
+                predicate = q -> q.getUnit().equals(u);
+            } else {
+                predicate = predicate.or(q -> q.getUnit().equals(u));
+            }
         }
         return predicate;
     }
@@ -182,8 +202,11 @@ public final class QuantityFunctions {
      * @return A predicate to filter to not be these units
      */
     @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q> unit, Unit<Q>... units) {
-       return fiterByUnit(unit, units).negate();
+    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q>... units) {
+        if (Objects.isNull(units) || units.length == 0) {
+            return q -> true;
+        }
+       return fiterByUnit(units).negate();
     }
 
     /**
