@@ -54,7 +54,7 @@ public final class Quantities {
      * class and its subclasses.</p>
      *
      * @param csq the decimal value and its unit (if any) separated by space(s).
-     * @return <code>MeasureFormat.getStandard().parse(csq, new ParsePosition(0))</code>
+     * @return <code>QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0))</code>
      */
     public static Quantity<?> getQuantity(CharSequence csq) {
         try {
