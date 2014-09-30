@@ -110,7 +110,7 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 	@Override
 	public Quantity<?> divide(Quantity<?> that) {
         return new DecimalQuantity(value.divide(toBigDecimal(that.getValue()),
-                MathContext.DECIMAL128), getUnit());
+                MathContext.DECIMAL128), getUnit().divide(that.getUnit()));
 	}
 
 	private BigDecimal toBigDecimal(Number value) {
