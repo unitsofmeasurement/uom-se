@@ -107,6 +107,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
     public static Quantity<?> of(Number number, Unit<?> unit) {
         return new BaseQuantity(number, unit);
     }
+    
 	/*
 	 * (non-Javadoc)
 	 *
