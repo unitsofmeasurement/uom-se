@@ -65,11 +65,11 @@ public final class Quantities {
     }
 
     /**
-     * Returns the scalar measure.
+     * Returns the scalar measurement.
      * in the specified unit.
      * @param value the measurement value.
      * @param unit the measurement unit.
-     * @return the corresponding <code>double</code> measure.
+     * @return the corresponding <code>numeric</code> measurement.
      * @throws NullPointerException when value or unit were null
      */
     public static <Q extends Quantity<Q>> Quantity<Q> getQuantity(Number value,
@@ -77,12 +77,14 @@ public final class Quantities {
 
         Objects.requireNonNull(value);
         Objects.requireNonNull(unit);
-        if (BigDecimal.class.isInstance(value)) {
+        if (Double.class.isInstance(value)) {
+            return new DoubleQuantity<>(Double.class.cast(value), unit);
+        } else if (BigDecimal.class.isInstance(value)) {
             return new DecimalQuantity<>(BigDecimal.class.cast(value), unit);
         } else if (BigInteger.class.isInstance(value)) {
             return new DecimalQuantity<>(new BigDecimal(
                     BigInteger.class.cast(value)), unit);
         }
-        return new DoubleQuantity<>(value.doubleValue(), unit);
+        return new BaseQuantity<>(value, unit);
     }
 }
