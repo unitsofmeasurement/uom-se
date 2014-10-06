@@ -303,9 +303,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     }
 
     /**
-     * Casts this quantity to a parameterized unit of specified nature or throw a
+     * Casts this quantity to a parameterized quantity of specified nature or throw a
      * <code>ClassCastException</code> if the dimension of the specified
-     * quantity and this measure unit's dimension do not match. For
+     * quantity and its unit's dimension do not match. For
      * example:<br/><code>
      *     Quantity<Length> length = BaseQuantity.of("2 km").asType(Length.class);
      * </code>
