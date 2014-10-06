@@ -82,7 +82,7 @@ import tec.uom.se.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.6.1, $Date: 2014-08-24 $
+ * @version 0.6.2, $Date: 2014-10-06 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
 
@@ -307,7 +307,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
      * <code>ClassCastException</code> if the dimension of the specified
      * quantity and this measure unit's dimension do not match. For
      * example:<br/><code>
-     *     Quantity<Length> length = AbstractQuantity.of("2 km").asType(Length.class);
+     *     Quantity<Length> length = BaseQuantity.of("2 km").asType(Length.class);
      * </code>
      *
      * @param type the quantity class identifying the nature of the measure.
