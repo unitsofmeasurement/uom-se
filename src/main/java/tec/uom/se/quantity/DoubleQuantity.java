@@ -20,9 +20,9 @@ import tec.uom.se.function.AbstractConverter;
  * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
- * @version 0.2, $Date: 2014-08-03 $
+ * @version 0.3, $Date: 2014-10-10 $
  */
-final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
+final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
 
     /**
 	 *
@@ -31,7 +31,7 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 
 	final double value;
 
-    public DoubleQuantity(double value, Unit<T> unit) {
+    public DoubleQuantity(double value, Unit<Q> unit) {
     	super(unit);
         this.value = value;
     }
@@ -43,19 +43,19 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 
 
     @Override
-    public double doubleValue(Unit<T> unit) {
+    public double doubleValue(Unit<Q> unit) {
         return (super.getUnit().equals(unit)) ? value : super.getUnit().getConverterTo(unit).convert(value);
     }
 
     @Override
-    public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
+    public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
             throws ArithmeticException {
         BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if it is a BD, otherwise use different converter
         return (super.getUnit().equals(unit)) ? decimal : ((AbstractConverter)super.getUnit().getConverterTo(unit)).convert(decimal, ctx);
     }
 
 	@Override
-	public long longValue(Unit<T> unit) {
+	public long longValue(Unit<Q> unit) {
         double result = doubleValue(unit);
         if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
             throw new ArithmeticException("Overflow (" + result + ")");
@@ -64,31 +64,31 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 	}
 
     @Override
-    public Quantity<T> add(Quantity<T> that) {
+    public Quantity<Q> add(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value + that.getValue().doubleValue(), getUnit());
         }
-        Quantity<T> converted = that.to(getUnit());
+        Quantity<Q> converted = that.to(getUnit());
         return Quantities.getQuantity(value + converted.getValue().doubleValue(), getUnit());
     }
 
     @Override
-    public Quantity<T> subtract(Quantity<T> that) {
+    public Quantity<Q> subtract(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value - that.getValue().doubleValue(), getUnit());
         }
-        Quantity<T> converted = that.to(getUnit());
+        Quantity<Q> converted = that.to(getUnit());
         return Quantities.getQuantity(value - converted.getValue().doubleValue(), getUnit());
     }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
+	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
 		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
-	public Quantity<T> multiply(Number that) {
+	public Quantity<Q> multiply(Number that) {
 		return Quantities.getQuantity(value * that.doubleValue(), getUnit());
 	}
 
@@ -99,14 +99,14 @@ final class DoubleQuantity<T extends Quantity<T>> extends AbstractQuantity<T> im
 	}
 
 	@Override
-	public Quantity<T> divide(Number that) {
+	public Quantity<Q> divide(Number that) {
 		return Quantities.getQuantity(value / that.doubleValue(), getUnit());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public AbstractQuantity<T> inverse() {
-		return (AbstractQuantity<T>) Quantities.getQuantity(value, getUnit().inverse());
+	public AbstractQuantity<Q> inverse() {
+		return (AbstractQuantity<Q>) Quantities.getQuantity(value, getUnit().inverse());
 	}
 
 	@Override

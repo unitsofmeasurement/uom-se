@@ -39,7 +39,7 @@ import tec.uom.se.function.AbstractConverter;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *            The type of the quantity.
- * @version 0.9.2, $Date: 2014-08-31 $
+ * @version 0.9.3, $Date: 2014-10-10 $
  */
 public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		implements Serializable { //Comparable<BaseQuantity<Q>>
@@ -204,9 +204,9 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 		return String.valueOf(getValue()) + " " + String.valueOf(getUnit());
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-	public Quantity<?> multiply(Quantity<?> that) {
+	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
 		final Unit<?> unit = getUnit().multiply(that.getUnit());
 		return new BaseQuantity((getValue().doubleValue() * that.getValue()
 				.doubleValue()), unit);

@@ -11,13 +11,13 @@ import javax.measure.Unit;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.function.AbstractConverter;
 
-final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> implements Serializable {
+final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
 
 	private static final long serialVersionUID = 6504081836032983882L;
 
 	private final BigDecimal value;
 
-    public DecimalQuantity(BigDecimal value, Unit<T> unit) {
+    public DecimalQuantity(BigDecimal value, Unit<Q> unit) {
     	super(unit);
     	this.value = value;
     }
@@ -28,37 +28,37 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
     }
 
     @Override
-    public double doubleValue(Unit<T> unit) {
+    public double doubleValue(Unit<Q> unit) {
         return (unit.equals(unit)) ? value.doubleValue() : unit.getConverterTo(unit).convert(value.doubleValue());
     }
 
     @Override
-    public BigDecimal decimalValue(Unit<T> unit, MathContext ctx)
+    public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx)
             throws ArithmeticException {
         return (super.getUnit().equals(unit)) ? value :
         	((AbstractConverter)unit.getConverterTo(unit)).convert(value, ctx);
     }
 
     @Override
-    public Quantity<T> add(Quantity<T> that) {
+    public Quantity<Q> add(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value.add(
                     toBigDecimal(that.getValue()), MathContext.DECIMAL128),
                     getUnit());
         }
-        Quantity<T> converted = that.to(getUnit());
+        Quantity<Q> converted = that.to(getUnit());
         return Quantities.getQuantity(
                 value.add(toBigDecimal(converted.getValue())), getUnit());
     }
 
     @Override
-    public Quantity<T> subtract(Quantity<T> that) {
+    public Quantity<Q> subtract(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value.subtract(
                     toBigDecimal(that.getValue()), MathContext.DECIMAL128),
                     getUnit());
         }
-        Quantity<T> converted = that.to(getUnit());
+        Quantity<Q> converted = that.to(getUnit());
         return Quantities.getQuantity(value.subtract(
                 toBigDecimal(converted.getValue()), MathContext.DECIMAL128),
                 getUnit());
@@ -66,20 +66,20 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
+	public <T extends Quantity<T>, R extends Quantity<R>> Quantity<R> multiply(Quantity<T> that) {
 		return new DecimalQuantity(value.multiply(toBigDecimal(that.getValue()), MathContext.DECIMAL128),
 				getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
-	public Quantity<T> multiply(Number that) {
+	public Quantity<Q> multiply(Number that) {
         return Quantities.getQuantity(
                 value.multiply(toBigDecimal(that), MathContext.DECIMAL128),
                 getUnit());
 	}
 
 	@Override
-	public Quantity<T> divide(Number that) {
+	public Quantity<Q> divide(Number that) {
         return Quantities.getQuantity(
                 value.divide(toBigDecimal(that), MathContext.DECIMAL128),
                 getUnit());
@@ -88,12 +88,12 @@ final class DecimalQuantity<T extends Quantity<T>> extends AbstractQuantity<T> i
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Quantity<T> inverse() {
-		return (Quantity<T>) Quantities.getQuantity(value, getUnit().inverse());
+	public Quantity<Q> inverse() {
+		return (Quantity<Q>) Quantities.getQuantity(value, getUnit().inverse());
 	}
 
 	@Override
-    protected long longValue(Unit<T> unit) {
+    protected long longValue(Unit<Q> unit) {
         double result = doubleValue(unit);
         if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
             throw new ArithmeticException("Overflow (" + result + ")");
