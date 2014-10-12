@@ -30,17 +30,17 @@ public class ArithmeticTest {
 
 	private Quantity<Length> sut;
 
-	private QuantityFactory<Length> lenghtFactory;
+	private QuantityFactory<Length> lengthFactory;
 
 	@Before
 	public void init() {
-	    lenghtFactory =  QuantityFactoryProvider.getQuantityFactory(Length.class);
-		sut = lenghtFactory.create(10, METRE);
+	    lengthFactory =  QuantityFactoryProvider.getQuantityFactory(Length.class);
+		sut = lengthFactory.create(10, METRE);
 	}
 
 	@Test
 	public void testAdd() {
-		Quantity<Length> len = lenghtFactory.create(5, METRE);
+		Quantity<Length> len = lengthFactory.create(5, METRE);
 		Quantity<Length> result = sut.add(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
@@ -49,12 +49,12 @@ public class ArithmeticTest {
 
 	@Test
 	public void testValue() {
-		assertEquals(Double.valueOf(10), sut.getValue());
+		assertEquals(Integer.valueOf(10), sut.getValue());
 	}
 
 	@Test
 	public void testToString() {
-		assertEquals("10.0 m", sut.toString());
+		assertEquals("10 m", sut.toString());
 	}
 
 }

@@ -44,19 +44,19 @@ public class QuantityFactoryProviderTest {
 	@Test
 	public void testMass() {
 		Quantity<Mass> m = QuantityFactoryProvider.getQuantityFactory(Mass.class).create(10, KILOGRAM); // 10 kg
-		assertEquals(10.0, m.getValue());
+		assertEquals(10, m.getValue());
 		assertEquals(KILOGRAM, m.getUnit());
 		assertEquals("kg", m.getUnit().getSymbol());
-		assertEquals("10.0 kg", m.toString());
+		assertEquals("10 kg", m.toString());
 	}
 
 	@Test
 	public void testTime() {
 		Quantity<Time> t = QuantityFactoryProvider.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
-		assertEquals(40.0, t.getValue());
+		assertEquals(40, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
 		assertEquals("min", t.getUnit().getSymbol());
-		assertEquals("40.0 min", t.toString());
+		assertEquals("40 min", t.toString());
 	}
 
 }
