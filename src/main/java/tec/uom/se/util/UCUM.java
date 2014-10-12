@@ -42,7 +42,7 @@ import static tec.uom.se.util.SIPrefix.*;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://www.unitsofmeasure.org">UCUM</a>
- * @version 0.4, $Date: 2014-06-09 $
+ * @version 0.5, $Date: 2014-10-12 $
  */
 public final class UCUM extends AbstractSystemOfUnits {
 
@@ -315,7 +315,6 @@ public final class UCUM extends AbstractSystemOfUnits {
 	public static final Unit<Acceleration> GAL = addUnit(new ProductUnit<Acceleration>(
 			CENTI(METER).divide(SECOND.pow(2))));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static final Unit<Force> DYNE = addUnit(new ProductUnit<Force>(
 			SI.GRAM.multiply(CENTI(SI.METRE).divide(SI.SECOND
 					.pow(2)))));
