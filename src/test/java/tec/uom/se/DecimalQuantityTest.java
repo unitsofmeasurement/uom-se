@@ -14,7 +14,6 @@ import tec.uom.se.util.SI;
 
 public class DecimalQuantityTest {
 
-
     @Test
     public void divideTest() {
         Quantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
@@ -57,7 +56,6 @@ public class DecimalQuantityTest {
         Assert.assertEquals(result.getUnit(), SI.METRE);
     }
 
-
     @Test
     public void subtractQuantityTest() {
         Quantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
@@ -99,12 +97,10 @@ public class DecimalQuantityTest {
         Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
     }
     
-
     @Test
     public void inverseTestTime() {
         Quantity<?> secInv = Quantities.getQuantity(BigDecimal.valueOf(2d), SI.SECOND).inverse();
         Assert.assertEquals(BigDecimal.valueOf(0.5d), secInv.getValue());
         Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
     }
-
 }
