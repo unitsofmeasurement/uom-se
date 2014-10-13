@@ -93,10 +93,18 @@ public class DecimalQuantityTest {
     }
 
     @Test
-    public void inverseTest() {
+    public void inverseTestLength() {
         Quantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE).inverse();
         Assert.assertEquals(BigDecimal.valueOf(0.1d), metre.getValue());
         Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
+    }
+    
+
+    @Test
+    public void inverseTestTime() {
+        Quantity<?> secInv = Quantities.getQuantity(BigDecimal.valueOf(2d), SI.SECOND).inverse();
+        Assert.assertEquals(BigDecimal.valueOf(0.5d), secInv.getValue());
+        Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
     }
 
 }
