@@ -89,7 +89,7 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
 	@SuppressWarnings("unchecked")
 	@Override
 	public Quantity<Q> inverse() {
-		return (Quantity<Q>) Quantities.getQuantity(value, getUnit().inverse());
+		return (Quantity<Q>) Quantities.getQuantity(BigDecimal.ONE.divide(value), getUnit().inverse());
 	}
 
 	@Override

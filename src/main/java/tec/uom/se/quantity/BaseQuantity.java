@@ -238,10 +238,9 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 	@Override
 	public Quantity<Q> inverse() {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		final Quantity<Q> m = new BaseQuantity(getValue(), getUnit().inverse()); // TODO
-																					// keep
-																					// value
-																					// same?
+		final Quantity<Q> m = new BaseQuantity((getValue() instanceof BigDecimal ? 
+				BigDecimal.ONE.divide((BigDecimal)getValue()) : 1d / getValue().doubleValue()), getUnit()
+				.inverse());
 		return m;
 	}
 

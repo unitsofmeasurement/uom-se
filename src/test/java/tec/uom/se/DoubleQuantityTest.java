@@ -93,7 +93,7 @@ public class DoubleQuantityTest {
     @Test
     public void inverseTest() {
         Quantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE).inverse();
-        Assert.assertTrue(metre.getValue().intValue() == 10);
+        Assert.assertEquals(BigDecimal.valueOf(0.1d), metre.getValue());
     }
 
 }

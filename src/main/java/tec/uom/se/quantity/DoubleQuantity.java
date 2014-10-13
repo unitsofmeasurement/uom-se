@@ -106,7 +106,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
 	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<Q> inverse() {
-		return (AbstractQuantity<Q>) Quantities.getQuantity(value, getUnit().inverse());
+		return (AbstractQuantity<Q>) Quantities.getQuantity(1d / value, getUnit().inverse());
 	}
 
 	@Override
