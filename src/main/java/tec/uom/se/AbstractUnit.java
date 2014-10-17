@@ -36,6 +36,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Map;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 
@@ -72,7 +74,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      */
     protected AbstractUnit() {
     }
-
+    
    /**
      * Indicates if this unit belongs to the set of coherent SI units 
      * (unscaled SI units).

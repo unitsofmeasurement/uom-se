@@ -15,10 +15,13 @@
  */
 package tec.uom.se;
 
+import javax.measure.quantity.Length;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tec.uom.se.unit.BaseUnit;
 import static org.junit.Assert.*;
 
 /**
@@ -26,6 +29,8 @@ import static org.junit.Assert.*;
  * @author Werner Keil
  */
 public class AbstractUnitTest {
+	
+	AbstractUnit<Length> sut = new BaseUnit<Length>("m");
 
     public AbstractUnitTest() {
     }
@@ -145,7 +150,8 @@ public class AbstractUnitTest {
 
     @Test
     public void testEquals() {
+    	assertTrue(sut.equals(new BaseUnit<Length>("m")));
     }
-
+    
 
 }
