@@ -42,7 +42,7 @@ import static tec.uom.se.util.SIPrefix.*;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://www.unitsofmeasure.org">UCUM</a>
- * @version 0.5, $Date: 2014-10-12 $
+ * @version 0.6, $Date: 2014-10-17 $
  */
 public final class UCUM extends AbstractSystemOfUnits {
 
@@ -632,8 +632,12 @@ public final class UCUM extends AbstractSystemOfUnits {
 	// contains a forward reference to POUND, so we had to move it here, below
 	// section §36
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Force> POUND_FORCE = addUnit(new ProductUnit<Force>(
-			POUND.multiply(ACCELLERATION_OF_FREEFALL)));
+//	public static final Unit<Force> POUND_FORCE = addUnit(new ProductUnit<Force>(
+//			POUND.multiply(ACCELLERATION_OF_FREEFALL)));
+	public static final Unit<Force> POUND_FORCE = addUnit(POUND.multiply(ACCELLERATION_OF_FREEFALL).asType(Force.class));
+	
+	//public static final Unit<InformationRate> POUND_FORCE2 = addUnit(POUND.multiply(ACCELLERATION_OF_FREEFALL).asType(InformationRate.class));
+	
 	// ///////////////////////////////////
 	// TROY WIEGHT UNITS: UCUM 4.4 §37 //
 	// ///////////////////////////////////
@@ -711,10 +715,8 @@ public final class UCUM extends AbstractSystemOfUnits {
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Energy> CALORIE = addUnit(CALORIE_THERMOCHEMICAL);
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	// public static final Unit<Energy> CALORIE_FOOD = addUnit(new
-	// AnnotatedUnit<Energy>((AbstractUnit<Energy>)
-	// KILO(CALORIE_THERMOCHEMICAL), "cal")))));
-	// FIXME CALORIE_FOOD totally f* up in Java 8
+	public static final Unit<Energy> CALORIE_FOOD = addUnit(KILO(CALORIE_THERMOCHEMICAL));
+	
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Energy> BTU_AT_39F = addUnit(KILO(JOULE).multiply(
 			105967).divide(100000));
@@ -831,10 +833,15 @@ public final class UCUM extends AbstractSystemOfUnits {
 	 *            the unit being added.
 	 * @return <code>unit</code>.
 	 */
-	private static <U extends Unit<?>> U addUnit(U unit) {
-		INSTANCE.units.add(unit);
-		return unit;
-	}
+//	private static <U extends Unit<?>> U addUnit(U unit) {
+//		INSTANCE.units.add(unit);
+//		return unit;
+//	}
+	
+    private static <U extends Unit<Q>,Q extends Quantity<Q>> U addUnit(U unit) {
+        INSTANCE.units.add(unit);
+        return unit;
+    }
 
 	/**
 	 * Adds a new unit and maps it to the specified quantity type.

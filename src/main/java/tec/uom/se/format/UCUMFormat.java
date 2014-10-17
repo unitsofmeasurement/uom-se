@@ -392,7 +392,7 @@ public abstract class UCUMFormat implements UnitFormat {
 
 //        private static final long serialVersionUID = -922531801940132715L;
         private static final SymbolMap CASE_SENSITIVE_SYMBOLS = SymbolMap.of(
-                ResourceBundle.getBundle(BUNDLE_BASE + "_CS", new Locale("", "CS"),
+                ResourceBundle.getBundle(BUNDLE_BASE + "_CS",
                	     new ResourceBundle.Control() {
                		 @Override
                		 public List<Locale> getCandidateLocales(String baseName, Locale locale) {

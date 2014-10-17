@@ -32,7 +32,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
      * Holds the units.
      */
-	protected final Set<Unit<?>> units = new HashSet<Unit<?>>();
+	protected final Set<Unit<?>> units = new HashSet<>();
 
     /**
      * Holds the mapping quantity to unit.

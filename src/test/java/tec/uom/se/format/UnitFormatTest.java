@@ -33,12 +33,12 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
+import tec.uom.se.quantity.QuantityFactoryProvider;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tec.uom.se.quantity.QuantityFactoryProvider;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -76,7 +76,6 @@ public class UnitFormatTest {
 	}
 
 	@Test
-	@Ignore
 	public void testFormatUCUMPrint() {
 		final UnitFormat format = UCUMFormat.getInstance(PRINT);
 		final Appendable a = new StringBuilder();
@@ -100,7 +99,6 @@ public class UnitFormatTest {
 	}
 
 	@Test
-	@Ignore
 	public void testFormatUCUMCS() {
 		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
 		final Appendable a = new StringBuilder();
@@ -124,7 +122,6 @@ public class UnitFormatTest {
 	}
 
 	@Test
-	@Ignore
 	public void testFormatUCUMCI() {
 		final UnitFormat format = UCUMFormat.getInstance(CASE_INSENSITIVE);
 		final Appendable a = new StringBuilder();
@@ -137,8 +134,7 @@ public class UnitFormatTest {
 		assertEquals("M", a.toString());
 	}
 
-	@Test
-	@Ignore
+	@Test(expected=UnsupportedOperationException.class)
 	public void testParseLocal() {
 		final UnitFormat format = LocalUnitFormat.getInstance();
 		try {
@@ -150,7 +146,6 @@ public class UnitFormatTest {
 	}
 
 	@Test
-	@Ignore
 	public void testParseUCUMCS() {
 		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
 		try {
@@ -162,7 +157,6 @@ public class UnitFormatTest {
 	}
 
 	@Test
-	@Ignore
 	public void testParseUCUMCI() {
 		final UnitFormat format = UCUMFormat.getInstance(CASE_INSENSITIVE);
 		try {
@@ -174,7 +168,6 @@ public class UnitFormatTest {
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
-	@Ignore
 	public void testParseUCUMPrint() {
 		final UnitFormat format = UCUMFormat.getInstance(PRINT);
 		try {
