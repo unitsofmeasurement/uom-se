@@ -92,7 +92,8 @@ public class DoubleQuantityTest {
 
     @Test
     public void inverseTestLength() {
-        Quantity<Length> metre = Quantities.getQuantity(10d, SI.METRE).inverse();
+        @SuppressWarnings("unchecked")
+		Quantity<Length> metre = (Quantity<Length>) Quantities.getQuantity(10d, SI.METRE).inverse();
         Assert.assertEquals(Double.valueOf(0.1d), metre.getValue());
         Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
     }
