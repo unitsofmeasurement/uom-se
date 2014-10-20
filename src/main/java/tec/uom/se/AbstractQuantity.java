@@ -322,9 +322,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     @SuppressWarnings("unchecked")
     public final <T extends Quantity<T>> AbstractQuantity<T> asType(Class<T> type)
             throws ClassCastException {
-        this.getUnit().asType(type); // Raises ClassCastException if dimension
-        // mismatches.
+        this.getUnit().asType(type); // Raises ClassCastException if dimension mismatches.
         return (AbstractQuantity<T>) this;
     }
-
 }
