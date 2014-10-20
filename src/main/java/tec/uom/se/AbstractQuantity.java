@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
-import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
@@ -82,17 +81,18 @@ import tec.uom.se.util.SI;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.6.2, $Date: 2014-10-06 $
+ * @version 0.6.3, $Date: 2014-10-21 $
  */
-public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantity<Q> {
-
+public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
+		Quantity<Q>, Comparable<Quantity<Q>> {
 
 	private final Unit<Q> unit;
 
 	/**
 	 * Holds a dimensionless measure of none (exact).
 	 */
-	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(0, SI.ONE);
+	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(
+			0, SI.ONE);
 
 	/**
 	 * Holds a dimensionless measure of one (exact).
@@ -184,13 +184,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
     }
 
     /**
-     * Compares this measure to the specified Measurement quantity. The default
-     * implementation compares the {@link Measurement#doubleValue(Unit)} of both
-     * this measure and the specified Measurement stated in the same unit (this
-     * measure's {@link #getUnit() unit}).
+     * Compares this quantity to the specified Measurement quantity. The default
+     * implementation compares the {@link AbstractQuantity#doubleValue(Unit)} of both
+     * this quantity and the specified Quantity stated in the same unit (this
+     * quantity's {@link #getUnit() unit}).
      *
-     * @return a negative integer, zero, or a positive integer as this measure
-     *         is less than, equal to, or greater than the specified Measurement
+     * @return a negative integer, zero, or a positive integer as this quantity
+     *         is less than, equal to, or greater than the specified Quantity
      *         quantity.
      * @return <code>Double.compare(this.doubleValue(getUnit()),
      *         that.doubleValue(getUnit()))</code>
