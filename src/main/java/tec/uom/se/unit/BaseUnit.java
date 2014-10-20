@@ -39,9 +39,9 @@ import java.util.Map;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, May 22, 2014
+ * @version 0.3, Oct 17, 2014
  */
-public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
+public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     /**
 	 * 
@@ -127,7 +127,7 @@ public class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
 	@Override
 	public Map<? extends AbstractUnit<Q>, Integer> getProductUnits() {
-		// TODO Auto-generated method stub
+		// TODO Shall we return null, empty list or what?
 		return null;
 	}
 }

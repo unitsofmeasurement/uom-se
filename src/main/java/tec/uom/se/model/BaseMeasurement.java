@@ -43,7 +43,6 @@ import tec.uom.se.format.MeasurementFormat;
  */
 public class BaseMeasurement<Q extends Quantity<Q>, V> extends
 		AbstractMeasurement<Q, V> implements Comparable<BaseMeasurement<Q, V>> {
-	// FIXME Bug 338334 overwrite equals()
 
 	/**
 	 * 

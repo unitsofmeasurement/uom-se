@@ -175,7 +175,7 @@ public class LocalUnitFormat implements UnitFormat {
      * {@link AbstractUnit Unit}s and <code>String</code>s, etc...
      * @return SymbolMap the current symbol map
      */
-    public SymbolMap getSymbols() {
+    SymbolMap getSymbols() {
         return symbolMap;
     }
 

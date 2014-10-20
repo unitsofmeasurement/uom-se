@@ -57,7 +57,7 @@ import java.util.*;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.5.1, 20 March 2014
+ * @version 0.5.2, 18 October 2014
  */
 public abstract class UCUMFormat implements UnitFormat {
 
@@ -138,7 +138,8 @@ public abstract class UCUMFormat implements UnitFormat {
     ////////////////
     // Formatting //
     // //////////////
-    public Appendable format(Unit<?> unknownUnit, Appendable appendable) throws IOException {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public Appendable format(Unit<?> unknownUnit, Appendable appendable) throws IOException {
         if (!(unknownUnit instanceof AbstractUnit)) {
             throw new UnsupportedOperationException("The UCUM format supports only known units (AbstractUnit instances)");
         }
@@ -154,8 +155,7 @@ public abstract class UCUMFormat implements UnitFormat {
         if (mapSymbol != null) {
             symbol = mapSymbol;
         } else if (unit.getProductUnits() != null) {
-            @SuppressWarnings("unchecked")
-			Map<? extends AbstractUnit<?>, Integer> productUnits = unit.getProductUnits();
+            Map<? extends AbstractUnit<?>, Integer> productUnits = unit.getProductUnits();
             StringBuffer app = new StringBuffer();
             for (AbstractUnit<?> u : productUnits.keySet()) {
                 StringBuffer temp = new StringBuffer();
@@ -473,8 +473,7 @@ public abstract class UCUMFormat implements UnitFormat {
             }
         }
         
-        @SuppressWarnings("rawtypes")
-		@Override
+        @Override
         public Unit<? extends Quantity<?>> parse(CharSequence csq) throws ParserException {
         	return parse(csq, new ParsePosition(0));
         }

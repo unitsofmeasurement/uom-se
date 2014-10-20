@@ -838,7 +838,7 @@ public final class UCUM extends AbstractSystemOfUnits {
 //		return unit;
 //	}
 	
-    private static <U extends Unit<Q>,Q extends Quantity<Q>> U addUnit(U unit) {
+    private static <U extends Unit<Q>, Q extends Quantity<Q>> U addUnit(U unit) {
         INSTANCE.units.add(unit);
         return unit;
     }

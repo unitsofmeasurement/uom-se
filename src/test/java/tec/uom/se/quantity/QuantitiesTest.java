@@ -13,26 +13,31 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package tec.uom.se;
-
-import javax.measure.quantity.Length;
+package tec.uom.se.quantity;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.AbstractQuantity;
+import tec.uom.se.quantity.Quantities;
+
+import javax.measure.Quantity;
+import javax.measure.quantity.Pressure;
+
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
+import static tec.uom.se.util.SI.PASCAL;
 
 /**
  *
  * @author Werner Keil
+ * @version 0.2
  */
-public class AbstractUnitTest {
-	
-	AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+public class QuantitiesTest {
 
-    public AbstractUnitTest() {
+    public QuantitiesTest() {
     }
 
     @BeforeClass
@@ -44,8 +49,9 @@ public class AbstractUnitTest {
     }
 
     @Test
-    public void testValueOf() {
-//        assertEquals(KILO(PASCAL), PhysicsUnit.valueOf("kPa")); // TODO: Problem with kg...
+    public void testOf() {
+    	Quantity<Pressure> pressure = Quantities.getQuantity(BigDecimal.ONE, PASCAL);
+        assertEquals(PASCAL, pressure.getUnit()); // TODO: Problem with kg...
     }
 
     @Test
@@ -150,8 +156,7 @@ public class AbstractUnitTest {
 
     @Test
     public void testEquals() {
-    	assertTrue(sut.equals(new BaseUnit<Length>("m")));
     }
-    
+
 
 }

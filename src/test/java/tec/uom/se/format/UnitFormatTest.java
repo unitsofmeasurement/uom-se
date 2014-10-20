@@ -36,7 +36,6 @@ import javax.measure.quantity.Speed;
 import tec.uom.se.quantity.QuantityFactoryProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 

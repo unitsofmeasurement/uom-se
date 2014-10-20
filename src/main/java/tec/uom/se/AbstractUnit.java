@@ -75,6 +75,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
     protected AbstractUnit() {
     }
     
+    protected Type getActualType() {
+    	ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+    	return parameterizedType.getActualTypeArguments()[0].getClass().getGenericInterfaces()[0];
+    }
+    
    /**
      * Indicates if this unit belongs to the set of coherent SI units 
      * (unscaled SI units).
@@ -155,7 +160,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Se
      * @throws ParserException if the specified character sequence
      *         cannot be correctly parsed (e.g. not UCUM compliant).
      */
-    public static Unit<?> of(CharSequence charSequence) {
+    public static final Unit<?> of(CharSequence charSequence) {
         return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
     }
 

@@ -21,12 +21,13 @@ import java.math.MathContext;
 import javax.measure.Measurement;
 import javax.measure.Quantity;
 import javax.measure.Unit;
+import javax.measure.function.ValueSupplier;
 
 import tec.uom.se.format.MeasurementFormat;
 import tec.uom.se.model.BaseMeasurement;
 
 /**
- * <p> This class represents the immutable result of a scalar measurement stated
+ * <p> This class represents the immutable result of a general measurement stated
  *     in a known unit.</p>
  *
  * <p> To avoid any lost of precision, known exact measure (e.g. physical
@@ -79,9 +80,10 @@ import tec.uom.se.model.BaseMeasurement;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, $Date: 2014-09-21 $
+ * @version 0.5.2, $Date: 2014-10-18 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements Measurement<Q> {
+public abstract class AbstractMeasurement<Q extends Quantity<Q>, V> implements
+		Measurement<Q>, ValueSupplier<V> {
 
 	protected final Unit<Q> unit;
 
