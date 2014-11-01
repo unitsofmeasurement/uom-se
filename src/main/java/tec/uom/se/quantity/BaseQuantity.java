@@ -279,7 +279,7 @@ public class BaseQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
 				- thatToUnit.getValue().doubleValue(), getUnit());
 	}
 
-    public int compareTo(BaseQuantity<Q> o) {
+    public int compareTo(Quantity<Q> o) {
         return Double.compare(getValue().doubleValue(), o.getValue().doubleValue());
     }
 }

@@ -204,14 +204,16 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
      * quantity's {@link #getUnit() unit}).
      *
      * @return a negative integer, zero, or a positive integer as this quantity
-     *         is less than, equal to, or greater than the specified Quantity
-     *         quantity.
-     * @return <code>Double.compare(this.doubleValue(getUnit()),
-     *         that.doubleValue(getUnit()))</code>
+     *         is less than, equal to, or greater than the specified quantity.
      */
     public int compareTo(Quantity<Q> that) {
         Unit<Q> unit = getUnit();
-        return Double.compare(doubleValue(unit), that.getValue().doubleValue());
+        if (unit instanceof AbstractUnit) {
+        	return Double.compare(doubleValue(unit), that.getValue().doubleValue()) +
+        			((AbstractUnit<Q>)unit).compareTo(that.getUnit());
+        } else {
+        	return Double.compare(doubleValue(unit), that.getValue().doubleValue()); 
+        }
     }
 
     /**
