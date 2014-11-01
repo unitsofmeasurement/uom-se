@@ -38,6 +38,7 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.uom.se.quantity.BaseQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
@@ -126,11 +127,89 @@ public class DecimalQuantityTest {
         Assert.assertEquals(BigDecimal.valueOf(0.1d), metre.getValue());
         Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
     }
-    
+
     @Test
     public void inverseTestTime() {
         Quantity<?> secInv = Quantities.getQuantity(BigDecimal.valueOf(2d), SI.SECOND).inverse();
         Assert.assertEquals(BigDecimal.valueOf(0.5d), secInv.getValue());
         Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
+    }
+
+
+    @Test
+    public void isGreaterThanTest() {
+        BaseQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
+        BaseQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
+        BaseQuantity<Time> minutes = Quantities.getQuantity(BigDecimal.valueOf(40), SI.MINUTE);
+
+        BaseQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
+        BaseQuantity<Time> dayInMinutes = Quantities.getQuantity(BigDecimal.valueOf(1440), SI.MINUTE);
+
+        BaseQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
+
+        Assert.assertTrue(day.isGreaterThan(hours));
+        Assert.assertTrue(day.isGreaterThan(minutes));
+
+        Assert.assertFalse(day.isGreaterThan(dayInHour));
+        Assert.assertFalse(day.isGreaterThan(daysInHour));
+        Assert.assertFalse(day.isGreaterThan(dayInMinutes));
+
+
+    }
+
+    @Test
+    public void isGreaterThanOrEqualToTest() {
+
+        BaseQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
+        BaseQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
+        BaseQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
+        BaseQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
+
+        Assert.assertTrue(day.isGreaterThanOrEqualTo(hours));
+        Assert.assertTrue(day.isGreaterThanOrEqualTo(dayInHour));
+        Assert.assertFalse(day.isGreaterThanOrEqualTo(daysInHour));
+    }
+
+    @Test
+    public void isLessThanTest(){
+
+        BaseQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
+        BaseQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
+        BaseQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
+        BaseQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
+
+        Assert.assertFalse(day.isLessThan(day));
+        Assert.assertFalse(day.isLessThan(hours));
+        Assert.assertFalse(day.isLessThan(dayInHour));
+        Assert.assertTrue(day.isLessThan(daysInHour));
+    }
+
+    @Test
+    public void isLessThanOrEqualToTest() {
+
+        BaseQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
+        BaseQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
+        BaseQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
+        BaseQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
+
+        Assert.assertTrue(day.isLessThanOrEqualTo(day));
+        Assert.assertFalse(day.isLessThanOrEqualTo(hours));
+        Assert.assertTrue(day.isLessThanOrEqualTo(dayInHour));
+        Assert.assertTrue(day.isLessThanOrEqualTo(daysInHour));
+
+    }
+
+    @Test
+    public void isEquivalentToTest() {
+
+        BaseQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
+        BaseQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
+        BaseQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
+        BaseQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
+
+        Assert.assertTrue(day.isLessThanOrEqualTo(day));
+        Assert.assertFalse(day.isEquivalentTo(hours));
+        Assert.assertTrue(day.isEquivalentTo(dayInHour));
+        Assert.assertFalse(day.isEquivalentTo(daysInHour));
     }
 }

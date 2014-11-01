@@ -32,12 +32,14 @@ package tec.uom.se.quantity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Comparator;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.function.AbstractConverter;
+import tec.uom.se.function.NaturalOrder;
 
 /**
  * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
@@ -141,5 +143,14 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
 	@Override
 	public boolean isBig() {
 		return false;
+	}
+
+	/**
+     * @see {@link NaturalOrder}
+     */
+	@Override
+	public int compareTo(Quantity<Q> that) {
+	    Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
+        return comparator.compare(this, that);
 	}
 }

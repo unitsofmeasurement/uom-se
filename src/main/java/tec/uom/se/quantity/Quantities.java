@@ -86,7 +86,7 @@ public final class Quantities {
      * @return the corresponding <code>numeric</code> measurement.
      * @throws NullPointerException when value or unit were null
      */
-    public static <Q extends Quantity<Q>> Quantity<Q> getQuantity(Number value,
+    public static <Q extends Quantity<Q>> BaseQuantity<Q> getQuantity(Number value,
             Unit<Q> unit) {
 
         Objects.requireNonNull(value);
@@ -99,6 +99,6 @@ public final class Quantities {
             return new DecimalQuantity<>(new BigDecimal(
                     BigInteger.class.cast(value)), unit);
         }
-        return new BaseQuantity<>(value, unit);
+        return new NumberQuantity<>(value, unit);
     }
 }

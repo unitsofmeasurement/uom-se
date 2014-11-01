@@ -39,6 +39,7 @@ import javax.measure.function.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.uom.se.format.MeasurementFormat;
+import tec.uom.se.quantity.BaseQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
@@ -98,7 +99,7 @@ import tec.uom.se.util.SI;
  * @version 0.6.3, $Date: 2014-10-21 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
-		Quantity<Q>, Comparable<Quantity<Q>> {
+        BaseQuantity<Q>, Comparable<Quantity<Q>> {
 
 	private final Unit<Q> unit;
 
@@ -197,6 +198,32 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
         return Quantities.getQuantity(decimalValue(unit, ctx), unit);
     }
 
+
+    @Override
+    public boolean isGreaterThan(Quantity<Q> that) {
+        return this.compareTo(that) > 0;
+    }
+
+    @Override
+    public boolean isGreaterThanOrEqualTo(Quantity<Q> that) {
+        return this.compareTo(that) >= 0;
+    }
+
+    @Override
+    public boolean isLessThan(Quantity<Q> that) {
+        return this.compareTo(that) < 0;
+    }
+
+    @Override
+    public boolean isLessThanOrEqualTo(Quantity<Q> that) {
+        return this.compareTo(that) <= 0;
+    }
+
+    @Override
+    public boolean isEquivalentTo(Quantity<Q> that) {
+        return this.compareTo(that) == 0;
+    }
+
     /**
      * Compares this quantity to the specified Measurement quantity. The default
      * implementation compares the {@link AbstractQuantity#doubleValue(Unit)} of both
@@ -208,12 +235,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
      */
     public int compareTo(Quantity<Q> that) {
         Unit<Q> unit = getUnit();
-        if (unit instanceof AbstractUnit) {
-        	return Double.compare(doubleValue(unit), that.getValue().doubleValue()) +
-        			((AbstractUnit<Q>)unit).compareTo(that.getUnit());
-        } else {
-        	return Double.compare(doubleValue(unit), that.getValue().doubleValue()); 
-        }
+        return Double.compare(doubleValue(unit), that.getValue().doubleValue());
     }
 
     /**
