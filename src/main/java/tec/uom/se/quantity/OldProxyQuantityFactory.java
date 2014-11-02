@@ -185,7 +185,7 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
         @SuppressWarnings("rawtypes")
 		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
         static {
-            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
+            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
             CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
             CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);

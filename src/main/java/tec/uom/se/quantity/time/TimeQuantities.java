@@ -1,4 +1,4 @@
-package tec.uom.se.time;
+package tec.uom.se.quantity.time;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -6,6 +6,7 @@ import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjuster;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Time;
@@ -58,7 +59,7 @@ public final class TimeQuantities {
      * @return the Quantity difference based in {@link SI#DAY}.
      * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
      */
-    public static Quantity<Time> of(Temporal temporalA, Temporal temporalB) {
+    public static Quantity<Time> getQuantity(Temporal temporalA, Temporal temporalB) {
         long days = ChronoUnit.DAYS.between(temporalA, temporalB);
         return Quantities.getQuantity(days, SI.DAY);
     }
@@ -70,7 +71,7 @@ public final class TimeQuantities {
      * @return the Quantity difference based in {@link SI#HOUR}.
      * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
      */
-    public static Quantity<Time> of(LocalTime localTimeA, LocalTime localTimeB) {
+    public static Quantity<Time> getQuantity(LocalTime localTimeA, LocalTime localTimeB) {
         long hours = ChronoUnit.HOURS.between(localTimeA, localTimeB);
         return Quantities.getQuantity(hours, SI.HOUR);
     }
@@ -82,9 +83,9 @@ public final class TimeQuantities {
      * @return The Quantity based in Temporal with TemporalAdjuster in {@link SI#DAY}.
      * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
      */
-    public static Quantity<Time> of(Temporal temporalA, TemporalAdjusterSupplier supplier) {
+    public static Quantity<Time> getQuantity(Temporal temporalA, Supplier<TemporalAdjuster> supplier) {
         Temporal temporalB = temporalA.with(supplier.get());
-        return of(temporalA, temporalB);
+        return getQuantity(temporalA, temporalB);
     }
 
     /**
@@ -94,9 +95,9 @@ public final class TimeQuantities {
      * @return The Quantity based in Temporal with TemporalAdjuster in {@link SI#DAY}.
      * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
      */
-    public static Quantity<Time> of(LocalTime localTimeA, TemporalAdjusterSupplier supplier) {
+    public static Quantity<Time> getQuantity(LocalTime localTimeA, Supplier<TemporalAdjuster> supplier) {
         LocalTime localTimeB = localTimeA.with(supplier.get());
-        return of(localTimeA, localTimeB);
+        return getQuantity(localTimeA, localTimeB);
     }
 
     /**
@@ -104,7 +105,7 @@ public final class TimeQuantities {
      * @param timeUnit - time to be used
      * @param value - value to be used
      */
-    public static TimeUnitQuantity of(TimeUnit timeUnit, Integer number) {
+    public static TimeUnitQuantity getQuantity(TimeUnit timeUnit, Integer number) {
         return new TimeUnitQuantity(Objects.requireNonNull(timeUnit),
                 Objects.requireNonNull(number));
     }
@@ -115,7 +116,7 @@ public final class TimeQuantities {
      * @param quantity - quantity to be used
      * @return the {@link TimeUnitQuantity} converted be quantity in seconds.
      */
-    public static TimeUnitQuantity of(Quantity<Time> quantity) {
+    public static TimeUnitQuantity getQuantity(Quantity<Time> quantity) {
         Quantity<Time> seconds = Objects.requireNonNull(quantity).to(TimeQuantities.SECOND);
         return new TimeUnitQuantity(TimeUnit.SECONDS, seconds.getValue().intValue());
     }

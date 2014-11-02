@@ -32,7 +32,6 @@ package tec.uom.se.unit;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.AbstractConverter;
 import tec.uom.se.model.QuantityDimension;
-import tec.uom.se.util.SI;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
@@ -292,7 +291,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     @SuppressWarnings("unchecked")
 	@Override
     public AbstractUnit<Q> toSI() {
-        Unit<?> systemUnit = SI.ONE;
+        Unit<?> systemUnit = AbstractUnit.ONE;
         for (Element element : elements) {
             Unit<?> unit = element.unit.toSI();
             unit = unit.pow(element.pow);
@@ -386,7 +385,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
         // Returns or creates instance.
         if (resultIndex == 0)
-            return SI.ONE;
+            return AbstractUnit.ONE;
         else if ((resultIndex == 1) && (result[0].pow == result[0].root))
             return result[0].unit;
         else {

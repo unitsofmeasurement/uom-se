@@ -1,4 +1,4 @@
-package tec.uom.se.time;
+package tec.uom.se.quantity.time;
 
 import static java.util.concurrent.TimeUnit.DAYS;
 import static java.util.concurrent.TimeUnit.HOURS;
@@ -26,6 +26,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.quantity.time.TimeQuantities;
+import tec.uom.se.quantity.time.TimeUnitQuantity;
 import tec.uom.se.util.SI;
 
 public class TimeQuantitiesTest {
@@ -142,7 +144,7 @@ public class TimeQuantitiesTest {
 
         LocalDate a = Year.of(2015).atMonth(Month.JANUARY).atDay(9);
         LocalDate b = Year.of(2015).atMonth(Month.JANUARY).atDay(10);
-        Quantity<Time> time = TimeQuantities.of(a, b);
+        Quantity<Time> time = TimeQuantities.getQuantity(a, b);
         Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(time.getValue().intValue()));
         Assert.assertEquals(SI.DAY, time.getUnit());
     }
@@ -152,7 +154,7 @@ public class TimeQuantitiesTest {
 
         LocalTime a = LocalTime.of(0, 0);
         LocalTime b = LocalTime.of(12, 0);
-        Quantity<Time> time = TimeQuantities.of(a, b);
+        Quantity<Time> time = TimeQuantities.getQuantity(a, b);
         Assert.assertEquals(Double.valueOf(12.0), Double.valueOf(time.getValue().doubleValue()));
         Assert.assertEquals(SI.HOUR, time.getUnit());
     }
@@ -162,7 +164,7 @@ public class TimeQuantitiesTest {
 
         LocalDate a = Year.of(2015).atMonth(Month.JANUARY).atDay(9);
 
-        Quantity<Time> time = TimeQuantities.of(a, () -> TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        Quantity<Time> time = TimeQuantities.getQuantity(a, () -> TemporalAdjusters.next(DayOfWeek.SUNDAY));
         Assert.assertEquals(Integer.valueOf(2), Integer.valueOf(time.getValue().intValue()));
         Assert.assertEquals(SI.DAY, time.getUnit());
     }
@@ -173,7 +175,7 @@ public class TimeQuantitiesTest {
         LocalTime a = LocalTime.MIDNIGHT;
         TemporalAdjuster temporalAdjuster = (temporal) -> temporal.plus(12L , ChronoUnit.HOURS);
 
-        Quantity<Time> time = TimeQuantities.of(a, () -> temporalAdjuster);
+        Quantity<Time> time = TimeQuantities.getQuantity(a, () -> temporalAdjuster);
         Assert.assertEquals(Integer.valueOf(12), Integer.valueOf(time.getValue().intValue()));
         Assert.assertEquals(SI.HOUR, time.getUnit());
     }

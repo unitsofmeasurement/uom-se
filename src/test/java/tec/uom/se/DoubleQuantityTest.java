@@ -38,7 +38,6 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tec.uom.se.quantity.BaseQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
@@ -138,10 +137,10 @@ public class DoubleQuantityTest {
 
     @Test
     public void isGreaterThanTest() {
-        BaseQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        BaseQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        BaseQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        BaseQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
 
         Assert.assertFalse(day.isGreaterThan(day));
         Assert.assertTrue(day.isGreaterThan(hours));
@@ -152,10 +151,10 @@ public class DoubleQuantityTest {
     @Test
     public void isGreaterThanOrEqualToTest() {
 
-        BaseQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        BaseQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        BaseQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        BaseQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
 
         Assert.assertTrue(day.isLessThanOrEqualTo(day));
         Assert.assertTrue(day.isGreaterThanOrEqualTo(hours));
@@ -166,10 +165,10 @@ public class DoubleQuantityTest {
     @Test
     public void isLessThanTest(){
 
-        BaseQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        BaseQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        BaseQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        BaseQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
 
         Assert.assertFalse(day.isLessThan(day));
         Assert.assertFalse(day.isLessThan(hours));
@@ -180,10 +179,10 @@ public class DoubleQuantityTest {
     @Test
     public void isLessThanOrEqualToTest() {
 
-        BaseQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        BaseQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        BaseQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        BaseQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
 
         Assert.assertTrue(day.isLessThanOrEqualTo(day));
         Assert.assertFalse(day.isLessThanOrEqualTo(hours));
@@ -195,10 +194,10 @@ public class DoubleQuantityTest {
     @Test
     public void isEquivalentToTest() {
 
-        BaseQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        BaseQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        BaseQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        BaseQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
 
         Assert.assertTrue(day.isEquivalentTo(day));
         Assert.assertFalse(day.isEquivalentTo(hours));

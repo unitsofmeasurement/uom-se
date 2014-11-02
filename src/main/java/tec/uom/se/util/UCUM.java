@@ -106,37 +106,37 @@ public final class UCUM extends AbstractSystemOfUnits {
 	// DIMENSIONLESS DERIVED UNITS: UCUM 4.3 §26 //
 	// /////////////////////////////////////////////
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> TRIILLIONS = addUnit(SI.ONE
+	public static final Unit<Dimensionless> TRIILLIONS = addUnit(AbstractUnit.ONE
 			.multiply(1000000000000L));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> BILLIONS = addUnit(SI.ONE
+	public static final Unit<Dimensionless> BILLIONS = addUnit(AbstractUnit.ONE
 			.multiply(1000000000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> MILLIONS = addUnit(SI.ONE
+	public static final Unit<Dimensionless> MILLIONS = addUnit(AbstractUnit.ONE
 			.multiply(1000000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> THOUSANDS = addUnit(SI.ONE
+	public static final Unit<Dimensionless> THOUSANDS = addUnit(AbstractUnit.ONE
 			.multiply(1000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> HUNDREDS = addUnit(SI.ONE
+	public static final Unit<Dimensionless> HUNDREDS = addUnit(AbstractUnit.ONE
 			.multiply(100));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> PI = addUnit(SI.ONE
+	public static final Unit<Dimensionless> PI = addUnit(AbstractUnit.ONE
 			.transform(new PiMultiplierConverter()));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> PERCENT = addUnit(SI.ONE
+	public static final Unit<Dimensionless> PERCENT = addUnit(AbstractUnit.ONE
 			.divide(100));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> PER_THOUSAND = addUnit(SI.ONE
+	public static final Unit<Dimensionless> PER_THOUSAND = addUnit(AbstractUnit.ONE
 			.divide(1000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> PER_MILLION = addUnit(SI.ONE
+	public static final Unit<Dimensionless> PER_MILLION = addUnit(AbstractUnit.ONE
 			.divide(1000000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> PER_BILLION = addUnit(SI.ONE
+	public static final Unit<Dimensionless> PER_BILLION = addUnit(AbstractUnit.ONE
 			.divide(1000000000));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> PER_TRILLION = addUnit(SI.ONE
+	public static final Unit<Dimensionless> PER_TRILLION = addUnit(AbstractUnit.ONE
 			.divide(1000000000000L));
 	// //////////////////////////
 	// SI UNITS: UCUM 4.3 §27 //
@@ -796,7 +796,7 @@ public final class UCUM extends AbstractSystemOfUnits {
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Mass> CARAT_METRIC = addUnit(GRAM.divide(5));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> CARAT_GOLD = addUnit(SI.ONE
+	public static final Unit<Dimensionless> CARAT_GOLD = addUnit(AbstractUnit.ONE
 			.divide(24));
 	// //////////////////////////////////////////////
 	// INFORMATION TECHNOLOGY UNITS: UCUM 4.6 §45 //
@@ -817,7 +817,7 @@ public final class UCUM extends AbstractSystemOfUnits {
 	 * standard.
 	 */
 	public static final Unit<Frequency> FRAMES_PER_SECOND = addUnit(
-			SI.ONE.divide(SECOND)).asType(Frequency.class);
+			AbstractUnit.ONE.divide(SECOND)).asType(Frequency.class);
 
 	// ///////////////////
 	// Collection View //

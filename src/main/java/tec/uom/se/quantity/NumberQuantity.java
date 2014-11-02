@@ -46,7 +46,7 @@ import tec.uom.se.function.AbstractConverter;
 
 /**
  * An amount of quantity, consisting of a Number and a Unit.
- * <type>BaseQuantity</type> objects are immutable.
+ * <type>ComparableQuantity</type> objects are immutable.
  *
  * @see AbstractQuantity
  * @see Quantity
@@ -56,7 +56,7 @@ import tec.uom.se.function.AbstractConverter;
  * @version 0.9.3, $Date: 2014-10-10 $
  */
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
-		implements Serializable { //Comparable<BaseQuantity<Q>>
+		implements Serializable { //Comparable<ComparableQuantity<Q>>
 
 	/**
 	 *

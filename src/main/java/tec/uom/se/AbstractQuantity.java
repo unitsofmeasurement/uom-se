@@ -38,9 +38,7 @@ import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
-import tec.uom.se.quantity.BaseQuantity;
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.util.SI;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
@@ -98,7 +96,7 @@ import tec.uom.se.util.SI;
  * @version 0.6.3, $Date: 2014-10-21 $
  */
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
-        BaseQuantity<Q>, Comparable<Quantity<Q>> {
+        ComparableQuantity<Q> {
 
 	private final Unit<Q> unit;
 
@@ -106,12 +104,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * Holds a dimensionless measure of none (exact).
 	 */
 	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(
-			0, SI.ONE);
+			0, AbstractUnit.ONE);
 
 	/**
 	 * Holds a dimensionless measure of one (exact).
 	 */
-	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, SI.ONE);
+	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, AbstractUnit.ONE);
 
 	/**
      * constructor.
@@ -344,7 +342,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
      * <code>ClassCastException</code> if the dimension of the specified
      * quantity and its unit's dimension do not match. For
      * example:<br/><code>
-     *     Quantity<Length> length = BaseQuantity.of("2 km").asType(Length.class);
+     *     Quantity<Length> length = ComparableQuantity.of("2 km").asType(Length.class);
      * </code>
      *
      * @param type the quantity class identifying the nature of the measure.

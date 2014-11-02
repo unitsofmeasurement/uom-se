@@ -45,6 +45,7 @@ import tec.uom.se.util.SI;
 
 import javax.measure.*;
 import javax.measure.function.UnitConverter;
+import javax.measure.quantity.Dimensionless;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -73,7 +74,7 @@ import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, Nov 1, 2014
+ * @version 0.5.2, Nov 2, 2014
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		Comparable<Unit<Q>>, Serializable {
@@ -87,6 +88,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 * Holds the name.
 	 */
 	protected String name;
+
+	/**
+	 * Holds the dimensionless unit <code>ONE</code>.
+	 */
+	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
 	/**
 	 * DefaultQuantityFactory constructor.
@@ -405,9 +411,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 * @return <code>this * that</code>
 	 */
 	public final Unit<?> multiply(AbstractUnit<?> that) {
-		if (this.equals(SI.ONE))
+		if (this.equals(AbstractUnit.ONE))
 			return that;
-		if (that.equals(SI.ONE))
+		if (that.equals(AbstractUnit.ONE))
 			return this;
 		return ProductUnit.getProductInstance(this, that);
 	}
@@ -419,9 +425,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	@Override
 	public final Unit<?> inverse() {
-		if (this.equals(SI.ONE))
+		if (this.equals(AbstractUnit.ONE))
 			return this;
-		return ProductUnit.getQuotientInstance(SI.ONE, this);
+		return ProductUnit.getQuotientInstance(AbstractUnit.ONE, this);
 	}
 
 	/**
@@ -489,7 +495,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 			throw new ArithmeticException("Root's order of zero");
 		else
 			// n < 0
-			return SI.ONE.divide(this.root(-n));
+			return AbstractUnit.ONE.divide(this.root(-n));
 	}
 
 	/**
@@ -504,10 +510,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		if (n > 0)
 			return this.multiply(this.pow(n - 1));
 		else if (n == 0)
-			return SI.ONE;
+			return AbstractUnit.ONE;
 		else
 			// n < 0
-			return SI.ONE.divide(this.pow(-n));
+			return AbstractUnit.ONE.divide(this.pow(-n));
 	}
 
 	/**

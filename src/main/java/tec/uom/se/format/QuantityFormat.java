@@ -43,8 +43,8 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractQuantity;
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.util.SI;
 
 
 
@@ -273,7 +273,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 //						(CompoundUnit) unit, dest);
 //			else {
 				dest.append(numberFormat.format(measure.getValue()));
-				if (measure.getUnit().equals(SI.ONE))
+				if (measure.getUnit().equals(AbstractUnit.ONE))
 					return dest;
 				dest.append(' ');
 				return unitFormat.format(measure.getUnit(), dest);
@@ -330,7 +330,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
             Unit unit = measure.getUnit();
 
             dest.append(measure.getValue().toString());
-            if (measure.getUnit().equals(SI.ONE))
+            if (measure.getUnit().equals(AbstractUnit.ONE))
                 return dest;
             dest.append(' ');
             return LocalUnitFormat.getInstance().format(unit, dest);

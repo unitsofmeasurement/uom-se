@@ -40,6 +40,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 
+import tec.uom.se.ComparableQuantity;
 import tec.uom.se.format.QuantityFormat;
 
 /**
@@ -85,7 +86,7 @@ public final class Quantities {
      * @return the corresponding <code>numeric</code> measurement.
      * @throws NullPointerException when value or unit were null
      */
-    public static <Q extends Quantity<Q>> BaseQuantity<Q> getQuantity(Number value,
+    public static <Q extends Quantity<Q>> ComparableQuantity<Q> getQuantity(Number value,
             Unit<Q> unit) {
 
         Objects.requireNonNull(value);

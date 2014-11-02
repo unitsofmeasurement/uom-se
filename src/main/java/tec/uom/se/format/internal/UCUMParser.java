@@ -33,7 +33,6 @@ import javax.measure.Unit;
 
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
-import tec.uom.se.util.SI;
 import tec.uom.se.util.SIPrefix;
 import static tec.uom.se.format.internal.UCUMParserConstants.*;
 
@@ -70,8 +69,8 @@ public class UCUMParser {
     }
     
     final public Unit Term() throws ParseException {
-        Unit result = SI.ONE;
-        Unit temp = SI.ONE;
+        Unit result = AbstractUnit.ONE;
+        Unit temp = AbstractUnit.ONE;
         result = Component();
         label_1:
         while (true) {
@@ -106,7 +105,7 @@ public class UCUMParser {
     }
 
     final public Unit Component() throws ParseException {
-        Unit result = (AbstractUnit) SI.ONE;
+        Unit result = (AbstractUnit) AbstractUnit.ONE;
         Token token = null;
         if (jj_2_1(2147483647)) {
             result = Annotatable();
@@ -132,7 +131,7 @@ public class UCUMParser {
                 case SOLIDUS:
                     jj_consume_token(SOLIDUS);
                     result = Component(); {
-                    return SI.ONE.divide(result);
+                    return AbstractUnit.ONE.divide(result);
                 }
                 case 14:
                     jj_consume_token(14);
@@ -149,7 +148,7 @@ public class UCUMParser {
     }
 
     final public Unit Annotatable() throws ParseException {
-    	Unit result = SI.ONE;
+    	Unit result = AbstractUnit.ONE;
         Token token1 = null;
         Token token2 = null;
         if (jj_2_2(2147483647)) {

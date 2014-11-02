@@ -219,7 +219,7 @@ public abstract class UCUMFormat implements UnitFormat {
                     converter = converter.concatenate(SIPrefix.KILO.getConverter());
                 }
                 format(parentUnit, temp);
-                printSeparator = !parentUnit.equals(SI.ONE);
+                printSeparator = !parentUnit.equals(AbstractUnit.ONE);
             }
             formatConverter(converter, printSeparator, temp);
             symbol = temp;
@@ -459,11 +459,11 @@ public abstract class UCUMFormat implements UnitFormat {
             int start = cursor.getIndex();
             int end = csq.length();
             if (end <= start) {
-                return SI.ONE;
+                return AbstractUnit.ONE;
             }
             String source = csq.subSequence(start, end).toString().trim();
             if (source.length() == 0) {
-                return SI.ONE;
+                return AbstractUnit.ONE;
             }
             if (!caseSensitive) {
                 source = source.toUpperCase();

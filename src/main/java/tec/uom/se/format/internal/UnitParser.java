@@ -35,7 +35,6 @@ import javax.measure.Unit;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
-import tec.uom.se.util.SI;
 import tec.uom.se.util.SIPrefix;
 
 /** */
@@ -76,7 +75,7 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public Unit AddExpr() throws ParseException {
-        Unit result = SI.ONE;
+        Unit result = AbstractUnit.ONE;
         Number n1 = null;
         Token sign1 = null;
         Number n2 = null;
@@ -115,8 +114,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public Unit MulExpr() throws ParseException {
-        Unit result = SI.ONE;
-        Unit temp = SI.ONE;
+        Unit result = AbstractUnit.ONE;
+        Unit temp = AbstractUnit.ONE;
         result = ExponentExpr();
         label_2:
         while (true) {
@@ -164,8 +163,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public Unit ExponentExpr() throws ParseException {
-        Unit result = SI.ONE;
-        Unit temp = SI.ONE;
+        Unit result = AbstractUnit.ONE;
+        Unit temp = AbstractUnit.ONE;
         Exponent exponent = null;
         Token token = null;
         if (jj_2_2(2147483647)) {
@@ -260,8 +259,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     final public Unit AtomicExpr() throws ParseException {
-        Unit result = SI.ONE;
-        Unit temp = SI.ONE;
+        Unit result = AbstractUnit.ONE;
+        Unit temp = AbstractUnit.ONE;
         Number n = null;
         Token token = null;
         switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {

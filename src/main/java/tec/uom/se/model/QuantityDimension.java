@@ -29,6 +29,7 @@
  */
 package tec.uom.se.model;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.util.SI;
 
@@ -72,7 +73,7 @@ public final class QuantityDimension implements Dimension, Serializable {
 	/**
      * Holds dimensionless.
      */
-    public static final Dimension NONE = new QuantityDimension(SI.ONE);
+    public static final Dimension NONE = new QuantityDimension(AbstractUnit.ONE);
 
     /**
      * Holds length dimension (L).

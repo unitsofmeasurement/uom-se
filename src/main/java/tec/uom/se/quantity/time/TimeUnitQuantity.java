@@ -1,4 +1,4 @@
-package tec.uom.se.time;
+package tec.uom.se.quantity.time;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;

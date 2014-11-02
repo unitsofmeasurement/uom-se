@@ -77,11 +77,7 @@ public final class SI extends AbstractSystemOfUnits {
         return INSTANCE;
     }
 
-    /**
-     * Holds the dimensionless unit <code>ONE</code>.
-     */
-    public static final AbstractUnit<Dimensionless> ONE
-        = addUnit( new ProductUnit<Dimensionless>(), Dimensionless.class);
+    
 
     ////////////////
     // BASE UNITS //
@@ -179,7 +175,7 @@ public final class SI extends AbstractSystemOfUnits {
      * length of the arc between them is equal to the radius.
      */
     public static final AlternateUnit<Angle> RADIAN
-            = addUnit(new AlternateUnit<Angle>(SI.ONE, "rad"), Angle.class);
+            = addUnit(new AlternateUnit<Angle>(AbstractUnit.ONE, "rad"), Angle.class);
 
     /**
      * The SI unit for solid angle quantities (standard name <code>sr</code>).
@@ -188,13 +184,13 @@ public final class SI extends AbstractSystemOfUnits {
      * The total solid angle of a sphere is 4*Pi steradians.
      */
     public static final AlternateUnit<SolidAngle> STERADIAN
-            = addUnit(new AlternateUnit<SolidAngle>(SI.ONE, "sr"), SolidAngle.class);
+            = addUnit(new AlternateUnit<SolidAngle>(AbstractUnit.ONE, "sr"), SolidAngle.class);
 
     /**
      * The SI unit for binary information (standard name <code>bit</code>).
      */
     public static final AlternateUnit<Information> BIT
-            = addUnit(new AlternateUnit<Information>(SI.ONE, "bit"), Information.class);
+            = addUnit(new AlternateUnit<Information>(AbstractUnit.ONE, "bit"), Information.class);
 
     /**
      * The SI unit for frequency (standard name <code>Hz</code>).
@@ -203,7 +199,7 @@ public final class SI extends AbstractSystemOfUnits {
      * first to produce radio waves artificially.
      */
     public static final AlternateUnit<Frequency> HERTZ
-            = addUnit(new AlternateUnit<Frequency>(SI.ONE.divide(SECOND), "Hz"), Frequency.class);
+            = addUnit(new AlternateUnit<Frequency>(AbstractUnit.ONE.divide(SECOND), "Hz"), Frequency.class);
 
     /**
      * The SI unit for force (standard name <code>N</code>).
@@ -364,7 +360,7 @@ public final class SI extends AbstractSystemOfUnits {
      */
     public static final AlternateUnit<Radioactivity> BECQUEREL
             = addUnit(new AlternateUnit<Radioactivity>(
-            ONE.divide(SECOND), "Bq"), Radioactivity.class);
+            AbstractUnit.ONE.divide(SECOND), "Bq"), Radioactivity.class);
 
     /**
      * The SI unit for absorbed dose, specific energy (imparted), kerma
@@ -503,7 +499,7 @@ public final class SI extends AbstractSystemOfUnits {
      * A dimensionless unit accepted for use with SI units (standard name <code>%</code>).
      */
     public static final TransformedUnit<Dimensionless> PERCENT
-        = new TransformedUnit<Dimensionless>(ONE, new RationalConverter(1, 100));
+        = new TransformedUnit<Dimensionless>(AbstractUnit.ONE, new RationalConverter(1, 100));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>min</code>).
@@ -560,14 +556,14 @@ public final class SI extends AbstractSystemOfUnits {
      * (CGPM, Conférence Générale des Poids et Mesures) and is thus not an SI unit.
      */
     public static final TransformedUnit<Dimensionless> NEPER
-        = new TransformedUnit<Dimensionless>(ONE, new LogConverter(E).inverse());
+        = new TransformedUnit<Dimensionless>(AbstractUnit.ONE, new LogConverter(E).inverse());
 
     /**
      * A dimensionless unit accepted for use with SI units (standard name <code>B</code>).
      * The bel is most commonly used with the SI prefix deci: 1 dB = 0.1 B
      */
     public static final TransformedUnit<Dimensionless> BEL
-        = new TransformedUnit<Dimensionless>(ONE, new LogConverter(10).inverse());
+        = new TransformedUnit<Dimensionless>(AbstractUnit.ONE, new LogConverter(10).inverse());
 
     /**
      * An energy unit accepted for use with SI units (standard name <code>eV</code>).
