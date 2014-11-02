@@ -43,10 +43,10 @@ import javax.measure.Quantity;
  * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
  * will return: seconds, minutes, hours, day
  */
-public class NaturalOrder<T extends Quantity<T>> implements Comparator<T>{
+public class NaturalOrder<T extends Quantity<T>> implements Comparator <Quantity<T>> {
 
     @Override
-    public int compare(T q1, T q2) {
+    public int compare(Quantity<T> q1, Quantity<T> q2) {
         if (q1.getUnit().equals(q2.getUnit())) {
             return Double.compare(q1.getValue().doubleValue(), q2.getValue()
                     .doubleValue());
