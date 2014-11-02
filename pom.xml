@@ -126,6 +126,7 @@
 					<instructions>
 						<Export-Package>tec.uom.se.*</Export-Package>
 						<Private-Package>tec.uom.se.format.internal.*</Private-Package>
+						<Private-Package>tec.uom.se.quantity.internal.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
