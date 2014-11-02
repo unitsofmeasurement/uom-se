@@ -61,7 +61,7 @@ import tec.uom.se.AbstractUnit;
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @version 0.4 ($Revision: 458 $), $Date: 2014-10-19 $
  */
-public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
+abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 	
     /**
      * Holds the current instances.
