@@ -25,7 +25,7 @@ public class TimeUnitQuantity {
      * @param timeUnit - time to be used
      * @param value - value to be used
      */
-    private TimeUnitQuantity(TimeUnit timeUnit, Integer value) {
+    TimeUnitQuantity(TimeUnit timeUnit, Integer value) {
         this.timeUnit = timeUnit;
         this.value = value;
     }
@@ -47,7 +47,7 @@ public class TimeUnitQuantity {
      * @return the {@link TimeUnitQuantity} converted be quantity in seconds.
      */
     public static TimeUnitQuantity of(Quantity<Time> quantity) {
-        Quantity<Time> seconds = Objects.requireNonNull(quantity).to(TimeUnits.SECOND);
+        Quantity<Time> seconds = Objects.requireNonNull(quantity).to(TimeQuantities.SECOND);
         return new TimeUnitQuantity(TimeUnit.SECONDS, seconds.getValue().intValue());
     }
 
@@ -94,19 +94,19 @@ public class TimeUnitQuantity {
     private Unit<Time> toUnit(TimeUnit timeUnit) {
         switch (timeUnit) {
         case MICROSECONDS:
-            return TimeUnits.MICROSECOND;
+            return TimeQuantities.MICROSECOND;
         case MILLISECONDS:
-            return TimeUnits.MILLISECOND;
+            return TimeQuantities.MILLISECOND;
         case NANOSECONDS:
-            return TimeUnits.NANOSECOND;
+            return TimeQuantities.NANOSECOND;
         case SECONDS:
-            return TimeUnits.SECOND;
+            return TimeQuantities.SECOND;
         case MINUTES:
-            return TimeUnits.MINUTE;
+            return TimeQuantities.MINUTE;
         case HOURS:
-            return TimeUnits.HOUR;
+            return TimeQuantities.HOUR;
         case DAYS:
-            return TimeUnits.DAY;
+            return TimeQuantities.DAY;
         default:
             throw new IllegalStateException(
                     "In TimeUnitQuantity just supports DAYS, HOURS, MICROSECONDS, MILLISECONDS, MINUTES, NANOSECONDS, SECONDS ");
