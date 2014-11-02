@@ -28,9 +28,9 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package tec.uom.se.quantity;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.measure.Quantity;
 import javax.measure.function.QuantityFactory;
@@ -45,8 +45,7 @@ public final class QuantityFactoryProvider {
 
     private QuantityFactoryProvider() {}
 
-
-    private static final Map<Class, QuantityFactory> INSTANCE = new HashMap<>();
+    private static final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();
 
     /**
      * return a factory Quantities from this unit
