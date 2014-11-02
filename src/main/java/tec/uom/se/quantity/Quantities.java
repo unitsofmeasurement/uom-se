@@ -29,7 +29,7 @@
  */
 package tec.uom.se.quantity;
 
-import static javax.measure.format.FormatBehavior.LOCALE_NEUTRAL;
+import static tec.uom.se.format.FormatBehavior.LOCALE_NEUTRAL;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -40,7 +40,6 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 
-import tec.uom.se.format.MeasurementFormat;
 import tec.uom.se.format.QuantityFormat;
 
 /**

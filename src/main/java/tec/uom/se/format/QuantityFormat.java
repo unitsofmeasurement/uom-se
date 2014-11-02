@@ -38,7 +38,6 @@ import java.text.ParsePosition;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.format.FormatBehavior;
 import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
@@ -59,7 +58,7 @@ import tec.uom.se.util.SI;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2014-02-07 22:28:20 +0100 (Fr, 07 Feb 2014) $
+ * @version 0.3, $Date: 2014-11-02 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {

@@ -38,7 +38,6 @@ import javax.measure.Unit;
 import javax.measure.function.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
-import tec.uom.se.format.MeasurementFormat;
 import tec.uom.se.quantity.BaseQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
@@ -50,7 +49,7 @@ import tec.uom.se.util.SI;
  * <p> To avoid any lost of precision, known exact measure (e.g. physical
  *     constants) should not be created from <code>double</code> constants but
  *     from their decimal representation.<br/><code>
- *         public static final Measurement<Number, Velocity> C = AbstractMeasurement.of("299792458 m/s").asType(Velocity.class);
+ *         public static final Quantity<Velocity> C = AbstractQuantity.of("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code></p>
  *
