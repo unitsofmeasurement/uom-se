@@ -41,7 +41,6 @@ import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-//import javax.measure.function.BiFactory;
 import javax.measure.quantity.*;
 
 import tec.uom.se.AbstractQuantity;
@@ -82,7 +81,6 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
      */
     @SuppressWarnings("unchecked")
 	public static <Q extends Quantity<Q>>  OldProxyQuantityFactory<Q> getInstance(final Class<Q> type) {
-        
          logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
          OldProxyQuantityFactory<Q> factory;
          if (!type.isInterface()) {
@@ -161,7 +159,6 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
      * @param <Q> The type of the quantity
      */
     private static final class Default<Q extends Quantity<Q>>  extends OldProxyQuantityFactory<Q> {
-
         /**
          * The type of the quantities created by this factory.
          */
@@ -222,7 +219,6 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
             CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
         }
  
-
         @Override
         @SuppressWarnings("unchecked")
         public Q create(final Number value, final Unit<Q> unit) {
