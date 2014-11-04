@@ -33,7 +33,7 @@ import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.QuantityFactory;
+import javax.measure.spi.QuantityFactory;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).

@@ -35,8 +35,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.measure.Quantity;
-import javax.measure.function.QuantityFactory;
 import javax.measure.quantity.Time;
+import javax.measure.spi.QuantityFactory;
 
 import org.junit.Assert;
 import org.junit.Before;

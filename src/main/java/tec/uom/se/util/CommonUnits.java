@@ -32,9 +32,9 @@ package tec.uom.se.util;
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
 
-import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
+import javax.measure.spi.SystemOfUnits;
 
 import static tec.uom.se.util.SI.METRES_PER_SECOND;
 

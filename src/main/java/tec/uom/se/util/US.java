@@ -35,9 +35,9 @@ import tec.uom.se.function.RationalConverter;
 import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.Quantity;
-import javax.measure.SystemOfUnits;
 import javax.measure.Unit;
 import javax.measure.quantity.*;
+import javax.measure.spi.SystemOfUnits;
 
 import static tec.uom.se.util.SI.*;
 import static tec.uom.se.util.SIPrefix.MICRO;

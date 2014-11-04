@@ -33,7 +33,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.measure.Quantity;
-import javax.measure.function.QuantityFactory;
+import javax.measure.spi.QuantityFactory;
 
 /**
  * Provider of Quantities

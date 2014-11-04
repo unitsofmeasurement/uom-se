@@ -41,8 +41,8 @@ import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.QuantityFactory;
 import javax.measure.quantity.*;
+import javax.measure.spi.QuantityFactory;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.AbstractUnit;

@@ -34,8 +34,8 @@ import static org.junit.Assert.assertNotNull;
 import static tec.uom.se.util.SI.METRE;
 
 import javax.measure.Quantity;
-import javax.measure.function.QuantityFactory;
 import javax.measure.quantity.Length;
+import javax.measure.spi.QuantityFactory;
 
 import org.junit.Before;
 import org.junit.Test;

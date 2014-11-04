@@ -37,8 +37,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.measure.Quantity;
-import javax.measure.function.QuantityFactory;
 import javax.measure.quantity.Time;
+import javax.measure.spi.QuantityFactory;
 
 import org.junit.Before;
 import org.junit.Test;
