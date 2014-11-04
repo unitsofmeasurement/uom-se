@@ -29,7 +29,6 @@
  */
 package tec.uom.se.function;
 
-import javax.measure.function.ValueSupplier;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;

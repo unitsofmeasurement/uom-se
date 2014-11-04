@@ -35,7 +35,7 @@ import tec.uom.se.model.QuantityDimension;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import java.util.Map;
 

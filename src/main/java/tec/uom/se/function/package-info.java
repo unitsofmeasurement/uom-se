@@ -29,7 +29,7 @@
  */
 /**
  * This package provides concrete implementations of the 
- * {@link javax.measure.function.UnitConverter} interface.
+ * {@link javax.measure.UnitConverter} interface.
  * 
  * As well as concrete implementations of 
  * {@link javax.measure.spi.UnitformatService}.

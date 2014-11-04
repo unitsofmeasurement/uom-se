@@ -42,9 +42,9 @@ import tec.uom.se.util.SIPrefix;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
+import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
-import javax.measure.function.UnitConverter;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

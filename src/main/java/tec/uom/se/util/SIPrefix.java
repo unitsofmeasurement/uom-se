@@ -34,7 +34,7 @@ import tec.uom.se.function.RationalConverter;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import java.math.BigInteger;
 

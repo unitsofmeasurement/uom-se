@@ -39,7 +39,7 @@ import javax.measure.IncommensurableException;
 import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.function.AbstractConverter;

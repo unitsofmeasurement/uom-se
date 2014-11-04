@@ -34,7 +34,7 @@ import tec.uom.se.function.AbstractConverter;
 import tec.uom.se.util.SIPrefix;
 
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import java.lang.reflect.Field;
 import java.util.Enumeration;

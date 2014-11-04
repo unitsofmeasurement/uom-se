@@ -44,7 +44,6 @@ import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.util.SI;
 
 import javax.measure.*;
-import javax.measure.function.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import java.io.IOException;

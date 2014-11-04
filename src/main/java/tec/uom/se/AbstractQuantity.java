@@ -35,7 +35,7 @@ import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.uom.se.quantity.Quantities;

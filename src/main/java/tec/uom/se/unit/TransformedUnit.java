@@ -32,7 +32,7 @@ package tec.uom.se.unit;
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.function.UnitConverter;
+import javax.measure.UnitConverter;
 
 import tec.uom.se.AbstractUnit;
 

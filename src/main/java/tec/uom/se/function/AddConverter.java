@@ -34,9 +34,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
-import javax.measure.function.UnitConverter;
-import javax.measure.function.ValueSupplier;
-
+import javax.measure.UnitConverter;
 
 /**
  * <p> This class represents a converter adding a constant offset

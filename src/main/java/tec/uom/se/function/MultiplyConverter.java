@@ -29,8 +29,7 @@
  */
 package tec.uom.se.function;
 
-import javax.measure.function.UnitConverter;
-import javax.measure.function.ValueSupplier;
+import javax.measure.UnitConverter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
