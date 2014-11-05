@@ -32,9 +32,7 @@ package tec.uom.se;
 import javax.measure.Quantity;
 
 /**
- *
- * Quantity specialized for comparison.
- * 
+ * Quantity specialized to SE platform.
  * @see {@link Quantity}
  * @author otaviojava
  * @author werner

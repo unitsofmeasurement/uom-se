@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se;
+package tec.uom.se.quantity;
 
 import java.math.BigDecimal;
 
@@ -38,10 +38,12 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
 public class DecimalQuantityTest {
+
+
+
 
     @Test
     public void divideTest() {
@@ -132,83 +134,5 @@ public class DecimalQuantityTest {
         Quantity<?> secInv = Quantities.getQuantity(BigDecimal.valueOf(2d), SI.SECOND).inverse();
         Assert.assertEquals(BigDecimal.valueOf(0.5d), secInv.getValue());
         Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
-    }
-
-
-    @Test
-    public void isGreaterThanTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
-        ComparableQuantity<Time> minutes = Quantities.getQuantity(BigDecimal.valueOf(40), SI.MINUTE);
-
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
-        ComparableQuantity<Time> dayInMinutes = Quantities.getQuantity(BigDecimal.valueOf(1440), SI.MINUTE);
-
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
-
-        Assert.assertTrue(day.isGreaterThan(hours));
-        Assert.assertTrue(day.isGreaterThan(minutes));
-
-        Assert.assertFalse(day.isGreaterThan(dayInHour));
-        Assert.assertFalse(day.isGreaterThan(daysInHour));
-        Assert.assertFalse(day.isGreaterThan(dayInMinutes));
-
-
-    }
-
-    @Test
-    public void isGreaterThanOrEqualToTest() {
-
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
-
-        Assert.assertTrue(day.isGreaterThanOrEqualTo(hours));
-        Assert.assertTrue(day.isGreaterThanOrEqualTo(dayInHour));
-        Assert.assertFalse(day.isGreaterThanOrEqualTo(daysInHour));
-    }
-
-    @Test
-    public void isLessThanTest(){
-
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
-
-        Assert.assertFalse(day.isLessThan(day));
-        Assert.assertFalse(day.isLessThan(hours));
-        Assert.assertFalse(day.isLessThan(dayInHour));
-        Assert.assertTrue(day.isLessThan(daysInHour));
-    }
-
-    @Test
-    public void isLessThanOrEqualToTest() {
-
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
-
-        Assert.assertTrue(day.isLessThanOrEqualTo(day));
-        Assert.assertFalse(day.isLessThanOrEqualTo(hours));
-        Assert.assertTrue(day.isLessThanOrEqualTo(dayInHour));
-        Assert.assertTrue(day.isLessThanOrEqualTo(daysInHour));
-
-    }
-
-    @Test
-    public void isEquivalentToTest() {
-
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), SI.HOUR);
-
-        Assert.assertTrue(day.isLessThanOrEqualTo(day));
-        Assert.assertFalse(day.isEquivalentTo(hours));
-        Assert.assertTrue(day.isEquivalentTo(dayInHour));
-        Assert.assertFalse(day.isEquivalentTo(daysInHour));
     }
 }

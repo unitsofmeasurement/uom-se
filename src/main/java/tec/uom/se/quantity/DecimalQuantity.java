@@ -33,15 +33,28 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
-import java.util.Comparator;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import tec.uom.se.AbstractQuantity;
+import tec.uom.se.ComparableQuantity;
 import tec.uom.se.function.AbstractConverter;
-import tec.uom.se.function.NaturalOrder;
 
+/**
+ * An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link BigDecimal} as implementation of {@link Number},
+ * this object is immutable.
+ * Note: all operations which involves {@link Number}, this implementation will convert to {@link BigDecimal}, and all operation of BigDecimal will use
+ * {@link MathContext#DECIMAL128}.
+ *
+ * @see AbstractQuantity
+ * @see Quantity
+ * @see ComparableQuantity
+ * @param <Q> The type of the quantity.
+ * @author otaviojava
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
 
 	private static final long serialVersionUID = 6504081836032983882L;
@@ -71,7 +84,7 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
     }
 
     @Override
-    public Quantity<Q> add(Quantity<Q> that) {
+    public ComparableQuantity<Q> add(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value.add(
                     toBigDecimal(that.getValue()), MathContext.DECIMAL128),
@@ -83,7 +96,7 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
     }
 
     @Override
-    public Quantity<Q> subtract(Quantity<Q> that) {
+    public ComparableQuantity<Q> subtract(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value.subtract(
                     toBigDecimal(that.getValue()), MathContext.DECIMAL128),
@@ -95,32 +108,30 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
                 getUnit());
     }
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
+	public ComparableQuantity<?> multiply(Quantity<?> that) {
 		return new DecimalQuantity(value.multiply(toBigDecimal(that.getValue()), MathContext.DECIMAL128),
 				getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
-	public Quantity<Q> multiply(Number that) {
+	public ComparableQuantity<Q> multiply(Number that) {
         return Quantities.getQuantity(
                 value.multiply(toBigDecimal(that), MathContext.DECIMAL128),
                 getUnit());
 	}
 
 	@Override
-	public Quantity<Q> divide(Number that) {
+	public ComparableQuantity<Q> divide(Number that) {
         return Quantities.getQuantity(
                 value.divide(toBigDecimal(that), MathContext.DECIMAL128),
                 getUnit());
 	}
 
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Quantity<Q> inverse() {
-		return (Quantity<Q>) Quantities.getQuantity(BigDecimal.ONE.divide(value), getUnit().inverse());
+	public ComparableQuantity<Q> inverse() {
+		return (ComparableQuantity<Q>) Quantities.getQuantity(BigDecimal.ONE.divide(value), getUnit().inverse());
 	}
 
 	@Override
@@ -137,9 +148,8 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
 		return true;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> divide(Quantity<?> that) {
+	public ComparableQuantity<?> divide(Quantity<?> that) {
         return new DecimalQuantity(value.divide(toBigDecimal(that.getValue()),
                 MathContext.DECIMAL128), getUnit().divide(that.getUnit()));
 	}
@@ -153,12 +163,5 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
         return BigDecimal.valueOf(value.doubleValue());
     }
 
-	/**
-     * @see {@link NaturalOrder}
-     */
-	@Override
-    public int compareTo(Quantity<Q> that) {
-        Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
-        return comparator.compare(this, that);
-    }
+
 }
