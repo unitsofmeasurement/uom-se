@@ -113,7 +113,7 @@ public class LocalUnitFormat implements UnitFormat {
      * is initialized, this instance will no longer be used.
      */
     private static LocalUnitFormat DEFAULT_INSTANCE = new LocalUnitFormat(SymbolMap.of(
-    		ResourceBundle.getBundle(LocalUnitFormat.class.getPackage().getName() + ".messages")));
+            ResourceBundle.getBundle(LocalUnitFormat.class.getPackage().getName() + ".messages")));
     /**
      * Multiplicand character
      */
@@ -147,7 +147,7 @@ public class LocalUnitFormat implements UnitFormat {
         return DEFAULT_INSTANCE;
     }
 
-    /** 
+    /**
      * Returns an instance for the given locale.
      * @param locale
      */
@@ -184,8 +184,8 @@ public class LocalUnitFormat implements UnitFormat {
     ////////////////////////
     // Instance methods //
     ////////////////////////
-    /** 
-     * Get the symbol map used by this instance to map between 
+    /**
+     * Get the symbol map used by this instance to map between
      * {@link AbstractUnit Unit}s and <code>String</code>s, etc...
      * @return SymbolMap the current symbol map
      */
@@ -236,17 +236,17 @@ public class LocalUnitFormat implements UnitFormat {
 
     @Override
     public Unit<? extends Quantity<?>> parse(CharSequence csq) throws ParserException {
-    	return parse(csq, new ParsePosition(0));
+        return parse(csq, new ParsePosition(0));
     }
-    
+
     /**
      * Format the given unit to the given StringBuffer, then return the operator
-     * precedence of the outermost operator in the unit expression that was 
+     * precedence of the outermost operator in the unit expression that was
      * formatted. See {@link ConverterFormat} for the constants that define the
      * various precedence values.
      * @param unit the unit to be formatted
      * @param buffer the <code>StringBuffer</code> to be written to
-     * @return the operator precedence of the outermost operator in the unit 
+     * @return the operator precedence of the outermost operator in the unit
      *   expression that was output
      */
     private int formatInternal(Unit<?> unit, Appendable buffer) throws IOException {
@@ -299,7 +299,7 @@ public class LocalUnitFormat implements UnitFormat {
             StringBuffer temp = new StringBuffer();
             int unitPrecedence = NOOP_PRECEDENCE;
             if (unit.equals(SI.KILOGRAM)) {
-                // A special case because KILOGRAM is a BaseUnit instead of 
+                // A special case because KILOGRAM is a BaseUnit instead of
                 // a transformed unit, even though it has a prefix.
                 converter = SIPrefix.KILO.getConverter();
                 unitPrecedence = formatInternal(SI.GRAM, temp);
@@ -308,7 +308,7 @@ public class LocalUnitFormat implements UnitFormat {
                 Unit parentUnit = unit.getSystemUnit();
                 converter = unit.getConverterTo(parentUnit);
                 if (parentUnit.equals(SI.KILOGRAM)) {
-                    // More special-case hackery to work around gram/kilogram 
+                    // More special-case hackery to work around gram/kilogram
                     // incosistency
                     parentUnit = SI.GRAM;
                     converter = converter.concatenate(SIPrefix.KILO.getConverter());
@@ -333,8 +333,8 @@ public class LocalUnitFormat implements UnitFormat {
      * @param unit Unit the unit to be formatted
      * @param pow int the numerator of the fractional power
      * @param root int the denominator of the fractional power
-     * @param continued boolean <code>true</code> if the converter expression 
-     *    should begin with an operator, otherwise <code>false</code>. This will 
+     * @param continued boolean <code>true</code> if the converter expression
+     *    should begin with an operator, otherwise <code>false</code>. This will
      *    always be true unless the unit being modified is equal to Unit.ONE.
      * @param buffer StringBuffer the buffer to append to. No assumptions should
      *    be made about its content.
@@ -405,11 +405,11 @@ public class LocalUnitFormat implements UnitFormat {
      * Formats the given converter to the given StringBuffer and returns the
      * operator precedence of the converter's mathematical operation. This is
      * the default implementation, which supports all built-in UnitConverter
-     * implementations. Note that it recursively calls itself in the case of 
-     * a {@link javax.measure.converter.UnitConverter.Compound Compound} 
+     * implementations. Note that it recursively calls itself in the case of
+     * a {@link javax.measure.converter.UnitConverter.Compound Compound}
      * converter.
      * @param converter the converter to be formatted
-     * @param continued <code>true</code> if the converter expression should 
+     * @param continued <code>true</code> if the converter expression should
      *    begin with an operator, otherwise <code>false</code>.
      * @param unitPrecedence the operator precedence of the operation expressed
      *    by the unit being modified by the given converter.

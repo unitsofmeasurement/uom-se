@@ -30,11 +30,12 @@
 package tec.uom.se;
 
 import javax.measure.Quantity;
+import javax.measure.Unit;
+
+import tec.uom.se.function.QuantityOperations;
 
 /**
- *
- * Quantity specialized for comparison.
- * 
+ * Quantity specialized to SE platform.
  * @see {@link Quantity}
  * @author otaviojava
  * @author werner
@@ -43,10 +44,63 @@ import javax.measure.Quantity;
 public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 		Comparable<Quantity<Q>> {
 
+    /**
+     * @see Quantity#add(Quantity)
+     */
+    ComparableQuantity<Q> add(Quantity<Q> that);
+
+    /**
+     * @see Quantity#subtract(Quantity)
+     */
+    ComparableQuantity<Q> subtract(Quantity<Q> that);
+
+    /**
+     * @see Quantity#divide(Quantity)
+     */
+    ComparableQuantity<?> divide(Quantity<?> that);
+
+    /**
+     * @see Quantity#divide(Number)
+     */
+    ComparableQuantity<Q> divide(Number that);
+
+    /**
+     * @see Quantity#multiply(Quantity)
+     */
+    ComparableQuantity<?> multiply(Quantity<?> multiplier);
+
+    /**
+     * @see Quantity#multiply(Number)
+     */
+    ComparableQuantity<Q> multiply(Number multiplier);
+
+    /**
+     * @see Quantity#inverse()
+     */
+    ComparableQuantity<?> inverse();
+
+    /**
+     * invert and already cast to defined quantityClass
+     * @param quantityClass Quantity to be converted
+     * @see Quantity#inverse()
+     * @see Quantity#asType(Class)
+     */
+    <T extends Quantity<T>> ComparableQuantity<T> inverse(Class<T> quantityClass);
+
+    /**
+     * @see Quantity#to(Unit)
+     */
+    ComparableQuantity<Q> to(Unit<Q> unit);
+
+    /**
+     * @see Quantity#asType(Class)
+     */
+    <T extends Quantity<T>> ComparableQuantity<T> asType(Class<T> type) throws ClassCastException;
+
 	/**
 	 * Compares two instances of {@link Quantity<Q>}. Conversion of unit can
 	 * happen if necessary
-	 * 
+	 *
 	 * @param that
 	 *            the {@code quantity<Q>} to be compared with this instance.
 	 * @return {@code true} if {@code that > this}.
@@ -58,7 +112,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 	/**
 	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
 	 * unit if necessary.
-	 * 
+	 *
 	 * @param that
 	 *            the {@code quantity<Q>} to be compared with this instance.
 	 * @return {@code true} if {@code that >= this}.
@@ -70,7 +124,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 	/**
 	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
 	 * unit if necessary.
-	 * 
+	 *
 	 * @param that
 	 *            the {@code quantity<Q>} to be compared with this instance.
 	 * @return {@code true} if {@code that < this}.
@@ -82,7 +136,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 	/**
 	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
 	 * unit if necessary.
-	 * 
+	 *
 	 * @param that
 	 *            the {@code quantity<Q>} to be compared with this instance.
 	 * @return {@code true} if {@code that < this}.
@@ -94,7 +148,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 	/**
 	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
 	 * unit if necessary.
-	 * 
+	 *
 	 * @param that
 	 *            the {@code quantity<Q>} to be compared with this instance.
 	 * @return {@code true} if {@code that < this}.
@@ -102,5 +156,30 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 	 *             if the quantity is null
 	 */
 	boolean isEquivalentTo(Quantity<Q> that);
+
+
+    /**
+     * Multiply and cast the {@link ComparableQuantity}
+     * @param operation this class contains the {@link Quantity} to multiply and the {@link Class} to be convert to result of this operation.
+     * @return the QuantityOperations multiplied and converted
+     * @see QuantityOperations
+     * @see QuantityOperations#of(Quantity, Class)
+     * @see Quantity#divide(Quantity)
+     * @see Quantity#asType(Class)
+     * @exception NullPointerException
+     */
+    <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> divide(QuantityOperations<T, E> operation);
+
+    /**
+     * Divide and cast the {@link ComparableQuantity}
+     * @param operation this class contains the {@link Quantity} to divide and the {@link Class} to be convert to result of this operation.
+     * @return the QuantityOperations multiplied and converted
+     * @see QuantityOperations
+     * @see QuantityOperations#of(Quantity, Class)
+     * @see Quantity#asType(Class)
+     * @see Quantity#multiply(Quantity)
+     * @exception NullPointerException
+     */
+    <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> multiply(QuantityOperations<T, E> operation);
 
 }

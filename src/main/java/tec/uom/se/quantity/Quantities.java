@@ -80,6 +80,8 @@ public final class Quantities {
 
     /**
      * Returns the scalar measurement.
+     * When the {@link Number} was {@link BigDecimal} or {@link BigInteger} will uses {@link DecimalQuantity},
+     *  when the {@link Number} was {@link Double} will {@link DoubleQuantity} otherwise will {@link NumberQuantity}.
      * in the specified unit.
      * @param value the measurement value.
      * @param unit the measurement unit.

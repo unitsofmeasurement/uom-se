@@ -58,7 +58,7 @@ public class ArithmeticTest {
 		Quantity<Length> result = sut.add(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
-		assertEquals(Double.valueOf(15), result.getValue());
+		assertEquals(Double.valueOf(15), Double.valueOf(result.getValue().doubleValue()));
 	}
 
 	@Test

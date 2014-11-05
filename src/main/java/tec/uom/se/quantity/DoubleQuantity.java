@@ -32,32 +32,33 @@ package tec.uom.se.quantity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Comparator;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
 import tec.uom.se.AbstractQuantity;
+import tec.uom.se.ComparableQuantity;
 import tec.uom.se.function.AbstractConverter;
-import tec.uom.se.function.NaturalOrder;
 
 /**
- * An amount of quantity, consisting of a double and a Unit. DoubleQuantity
- * objects are immutable.
+An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link Double} as implementation of {@link Number},
+ * this object is immutable.
+ * Note: all operations which involves {@link Number}, this implementation will convert to {@link Double}.
  *
  * @see AbstractQuantity
  * @see Quantity
+ * @see ComparableQuantity
+ * @param <Q> The type of the quantity.
+ *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Otavio de Santana
  * @param <Q>
  *            The type of the quantity.
  * @version 0.3, $Date: 2014-10-10 $
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
 
-    /**
-	 *
-	 */
 	private static final long serialVersionUID = 8660843078156312278L;
 
 	final double value;
@@ -71,7 +72,6 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
     public Double getValue() {
         return value;
     }
-
 
     @Override
     public double doubleValue(Unit<Q> unit) {
@@ -95,7 +95,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
 	}
 
     @Override
-    public Quantity<Q> add(Quantity<Q> that) {
+    public ComparableQuantity<Q> add(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value + that.getValue().doubleValue(), getUnit());
         }
@@ -104,7 +104,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
     }
 
     @Override
-    public Quantity<Q> subtract(Quantity<Q> that) {
+    public ComparableQuantity<Q> subtract(Quantity<Q> that) {
         if (getUnit().equals(that.getUnit())) {
             return Quantities.getQuantity(value - that.getValue().doubleValue(), getUnit());
         }
@@ -112,29 +112,26 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
         return Quantities.getQuantity(value - converted.getValue().doubleValue(), getUnit());
     }
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> multiply(Quantity<?> that) {
+	public ComparableQuantity<?> multiply(Quantity<?> that) {
 		return new DoubleQuantity(value * that.getValue().doubleValue(), getUnit().multiply(that.getUnit()));
 	}
 
 	@Override
-	public Quantity<Q> multiply(Number that) {
+	public ComparableQuantity<Q> multiply(Number that) {
 		return Quantities.getQuantity(value * that.doubleValue(), getUnit());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Quantity<?> divide(Quantity<?> that) {
+	public ComparableQuantity<?> divide(Quantity<?> that) {
 		return new DoubleQuantity(value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
 	}
 
 	@Override
-	public Quantity<Q> divide(Number that) {
+	public ComparableQuantity<Q> divide(Number that) {
 		return Quantities.getQuantity(value / that.doubleValue(), getUnit());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public AbstractQuantity<Q> inverse() {
 		return (AbstractQuantity<Q>) Quantities.getQuantity(1d / value, getUnit().inverse());
@@ -145,12 +142,4 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
 		return false;
 	}
 
-	/**
-     * @see {@link NaturalOrder}
-     */
-	@Override
-	public int compareTo(Quantity<Q> that) {
-	    Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
-        return comparator.compare(this, that);
-	}
 }
