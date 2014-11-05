@@ -29,43 +29,23 @@
  */
 package tec.uom.se;
 
+import java.time.Instant;
+
 import javax.measure.Quantity;
+
+import tec.uom.se.function.QuantitySupplier;
 
 /**
  *
- * Quantity specialized for comparison.
+ * A Measurement contains a {@link Quantity} and a {@linkplain Instant} as timestamp.
  * 
- * @see {@link Quantity}
- * @author otaviojava
+ * @see {@link QuantitySupplier}
  * @author werner
+ * @version 0.1
  * @param <Q>
  */
-public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
-		Comparable<Quantity<Q>> {
-
-	/**
-	 * Compares two instances of {@link Quantity<Q>}. Conversion of unit can
-	 * happen if necessary
-	 * 
-	 * @param that
-	 *            the {@code quantity<Q>} to be compared with this instance.
-	 * @return {@code true} if {@code that > this}.
-	 * @throws NullPointerException
-	 *             if the that is null
-	 */
-	boolean isGreaterThan(Quantity<Q> that);
-
-	/**
-	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
-	 * unit if necessary.
-	 * 
-	 * @param that
-	 *            the {@code quantity<Q>} to be compared with this instance.
-	 * @return {@code true} if {@code that >= this}.
-	 * @throws NullPointerException
-	 *             if the that is null
-	 */
-	boolean isGreaterThanOrEqualTo(Quantity<Q> that);
+public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
+		Comparable<Measurement<Q>> {
 
 	/**
 	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
@@ -77,30 +57,5 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 	 * @throws NullPointerException
 	 *             if the quantity is null
 	 */
-	boolean isLessThan(Quantity<Q> that);
-
-	/**
-	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
-	 * unit if necessary.
-	 * 
-	 * @param that
-	 *            the {@code quantity<Q>} to be compared with this instance.
-	 * @return {@code true} if {@code that < this}.
-	 * @throws NullPointerException
-	 *             if the quantity is null
-	 */
-	boolean isLessThanOrEqualTo(Quantity<Q> that);
-
-	/**
-	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
-	 * unit if necessary.
-	 * 
-	 * @param that
-	 *            the {@code quantity<Q>} to be compared with this instance.
-	 * @return {@code true} if {@code that < this}.
-	 * @throws NullPointerException
-	 *             if the quantity is null
-	 */
-	boolean isEquivalentTo(Quantity<Q> that);
-
+	Instant getInstant();
 }
