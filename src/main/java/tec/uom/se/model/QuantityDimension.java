@@ -98,7 +98,7 @@ public final class QuantityDimension implements Dimension, Serializable {
     /**
      * Holds temperature dimension (Θ).
      */
-    public static final Dimension TEMPERATURE = new QuantityDimension('Θ');
+    public static final Dimension TEMPERATURE = new QuantityDimension('\u0398');
 
     /**
      * Holds amount of substance dimension (N).

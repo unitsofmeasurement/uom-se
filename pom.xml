@@ -137,6 +137,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
 				<configuration>
 					<locales>en</locales>
 					<inputEncoding>${project.build.sourceEncoding}</inputEncoding>
@@ -195,7 +196,7 @@
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-pmd-plugin</artifactId>
-							<version>3.0.1</version>
+							<version>3.2</version>
 							<configuration>
 								<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 								<targetJdk>${project.build.javaVersion}</targetJdk>
