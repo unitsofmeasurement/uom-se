@@ -40,7 +40,6 @@ import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.uom.se.function.NaturalOrder;
-import tec.uom.se.function.QuantityOperations;
 import tec.uom.se.quantity.Quantities;
 
 /**
@@ -338,17 +337,17 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
     }
 
     @Override
-    public <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> divide(QuantityOperations<T, E> operation) {
+    public <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> divide(Quantity<T> that, Class<E> asTypeQuantity) {
 
-        return divide(operation.getQuantity())
-                .asType(operation.getQuantityClass());
+        return divide(Objects.requireNonNull(that))
+                .asType(Objects.requireNonNull(asTypeQuantity));
 
     }
 
     @Override
-    public <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> multiply(QuantityOperations<T, E> operation) {
-        return multiply(operation.getQuantity())
-                .asType(operation.getQuantityClass());
+    public <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> multiply(Quantity<T> that, Class<E> asTypeQuantity) {
+        return multiply(Objects.requireNonNull(that))
+                .asType(Objects.requireNonNull(asTypeQuantity));
     }
 
     @Override
