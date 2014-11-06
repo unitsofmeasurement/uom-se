@@ -40,8 +40,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.ComparableQuantity;
-import tec.uom.se.function.QuantityOperations;
-import tec.uom.se.quantity.Quantities;
 import tec.uom.se.util.SI;
 
 public class DecimalComparableQuantityTest {
@@ -52,7 +50,7 @@ public class DecimalComparableQuantityTest {
     public void divideOperationsTest() {
         ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
         ComparableQuantity<Time> time = Quantities.getQuantity(BigDecimal.TEN, SI.SECOND);
-        ComparableQuantity<Speed> speed = metre.divide(QuantityOperations.of(time, Speed.class));
+        ComparableQuantity<Speed> speed = metre.divide(time, Speed.class);
 
         Assert.assertEquals(Integer.valueOf(speed.getValue().intValue()), Integer.valueOf(1));
         Assert.assertEquals(SI.METRES_PER_SECOND, speed.getUnit());
@@ -63,14 +61,14 @@ public class DecimalComparableQuantityTest {
         ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
         ComparableQuantity<Time> time = Quantities.getQuantity(BigDecimal.TEN, SI.SECOND);
         @SuppressWarnings("unused")
-        ComparableQuantity<Area> area = metre.divide(QuantityOperations.of(time, Area.class));
+        ComparableQuantity<Area> area = metre.divide(time, Area.class);
     }
 
 
     @Test
     public void multiplyOperationsTest() {
         ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
-        ComparableQuantity<Area> area = metre.multiply(QuantityOperations.of(metre, Area.class));
+        ComparableQuantity<Area> area = metre.multiply(metre, Area.class);
 
         Assert.assertEquals(Integer.valueOf(area.getValue().intValue()), Integer.valueOf(100));
         Assert.assertEquals(SI.SQUARE_METRE, area.getUnit());
@@ -81,7 +79,7 @@ public class DecimalComparableQuantityTest {
     public void multiplyOperationsExceptionTest() {
         ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
         @SuppressWarnings("unused")
-        ComparableQuantity<Speed> speed = metre.multiply(QuantityOperations.of(metre, Speed.class));
+        ComparableQuantity<Speed> speed = metre.multiply(metre, Speed.class);
     }
 
     @Test

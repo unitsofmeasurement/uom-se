@@ -32,8 +32,6 @@ package tec.uom.se;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
-import tec.uom.se.function.QuantityOperations;
-
 /**
  * Quantity specialized to SE platform.
  * @see {@link Quantity}
@@ -160,19 +158,19 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
 
     /**
      * Multiply and cast the {@link ComparableQuantity}
-     * @param operation this class contains the {@link Quantity} to multiply and the {@link Class} to be convert to result of this operation.
+     * @param that quantity to be multiplied
+     * @param asTypeQuantity quantity to be converted
      * @return the QuantityOperations multiplied and converted
-     * @see QuantityOperations
-     * @see QuantityOperations#of(Quantity, Class)
      * @see Quantity#divide(Quantity)
      * @see Quantity#asType(Class)
      * @exception NullPointerException
      */
-    <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> divide(QuantityOperations<T, E> operation);
+    <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> divide(Quantity<T> that, Class<E> asTypeQuantity);
 
     /**
      * Divide and cast the {@link ComparableQuantity}
-     * @param operation this class contains the {@link Quantity} to divide and the {@link Class} to be convert to result of this operation.
+     * @param that quantity to be divided
+     * @param asTypeQuantity quantity to be converted
      * @return the QuantityOperations multiplied and converted
      * @see QuantityOperations
      * @see QuantityOperations#of(Quantity, Class)
@@ -180,6 +178,6 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
      * @see Quantity#multiply(Quantity)
      * @exception NullPointerException
      */
-    <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> multiply(QuantityOperations<T, E> operation);
+    <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> multiply(Quantity<T> that, Class<E> asTypeQuantity);
 
 }
