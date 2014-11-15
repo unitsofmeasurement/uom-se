@@ -218,7 +218,7 @@ public class LocalUnitFormat implements UnitFormat {
         }
         try {
             UnitParser parser = new UnitParser(symbolMap, new StringReader(source));
-            AbstractUnit<?> result = parser.parseUnit();
+            Unit<?> result = parser.parseUnit();
             cursor.setIndex(end);
             return result;
         } catch (ParseException e) {

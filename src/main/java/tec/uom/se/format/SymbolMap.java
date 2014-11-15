@@ -41,6 +41,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,9 +67,10 @@ import java.util.logging.Logger;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 5.3, March 20, 2014
  */
+@SuppressWarnings("rawtypes")
 public final class SymbolMap {
 	private static final Logger logger = Logger.getLogger(SymbolMap.class.getName());
-	
+
     private final Map<String, Unit<?>> symbolToUnit;
     private final Map<Unit<?>, String> unitToSymbol;
     private final Map<String, Object> symbolToPrefix;
@@ -79,18 +81,19 @@ public final class SymbolMap {
      * Creates an empty mapping.
      */
     private SymbolMap() {
-        symbolToUnit = new HashMap<>();
+        symbolToUnit = new TreeMap<>();
         unitToSymbol = new HashMap<>();
-        symbolToPrefix = new HashMap<>();
+        symbolToPrefix = new TreeMap<>();
         prefixToSymbol = new HashMap<>();
         converterToPrefix = new HashMap<>();
     }
 
-    /** 
+    /**
      * Creates a symbol map from the specified resource bundle,
      *
      * @param rb the resource bundle.
      */
+
     private SymbolMap(ResourceBundle rb) {
         this();
         for (Enumeration<String> i = rb.getKeys(); i.hasMoreElements();) {
@@ -127,8 +130,8 @@ public final class SymbolMap {
             }
         }
     }
-    
-    /** 
+
+    /**
      * Creates a symbol map from the specified resource bundle,
      *
      * @param rb the resource bundle.
@@ -146,7 +149,7 @@ public final class SymbolMap {
      * @param unit the unit to label.
      * @param symbol the new symbol for the unit.
      */
-    public void label(AbstractUnit<?> unit, String symbol) {
+    public void label(Unit<?> unit, String symbol) {
         symbolToUnit.put(symbol, unit);
         unitToSymbol.put(unit, symbol);
     }
@@ -182,7 +185,7 @@ public final class SymbolMap {
 
     /**
      * Returns the unit for the specified symbol.
-     * 
+     *
      * @param symbol the symbol.
      * @return the corresponding unit or <code>null</code> if none.
      */
@@ -233,5 +236,19 @@ public final class SymbolMap {
      */
     public String getSymbol(SIPrefix prefix) {
         return prefixToSymbol.get(prefix);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("tec.uom.se.format.SymbolMap: [");
+        sb.append("symbolToUnit: ").append(symbolToUnit).append(',');
+        sb.append("unitToSymbol: ").append(unitToSymbol).append(',');
+        sb.append("symbolToPrefix: ").append(symbolToPrefix).append(',');
+        sb.append("prefixToSymbol: ").append(prefixToSymbol).append(',');
+        sb.append("converterToPrefix: ").append(converterToPrefix).append(',');
+        sb.append("converterToPrefix: ").append(converterToPrefix);
+        sb.append(" ]");
+        return sb.toString();
     }
 }

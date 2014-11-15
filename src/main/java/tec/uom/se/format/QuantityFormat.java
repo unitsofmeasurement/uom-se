@@ -43,8 +43,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractQuantity;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.quantity.Quantities;
+import tec.uom.se.ComparableQuantity;
 
 
 
@@ -61,7 +60,7 @@ import tec.uom.se.quantity.Quantities;
  * @version 0.3, $Date: 2014-11-02 $
  */
 @SuppressWarnings("rawtypes")
-public abstract class QuantityFormat extends Format implements Parser<CharSequence, Quantity> {
+public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
 
 	/**
 	 *
@@ -71,13 +70,13 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	/**
 	 * Holds the default format instance.
 	 */
-	private static final NumberSpaceUnit DEFAULT = new NumberSpaceUnit(
+	private static final NumberSpaceUnitFormat DEFAULT = new NumberSpaceUnitFormat(
 			NumberFormat.getInstance(), LocalUnitFormat.getInstance());
 
 	/**
 	 * Holds the standard format instance.
 	 */
-	private static final Standard STANDARD = new Standard();
+	private static final StandardFormat STANDARD = new StandardFormat();
 
 	/**
 	 * Returns the measure format for the default locale. The default format
@@ -100,7 +99,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 */
 	public static QuantityFormat getInstance(NumberFormat numberFormat,
 			UnitFormat unitFormat) {
-		return new NumberSpaceUnit(numberFormat, unitFormat);
+		return new NumberSpaceUnitFormat(numberFormat, unitFormat);
 	}
 
 	/**
@@ -150,7 +149,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             if any problem occurs while parsing the specified character
 	 *             sequence (e.g. illegal syntax).
 	 */
-	public abstract Quantity<?> parse(CharSequence csq, ParsePosition cursor)
+	public abstract ComparableQuantity<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException, ParserException;
 
 	/**
@@ -167,48 +166,9 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 *             sequence (e.g. illegal syntax).
 	 */
 	@Override
-    public abstract Quantity<?> parse(CharSequence csq)
+    public abstract ComparableQuantity<?> parse(CharSequence csq)
 			throws IllegalArgumentException, ParserException;
 
-	/**
-	 * Formats the specified value using {@link CompoundUnit} compound units}.
-	 * The default implementation is locale sensitive and does not use space to
-	 * separate units. For example:[code]
-	 *     Unit<Length> FOOT_INCH = FOOT.compound(INCH);
-	 *     Measure<Length> height = Measure.valueOf(1.81, METER);
-	 *     System.out.println(height.to(FOOT_INCH));
-	 *
-	 *     > 5ft11,26in // French Local
-	 *
-	 *     Unit<Angle> DMS = DEGREE_ANGLE.compound(MINUTE_ANGLE).compound(SECOND_ANGLE);
-	 *     Measure<Angle> rotation = Measure.valueOf(35.857497, DEGREE_ANGLE);
-	 *     System.out.println(rotation.to(DMS));
-	 *
-	 *     > 35°51'26,989" // French Local
-	 * [/code]
-	 *
-	 * @param value the value to format using compound units.
-	 * @param unit the compound unit.
-	 * @param dest the appendable destination.
-	 * @return the specified <code>Appendable</code>.
-	 * @throws IOException if an I/O exception occurs.
-	 */
-//	@SuppressWarnings("unchecked")
-//	protected Appendable formatCompound(double value, CompoundUnit<?> unit,
-//			Appendable dest) throws IOException {
-//		Unit high = unit.getHigh();
-//		Unit low = unit.getLow(); // The unit in which the value is stated.
-//		long highValue = (long) low.getConverterTo(high).convert(value);
-//		double lowValue = value - high.getConverterTo(low).convert(highValue);
-//		if (high instanceof CompoundUnit)
-//			formatCompound(highValue, (CompoundUnit) high, dest);
-//		else {
-//			dest.append(DEFAULT._numberFormat.format(highValue));
-//			DEFAULT._unitFormat.format(high, dest);
-//		}
-//		dest.append(DEFAULT._numberFormat.format(lowValue));
-//		return DEFAULT._unitFormat.format(low, dest);
-//	}
 
 	@Override
 	public final StringBuffer format(Object obj, final StringBuffer toAppendTo,
@@ -231,8 +191,8 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		try {
 			return parse(source, pos);
 		} catch (IllegalArgumentException | ParserException e) {
-			return null; // Unfortunately the message why the parsing failed
-		} // is lost; but we have to follow the Format spec.
+			return null;
+		}
 
 	}
 
@@ -252,115 +212,4 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 		}
 	}
 
-	// Holds default implementation.
-	private static final class NumberSpaceUnit extends QuantityFormat {
-
-		private final NumberFormat numberFormat;
-
-		private final UnitFormat unitFormat;
-
-		private NumberSpaceUnit(NumberFormat numberFormat, UnitFormat unitFormat) {
-			this.numberFormat = numberFormat;
-			this.unitFormat = unitFormat;
-		}
-
-		@Override
-		public Appendable format(Quantity<?> measure, Appendable dest)
-				throws IOException {
-//			Unit unit = measure.getUnit();
-//			if (unit instanceof CompoundUnit)
-//				return formatCompound(measure.doubleValue(unit),
-//						(CompoundUnit) unit, dest);
-//			else {
-				dest.append(numberFormat.format(measure.getValue()));
-				if (measure.getUnit().equals(AbstractUnit.ONE))
-					return dest;
-				dest.append(' ');
-				return unitFormat.format(measure.getUnit(), dest);
-//			}
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Quantity<?> parse(CharSequence csq, ParsePosition cursor)
-				throws IllegalArgumentException, ParserException {
-			String str = csq.toString();
-			Number number = numberFormat.parse(str, cursor);
-			if (number == null)
-				throw new IllegalArgumentException("Number cannot be parsed");
-			Unit unit = unitFormat.parse(csq);
-			if (number instanceof BigDecimal) {
-				return Quantities.getQuantity((BigDecimal) number, unit);
-			}
-			if (number instanceof Long) {
-				return Quantities.getQuantity(number.longValue(), unit);
-			}
-			else if (number instanceof Double) {
-				return Quantities.getQuantity(number.doubleValue(), unit);
-			}
-			else if (number instanceof Integer) {
-				return Quantities.getQuantity(number.intValue(), unit);
-			}
-			else {
-				throw new UnsupportedOperationException("Number of type "
-						+ number.getClass() + " are not supported");
-			}
-		}
-
-		@Override
-        public Quantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
-			return parse(csq, new ParsePosition(0));
-		}
-
-		private static final long serialVersionUID = 1L;
-
-	}
-
-	// Holds standard implementation.
-	private static final class Standard extends QuantityFormat {
-
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 2758248665095734058L;
-
-		@Override
-        public Appendable format(Quantity measure, Appendable dest)
-                throws IOException {
-            Unit unit = measure.getUnit();
-
-            dest.append(measure.getValue().toString());
-            if (measure.getUnit().equals(AbstractUnit.ONE))
-                return dest;
-            dest.append(' ');
-            return LocalUnitFormat.getInstance().format(unit, dest);
-        }
-
-		@SuppressWarnings("unchecked")
-		@Override
-		public Quantity<?> parse(CharSequence csq, ParsePosition cursor)
-				throws ParserException {
-			int startDecimal = cursor.getIndex();
-			while ((startDecimal < csq.length())
-					&& Character.isWhitespace(csq.charAt(startDecimal))) {
-				startDecimal++;
-			}
-			int endDecimal = startDecimal + 1;
-			while ((endDecimal < csq.length())
-					&& !Character.isWhitespace(csq.charAt(endDecimal))) {
-				endDecimal++;
-			}
-			BigDecimal decimal = new BigDecimal(csq.subSequence(startDecimal,
-					endDecimal).toString());
-			cursor.setIndex(endDecimal + 1);
-			Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-			return Quantities.getQuantity(decimal, unit);
-		}
-
-		@Override
-        public Quantity<?> parse(CharSequence csq)
-				throws ParserException {
-			return parse(csq, new ParsePosition(0));
-		}
-	}
 }
