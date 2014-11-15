@@ -34,6 +34,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
+import tec.uom.se.AbstractConverter;
+
 /**
  * <p> This class represents a exponential converter of limited precision.
  *     Such converter is used to create inverse of logarithmic unit.

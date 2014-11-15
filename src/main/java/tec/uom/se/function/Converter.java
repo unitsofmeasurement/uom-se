@@ -29,24 +29,26 @@
  */
 package tec.uom.se.function;
 
-import javax.measure.UnitConverter;
-
 /**
- * Provides a {@link UnitConverter} to implementations
+ *  Represents an operation to convert values.
+ * <p>
+ * This is a <a href=
+ * "http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html#package.description"
+ * >functional interface</a> whose functional method is {@link #convert()}.
  *
- * <p>There is no requirement that a distinct result be returned each
- * time the supplier is invoked, unless implementing classes enforce it.
- * 
- * <p>This is a <a href="http://download.java.net/jdk8/docs/api/java/util/function/package-summary.html">functional interface</a>
- * whose functional method is {@link #getConverter()}.
- * 
- * @author Werner Keil
+*  @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.2, 2014-11-15
+ * @param <Q>
+ *            The type to convert to.
+ * @see <a href="http://en.wikipedia.org/wiki/Data_conversion">Wikipedia: Data Conversion</a>
  */
 @FunctionalInterface
-public interface ConverterSupplier {
-	
+public interface Converter<F, T> {
+
     /**
-     * @return a converter
+     * Returns a F converted into a T.
+     * @param from
+     * @return the converted result.
      */
-    UnitConverter getConverter();
+    T convert(F from);
 }

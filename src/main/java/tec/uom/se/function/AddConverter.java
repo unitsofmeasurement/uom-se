@@ -36,6 +36,8 @@ import java.util.Objects;
 
 import javax.measure.UnitConverter;
 
+import tec.uom.se.AbstractConverter;
+
 /**
  * <p> This class represents a converter adding a constant offset
  *     to numeric values (<code>double</code> based).</p>

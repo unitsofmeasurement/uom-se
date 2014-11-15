@@ -27,20 +27,26 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se;
+package tec.uom.se.function;
 
-import static org.junit.Assert.assertEquals;
-import static tec.uom.se.util.SI.GRAM;
-import static tec.uom.se.util.SIPrefix.KILO;
+import javax.measure.UnitConverter;
 
-import org.junit.Test;
-
-public class UnitsTest {
-//	private final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+/**
+ * Provides a {@link UnitConverter} to implementations
+ *
+ * <p>There is no requirement that a distinct result be returned each
+ * time the supplier is invoked, unless implementing classes enforce it.
+ * 
+ * <p>This is a <a href="http://download.java.net/jdk8/docs/api/java/util/function/package-summary.html">functional interface</a>
+ * whose functional method is {@link #getConverter()}.
+ * 
+ * @author Werner Keil
+ */
+@FunctionalInterface
+public interface UnitConverterSupplier {
 	
-    @Test
-    public void testOf() {
-        assertEquals(KILO(GRAM), AbstractUnit.parse("kg"));
-    }
+    /**
+     * @return a converter
+     */
+    UnitConverter getConverter();
 }
-

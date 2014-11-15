@@ -37,9 +37,9 @@ import java.math.MathContext;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
-import tec.uom.se.function.AbstractConverter;
 
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link BigDecimal} as implementation of {@link Number},

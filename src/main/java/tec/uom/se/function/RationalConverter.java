@@ -31,6 +31,8 @@ package tec.uom.se.function;
 
 import javax.measure.UnitConverter;
 
+import tec.uom.se.AbstractConverter;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;

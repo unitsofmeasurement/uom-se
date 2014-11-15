@@ -29,7 +29,7 @@
  */
 package tec.uom.se.util;
 
-import tec.uom.se.function.ConverterSupplier;
+import tec.uom.se.function.UnitConverterSupplier;
 import tec.uom.se.function.RationalConverter;
 
 import javax.measure.Quantity;
@@ -56,7 +56,7 @@ import java.math.BigInteger;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 5.4, $Date: 2014-04-09 $
  */
-public enum SIPrefix implements ConverterSupplier {
+public enum SIPrefix implements UnitConverterSupplier {
 
     YOTTA(new RationalConverter(10^24L, 1L)), // TODO if this works, we could avoid BigInteger for a "normal" range from ATTO to YOCTO
     ZETTA(new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),

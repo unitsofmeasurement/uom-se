@@ -27,9 +27,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.function;
+package tec.uom.se;
 
 import javax.measure.UnitConverter;
+
+import tec.uom.se.function.Converter;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -42,9 +44,9 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, August 03, 2014
+ * @version 0.5, Nov 15, 2014
  */
-public abstract class AbstractConverter implements UnitConverter {
+public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
 
     /**
 	 *

@@ -33,6 +33,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import tec.uom.se.AbstractConverter;
+
 /**
  * <p>
  * This class represents a converter multiplying numeric values by π (Pi).

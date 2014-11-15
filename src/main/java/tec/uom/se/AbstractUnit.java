@@ -31,7 +31,6 @@ package tec.uom.se;
 
 import tec.uom.se.format.LocalUnitFormat;
 import tec.uom.se.format.UCUMFormat;
-import tec.uom.se.function.AbstractConverter;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
@@ -177,7 +176,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 * <p>
 	 * Note: The standard UCUM format supports dimensionless units.[code]
 	 * AbstractUnit<Dimensionless> PERCENT =
-	 * AbstractUnit.valueOf("100").inverse().asType(Dimensionless.class);
+	 * AbstractUnit.parse("100").inverse().asType(Dimensionless.class);
 	 * [/code]
 	 * </p>
 	 *
@@ -188,7 +187,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 *             if the specified character sequence cannot be correctly
 	 *             parsed (e.g. not UCUM compliant).
 	 */
-	public static final Unit<?> of(CharSequence charSequence) {
+	public static final Unit<?> parse(CharSequence charSequence) {
 		return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
 	}
 

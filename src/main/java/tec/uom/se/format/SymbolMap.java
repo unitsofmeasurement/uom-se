@@ -29,8 +29,8 @@
  */
 package tec.uom.se.format;
 
+import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.function.AbstractConverter;
 import tec.uom.se.util.SIPrefix;
 
 import javax.measure.Unit;

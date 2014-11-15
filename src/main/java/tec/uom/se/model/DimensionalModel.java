@@ -29,7 +29,7 @@
  */
 package tec.uom.se.model;
 
-import tec.uom.se.function.AbstractConverter;
+import tec.uom.se.AbstractConverter;
 
 import javax.measure.Dimension;
 

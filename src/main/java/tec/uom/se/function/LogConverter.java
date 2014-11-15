@@ -33,6 +33,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
+import tec.uom.se.AbstractConverter;
+
 /**
  * <p> This class represents a logarithmic converter of limited precision.
  *     Such converter  is typically used to create logarithmic unit.
