@@ -37,7 +37,7 @@ import tec.uom.se.function.QuantitySupplier;
 
 /**
  *
- * A Measurement contains a {@link Quantity} and a {@linkplain Instant} as timestamp.
+ * A Measurement contains a {@link Quantity} and a timestamp.
  * 
  * <p>
  * A {@code Measurement} object is used for maintaining the tuple of quantity and time-stamp.
@@ -48,21 +48,23 @@ import tec.uom.se.function.QuantitySupplier;
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.1
+ * @version 0.2
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
 		Comparable<Measurement<Q>> {
 
 	/**
-	 * Compares two instances of {@link Quantity<Q>}, doing the conversion of
-	 * unit if necessary.
+	 * Returns the timestamp of this {@link Measurement}.
 	 * 
-	 * @param that
-	 *            the {@code quantity<Q>} to be compared with this instance.
-	 * @return {@code true} if {@code that < this}.
-	 * @throws NullPointerException
-	 *             if the quantity is null
+	 * @return a timestamp.
+	 */
+	long getTimestamp();
+	
+	/**
+	 * Returns the {@linkplain Instant} as timestamp.
+	 * 
+	 * @return an instant.
 	 */
 	Instant getInstant();
 }
