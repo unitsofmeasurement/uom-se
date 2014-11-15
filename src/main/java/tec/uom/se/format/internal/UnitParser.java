@@ -37,7 +37,7 @@ import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.util.SIPrefix;
 
-/** */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public final class UnitParser implements UnitParserConstants {
 
     private static class Exponent {
@@ -51,26 +51,24 @@ public final class UnitParser implements UnitParserConstants {
             this.root = root;
         }
     }
-    private SymbolMap _symbols;
+    private SymbolMap symbols;
 
     public UnitParser(SymbolMap symbols, java.io.Reader in) {
         this(in);
-        _symbols = symbols;
+        this.symbols = symbols;
     }
 
-//
-// Parser productions
-//
-    final public AbstractUnit parseUnit() throws ParseException {
-        AbstractUnit result;
-        result = CompoundExpr();
-        jj_consume_token(0);
+
+    final public Unit parseUnit() throws ParseException {
+        Unit result = CompoundExpr();
+        consumeToken(0);
         {
             return result;
         }
     }
 
-    final public AbstractUnit CompoundExpr() throws ParseException {
+
+    final public Unit CompoundExpr() throws ParseException {
         throw new UnsupportedOperationException("Compound units not supported");
     }
 
@@ -86,14 +84,14 @@ public final class UnitParser implements UnitParserConstants {
         } else {
         }
         result = MulExpr();
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case PLUS:
             case MINUS:
                 sign2 = Sign();
                 n2 = NumberExpr();
                 break;
             default:
-                jj_la1[1] = jj_gen;
+                laA[1] = genInt;
         }
         if (n1 != null) {
             if (sign1.image.equals("-")) {
@@ -113,47 +111,48 @@ public final class UnitParser implements UnitParserConstants {
         }
     }
 
+
     final public Unit MulExpr() throws ParseException {
         Unit result = AbstractUnit.ONE;
         Unit temp = AbstractUnit.ONE;
         result = ExponentExpr();
         label_2:
         while (true) {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                 case ASTERISK:
                 case MIDDLE_DOT:
                 case SOLIDUS:
                     break;
                 default:
-                    jj_la1[2] = jj_gen;
+                    laA[2] = genInt;
                     break label_2;
             }
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                 case ASTERISK:
                 case MIDDLE_DOT:
-                    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                    switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                         case ASTERISK:
-                            jj_consume_token(ASTERISK);
+                            consumeToken(ASTERISK);
                             break;
                         case MIDDLE_DOT:
-                            jj_consume_token(MIDDLE_DOT);
+                            consumeToken(MIDDLE_DOT);
                             break;
                         default:
-                            jj_la1[3] = jj_gen;
-                            jj_consume_token(-1);
+                            laA[3] = genInt;
+                            consumeToken(-1);
                             throw new ParseException();
                     }
                     temp = ExponentExpr();
                     result = result.multiply(temp);
                     break;
                 case SOLIDUS:
-                    jj_consume_token(SOLIDUS);
+                    consumeToken(SOLIDUS);
                     temp = ExponentExpr();
                     result = result.divide(temp);
                     break;
                 default:
-                    jj_la1[4] = jj_gen;
-                    jj_consume_token(-1);
+                    laA[4] = genInt;
+                    consumeToken(-1);
                     throw new ParseException();
             }
         }
@@ -164,23 +163,22 @@ public final class UnitParser implements UnitParserConstants {
 
     final public Unit ExponentExpr() throws ParseException {
         Unit result = AbstractUnit.ONE;
-        Unit temp = AbstractUnit.ONE;
         Exponent exponent = null;
         Token token = null;
         if (jj_2_2(2147483647)) {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                 case INTEGER:
-                    token = jj_consume_token(INTEGER);
+                    token = consumeToken(INTEGER);
                     break;
                 case E:
-                    token = jj_consume_token(E);
+                    token = consumeToken(E);
                     break;
                 default:
-                    jj_la1[5] = jj_gen;
-                    jj_consume_token(-1);
+                    laA[5] = genInt;
+                    consumeToken(-1);
                     throw new ParseException();
             }
-            jj_consume_token(CARET);
+            consumeToken(CARET);
             result = AtomicExpr();
             double base;
             if (token.kind == INTEGER) {
@@ -192,19 +190,19 @@ public final class UnitParser implements UnitParserConstants {
                 return result.transform(new LogConverter(base).inverse());
             }
         } else {
-            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+            switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                 case OPEN_PAREN:
                 case INTEGER:
                 case FLOATING_POINT:
                 case UNIT_IDENTIFIER:
                     result = AtomicExpr();
-                    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                    switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                         case CARET:
                         case SUPERSCRIPT_INTEGER:
                             exponent = Exp();
                             break;
                         default:
-                            jj_la1[6] = jj_gen;
+                            laA[6] = genInt;
                     }
                     if (exponent != null) {
                         if (exponent.pow != 1) {
@@ -218,28 +216,28 @@ public final class UnitParser implements UnitParserConstants {
                 }
                 case LOG:
                 case NAT_LOG:
-                    switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                    switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                         case LOG:
-                            jj_consume_token(LOG);
-                            switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                            consumeToken(LOG);
+                            switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                                 case INTEGER:
-                                    token = jj_consume_token(INTEGER);
+                                    token = consumeToken(INTEGER);
                                     break;
                                 default:
-                                    jj_la1[7] = jj_gen;
+                                    laA[7] = genInt;
                             }
                             break;
                         case NAT_LOG:
-                            token = jj_consume_token(NAT_LOG);
+                            token = consumeToken(NAT_LOG);
                             break;
                         default:
-                            jj_la1[8] = jj_gen;
-                            jj_consume_token(-1);
+                            laA[8] = genInt;
+                            consumeToken(-1);
                             throw new ParseException();
                     }
-                    jj_consume_token(OPEN_PAREN);
+                    consumeToken(OPEN_PAREN);
                     result = AddExpr();
-                    jj_consume_token(CLOSE_PAREN);
+                    consumeToken(CLOSE_PAREN);
                     double base = 10;
                     if (token != null) {
                         if (token.kind == INTEGER) {
@@ -251,8 +249,8 @@ public final class UnitParser implements UnitParserConstants {
                     return result.transform(new LogConverter(base));
                 }
                 default:
-                    jj_la1[9] = jj_gen;
-                    jj_consume_token(-1);
+                    laA[9] = genInt;
+                    consumeToken(-1);
                     throw new ParseException();
             }
         }
@@ -260,10 +258,9 @@ public final class UnitParser implements UnitParserConstants {
 
     final public Unit AtomicExpr() throws ParseException {
         Unit result = AbstractUnit.ONE;
-        Unit temp = AbstractUnit.ONE;
         Number n = null;
         Token token = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case INTEGER:
             case FLOATING_POINT:
                 n = NumberExpr();
@@ -277,13 +274,13 @@ public final class UnitParser implements UnitParserConstants {
                     }
                 }
             case UNIT_IDENTIFIER:
-                token = jj_consume_token(UNIT_IDENTIFIER);
-                Unit unit = _symbols.getUnit(token.image);
+                token = consumeToken(UNIT_IDENTIFIER);
+                Unit unit = symbols.getUnit(token.image);
                 if (unit == null) {
-                    SIPrefix prefix = _symbols.getPrefix(token.image);
+                    SIPrefix prefix = symbols.getPrefix(token.image);
                     if (prefix != null) {
-                        String prefixSymbol = _symbols.getSymbol(prefix);
-                        unit = _symbols.getUnit(token.image.substring(prefixSymbol.length()));
+                        String prefixSymbol = symbols.getSymbol(prefix);
+                        unit = symbols.getUnit(token.image.substring(prefixSymbol.length()));
                         if (unit != null) {
                             {
                                 return unit.transform(prefix.getConverter());
@@ -299,30 +296,30 @@ public final class UnitParser implements UnitParserConstants {
                     }
                 }
             case OPEN_PAREN:
-                jj_consume_token(OPEN_PAREN);
+                consumeToken(OPEN_PAREN);
                 result = AddExpr();
-                jj_consume_token(CLOSE_PAREN); {
+                consumeToken(CLOSE_PAREN); {
                 return result;
             }
             default:
-                jj_la1[10] = jj_gen;
-                jj_consume_token(-1);
+                laA[10] = genInt;
+                consumeToken(-1);
                 throw new ParseException();
         }
     }
 
     final public Token Sign() throws ParseException {
         Token result = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case PLUS:
-                result = jj_consume_token(PLUS);
+                result = consumeToken(PLUS);
                 break;
             case MINUS:
-                result = jj_consume_token(MINUS);
+                result = consumeToken(MINUS);
                 break;
             default:
-                jj_la1[11] = jj_gen;
-                jj_consume_token(-1);
+                laA[11] = genInt;
+                consumeToken(-1);
                 throw new ParseException();
         }
         {
@@ -332,18 +329,18 @@ public final class UnitParser implements UnitParserConstants {
 
     final public Number NumberExpr() throws ParseException {
         Token token = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case INTEGER:
-                token = jj_consume_token(INTEGER); {
+                token = consumeToken(INTEGER); {
                 return Long.valueOf(token.image);
             }
             case FLOATING_POINT:
-                token = jj_consume_token(FLOATING_POINT); {
+                token = consumeToken(FLOATING_POINT); {
                 return Double.valueOf(token.image);
             }
             default:
-                jj_la1[12] = jj_gen;
-                jj_consume_token(-1);
+                laA[12] = genInt;
+                consumeToken(-1);
                 throw new ParseException();
         }
     }
@@ -353,22 +350,22 @@ public final class UnitParser implements UnitParserConstants {
         Token powToken = null;
         Token rootSign = null;
         Token rootToken = null;
-        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case CARET:
-                jj_consume_token(CARET);
-                switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                consumeToken(CARET);
+                switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                     case PLUS:
                     case MINUS:
                     case INTEGER:
-                        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                             case PLUS:
                             case MINUS:
                                 powSign = Sign();
                                 break;
                             default:
-                                jj_la1[13] = jj_gen;
+                                laA[13] = genInt;
                         }
-                        powToken = jj_consume_token(INTEGER);
+                        powToken = consumeToken(INTEGER);
                         int pow = Integer.parseInt(powToken.image);
                         if ((powSign != null) && powSign.image.equals("-")) {
                             pow = -pow;
@@ -376,33 +373,33 @@ public final class UnitParser implements UnitParserConstants {
                         return new Exponent(pow, 1);
                     }
                     case OPEN_PAREN:
-                        jj_consume_token(OPEN_PAREN);
-                        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                        consumeToken(OPEN_PAREN);
+                        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                             case PLUS:
                             case MINUS:
                                 powSign = Sign();
                                 break;
                             default:
-                                jj_la1[14] = jj_gen;
+                                laA[14] = genInt;
                         }
-                        powToken = jj_consume_token(INTEGER);
-                        switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                        powToken = consumeToken(INTEGER);
+                        switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                             case SOLIDUS:
-                                jj_consume_token(SOLIDUS);
-                                switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
+                                consumeToken(SOLIDUS);
+                                switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
                                     case PLUS:
                                     case MINUS:
                                         rootSign = Sign();
                                         break;
                                     default:
-                                        jj_la1[15] = jj_gen;
+                                        laA[15] = genInt;
                                 }
-                                rootToken = jj_consume_token(INTEGER);
+                                rootToken = consumeToken(INTEGER);
                                 break;
                             default:
-                                jj_la1[16] = jj_gen;
+                                laA[16] = genInt;
                         }
-                        jj_consume_token(CLOSE_PAREN);
+                        consumeToken(CLOSE_PAREN);
                         pow = Integer.parseInt(powToken.image);
                         if ((powSign != null) && powSign.image.equals("-")) {
                             pow = -pow;
@@ -417,12 +414,12 @@ public final class UnitParser implements UnitParserConstants {
                         return new Exponent(pow, root);
                     }
                     default:
-                        jj_la1[17] = jj_gen;
-                        jj_consume_token(-1);
+                        laA[17] = genInt;
+                        consumeToken(-1);
                         throw new ParseException();
                 }
             case SUPERSCRIPT_INTEGER:
-                powToken = jj_consume_token(SUPERSCRIPT_INTEGER);
+                powToken = consumeToken(SUPERSCRIPT_INTEGER);
                 int pow = 0;
                 for (int i = 0; i < powToken.image.length(); i += 1) {
                     pow *= 10;
@@ -459,15 +456,15 @@ public final class UnitParser implements UnitParserConstants {
                 return new Exponent(pow, 1);
             }
             default:
-                jj_la1[18] = jj_gen;
-                jj_consume_token(-1);
+                laA[18] = genInt;
+                consumeToken(-1);
                 throw new ParseException();
         }
     }
 
     private boolean jj_2_1(int xla) {
-        jj_la = xla;
-        jj_lastpos = jj_scanpos = token;
+        laInt = xla;
+        lastpos = scanpos = token;
         try {
             return !jj_3_1();
         } catch (LookaheadSuccess ls) {
@@ -478,8 +475,8 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     private boolean jj_2_2(int xla) {
-        jj_la = xla;
-        jj_lastpos = jj_scanpos = token;
+        laInt = xla;
+        lastpos = scanpos = token;
         try {
             return !jj_3_2();
         } catch (LookaheadSuccess ls) {
@@ -491,9 +488,9 @@ public final class UnitParser implements UnitParserConstants {
 
     private boolean jj_3R_3() {
         Token xsp;
-        xsp = jj_scanpos;
+        xsp = scanpos;
         if (jj_3R_5()) {
-            jj_scanpos = xsp;
+            scanpos = xsp;
             if (jj_3R_6())
                 return true;
         }
@@ -501,18 +498,18 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     private boolean jj_3R_6() {
-        return jj_scan_token(FLOATING_POINT);
+        return scanToken(FLOATING_POINT);
     }
 
     private boolean jj_3_2() {
         Token xsp;
-        xsp = jj_scanpos;
-        if (jj_scan_token(14)) {
-            jj_scanpos = xsp;
-            if (jj_scan_token(19))
+        xsp = scanpos;
+        if (scanToken(14)) {
+            scanpos = xsp;
+            if (scanToken(19))
                 return true;
         }
-        return jj_scan_token(CARET);
+        return scanToken(CARET);
     }
 
     private boolean jj_3_1() {
@@ -521,53 +518,53 @@ public final class UnitParser implements UnitParserConstants {
 
     private boolean jj_3R_4() {
         Token xsp;
-        xsp = jj_scanpos;
-        if (jj_scan_token(5)) {
-            jj_scanpos = xsp;
-            if (jj_scan_token(6))
+        xsp = scanpos;
+        if (scanToken(5)) {
+            scanpos = xsp;
+            if (scanToken(6))
                 return true;
         }
         return false;
     }
 
     private boolean jj_3R_5() {
-        return jj_scan_token(INTEGER);
+        return scanToken(INTEGER);
     }
     /** Generated Token Manager. */
-    public UnitParserTokenManager token_source;
+    public UnitParserTokenManager tokenSource;
 
-    SimpleCharStream jj_input_stream;
+    SimpleCharStream inputStream;
 
     /** Current token. */
     public Token token;
 
     /** Next token. */
-    public Token jj_nt;
+    public Token nextToken;
 
-    private int jj_ntk;
+    private int nextTokenIndex;
 
-    private Token jj_scanpos, jj_lastpos;
+    private Token scanpos, lastpos;
 
-    private int jj_la;
+    private int laInt;
 
-    private int jj_gen;
+    private int genInt;
 
-    final private int[] jj_la1 = new int[19];
+    final private int[] laA = new int[19];
 
-    static private int[] jj_la1_0;
+    static private int[] laB;
 
     static {
-        jj_la1_init_0();
+        init();
     }
 
-    private static void jj_la1_init_0() {
-        jj_la1_0 = new int[]{0x800, 0x60, 0x380, 0x180, 0x380, 0x84000, 0x8400, 0x4000, 0x60000, 0x175000, 0x115000, 0x60, 0x14000, 0x60, 0x60, 0x60, 0x200, 0x5060, 0x8400,};
+    private static void init() {
+        laB = new int[]{0x800, 0x60, 0x380, 0x180, 0x380, 0x84000, 0x8400, 0x4000, 0x60000, 0x175000, 0x115000, 0x60, 0x14000, 0x60, 0x60, 0x60, 0x200, 0x5060, 0x8400,};
     }
-    final private JJCalls[] jj_2_rtns = new JJCalls[2];
+    final private JJCalls[] rtns = new JJCalls[2];
 
-    private boolean jj_rescan = false;
+    private boolean rescan = false;
 
-    private int jj_gc = 0;
+    private int gcInt = 0;
 
     /** Constructor with InputStream. */
     public UnitParser(java.io.InputStream stream) {
@@ -577,19 +574,19 @@ public final class UnitParser implements UnitParserConstants {
     /** Constructor with InputStream and supplied encoding */
     public UnitParser(java.io.InputStream stream, String encoding) {
         try {
-            jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
+            inputStream = new SimpleCharStream(stream, encoding, 1, 1);
         } catch (java.io.UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        token_source = new UnitParserTokenManager(jj_input_stream);
+        tokenSource = new UnitParserTokenManager(inputStream);
         token = new Token();
-        jj_ntk = -1;
-        jj_gen = 0;
+        nextTokenIndex = -1;
+        genInt = 0;
         for (int i = 0; i < 19; i++) {
-            jj_la1[i] = -1;
+            laA[i] = -1;
         }
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-            jj_2_rtns[i] = new JJCalls();
+        for (int i = 0; i < rtns.length; i++) {
+            rtns[i] = new JJCalls();
         }
     }
 
@@ -601,95 +598,95 @@ public final class UnitParser implements UnitParserConstants {
     /** Reinitialise. */
     public void ReInit(java.io.InputStream stream, String encoding) {
         try {
-            jj_input_stream.ReInit(stream, encoding, 1, 1);
+            inputStream.ReInit(stream, encoding, 1, 1);
         } catch (java.io.UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        token_source.ReInit(jj_input_stream);
+        tokenSource.ReInit(inputStream);
         token = new Token();
-        jj_ntk = -1;
-        jj_gen = 0;
+        nextTokenIndex = -1;
+        genInt = 0;
         for (int i = 0; i < 19; i++) {
-            jj_la1[i] = -1;
+            laA[i] = -1;
         }
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-            jj_2_rtns[i] = new JJCalls();
+        for (int i = 0; i < rtns.length; i++) {
+            rtns[i] = new JJCalls();
         }
     }
 
     /** Constructor. */
     public UnitParser(java.io.Reader stream) {
-        jj_input_stream = new SimpleCharStream(stream, 1, 1);
-        token_source = new UnitParserTokenManager(jj_input_stream);
+        inputStream = new SimpleCharStream(stream, 1, 1);
+        tokenSource = new UnitParserTokenManager(inputStream);
         token = new Token();
-        jj_ntk = -1;
-        jj_gen = 0;
+        nextTokenIndex = -1;
+        genInt = 0;
         for (int i = 0; i < 19; i++) {
-            jj_la1[i] = -1;
+            laA[i] = -1;
         }
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-            jj_2_rtns[i] = new JJCalls();
+        for (int i = 0; i < rtns.length; i++) {
+            rtns[i] = new JJCalls();
         }
     }
 
     /** Reinitialise. */
     public void ReInit(java.io.Reader stream) {
-        jj_input_stream.ReInit(stream, 1, 1);
-        token_source.ReInit(jj_input_stream);
+        inputStream.ReInit(stream, 1, 1);
+        tokenSource.ReInit(inputStream);
         token = new Token();
-        jj_ntk = -1;
-        jj_gen = 0;
+        nextTokenIndex = -1;
+        genInt = 0;
         for (int i = 0; i < 19; i++) {
-            jj_la1[i] = -1;
+            laA[i] = -1;
         }
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-            jj_2_rtns[i] = new JJCalls();
+        for (int i = 0; i < rtns.length; i++) {
+            rtns[i] = new JJCalls();
         }
     }
 
     /** Constructor with generated Token Manager. */
     public UnitParser(UnitParserTokenManager tm) {
-        token_source = tm;
+        tokenSource = tm;
         token = new Token();
-        jj_ntk = -1;
-        jj_gen = 0;
+        nextTokenIndex = -1;
+        genInt = 0;
         for (int i = 0; i < 19; i++) {
-            jj_la1[i] = -1;
+            laA[i] = -1;
         }
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-            jj_2_rtns[i] = new JJCalls();
+        for (int i = 0; i < rtns.length; i++) {
+            rtns[i] = new JJCalls();
         }
     }
 
     /** Reinitialise. */
     public void ReInit(UnitParserTokenManager tm) {
-        token_source = tm;
+        tokenSource = tm;
         token = new Token();
-        jj_ntk = -1;
-        jj_gen = 0;
+        nextTokenIndex = -1;
+        genInt = 0;
         for (int i = 0; i < 19; i++) {
-            jj_la1[i] = -1;
+            laA[i] = -1;
         }
-        for (int i = 0; i < jj_2_rtns.length; i++) {
-            jj_2_rtns[i] = new JJCalls();
+        for (int i = 0; i < rtns.length; i++) {
+            rtns[i] = new JJCalls();
         }
     }
 
-    private Token jj_consume_token(int kind) throws ParseException {
+    private Token consumeToken(int kind) throws ParseException {
         Token oldToken;
         if ((oldToken = token).next != null)
             token = token.next;
         else
-            token = token.next = token_source.getNextToken();
-        jj_ntk = -1;
+            token = token.next = tokenSource.getNextToken();
+        nextTokenIndex = -1;
         if (token.kind == kind) {
-            jj_gen++;
-            if (++jj_gc > 100) {
-                jj_gc = 0;
-                for (JJCalls jj_2_rtn : jj_2_rtns) {
+            genInt++;
+            if (++gcInt > 100) {
+                gcInt = 0;
+                for (JJCalls jj_2_rtn : rtns) {
                     JJCalls c = jj_2_rtn;
                     while (c != null) {
-                        if (c.gen < jj_gen)
+                        if (c.gen < genInt)
                             c.first = null;
                         c = c.next;
                     }
@@ -698,39 +695,39 @@ public final class UnitParser implements UnitParserConstants {
             return token;
         }
         token = oldToken;
-        jj_kind = kind;
+        this.kind = kind;
         throw generateParseException();
     }
 
-    static private final class LookaheadSuccess extends java.lang.Error {
+    static private final class LookaheadSuccess extends java.lang.RuntimeException {
+        private static final long serialVersionUID = 2205332054119123041L;
     }
-    final private LookaheadSuccess jj_ls = new LookaheadSuccess();
 
-    private boolean jj_scan_token(int kind) {
-        if (jj_scanpos == jj_lastpos) {
-            jj_la--;
-            if (jj_scanpos.next == null) {
-                jj_lastpos = jj_scanpos = jj_scanpos.next = token_source.getNextToken();
+    private boolean scanToken(int kind) {
+        if (scanpos == lastpos) {
+            laInt--;
+            if (scanpos.next == null) {
+                lastpos = scanpos = scanpos.next = tokenSource.getNextToken();
             } else {
-                jj_lastpos = jj_scanpos = jj_scanpos.next;
+                lastpos = scanpos = scanpos.next;
             }
         } else {
-            jj_scanpos = jj_scanpos.next;
+            scanpos = scanpos.next;
         }
-        if (jj_rescan) {
+        if (rescan) {
             int i = 0;
             Token tok = token;
-            while (tok != null && tok != jj_scanpos) {
+            while (tok != null && tok != scanpos) {
                 i++;
                 tok = tok.next;
             }
             if (tok != null)
                 jj_add_error_token(kind, i);
         }
-        if (jj_scanpos.kind != kind)
+        if (scanpos.kind != kind)
             return true;
-        if (jj_la == 0 && jj_scanpos == jj_lastpos)
-            throw jj_ls;
+        if (laInt == 0 && scanpos == lastpos)
+            throw new LookaheadSuccess();
         return false;
     }
 
@@ -739,9 +736,9 @@ public final class UnitParser implements UnitParserConstants {
         if (token.next != null)
             token = token.next;
         else
-            token = token.next = token_source.getNextToken();
-        jj_ntk = -1;
-        jj_gen++;
+            token = token.next = tokenSource.getNextToken();
+        nextTokenIndex = -1;
+        genInt++;
         return token;
     }
 
@@ -752,64 +749,66 @@ public final class UnitParser implements UnitParserConstants {
             if (t.next != null)
                 t = t.next;
             else
-                t = t.next = token_source.getNextToken();
+                t = t.next = tokenSource.getNextToken();
         }
         return t;
     }
 
     private int jj_ntk() {
-        if ((jj_nt = token.next) == null)
-            return (jj_ntk = (token.next = token_source.getNextToken()).kind);
-        else
-            return (jj_ntk = jj_nt.kind);
+        if ((nextToken = token.next) == null) {
+            return (nextTokenIndex = (token.next = tokenSource.getNextToken()).kind);
+        }
+        else {
+            return (nextTokenIndex = nextToken.kind);
+        }
     }
-    private java.util.List<int[]> jj_expentries = new java.util.ArrayList<>();
+    private java.util.List<int[]> expentries = new java.util.ArrayList<>();
 
-    private int[] jj_expentry;
+    private int[] expentry;
 
-    private int jj_kind = -1;
+    private int kind = -1;
 
-    private int[] jj_lasttokens = new int[100];
+    private int[] lastTokens = new int[100];
 
-    private int jj_endpos;
+    private int endpos;
 
     private void jj_add_error_token(int kind, int pos) {
         if (pos >= 100)
             return;
-        if (pos == jj_endpos + 1) {
-            jj_lasttokens[jj_endpos++] = kind;
-        } else if (jj_endpos != 0) {
-            jj_expentry = new int[jj_endpos];
-            System.arraycopy(jj_lasttokens, 0, jj_expentry, 0, jj_endpos);
-            jj_entries_loop:
-            for (int[] jj_expentry1 : jj_expentries) {
-                if (jj_expentry1.length == jj_expentry.length) {
-                    for (int i = 0; i < jj_expentry.length; i++) {
-                        if (jj_expentry1[i] != jj_expentry[i]) {
-                            continue jj_entries_loop;
+        if (pos == endpos + 1) {
+            lastTokens[endpos++] = kind;
+        } else if (endpos != 0) {
+            expentry = new int[endpos];
+            System.arraycopy(lastTokens, 0, expentry, 0, endpos);
+            entriesLoop:
+            for (int[] jj_expentry1 : expentries) {
+                if (jj_expentry1.length == expentry.length) {
+                    for (int i = 0; i < expentry.length; i++) {
+                        if (jj_expentry1[i] != expentry[i]) {
+                            continue entriesLoop;
                         }
                     }
-                    jj_expentries.add(jj_expentry);
+                    expentries.add(expentry);
                     break;
                 }
             }
             if (pos != 0)
-                jj_lasttokens[(jj_endpos = pos) - 1] = kind;
+                lastTokens[(endpos = pos) - 1] = kind;
         }
     }
 
     /** Generate ParseException. */
     public ParseException generateParseException() {
-        jj_expentries.clear();
+        expentries.clear();
         boolean[] la1tokens = new boolean[21];
-        if (jj_kind >= 0) {
-            la1tokens[jj_kind] = true;
-            jj_kind = -1;
+        if (kind >= 0) {
+            la1tokens[kind] = true;
+            kind = -1;
         }
         for (int i = 0; i < 19; i++) {
-            if (jj_la1[i] == jj_gen) {
+            if (laA[i] == genInt) {
                 for (int j = 0; j < 32; j++) {
-                    if ((jj_la1_0[i] & (1 << j)) != 0) {
+                    if ((laB[i] & (1 << j)) != 0) {
                         la1tokens[j] = true;
                     }
                 }
@@ -817,17 +816,17 @@ public final class UnitParser implements UnitParserConstants {
         }
         for (int i = 0; i < 21; i++) {
             if (la1tokens[i]) {
-                jj_expentry = new int[1];
-                jj_expentry[0] = i;
-                jj_expentries.add(jj_expentry);
+                expentry = new int[1];
+                expentry[0] = i;
+                expentries.add(expentry);
             }
         }
-        jj_endpos = 0;
+        endpos = 0;
         jj_rescan_token();
         jj_add_error_token(0, 0);
-        int[][] exptokseq = new int[jj_expentries.size()][];
-        for (int i = 0; i < jj_expentries.size(); i++) {
-            exptokseq[i] = jj_expentries.get(i);
+        int[][] exptokseq = new int[expentries.size()][];
+        for (int i = 0; i < expentries.size(); i++) {
+            exptokseq[i] = expentries.get(i);
         }
         return new ParseException(token, exptokseq, tokenImage);
     }
@@ -841,14 +840,14 @@ public final class UnitParser implements UnitParserConstants {
     }
 
     private void jj_rescan_token() {
-        jj_rescan = true;
+        rescan = true;
         for (int i = 0; i < 2; i++) {
             try {
-                JJCalls p = jj_2_rtns[i];
+                JJCalls p = rtns[i];
                 do {
-                    if (p.gen > jj_gen) {
-                        jj_la = p.arg;
-                        jj_lastpos = jj_scanpos = p.first;
+                    if (p.gen > genInt) {
+                        laInt = p.arg;
+                        lastpos = scanpos = p.first;
                         switch (i) {
                             case 0:
                                 jj_3_1();
@@ -863,19 +862,19 @@ public final class UnitParser implements UnitParserConstants {
             } catch (LookaheadSuccess ls) {
             }
         }
-        jj_rescan = false;
+        rescan = false;
     }
 
     private void jj_save(int index, int xla) {
-        JJCalls p = jj_2_rtns[index];
-        while (p.gen > jj_gen) {
+        JJCalls p = rtns[index];
+        while (p.gen > genInt) {
             if (p.next == null) {
                 p = p.next = new JJCalls();
                 break;
             }
             p = p.next;
         }
-        p.gen = jj_gen + xla - jj_la;
+        p.gen = genInt + xla - laInt;
         p.first = token;
         p.arg = xla;
     }

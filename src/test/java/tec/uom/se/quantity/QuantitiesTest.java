@@ -49,6 +49,7 @@ import org.junit.Test;
 public class QuantitiesTest {
 
 
+
     @Test
     public void testOf() {
     	Quantity<Pressure> pressure = Quantities.getQuantity(BigDecimal.ONE, PASCAL);
