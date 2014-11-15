@@ -97,7 +97,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
 
     public TransformedUnit(String symbol, AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
-        if (!parentUnit.isSI()) {
+        if (!parentUnit.isSystemUnit()) {
             throw new IllegalArgumentException("The parent unit: " + parentUnit
                     + " is not a system unit");
         }
@@ -116,8 +116,8 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
 
     @Override
-    public AbstractUnit<Q> toSI() {
-        return parentUnit.toSI();
+    protected AbstractUnit<Q> toSystemUnit() {
+        return parentUnit.getSystemUnit();
     }
 
     @Override

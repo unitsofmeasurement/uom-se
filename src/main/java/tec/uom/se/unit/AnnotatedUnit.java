@@ -111,7 +111,7 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public AbstractUnit<Q> toSI() {
+    public AbstractUnit<Q> toSystemUnit() {
         return actualUnit.getSystemUnit();
     }
 

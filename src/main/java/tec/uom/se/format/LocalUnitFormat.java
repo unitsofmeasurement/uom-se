@@ -293,7 +293,7 @@ public class LocalUnitFormat implements UnitFormat {
                 }
             }
             return PRODUCT_PRECEDENCE;
-        } else if ((!((AbstractUnit)unit).isSI()) || unit.equals(SI.KILOGRAM)) {
+        } else if ((!((AbstractUnit)unit).isSystemUnit()) || unit.equals(SI.KILOGRAM)) {
             UnitConverter converter = null;
             boolean printSeparator = false;
             StringBuffer temp = new StringBuffer();

@@ -117,10 +117,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 * coherent set are used, conversion factors between units are never
 	 * required.
 	 * 
-	 * @return <code>equals(toSI())</code>
+	 * @return <code>equals(toSystemUnit())</code>
 	 */
-	public boolean isSI() {
-		AbstractUnit<Q> si = this.toSI();
+	public boolean isSystemUnit() {
+		AbstractUnit<Q> si = this.toSystemUnit();
 		return (this == si) || this.equals(si);
 	}
 
@@ -135,13 +135,13 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 *
 	 * @return the unscaled metric unit from which this unit is derived.
 	 */
-	public abstract AbstractUnit<Q> toSI();
+	protected abstract AbstractUnit<Q> toSystemUnit();
 
 	/**
-	 * Returns the converter from this unit to its unscaled {@link #toSI SI}
+	 * Returns the converter from this unit to its unscaled {@link #toSysemUnit System Unit}
 	 * unit.
 	 *
-	 * @return <code>getConverterTo(this.toSI())</code>
+	 * @return <code>getConverterTo(this.toSystemUnit())</code>
 	 * @see #toSI
 	 */
 	public abstract UnitConverter getConverterToSI();
@@ -234,7 +234,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	@Override
 	public final AbstractUnit<Q> getSystemUnit() {
-		return toSI();
+		return toSystemUnit();
 	}
 
 	/**

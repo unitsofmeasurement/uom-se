@@ -198,7 +198,7 @@ public abstract class UCUMFormat implements UnitFormat {
                 }
             }
             symbol = app;
-        } else if (!unit.isSI() || unit.equals(SI.KILOGRAM)) {
+        } else if (!unit.isSystemUnit() || unit.equals(SI.KILOGRAM)) {
             final StringBuilder temp = new StringBuilder();
             UnitConverter converter;
             boolean printSeparator;
