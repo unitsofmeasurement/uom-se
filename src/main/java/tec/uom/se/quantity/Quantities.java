@@ -58,7 +58,7 @@ public final class Quantities {
      * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
      * measure of unknown type corresponding to the specified representation.
      * This method can be used to parse dimensionless quantities.<br/><code>
-     *     Measurement<Number, Dimensionless> proportion = Measure.valueOf("0.234").asType(Dimensionless.class);
+     *     Quantity<Dimensionless> proportion = Quantities.getQuantity("0.234").asType(Dimensionless.class);
      * </code>
      *
      * <p> Note: This method handles only

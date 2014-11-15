@@ -57,7 +57,7 @@ import tec.uom.se.ComparableQuantity;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-11-02 $
+ * @version 0.4, $Date: 2014-11-15 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
@@ -109,7 +109,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 * unambiguous electronic communication of quantities together with their
 	 * units without loss of information. For example:
 	 * <code>"1.23456789 kg.m/s2"</code> returns
-	 * <code>Measure.valueOf(new BigDecimal("1.23456789"), Unit.valueOf("kg.m/s2")));</code>
+	 * <code>Quantities.getQuantity(new BigDecimal("1.23456789"), AbstractUnit.parse("kg.m/s2")));</code>
 	 *
 	 * @param style the format style to apply.
 	 * @return the desired format.

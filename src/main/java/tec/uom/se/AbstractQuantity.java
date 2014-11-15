@@ -240,14 +240,14 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
      * <p> Similarly to the {@link BigDecimal#equals} method which consider 2.0
      *     and 2.00 as different objects because of different internal scales,
      *     measurements such as <code>Measure.valueOf(3.0, KILOGRAM)</code>
-     *     <code>Measure.valueOf(3, KILOGRAM)</code> and
-     *     <code>Measure.valueOf("3 kg")</code> might not be considered equals
+     *     <code>Quantities.getQuantity(3, KILOGRAM)</code> and
+     *     <code>Quantities.getQuantity("3 kg")</code> might not be considered equals
      *     because of possible differences in their implementations.</p>
      *
      * <p> To compare measures stated using different units or using different
      *     amount implementations the {@link #compareTo compareTo} or
-     *     {@link #equals(javax.measure.Measurement, double, javax.measure.unit.Unit)
-     *      equals(Measurement, epsilon, epsilonUnit)} methods should be used.</p>
+     *     {@link #equals(javax.measure.Quantity, double, javax.measure.unit.Unit)
+     *      equals(Quantity, epsilon, epsilonUnit)} methods should be used.</p>
      *
      * @param obj the object to compare with.
      * @return <code>this.getUnit.equals(obj.getUnit())
