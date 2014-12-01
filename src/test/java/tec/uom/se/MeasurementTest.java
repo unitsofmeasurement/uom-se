@@ -29,54 +29,25 @@
  */
 package tec.uom.se;
 
-import static tec.uom.se.AbstractMeasurement.Default;
-
+import static org.junit.Assert.assertEquals;
+import static tec.uom.se.util.SI.KILOGRAM;
 import java.time.Instant;
 
-import javax.measure.Quantity;
+import javax.measure.quantity.Mass;
 
-import tec.uom.se.function.QuantitySupplier;
+import org.junit.Test;
 
-/**
- *
- * A Measurement contains a {@link Quantity} and a timestamp.
- * 
- * <p>
- * A {@code Measurement} object is used for maintaining the tuple of quantity and time-stamp.
- * The value is represented as {@linkplain Quantity}
- * and the time as {@linkplain Instant}
- * <p>
+import tec.uom.se.quantity.Quantities;
 
- * 
- * @see {@link QuantitySupplier}
- * @author werner
- * @version 0.2
- * @param <Q>
- */
-public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
-		Comparable<Measurement<Q>> {
+public class MeasurementTest {
 
-	/**
-	 * Returns the timestamp of this {@link Measurement}.
-	 * 
-	 * @return a timestamp.
-	 */
-	long getTimestamp();
-	
-	/**
-	 * Returns the {@linkplain Instant} as timestamp.
-	 * 
-	 * @return an instant.
-	 */
-	Instant getInstant();
-	
-	@SuppressWarnings({ "unchecked" })
-	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
-		return new Default<Q>(q);
-	}
-	
-	@SuppressWarnings("unchecked")
-	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, Instant i) {
-		return new Default<Q>(q, i);
+	@Test
+	public void testOf() {
+		Instant instant = Instant.now();
+		Measurement<Mass> measurement = Measurement.of(
+				Quantities.getQuantity(15, KILOGRAM), instant);
+		assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
+		assertEquals(instant, measurement.getInstant());
+		assertEquals(instant.toEpochMilli(), measurement.getTimestamp());
 	}
 }

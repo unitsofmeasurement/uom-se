@@ -35,6 +35,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import tec.uom.se.AbstractUnit;
+import tec.uom.se.function.UnitConverterSupplier;
 
 import java.util.Map;
 import java.util.Objects;
@@ -60,9 +61,9 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, March 20, 2014
+ * @version 0.5.4, November 30, 2014
  */
-public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
+public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
 	/**
 	 *
@@ -116,6 +117,11 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
 
     @Override
+    public UnitConverter getConverter() {
+        return unitConverter;
+    }
+    
+    @Override
     protected AbstractUnit<Q> toSystemUnit() {
         return parentUnit.getSystemUnit();
     }
@@ -146,5 +152,9 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 	@Override
 	public String getSymbol() {
 		return symbol;
+	}
+
+	public Unit<Q> getParentUnit() {
+		return parentUnit;
 	}
 }

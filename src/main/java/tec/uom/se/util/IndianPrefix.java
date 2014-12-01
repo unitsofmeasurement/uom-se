@@ -248,22 +248,22 @@ public abstract class IndianPrefix {
 	}
 
 	// Holds prefix converters (optimization).
-	private static RationalConverter E19 = new RationalConverter(
+	private static final RationalConverter E19 = new RationalConverter(
 			BigInteger.TEN.pow(19), BigInteger.ONE);
-	private static RationalConverter E17 = new RationalConverter(
+	private static final RationalConverter E17 = new RationalConverter(
 			BigInteger.TEN.pow(17), BigInteger.ONE);
-	private static RationalConverter E15 = new RationalConverter(
+	private static final RationalConverter E15 = new RationalConverter(
 			BigInteger.TEN.pow(15), BigInteger.ONE);
-	private static RationalConverter E13 = new RationalConverter(
+	private static final RationalConverter E13 = new RationalConverter(
 			BigInteger.TEN.pow(13), BigInteger.ONE);
-	private static RationalConverter E11 = new RationalConverter(
+	private static final RationalConverter E11 = new RationalConverter(
 			BigInteger.TEN.pow(11), BigInteger.ONE);
-	private static RationalConverter E9 = new RationalConverter(
+	private static final RationalConverter E9 = new RationalConverter(
 			BigInteger.TEN.pow(9), BigInteger.ONE);
-	private static RationalConverter E3 = new RationalConverter(
+	private static final RationalConverter E3 = new RationalConverter(
 			BigInteger.TEN.pow(3), BigInteger.ONE);
-	private static RationalConverter E2 = new RationalConverter(
+	private static final RationalConverter E2 = new RationalConverter(
 			BigInteger.TEN.pow(2), BigInteger.ONE);
-	private static RationalConverter E1 = new RationalConverter(
+	private static final RationalConverter E1 = new RationalConverter(
 			BigInteger.TEN.pow(1), BigInteger.ONE);
 }

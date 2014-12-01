@@ -57,7 +57,6 @@ import java.math.BigInteger;
  * @version 5.4, $Date: 2014-04-09 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
-
     YOTTA(new RationalConverter(10^24L, 1L)), // TODO if this works, we could avoid BigInteger for a "normal" range from ATTO to YOCTO
     ZETTA(new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),
     EXA(new RationalConverter(BigInteger.TEN.pow(18), BigInteger.ONE)),
@@ -80,6 +79,9 @@ public enum SIPrefix implements UnitConverterSupplier {
     YOCTO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(24)));
 
     private final RationalConverter converter;
+    
+    private static final RationalConverter E3 = new RationalConverter(
+			BigInteger.TEN.pow(3), BigInteger.ONE);
 
     /**
      * Creates a new prefix.
@@ -192,7 +194,8 @@ public enum SIPrefix implements UnitConverterSupplier {
      * @return <code>unit.times(1e3)</code>.
      */
     public static <Q extends Quantity<Q>> Unit<Q> KILO(Unit<Q> unit) {
-        return unit.transform(KILO.getConverter());
+        //return unit.transform(KILO.getConverter());
+    	return unit.transform(E3);
     }
 
     /**

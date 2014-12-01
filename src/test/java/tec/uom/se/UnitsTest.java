@@ -36,10 +36,9 @@ import static tec.uom.se.util.SIPrefix.KILO;
 import org.junit.Test;
 
 public class UnitsTest {
-//	private final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
 	
     @Test
-    public void testOf() {
+    public void testParse() {
         assertEquals(KILO(GRAM), AbstractUnit.parse("kg"));
     }
 }

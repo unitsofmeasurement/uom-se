@@ -34,7 +34,7 @@ package tec.uom.se.model;
  * This class represents the standard model. 
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 5.0, October 12, 2010
+ * @version 0.5, November 30, 2014
  */
 public class StandardModel extends DimensionalModel {
 

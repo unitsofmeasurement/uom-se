@@ -30,9 +30,6 @@
 package tec.uom.se;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.util.SI.GRAM;
-import static tec.uom.se.util.SIPrefix.KILO;
-
 import javax.measure.quantity.Length;
 
 import org.junit.Ignore;
