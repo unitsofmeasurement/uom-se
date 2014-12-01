@@ -106,7 +106,7 @@ import java.util.ResourceBundle;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, December 1 2014
+ * @version 0.6, December 1, 2014
  */
 public class LocalUnitFormat implements UnitFormat {
 
