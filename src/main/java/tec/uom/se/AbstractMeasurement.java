@@ -27,7 +27,6 @@ package tec.uom.se;
 
 import java.io.Serializable;
 import java.time.Instant;
-
 import javax.measure.Quantity;
 
 /**
@@ -52,7 +51,7 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 	 */
 	private static final long serialVersionUID = 2417644773551236879L;
 
-	private final Quantity<Q> quantity;
+	protected final Quantity<Q> quantity;
 	
 	private final Instant instant;
 	
@@ -131,10 +130,18 @@ public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 			super(q);
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public int compareTo(Object o) {
-			// TODO Auto-generated method stub
-			return 0;
+			if (o instanceof Measurement) {
+				Measurement m = (Measurement)o;
+				if (getQuantity() instanceof ComparableQuantity) {
+					ComparableQuantity<?> comp = (ComparableQuantity<?>) getQuantity();
+					return comp.compareTo(m.getQuantity()) + getInstant().compareTo(m.getInstant());
+				}
+				return 0;
+			}
+			return 0;			
 		}
 	}
 }
