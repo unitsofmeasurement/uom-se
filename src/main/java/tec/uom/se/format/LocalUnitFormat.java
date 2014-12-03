@@ -40,6 +40,7 @@ import tec.uom.se.format.internal.UnitParser;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
+import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.TransformedUnit;
@@ -384,7 +385,7 @@ public class LocalUnitFormat implements UnitFormat {
 		} else if (unit instanceof BaseUnit<?>) {
 			buffer.append(((BaseUnit<?>) unit).getSymbol());
 			return NOOP_PRECEDENCE;
-		} else if (unit.getSymbol() != null) { // Alternate unit.
+		} else if (unit instanceof AlternateUnit<?>) { // unit.getSymbol() != null) { // Alternate unit.
 			buffer.append(unit.getSymbol());
 			return NOOP_PRECEDENCE;
 		} else { // A transformed unit or new unit type!
