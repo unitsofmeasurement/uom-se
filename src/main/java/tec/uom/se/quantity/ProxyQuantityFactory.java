@@ -59,7 +59,7 @@ import tec.uom.se.AbstractUnit;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.4 ($Revision: 458 $), $Date: 2014-10-19 $
+ * @version 0.5, $Date: 2014-12-16 $
  */
 abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 	
@@ -220,11 +220,10 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public <N extends Number, U extends Unit<Q>> Quantity<Q> create(
-				N number, U unit) {
+		public Quantity<Q> create(Number value, Unit<Q> unit) {
 	           //System.out.println("Type: " + type);
             return (Q) Proxy.newProxyInstance(type.getClassLoader(),
-                    new Class<?>[]{type}, new GenericHandler<Q>(number, unit));
+                    new Class<?>[]{type}, new GenericHandler<Q>(value, unit));
 		}
     }
 

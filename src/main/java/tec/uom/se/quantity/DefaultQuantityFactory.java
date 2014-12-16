@@ -48,7 +48,7 @@ import javax.measure.spi.QuantityFactory;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:otaviojava@java.net">Otavio Santana</a>
- * @version 0.5.5, $Date: 2014-07-22 $
+ * @version 0.6, $Date: 2014-12-16 $
  */
 class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityFactory<Q>{
 
@@ -80,7 +80,7 @@ class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityFactory<
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends Number, U extends Unit<Q>> Q create(T number, U unit) {
-        return (Q) tec.uom.se.quantity.Quantities.getQuantity(number, unit);
+    public Quantity<Q> create(Number value, Unit<Q> unit) {
+        return (Q) tec.uom.se.quantity.Quantities.getQuantity(value, unit);
     }
 }
