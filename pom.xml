@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8-SNAPSHOT</version>
+		<version>0.7</version>
 	</parent>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
