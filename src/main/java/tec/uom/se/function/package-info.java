@@ -28,12 +28,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * This package provides concrete implementations of the 
- * {@link javax.measure.UnitConverter} interface.
- * 
- * As well as concrete implementations of 
- * {@link javax.measure.spi.UnitformatService}.
- * Clients can also obtain concrete implementations from their OSGi bundle 
- * context or service tracker.
+ * This package provides <a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html#package.description"
+ * >functional interfaces</a>.
  */
 package tec.uom.se.function;
