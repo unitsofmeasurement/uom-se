@@ -27,9 +27,10 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.model;
+package tec.uom.se;
 
-import tec.uom.se.AbstractConverter;
+import tec.uom.se.quantity.QuantityDimension;
+import tec.uom.se.util.StandardModel;
 
 import javax.measure.Dimension;
 

@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.model;
+package tec.uom.se.quantity;
 
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;

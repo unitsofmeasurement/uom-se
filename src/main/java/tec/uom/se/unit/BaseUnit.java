@@ -31,7 +31,7 @@ package tec.uom.se.unit;
 
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.model.QuantityDimension;
+import tec.uom.se.quantity.QuantityDimension;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
@@ -44,7 +44,7 @@ import java.util.Map;
  * <p> This class represents the building blocks on top of which all others
  *     physical units are created. Base units are always unscaled SI units.</p>
  * 
- * <p> When using the {@link tec.uom.se.model.StandardModel standard model},
+ * <p> When using the {@link tec.uom.se.util.StandardModel standard model},
  *     all seven {@link org.tec.uom.se.system.SI SI} base units
  *     are dimensionally independent.</p>
  *

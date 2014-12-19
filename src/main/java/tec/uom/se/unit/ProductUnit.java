@@ -31,7 +31,7 @@ package tec.uom.se.unit;
 
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.model.QuantityDimension;
+import tec.uom.se.quantity.QuantityDimension;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;

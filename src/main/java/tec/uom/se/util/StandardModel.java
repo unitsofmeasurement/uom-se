@@ -27,8 +27,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package tec.uom.se.util;
+
+import tec.uom.se.DimensionalModel;
+
 /**
- This package provides support for <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional Analysis</a>.
+ * Provides support for <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional Analysis</a>.
  
  <p> The difference between dimensional models lies in the assumptions each makes and,
     in consequence,the operations each permits. For example, the summation
@@ -144,5 +148,17 @@
     </td>
   </tr>
 </table>
- **/
-package tec.uom.se.model;
+ * This class represents the standard model. 
+ *
+ * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @version 0.6, December 19, 2014
+ */
+public class StandardModel extends DimensionalModel {
+
+    /**
+     * DefaultQuantityFactory constructor.
+     */
+    public StandardModel() {
+    }
+
+}

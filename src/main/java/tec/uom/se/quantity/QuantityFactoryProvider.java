@@ -39,10 +39,11 @@ import javax.measure.spi.QuantityFactory;
  * Provider of Quantities
  * @author otaviojava
  * @author werner
+ * @version 0.2
  */
 @SuppressWarnings("rawtypes")
 public final class QuantityFactoryProvider {
-
+// TODO could help SPI, but it competes with Quantities
     private QuantityFactoryProvider() {}
 
     private static final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();
