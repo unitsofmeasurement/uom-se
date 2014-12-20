@@ -78,7 +78,7 @@ import java.util.Map;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, $Date: 2014-04-07 03:41:49 +0200 (Mo, 07 Apr 2014) $
+ * @version 0.5.3, $Date: 2014-12-20 $
  */
 public abstract class DimensionalModel {
 
@@ -93,7 +93,7 @@ public abstract class DimensionalModel {
      *
      * @return the current dimensional model.
      */
-    public static DimensionalModel getInstance() {
+    public static DimensionalModel current() {
         return DimensionalModel.Current.get();
     }
 
