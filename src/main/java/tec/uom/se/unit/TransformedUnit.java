@@ -45,11 +45,11 @@ import java.util.Objects;
  * <p> This class represents the units derived from other units using
  *     {@linkplain UnitConverter converters}.</p>
  *
- * <p> Examples of transformed units:[code]
+ * <p> Examples of transformed units:<code>
  *         CELSIUS = KELVIN.shift(273.15);
  *         FOOT = METRE.multiply(3048).divide(10000);
  *         MILLISECOND = MILLI(SECOND);
- *     [/code]</p>
+ *     </code></p>
  *
  * <p> Transformed units have no label. But like any other units,
  *     they may have labels attached to them (see {@link tec.uom.se.format.SymbolMap
@@ -61,7 +61,7 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.4, November 30, 2014
+ * @version 0.5.5, December 23, 2014
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
@@ -78,7 +78,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     /**
      * Holds the converter to the parent unit.
      */
-    private final UnitConverter unitConverter;
+    private final UnitConverter converter;
 
     /**
      * Holds the symbol.
@@ -89,7 +89,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
      * Creates a transformed unit from the specified system unit.
      * using the parent as symbol
      * @param parentUnit the system unit from which this unit is derived.
-     * @param unitConverter the converter to the parent units.
+     * @param converter the converter to the parent units.
      * @throws IllegalArgumentException if the specified parent unit is not an
      *         {@link AbstractUnit#isSystemUnit() system unit}
      */
@@ -103,7 +103,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
                     + " is not a system unit");
         }
         this.parentUnit = parentUnit;
-        this.unitConverter = unitConverter;
+        this.converter = unitConverter;
         this.symbol = symbol;
     }
     @Override
@@ -113,12 +113,12 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     @Override
     public UnitConverter getConverterToSI() {
-        return parentUnit.getConverterToSI().concatenate(unitConverter);
+        return parentUnit.getConverterToSI().concatenate(converter);
     }
 
     @Override
     public UnitConverter getConverter() {
-        return unitConverter;
+        return converter;
     }
     
     @Override
@@ -133,7 +133,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 
     @Override
     public int hashCode() {
-        return Objects.hash(parentUnit, unitConverter);
+        return Objects.hash(parentUnit, converter);
     }
 
 	@Override
@@ -144,7 +144,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 		if (obj instanceof TransformedUnit) {
 			TransformedUnit<?> other = (TransformedUnit<?>) obj;
 			return Objects.equals(parentUnit, other.parentUnit)
-					&& Objects.equals(unitConverter, other.unitConverter);
+					&& Objects.equals(converter, other.converter);
 		}
 		return false;
 	}
