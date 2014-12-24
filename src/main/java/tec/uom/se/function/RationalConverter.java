@@ -144,6 +144,25 @@ public final class RationalConverter extends AbstractConverter implements
 	public static final RationalConverter of(long dividend, long divisor) {
 		return new RationalConverter(dividend, divisor);
 	}
+	
+	/**
+	 * Convenience method equivalent to
+	 * <code>new RationalConverter(BigDecimal.valueOf(dividend).toBigInteger(), 
+	 *    BigDecimal.valueOf(divisor).toBigInteger())</code>
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public static final RationalConverter of(double dividend, double divisor) {
+		return new RationalConverter(BigDecimal.valueOf(dividend).toBigInteger(),
+				BigDecimal.valueOf(divisor).toBigInteger());
+	}
 
 	/**
 	 * Returns the integer dividend for this rational converter.

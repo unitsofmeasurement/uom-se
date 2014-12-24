@@ -44,7 +44,8 @@ import java.math.BigInteger;
  *     For example:<pre><code>
  *     import static tec.uom.se.util.SI.*;  // Static import.
  *     import static tec.uom.se.util.SIPrefix.*; // Static import.
- *     import org.unitsofmeasurement.quantity.*;
+ *     import javax.measure.*;
+ *     import javax.measure.quantity.*;
  *     ...
  *     Unit<Pressure> HECTOPASCAL = HECTO(PASCAL);
  *     Unit<Length> KILOMETRE = KILO(METRE);
@@ -54,10 +55,10 @@ import java.math.BigInteger;
  * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.4, $Date: 2014-04-09 $
+ * @version 0.5.5, $Date: 2014-12-24 $
  */
 public enum SIPrefix implements UnitConverterSupplier {
-    YOTTA(new RationalConverter(10^24L, 1L)), // TODO if this works, we could avoid BigInteger for a "normal" range from ATTO to YOCTO
+    YOTTA(new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),
     ZETTA(new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),
     EXA(new RationalConverter(BigInteger.TEN.pow(18), BigInteger.ONE)),
     PETA(new RationalConverter(BigInteger.TEN.pow(15), BigInteger.ONE)),
@@ -67,16 +68,16 @@ public enum SIPrefix implements UnitConverterSupplier {
     KILO(new RationalConverter(BigInteger.TEN.pow(3), BigInteger.ONE)),
     HECTO(new RationalConverter(BigInteger.TEN.pow(2), BigInteger.ONE)),
     DEKA(new RationalConverter(BigInteger.TEN.pow(1), BigInteger.ONE)),
-    DECI(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(1))),
-    CENTI(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(2))),
-    MILLI(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(3))),
-    MICRO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(6))),
-    NANO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(9))),
-    PICO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(12))),
-    FEMTO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(15))),
-    ATTO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(18))),
-    ZEPTO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(21))),
-    YOCTO(new RationalConverter( BigInteger.ONE, BigInteger.TEN.pow(24)));
+    DECI(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(1))),
+    CENTI(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(2))),
+    MILLI(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(3))),
+    MICRO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(6))),
+    NANO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(9))),
+    PICO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(12))),
+    FEMTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(15))),
+    ATTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(18))),
+    ZEPTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(21))),
+    YOCTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(24)));
 
     private final RationalConverter converter;
     
