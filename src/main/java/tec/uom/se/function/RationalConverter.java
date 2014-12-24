@@ -40,124 +40,176 @@ import java.util.Objects;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
-
 /**
- * <p> This class represents a converter multiplying numeric values by an
- *     exact scaling factor (represented as the quotient of two
- *     <code>BigInteger</code> numbers).</p>
+ * <p>
+ * This class represents a converter multiplying numeric values by an exact
+ * scaling factor (represented as the quotient of two <code>BigInteger</code>
+ * numbers).
+ * </p>
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, Sep 21, 2014
+ * @version 0.6.1, Dec 24, 2014
  */
-public final class RationalConverter extends AbstractConverter
-	implements ValueSupplier<Double>, Supplier<Double>, DoubleSupplier { //implements Immutable<Double> {
-
-    /**
-	 *
-	 */
-//	private static final long serialVersionUID = 1L;
+public final class RationalConverter extends AbstractConverter implements
+		ValueSupplier<Double>, Supplier<Double>, DoubleSupplier { // implements
+																	// Immutable<Double>
+																	// {
 
 	/**
-     * Holds the converter dividend.
-     */
-    private final BigInteger dividend;
+	 *
+	 */
+	// private static final long serialVersionUID = 1L;
 
-    /**
-     * Holds the converter divisor (always positive).
-     */
-    private final BigInteger divisor;
+	/**
+	 * Holds the converter dividend.
+	 */
+	private final BigInteger dividend;
 
-    /**
-     * Creates a rational converter with the specified dividend and
-     * divisor.
-     *
-     * @param dividend the dividend.
-     * @param divisor the positive divisor.
-     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
-     * @throws IllegalArgumentException if <code>dividend == divisor</code>
-     */
-    public RationalConverter(BigInteger dividend, BigInteger divisor) {
-        if (divisor.compareTo(BigInteger.ZERO) <= 0)
-            throw new IllegalArgumentException("Negative or zero divisor");
-        if (dividend.equals(divisor))
-            throw new IllegalArgumentException("Would result in identity converter");
-        this.dividend = dividend; // Exact conversion.
-        this.divisor = divisor; // Exact conversion.
-    }
+	/**
+	 * Holds the converter divisor (always positive).
+	 */
+	private final BigInteger divisor;
 
-    /**
-     * Convenience method equivalent to
-     * <code>RationalConverter.valueOf(BigInteger.valueOf(dividend), BigInteger.valueOf(divisor))</code>
-     *
-     * @param dividend the dividend.
-     * @param divisor the positive divisor.
-     * @throws IllegalArgumentException if <code>divisor &lt;= 0</code>
-     * @throws IllegalArgumentException if <code>dividend == divisor</code>
-     */
-    public RationalConverter (long dividend, long divisor) {
-        this(BigInteger.valueOf(dividend), BigInteger.valueOf(divisor));
-    }
+	/**
+	 * Creates a rational converter with the specified dividend and divisor.
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public RationalConverter(BigInteger dividend, BigInteger divisor) {
+		if (divisor.compareTo(BigInteger.ZERO) <= 0)
+			throw new IllegalArgumentException("Negative or zero divisor");
+		if (dividend.equals(divisor))
+			throw new IllegalArgumentException(
+					"Would result in identity converter");
+		this.dividend = dividend; // Exact conversion.
+		this.divisor = divisor; // Exact conversion.
+	}
 
-    /**
-     * Returns the integer dividend for this rational converter.
-     *
-     * @return this converter dividend.
-     */
-    public BigInteger getDividend() {
-        return dividend;
-    }
+	/**
+	 * Convenience method equivalent to
+	 * <code>new RationalConverter(BigInteger.valueOf(dividend), BigInteger.valueOf(divisor))</code>
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public RationalConverter(long dividend, long divisor) {
+		this(BigInteger.valueOf(dividend), BigInteger.valueOf(divisor));
+	}
 
-    /**
-     * Returns the integer (positive) divisor for this rational converter.
-     *
-     * @return this converter divisor.
-     */
-    public BigInteger getDivisor() {
-        return divisor;
-    }
+	/**
+	 * Convenience method equivalent to
+	 * <code>new RationalConverter(dividend, divisor)</code>
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public static final RationalConverter of(BigInteger dividend,
+			BigInteger divisor) {
+		return new RationalConverter(dividend, divisor);
+	}
 
-    @Override
-    public double convert(double value) {
-        return value * toDouble(dividend) / toDouble(divisor);
-    }
+	/**
+	 * Convenience method equivalent to
+	 * <code>new RationalConverter(dividend, divisor)</code>
+	 *
+	 * @param dividend
+	 *            the dividend.
+	 * @param divisor
+	 *            the positive divisor.
+	 * @throws IllegalArgumentException
+	 *             if <code>divisor &lt;= 0</code>
+	 * @throws IllegalArgumentException
+	 *             if <code>dividend == divisor</code>
+	 */
+	public static final RationalConverter of(long dividend, long divisor) {
+		return new RationalConverter(dividend, divisor);
+	}
 
-    // Optimization of BigInteger.doubleValue() (implementation too inneficient).
-    private static double toDouble(BigInteger integer) {
-        return (integer.bitLength() < 64) ? integer.longValue() : integer.doubleValue();
-    }
+	/**
+	 * Returns the integer dividend for this rational converter.
+	 *
+	 * @return this converter dividend.
+	 */
+	public BigInteger getDividend() {
+		return dividend;
+	}
 
-    @Override
-    public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
-        BigDecimal decimalDividend = new BigDecimal(dividend, 0);
-        BigDecimal decimalDivisor = new BigDecimal(divisor, 0);
-        return value.multiply(decimalDividend, ctx).divide(decimalDivisor, ctx);
-    }
+	/**
+	 * Returns the integer (positive) divisor for this rational converter.
+	 *
+	 * @return this converter divisor.
+	 */
+	public BigInteger getDivisor() {
+		return divisor;
+	}
 
-    @Override
-    public UnitConverter concatenate(UnitConverter converter) {
-        if (!(converter instanceof RationalConverter))
-            return super.concatenate(converter);
-        RationalConverter that = (RationalConverter) converter;
-        BigInteger newDividend = this.getDividend().multiply(that.getDividend());
-        BigInteger newDivisor = this.getDivisor().multiply(that.getDivisor());
-        BigInteger gcd = newDividend.gcd(newDivisor);
-        newDividend = newDividend.divide(gcd);
-        newDivisor = newDivisor.divide(gcd);
-        return (newDividend.equals(BigInteger.ONE) && newDivisor.equals(BigInteger.ONE))
-                ? IDENTITY : new RationalConverter(newDividend, newDivisor);
-    }
+	@Override
+	public double convert(double value) {
+		return value * toDouble(dividend) / toDouble(divisor);
+	}
 
-    @Override
-    public RationalConverter inverse() {
-        return dividend.signum() == -1 ? new RationalConverter(getDivisor().negate(), getDividend().negate())
-                : new RationalConverter(getDivisor(), getDividend());
-    }
+	// Optimization of BigInteger.doubleValue() (implementation too
+	// inneficient).
+	private static double toDouble(BigInteger integer) {
+		return (integer.bitLength() < 64) ? integer.longValue() : integer
+				.doubleValue();
+	}
 
-    @Override
-    public final String toString() {
-        return "RationalConverter(" + dividend + "," + divisor + ")";
-    }
+	@Override
+	public BigDecimal convert(BigDecimal value, MathContext ctx)
+			throws ArithmeticException {
+		BigDecimal decimalDividend = new BigDecimal(dividend, 0);
+		BigDecimal decimalDivisor = new BigDecimal(divisor, 0);
+		return value.multiply(decimalDividend, ctx).divide(decimalDivisor, ctx);
+	}
+
+	@Override
+	public UnitConverter concatenate(UnitConverter converter) {
+		if (!(converter instanceof RationalConverter))
+			return super.concatenate(converter);
+		RationalConverter that = (RationalConverter) converter;
+		BigInteger newDividend = this.getDividend()
+				.multiply(that.getDividend());
+		BigInteger newDivisor = this.getDivisor().multiply(that.getDivisor());
+		BigInteger gcd = newDividend.gcd(newDivisor);
+		newDividend = newDividend.divide(gcd);
+		newDivisor = newDivisor.divide(gcd);
+		return (newDividend.equals(BigInteger.ONE) && newDivisor
+				.equals(BigInteger.ONE)) ? IDENTITY : new RationalConverter(
+				newDividend, newDivisor);
+	}
+
+	@Override
+	public RationalConverter inverse() {
+		return dividend.signum() == -1 ? new RationalConverter(getDivisor()
+				.negate(), getDividend().negate()) : new RationalConverter(
+				getDivisor(), getDividend());
+	}
+
+	@Override
+	public final String toString() {
+		return "RationalConverter(" + dividend + "," + divisor + ")";
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -173,17 +225,17 @@ public final class RationalConverter extends AbstractConverter
 		return false;
 	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(dividend, divisor);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(dividend, divisor);
+	}
 
-    @Override
-    public boolean isLinear() {
-        return true;
-    }
+	@Override
+	public boolean isLinear() {
+		return true;
+	}
 
-    @Override
+	@Override
 	public Double getValue() {
 		return getAsDouble();
 	}
