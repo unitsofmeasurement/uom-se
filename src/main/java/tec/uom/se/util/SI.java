@@ -165,9 +165,8 @@ public final class SI extends AbstractSystemOfUnits {
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-	public static final TransformedUnit<Mass> GRAM
-            = new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
+	public static final Unit<Mass> GRAM = KILOGRAM.divide(1000);
+            //= new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
 
     /**
      * The SI unit for plane angle quantities (standard name <code>rad</code>).

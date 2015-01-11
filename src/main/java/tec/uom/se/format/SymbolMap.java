@@ -199,7 +199,7 @@ public final class SymbolMap {
      * @param unit the corresponding symbol.
      * @return the corresponding symbol or <code>null</code> if none.
      */
-    public String getSymbol(AbstractUnit<?> unit) {
+    public String getSymbol(Unit<?> unit) {
         return unitToSymbol.get(unit);
     }
 

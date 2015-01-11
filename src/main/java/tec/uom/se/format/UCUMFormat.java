@@ -210,7 +210,7 @@ public abstract class UCUMFormat implements UnitFormat {
                 converter = SIPrefix.KILO.getConverter();
                 printSeparator = true;
             } else {
-                AbstractUnit<?> parentUnit = unit.getSystemUnit();
+                Unit<?> parentUnit = unit.getSystemUnit();
                 converter = unit.getConverterTo(parentUnit);
                 if (parentUnit.equals(SI.KILOGRAM)) {
                     // More special-case hackery to work around gram/kilogram
