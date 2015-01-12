@@ -106,7 +106,7 @@ public final class UCUM extends AbstractSystemOfUnits {
 	// DIMENSIONLESS DERIVED UNITS: UCUM 4.3 §26 //
 	// /////////////////////////////////////////////
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
-	public static final Unit<Dimensionless> TRIILLIONS = addUnit(AbstractUnit.ONE
+	public static final Unit<Dimensionless> TRILLIONS = addUnit(AbstractUnit.ONE
 			.multiply(1000000000000L));
 	/** As per <a href="http://unitsofmeasure.org/">UCUM</a> standard. */
 	public static final Unit<Dimensionless> BILLIONS = addUnit(AbstractUnit.ONE
