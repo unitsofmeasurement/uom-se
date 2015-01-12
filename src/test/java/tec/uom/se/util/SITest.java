@@ -44,6 +44,6 @@ public class SITest {
 	@Test
 	public void testPrefixes() {
 		assertEquals(YOTTA(METRE).getConverterTo(ZETTA(METRE)),
-				new RationalConverter(new BigInteger("9"), new BigInteger("500000000000000000000")));
+				new RationalConverter(new BigInteger("1000"), BigInteger.ONE));
 	}
 }

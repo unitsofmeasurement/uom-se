@@ -41,5 +41,6 @@ public class PrefixTest {
 	public void testKilo() {
 		// TODO how to handle equals for units?
 		assertEquals(KILOGRAM.getSymbol(), KILO(GRAM).getSymbol());
+		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
 	}
 }
