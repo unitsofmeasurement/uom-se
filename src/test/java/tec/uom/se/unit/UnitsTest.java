@@ -90,8 +90,8 @@ public class UnitsTest {
 
 	@Test
 	public void testGetSymbol() {
-//		assertEquals("lb", UCUM.POUND.getSymbol());
-//		assertEquals("oz", UCUM.OUNCE.getSymbol());
+		assertEquals("lb", UCUM.POUND.getSymbol());
+		assertEquals("oz", UCUM.OUNCE.getSymbol());
 		assertEquals("kg", SIPrefix.KILO(UCUM.GRAM).getSymbol());
 		assertEquals("g", UCUM.GRAM.getSymbol());
 		assertEquals("lb", US.POUND.getSymbol());
