@@ -59,7 +59,7 @@ public final class UnitParser implements UnitParserConstants {
     }
 
 
-    final public Unit parseUnit() throws ParseException {
+    final public Unit parseUnit() throws TokenException {
         Unit result = CompoundExpr();
         consumeToken(0);
         {
@@ -68,11 +68,11 @@ public final class UnitParser implements UnitParserConstants {
     }
 
 
-    final public Unit CompoundExpr() throws ParseException {
+    final public Unit CompoundExpr() throws TokenException {
         throw new UnsupportedOperationException("Compound units not supported");
     }
 
-    final public Unit AddExpr() throws ParseException {
+    final public Unit AddExpr() throws TokenException {
         Unit result = AbstractUnit.ONE;
         Number n1 = null;
         Token sign1 = null;
@@ -112,7 +112,7 @@ public final class UnitParser implements UnitParserConstants {
     }
 
 
-    final public Unit MulExpr() throws ParseException {
+    final public Unit MulExpr() throws TokenException {
         Unit result = AbstractUnit.ONE;
         Unit temp = AbstractUnit.ONE;
         result = ExponentExpr();
@@ -140,7 +140,7 @@ public final class UnitParser implements UnitParserConstants {
                         default:
                             laA[3] = genInt;
                             consumeToken(-1);
-                            throw new ParseException();
+                            throw new TokenException();
                     }
                     temp = ExponentExpr();
                     result = result.multiply(temp);
@@ -153,7 +153,7 @@ public final class UnitParser implements UnitParserConstants {
                 default:
                     laA[4] = genInt;
                     consumeToken(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         {
@@ -161,7 +161,7 @@ public final class UnitParser implements UnitParserConstants {
         }
     }
 
-    final public Unit ExponentExpr() throws ParseException {
+    final public Unit ExponentExpr() throws TokenException {
         Unit result = AbstractUnit.ONE;
         Exponent exponent = null;
         Token token = null;
@@ -176,7 +176,7 @@ public final class UnitParser implements UnitParserConstants {
                 default:
                     laA[5] = genInt;
                     consumeToken(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
             consumeToken(CARET);
             result = AtomicExpr();
@@ -233,7 +233,7 @@ public final class UnitParser implements UnitParserConstants {
                         default:
                             laA[8] = genInt;
                             consumeToken(-1);
-                            throw new ParseException();
+                            throw new TokenException();
                     }
                     consumeToken(OPEN_PAREN);
                     result = AddExpr();
@@ -251,12 +251,12 @@ public final class UnitParser implements UnitParserConstants {
                 default:
                     laA[9] = genInt;
                     consumeToken(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
     }
 
-    final public Unit AtomicExpr() throws ParseException {
+    final public Unit AtomicExpr() throws TokenException {
         Unit result = AbstractUnit.ONE;
         Number n = null;
         Token token = null;
@@ -288,7 +288,7 @@ public final class UnitParser implements UnitParserConstants {
                         }
                     }
                     {
-                        throw new ParseException();
+                        throw new TokenException();
                     }
                 } else {
                     {
@@ -304,11 +304,11 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 laA[10] = genInt;
                 consumeToken(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
     }
 
-    final public Token Sign() throws ParseException {
+    final public Token Sign() throws TokenException {
         Token result = null;
         switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case PLUS:
@@ -320,14 +320,14 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 laA[11] = genInt;
                 consumeToken(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
         {
             return result;
         }
     }
 
-    final public Number NumberExpr() throws ParseException {
+    final public Number NumberExpr() throws TokenException {
         Token token = null;
         switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
             case INTEGER:
@@ -341,11 +341,11 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 laA[12] = genInt;
                 consumeToken(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
     }
 
-    final public Exponent Exp() throws ParseException {
+    final public Exponent Exp() throws TokenException {
         Token powSign = null;
         Token powToken = null;
         Token rootSign = null;
@@ -416,7 +416,7 @@ public final class UnitParser implements UnitParserConstants {
                     default:
                         laA[17] = genInt;
                         consumeToken(-1);
-                        throw new ParseException();
+                        throw new TokenException();
                 }
             case SUPERSCRIPT_INTEGER:
                 powToken = consumeToken(SUPERSCRIPT_INTEGER);
@@ -458,7 +458,7 @@ public final class UnitParser implements UnitParserConstants {
             default:
                 laA[18] = genInt;
                 consumeToken(-1);
-                throw new ParseException();
+                throw new TokenException();
         }
     }
 
@@ -672,7 +672,7 @@ public final class UnitParser implements UnitParserConstants {
         }
     }
 
-    private Token consumeToken(int kind) throws ParseException {
+    private Token consumeToken(int kind) throws TokenException {
         Token oldToken;
         if ((oldToken = token).next != null)
             token = token.next;
@@ -696,7 +696,7 @@ public final class UnitParser implements UnitParserConstants {
         }
         token = oldToken;
         this.kind = kind;
-        throw generateParseException();
+        throw raiseTokenException();
     }
 
     static private final class LookaheadSuccess extends java.lang.RuntimeException {
@@ -797,8 +797,8 @@ public final class UnitParser implements UnitParserConstants {
         }
     }
 
-    /** Generate ParseException. */
-    public ParseException generateParseException() {
+    /** Generate TokenException. */
+    TokenException raiseTokenException() {
         expentries.clear();
         boolean[] la1tokens = new boolean[21];
         if (kind >= 0) {
@@ -828,7 +828,7 @@ public final class UnitParser implements UnitParserConstants {
         for (int i = 0; i < expentries.size(); i++) {
             exptokseq[i] = expentries.get(i);
         }
-        return new ParseException(token, exptokseq, tokenImage);
+        return new TokenException(token, exptokseq, tokenImage);
     }
 
     /** Enable tracing. */

@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -31,8 +31,7 @@
 package tec.uom.se.format.internal;
 
 /** Token Manager. */
-@SuppressWarnings("RedundantIfStatement")
-public class UnitParserTokenManager implements UnitParserConstants
+class UnitParserTokenManager
 {
 
   /** Debug output. */

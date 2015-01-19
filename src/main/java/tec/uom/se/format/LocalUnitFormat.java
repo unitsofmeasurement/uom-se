@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -34,7 +34,7 @@ import static tec.uom.se.util.SI.KILOGRAM;
 import static tec.uom.se.util.SI.CUBIC_METRE;
 import static tec.uom.se.util.UCUM.LITER;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.internal.ParseException;
+import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
 import tec.uom.se.format.internal.UnitParser;
 import tec.uom.se.function.AddConverter;
@@ -107,7 +107,7 @@ import java.util.ResourceBundle;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, December 1, 2014
+ * @version 0.6.1, January 20, 2015
  */
 public class LocalUnitFormat implements UnitFormat {
 
@@ -227,13 +227,13 @@ public class LocalUnitFormat implements UnitFormat {
             Unit<?> result = parser.parseUnit();
             cursor.setIndex(end);
             return result;
-        } catch (ParseException e) {
+        } catch (TokenException e) {
             if (e.currentToken != null) {
                 cursor.setErrorIndex(start + e.currentToken.endColumn);
             } else {
                 cursor.setErrorIndex(start);
             }
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalArgumentException(e); // TODO should we throw ParserException here, too?
         } catch (TokenMgrError e) {
             cursor.setErrorIndex(start);
             throw new ParserException(e);

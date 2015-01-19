@@ -59,7 +59,7 @@ public class UCUMParser {
 //
 // Parser productions
 //
-    final public Unit parseUnit() throws ParseException {
+    final public Unit parseUnit() throws TokenException {
         Unit u;
         u = Term();
         jj_consume_token(0);
@@ -68,7 +68,7 @@ public class UCUMParser {
         }
     }
     
-    final public Unit Term() throws ParseException {
+    final public Unit Term() throws TokenException {
         Unit result = AbstractUnit.ONE;
         Unit temp = AbstractUnit.ONE;
         result = Component();
@@ -96,7 +96,7 @@ public class UCUMParser {
                 default:
                     jj_la1[1] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
         {
@@ -104,7 +104,7 @@ public class UCUMParser {
         }
     }
 
-    final public Unit Component() throws ParseException {
+    final public Unit Component() throws TokenException {
         Unit result = (AbstractUnit) AbstractUnit.ONE;
         Token token = null;
         if (jj_2_1(2147483647)) {
@@ -142,12 +142,12 @@ public class UCUMParser {
                 default:
                     jj_la1[2] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
     }
 
-    final public Unit Annotatable() throws ParseException {
+    final public Unit Annotatable() throws TokenException {
     	Unit result = AbstractUnit.ONE;
         Token token1 = null;
         Token token2 = null;
@@ -180,12 +180,12 @@ public class UCUMParser {
                 default:
                     jj_la1[4] = jj_gen;
                     jj_consume_token(-1);
-                    throw new ParseException();
+                    throw new TokenException();
             }
         }
     }
 
-    final public Unit SimpleUnit() throws ParseException {
+    final public Unit SimpleUnit() throws TokenException {
         Token token = null;
         token = jj_consume_token(ATOM);
         Unit unit = symbols.getUnit(token.image);
@@ -201,7 +201,7 @@ public class UCUMParser {
                 }
             }
             {
-                throw new ParseException();
+                throw new TokenException();
             }
         } else {
             {
@@ -418,7 +418,7 @@ public class UCUMParser {
         }
     }
 
-    private Token jj_consume_token(int kind) throws ParseException {
+    private Token jj_consume_token(int kind) throws TokenException {
         Token oldToken;
         if ((oldToken = token).next != null)
             token = token.next;
@@ -442,7 +442,7 @@ public class UCUMParser {
         }
         token = oldToken;
         jj_kind = kind;
-        throw generateParseException();
+        throw raiseTokenException();
     }
 
     static private final class LookaheadSuccess extends java.lang.Error {
@@ -547,8 +547,8 @@ public class UCUMParser {
         }
     }
 
-    /** Generate ParseException. */
-    public ParseException generateParseException() {
+    /** Generate TokenException. */
+    TokenException raiseTokenException() {
         jj_expentries.clear();
         boolean[] la1tokens = new boolean[16];
         if (jj_kind >= 0) {
@@ -578,7 +578,7 @@ public class UCUMParser {
         for (int i = 0; i < jj_expentries.size(); i++) {
             exptokseq[i] = jj_expentries.get(i);
         }
-        return new ParseException(token, exptokseq, tokenImage);
+        return new TokenException(token, exptokseq, tokenImage);
     }
 
     /** Enable tracing. */

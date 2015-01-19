@@ -31,7 +31,7 @@ package tec.uom.se.format;
 
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.internal.ParseException;
+import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
 import tec.uom.se.format.internal.UCUMParser;
 import tec.uom.se.function.MultiplyConverter;
@@ -474,7 +474,7 @@ public abstract class UCUMFormat implements UnitFormat {
                 Unit<?> result = parser.parseUnit();
                 cursor.setIndex(end);
                 return result;
-            } catch (ParseException e) {
+            } catch (TokenException e) {
                 if (e.currentToken != null) {
                     cursor.setErrorIndex(start + e.currentToken.endColumn);
                 } else {
