@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -47,6 +47,7 @@ import javax.measure.quantity.Dimensionless;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -71,7 +72,7 @@ import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, Nov 2, 2014
+ * @version 0.5.3, Jan 19, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		Comparable<Unit<Q>>, Serializable {
@@ -91,6 +92,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
 
+	/**
+	 * Holds the unique symbols collection (base units or alternate units).
+	 */
+	protected static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<>();
+	
 	/**
 	 * DefaultQuantityFactory constructor.
 	 */

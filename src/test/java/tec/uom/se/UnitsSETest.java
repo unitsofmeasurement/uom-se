@@ -30,11 +30,13 @@
 package tec.uom.se;
 
 import static org.junit.Assert.assertEquals;
+
 import javax.measure.quantity.Length;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;
 
 public class UnitsSETest {
