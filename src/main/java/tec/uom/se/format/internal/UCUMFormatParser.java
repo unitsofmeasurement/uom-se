@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -34,7 +34,7 @@ import javax.measure.Unit;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.util.SIPrefix;
-import static tec.uom.se.format.internal.UCUMParserConstants.*;
+import static tec.uom.se.format.internal.UCUMTokenConstants.*;
 
 /**
  * <p> 
@@ -45,13 +45,13 @@ import static tec.uom.se.format.internal.UCUMParserConstants.*;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://unitsofmeasure.org">UCUM</a>
- * @version 5.1, April 16, 2014
+ * @version 0.5.2, January 20, 2015
  */
-public class UCUMParser {
+public final class UCUMFormatParser {
 
     private SymbolMap symbols;
 
-    public UCUMParser(SymbolMap symbols, java.io.InputStream in) {
+    public UCUMFormatParser(SymbolMap symbols, java.io.InputStream in) {
         this(in);
         this.symbols = symbols;
     }
@@ -277,7 +277,7 @@ public class UCUMParser {
         return false;
     }
     /** Generated Token Manager. */
-    public UCUMParserTokenManager token_source;
+    public UCUMTokenManager token_source;
 
     SimpleCharStream jj_input_stream;
 
@@ -313,18 +313,18 @@ public class UCUMParser {
     private int jj_gc = 0;
 
     /** Constructor with InputStream. */
-    public UCUMParser(java.io.InputStream stream) {
+    public UCUMFormatParser(java.io.InputStream stream) {
         this(stream, null);
     }
 
     /** Constructor with InputStream and supplied encoding */
-    public UCUMParser(java.io.InputStream stream, String encoding) {
+    public UCUMFormatParser(java.io.InputStream stream, String encoding) {
         try {
             jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1);
         } catch (java.io.UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        token_source = new UCUMParserTokenManager(jj_input_stream);
+        token_source = new UCUMTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;
         jj_gen = 0;
@@ -361,9 +361,9 @@ public class UCUMParser {
     }
 
     /** Constructor. */
-    public UCUMParser(java.io.Reader stream) {
+    public UCUMFormatParser(java.io.Reader stream) {
         jj_input_stream = new SimpleCharStream(stream, 1, 1);
-        token_source = new UCUMParserTokenManager(jj_input_stream);
+        token_source = new UCUMTokenManager(jj_input_stream);
         token = new Token();
         jj_ntk = -1;
         jj_gen = 0;
@@ -391,7 +391,7 @@ public class UCUMParser {
     }
 
     /** Constructor with generated Token Manager. */
-    public UCUMParser(UCUMParserTokenManager tm) {
+    public UCUMFormatParser(UCUMTokenManager tm) {
         token_source = tm;
         token = new Token();
         jj_ntk = -1;
@@ -405,7 +405,7 @@ public class UCUMParser {
     }
 
     /** Reinitialise. */
-    public void ReInit(UCUMParserTokenManager tm) {
+    public void ReInit(UCUMTokenManager tm) {
         token_source = tm;
         token = new Token();
         jj_ntk = -1;

@@ -36,7 +36,7 @@ import static tec.uom.se.util.UCUM.LITER;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
-import tec.uom.se.format.internal.UnitParser;
+import tec.uom.se.format.internal.UnitFormatParser;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
@@ -223,7 +223,7 @@ public class LocalUnitFormat implements UnitFormat {
             return AbstractUnit.ONE;
         }
         try {
-            UnitParser parser = new UnitParser(symbolMap, new StringReader(source));
+            UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(source));
             Unit<?> result = parser.parseUnit();
             cursor.setIndex(end);
             return result;

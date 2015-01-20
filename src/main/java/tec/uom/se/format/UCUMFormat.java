@@ -33,7 +33,7 @@ import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
-import tec.uom.se.format.internal.UCUMParser;
+import tec.uom.se.format.internal.UCUMFormatParser;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
 import tec.uom.se.unit.AnnotatedUnit;
@@ -67,7 +67,7 @@ import java.util.*;
  * href="http://unitsofmeasure.org/ticket/4">error</a>. I've attempted to work
  * around the problem by modifying the BNF productions for &lt;Term&gt;. Once the
  * error in the standard is corrected, it may be necessary to modify the
- * productions in the UCUMParser.jj file to conform to the standard. </p>
+ * productions in the UCUMFormatParser.jj file to conform to the standard. </p>
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -468,7 +468,7 @@ public abstract class UCUMFormat implements UnitFormat {
             if (!caseSensitive) {
                 source = source.toUpperCase();
             }
-            UCUMParser parser = new UCUMParser(symbolMap,
+            UCUMFormatParser parser = new UCUMFormatParser(symbolMap,
                     new ByteArrayInputStream(source.getBytes()));
             try {
                 Unit<?> result = parser.parseUnit();
