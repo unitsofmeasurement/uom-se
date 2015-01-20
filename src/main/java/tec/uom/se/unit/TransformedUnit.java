@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -61,7 +61,7 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, December 23, 2014
+ * @version 0.6, January 22, 2015
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
@@ -83,7 +83,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     /**
      * Holds the symbol.
      */
-    private final String symbol;
+    private String symbol;
 
     /**
      * Creates a transformed unit from the specified system unit.
@@ -104,7 +104,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
         }
         this.parentUnit = parentUnit;
         this.converter = unitConverter;
-        this.symbol = symbol;
+//        this.symbol = symbol; TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
     }
     @Override
     public Dimension getDimension() {

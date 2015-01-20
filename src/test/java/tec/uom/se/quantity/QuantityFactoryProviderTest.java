@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -30,9 +30,11 @@
 package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static tec.uom.se.util.SI.KILOGRAM;
 import static tec.uom.se.util.SI.METRE;
 import static tec.uom.se.util.SI.MINUTE;
+import static tec.uom.se.util.SI.SECOND;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -63,13 +65,23 @@ public class QuantityFactoryProviderTest {
 		assertEquals("kg", m.getUnit().getSymbol());
 		assertEquals("10 kg", m.toString());
 	}
-
+	
 	@Test
 	public void testTime() {
+		Quantity<Time> t = QuantityFactoryProvider.getQuantityFactory(Time.class).create(30, SECOND); // 30 sec
+		assertEquals(30, t.getValue());
+		assertEquals(SECOND, t.getUnit());
+		assertEquals("s", t.getUnit().getSymbol());
+		assertEquals("30 s", t.toString());
+	}
+
+	@Test
+	public void testTimeDerived() {
 		Quantity<Time> t = QuantityFactoryProvider.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(40, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
-		assertEquals("min", t.getUnit().getSymbol());
+//		assertEquals("min", t.getUnit().getSymbol()); TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
+		assertNull(t.getUnit().getSymbol());
 		assertEquals("40 min", t.toString());
 	}
 
