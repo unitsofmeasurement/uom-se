@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -44,8 +44,6 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -71,9 +69,9 @@ import java.util.*;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, 18 October 2014
+ * @version 0.5.3, 24 January 2015
  */
-public abstract class UCUMFormat implements UnitFormat {
+public abstract class UCUMFormat extends AbstractUnitFormat {
 
     /**
 	 * 
@@ -123,12 +121,23 @@ public abstract class UCUMFormat implements UnitFormat {
 	     		throw new IllegalArgumentException("Unknown variant: " + variant);
     	}
     }
+    
     /**
      * The symbol map used by this instance to map between
      * {@link AbstractUnit Unit}s and
      * <code>String</code>s.
      */
     final SymbolMap symbolMap;
+    
+    /**
+     * Get the symbol map used by this instance to map between
+     * {@link AbstractUnit Unit}s and <code>String</code>s, etc...
+     * @return SymbolMap the current symbol map
+     */
+    @Override
+    protected SymbolMap getSymbols() {
+        return symbolMap;
+    }
 
     // ////////////////
     // Constructors //

@@ -50,8 +50,6 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
-import javax.measure.format.UnitFormat;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.math.BigInteger;
@@ -109,7 +107,7 @@ import java.util.ResourceBundle;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.6.1, January 20, 2015
  */
-public class LocalUnitFormat implements UnitFormat {
+public class LocalUnitFormat extends AbstractUnitFormat {
 
     //////////////////////////////////////////////////////
     // Class variables                                  //
@@ -173,7 +171,7 @@ public class LocalUnitFormat implements UnitFormat {
      * {@link Unit Unit}s and
      * <code>String</code>s, etc...
      */
-    private transient SymbolMap symbolMap;
+    private final transient SymbolMap symbolMap;
 
     //////////////////
     // Constructors //
@@ -195,7 +193,8 @@ public class LocalUnitFormat implements UnitFormat {
      * {@link AbstractUnit Unit}s and <code>String</code>s, etc...
      * @return SymbolMap the current symbol map
      */
-    SymbolMap getSymbols() {
+    @Override
+    protected SymbolMap getSymbols() {
         return symbolMap;
     }
 
