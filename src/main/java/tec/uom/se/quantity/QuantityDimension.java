@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -60,7 +60,7 @@ import java.util.logging.Logger;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2014-06-27 $
+ * @version 0.5.1, $Date: 2015-01-28 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -233,7 +233,7 @@ public final class QuantityDimension implements Dimension, Serializable {
     @SuppressWarnings("rawtypes")
 	public Map<? extends QuantityDimension, Integer> getProductDimensions() {
         Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
-        if (pseudoUnit == null) return null;
+        if (pseudoUnits == null) return null;
         Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();
         for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
             fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
@@ -262,5 +262,4 @@ public final class QuantityDimension implements Dimension, Serializable {
     public int hashCode() {
         return Objects.hashCode(pseudoUnit);
     }
-
 }
