@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,10 +27,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
+package tec.uom.se.spi;
 
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.function.Nameable;
+import tec.uom.se.util.SI;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
@@ -42,7 +43,7 @@ import static tec.uom.se.util.SI.METRES_PER_SECOND;
  * <p> This class defines commonly used units outside the {@link SI} standard.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, December 24, 2014
+ * @version 0.3, February 14, 2015
 */
 public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
 
