@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
+package tec.uom.se.spi;
 
 import static tec.uom.se.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVIDEND;
 import static tec.uom.se.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVISOR;
@@ -44,6 +44,7 @@ import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.ProductUnit;
 import tec.uom.se.unit.TransformedUnit;
+import tec.uom.se.util.US;
 
 
 /**
