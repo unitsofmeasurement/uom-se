@@ -104,7 +104,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
         }
         this.parentUnit = parentUnit;
         this.converter = unitConverter;
-        this.symbol = symbol; //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
+//        this.symbol = symbol; //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
     }
     @Override
     public Dimension getDimension() {
