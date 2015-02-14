@@ -8,7 +8,7 @@ import javax.measure.Unit;
 import javax.measure.quantity.Time;
 
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.util.SI;
+import tec.uom.se.spi.SI;
 
 /**
  * Class that represents {@link TimeUnit} in measure API

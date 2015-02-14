@@ -30,7 +30,8 @@
 package tec.uom.se;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.util.SI.KILOGRAM;
+import static tec.uom.se.spi.SI.KILOGRAM;
+
 import java.time.Instant;
 
 import javax.measure.quantity.Mass;

@@ -30,10 +30,10 @@
 package tec.uom.se.util;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.util.SI.METRE;
-import static tec.uom.se.util.SIPrefix.KILO;
-import static tec.uom.se.util.IndianPrefix.CRORE;
-import static tec.uom.se.util.IndianPrefix.LAKH;
+import static tec.uom.se.spi.IndianPrefix.CRORE;
+import static tec.uom.se.spi.IndianPrefix.LAKH;
+import static tec.uom.se.spi.SI.METRE;
+import static tec.uom.se.spi.SIPrefix.KILO;
 
 import java.math.BigInteger;
 

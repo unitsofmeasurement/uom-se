@@ -53,4 +53,7 @@
 package tec.uom.se.util;
 
 import tec.uom.se.spi.CommonUnits;
+import tec.uom.se.spi.SI;
+import tec.uom.se.spi.UCUM;
+import tec.uom.se.spi.US;
 

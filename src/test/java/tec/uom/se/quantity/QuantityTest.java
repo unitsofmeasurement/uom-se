@@ -38,8 +38,8 @@ import javax.measure.quantity.Length;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tec.uom.se.util.SI;
-import tec.uom.se.util.US;
+import tec.uom.se.spi.SI;
+import tec.uom.se.spi.US;
 
 public class QuantityTest {
 

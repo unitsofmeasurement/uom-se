@@ -41,18 +41,18 @@ import org.junit.Test;
 
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.spi.SI;
+import tec.uom.se.spi.SIPrefix;
+import tec.uom.se.spi.UCUM;
+import tec.uom.se.spi.US;
 import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.util.SI;
-import tec.uom.se.util.SIPrefix;
-import tec.uom.se.util.UCUM;
-import tec.uom.se.util.US;
 import static org.junit.Assert.*;
+import static tec.uom.se.spi.SI.GRAM;
+import static tec.uom.se.spi.SI.METRE;
+import static tec.uom.se.spi.SI.WATT;
+import static tec.uom.se.spi.SIPrefix.KILO;
 import static tec.uom.se.util.OutputHelper.println;
-import static tec.uom.se.util.SI.GRAM;
-import static tec.uom.se.util.SI.METRE;
-import static tec.uom.se.util.SI.WATT;
-import static tec.uom.se.util.SIPrefix.KILO;
 
 /**
  *

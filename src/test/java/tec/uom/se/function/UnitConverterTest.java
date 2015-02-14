@@ -16,8 +16,8 @@
 package tec.uom.se.function;
 
 import static org.junit.Assert.*;
-import static tec.uom.se.util.SI.*;
-import static tec.uom.se.util.SIPrefix.*;
+import static tec.uom.se.spi.SI.*;
+import static tec.uom.se.spi.SIPrefix.*;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

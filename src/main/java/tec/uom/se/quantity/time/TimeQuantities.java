@@ -12,10 +12,10 @@ import javax.measure.Quantity;
 import javax.measure.quantity.Time;
 
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.spi.SI;
+import tec.uom.se.spi.SIPrefix;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.util.SI;
-import tec.uom.se.util.SIPrefix;
 
 public final class TimeQuantities {
 

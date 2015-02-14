@@ -34,10 +34,10 @@ import static org.junit.Assert.fail;
 import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 import static tec.uom.se.format.UCUMFormat.Variant.CASE_SENSITIVE;
 import static tec.uom.se.format.UCUMFormat.Variant.PRINT;
-import static tec.uom.se.util.SI.KILOGRAM;
-import static tec.uom.se.util.SI.METRE;
-import static tec.uom.se.util.SI.MINUTE;
-import static tec.uom.se.util.SI.SECOND;
+import static tec.uom.se.spi.SI.KILOGRAM;
+import static tec.uom.se.spi.SI.METRE;
+import static tec.uom.se.spi.SI.MINUTE;
+import static tec.uom.se.spi.SI.SECOND;
 
 import java.io.IOException;
 
@@ -47,6 +47,7 @@ import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
+
 import tec.uom.se.quantity.QuantityFactoryProvider;
 
 import org.junit.Before;

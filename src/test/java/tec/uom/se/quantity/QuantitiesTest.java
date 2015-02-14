@@ -31,7 +31,7 @@ package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static tec.uom.se.util.SI.PASCAL;
+import static tec.uom.se.spi.SI.PASCAL;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

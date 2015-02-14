@@ -28,7 +28,7 @@ import org.junit.Test;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.quantity.time.TimeQuantities;
 import tec.uom.se.quantity.time.TimeUnitQuantity;
-import tec.uom.se.util.SI;
+import tec.uom.se.spi.SI;
 
 public class TimeQuantitiesTest {
 

@@ -30,9 +30,9 @@
 package tec.uom.se.util;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.util.SI.METRE;
-import static tec.uom.se.util.SIPrefix.YOTTA;
-import static tec.uom.se.util.SIPrefix.ZETTA;
+import static tec.uom.se.spi.SI.METRE;
+import static tec.uom.se.spi.SIPrefix.YOTTA;
+import static tec.uom.se.spi.SIPrefix.ZETTA;
 
 import java.math.BigInteger;
 

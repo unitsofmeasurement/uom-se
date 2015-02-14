@@ -31,7 +31,7 @@ package tec.uom.se.format;
 
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.util.SIPrefix;
+import tec.uom.se.spi.SIPrefix;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;

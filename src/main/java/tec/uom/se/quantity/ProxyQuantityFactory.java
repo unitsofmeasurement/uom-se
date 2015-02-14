@@ -29,7 +29,7 @@
  */
 package tec.uom.se.quantity;
 
-import static tec.uom.se.util.SI.*;
+import static tec.uom.se.spi.SI.*;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

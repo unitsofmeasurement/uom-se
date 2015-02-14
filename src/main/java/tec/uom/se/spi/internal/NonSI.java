@@ -25,31 +25,31 @@
  */
 package tec.uom.se.spi.internal;
 
-import static tec.uom.se.util.SI.AMPERE;
-import static tec.uom.se.util.SI.BECQUEREL;
-import static tec.uom.se.util.SI.BIT;
-import static tec.uom.se.util.SI.COULOMB;
-import static tec.uom.se.util.SI.GRAM;
-import static tec.uom.se.util.SI.GRAY;
-import static tec.uom.se.util.SI.JOULE;
-import static tec.uom.se.util.SI.KELVIN;
-import static tec.uom.se.util.SI.KILOGRAM;
-import static tec.uom.se.util.SI.LUX;
-import static tec.uom.se.util.SI.METRE;
-import static tec.uom.se.util.SI.METRES_PER_SECOND;
-import static tec.uom.se.util.SI.METRES_PER_SQUARE_SECOND;
-import static tec.uom.se.util.SI.MOLE;
-import static tec.uom.se.util.SI.NEWTON;
-import static tec.uom.se.util.SI.PASCAL;
-import static tec.uom.se.util.SI.RADIAN;
-import static tec.uom.se.util.SI.SECOND;
-import static tec.uom.se.util.SI.SIEVERT;
-import static tec.uom.se.util.SI.SQUARE_METRE;
-import static tec.uom.se.util.SI.STERADIAN;
-import static tec.uom.se.util.SI.TESLA;
-import static tec.uom.se.util.SI.WATT;
-import static tec.uom.se.util.SI.WEBER;
-import static tec.uom.se.util.SIPrefix.*;
+import static tec.uom.se.spi.SI.AMPERE;
+import static tec.uom.se.spi.SI.BECQUEREL;
+import static tec.uom.se.spi.SI.BIT;
+import static tec.uom.se.spi.SI.COULOMB;
+import static tec.uom.se.spi.SI.GRAM;
+import static tec.uom.se.spi.SI.GRAY;
+import static tec.uom.se.spi.SI.JOULE;
+import static tec.uom.se.spi.SI.KELVIN;
+import static tec.uom.se.spi.SI.KILOGRAM;
+import static tec.uom.se.spi.SI.LUX;
+import static tec.uom.se.spi.SI.METRE;
+import static tec.uom.se.spi.SI.METRES_PER_SECOND;
+import static tec.uom.se.spi.SI.METRES_PER_SQUARE_SECOND;
+import static tec.uom.se.spi.SI.MOLE;
+import static tec.uom.se.spi.SI.NEWTON;
+import static tec.uom.se.spi.SI.PASCAL;
+import static tec.uom.se.spi.SI.RADIAN;
+import static tec.uom.se.spi.SI.SECOND;
+import static tec.uom.se.spi.SI.SIEVERT;
+import static tec.uom.se.spi.SI.SQUARE_METRE;
+import static tec.uom.se.spi.SI.STERADIAN;
+import static tec.uom.se.spi.SI.TESLA;
+import static tec.uom.se.spi.SI.WATT;
+import static tec.uom.se.spi.SI.WEBER;
+import static tec.uom.se.spi.SIPrefix.*;
 
 import javax.measure.Unit;
 import javax.measure.quantity.*;
@@ -58,8 +58,8 @@ import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.function.RationalConverter;
+import tec.uom.se.spi.SI;
 import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.util.SI;
 
 
 /**

@@ -29,10 +29,10 @@
  */
 package tec.uom.se.format;
 
-import static tec.uom.se.util.SI.GRAM;
-import static tec.uom.se.util.SI.KILOGRAM;
-import static tec.uom.se.util.SI.CUBIC_METRE;
-import static tec.uom.se.util.UCUM.LITER;
+import static tec.uom.se.spi.SI.CUBIC_METRE;
+import static tec.uom.se.spi.SI.GRAM;
+import static tec.uom.se.spi.SI.KILOGRAM;
+import static tec.uom.se.spi.UCUM.LITER;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
@@ -40,16 +40,17 @@ import tec.uom.se.format.internal.UnitFormatParser;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
+import tec.uom.se.spi.SIPrefix;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.util.SIPrefix;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.format.ParserException;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.math.BigInteger;

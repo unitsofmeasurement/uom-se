@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
+package tec.uom.se.spi;
 
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
@@ -39,8 +39,8 @@ import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.spi.SystemOfUnits;
 
-import static tec.uom.se.util.SI.*;
-import static tec.uom.se.util.SIPrefix.MICRO;
+import static tec.uom.se.spi.SI.*;
+import static tec.uom.se.spi.SIPrefix.MICRO;
 
 /**
  * <p>

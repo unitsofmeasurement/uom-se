@@ -25,10 +25,10 @@
  */
 package tec.uom.se.spi;
 
+import static tec.uom.se.spi.SI.*;
+import static tec.uom.se.spi.SIPrefix.MICRO;
 import static tec.uom.se.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVIDEND;
 import static tec.uom.se.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVISOR;
-import static tec.uom.se.util.SI.*;
-import static tec.uom.se.util.SIPrefix.MICRO;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Area;
@@ -44,7 +44,6 @@ import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.ProductUnit;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.util.US;
 
 
 /**

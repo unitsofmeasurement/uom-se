@@ -31,13 +31,12 @@ package tec.uom.se.spi;
 
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.function.Nameable;
-import tec.uom.se.util.SI;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Speed;
 import javax.measure.spi.SystemOfUnits;
 
-import static tec.uom.se.util.SI.METRES_PER_SECOND;
+import static tec.uom.se.spi.SI.METRES_PER_SECOND;
 
 /**
  * <p> This class defines commonly used units outside the {@link SI} standard.

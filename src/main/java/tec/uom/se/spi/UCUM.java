@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
+package tec.uom.se.spi;
 
 import tec.uom.se.*;
 import tec.uom.se.function.PiMultiplierConverter;
@@ -38,7 +38,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.*;
 
-import static tec.uom.se.util.SIPrefix.*;
+import static tec.uom.se.spi.SIPrefix.*;
 
 /**
  * <p>

@@ -33,7 +33,7 @@ import javax.measure.Unit;
 
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
-import tec.uom.se.util.SIPrefix;
+import tec.uom.se.spi.SIPrefix;
 import static tec.uom.se.format.internal.UCUMTokenConstants.*;
 
 /**

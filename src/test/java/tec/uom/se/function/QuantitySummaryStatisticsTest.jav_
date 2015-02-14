@@ -35,7 +35,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.util.SI;
+import tec.uom.se.spi.SI;
 
 public class QuantitySummaryStatisticsTest {
 
