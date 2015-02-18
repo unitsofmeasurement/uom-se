@@ -35,6 +35,7 @@ import javax.measure.Unit;
 import javax.measure.spi.SystemOfUnits;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>An abstract base class for unit systems.</p>
@@ -77,13 +78,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 
     @Override
     public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-        final Set<Unit<?>> set = new HashSet<>(); // Diamond, Java 7+
-        for (Unit<?> unit : this.getUnits()) {
-            if (dimension.equals(unit.getDimension())) {
-                set.add(unit);
-            }
-        }
-        return set;
+        return this.getUnits().stream().filter(unit -> dimension.equals(unit.getDimension())).collect(Collectors.toSet());
     }
     
     @SuppressWarnings("unchecked")
@@ -96,13 +91,8 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {
 			if (dimension != null) {
-				Set<Unit<?>>dimSet = new HashSet<>(); // Diamond, Java 7+
-				for (Unit<?> u : units) {
-					if (dimension.equals(u.getDimension())) {
-						dimSet.add(u);
-					}
-				}
-				return dimSet;
+				return units.stream().filter(u -> dimension.equals(u.getDimension())).collect(Collectors.toSet());
+
 			}
 			return null;
 		}
