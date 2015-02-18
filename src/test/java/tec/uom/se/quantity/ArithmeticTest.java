@@ -63,7 +63,7 @@ public class ArithmeticTest {
 
 	@Test
 	public void testValue() {
-		assertEquals(Integer.valueOf(10), sut.getValue());
+		assertEquals(10, sut.getValue());
 	}
 
 	@Test

@@ -104,7 +104,7 @@ public class UnitsTest {
      */
     @Test
     public void testConverterToSI() {
-        Double factor = new Double(10);
+        Double factor = 10.0;
         UnitConverter converter = one.getConverterTo(one);
         Double result = converter.convert(factor.doubleValue());
         assertEquals(result, factor);
