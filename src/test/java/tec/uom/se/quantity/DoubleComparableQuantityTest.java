@@ -161,14 +161,14 @@ public class DoubleComparableQuantityTest {
     public void inverseTestLength() {
         @SuppressWarnings("unchecked")
         ComparableQuantity<Length> metre = (ComparableQuantity<Length>) Quantities.getQuantity(10d, SI.METRE).inverse();
-        Assert.assertEquals(Double.valueOf(0.1d), metre.getValue());
+        Assert.assertEquals(0.1d, metre.getValue());
         Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
     }
 
     @Test
     public void inverseTestTime() {
         ComparableQuantity<?> secInv = Quantities.getQuantity(2d, SI.SECOND).inverse();
-        Assert.assertEquals(Double.valueOf(0.5d), secInv.getValue());
+        Assert.assertEquals(0.5d, secInv.getValue());
         Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
     }
 
