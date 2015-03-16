@@ -14,10 +14,10 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8-SNAPSHOT</version>
+		<version>0.8-RC1</version>
 	</parent>
 	<scm>
-		<url>https://github.com/unitsofmeasurement/unit-ri.git</url>
+		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
 	</scm>
 	<issueManagement>
 		<system>JIRA</system>
