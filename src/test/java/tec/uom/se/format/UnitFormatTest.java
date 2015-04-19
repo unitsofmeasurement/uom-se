@@ -34,10 +34,13 @@ import static org.junit.Assert.fail;
 import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 import static tec.uom.se.format.UCUMFormat.Variant.CASE_SENSITIVE;
 import static tec.uom.se.format.UCUMFormat.Variant.PRINT;
-import static tec.uom.se.spi.SI.KILOGRAM;
-import static tec.uom.se.spi.SI.METRE;
-import static tec.uom.se.spi.SI.MINUTE;
-import static tec.uom.se.spi.SI.SECOND;
+import static tec.uom.se.unit.MetricPrefix.KILO;
+import static tec.uom.se.unit.MetricPrefix.MEGA;
+import static tec.uom.se.unit.SI.HERTZ;
+import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.SI.METRE;
+import static tec.uom.se.unit.SI.MINUTE;
+import static tec.uom.se.unit.SI.SECOND;
 
 import java.io.IOException;
 
@@ -45,10 +48,11 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
+import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 
-import tec.uom.se.quantity.QuantityFactoryProvider;
+import tec.uom.se.spi.QuantityFactoryProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +70,24 @@ public class UnitFormatTest {
 		sut = QuantityFactoryProvider.getQuantityFactory(Length.class).create(10, METRE);
 	}
 
+	@Test
+	public void testFormat() {
+		Unit<Frequency> hz = HERTZ;
+		assertEquals("Hz", hz.toString());
+	}
+	
+	@Test
+	public void testFormat2() {
+		Unit<Frequency> mhz = MEGA(HERTZ);
+		assertEquals("Mhz", mhz.toString());
+	}
+
+	@Test
+	public void testFormat3() {
+		Unit<Frequency> khz = KILO(HERTZ);
+		assertEquals("khz", khz.toString());
+	}
+	
 	@Test
 	public void testFormatLocal() {
 		final UnitFormat format = LocalUnitFormat.getInstance();

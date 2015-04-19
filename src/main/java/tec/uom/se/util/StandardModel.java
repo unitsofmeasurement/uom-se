@@ -56,7 +56,7 @@ import tec.uom.se.DimensionalModel;
     <th>	Model</th>
     <th>	Class</th>
     <th>	Defining Characteristics</th>
-    <th>	DefaultQuantityFactory Output Units</th>
+    <th>	DefaultQuantityFactory Output CommonUnits</th>
   </tr>
 
   <tr align="left" valign="middle">

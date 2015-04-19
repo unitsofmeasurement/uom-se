@@ -27,15 +27,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.unit;
 
 import tec.uom.se.*;
 import tec.uom.se.function.*;
 import tec.uom.se.quantity.QuantityDimension;
-import tec.uom.se.unit.AlternateUnit;
-import tec.uom.se.unit.BaseUnit;
-import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -46,8 +42,8 @@ import javax.measure.quantity.*;
  *     derived units as well as units that are accepted for use with the
  *     SI units.</p>
  *
- * @see <a href="http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
- * @see <a href="http://physics.nist.gov/cuu/Units/outside.html>Units outside the SI that are accepted for use with the SI</a>
+ * @see <a href="http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of CommonUnits</a>
+ * @see <a href="http://physics.nist.gov/cuu/CommonUnits/outside.html>CommonUnits outside the SI that are accepted for use with the SI</a>
  * @see <a href="http://www.bipm.org/utils/common/pdf/si_brochure_8.pdf>SI 2006 - Official Specification</a>
  * @see SIPrefixOld
  *
@@ -166,7 +162,7 @@ public final class SI extends AbstractSystemOfUnits {
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
 	public static final Unit<Mass> GRAM = KILOGRAM.divide(1000);
-            //= new TransformedUnit(KILOGRAM, SIPrefix.KILO.getConverter());
+            //= new TransformedUnit(KILOGRAM, MetricPrefix.KILO.getConverter());
 
     /**
      * The SI unit for plane angle quantities (standard name <code>rad</code>).
@@ -491,7 +487,7 @@ public final class SI extends AbstractSystemOfUnits {
             = addUnit(new ProductUnit<InformationRate>(BIT.divide(SECOND)), InformationRate.class);
 
     /////////////////////////////////////////////////////////////////
-    // Units outside the SI that are accepted for use with the SI. //
+    // CommonUnits outside the SI that are accepted for use with the SI. //
     /////////////////////////////////////////////////////////////////
 
     /**

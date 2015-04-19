@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.unit;
 
 import tec.uom.se.function.UnitConverterSupplier;
 import tec.uom.se.function.RationalConverter;
@@ -39,11 +39,11 @@ import javax.measure.UnitConverter;
 import java.math.BigInteger;
 
 /**
- * <p> This class provides support for the 20 SI prefixes used in the metric
- *     system (decimal multiples and submultiples of SI units).
+ * <p> This class provides support for the 20 prefixes used in the metric
+ *     system (decimal multiples and submultiples of units).
  *     For example:<pre><code>
  *     import static tec.uom.se.util.SI.*;  // Static import.
- *     import static tec.uom.se.util.SIPrefix.*; // Static import.
+ *     import static tec.uom.se.uit.MetricPrefix.*; // Static import.
  *     import javax.measure.*;
  *     import javax.measure.quantity.*;
  *     ...
@@ -52,12 +52,12 @@ import java.math.BigInteger;
  *     </code></pre>
  * </p>
  *
- * @see <a href="http://en.wikipedia.org/wiki/SI_prefix">Wikipedia: SI Prefix</a>
+ * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, $Date: 2014-12-24 $
+ * @version 0.6, $Date: 2015-04-19 $
  */
-public enum SIPrefix implements UnitConverterSupplier {
+public enum MetricPrefix implements UnitConverterSupplier {
     YOTTA(new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),
     ZETTA(new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),
     EXA(new RationalConverter(BigInteger.TEN.pow(18), BigInteger.ONE)),
@@ -89,7 +89,7 @@ public enum SIPrefix implements UnitConverterSupplier {
      *
      * @param converter the associated unit converter.
      */
-    private SIPrefix (RationalConverter converter) {
+    private MetricPrefix (RationalConverter converter) {
         this.converter = converter;
     }
 

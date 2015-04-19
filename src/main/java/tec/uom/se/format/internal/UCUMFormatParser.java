@@ -33,14 +33,14 @@ import javax.measure.Unit;
 
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
-import tec.uom.se.spi.SIPrefix;
+import tec.uom.se.unit.MetricPrefix;
 import static tec.uom.se.format.internal.UCUMTokenConstants.*;
 
 /**
  * <p> 
  * Parser definition for parsing {@link AbstractUnit Unit}s
  * according to the <a href="http://unitsofmeasure.org">
- * Uniform Code for Units of Measure</a>.
+ * Uniform Code for CommonUnits of Measure</a>.
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -190,7 +190,7 @@ public final class UCUMFormatParser {
         token = jj_consume_token(ATOM);
         Unit unit = symbols.getUnit(token.image);
         if (unit == null) {
-            SIPrefix prefix = symbols.getPrefix(token.image);
+            MetricPrefix prefix = symbols.getPrefix(token.image);
             if (prefix != null) {
                 String prefixSymbol = symbols.getSymbol(prefix);
                 unit = symbols.getUnit(token.image.substring(prefixSymbol.length()));

@@ -29,10 +29,10 @@
  */
 package tec.uom.se.format;
 
-import static tec.uom.se.spi.SI.CUBIC_METRE;
-import static tec.uom.se.spi.SI.GRAM;
-import static tec.uom.se.spi.SI.KILOGRAM;
-import static tec.uom.se.spi.UCUM.LITER;
+import static tec.uom.se.unit.SI.CUBIC_METRE;
+import static tec.uom.se.unit.SI.GRAM;
+import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.ucum.UCUM.LITER;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
@@ -40,10 +40,10 @@ import tec.uom.se.format.internal.UnitFormatParser;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
-import tec.uom.se.spi.SIPrefix;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.Quantity;
@@ -62,7 +62,7 @@ import java.util.ResourceBundle;
 /**
  * <p> This class represents the local sensitive format.</p>
  *
- * <h3>Here is the grammar for Units in Extended Backus-Naur Form (EBNF)</h3>
+ * <h3>Here is the grammar for CommonUnits in Extended Backus-Naur Form (EBNF)</h3>
  * <p> Note that the grammar has been left-factored to be suitable for use by a
  * top-down parser generator such as <a
  * href="https://javacc.dev.java.net/">JavaCC</a> </p> <table width="90%"
@@ -308,7 +308,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
             if (unit.equals(SI.KILOGRAM)) {
                 // A special case because KILOGRAM is a BaseUnit instead of
                 // a transformed unit, even though it has a prefix.
-                converter = SIPrefix.KILO.getConverter();
+                converter = MetricPrefix.KILO.getConverter();
                 unitPrecedence = formatInternal(SI.GRAM, temp);
                 printSeparator = true;
             } else {
@@ -318,7 +318,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
                     // More special-case hackery to work around gram/kilogram
                     // incosistency
                     parentUnit = SI.GRAM;
-                    converter = converter.concatenate(SIPrefix.KILO.getConverter());
+                    converter = converter.concatenate(MetricPrefix.KILO.getConverter());
                 }
                 unitPrecedence = formatInternal(parentUnit, temp);
                 printSeparator = !parentUnit.equals(AbstractUnit.ONE);
@@ -523,7 +523,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
             boolean continued,
             int unitPrecedence,
             StringBuilder buffer) {
-        SIPrefix prefix = symbolMap.getPrefix(converter);
+        MetricPrefix prefix = symbolMap.getPrefix(converter);
         if ((prefix != null) && (unitPrecedence == NOOP_PRECEDENCE)) {
             buffer.insert(0, symbolMap.getSymbol(prefix));
             return NOOP_PRECEDENCE;

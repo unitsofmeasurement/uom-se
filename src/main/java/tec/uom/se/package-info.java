@@ -40,9 +40,9 @@
  * import tec.uom.se.AbstractUnit;
  * import tec.uom.se.function.AbstractConverter;
  * 
- * import static tec.uom.se.util.SI.*; // Standard Units.
+ * import static tec.uom.se.util.SI.*; // Standard CommonUnits.
  * import static tec.uom.se.util.SIPrefix.*;
- * import static tec.uom.se.util.UCUM.*; // Standard & Non-Standard Units.
+ * import static tec.uom.se.util.UCUM.*; // Standard & Non-Standard CommonUnits.
  *
  * public class Main {
  *     public void main(String[] args) {
@@ -76,7 +76,7 @@
  *
  * <h3>Unit Parameterization</h3>
  *
- *     Units are parameterized enforce compile-time checks of units/measures consistency, for example:[code]
+ *     CommonUnits are parameterized enforce compile-time checks of units/measures consistency, for example:[code]
  *
  *     AbstractUnit<Time> MINUTE = SECOND.times(60); // Ok.
  *     AbstractUnit<Time> MINUTE = METRE.times(60); // Compile error.

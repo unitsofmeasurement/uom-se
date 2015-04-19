@@ -38,7 +38,7 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tec.uom.se.spi.SI;
+import tec.uom.se.unit.SI;
 
 public class NumberQuantityTest {
 

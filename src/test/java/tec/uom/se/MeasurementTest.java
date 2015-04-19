@@ -30,7 +30,7 @@
 package tec.uom.se;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.spi.SI.KILOGRAM;
+import static tec.uom.se.unit.SI.KILOGRAM;
 
 import java.time.Instant;
 

@@ -31,7 +31,7 @@ package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static tec.uom.se.spi.SI.METRE;
+import static tec.uom.se.unit.SI.METRE;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -39,6 +39,8 @@ import javax.measure.spi.QuantityFactory;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import tec.uom.se.spi.QuantityFactoryProvider;
 
 public class ArithmeticTest {
 

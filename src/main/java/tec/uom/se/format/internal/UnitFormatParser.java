@@ -37,7 +37,7 @@ import javax.measure.Unit;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
-import tec.uom.se.spi.SIPrefix;
+import tec.uom.se.unit.MetricPrefix;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class UnitFormatParser {
@@ -279,7 +279,7 @@ public final class UnitFormatParser {
                 token = consumeToken(UNIT_IDENTIFIER);
                 Unit unit = symbols.getUnit(token.image);
                 if (unit == null) {
-                    SIPrefix prefix = symbols.getPrefix(token.image);
+                    MetricPrefix prefix = symbols.getPrefix(token.image);
                     if (prefix != null) {
                         String prefixSymbol = symbols.getSymbol(prefix);
                         unit = symbols.getUnit(token.image.substring(prefixSymbol.length()));

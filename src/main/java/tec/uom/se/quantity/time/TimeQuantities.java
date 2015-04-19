@@ -12,9 +12,9 @@ import javax.measure.Quantity;
 import javax.measure.quantity.Time;
 
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.spi.SI;
-import tec.uom.se.spi.SIPrefix;
 import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.unit.MetricPrefix;
+import tec.uom.se.unit.SI;
 import tec.uom.se.unit.TransformedUnit;
 
 public final class TimeQuantities {
@@ -43,13 +43,13 @@ public final class TimeQuantities {
     public static final BaseUnit<Time> SECOND = SI.SECOND;
 
     public static final TransformedUnit<Time> MICROSECOND = new TransformedUnit<Time>(
-            "μs", SI.SECOND, SIPrefix.MICRO.getConverter());
+            "μs", SI.SECOND, MetricPrefix.MICRO.getConverter());
 
     public static final TransformedUnit<Time> MILLISECOND = new TransformedUnit<Time>(
-            "ms", SI.SECOND, SIPrefix.MILLI.getConverter());
+            "ms", SI.SECOND, MetricPrefix.MILLI.getConverter());
 
     public static final TransformedUnit<Time> NANOSECOND = new TransformedUnit<Time>(
-            "ns", SI.SECOND, SIPrefix.NANO.getConverter());
+            "ns", SI.SECOND, MetricPrefix.NANO.getConverter());
 
 
     /**

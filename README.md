@@ -9,6 +9,7 @@ This implementation aims at **Java SE 8** and above.
 
 Allowing the use of new features like *Lambdas* together with Units of Measurement API
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se/badge.svg)](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se)
 [![Build Status](https://drone.io/github.com/unitsofmeasurement/uom-se/status.png)](https://drone.io/github.com/unitsofmeasurement/uom-se/latest)
 [![License](http://img.shields.io/badge/license-BSD3-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) 
 [![Join the chat at https://gitter.im/unitsofmeasurement/uom-se](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unitsofmeasurement/uom-se?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

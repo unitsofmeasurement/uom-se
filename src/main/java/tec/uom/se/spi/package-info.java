@@ -31,17 +31,17 @@
  * This package provides utility classes in conformity with the
  * <a href="http://www.unitsofmeasurement.org/">Units of Measurement API</a>.
  *
- * <h3> Standard / Non Standard Units</h3>
+ * <h3> Standard / Non Standard CommonUnits</h3>
  * <ul>
  *    <li> The class {@link SI} contains standard units as defined by the 
  *       <a href="http://physics.nist.gov/Pubs/SP330/sp330.pdf">
- *      "The International System of Units"</a>.</li>
+ *      "The International System of CommonUnits"</a>.</li>
  *    <li> The class {@link US} contains units 
  *      as defined in the <a href="http://en.wikipedia.org/wiki/United_States_customary_units">
  *      "United States customary system"</a>.</li>
  *    <li> The class {@link UCUM} contains standard and non-standard units 
  *      as defined by the <a href="http://unitsofmeasure.org/">
- *      "Uniform Code for Units of Measure"</a>.</li>
+ *      "Uniform Code for CommonUnits of Measure"</a>.</li>
  *    <li> The class {@link CommonUnits} contains other commonly used non-standard units.</li>
  * </ul>
  *
@@ -51,3 +51,8 @@
  * @version 0.3
  */
 package tec.uom.se.spi;
+import tec.uom.se.unit.CommonUnits;
+import tec.uom.se.unit.SI;
+import tec.uom.se.unit.US;
+import tec.uom.se.unit.ucum.UCUM;
+

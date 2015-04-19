@@ -36,9 +36,9 @@ import tec.uom.se.format.internal.TokenMgrError;
 import tec.uom.se.format.internal.UCUMFormatParser;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
-import tec.uom.se.spi.SI;
-import tec.uom.se.spi.SIPrefix;
 import tec.uom.se.unit.AnnotatedUnit;
+import tec.uom.se.unit.MetricPrefix;
+import tec.uom.se.unit.SI;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -55,11 +55,11 @@ import java.util.*;
 /**
  * <p> This class provides the interface for formatting and parsing
  * {@link AbstractUnit units} according to the <a
- * href="http://unitsofmeasure.org/">Uniform Code for Units of Measure</a>
+ * href="http://unitsofmeasure.org/">Uniform Code for CommonUnits of Measure</a>
  * (UCUM). </p>
  *
  * <p> For a technical/historical overview of this format please read <a
- * href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=61354"> Units
+ * href="http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=61354"> CommonUnits
  * of Measure in Clinical Information Systems</a>. </p>
  *
  * <p> As of revision 1.16, the BNF in the UCUM standard contains an <a
@@ -217,7 +217,7 @@ public abstract class UCUMFormat extends AbstractUnitFormat {
                 // a transformed unit, for compatability with existing SI
                 // unit system.
                 format(SI.GRAM, temp);
-                converter = SIPrefix.KILO.getConverter();
+                converter = MetricPrefix.KILO.getConverter();
                 printSeparator = true;
             } else {
                 Unit<?> parentUnit = unit.getSystemUnit();
@@ -226,7 +226,7 @@ public abstract class UCUMFormat extends AbstractUnitFormat {
                     // More special-case hackery to work around gram/kilogram
                     // incosistency
                     parentUnit = SI.GRAM;
-                    converter = converter.concatenate(SIPrefix.KILO.getConverter());
+                    converter = converter.concatenate(MetricPrefix.KILO.getConverter());
                 }
                 format(parentUnit, temp);
                 printSeparator = !parentUnit.equals(AbstractUnit.ONE);
@@ -279,7 +279,7 @@ public abstract class UCUMFormat extends AbstractUnitFormat {
     void formatConverter(UnitConverter converter, boolean continued,
             StringBuilder buffer) {
         boolean unitIsExpression = ((buffer.indexOf(".") >= 0) || (buffer.indexOf("/") >= 0));
-        SIPrefix prefix = symbolMap.getPrefix(converter);
+        MetricPrefix prefix = symbolMap.getPrefix(converter);
         if ((prefix != null) && (!unitIsExpression)) {
             buffer.insert(0, symbolMap.getSymbol(prefix));
         } else if (converter == AbstractConverter.IDENTITY) {

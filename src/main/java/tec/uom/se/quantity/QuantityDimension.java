@@ -30,8 +30,8 @@
 package tec.uom.se.quantity;
 
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.spi.SI;
 import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.unit.SI;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;

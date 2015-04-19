@@ -30,9 +30,9 @@
 package tec.uom.se.util;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.spi.SI.GRAM;
-import static tec.uom.se.spi.SI.KILOGRAM;
-import static tec.uom.se.spi.SIPrefix.KILO;
+import static tec.uom.se.unit.MetricPrefix.KILO;
+import static tec.uom.se.unit.SI.GRAM;
+import static tec.uom.se.unit.SI.KILOGRAM;
 
 import org.junit.Test;
 

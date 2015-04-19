@@ -31,10 +31,10 @@ package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static tec.uom.se.spi.SI.KILOGRAM;
-import static tec.uom.se.spi.SI.METRE;
-import static tec.uom.se.spi.SI.MINUTE;
-import static tec.uom.se.spi.SI.SECOND;
+import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.SI.METRE;
+import static tec.uom.se.unit.SI.MINUTE;
+import static tec.uom.se.unit.SI.SECOND;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -42,6 +42,8 @@ import javax.measure.quantity.Mass;
 import javax.measure.quantity.Time;
 
 import org.junit.Test;
+
+import tec.uom.se.spi.QuantityFactoryProvider;
 
 /**
  * @author Werner Keil

@@ -23,12 +23,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.unit;
 
-import static tec.uom.se.spi.SI.*;
-import static tec.uom.se.spi.SIPrefix.MICRO;
-import static tec.uom.se.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVIDEND;
-import static tec.uom.se.spi.internal.NonSI.AVOIRDUPOIS_POUND_DIVISOR;
+import static tec.uom.se.unit.MetricPrefix.MICRO;
+import static tec.uom.se.unit.SI.*;
+import static tec.uom.se.unit.internal.NonSI.AVOIRDUPOIS_POUND_DIVIDEND;
+import static tec.uom.se.unit.internal.NonSI.AVOIRDUPOIS_POUND_DIVISOR;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Area;
@@ -41,9 +41,6 @@ import javax.measure.quantity.Volume;
 import javax.measure.spi.SystemOfUnits;
 
 import tec.uom.se.AbstractSystemOfUnits;
-import tec.uom.se.unit.AlternateUnit;
-import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.unit.TransformedUnit;
 
 
 /**
@@ -58,7 +55,7 @@ import tec.uom.se.unit.TransformedUnit;
  * @version 0.3, $Date: 2015-01-28 $
  * @see <a
  *      href="http://en.wikipedia.org/wiki/http://en.wikipedia.org/wiki/Imperial_unit">Wikipedia:
- *      Imperial Units</a>
+ *      Imperial CommonUnits</a>
  */
 public final class Imperial extends AbstractSystemOfUnits  {
 

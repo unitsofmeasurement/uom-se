@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.unit;
 
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.function.Nameable;
@@ -36,7 +36,7 @@ import javax.measure.Unit;
 import javax.measure.quantity.Speed;
 import javax.measure.spi.SystemOfUnits;
 
-import static tec.uom.se.spi.SI.METRES_PER_SECOND;
+import static tec.uom.se.unit.SI.METRES_PER_SECOND;
 
 /**
  * <p> This class defines commonly used units outside the {@link SI} standard.
@@ -52,7 +52,7 @@ public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
 	private static final CommonUnits INSTANCE = new CommonUnits();
 	
 	public String getName() {
-		return "Common Units";
+		return "Common CommonUnits";
 	}
 
 	/**

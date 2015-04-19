@@ -23,33 +23,33 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi.internal;
+package tec.uom.se.unit.internal;
 
-import static tec.uom.se.spi.SI.AMPERE;
-import static tec.uom.se.spi.SI.BECQUEREL;
-import static tec.uom.se.spi.SI.BIT;
-import static tec.uom.se.spi.SI.COULOMB;
-import static tec.uom.se.spi.SI.GRAM;
-import static tec.uom.se.spi.SI.GRAY;
-import static tec.uom.se.spi.SI.JOULE;
-import static tec.uom.se.spi.SI.KELVIN;
-import static tec.uom.se.spi.SI.KILOGRAM;
-import static tec.uom.se.spi.SI.LUX;
-import static tec.uom.se.spi.SI.METRE;
-import static tec.uom.se.spi.SI.METRES_PER_SECOND;
-import static tec.uom.se.spi.SI.METRES_PER_SQUARE_SECOND;
-import static tec.uom.se.spi.SI.MOLE;
-import static tec.uom.se.spi.SI.NEWTON;
-import static tec.uom.se.spi.SI.PASCAL;
-import static tec.uom.se.spi.SI.RADIAN;
-import static tec.uom.se.spi.SI.SECOND;
-import static tec.uom.se.spi.SI.SIEVERT;
-import static tec.uom.se.spi.SI.SQUARE_METRE;
-import static tec.uom.se.spi.SI.STERADIAN;
-import static tec.uom.se.spi.SI.TESLA;
-import static tec.uom.se.spi.SI.WATT;
-import static tec.uom.se.spi.SI.WEBER;
-import static tec.uom.se.spi.SIPrefix.*;
+import static tec.uom.se.unit.MetricPrefix.*;
+import static tec.uom.se.unit.SI.AMPERE;
+import static tec.uom.se.unit.SI.BECQUEREL;
+import static tec.uom.se.unit.SI.BIT;
+import static tec.uom.se.unit.SI.COULOMB;
+import static tec.uom.se.unit.SI.GRAM;
+import static tec.uom.se.unit.SI.GRAY;
+import static tec.uom.se.unit.SI.JOULE;
+import static tec.uom.se.unit.SI.KELVIN;
+import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.SI.LUX;
+import static tec.uom.se.unit.SI.METRE;
+import static tec.uom.se.unit.SI.METRES_PER_SECOND;
+import static tec.uom.se.unit.SI.METRES_PER_SQUARE_SECOND;
+import static tec.uom.se.unit.SI.MOLE;
+import static tec.uom.se.unit.SI.NEWTON;
+import static tec.uom.se.unit.SI.PASCAL;
+import static tec.uom.se.unit.SI.RADIAN;
+import static tec.uom.se.unit.SI.SECOND;
+import static tec.uom.se.unit.SI.SIEVERT;
+import static tec.uom.se.unit.SI.SQUARE_METRE;
+import static tec.uom.se.unit.SI.STERADIAN;
+import static tec.uom.se.unit.SI.TESLA;
+import static tec.uom.se.unit.SI.WATT;
+import static tec.uom.se.unit.SI.WEBER;
 
 import javax.measure.Unit;
 import javax.measure.quantity.*;
@@ -58,14 +58,14 @@ import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.function.RationalConverter;
-import tec.uom.se.spi.SI;
 import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.SI;
 
 
 /**
  * <p>
  * This class contains units that are not part of the International System of
- * Units, that is, they are outside the SI, but are important and widely used.
+ * CommonUnits, that is, they are outside the SI, but are important and widely used.
  * </p>
  * 
  * <p>

@@ -35,10 +35,10 @@ import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
 import tec.uom.se.quantity.QuantityDimension;
-import tec.uom.se.spi.SI;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.SI;
 import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.*;
@@ -57,7 +57,7 @@ import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 /**
  * <p>
  * The class represents units founded on the seven
- * {@link tec.uom.se.spi.tec.uom.se.system.SI SI} base units for seven base quantities
+ * {@link tec.uom.se.unit.tec.uom.se.system.SI SI} base units for seven base quantities
  * assumed to be mutually independent.
  * </p>
  *

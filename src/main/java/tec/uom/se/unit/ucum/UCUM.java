@@ -27,23 +27,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.unit.ucum;
 
 import tec.uom.se.*;
 import tec.uom.se.function.PiMultiplierConverter;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.ProductUnit;
+import tec.uom.se.unit.SI;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.*;
 
-import static tec.uom.se.spi.SIPrefix.*;
+import static tec.uom.se.unit.MetricPrefix.*;
 
 /**
  * <p>
  * This class contains {@link SI} and Non-SI units as defined in the <a
- * href="http://unitsofmeasure.org/"> Uniform Code for Units of Measure</a>.
+ * href="http://unitsofmeasure.org/"> Uniform Code for CommonUnits of Measure</a>.
  * </p>
  *
  * <p>

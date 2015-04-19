@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,20 +27,19 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.unit;
 
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.RationalConverter;
-import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.spi.SystemOfUnits;
 
-import static tec.uom.se.spi.SI.*;
-import static tec.uom.se.spi.SIPrefix.MICRO;
+import static tec.uom.se.unit.MetricPrefix.MICRO;
+import static tec.uom.se.unit.SI.*;
 
 /**
  * <p>
@@ -52,10 +51,10 @@ import static tec.uom.se.spi.SIPrefix.MICRO;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.17, $Date: 2014-04-06 22:44:42 +0200 (So, 06 Apr 2014) $
+ * @version 0.18, $Date: 2015-04-19 $
  * @see <a
  *      href="http://en.wikipedia.org/wiki/United_States_customary_units">Wikipedia:
- *      United State Customary Units</a>
+ *      United State Customary CommonUnits</a>
  */
 public final class US extends AbstractSystemOfUnits {
 

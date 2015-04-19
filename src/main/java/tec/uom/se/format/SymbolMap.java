@@ -31,7 +31,7 @@ package tec.uom.se.format;
 
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.spi.SIPrefix;
+import tec.uom.se.unit.MetricPrefix;
 
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -47,9 +47,9 @@ import java.util.logging.Logger;
 
 /**
  * <p> This class provides a set of mappings between
- *     {@link AbstractUnit physical units} and symbols (both ways), between {@link SIPrefix prefixes}
+ *     {@link AbstractUnit physical units} and symbols (both ways), between {@link MetricPrefix prefixes}
  * and symbols (both ways), and from {@link AbstractConverter
- *     physical unit converters} to {@link SIPrefix prefixes} (one way). No attempt
+ *     physical unit converters} to {@link MetricPrefix prefixes} (one way). No attempt
  * is made to verify the uniqueness of the mappings.</p>
  *
  * <p> Mappings are read from a
@@ -75,7 +75,7 @@ public final class SymbolMap {
     private final Map<Unit<?>, String> unitToSymbol;
     private final Map<String, Object> symbolToPrefix;
     private final Map<Object, String> prefixToSymbol;
-    private final Map<UnitConverter, SIPrefix> converterToPrefix;
+    private final Map<UnitConverter, MetricPrefix> converterToPrefix;
 
     /**
      * Creates an empty mapping.
@@ -120,8 +120,8 @@ public final class SymbolMap {
                     } else {
                         label((AbstractUnit<?>) value, symbol);
                     }
-                } else if (value instanceof SIPrefix) {
-                    label((SIPrefix) value, symbol);
+                } else if (value instanceof MetricPrefix) {
+                    label((MetricPrefix) value, symbol);
                 } else {
                     throw new ClassCastException("unable to cast " + value + " to Unit or Prefix");
                 }
@@ -173,11 +173,11 @@ public final class SymbolMap {
 
     /**
      * Attaches a label to the specified prefix. For example:[code]
-     *    symbolMap.label(SIPrefix.GIGA, "G");
-     *    symbolMap.label(SIPrefix.MICRO, "µ");
+     *    symbolMap.label(MetricPrefix.GIGA, "G");
+     *    symbolMap.label(MetricPrefix.MICRO, "µ");
      * [/code]
      */
-    public void label(SIPrefix prefix, String symbol) {
+    public void label(MetricPrefix prefix, String symbol) {
         symbolToPrefix.put(symbol, prefix);
         prefixToSymbol.put(prefix, symbol);
         converterToPrefix.put(prefix.getConverter(), prefix);
@@ -209,10 +209,10 @@ public final class SymbolMap {
      * @param symbol the unit symbol.
      * @return the corresponding prefix or <code>null</code> if none.
      */
-    public SIPrefix getPrefix(String symbol) {
+    public MetricPrefix getPrefix(String symbol) {
         for (String pfSymbol : symbolToPrefix.keySet()) {
             if (symbol.startsWith(pfSymbol)) {
-                return (SIPrefix) symbolToPrefix.get(pfSymbol);
+                return (MetricPrefix) symbolToPrefix.get(pfSymbol);
             }
         }
         return null;
@@ -224,7 +224,7 @@ public final class SymbolMap {
      * @param converter the unit converter.
      * @return the corresponding prefix or <code>null</code> if none.
      */
-    public SIPrefix getPrefix(UnitConverter converter) {
+    public MetricPrefix getPrefix(UnitConverter converter) {
         return converterToPrefix.get(converter);
     }
 
@@ -234,7 +234,7 @@ public final class SymbolMap {
      * @param prefix the prefix.
      * @return the corresponding symbol or <code>null</code> if none.
      */
-    public String getSymbol(SIPrefix prefix) {
+    public String getSymbol(MetricPrefix prefix) {
         return prefixToSymbol.get(prefix);
     }
 

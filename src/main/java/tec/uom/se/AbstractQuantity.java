@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -40,6 +40,8 @@ import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
 import tec.uom.se.function.NaturalOrder;
+import tec.uom.se.function.UnitSupplier;
+import tec.uom.se.function.ValueSupplier;
 import tec.uom.se.quantity.Quantities;
 
 /**
@@ -67,7 +69,7 @@ import tec.uom.se.quantity.Quantities;
  *         > 670616629.3843951 [mi_i]/h
  *     </code></p>
  *
- * <p> Applications may sub-class {@link AbstractQuantity} for particular measurements
+ * <p> Applications may sub-class {@link AbstractQuantity} for particular quantity
  *     types.<br/><code>
  *         // Quantity of type Mass based on <code>double</code> primitive types.
  *         public class MassAmount extends AbstractQuantity<Mass> {
@@ -95,11 +97,11 @@ import tec.uom.se.quantity.Quantities;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.6.3, $Date: 2014-10-21 $
+ * @version 0.6.4, $Date: 2015-04-19 $
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
-        ComparableQuantity<Q> {
+        ComparableQuantity<Q>, UnitSupplier<Q>, ValueSupplier<Number> {
 
 	private final Unit<Q> unit;
 

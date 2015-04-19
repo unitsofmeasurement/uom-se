@@ -44,8 +44,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.uom.se.quantity.QuantityFactoryProvider;
-import tec.uom.se.spi.SI;
+import tec.uom.se.spi.QuantityFactoryProvider;
+import tec.uom.se.unit.SI;
 
 public class QuantityFunctionsGroupTest {
 
