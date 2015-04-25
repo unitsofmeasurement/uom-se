@@ -53,14 +53,14 @@ import java.util.logging.Logger;
  *     aggregating the results of all {@link DimensionService} instances
  *     is provided.<br/><br/>
  *     <code>
- *        QuantityDimension velocityDimension
- *            = QuantityDimension.of(Velocity.class);
+ *        QuantityDimension speedDimension
+ *            = QuantityDimension.of(Speed.class);
  *     </code>
  * </p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, $Date: 2015-01-28 $
+ * @version 0.5.2, $Date: 2015-04-26 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -124,9 +124,9 @@ public final class QuantityDimension implements Dimension, Serializable {
      * @return the dimension for the quantity type or <code>null</code>.
      */
     public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
-        // TODO: Track OSGi services and aggregate results.
+        // TODO: Track OSGi services and aggregate results (register custom types)
         Unit<Q> siUnit = SI.getInstance().getUnit(quantityType);
-        if (siUnit == null) logger.warning("Quantity type: " + quantityType + " unknown");
+        if (siUnit == null) logger.finer("Quantity type: " + quantityType + " unknown"); // we're logging but probably FINER is enough?
         return (siUnit != null) ? siUnit.getDimension() : null;
     }
 
