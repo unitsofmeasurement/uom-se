@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -28,7 +28,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package tec.uom.se.util;
-
+// TODO move to tec.uom.se.quantity.time
 import java.time.Instant;
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -42,7 +42,7 @@ import tec.uom.se.function.Nameable;
  *            The data value.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4.1
+ * @version 0.4.2
  * @see <a href="http://en.wikipedia.org/wiki/Time_series"> Wikipedia:
  *      Time Series</a>
  */
