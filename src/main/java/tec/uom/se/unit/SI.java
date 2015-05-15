@@ -49,7 +49,8 @@ import javax.measure.quantity.*;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, February 14, 2015
+ * @version 0.6.1, May 15, 2015
+ * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100 relevant units moved to @link Units
 */
 public final class SI extends AbstractSystemOfUnits {
 
@@ -72,8 +73,6 @@ public final class SI extends AbstractSystemOfUnits {
     public static SI getInstance() {
         return INSTANCE;
     }
-
-    
 
     ////////////////
     // BASE UNITS //
@@ -153,6 +152,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for magnetomotive force (standard name <code>At</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final Unit<MagnetomotiveForce> AMPERE_TURN
             = addUnit(new AlternateUnit<MagnetomotiveForce>(SI.AMPERE, "At"), MagnetomotiveForce.class);
@@ -183,6 +183,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for binary information (standard name <code>bit</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final AlternateUnit<Information> BIT
             = addUnit(new AlternateUnit<Information>(AbstractUnit.ONE, "bit"), Information.class);
@@ -419,6 +420,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for action quantities (standard name <code>j.s</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final ProductUnit<Action> JOULE_SECOND
             = addUnit(new ProductUnit<Action>(
@@ -433,6 +435,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for magnetic permeability quantities (standard name <code>N/A2</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final ProductUnit<MagneticPermeability> NEWTONS_PER_SQUARE_AMPERE
             = addUnit(new ProductUnit<MagneticPermeability>(
@@ -447,6 +450,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for dynamic viscosity quantities (standard name <code>Pa.s</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final ProductUnit<DynamicViscosity> PASCAL_SECOND
             = addUnit(new ProductUnit<DynamicViscosity>(
@@ -461,6 +465,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for kinematic viscosity quantities (standard name <code>m2/s"</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final ProductUnit<KinematicViscosity> SQUARE_METRES_PER_SECOND
             = addUnit(new ProductUnit<KinematicViscosity>(
@@ -475,6 +480,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for ionizing radiation quantities (standard name <code>C/kg"</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final ProductUnit<IonizingRadiation> COULOMBS_PER_KILOGRAM
             = addUnit(new ProductUnit<IonizingRadiation>(
@@ -482,6 +488,7 @@ public final class SI extends AbstractSystemOfUnits {
 
     /**
      * The SI unit for binary information rate (standard name <code>bit/s</code>).
+     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
      */
     public static final ProductUnit<InformationRate> BITS_PER_SECOND
             = addUnit(new ProductUnit<InformationRate>(BIT.divide(SECOND)), InformationRate.class);
@@ -635,5 +642,4 @@ public final class SI extends AbstractSystemOfUnits {
         INSTANCE.quantityToUnit.put(type, unit);
         return unit;
     }
-
 }

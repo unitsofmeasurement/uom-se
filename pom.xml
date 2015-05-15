@@ -34,7 +34,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-	    <jsr.version>0.8-RC2</jsr.version>
+	    <jsr.version>0.8-SNAPSHOT</jsr.version>
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
@@ -267,17 +267,22 @@
 
     <!-- Additional repositories -->
     <!-- Helps to resolve Parent POM -->
-    <repositories> 
-        <repository> 
+    <repositories>  
+        <repository>
             <id>geotoolkit</id>
             <name>Geotoolkit.org project</name>
-            <url>http://maven.geotoolkit.org</url> 
+            <url>http://maven.geotoolkit.org</url>
         </repository>
-        <repository> 
+        <repository>
             <id>jcenter</id>
             <name>JCenter</name>
-            <url>http://jcenter.bintray.com</url> 
-        </repository> 
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <id>unitsofmeasurement-github-repo</id>
+            <name>Local repository for Unit-API or other Units of Measurement snapshots</name>
+            <url>https://github.com/unitsofmeasurement/repository/raw/master</url>
+        </repository>
     </repositories>
 
 	<profiles>
