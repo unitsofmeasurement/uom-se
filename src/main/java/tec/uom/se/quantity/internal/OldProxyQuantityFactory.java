@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -58,7 +58,7 @@ import tec.uom.se.AbstractUnit;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.3 ($Revision: 458 $), $Date: 2014-04-07 21:20:00 +0200 (Mo, 07 Apr 2014) $
+ * @version 0.3.1, $Date: 2015-05-20 $
  */
 public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implements BiFactory<Number, Unit<Q>, Q> {
 	
@@ -190,10 +190,10 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
             CLASS_TO_METRIC_UNIT.put(Length.class, METRE);
             CLASS_TO_METRIC_UNIT.put(AmountOfSubstance.class, MOLE);
             CLASS_TO_METRIC_UNIT.put(Time.class, SECOND);
-            CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
+//            CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
             CLASS_TO_METRIC_UNIT.put(Angle.class, RADIAN);
             CLASS_TO_METRIC_UNIT.put(SolidAngle.class, STERADIAN);
-            CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
+//            CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
             CLASS_TO_METRIC_UNIT.put(Frequency.class, HERTZ);
             CLASS_TO_METRIC_UNIT.put(Force.class, NEWTON);
             CLASS_TO_METRIC_UNIT.put(Pressure.class, PASCAL);

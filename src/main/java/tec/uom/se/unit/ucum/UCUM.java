@@ -57,7 +57,7 @@ import static tec.uom.se.unit.MetricPrefix.*;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://www.unitsofmeasure.org">UCUM</a>
- * @version 0.6, $Date: 2014-10-17 $
+ * @version 0.6.1, $Date: 2014-10-17 $
  */
 public final class UCUM extends AbstractSystemOfUnits {
 
@@ -170,7 +170,7 @@ public final class UCUM extends AbstractSystemOfUnits {
 	 * <code>COULOMB.divide(SECOND)</code>.
 	 */
 	public static final Unit<ElectricCurrent> AMPERE = addUnit(SI.AMPERE);
-	public static final Unit<MagnetomotiveForce> AMPERE_TURN = addUnit(SI.AMPERE_TURN);
+//	public static final Unit<MagnetomotiveForce> AMPERE_TURN = addUnit(SI.AMPERE_TURN);
 	/**
 	 * We deviate slightly from the standard here, to maintain compatibility
 	 * with the existing SI units. In UCUM, the volt is defined as
