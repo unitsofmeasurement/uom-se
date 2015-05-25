@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -46,12 +46,12 @@ import tec.uom.se.function.MinimumSupplier;
  *            The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.7, June 29, 2014
+ * @version 0.8.8, May 23, 2015
  * @see <a
  *      href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html">
  *      SensorML: QuantityRange</a>
  */
-public class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
+public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
 	// TODO do we keep null for min and max to represent infinity?
 	// Java 8 Optional was evaluated, but caused conflict with the type-safe
 	// Quantity feature of this API, plus it won't work in CLDC8
@@ -86,38 +86,6 @@ public class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
 	protected Range(T min, T max) {
 		this.min = min;
 		this.max = max;
-	}
-
-	/**
-	 * Returns an {@code Range} with the specified values.
-	 *
-	 * @param <T>
-	 *            the class of the value
-	 * @param minimum
-	 *            The minimum value for the measurement range.
-	 * @param maximum
-	 *            The maximum value for the measurement range.
-	 * @param resolution
-	 *            The resolution of the measurement range.
-	 * @return an {@code MeasurementRange} with the given values
-	 */
-	public static <T> Range<T> of(T minimum, T maximum, T resolution) {
-		return new Range<T>(minimum, maximum, resolution);
-	}
-
-	/**
-	 * Returns an {@code Range} with the specified values.
-	 *
-	 * @param <T>
-	 *            the class of the value
-	 * @param minimum
-	 *            The minimum value for the measurement range.
-	 * @param maximum
-	 *            The maximum value for the measurement range.
-	 * @return an {@code MeasurementRange} with the given values
-	 */
-	public static <T> Range<T> of(T minimum, T maximum) {
-		return new Range<T>(minimum, maximum);
 	}
 
 	/**
@@ -169,6 +137,13 @@ public class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
 		return max != null;
 	}
 
+	/**
+	 * Checks whether the given <code>T</code> is within this range
+	 * @param t
+	 * @return true if the value is within the range
+	 */
+	public abstract boolean contains(T t);
+	
 	/*
 	 * (non-Javadoc)
 	 * 

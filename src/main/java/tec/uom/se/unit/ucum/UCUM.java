@@ -57,7 +57,8 @@ import static tec.uom.se.unit.MetricPrefix.*;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see <a href="http://www.unitsofmeasure.org">UCUM</a>
- * @version 0.6.1, $Date: 2014-10-17 $
+ * @version 0.6.2, $Date: 2015-05-23 $
+ * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100 relevant units moved to @link Units, this bundle should move to a separate module, too
  */
 public final class UCUM extends AbstractSystemOfUnits {
 

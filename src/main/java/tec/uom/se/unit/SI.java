@@ -151,13 +151,6 @@ public final class SI extends AbstractSystemOfUnits {
     ////////////////////////////////
 
     /**
-     * The SI unit for magnetomotive force (standard name <code>At</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final Unit<MagnetomotiveForce> AMPERE_TURN
-            = addUnit(new AlternateUnit<MagnetomotiveForce>(SI.AMPERE, "At"), MagnetomotiveForce.class);
-
-    /**
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
@@ -449,27 +442,11 @@ public final class SI extends AbstractSystemOfUnits {
             METRE.pow(-1)), WaveNumber.class);
 
     /**
-     * The SI unit for dynamic viscosity quantities (standard name <code>Pa.s</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final ProductUnit<DynamicViscosity> PASCAL_SECOND
-            = addUnit(new ProductUnit<DynamicViscosity>(
-            PASCAL.multiply(SECOND)), DynamicViscosity.class);
-
-    /**
      * The SI unit for luminance quantities (standard name <code>cd/m2</code>).
      */
     public static final ProductUnit<Luminance> CANDELAS_PER_SQUARE_METRE
             = addUnit(new ProductUnit<Luminance>(
             CANDELA.divide(SQUARE_METRE)), Luminance.class);
-
-    /**
-     * The SI unit for kinematic viscosity quantities (standard name <code>m2/s"</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final ProductUnit<KinematicViscosity> SQUARE_METRES_PER_SECOND
-            = addUnit(new ProductUnit<KinematicViscosity>(
-            SQUARE_METRE.divide(SECOND)), KinematicViscosity.class);
 
     /**
      * The SI unit for magnetic field strength quantities (standard name <code>A/m"</code>).
