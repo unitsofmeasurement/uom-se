@@ -42,7 +42,6 @@ import javax.measure.spi.SystemOfUnits;
 
 import tec.uom.se.AbstractSystemOfUnits;
 
-
 /**
  * <p>
  * This class contains units from the Imperial system.
@@ -57,6 +56,7 @@ import tec.uom.se.AbstractSystemOfUnits;
  *      href="http://en.wikipedia.org/wiki/http://en.wikipedia.org/wiki/Imperial_unit">Wikipedia:
  *      Imperial CommonUnits</a>
  */
+ // TODO while SE-specific, consider moving to a module like "imperial" under uom-systems
 public final class Imperial extends AbstractSystemOfUnits  {
 
 	/**
