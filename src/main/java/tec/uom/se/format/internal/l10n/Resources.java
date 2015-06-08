@@ -38,7 +38,7 @@ public class Resources extends MultiPropertiesResourceBundle {
 	 * Constructor.
 	 * 
 	 */
-	public Resources(String language) {
-		super(language);
+	public Resources(String packageName, String baseName) {
+		super(packageName, baseName);
 	}
 }
