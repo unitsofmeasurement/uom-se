@@ -113,7 +113,7 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
         if (value instanceof BigDecimal) {
         	return convert((BigDecimal)value, MathContext.DECIMAL128);
         }
-        return convert(value.doubleValue());
+        return convert(value.doubleValue()); // TODO null check, Optional, etc.?
     }
 
     @Override
