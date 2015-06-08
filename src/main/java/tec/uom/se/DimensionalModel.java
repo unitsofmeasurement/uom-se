@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -34,8 +34,6 @@ import tec.uom.se.util.StandardModel;
 
 import javax.measure.Dimension;
 
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
 import java.util.Map;
 
 /**
@@ -78,14 +76,14 @@ import java.util.Map;
  * @see <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Wikipedia: Dimensional Analysis</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, $Date: 2014-12-20 $
+ * @version 0.5.4, $Date: 2015-06-08 $
  */
 public abstract class DimensionalModel {
 
     /**
      * Holds the current model.
      */
-    private static Reference<DimensionalModel> Current = new WeakReference<>(new StandardModel());
+    private static final DimensionalModel CURRENT = new StandardModel();
 
     /**
      * Returns the current model
@@ -94,7 +92,7 @@ public abstract class DimensionalModel {
      * @return the current dimensional model.
      */
     public static DimensionalModel current() {
-        return DimensionalModel.Current.get();
+        return CURRENT;
     }
 
 //    /**
