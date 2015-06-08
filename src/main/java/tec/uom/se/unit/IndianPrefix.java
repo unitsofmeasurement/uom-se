@@ -36,7 +36,6 @@ import javax.measure.Unit;
 
 import tec.uom.se.function.RationalConverter;
 
-
 /**
  * Utility class holding prefixes used today in India, Pakistan, Bangladesh, Nepal
  * and Myanmar (Burma); based on grouping by two decimal places, rather than the
@@ -50,6 +49,7 @@ import tec.uom.se.function.RationalConverter;
  * @see <a
  *      href="http://en.wikipedia.org/wiki/Indian_numbering_system">Wikipedia: Indian numbering system</a>
  */
+ // TODO while SE-specific, consider moving to a local module in uom-systems
 public abstract class IndianPrefix {
 
 	/**

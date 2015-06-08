@@ -50,6 +50,7 @@ import tec.uom.se.function.RationalConverter;
  *      href="http://en.wikipedia.org/wiki/Tamil_units_of_measurement#Whole_numbers">Wikipedia:
  *      Tamil units of measurement - Whole numbers</a>
  */
+ // TODO while SE-specific, consider moving to a local module in uom-systems
 public abstract class TamilPrefix  {
 
 	/**
