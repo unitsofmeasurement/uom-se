@@ -1,4 +1,4 @@
-package tec.uom.se.format.internal;
+package tec.uom.se.format;
 
 import java.io.Serializable;
 import java.util.Enumeration;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * Implements an Enumeration that combines elements from a Set and an
- * Enumeration. Used by {@link MultiPropertiesResourceBundle}.
+ * Enumeration. Used by {@link MultiPropertyResourceBundle}.
  */
 class ResourceBundleEnumeration implements Serializable, Enumeration<String> {
 

@@ -71,6 +71,7 @@ import java.util.*;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.5.3, 24 January 2015
+ * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100 relevant units moved to @link Units, this bundle should move to a separate module, too
  */
 public abstract class UCUMFormat extends AbstractUnitFormat {
 
