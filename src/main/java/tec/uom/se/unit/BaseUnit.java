@@ -44,7 +44,7 @@ import java.util.Map;
  * <p> This class represents the building blocks on top of which all others
  *     physical units are created. Base units are always unscaled SI units.</p>
  * 
- * <p> When using the {@link tec.uom.se.util.StandardModel standard model},
+ * <p> When using the {@link tec.uom.se.StandardModel standard model},
  *     all seven {@link tec.uom.se.unit.tec.uom.se.system.SI SI} base units
  *     are dimensionally independent.</p>
  *

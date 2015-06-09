@@ -39,17 +39,17 @@ import javax.measure.spi.SystemOfUnits;
 import static tec.uom.se.unit.SI.METRES_PER_SECOND;
 
 /**
- * <p> This class defines commonly used units outside the {@link SI} standard.
+ * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, February 14, 2015
+ * @version 0.4, June 9, 2015
 */
-public class CommonUnits extends AbstractSystemOfUnits implements Nameable {
+public class Units extends AbstractSystemOfUnits implements Nameable {
 
-	private CommonUnits() {
+	private Units() {
 	}
 	
-	private static final CommonUnits INSTANCE = new CommonUnits();
+	private static final Units INSTANCE = new Units();
 	
 	public String getName() {
 		return "Common CommonUnits";

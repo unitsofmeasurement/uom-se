@@ -30,7 +30,6 @@
 package tec.uom.se;
 
 import tec.uom.se.quantity.QuantityDimension;
-import tec.uom.se.util.StandardModel;
 
 import javax.measure.Dimension;
 

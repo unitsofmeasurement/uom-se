@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,9 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
-
-import tec.uom.se.DimensionalModel;
+package tec.uom.se;
 
 /**
  * Provides support for <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional Analysis</a>.
@@ -151,9 +149,9 @@ import tec.uom.se.DimensionalModel;
  * This class represents the standard model. 
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6, December 19, 2014
+ * @version 0.6.1, June 9, 2015
  */
-public class StandardModel extends DimensionalModel {
+class StandardModel extends DimensionalModel {
 
     /**
      * DefaultQuantityFactory constructor.

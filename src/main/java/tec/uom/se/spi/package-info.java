@@ -42,7 +42,7 @@
  *    <li> The class {@link UCUM} contains standard and non-standard units 
  *      as defined by the <a href="http://unitsofmeasure.org/">
  *      "Uniform Code for CommonUnits of Measure"</a>.</li>
- *    <li> The class {@link CommonUnits} contains other commonly used non-standard units.</li>
+ *    <li> The class {@link Units} contains other commonly used non-standard units.</li>
  * </ul>
  *
  *
@@ -51,7 +51,7 @@
  * @version 0.3
  */
 package tec.uom.se.spi;
-import tec.uom.se.unit.CommonUnits;
+import tec.uom.se.unit.Units;
 import tec.uom.se.unit.SI;
 import tec.uom.se.unit.US;
 import tec.uom.se.unit.ucum.UCUM;
