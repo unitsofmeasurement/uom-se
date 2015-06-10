@@ -1,4 +1,4 @@
-package tec.uom.se.format;
+package tec.uom.se.format.internal.l10n;
 
 import java.io.IOException;
 import java.io.InputStream;

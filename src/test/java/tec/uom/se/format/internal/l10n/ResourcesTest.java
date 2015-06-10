@@ -1,10 +1,12 @@
-package tec.uom.se.format;
+package tec.uom.se.format.internal.l10n;
 
 import static org.junit.Assert.*;
 
 import java.util.ResourceBundle;
 
 import org.junit.Test;
+
+import tec.uom.se.format.internal.l10n.MultiPropertyResourceBundle;
 
 public class ResourcesTest {
 
