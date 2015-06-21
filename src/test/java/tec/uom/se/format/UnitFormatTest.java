@@ -41,6 +41,7 @@ import static tec.uom.se.unit.SI.KILOGRAM;
 import static tec.uom.se.unit.SI.METRE;
 import static tec.uom.se.unit.SI.MINUTE;
 import static tec.uom.se.unit.SI.SECOND;
+import static tec.uom.se.unit.ucum.UCUM.METER;
 
 import java.io.IOException;
 
@@ -52,7 +53,9 @@ import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 
+import tec.uom.se.quantity.Quantities;
 import tec.uom.se.spi.QuantityFactoryProvider;
+import tec.uom.se.unit.Units;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +70,8 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		sut = QuantityFactoryProvider.getQuantityFactory(Length.class).create(10, METRE);
+		//sut = QuantityFactoryProvider.getQuantityFactory(Length.class).create(10, METRE);
+		sut = Quantities.getQuantity(10, METRE);
 	}
 
 	@Test
@@ -89,6 +93,12 @@ public class UnitFormatTest {
 	}
 	
 	@Test
+	public void testFormat4() {
+		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+		assertEquals("km/h", kph.toString());
+	}
+	
+	@Test
 	public void testFormatLocal() {
 		final UnitFormat format = LocalUnitFormat.getInstance();
 		final Appendable a = new StringBuilder();
@@ -102,7 +112,7 @@ public class UnitFormatTest {
 
 		final Appendable a2 = new StringBuilder();
 		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
+		Unit<Speed> v = (Unit<Speed>) METER.divide(SECOND);
 		try {
 			format.format(v, a2);
 		} catch (IOException e) {
@@ -126,16 +136,40 @@ public class UnitFormatTest {
 		final Appendable a2 = new StringBuilder();
 		@SuppressWarnings("unchecked")
 		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
+		
 		try {
 			format.format(v, a2);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
-		assertEquals("1/s.m", a2.toString());
+		assertEquals("m/s", a2.toString());
 	}
 
 	@Test
 	public void testFormatUCUMCS() {
+		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
+		final Appendable a = new StringBuilder();
+		try {
+			format.format(METRE, a);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		assertEquals(METRE, sut.getUnit());
+		assertEquals("m", a.toString());
+
+		final Appendable a2 = new StringBuilder();
+		@SuppressWarnings("unchecked")
+		Unit<Speed> v = (Unit<Speed>) METER.divide(SECOND);
+		try {
+			format.format(v, a2);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		assertEquals("m/s", a2.toString());
+	}
+	
+	@Test
+	public void testFormatUCUMCSfromQuantity() {
 		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
 		final Appendable a = new StringBuilder();
 		try {
@@ -154,7 +188,7 @@ public class UnitFormatTest {
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
-		assertEquals("1/s.m", a2.toString());
+		assertEquals("m/s", a2.toString());
 	}
 
 	@Test
