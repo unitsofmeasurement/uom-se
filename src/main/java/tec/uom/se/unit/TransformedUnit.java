@@ -40,7 +40,6 @@ import tec.uom.se.function.UnitConverterSupplier;
 import java.util.Map;
 import java.util.Objects;
 
-
 /**
  * <p> This class represents the units derived from other units using
  *     {@linkplain UnitConverter converters}.</p>
@@ -51,7 +50,7 @@ import java.util.Objects;
  *         MILLISECOND = MILLI(SECOND);
  *     </code></p>
  *
- * <p> Transformed units have no label. But like any other units,
+ * <p> Transformed units have no symbol. But like any other units,
  *     they may have labels attached to them (see {@link tec.uom.se.format.SymbolMap
  *     SymbolMap}</p>
  *
@@ -61,7 +60,7 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, January 22, 2015
+ * @version 0.6.1, June 24, 2015
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
