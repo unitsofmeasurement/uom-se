@@ -52,6 +52,13 @@ public class PrefixTest {
 	}
 	
 	@Test
+	public void testMega() {
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MEGA(SI.GRAM));
+		assertEquals(1e9, m1.getValue());
+		assertEquals("Mg", m1.getUnit().toString());
+	}
+	
+	@Test
 	public void testMicro2() {
 		Quantity<Length> m1 = Quantities.getQuantity(1.0, SI.METRE);
 		assertEquals(1d, m1.getValue());
