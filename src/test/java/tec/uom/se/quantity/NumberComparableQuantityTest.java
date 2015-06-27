@@ -74,7 +74,6 @@ public class NumberComparableQuantityTest {
         Assert.assertEquals(SI.SQUARE_METRE, area.getUnit());
     }
 
-
     @Test(expected = ClassCastException.class)
     public void multiplyOperationsExceptionTest() {
         ComparableQuantity<Length> metre = Quantities.getQuantity(10, SI.METRE);
