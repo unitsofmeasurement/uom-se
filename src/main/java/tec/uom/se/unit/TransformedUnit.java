@@ -111,8 +111,8 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
 
     @Override
-    public UnitConverter getConverterToSI() {
-        return parentUnit.getConverterToSI().concatenate(converter);
+    public UnitConverter getSystemConverter() {
+        return parentUnit.getSystemConverter().concatenate(converter);
     }
 
     @Override

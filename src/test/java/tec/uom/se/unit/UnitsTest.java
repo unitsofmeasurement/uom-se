@@ -42,7 +42,6 @@ import org.junit.Test;
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.unit.ucum.UCUM;
 import tec.uom.se.AbstractUnit;
 import static org.junit.Assert.*;
 import static tec.uom.se.unit.MetricPrefix.KILO;
@@ -292,11 +291,7 @@ public class UnitsTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("kg", MetricPrefix.KILO(UCUM.GRAM).toString());
-		assertEquals("lb", UCUM.POUND.toString());
-		assertEquals("uz", UCUM.OUNCE.toString()); // TODO try using UCUM.Print for toString()
-		assertEquals("g", UCUM.GRAM.toString());
-		assertEquals("lb", US.POUND.toString());
+		assertEquals("kg", MetricPrefix.KILO(Units.GRAM).toString());
 	}
 
 	@Test
@@ -310,11 +305,11 @@ public class UnitsTest {
 //		assertEquals("kg", SI.GRAM.getSymbol()); //"g"
 //		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
 //		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
-		assertEquals("kg", MetricPrefix.KILO(UCUM.GRAM).getSymbol());
+		assertEquals("kg", MetricPrefix.KILO(Units.GRAM).getSymbol());
 //		assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
 //		assertEquals("kg", US.POUND.getSymbol()); //"lb"
-		assertNull(SI.GRAM.getSymbol());
-		assertNull(UCUM.OUNCE.getSymbol());
+		assertNull(Units.GRAM.getSymbol());
+//		assertNull(UCUM.OUNCE.getSymbol());
 		assertNull(US.POUND.getSymbol());
 	}
 

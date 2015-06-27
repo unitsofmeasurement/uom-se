@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -45,9 +45,9 @@ import tec.uom.se.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.5, Nov 04, 2014
+ * @version 0.6, Jun 27, 2015
  */
-final class ExpConverter extends AbstractConverter 
+public final class ExpConverter extends AbstractConverter 
 	implements ValueSupplier<String>, Serializable { //implements Immutable {
 
     /**

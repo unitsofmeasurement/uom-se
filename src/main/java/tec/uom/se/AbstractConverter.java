@@ -171,7 +171,7 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
      * This class represents converters made up of two or more separate
      * converters (in matrix notation <code>[pair] = [left] x [right]</code>).
      */
-    private static final class Pair extends AbstractConverter {
+    public static final class Pair extends AbstractConverter {
 
         /**
          * Holds the first converter.
@@ -250,6 +250,14 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
         public int hashCode() {
             return Objects.hash(left, right);
         }
+
+		public UnitConverter getLeft() {
+			return left;
+		}
+
+		public UnitConverter getRight() {
+			return right;
+		}
 
     }
 

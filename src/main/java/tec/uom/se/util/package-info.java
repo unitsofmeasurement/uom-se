@@ -1,6 +1,6 @@
 /**
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -36,24 +36,11 @@
  *    <li> The class {@link SI} contains standard units as defined by the 
  *       <a href="http://physics.nist.gov/Pubs/SP330/sp330.pdf">
  *      "The International System of CommonUnits"</a>.</li>
- *    <li> The class {@link US} contains units 
- *      as defined in the <a href="http://en.wikipedia.org/wiki/United_States_customary_units">
- *      "United States customary system"</a>.</li>
- *    <li> The class {@link UCUM} contains standard and non-standard units 
- *      as defined by the <a href="http://unitsofmeasure.org/">
- *      "Uniform Code for CommonUnits of Measure"</a>.</li>
- *    <li> The class {@link Units} contains other commonly used non-standard units.</li>
  * </ul>
  *
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2
+ * @version 0.3
  */
 package tec.uom.se.util;
-
-import tec.uom.se.unit.Units;
-import tec.uom.se.unit.SI;
-import tec.uom.se.unit.US;
-import tec.uom.se.unit.ucum.UCUM;
-

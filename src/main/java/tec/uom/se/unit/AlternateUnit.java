@@ -104,8 +104,8 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
 
     @Override
-    public UnitConverter getConverterToSI() {
-        return ((AbstractUnit)parentUnit).getConverterToSI();
+    public UnitConverter getSystemConverter() {
+        return ((AbstractUnit)parentUnit).getSystemConverter();
     }
 
     @Override

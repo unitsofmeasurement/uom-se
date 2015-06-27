@@ -29,8 +29,8 @@
  */
 package tec.uom.se;
 
+import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.format.LocalUnitFormat;
-import tec.uom.se.format.UCUMFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
@@ -38,7 +38,6 @@ import tec.uom.se.quantity.QuantityDimension;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.ProductUnit;
-import tec.uom.se.unit.SI;
 import tec.uom.se.unit.TransformedUnit;
 
 import javax.measure.*;
@@ -51,8 +50,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
-import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
 
 /**
  * <p>
@@ -72,7 +69,7 @@ import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, Jan 19, 2015
+ * @version 0.6, Jun 27, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		Comparable<Unit<Q>>, Serializable {
@@ -149,7 +146,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 * @return <code>getConverterTo(this.toSystemUnit())</code>
 	 * @see #toSI
 	 */
-	public abstract UnitConverter getConverterToSI();
+	public abstract UnitConverter getSystemConverter();
 
 	/**
 	 * Annotates the specified unit. Annotation does not change the unit
@@ -193,7 +190,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 *             parsed (e.g. not UCUM compliant).
 	 */
 	public static final Unit<?> parse(CharSequence charSequence) {
-		return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
+		//return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
+		return SimpleUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**
@@ -322,7 +320,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 			} catch (IncommensurableException e) {
 				throw new UnconvertibleException(e);
 			}
-		UnitConverter thisToSI = this.getConverterToSI();
+		UnitConverter thisToSI = this.getSystemConverter();
 		UnitConverter thatToSI = that.getConverterTo(thatSystemUnit);
 		return thatToSI.inverse().concatenate(thisToSI);
 	}
@@ -342,11 +340,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		AbstractUnit thisSystemUnit = this.getSystemUnit();
 		UnitConverter thisToDimension = model.getDimensionalTransform(
 				thisSystemUnit.getDimension()).concatenate(
-				this.getConverterToSI());
+				this.getSystemConverter());
 		AbstractUnit thatSystemUnit = thatAbstr.getSystemUnit();
 		UnitConverter thatToDimension = model.getDimensionalTransform(
 				thatSystemUnit.getDimension()).concatenate(
-				thatAbstr.getConverterToSI());
+				thatAbstr.getSystemConverter());
 		return thatToDimension.inverse().concatenate(thisToDimension);
 	}
 
@@ -359,7 +357,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	@Override
 	public final AbstractUnit<Q> transform(UnitConverter operation) {
 		AbstractUnit<Q> systemUnit = this.getSystemUnit();
-		UnitConverter cvtr = this.getConverterToSI().concatenate(operation);
+		UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
 		if (cvtr.equals(AbstractConverter.IDENTITY))
 			return systemUnit;
 		return new TransformedUnit<>(systemUnit, cvtr);

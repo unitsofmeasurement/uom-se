@@ -32,7 +32,7 @@ package tec.uom.se.format;
 import static tec.uom.se.unit.SI.CUBIC_METRE;
 import static tec.uom.se.unit.SI.GRAM;
 import static tec.uom.se.unit.SI.KILOGRAM;
-import static tec.uom.se.unit.ucum.UCUM.LITER;
+import static tec.uom.se.unit.Units.LITRE;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.internal.TokenException;
 import tec.uom.se.format.internal.TokenMgrError;
@@ -394,7 +394,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 			StringBuilder temp = new StringBuilder();
 			int unitPrecedence = NOOP_PRECEDENCE;
 			Unit<?> parentUnit = unit.getSystemUnit();
-			converter = ((AbstractUnit<?>) unit).getConverterToSI();
+			converter = ((AbstractUnit<?>) unit).getSystemConverter();
 			if (KILOGRAM.equals(parentUnit)) {
 				// More special-case hackery to work around gram/kilogram
 				// incosistency
@@ -410,7 +410,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 				}
 			} else if (CUBIC_METRE.equals(parentUnit)) {
 				if (converter != null) {
-					parentUnit = LITER;
+					parentUnit = LITRE;
 				}
 			}
 

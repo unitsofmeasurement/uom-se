@@ -116,7 +116,7 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
 
     @Override
-    public UnitConverter getConverterToSI() throws UnsupportedOperationException {
+    public UnitConverter getSystemConverter() throws UnsupportedOperationException {
         return AbstractConverter.IDENTITY;
     }
 

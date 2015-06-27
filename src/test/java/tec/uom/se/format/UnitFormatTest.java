@@ -31,9 +31,6 @@ package tec.uom.se.format;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static tec.uom.se.format.UCUMFormat.Variant.CASE_INSENSITIVE;
-import static tec.uom.se.format.UCUMFormat.Variant.CASE_SENSITIVE;
-import static tec.uom.se.format.UCUMFormat.Variant.PRINT;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.MetricPrefix.MEGA;
 import static tec.uom.se.unit.SI.HERTZ;
@@ -41,7 +38,6 @@ import static tec.uom.se.unit.SI.KILOGRAM;
 import static tec.uom.se.unit.SI.METRE;
 import static tec.uom.se.unit.SI.MINUTE;
 import static tec.uom.se.unit.SI.SECOND;
-import static tec.uom.se.unit.ucum.UCUM.METER;
 
 import java.io.IOException;
 
@@ -112,96 +108,13 @@ public class UnitFormatTest {
 
 		final Appendable a2 = new StringBuilder();
 		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) METER.divide(SECOND);
+		Unit<Speed> v = (Unit<Speed>) METRE.divide(SECOND);
 		try {
 			format.format(v, a2);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
 		assertEquals("m/s", a2.toString());
-	}
-
-	@Test
-	public void testFormatUCUMPrint() {
-		final UnitFormat format = UCUMFormat.getInstance(PRINT);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
-
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-		
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("m/s", a2.toString());
-	}
-
-	@Test
-	public void testFormatUCUMCS() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
-
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) METER.divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("m/s", a2.toString());
-	}
-	
-	@Test
-	public void testFormatUCUMCSfromQuantity() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
-
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) sut.getUnit().divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("m/s", a2.toString());
-	}
-
-	@Test
-	public void testFormatUCUMCI() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_INSENSITIVE);
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("M", a.toString());
 	}
 
 	@Test(expected=UnsupportedOperationException.class)
@@ -210,39 +123,6 @@ public class UnitFormatTest {
 		try {
 			Unit<?> u = format.parse("min");
 			assertEquals("min", u.getSymbol());
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
-
-	@Test
-	public void testParseUCUMCS() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_SENSITIVE);
-		try {
-			Unit<?> u = format.parse("min");
-			assertEquals(MINUTE, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
-
-	@Test
-	public void testParseUCUMCI() {
-		final UnitFormat format = UCUMFormat.getInstance(CASE_INSENSITIVE);
-		try {
-			Unit<?> u = format.parse("M");
-			assertEquals(METRE, u);
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
-
-	@Test(expected = UnsupportedOperationException.class)
-	public void testParseUCUMPrint() {
-		final UnitFormat format = UCUMFormat.getInstance(PRINT);
-		try {
-			Unit<?> u = format.parse("kg");
-			assertEquals(KILOGRAM, u);
 		} catch (ParserException e) {
 			fail(e.getMessage());
 		}
