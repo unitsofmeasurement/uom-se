@@ -458,6 +458,11 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         = new TransformedUnit<>("d", SECOND, new RationalConverter(24 * 60 * 60, 1));
 
     /**
+     * A time unit accepted for use with SI units (standard name <code>y/code>).
+     */
+	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.25));
+    
+    /**
      * An angle unit accepted for use with SI units (standard name <code>deg/code>).
      */
     public static final TransformedUnit<Angle> DEGREE_ANGLE
