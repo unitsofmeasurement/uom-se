@@ -96,21 +96,6 @@ public final class SI extends Units {
             AMPERE.divide(METRE)), MagneticFieldStrength.class);
 
     /**
-     * The SI unit for ionizing radiation quantities (standard name <code>C/kg"</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final ProductUnit<IonizingRadiation> COULOMBS_PER_KILOGRAM
-            = addUnit(new ProductUnit<IonizingRadiation>(
-            COULOMB.divide(KILOGRAM)), IonizingRadiation.class);
-
-    /**
-     * The SI unit for binary information rate (standard name <code>bit/s</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final ProductUnit<InformationRate> BITS_PER_SECOND
-            = addUnit(new ProductUnit<InformationRate>(BIT.divide(SECOND)), InformationRate.class);
-
-    /**
      * A dimensionless unit accepted for use with SI units (standard name <code>Np</code>).
      * Although the neper is coherent with SI units and is accepted by the CIPM,
      * it has not been adopted by the General Conference on Weights and Measures

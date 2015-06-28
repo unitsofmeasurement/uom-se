@@ -56,7 +56,6 @@ import javax.measure.quantity.Energy;
 import javax.measure.quantity.Force;
 import javax.measure.quantity.Frequency;
 import javax.measure.quantity.Illuminance;
-import javax.measure.quantity.Information;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.LuminousFlux;
 import javax.measure.quantity.LuminousIntensity;
@@ -192,13 +191,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      */
     public static final AlternateUnit<SolidAngle> STERADIAN
             = addUnit(new AlternateUnit<SolidAngle>(AbstractUnit.ONE, "sr"), SolidAngle.class);
-
-    /**
-     * The SI unit for binary information (standard name <code>bit</code>).
-     * @deprecated see https://java.net/jira/browse/UNITSOFMEASUREMENT-100
-     */
-    public static final AlternateUnit<Information> BIT
-            = addUnit(new AlternateUnit<Information>(AbstractUnit.ONE, "bit"), Information.class);
 
     /**
      * The SI unit for frequency (standard name <code>Hz</code>).

@@ -110,7 +110,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @param right the right unit operand.
      * @return <code>left * right</code>
      */
-    public static Unit<?> getProductInstance(AbstractUnit<?> left, AbstractUnit<?> right) {
+    public static Unit<?> getProductInstance(Unit<?> left, Unit<?> right) {
         Element[] leftElems;
         if (left instanceof ProductUnit<?>) {
             leftElems = ((ProductUnit<?>) left).elements;
@@ -217,7 +217,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      * @throws IndexOutOfBoundsException if index is out of range
      *         <code>(index &lt; 0 || index &gt;= getUnitCount())</code>.
      */
-    public AbstractUnit<?> getUnit(int index) {
+    public Unit<?> getUnit(int index) {
         return elements[index].getUnit();
     }
 
@@ -246,8 +246,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
 
     @Override
-    public Map<AbstractUnit<?>, Integer> getProductUnits() {
-        final Map<AbstractUnit<?>, Integer> units = new HashMap<>(); // Diamond (Java7+)
+    public Map<Unit<?>, Integer> getProductUnits() {
+        final Map<Unit<?>, Integer> units = new HashMap<>(); // Diamond (Java7+)
         for (int i = 0; i < getUnitCount(); i++) {
             units.put(getUnit(i), getUnitPow(i));
         }
@@ -305,18 +305,20 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     public UnitConverter getSystemConverter() {
         UnitConverter converter = AbstractConverter.IDENTITY;
         for (Element e : elements) {
-            UnitConverter cvtr = e.unit.getSystemConverter();
-            if (!(cvtr.isLinear()))
-                throw new UnsupportedOperationException(e.unit + " is non-linear, cannot convert");
-            if (e.root != 1)
-                throw new UnsupportedOperationException(e.unit + " holds a base unit with fractional exponent");
-            int pow = e.pow;
-            if (pow < 0) { // Negative power.
-                pow = -pow;
-                cvtr = cvtr.inverse();
-            }
-            for (int j = 0; j < pow; j++) {
-                converter = converter.concatenate(cvtr);
+            if (e.unit instanceof AbstractUnit) {
+	        	UnitConverter cvtr = ((AbstractUnit)e.unit).getSystemConverter();
+	            if (!(cvtr.isLinear()))
+	                throw new UnsupportedOperationException(e.unit + " is non-linear, cannot convert");
+	            if (e.root != 1)
+	                throw new UnsupportedOperationException(e.unit + " holds a base unit with fractional exponent");
+	            int pow = e.pow;
+	            if (pow < 0) { // Negative power.
+	                pow = -pow;
+	                cvtr = cvtr.inverse();
+	            }
+	            for (int j = 0; j < pow; j++) {
+	                converter = converter.concatenate(cvtr);
+	            }
             }
         }
         return converter;
@@ -326,7 +328,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     public Dimension getDimension() {
     	Dimension dimension = QuantityDimension.NONE;
         for (int i = 0; i < this.getUnitCount(); i++) {
-            AbstractUnit<?> unit = this.getUnit(i);
+            Unit<?> unit = this.getUnit(i);
             if (this.elements != null && unit.getDimension() != null) {
             	Dimension d = unit.getDimension().pow(this.getUnitPow(i)).root(this.getUnitRoot(i));
             	dimension = dimension.multiply(d);
@@ -349,7 +351,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         Element[] result = new Element[leftElems.length + rightElems.length];
         int resultIndex = 0;
         for (Element leftElem : leftElems) {
-            AbstractUnit<?> unit = leftElem.unit;
+            Unit<?> unit = leftElem.unit;
             int p1 = leftElem.pow;
             int r1 = leftElem.root;
             int p2 = 0;
@@ -371,7 +373,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
         // Appends remaining right elements not merged.
         for (Element rightElem : rightElems) {
-            AbstractUnit<?> unit = rightElem.unit;
+            Unit<?> unit = rightElem.unit;
             boolean hasBeenMerged = false;
             for (Element leftElem : leftElems) {
                 if (unit.equals(leftElem.unit)) {
@@ -423,7 +425,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 		/**
          * Holds the single unit.
          */
-        private final AbstractUnit<?> unit;
+        private final Unit<?> unit;
 
         /**
          * Holds the power exponent.
@@ -442,7 +444,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
          * @param pow the power exponent.
          * @param root the root exponent.
          */
-        private Element(AbstractUnit<?> unit, int pow, int root) {
+        private Element(Unit<?> unit, int pow, int root) {
             this.unit = unit;
             this.pow = pow;
             this.root = root;
@@ -453,7 +455,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
          *
          * @return the single unit.
          */
-        public AbstractUnit<?> getUnit() {
+        public Unit<?> getUnit() {
             return unit;
         }
 

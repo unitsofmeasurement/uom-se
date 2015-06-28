@@ -401,7 +401,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	public final Unit<?> multiply(Unit<?> that) {
 		if (that instanceof AbstractUnit)
 			return multiply((AbstractUnit<?>) that);
-		return that.multiply(this); // Commutatif.
+		//return that.multiply(this); // Commutatif.
+		return ProductUnit.getProductInstance(this, that);
 	}
 
 	/**

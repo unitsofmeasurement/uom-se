@@ -290,20 +290,6 @@ public final class US extends AbstractSystemOfUnits {
 	 */
 	public static final Unit<Area> ACRE = addUnit(SQUARE_FOOT.multiply(43560));
 	
-	// ///////////////
-	// Data Amount //
-	// ///////////////
-	/**
-	 * A unit of data amount equal to <code>8 {@link SI#BIT}</code> (BinarY
-	 * TErm, standard name <code>byte</code>).
-	 */
-	public static final Unit<Information> BYTE = addUnit(BIT.multiply(8));
-
-	/**
-	 * Equivalent {@link #BYTE}
-	 */
-	public static final Unit<Information> OCTET = BYTE;
-
 	// //////////
 	// Energy //
 	// //////////
