@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, $Date: 2014-09-06 $
+ * @version 0.4, $Date: 2015-07-01 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
@@ -56,6 +56,25 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 	protected final Map<Class<? extends Quantity>, AbstractUnit>
             quantityToUnit = new HashMap<>(); // Diamond (Java 7+)
 
+    /**
+	 * Adds a new named unit to the collection.
+	 * 
+	 * @param unit the unit being added.
+	 * @param name the name of the unit.
+	 * @return <code>unit</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	protected <U extends Unit<?>> U addUnit(U unit, String name) {
+		if (name != null && unit instanceof AbstractUnit) {
+			AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+			aUnit.setName(name);
+			units.add(aUnit);
+			return (U) aUnit;
+		}
+		units.add(unit);
+		return unit;
+	}
+    
     /**
      * The natural logarithm.
      **/
