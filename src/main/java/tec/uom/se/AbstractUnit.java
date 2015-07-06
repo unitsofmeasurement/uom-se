@@ -29,7 +29,7 @@
  */
 package tec.uom.se;
 
-import tec.uom.se.format.SimpleUnitFormat;
+import tec.uom.se.format.EBNFUnitFormat;
 import tec.uom.se.format.LocalUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
@@ -191,7 +191,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	public static final Unit<?> parse(CharSequence charSequence) {
 		//return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
-		return SimpleUnitFormat.getInstance().parse(charSequence);
+		return EBNFUnitFormat.getInstance().parse(charSequence);
 	}
 
 	/**

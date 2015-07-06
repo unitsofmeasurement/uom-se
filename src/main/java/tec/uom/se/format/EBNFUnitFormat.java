@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -166,9 +166,9 @@ import tec.uom.se.unit.TransformedUnit;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2015-02-08 $
+ * @version 0.6, $Date: 2015-07-06 $
  */
-public class SimpleUnitFormat extends AbstractUnitFormat {
+public class EBNFUnitFormat extends AbstractUnitFormat {
 
 	// ////////////////////////////////////////////////////
 	// Class variables //
@@ -189,7 +189,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Default locale instance. If the default locale is changed after the class
 	 * is initialized, this instance will no longer be used.
 	 */
-	private static final SimpleUnitFormat DEFAULT_INSTANCE = new SimpleUnitFormat();
+	private static final EBNFUnitFormat DEFAULT_INSTANCE = new EBNFUnitFormat();
 			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
 				//	Locale.getDefault()), Locale.getDefault()));
 
@@ -228,7 +228,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Returns the instance for the current default locale (non-ascii characters
 	 * are allowed)
 	 */
-	public static SimpleUnitFormat getInstance() {
+	public static EBNFUnitFormat getInstance() {
 		return DEFAULT_INSTANCE;
 	}
 
@@ -243,8 +243,8 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 //	}
 
 	/** Returns an instance for the given symbol map. */
-	protected static SimpleUnitFormat getInstance(SymbolMap symbols, Locale locale) {
-		return new SimpleUnitFormat(symbols, locale);
+	protected static EBNFUnitFormat getInstance(SymbolMap symbols, Locale locale) {
+		return new EBNFUnitFormat(symbols, locale);
 	}
 
 	// //////////////////////
@@ -263,7 +263,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Base constructor.
 	 * 
 	 */
-	public SimpleUnitFormat() {
+	public EBNFUnitFormat() {
 		//this(SymbolMap.of(toMap(L10nResources.getBundle(
 				//BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 		this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault())), 
@@ -276,7 +276,7 @@ public class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @param symbols
 	 *            the symbol mapping.
 	 */
-	private SimpleUnitFormat(SymbolMap symbols, Locale loc) {
+	private EBNFUnitFormat(SymbolMap symbols, Locale loc) {
 		symbolMap = symbols;
 	}
 
