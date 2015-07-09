@@ -34,7 +34,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-	    <!--  use parent jsr.version>0.8-RC2</jsr.version -->
+		<!-- use parent jsr.version>0.8-RC2</jsr.version -->
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
@@ -50,6 +50,10 @@
 			<artifactId>unit-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
 			<scope>test</scope>
@@ -63,6 +67,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>javax.annotation-api</artifactId>
+				<version>1.2</version>
+			</dependency>
 			<dependency>
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest-all</artifactId>
@@ -110,14 +119,14 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- ======================================================= -->
-            <!-- Source Attachment -->
-            <!-- ======================================================= -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
+			<!-- Source Attachment -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
 
 			<!-- ======================================================= -->
 			<!-- JAR packaging -->
@@ -265,25 +274,25 @@
 		</plugins>
 	</build>
 
-    <!-- Additional repositories -->
-    <!-- Helps to resolve Parent POM -->
-    <repositories>  
-        <repository>
-            <id>geotoolkit</id>
-            <name>Geotoolkit.org project</name>
-            <url>http://maven.geotoolkit.org</url>
-        </repository>
-        <repository>
-            <id>jcenter</id>
-            <name>JCenter</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-        <repository>
-            <id>unitsofmeasurement-github-repo</id>
-            <name>Local repository for Unit-API or other Units of Measurement snapshots</name>
-            <url>https://github.com/unitsofmeasurement/repository/raw/master</url>
-        </repository>
-    </repositories>
+	<!-- Additional repositories -->
+	<!-- Helps to resolve Parent POM -->
+	<repositories>
+		<repository>
+			<id>geotoolkit</id>
+			<name>Geotoolkit.org project</name>
+			<url>http://maven.geotoolkit.org</url>
+		</repository>
+		<repository>
+			<id>jcenter</id>
+			<name>JCenter</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<id>unitsofmeasurement-github-repo</id>
+			<name>Local repository for Unit-API or other Units of Measurement snapshots</name>
+			<url>https://github.com/unitsofmeasurement/repository/raw/master</url>
+		</repository>
+	</repositories>
 
 	<profiles>
 		<profile>
