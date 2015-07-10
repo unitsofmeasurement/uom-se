@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.format.internal.l10n;
+package tec.uom.se.internal.format.l10n;
 
 import java.util.Enumeration;
 import java.util.HashMap;

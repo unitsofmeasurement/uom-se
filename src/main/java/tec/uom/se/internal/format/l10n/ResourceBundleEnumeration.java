@@ -1,4 +1,4 @@
-package tec.uom.se.format.internal.l10n;
+package tec.uom.se.internal.format.l10n;
 
 import java.io.Serializable;
 import java.util.Enumeration;

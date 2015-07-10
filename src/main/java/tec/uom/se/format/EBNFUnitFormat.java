@@ -45,14 +45,14 @@ import javax.measure.format.ParserException;
 import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractConverter.Pair;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.internal.SimpleFormatParser;
-import tec.uom.se.format.internal.TokenException;
-import tec.uom.se.format.internal.TokenMgrError;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.ExpConverter;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
+import tec.uom.se.internal.format.SimpleFormatParser;
+import tec.uom.se.internal.format.TokenException;
+import tec.uom.se.internal.format.TokenMgrError;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.MetricPrefix;
@@ -182,7 +182,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	/**
 	 * Name of the resource bundle
 	 */
-	private static final String BUNDLE_NAME = "tec.uom.se.format.internal.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "tec.uom.se.internal.format.messages"; //$NON-NLS-1$
 	//= SimpleFormatParser.class.getPackage()			.getName() + ".messages"; 
 
 	/**
