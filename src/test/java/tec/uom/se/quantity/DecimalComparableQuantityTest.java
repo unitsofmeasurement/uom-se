@@ -31,6 +31,7 @@ package tec.uom.se.quantity;
 
 import java.math.BigDecimal;
 
+import javax.measure.Quantity;
 import javax.measure.quantity.Area;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
@@ -82,6 +83,13 @@ public class DecimalComparableQuantityTest {
         ComparableQuantity<Speed> speed = metre.multiply(metre, Speed.class);
     }
 
+    @Test
+    public void multiplyOperationsException2Test() {
+        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
+        @SuppressWarnings("unused")
+        Quantity<Area> speed = metre.multiply(metre).asType(Area.class);
+    }
+    
     @Test
     public void divideTest() {
         ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);

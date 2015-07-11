@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -92,19 +92,25 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
      * @throws IllegalArgumentException if the specified parent unit is not an
      *         {@link AbstractUnit#isSystemUnit() system unit}
      */
-    public TransformedUnit(AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
+    public TransformedUnit(Unit<Q> parentUnit, UnitConverter unitConverter) {
         this(parentUnit.getSymbol(), parentUnit, unitConverter);
     }
 
-    public TransformedUnit(String symbol, AbstractUnit<Q> parentUnit, UnitConverter unitConverter) {
-        if (!parentUnit.isSystemUnit()) {
-            throw new IllegalArgumentException("The parent unit: " + parentUnit
-                    + " is not a system unit");
+    public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {
+        if(parentUnit instanceof AbstractUnit) {
+	    	final AbstractUnit<Q> abParent = (AbstractUnit<Q>) parentUnit;
+        	if (!abParent.isSystemUnit()) {
+	            throw new IllegalArgumentException("The parent unit: " + abParent
+	                    + " is not a system unit");
+	        }
+	        this.parentUnit = abParent;
+	        this.converter = unitConverter;
+	//        this.symbol = symbol; //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
+        } else {
+        	throw new IllegalArgumentException("The parent unit: " + parentUnit + " is not an abstract unit.");
         }
-        this.parentUnit = parentUnit;
-        this.converter = unitConverter;
-//        this.symbol = symbol; //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
     }
+        
     @Override
     public Dimension getDimension() {
         return parentUnit.getDimension();
