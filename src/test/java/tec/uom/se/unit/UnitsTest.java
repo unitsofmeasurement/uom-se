@@ -274,22 +274,6 @@ public class UnitsTest {
     }
 
 	@Test
-	public void testAnnotate() {
-	}
-
-	@Test
-	public void testGetAnnotation() {
-	}
-
-	@Test
-	public void testGetUnannotatedUnit() {
-	}
-
-	@Test
-	public void testIsSystemUnit() {
-	}
-
-	@Test
 	public void testToString() {
 		assertEquals("kg", MetricPrefix.KILO(Units.GRAM).toString());
 	}
@@ -324,6 +308,24 @@ public class UnitsTest {
 //		assertEquals("kg", US.POUND.getSymbol()); //"lb"
 	}
 
+	// TODO below are empty
+	
+	@Test
+	public void testAnnotate() {
+	}
+
+	@Test
+	public void testGetAnnotation() {
+	}
+
+	@Test
+	public void testGetUnannotatedUnit() {
+	}
+
+	@Test
+	public void testIsSystemUnit() {
+	}
+	
 	@Test
 	public void testGetSystemUnit() {
 	}
