@@ -28,10 +28,83 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * 
- */
-/**
- * @author Werner
+ * This package provides supports for physics units, in conformity with the
+ * <a href="http://www.unitsofmeasurement.org/">Units of Measurement API</a>.
  *
+ *
+ * <h3>Usage:</h3>
+ * <code>
+ *
+ * import javax.measure.quantity.*; // Holds quantity types.
+ * 
+ * import tec.uom.se.AbstractUnit;
+ * import tec.uom.se.function.AbstractConverter;
+ * 
+ * import static tec.uom.se.util.SI.*; // Standard CommonUnits.
+ * import static tec.uom.se.util.SIPrefix.*;
+ * import static tec.uom.se.util.UCUM.*; // Standard & Non-Standard CommonUnits.
+ *
+ * public class Main {
+ *     public void main(String[] args) {
+ *
+ *         // Conversion between units (explicit way).
+ *         AbstractUnit<Length> sourceUnit = KILO(METRE);
+ *         AbstractUnit<Length> targetUnit = MILE;
+ *         PhysicsConverter uc = sourceUnit.getConverterTo(targetUnit);
+ *         System.out.println(uc.convert(10)); // Converts 10 km to miles.
+ *
+ *         // Same conversion than above, packed in one line.
+ *         System.out.println(KILO(METRE).getConverterTo(MILE).convert(10));
+ *
+ *         // Retrieval of the SI unit (identifies the measurement type).
+ *         System.out.println(REVOLUTION.divide(MINUTE).toSI());
+ *
+ *         // Dimension checking (allows/disallows conversions)
+ *         System.out.println(ELECTRON_VOLT.isCompatible(WATT.times(HOUR)));
+ *
+ *         // Retrieval of the unit dimension (depends upon the current model).
+ *         System.out.println(ELECTRON_VOLT.getDimension());
+ *     }
+ * }
+ *
+ * > 6.2137119223733395
+ * > 6.2137119223733395
+ * > rad/s
+ * > true
+ * > [L]²·[M]/[T]²
+ * </code>
+ *
+ * <h3>Unit Parameterization</h3>
+ *
+ *     CommonUnits are parameterized enforce compile-time checks of units/measures consistency, for example:[code]
+ *
+ *     AbstractUnit<Time> MINUTE = SECOND.times(60); // Ok.
+ *     AbstractUnit<Time> MINUTE = METRE.times(60); // Compile error.
+ *
+ *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(PASCAL); // Ok.
+ *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(NEWTON); // Compile error.
+ *
+ *     Quantity<Time> duration = ComparableQuantity.of(2, MINUTE); // Ok.
+ *     Quantity<Time> duration = ComparableQuantity.of(2, CELSIUS); // Compile error.
+ *
+ *     long milliseconds = duration.longValue(MILLI(SECOND)); // Ok.
+ *     long milliseconds = duration.longValue(POUND); // Compile error.
+ *     [/code]
+ *
+ *     Runtime checks of dimension consistency can be done for more complex cases.
+ *
+ *     [code]
+ *     AbstractUnit<Area> SQUARE_FOOT = FOOT.times(FOOT).asType(Area.class); // Ok.
+ *     AbstractUnit<Area> SQUARE_FOOT = FOOT.times(KELVIN).asType(Area.class); // Runtime error.
+ *
+ *     AbstractUnit<Temperature> KELVIN = AbstractUnit.of("K").asType(Temperature.class); // Ok.
+ *     AbstractUnit<Temperature> KELVIN = AbstractUnit.of("kg").asType(Temperature.class); // Runtime error.
+ *     [/code]
+ *     </p>
+ *
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.2
  */
 package tec.uom.se.unit;
+

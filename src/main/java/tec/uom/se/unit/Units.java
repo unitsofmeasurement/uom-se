@@ -78,7 +78,7 @@ import javax.measure.spi.SystemOfUnits;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.1, July 11, 2015
+ * @version 0.5.2, July 12, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -91,6 +91,11 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 		return "Units";
 	}
 
+	/**
+	 * Holds the dimensionless unit <code>ONE</code>.
+	 */
+	public static final Unit<Dimensionless> ONE
+			= addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
 	
     ////////////////
     // BASE UNITS //
@@ -103,6 +108,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * cross-section, and placed 1 meter apart in vacuum, would produce between
      * these conductors a force equal to 2 * 10-7 newton per meter of length.
      * It is named after the French physicist Andre Ampere (1775-1836).
+     * 
+     * @implNote SI Base Unit
      */
     public static final BaseUnit<ElectricCurrent> AMPERE
             = addUnit(new BaseUnit<ElectricCurrent>("A", QuantityDimension.ELECTRIC_CURRENT), ElectricCurrent.class);
@@ -115,6 +122,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * direction of 1/683 watt per steradian
      * @see <a href="http://en.wikipedia.org/wiki/Candela">
      *      Wikipedia: Candela</a>
+     *
+     * @implNote SI Base Unit
      */
     public static final BaseUnit<LuminousIntensity> CANDELA
             = addUnit(new BaseUnit<LuminousIntensity>("cd", QuantityDimension.LUMINOUS_INTENSITY), LuminousIntensity.class);
@@ -124,6 +133,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The kelvin is the 1/273.16th of the thermodynamic temperature of the
      * triple point of water. It is named after the Scottish mathematician and
      * physicist William Thomson 1st Lord Kelvin (1824-1907)
+     * 
+     * @implNote SI Base Unit 
      */
     public static final BaseUnit<Temperature> KELVIN
             = addUnit(new BaseUnit<Temperature>("K", QuantityDimension.TEMPERATURE), Temperature.class);
@@ -134,6 +145,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The kilogram is equal to the mass of an international prototype in the
      * form of a platinum-iridium cylinder kept at Sevres in France.
      * @see   #GRAM
+     *
+     * @implNote SI Base Unit
      */
     public static final BaseUnit<Mass> KILOGRAM
             = addUnit(new BaseUnit<Mass>("kg", QuantityDimension.MASS), Mass.class);
@@ -142,6 +155,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The SI base unit for length quantities (standard name <code>m</code>).
      * One metre was redefined in 1983 as the distance traveled by light in
      * a vacuum in 1/299,792,458 of a second.
+     * 
+     * @implNote SI Base Unit
      */
     public static final Unit<Length> METRE
             = addUnit(new BaseUnit<Length>("m", QuantityDimension.LENGTH), Length.class);
@@ -150,6 +165,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The SI base unit for amount of substance quantities (standard name <code>mol</code>).
      * The mole is the amount of substance of a system which contains as many
      * elementary entities as there are atoms in 0.012 kilogram of carbon 12.
+     * 
+     * @implNote SI Base Unit
      */
     public static final Unit<AmountOfSubstance> MOLE
             = addUnit(new BaseUnit<AmountOfSubstance>("mol", QuantityDimension.AMOUNT_OF_SUBSTANCE), AmountOfSubstance.class);
@@ -159,6 +176,8 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * It is defined as the duration of 9,192,631,770 cycles of radiation
      * corresponding to the transition between two hyperfine levels of
      * the ground state of cesium (1967 Standard).
+     * 
+     * @implNote SI Base Unit
      */
     public static final Unit<Time> SECOND
             = addUnit(new BaseUnit<Time>("s", QuantityDimension.TIME), Time.class);
@@ -181,7 +200,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * length of the arc between them is equal to the radius.
      */
     public static final AlternateUnit<Angle> RADIAN
-            = addUnit(new AlternateUnit<Angle>(AbstractUnit.ONE, "rad"), Angle.class);
+            = addUnit(new AlternateUnit<Angle>(ONE, "rad"), Angle.class);
 
     /**
      * The SI unit for solid angle quantities (standard name <code>sr</code>).
@@ -190,7 +209,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The total solid angle of a sphere is 4*Pi steradians.
      */
     public static final AlternateUnit<SolidAngle> STERADIAN
-            = addUnit(new AlternateUnit<SolidAngle>(AbstractUnit.ONE, "sr"), SolidAngle.class);
+            = addUnit(new AlternateUnit<SolidAngle>(ONE, "sr"), SolidAngle.class);
 
     /**
      * The SI unit for frequency (standard name <code>Hz</code>).
@@ -199,7 +218,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * first to produce radio waves artificially.
      */
     public static final AlternateUnit<Frequency> HERTZ
-            = addUnit(new AlternateUnit<Frequency>(AbstractUnit.ONE.divide(SECOND), "Hz"), Frequency.class);
+            = addUnit(new AlternateUnit<Frequency>(ONE.divide(SECOND), "Hz"), Frequency.class);
 
     /**
      * The SI unit for force (standard name <code>N</code>).
@@ -360,7 +379,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      */
     public static final AlternateUnit<Radioactivity> BECQUEREL
             = addUnit(new AlternateUnit<Radioactivity>(
-            AbstractUnit.ONE.divide(SECOND), "Bq"), Radioactivity.class);
+            ONE.divide(SECOND), "Bq"), Radioactivity.class);
 
     /**
      * The SI unit for absorbed dose, specific energy (imparted), kerma
@@ -437,7 +456,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * A dimensionless unit accepted for use with SI units (standard name <code>%</code>).
      */
     public static final TransformedUnit<Dimensionless> PERCENT
-        = new TransformedUnit<Dimensionless>(AbstractUnit.ONE, new RationalConverter(1, 100));
+        = new TransformedUnit<Dimensionless>(ONE, new RationalConverter(1, 100));
 
 	//////////
 	// Time //
@@ -449,13 +468,13 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         = new TransformedUnit<Time>("min", SECOND, new RationalConverter(60, 1));
 
     /**
-     * A time unit accepted for use with SI units (standard name <code>h/code>).
+     * A time unit accepted for use with SI units (standard name <code>h</code>).
      */
     public static final Unit<Time> HOUR
         = new TransformedUnit<Time>("h", SECOND, new RationalConverter(60 * 60, 1));
 
     /**
-     * A time unit accepted for use with SI units (standard name <code>d/code>).
+     * A time unit accepted for use with SI units (standard name <code>d</code>).
      */
     public static final Unit<Time> DAY
         = new TransformedUnit<Time>("d", SECOND, new RationalConverter(24 * 60 * 60, 1));
@@ -467,18 +486,18 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
     
     /**
-     * A time unit accepted for use with SI units (standard name <code>y/code>).
+     * A time unit accepted for use with SI units (standard name <code>y</code>).
      */
 	public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
     
     /**
-     * An angle unit accepted for use with SI units (standard name <code>deg/code>).
+     * An angle unit accepted for use with SI units (standard name <code>deg</code>).
      */
     public static final Unit<Angle> DEGREE_ANGLE
         = new TransformedUnit<Angle>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180)));
 
     /**
-     * An angle unit accepted for use with SI units (standard name <code>'/code>).
+     * An angle unit accepted for use with SI units (standard name <code>'</code>).
      */
     public static final Unit<Angle> MINUTE_ANGLE
         = new TransformedUnit<Angle>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180 * 60)));

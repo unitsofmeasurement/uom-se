@@ -57,6 +57,7 @@ import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
+import tec.uom.se.unit.Units;
 
 /**
  * <p>
@@ -316,11 +317,11 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		int start = index; //cursor != null ? cursor.getIndex() : 0;
 		int end = csq.length();
 		if (end <= start) {
-			return AbstractUnit.ONE;
+			return Units.ONE;
 		}
 		String source = csq.subSequence(start, end).toString().trim();
 		if (source.length() == 0) {
-			return AbstractUnit.ONE;
+			return Units.ONE;
 		}
 		try {
 			SimpleFormatParser parser = new SimpleFormatParser(symbolMap, new StringReader(
@@ -456,7 +457,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			}
 
 			unitPrecedence = formatInternal(parentUnit, temp);
-			printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+			printSeparator = !parentUnit.equals(Units.ONE);
 			int result = formatConverter(converter, printSeparator,
 					unitPrecedence, temp);
 			buffer.append(temp);

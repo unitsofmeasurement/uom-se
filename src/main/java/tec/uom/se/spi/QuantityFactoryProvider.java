@@ -35,6 +35,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
 
+import tec.uom.se.quantity.DefaultQuantityFactory;
+
 /**
  * Provider of Quantities
  * @author otaviojava
@@ -43,7 +45,7 @@ import javax.measure.spi.QuantityFactory;
  */
 @SuppressWarnings("rawtypes")
 public final class QuantityFactoryProvider {
-// TODO could help SPI, but it competes with Quantities
+// TODO could help SPI, align with ServiceProvider
     private QuantityFactoryProvider() {}
 
     private static final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();

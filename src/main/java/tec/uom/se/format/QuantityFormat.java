@@ -70,13 +70,13 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	/**
 	 * Holds the default format instance.
 	 */
-	private static final NumberSpaceUnitFormat DEFAULT = new NumberSpaceUnitFormat(
+	private static final NumberSpaceQuantityFormat DEFAULT = new NumberSpaceQuantityFormat(
 			NumberFormat.getInstance(), LocalUnitFormat.getInstance());
 
 	/**
 	 * Holds the standard format instance.
 	 */
-	private static final StandardFormat STANDARD = new StandardFormat();
+	private static final DefaultQuantityFormat STANDARD = new DefaultQuantityFormat();
 
 	/**
 	 * Returns the measure format for the default locale. The default format
@@ -99,7 +99,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
 	 */
 	public static QuantityFormat getInstance(NumberFormat numberFormat,
 			UnitFormat unitFormat) {
-		return new NumberSpaceUnitFormat(numberFormat, unitFormat);
+		return new NumberSpaceQuantityFormat(numberFormat, unitFormat);
 	}
 
 	/**

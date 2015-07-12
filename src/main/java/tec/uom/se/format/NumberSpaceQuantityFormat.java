@@ -12,15 +12,16 @@ import javax.measure.format.UnitFormat;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.ComparableQuantity;
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.unit.Units;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-class NumberSpaceUnitFormat extends QuantityFormat {
+class NumberSpaceQuantityFormat extends QuantityFormat {
 
     private final NumberFormat numberFormat;
 
     private final UnitFormat unitFormat;
 
-    NumberSpaceUnitFormat(NumberFormat numberFormat, UnitFormat unitFormat) {
+    NumberSpaceQuantityFormat(NumberFormat numberFormat, UnitFormat unitFormat) {
         this.numberFormat = numberFormat;
         this.unitFormat = unitFormat;
     }
@@ -29,7 +30,7 @@ class NumberSpaceUnitFormat extends QuantityFormat {
     public Appendable format(Quantity<?> measure, Appendable dest)
             throws IOException {
             dest.append(numberFormat.format(measure.getValue()));
-            if (measure.getUnit().equals(AbstractUnit.ONE))
+            if (measure.getUnit().equals(Units.ONE))
                 return dest;
             dest.append(' ');
             return unitFormat.format(measure.getUnit(), dest);

@@ -27,15 +27,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.quantity;
 
 import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.spi.QuantityFactory;
-
-import tec.uom.se.quantity.Quantities;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
@@ -56,7 +54,7 @@ public class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityF
 
     private Class<Q> unit;
 
-    DefaultQuantityFactory(Class<Q> unit) {
+    public DefaultQuantityFactory(Class<Q> unit) {
         this.unit = unit;
 
     }

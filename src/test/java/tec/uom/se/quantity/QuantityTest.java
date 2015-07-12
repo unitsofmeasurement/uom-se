@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -33,23 +33,22 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import javax.measure.Quantity;
-import javax.measure.quantity.Length;
+import javax.measure.quantity.Time;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import tec.uom.se.unit.SI;
-import tec.uom.se.unit.US;
+import tec.uom.se.unit.Units;
 
 public class QuantityTest {
 
     @Test
     public void toTest() {
-        Quantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, SI.METRE);
-        Quantity<Length> foot =  metre.to(US.FOOT);
-        BigDecimal value = (BigDecimal) foot.getValue();
+        Quantity<Time> minute = Quantities.getQuantity(BigDecimal.ONE, Units.YEAR);
+        Quantity<Time> second =  minute.to(Units.SECOND);
+        BigDecimal value = (BigDecimal) second.getValue();
         value.setScale(4, RoundingMode.HALF_EVEN);
-        BigDecimal expected = BigDecimal.valueOf(32.8084);
-        Assert.assertEquals(expected, value.setScale(4, RoundingMode.HALF_EVEN));
+        BigDecimal expected = BigDecimal.valueOf(31557816);
+        Assert.assertEquals(expected.setScale(4, RoundingMode.HALF_EVEN), value.setScale(4, RoundingMode.HALF_EVEN));
     }
 }

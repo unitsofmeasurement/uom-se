@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -45,6 +45,7 @@ import javax.measure.quantity.*;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.AbstractUnit;
+import tec.uom.se.unit.Units;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
@@ -58,7 +59,7 @@ import tec.uom.se.AbstractUnit;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.3.1, $Date: 2015-05-20 $
+ * @version 0.3.2, $Date: 2015-07-12 $
  */
 public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implements BiFactory<Number, Unit<Q>, Q> {
 	
@@ -182,7 +183,7 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
         @SuppressWarnings("rawtypes")
 		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
         static {
-            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
+            CLASS_TO_METRIC_UNIT.put(Dimensionless.class, Units.ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
             CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
             CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);

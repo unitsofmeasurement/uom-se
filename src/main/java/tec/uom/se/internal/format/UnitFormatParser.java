@@ -38,6 +38,7 @@ import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.unit.MetricPrefix;
+import tec.uom.se.unit.Units;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class UnitFormatParser {
@@ -75,7 +76,7 @@ public final class UnitFormatParser {
     }
 
     final public Unit AddExpr() throws TokenException {
-        Unit result = AbstractUnit.ONE;
+        Unit result = Units.ONE;
         Number n1 = null;
         Token sign1 = null;
         Number n2 = null;
@@ -115,8 +116,8 @@ public final class UnitFormatParser {
 
 
     final public Unit MulExpr() throws TokenException {
-        Unit result = AbstractUnit.ONE;
-        Unit temp = AbstractUnit.ONE;
+        Unit result = Units.ONE;
+        Unit temp = Units.ONE;
         result = ExponentExpr();
         label_2:
         while (true) {
@@ -164,7 +165,7 @@ public final class UnitFormatParser {
     }
 
     final public Unit ExponentExpr() throws TokenException {
-        Unit result = AbstractUnit.ONE;
+        Unit result = Units.ONE;
         Exponent exponent = null;
         Token token = null;
         if (jj_2_2(2147483647)) {
@@ -259,7 +260,7 @@ public final class UnitFormatParser {
     }
 
     final public Unit AtomicExpr() throws TokenException {
-        Unit result = AbstractUnit.ONE;
+        Unit result = Units.ONE;
         Number n = null;
         Token token = null;
         switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {

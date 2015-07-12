@@ -74,7 +74,7 @@ public class UnitsTest {
     @Before
     public void setUp() throws Exception {
 //      super.setUp();
-        one = AbstractUnit.ONE;
+        one = Units.ONE;
     }
 
     /* (non-Javadoc)
@@ -294,7 +294,6 @@ public class UnitsTest {
 //		assertEquals("kg", US.POUND.getSymbol()); //"lb"
 		assertNull(Units.GRAM.getSymbol());
 //		assertNull(UCUM.OUNCE.getSymbol());
-		assertNull(US.POUND.getSymbol());
 	}
 
 	@Test

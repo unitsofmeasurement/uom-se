@@ -43,6 +43,7 @@ import tec.uom.se.function.NaturalOrder;
 import tec.uom.se.function.UnitSupplier;
 import tec.uom.se.function.ValueSupplier;
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.unit.Units;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
@@ -109,12 +110,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * Holds a dimensionless measure of none (exact).
 	 */
 	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(
-			0, AbstractUnit.ONE);
+			0, Units.ONE);
 
 	/**
 	 * Holds a dimensionless measure of one (exact).
 	 */
-	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, AbstractUnit.ONE);
+	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, Units.ONE);
 
 	/**
      * constructor.

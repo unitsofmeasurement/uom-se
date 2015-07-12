@@ -23,11 +23,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
+package tec.uom.se.quantity;
 
 import java.util.Objects;
 
 import javax.measure.Quantity;
+
+import tec.uom.se.util.Range;
 
 /**
  * A Quantity Range is a pair of {@link Quantity} items that represent a range

@@ -60,7 +60,7 @@ import java.util.Objects;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, June 24, 2015
+ * @version 0.6.2, July 12, 2015
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
@@ -127,7 +127,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     }
     
     @Override
-    protected AbstractUnit<Q> toSystemUnit() {
+    public AbstractUnit<Q> toSystemUnit() {
         return parentUnit.getSystemUnit();
     }
 

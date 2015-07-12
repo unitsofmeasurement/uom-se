@@ -11,12 +11,13 @@ import javax.measure.format.ParserException;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.ComparableQuantity;
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.unit.Units;
 
 /**
  * Holds standard implementation
  */
 @SuppressWarnings("rawtypes")
-class StandardFormat extends QuantityFormat {
+class DefaultQuantityFormat extends QuantityFormat {
 
     /**
      *
@@ -29,7 +30,7 @@ class StandardFormat extends QuantityFormat {
         Unit unit = measure.getUnit();
 
         dest.append(measure.getValue().toString());
-        if (measure.getUnit().equals(AbstractUnit.ONE))
+        if (measure.getUnit().equals(Units.ONE))
             return dest;
         dest.append(' ');
         return LocalUnitFormat.getInstance().format(unit, dest);

@@ -45,6 +45,7 @@ import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
+import tec.uom.se.unit.Units;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -216,11 +217,11 @@ public class LocalUnitFormat extends AbstractUnitFormat {
         int start = cursor.getIndex();
         int end = csq.length();
         if (end <= start) {
-            return AbstractUnit.ONE;
+            return Units.ONE;
         }
         String source = csq.subSequence(start, end).toString().trim();
         if (source.length() == 0) {
-            return AbstractUnit.ONE;
+            return Units.ONE;
         }
         try {
             UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(source));
@@ -321,7 +322,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
                     converter = converter.concatenate(MetricPrefix.KILO.getConverter());
                 }
                 unitPrecedence = formatInternal(parentUnit, temp);
-                printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+                printSeparator = !parentUnit.equals(Units.ONE);
             }
             int result = formatConverter(converter, printSeparator, unitPrecedence, temp);
             buffer.append(temp);
@@ -422,7 +423,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
 			}
 
 			unitPrecedence = formatInternal(parentUnit, temp);
-			printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+			printSeparator = !parentUnit.equals(Units.ONE);
 			int result = formatConverter(converter, printSeparator,
 					unitPrecedence, temp);
 			buffer.append(temp);

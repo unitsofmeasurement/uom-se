@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -28,8 +28,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /**
- * This package provides supports for physics units, in conformity with the
- * <a href="http://www.unitsofmeasurement.org/">Units of Measurement API</a>.
+ * This package provides a Java SE 8 implementation of the
+ * <a href="http://unitsofmeasurement.github.io/">Units of Measurement API</a>.
  *
  *
  * <h3>Usage:</h3>

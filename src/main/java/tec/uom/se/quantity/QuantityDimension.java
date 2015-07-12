@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -29,9 +29,8 @@
  */
 package tec.uom.se.quantity;
 
-import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
@@ -60,7 +59,7 @@ import java.util.logging.Logger;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, $Date: 2015-04-26 $
+ * @version 0.5.3, $Date: 2015-07-12 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
 	private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -73,7 +72,7 @@ public final class QuantityDimension implements Dimension, Serializable {
 	/**
      * Holds dimensionless.
      */
-    public static final Dimension NONE = new QuantityDimension(AbstractUnit.ONE);
+    public static final Dimension NONE = new QuantityDimension(Units.ONE);
 
     /**
      * Holds length dimension (L).
@@ -125,7 +124,7 @@ public final class QuantityDimension implements Dimension, Serializable {
      */
     public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
         // TODO: Track OSGi services and aggregate results (register custom types)
-        Unit<Q> siUnit = SI.getInstance().getUnit(quantityType);
+        Unit<Q> siUnit = Units.getInstance().getUnit(quantityType);
         if (siUnit == null) logger.finer("Quantity type: " + quantityType + " unknown"); // we're logging but probably FINER is enough?
         return (siUnit != null) ? siUnit.getDimension() : null;
     }
