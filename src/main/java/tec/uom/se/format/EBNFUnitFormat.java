@@ -50,9 +50,10 @@ import tec.uom.se.function.ExpConverter;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
-import tec.uom.se.internal.format.SimpleFormatParser;
+import tec.uom.se.internal.format.UnitFormatParser;
 import tec.uom.se.internal.format.TokenException;
 import tec.uom.se.internal.format.TokenMgrError;
+import tec.uom.se.internal.format.OldUnitFormatParser;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.MetricPrefix;
@@ -184,7 +185,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	 * Name of the resource bundle
 	 */
 	private static final String BUNDLE_NAME = "tec.uom.se.internal.format.messages"; //$NON-NLS-1$
-	//= SimpleFormatParser.class.getPackage()			.getName() + ".messages"; 
+	//= UnitFormatParser.class.getPackage()			.getName() + ".messages"; 
 
 	/**
 	 * Default locale instance. If the default locale is changed after the class
@@ -324,7 +325,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			return Units.ONE;
 		}
 		try {
-			SimpleFormatParser parser = new SimpleFormatParser(symbolMap, new StringReader(
+			UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(
 					source));
 			Unit<?> result = parser.parseUnit();
 //			if (cursor != null)
