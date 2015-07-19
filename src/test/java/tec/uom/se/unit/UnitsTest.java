@@ -273,6 +273,11 @@ public class UnitsTest {
         assertEquals(KILO(GRAM), AbstractUnit.parse("kg")); // TODO: Problem with kg...?
     }
 
+    @Test
+    public void testParse2() {
+        assertEquals(KILO(METRE), AbstractUnit.parse("km"));
+    }
+    
 	@Test
 	public void testToString() {
 		assertEquals("kg", MetricPrefix.KILO(Units.GRAM).toString());
