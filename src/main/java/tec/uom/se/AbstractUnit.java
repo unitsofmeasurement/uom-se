@@ -68,7 +68,7 @@ import java.lang.reflect.Type;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, Jul 12, 2015
+ * @version 0.7.1, Jul 22, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		Comparable<Unit<Q>>, Serializable {
@@ -146,9 +146,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 * Annotates the specified unit. Annotation does not change the unit
 	 * semantic. Annotations are often written between curly braces behind
 	 * units. For example: [code] AbstractUnit<Volume> PERCENT_VOL =
-	 * SI.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
-	 * SI.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless>
-	 * RED_BLOOD_CELLS = SI.ONE.annotate("RBC"); // "{RBC}" [/code]
+	 * Units.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
+	 * Units.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless>
+	 * RED_BLOOD_CELLS = Units.ONE.annotate("RBC"); // "{RBC}" [/code]
 	 *
 	 * Note: Annotation of system units are not considered themselves as system
 	 * units.
@@ -273,8 +273,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 *            the quantity class identifying the nature of the unit.
 	 * @throws ClassCastException
 	 *             if the dimension of this unit is different from the
-	 *             {@link SI} dimension of the specified type.
-	 * @see SI#getUnit(Class)
+	 *              SI dimension of the specified type.
+	 * @see Units#getUnit(Class)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

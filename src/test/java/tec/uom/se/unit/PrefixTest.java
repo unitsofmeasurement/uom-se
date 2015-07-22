@@ -31,8 +31,8 @@ package tec.uom.se.unit;
 
 import static org.junit.Assert.assertEquals;
 import static tec.uom.se.unit.MetricPrefix.*;
-import static tec.uom.se.unit.SI.GRAM;
-import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.Units.GRAM;
+import static tec.uom.se.unit.Units.KILOGRAM;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -64,7 +64,7 @@ public class PrefixTest {
 		assertEquals(1d, m1.getValue());
 		assertEquals("m", m1.getUnit().toString());
 				
-		Quantity<Length> m2 = m1.to(MICRO(SI.METRE));
+		Quantity<Length> m2 = m1.to(MICRO(Units.METRE));
 		assertEquals(1000000.0d, m2.getValue());
 		assertEquals("µm", m2.getUnit().toString());
 	}
@@ -72,22 +72,22 @@ public class PrefixTest {
 	@Test
 	@Ignore
 	public void testNano() {
-		Quantity<Mass> m1 = Quantities.getQuantity(1.0, SI.GRAM);
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, Units.GRAM);
 		assertEquals(1d, m1.getValue());
 		assertEquals("g", m1.getUnit().toString());
 				
-		Quantity<Mass> m2 = m1.to(NANO(SI.GRAM));
+		Quantity<Mass> m2 = m1.to(NANO(Units.GRAM));
 		assertEquals(1000000000.0d, m2.getValue());
 		assertEquals("ng", m2.getUnit().toString());
 	}
 	
 	@Test
 	public void testNano2() {
-		Quantity<Length> m1 = Quantities.getQuantity(1.0, SI.METRE);
+		Quantity<Length> m1 = Quantities.getQuantity(1.0, Units.METRE);
 		assertEquals(1d, m1.getValue());
 		assertEquals("m", m1.getUnit().toString());
 				
-		Quantity<Length> m2 = m1.to(NANO(SI.METRE));
+		Quantity<Length> m2 = m1.to(NANO(Units.METRE));
 		assertEquals(1000000000.0d, m2.getValue());
 		assertEquals("nm", m2.getUnit().toString());
 	}

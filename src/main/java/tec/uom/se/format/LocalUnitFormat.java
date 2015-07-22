@@ -29,9 +29,9 @@
  */
 package tec.uom.se.format;
 
-import static tec.uom.se.unit.SI.CUBIC_METRE;
-import static tec.uom.se.unit.SI.GRAM;
-import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.Units.CUBIC_METRE;
+import static tec.uom.se.unit.Units.GRAM;
+import static tec.uom.se.unit.Units.KILOGRAM;
 import static tec.uom.se.unit.Units.LITRE;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.AddConverter;
@@ -301,24 +301,24 @@ public class LocalUnitFormat extends AbstractUnitFormat {
                 }
             }
             return PRODUCT_PRECEDENCE;
-        } else if ((!((AbstractUnit)unit).isSystemUnit()) || unit.equals(SI.KILOGRAM)) {
+        } else if ((!((AbstractUnit)unit).isSystemUnit()) || unit.equals(Units.KILOGRAM)) {
             UnitConverter converter = null;
             boolean printSeparator = false;
             StringBuffer temp = new StringBuffer();
             int unitPrecedence = NOOP_PRECEDENCE;
-            if (unit.equals(SI.KILOGRAM)) {
+            if (unit.equals(Units.KILOGRAM)) {
                 // A special case because KILOGRAM is a BaseUnit instead of
                 // a transformed unit, even though it has a prefix.
                 converter = MetricPrefix.KILO.getConverter();
-                unitPrecedence = formatInternal(SI.GRAM, temp);
+                unitPrecedence = formatInternal(Units.GRAM, temp);
                 printSeparator = true;
             } else {
                 Unit parentUnit = unit.getSystemUnit();
                 converter = unit.getConverterTo(parentUnit);
-                if (parentUnit.equals(SI.KILOGRAM)) {
+                if (parentUnit.equals(Units.KILOGRAM)) {
                     // More special-case hackery to work around gram/kilogram
                     // incosistency
-                    parentUnit = SI.GRAM;
+                    parentUnit = Units.GRAM;
                     converter = converter.concatenate(MetricPrefix.KILO.getConverter());
                 }
                 unitPrecedence = formatInternal(parentUnit, temp);

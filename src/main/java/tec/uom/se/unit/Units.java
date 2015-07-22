@@ -449,7 +449,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 			METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
 	
 	   /////////////////////////////////////////////////////////////////
-    // CommonUnits outside the SI that are accepted for use with the SI. //
+    // CommonUnits outside the SI that are accepted for use with the Units. //
     /////////////////////////////////////////////////////////////////
 
     /**

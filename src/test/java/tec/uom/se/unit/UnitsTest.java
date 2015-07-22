@@ -46,9 +46,9 @@ import tec.uom.se.AbstractUnit;
 import static org.junit.Assert.*;
 import static tec.uom.se.internal.format.OutputHelper.println;
 import static tec.uom.se.unit.MetricPrefix.KILO;
-import static tec.uom.se.unit.SI.GRAM;
-import static tec.uom.se.unit.SI.METRE;
-import static tec.uom.se.unit.SI.WATT;
+import static tec.uom.se.unit.Units.GRAM;
+import static tec.uom.se.unit.Units.METRE;
+import static tec.uom.se.unit.Units.WATT;
 
 /**
  *
@@ -265,7 +265,7 @@ public class UnitsTest {
 
 	@Test
 	public void testOf() {
-		assertEquals(MetricPrefix.KILO(SI.GRAM), AbstractUnit.parse("kg")); 
+		assertEquals(MetricPrefix.KILO(Units.GRAM), AbstractUnit.parse("kg")); 
 	}
 	
     @Test
@@ -290,8 +290,8 @@ public class UnitsTest {
 	@Test
 	public void testGetSymbol() {
 		// TODO see https://github.com/unitsofmeasurement/uom-se/issues/54 / https://java.net/jira/browse/UNITSOFMEASUREMENT-109
-		assertEquals("kg", SI.KILOGRAM.getSymbol());
-//		assertEquals("kg", SI.GRAM.getSymbol()); //"g"
+		assertEquals("kg", Units.KILOGRAM.getSymbol());
+//		assertEquals("kg", Units.GRAM.getSymbol()); //"g"
 //		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
 //		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
 		assertEquals("kg", MetricPrefix.KILO(Units.GRAM).getSymbol());
@@ -303,8 +303,8 @@ public class UnitsTest {
 
 	@Test
 	public void testGetParentUnit() {
-		assertEquals("TransformedUnit", SI.GRAM.getClass().getSimpleName());
-		assertEquals("kg", ((TransformedUnit<Mass>)SI.GRAM).getParentUnit().getSymbol());
+		assertEquals("TransformedUnit", Units.GRAM.getClass().getSimpleName());
+		assertEquals("kg", ((TransformedUnit<Mass>)Units.GRAM).getParentUnit().getSymbol());
 //		assertEquals("kg", UCUM.POUND.getSymbol()); //"lb"
 //		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
 //		assertEquals("kg", MetricPrefix.KILO(UCUM.GRAM).getSymbol());

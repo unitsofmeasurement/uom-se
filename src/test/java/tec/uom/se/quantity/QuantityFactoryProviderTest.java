@@ -31,10 +31,10 @@ package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static tec.uom.se.unit.SI.KILOGRAM;
-import static tec.uom.se.unit.SI.METRE;
-import static tec.uom.se.unit.SI.MINUTE;
-import static tec.uom.se.unit.SI.SECOND;
+import static tec.uom.se.unit.Units.KILOGRAM;
+import static tec.uom.se.unit.Units.METRE;
+import static tec.uom.se.unit.Units.MINUTE;
+import static tec.uom.se.unit.Units.SECOND;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;

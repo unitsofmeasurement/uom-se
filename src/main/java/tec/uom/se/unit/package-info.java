@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -40,10 +40,10 @@
  * import tec.uom.se.AbstractUnit;
  * import tec.uom.se.function.AbstractConverter;
  * 
- * import static tec.uom.se.spi.SI.*; // Standard CommonUnits.
- * import static tec.uom.se.spi.SIPrefix.*;
- * import static tec.uom.se.spi.UCUM.*; // Standard & Non-Standard CommonUnits.
- *
+ * import static tec.uom.se.unit.Units.*; // Standard units.
+ * import static tec.uom.se.unit.MetricPrefix.*;
+ * import ...US.*; // US units (external module)
+ * 
  * public class Main {
  *     public void main(String[] args) {
  *
@@ -78,11 +78,11 @@
  *
  *     CommonUnits are parameterized enforce compile-time checks of units/measures consistency, for example:[code]
  *
- *     AbstractUnit<Time> MINUTE = SECOND.times(60); // Ok.
- *     AbstractUnit<Time> MINUTE = METRE.times(60); // Compile error.
+ *     Unit<Time> MINUTE = SECOND.times(60); // Ok.
+ *     tUnit<Time> MINUTE = METRE.times(60); // Compile error.
  *
- *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(PASCAL); // Ok.
- *     AbstractUnit<Pressure> HECTOPASCAL = HECTO(NEWTON); // Compile error.
+ *     Unit<Pressure> HECTOPASCAL = HECTO(PASCAL); // Ok.
+ *     Unit<Pressure> HECTOPASCAL = HECTO(NEWTON); // Compile error.
  *
  *     Quantity<Time> duration = ComparableQuantity.of(2, MINUTE); // Ok.
  *     Quantity<Time> duration = ComparableQuantity.of(2, CELSIUS); // Compile error.
@@ -93,18 +93,18 @@
  *
  *     Runtime checks of dimension consistency can be done for more complex cases.
  *
- *     [code]
- *     AbstractUnit<Area> SQUARE_FOOT = FOOT.times(FOOT).asType(Area.class); // Ok.
- *     AbstractUnit<Area> SQUARE_FOOT = FOOT.times(KELVIN).asType(Area.class); // Runtime error.
+ *     <code>
+ *     Unit<Area> SQUARE_FOOT = FOOT.times(FOOT).asType(Area.class); // Ok.
+ *     Unit<Area> SQUARE_FOOT = FOOT.times(KELVIN).asType(Area.class); // Runtime error.
  *
- *     AbstractUnit<Temperature> KELVIN = AbstractUnit.of("K").asType(Temperature.class); // Ok.
- *     AbstractUnit<Temperature> KELVIN = AbstractUnit.of("kg").asType(Temperature.class); // Runtime error.
- *     [/code]
+ *     Unit<Temperature> KELVIN = AbstractUnit.of("K").asType(Temperature.class); // Ok.
+ *     Unit<Temperature> KELVIN = AbstractUnit.of("kg").asType(Temperature.class); // Runtime error.
+ *     </code>
  *     </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2
+ * @version 0.3
  */
 package tec.uom.se.unit;
 

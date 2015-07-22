@@ -40,8 +40,8 @@
  * import tec.uom.se.AbstractUnit;
  * import tec.uom.se.function.AbstractConverter;
  * 
- * import static tec.uom.se.spi.SI.*; // Standard CommonUnits.
- * import static tec.uom.se.spi.SIPrefix.*;
+ * import static tec.uom.se.unit.Units.*; // Standard CommonUnits.
+ * import static tec.uom.se.unit.MetricPrefix.*;
  * import static tec.uom.se.spi.UCUM.*; // Standard & Non-Standard CommonUnits.
  *
  * public class Main {

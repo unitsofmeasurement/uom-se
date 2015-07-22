@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -40,106 +40,106 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.ComparableQuantity;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 public class DoubleComparableQuantityTest {
 
 
     @Test
     public void divideOperationsTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, SI.METRE);
-        ComparableQuantity<Time> time = Quantities.getQuantity(10D, SI.SECOND);
+        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
+        ComparableQuantity<Time> time = Quantities.getQuantity(10D, Units.SECOND);
         ComparableQuantity<Speed> speed = metre.divide(time, Speed.class);
 
         Assert.assertEquals(Integer.valueOf(speed.getValue().intValue()), Integer.valueOf(1));
-        Assert.assertEquals(SI.METRES_PER_SECOND, speed.getUnit());
+        Assert.assertEquals(Units.METRES_PER_SECOND, speed.getUnit());
     }
 
     @Test(expected = ClassCastException.class)
     public void divideOperationsExceptionTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, SI.METRE);
-        ComparableQuantity<Time> time = Quantities.getQuantity(10D, SI.SECOND);
+        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
+        ComparableQuantity<Time> time = Quantities.getQuantity(10D, Units.SECOND);
         @SuppressWarnings("unused")
         ComparableQuantity<Area> area = metre.divide(time, Area.class);
     }
 
     @Test
     public void multiplyOperationsTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, SI.METRE);
+        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
         ComparableQuantity<Area> area = metre.multiply(metre, Area.class);
 
         Assert.assertEquals(Integer.valueOf(area.getValue().intValue()), Integer.valueOf(100));
-        Assert.assertEquals(SI.SQUARE_METRE, area.getUnit());
+        Assert.assertEquals(Units.SQUARE_METRE, area.getUnit());
     }
 
 
     @Test(expected = ClassCastException.class)
     public void multiplyOperationsExceptionTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, SI.METRE);
+        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
         @SuppressWarnings("unused")
         ComparableQuantity<Speed> speed = metre.multiply(metre, Speed.class);
     }
 
     @Test
     public void divideTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, SI.METRE);
+        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
         ComparableQuantity<Length> result = metre.divide(10D);
         Assert.assertTrue(result.getValue().intValue() == 1);
-        Assert.assertEquals(result.getUnit(), SI.METRE);
+        Assert.assertEquals(result.getUnit(), Units.METRE);
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(10D, SI.DAY);
+        ComparableQuantity<Time> day = Quantities.getQuantity(10D, Units.DAY);
         ComparableQuantity<Time> dayResult = day.divide(BigDecimal.valueOf(2.5D));
         Assert.assertTrue(dayResult.getValue().intValue() == 4);
-        Assert.assertEquals(dayResult.getUnit(), SI.DAY);
+        Assert.assertEquals(dayResult.getUnit(), Units.DAY);
     }
 
     @Test
     public void addTest() {
-        ComparableQuantity<Length> m = Quantities.getQuantity(10D, SI.METRE);
-        ComparableQuantity<Length> m2 = Quantities.getQuantity(BigDecimal.valueOf(12.5), SI.METRE);
-        ComparableQuantity<Length> m3 = Quantities.getQuantity(2.5, SI.METRE);
-        ComparableQuantity<Length> m4 = Quantities.getQuantity(5L, SI.METRE);
+        ComparableQuantity<Length> m = Quantities.getQuantity(10D, Units.METRE);
+        ComparableQuantity<Length> m2 = Quantities.getQuantity(BigDecimal.valueOf(12.5), Units.METRE);
+        ComparableQuantity<Length> m3 = Quantities.getQuantity(2.5, Units.METRE);
+        ComparableQuantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
         ComparableQuantity<Length> result = m.add(m2).add(m3).add(m4);
         Assert.assertTrue(result.getValue().doubleValue() == 30.0);
-        Assert.assertEquals(result.getUnit(), SI.METRE);
+        Assert.assertEquals(result.getUnit(), Units.METRE);
     }
 
     @Test
     public void addQuantityTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(1, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
         ComparableQuantity<Time> result = day.add(hours);
         Assert.assertTrue(result.getValue().doubleValue() == 1.5);
-        Assert.assertEquals(result.getUnit(), SI.DAY);
+        Assert.assertEquals(result.getUnit(), Units.DAY);
     }
 
     @Test
     public void subtractTest() {
-        ComparableQuantity<Length> m = Quantities.getQuantity(10D, SI.METRE);
-        ComparableQuantity<Length> m2 = Quantities.getQuantity(12.5, SI.METRE);
+        ComparableQuantity<Length> m = Quantities.getQuantity(10D, Units.METRE);
+        ComparableQuantity<Length> m2 = Quantities.getQuantity(12.5, Units.METRE);
         ComparableQuantity<Length> result = m.subtract(m2);
         Assert.assertTrue(result.getValue().doubleValue() == -2.5);
-        Assert.assertEquals(result.getUnit(), SI.METRE);
+        Assert.assertEquals(result.getUnit(), Units.METRE);
     }
 
     @Test
     public void subtractQuantityTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(1, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12F, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12F, Units.HOUR);
         ComparableQuantity<Time> result = day.subtract(hours);
         Assert.assertTrue(result.getValue().doubleValue() == 0.5);
-        Assert.assertEquals(result.getUnit(), SI.DAY);
+        Assert.assertEquals(result.getUnit(), Units.DAY);
     }
 
     @Test
     public void multiplyTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, SI.METRE);
+        ComparableQuantity<Length> metre = Quantities.getQuantity(10D, Units.METRE);
         ComparableQuantity<Length> result = metre.multiply(10D);
         Assert.assertTrue(result.getValue().intValue() == 100);
-        Assert.assertEquals(result.getUnit(), SI.METRE);
+        Assert.assertEquals(result.getUnit(), Units.METRE);
         @SuppressWarnings("unchecked")
         ComparableQuantity<Length> result2 = (ComparableQuantity<Length>) metre
-                .multiply(Quantities.getQuantity(10D, SI.HOUR));
+                .multiply(Quantities.getQuantity(10D, Units.HOUR));
         Assert.assertTrue(result2.getValue().intValue() == 100);
 
 
@@ -147,12 +147,12 @@ public class DoubleComparableQuantityTest {
 
     @Test
     public void toTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        ComparableQuantity<Time> hour = day.to(SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+        ComparableQuantity<Time> hour = day.to(Units.HOUR);
         Assert.assertEquals(hour.getValue().intValue(), 24);
-        Assert.assertEquals(hour.getUnit(), SI.HOUR);
+        Assert.assertEquals(hour.getUnit(), Units.HOUR);
 
-        ComparableQuantity<Time> dayResult = hour.to(SI.DAY);
+        ComparableQuantity<Time> dayResult = hour.to(Units.DAY);
         Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
         Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     }
@@ -160,14 +160,14 @@ public class DoubleComparableQuantityTest {
     @Test
     public void inverseTestLength() {
         @SuppressWarnings("unchecked")
-        ComparableQuantity<Length> metre = (ComparableQuantity<Length>) Quantities.getQuantity(10d, SI.METRE).inverse();
+        ComparableQuantity<Length> metre = (ComparableQuantity<Length>) Quantities.getQuantity(10d, Units.METRE).inverse();
         Assert.assertEquals(0.1d, metre.getValue());
         Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
     }
 
     @Test
     public void inverseTestTime() {
-        ComparableQuantity<?> secInv = Quantities.getQuantity(2d, SI.SECOND).inverse();
+        ComparableQuantity<?> secInv = Quantities.getQuantity(2d, Units.SECOND).inverse();
         Assert.assertEquals(0.5d, secInv.getValue());
         Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
     }
@@ -175,10 +175,10 @@ public class DoubleComparableQuantityTest {
 
     @Test
     public void isGreaterThanTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, Units.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, Units.HOUR);
 
         Assert.assertFalse(day.isGreaterThan(day));
         Assert.assertTrue(day.isGreaterThan(hours));
@@ -189,10 +189,10 @@ public class DoubleComparableQuantityTest {
     @Test
     public void isGreaterThanOrEqualToTest() {
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, Units.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, Units.HOUR);
 
         Assert.assertTrue(day.isLessThanOrEqualTo(day));
         Assert.assertTrue(day.isGreaterThanOrEqualTo(hours));
@@ -203,10 +203,10 @@ public class DoubleComparableQuantityTest {
     @Test
     public void isLessThanTest(){
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, Units.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, Units.HOUR);
 
         Assert.assertFalse(day.isLessThan(day));
         Assert.assertFalse(day.isLessThan(hours));
@@ -217,10 +217,10 @@ public class DoubleComparableQuantityTest {
     @Test
     public void isLessThanOrEqualToTest() {
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, Units.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, Units.HOUR);
 
         Assert.assertTrue(day.isLessThanOrEqualTo(day));
         Assert.assertFalse(day.isLessThanOrEqualTo(hours));
@@ -232,10 +232,10 @@ public class DoubleComparableQuantityTest {
     @Test
     public void isEquivalentToTest() {
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(1D, SI.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, SI.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, SI.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, SI.HOUR);
+        ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
+        ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
+        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, Units.HOUR);
+        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, Units.HOUR);
 
         Assert.assertTrue(day.isEquivalentTo(day));
         Assert.assertFalse(day.isEquivalentTo(hours));

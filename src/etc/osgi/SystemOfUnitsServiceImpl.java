@@ -39,14 +39,14 @@ class SystemOfUnitsServiceImpl implements SystemOfUnitsService {
      * Returns the SI instance.
      */
     public SystemOfUnits getSystemOfUnits() {
-        return SI.getInstance();
+        return Units.getInstance();
     }
 
     /**
      * Returns the instance having the specified name.
      */
     public SystemOfUnits getSystemOfUnits(String name) {
-        if (name.equals("SI")) return SI.getInstance();
+        if (name.equals("SI")) return Units.getInstance();
         if (name.equals("UCUM")) return UCUM.getInstance();
         return null;
     }

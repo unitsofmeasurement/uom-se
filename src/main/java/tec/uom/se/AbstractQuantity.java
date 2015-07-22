@@ -77,9 +77,9 @@ import tec.uom.se.unit.Units;
  *             private final double _kilograms; // Internal SI representation.
  *             private Mass(double kilograms) { _kilograms = kilograms; }
  *             public static Mass of(double value, Unit<Mass> unit) {
- *                 return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));
+ *                 return new Mass(unit.getConverterTo(Units.KILOGRAM).convert(value));
  *             }
- *             public Unit<Mass> getUnit() { return SI.KILOGRAM; }
+ *             public Unit<Mass> getUnit() { return Units.KILOGRAM; }
  *             public Double getValue() { return _kilograms; }
  *             ...
  *         }

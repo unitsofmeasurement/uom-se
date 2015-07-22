@@ -40,9 +40,9 @@ import tec.uom.se.AbstractUnit;
  * <p> For all metric units, the 20 SI prefixes used to form decimal
  *     multiples and sub-multiples of SI units are recognized.
  *     {@link USCustomary US Customary} units are directly recognized. For example:[code]
- *        Unit.valueOf("m°C").equals(SI.MILLI(SI.CELSIUS))
- *        Unit.valueOf("kW").equals(SI.KILO(SI.WATT))
- *        Unit.valueOf("ft").equals(SI.METRE.multiply(3048).divide(10000))[/code]</p>
+ *        Unit.valueOf("m°C").equals(Units.MILLI(Units.CELSIUS))
+ *        Unit.valueOf("kW").equals(Units.KILO(Units.WATT))
+ *        Unit.valueOf("ft").equals(Units.METRE.multiply(3048).divide(10000))[/code]</p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:uomo@catmedia.us">Werner Keil</a>

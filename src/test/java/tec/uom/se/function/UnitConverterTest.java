@@ -17,7 +17,7 @@ package tec.uom.se.function;
 
 import static org.junit.Assert.*;
 import static tec.uom.se.unit.MetricPrefix.*;
-import static tec.uom.se.unit.SI.*;
+import static tec.uom.se.unit.Units.*;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;

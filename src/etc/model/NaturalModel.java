@@ -48,16 +48,16 @@ public class NaturalModel extends QuantumModel {
 //		// BOLTZMANN (JOULE / KELVIN = (KILOGRAM / C^2 ) / KELVIN) = 1
 //		// MAGNETIC CONSTANT (NEWTON / AMPERE^2) = 1
 //		// GRAVITATIONAL CONSTANT (METRE^3 / KILOGRAM / SECOND^2) = 1
-//		SI.SECOND.setDimension(NONE, new MultiplyConverter((c * c)
+//		Units.SECOND.setDimension(NONE, new MultiplyConverter((c * c)
 //				* MathLib.sqrt(c / (hBar * G))));
-//		SI.METRE.setDimension(NONE, new MultiplyConverter(c
+//		Units.METRE.setDimension(NONE, new MultiplyConverter(c
 //				* MathLib.sqrt(c / (hBar * G))));
-//		SI.KILOGRAM.setDimension(NONE, new MultiplyConverter(MathLib.sqrt(G
+//		Units.KILOGRAM.setDimension(NONE, new MultiplyConverter(MathLib.sqrt(G
 //				/ (hBar * c))));
-//		SI.KELVIN.setDimension(NONE, new MultiplyConverter(k
+//		Units.KELVIN.setDimension(NONE, new MultiplyConverter(k
 //				* MathLib.sqrt(G / (hBar * c)) / (c * c)));
-//		SI.AMPERE.setDimension(NONE, new MultiplyConverter(MathLib.sqrt(µ0 * G)
+//		Units.AMPERE.setDimension(NONE, new MultiplyConverter(MathLib.sqrt(µ0 * G)
 //				/ (c * c)));
-//		SI.MOLE.setDimension(AMOUNT_OF_SUBSTANCE, Converter.IDENTITY);
-//		SI.CANDELA.setDimension(LUMINOUS_INTENSITY, Converter.IDENTITY);
+//		Units.MOLE.setDimension(AMOUNT_OF_SUBSTANCE, Converter.IDENTITY);
+//		Units.CANDELA.setDimension(LUMINOUS_INTENSITY, Converter.IDENTITY);
 }

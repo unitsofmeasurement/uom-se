@@ -65,7 +65,7 @@ import java.util.Map;
  *     LocalContext.enter();
  *     try {
  *         DimensionalModel.setCurrent(relativistic); // Current thread use the relativistic model.
- *         SI.KILOGRAM.getConverterToAny(SI.JOULE); // Allowed.
+ *         Units.KILOGRAM.getConverterToAny(Units.JOULE); // Allowed.
  *         ...
  *     } finally {
  *         LocalContext.exit();

@@ -143,7 +143,7 @@ public final class SymbolMap {
     /**
      * Attaches a label to the specified unit. For example:[code]
      *    symbolMap.label(DAY.multiply(365), "year");
-     *    symbolMap.label(NonSI.FOOT, "ft");
+     *    symbolMap.label(NonUnits.FOOT, "ft");
      * [/code]
      *
      * @param unit the unit to label.
@@ -158,10 +158,10 @@ public final class SymbolMap {
      * Attaches an alias to the specified unit. Multiple aliases may be
      * attached to the same unit. Aliases are used during parsing to
      * recognize different variants of the same unit.[code]
-     *     symbolMap.alias(NonSI.FOOT, "foot");
-     *     symbolMap.alias(NonSI.FOOT, "feet");
-     *     symbolMap.alias(SI.METER, "meter");
-     *     symbolMap.alias(SI.METER, "metre");
+     *     symbolMap.alias(NonUnits.FOOT, "foot");
+     *     symbolMap.alias(NonUnits.FOOT, "feet");
+     *     symbolMap.alias(Units.METER, "meter");
+     *     symbolMap.alias(Units.METER, "metre");
      * [/code]
      *
      * @param unit the unit to label.

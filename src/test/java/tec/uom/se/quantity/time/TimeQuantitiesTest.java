@@ -33,7 +33,6 @@ import static tec.uom.se.unit.Units.DAY;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.MINUTE;
 import static tec.uom.se.unit.Units.SECOND;
-
 import static java.util.concurrent.TimeUnit.DAYS;
 import static java.util.concurrent.TimeUnit.HOURS;
 import static java.util.concurrent.TimeUnit.MICROSECONDS;
@@ -62,11 +61,9 @@ import org.junit.Test;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.quantity.time.TimeQuantities;
 import tec.uom.se.quantity.time.TimeUnitQuantity;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 public class TimeQuantitiesTest {
-
-
 
     @Test
     public void ofTest() {
@@ -103,7 +100,7 @@ public class TimeQuantitiesTest {
 
     @Test
     public void ofQuantityTest() {
-        Quantity<Time> hour = Quantities.getQuantity(1, SI.HOUR);
+        Quantity<Time> hour = Quantities.getQuantity(1, Units.HOUR);
         TimeUnitQuantity timeQuantity = TimeUnitQuantity.of(hour);
 
         Assert.assertEquals(TimeUnit.SECONDS, timeQuantity.getTimeUnit());
@@ -180,7 +177,7 @@ public class TimeQuantitiesTest {
         LocalDate b = Year.of(2015).atMonth(Month.JANUARY).atDay(10);
         Quantity<Time> time = TimeQuantities.getQuantity(a, b);
         Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(time.getValue().intValue()));
-        Assert.assertEquals(SI.DAY, time.getUnit());
+        Assert.assertEquals(Units.DAY, time.getUnit());
     }
 
     @Test
@@ -190,7 +187,7 @@ public class TimeQuantitiesTest {
         LocalTime b = LocalTime.of(12, 0);
         Quantity<Time> time = TimeQuantities.getQuantity(a, b);
         Assert.assertEquals(Double.valueOf(12.0), Double.valueOf(time.getValue().doubleValue()));
-        Assert.assertEquals(SI.HOUR, time.getUnit());
+        Assert.assertEquals(Units.HOUR, time.getUnit());
     }
 
     @Test
@@ -200,7 +197,7 @@ public class TimeQuantitiesTest {
 
         Quantity<Time> time = TimeQuantities.getQuantity(a, () -> TemporalAdjusters.next(DayOfWeek.SUNDAY));
         Assert.assertEquals(Integer.valueOf(2), Integer.valueOf(time.getValue().intValue()));
-        Assert.assertEquals(SI.DAY, time.getUnit());
+        Assert.assertEquals(Units.DAY, time.getUnit());
     }
 
     @Test
@@ -211,6 +208,6 @@ public class TimeQuantitiesTest {
 
         Quantity<Time> time = TimeQuantities.getQuantity(a, () -> temporalAdjuster);
         Assert.assertEquals(Integer.valueOf(12), Integer.valueOf(time.getValue().intValue()));
-        Assert.assertEquals(SI.HOUR, time.getUnit());
+        Assert.assertEquals(Units.HOUR, time.getUnit());
     }
 }

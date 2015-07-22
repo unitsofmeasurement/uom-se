@@ -41,23 +41,23 @@ class QuantumModel extends HighEnergyModel {
     
 // TODO: Allow more conversion.
 //        // ENERGY = m²·kg/s² = kg·c²
-//        KILOGRAM.setDimension(SI.GIGA(ELECTRON_VOLT),
+//        KILOGRAM.setDimension(Units.GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(1E-9 * c * c / ePlus));
 //
 //        // H_BAR (SECOND * JOULE = SECOND * (KILOGRAM / C^2 )) = 1
-//        SECOND.setDimension(Unit.ONE.divide(SI.GIGA(ELECTRON_VOLT)),
+//        SECOND.setDimension(Unit.ONE.divide(Units.GIGA(ELECTRON_VOLT)),
 //                new MultiplyConverter(1E9 * ePlus / hBar));
 //
 //        // SPEED_OF_LIGHT (METRE / SECOND) = 1
-//        METRE.setDimension(Unit.ONE.divide(SI.GIGA(ELECTRON_VOLT)),
+//        METRE.setDimension(Unit.ONE.divide(Units.GIGA(ELECTRON_VOLT)),
 //                new MultiplyConverter(1E9 * ePlus / (c * hBar)));
 //
 //        // BOLTZMANN (JOULE / KELVIN = (KILOGRAM / C^2 ) / KELVIN) = 1
-//        KELVIN.setDimension(SI.GIGA(ELECTRON_VOLT),
+//        KELVIN.setDimension(Units.GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(1E-9 * k / ePlus));
 //
 //        // MAGNETIC CONSTANT (NEWTON / AMPERE^2) = 1
-//        AMPERE.setDimension(SI.GIGA(ELECTRON_VOLT),
+//        AMPERE.setDimension(Units.GIGA(ELECTRON_VOLT),
 //                new MultiplyConverter(1E-9 * MathLib.sqrt(µ0 * c * hBar) / ePlus));
 //
 //        MOLE.setDimension(MOLE, AbstractConverter.IDENTITY);

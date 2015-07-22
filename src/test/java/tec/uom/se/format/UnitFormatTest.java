@@ -33,11 +33,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.MetricPrefix.MEGA;
-import static tec.uom.se.unit.SI.HERTZ;
-import static tec.uom.se.unit.SI.KILOGRAM;
-import static tec.uom.se.unit.SI.METRE;
-import static tec.uom.se.unit.SI.MINUTE;
-import static tec.uom.se.unit.SI.SECOND;
+import static tec.uom.se.unit.Units.HERTZ;
+import static tec.uom.se.unit.Units.KILOGRAM;
+import static tec.uom.se.unit.Units.METRE;
+import static tec.uom.se.unit.Units.MINUTE;
+import static tec.uom.se.unit.Units.SECOND;
 
 import java.io.IOException;
 

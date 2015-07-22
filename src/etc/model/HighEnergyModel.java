@@ -55,7 +55,7 @@ class HighEnergyModel extends RelativisticModel {
 //                new MultiplyConverter(k / ePlus / 1E9));
 //
 //        // ELEMENTARY_CHARGE (SECOND * AMPERE) = 1
-//        AMPERE.setDimension(Unit.ONE.divide(SI.NANO(SI.SECOND)),
+//        AMPERE.setDimension(Unit.ONE.divide(Units.NANO(Units.SECOND)),
 //                new MultiplyConverter(1E-9 / ePlus));
 //
 //        MOLE.setDimension(MOLE, AbstractConverter.IDENTITY);

@@ -37,10 +37,10 @@ import javax.measure.Quantity;
  * Comparator to sort by natural order, looking both the unit and the value.
  * @return
  * <b>Given:</b>
- * <p>Quantity<Time> day = timeFactory.create(1, SI.DAY);</p>
- * <p>Quantity<Time> hours = timeFactory.create(18, SI.HOUR);</p>
- * <p>Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);</p>
- * <p>Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);</p>
+ * <p>Quantity<Time> day = timeFactory.create(1, Units.DAY);</p>
+ * <p>Quantity<Time> hours = timeFactory.create(18, Units.HOUR);</p>
+ * <p>Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);</p>
+ * <p>Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);</p>
  * will return: seconds, minutes, hours, day
  */
 public class NaturalOrder<T extends Quantity<T>> implements Comparator <Quantity<T>> {

@@ -26,7 +26,7 @@
 package tec.uom.se.spi;
 
 import static org.junit.Assert.*;
-import static tec.uom.se.unit.SI.KILOGRAM;
+import static tec.uom.se.unit.Units.KILOGRAM;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Mass;
