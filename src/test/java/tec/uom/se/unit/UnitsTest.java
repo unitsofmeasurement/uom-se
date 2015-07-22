@@ -44,11 +44,11 @@ import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.AbstractUnit;
 import static org.junit.Assert.*;
+import static tec.uom.se.internal.format.OutputHelper.println;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.SI.GRAM;
 import static tec.uom.se.unit.SI.METRE;
 import static tec.uom.se.unit.SI.WATT;
-import static tec.uom.se.util.OutputHelper.println;
 
 /**
  *
