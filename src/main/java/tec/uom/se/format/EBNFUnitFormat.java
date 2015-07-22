@@ -53,7 +53,6 @@ import tec.uom.se.function.RationalConverter;
 import tec.uom.se.internal.format.UnitFormatParser;
 import tec.uom.se.internal.format.TokenException;
 import tec.uom.se.internal.format.TokenMgrError;
-import tec.uom.se.internal.format.OldUnitFormatParser;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.MetricPrefix;

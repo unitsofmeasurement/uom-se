@@ -39,7 +39,7 @@ import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
 import tec.uom.se.internal.format.TokenException;
 import tec.uom.se.internal.format.TokenMgrError;
-import tec.uom.se.internal.format.OldUnitFormatParser;
+import tec.uom.se.internal.format.LocalUnitFormatParser;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
@@ -224,7 +224,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
             return Units.ONE;
         }
         try {
-            OldUnitFormatParser parser = new OldUnitFormatParser(symbolMap, new StringReader(source));
+            LocalUnitFormatParser parser = new LocalUnitFormatParser(symbolMap, new StringReader(source));
             Unit<?> result = parser.parseUnit();
             cursor.setIndex(end);
             return result;
