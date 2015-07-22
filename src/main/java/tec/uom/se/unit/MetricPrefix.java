@@ -42,7 +42,7 @@ import java.math.BigInteger;
  * <p> This class provides support for the 20 prefixes used in the metric
  *     system (decimal multiples and submultiples of units).
  *     For example:<pre><code>
- *     import static tec.uom.se.util.SI.*;  // Static import.
+ *     import static tec.uom.se.spi.SI.*;  // Static import.
  *     import static tec.uom.se.uit.MetricPrefix.*; // Static import.
  *     import javax.measure.*;
  *     import javax.measure.quantity.*;

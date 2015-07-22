@@ -29,7 +29,7 @@ import java.util.Objects;
 
 import javax.measure.Quantity;
 
-import tec.uom.se.util.Range;
+import tec.uom.se.spi.Range;
 
 /**
  * A Quantity Range is a pair of {@link Quantity} items that represent a range

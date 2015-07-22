@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.util;
+package tec.uom.se.spi;
 
 import static org.junit.Assert.*;
 import static tec.uom.se.unit.SI.KILOGRAM;
@@ -37,7 +37,7 @@ import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.quantity.QuantityRange;
-import tec.uom.se.util.Range;
+import tec.uom.se.spi.Range;
 
 public class RangeTest {
 	private Quantity<Mass> min;
@@ -78,5 +78,4 @@ public class RangeTest {
 	public void testToString() {
 		assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
 	}
-
 }
