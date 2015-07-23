@@ -41,9 +41,10 @@ import javax.measure.spi.ServiceProvider;
  *
  * @author Werner Keil
  */
-class DefaultServiceProvider implements ServiceProvider {
+class SEServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
-    private final ConcurrentHashMap<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<Class, List<Object>>();
+    @SuppressWarnings("rawtypes")
+	private final ConcurrentHashMap<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<Class, List<Object>>();
 
     @Override
     public int getPriority() {
@@ -97,7 +98,7 @@ class DefaultServiceProvider implements ServiceProvider {
             final List<T> previousServices = (List<T>) servicesLoaded.putIfAbsent(serviceType, (List<Object>) services);
             return Collections.unmodifiableList(previousServices != null ? previousServices : services);
         } catch (Exception e) {
-            Logger.getLogger(DefaultServiceProvider.class.getName()).log(Level.WARNING,
+            Logger.getLogger(SEServiceProvider.class.getName()).log(Level.WARNING,
                                                                          "Error loading services of type " + serviceType, e);
             return services;
         }
