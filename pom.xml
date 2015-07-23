@@ -5,7 +5,7 @@
 	<version>0.8-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Implementation for Java SE</name>
-	<url>https://github.com/unitsofmeasurement/unit-impl-se</url>
+	<url>https://github.com/unitsofmeasurement/uom-se</url>
 	<description>Units of Measurement Implementation for Java SE JDK Integration of Unit-API / JSR 363</description>
 	<organization>
 		<name>Units of Measurement project</name>
