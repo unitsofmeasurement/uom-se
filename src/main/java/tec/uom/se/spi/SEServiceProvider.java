@@ -41,7 +41,7 @@ import javax.measure.spi.ServiceProvider;
  *
  * @author Werner Keil
  */
-class SEServiceProvider implements ServiceProvider {
+public class SEServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
     @SuppressWarnings("rawtypes")
 	private final ConcurrentHashMap<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<Class, List<Object>>();
