@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -23,14 +23,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.internal;
 
 import javax.annotation.Priority;
 import javax.measure.spi.ServiceProvider;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -46,7 +48,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
     /**
      * List of services loaded, per class.
      */
-    private final ConcurrentHashMap<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<>();
+    private final Map<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<>();
 
     private static final Comparator<Object> SERVICE_COMPARATOR = new Comparator<Object>(){
 
@@ -57,7 +59,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
     };
 
     /**
-     * Returns a prioritx value of 10.
+     * Returns a priority value of 10.
      *
      * @return 10, overriding the default provider.
      */
@@ -137,5 +139,4 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
             return services;
         }
     }
-
 }

@@ -27,53 +27,23 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.quantity;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static tec.uom.se.unit.Units.METRE;
-
+package tec.uom.se.spi;
 import javax.measure.Quantity;
-import javax.measure.quantity.Length;
 import javax.measure.spi.QuantityFactory;
 
-import org.junit.Before;
-import org.junit.Test;
+/**
+ * Provider of {@link QuantityFactory}
+ * @author otaviojava
+ * @author werner
+ * @version 0.1
+ */
+public interface QuantityFactoryService {
 
-import tec.uom.se.spi.QuantityFactoryService;
-
-public class ArithmeticTest {
-
-	private Quantity<Length> sut;
-
-//	private QuantityFactory<Length> lengthFactory;
-
-	@Before
-	public void init() {
-//	    lengthFactory =  QuantityFactoryService.getQuantityFactory(Length.class);
-//		sut = lengthFactory.create(10, METRE);
-		sut = Quantities.getQuantity(10, METRE);
-	}
-
-	@Test
-	public void testAdd() {
-//		Quantity<Length> len = lengthFactory.create(5, METRE);
-		Quantity<Length> len = Quantities.getQuantity(5, METRE);
-
-		Quantity<Length> result = sut.add(len);
-		assertNotNull(result);
-		assertEquals(METRE, result.getUnit());
-		assertEquals(Double.valueOf(15), Double.valueOf(result.getValue().doubleValue()));
-	}
-
-	@Test
-	public void testValue() {
-		assertEquals(10, sut.getValue());
-	}
-
-	@Test
-	public void testToString() {
-		assertEquals("10 m", sut.toString());
-	}
-
+    /**
+     * Return a factory for this {@link Quantity}.
+     * @param quantity the quantity
+     * @return the {@link QuantityFactory}
+     * @throws NullPointerException
+     */
+    <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> quantity);
 }

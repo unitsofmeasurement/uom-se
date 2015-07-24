@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.internal.quantity;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,6 +36,7 @@ import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
 
 import tec.uom.se.quantity.DefaultQuantityFactory;
+import tec.uom.se.spi.QuantityFactoryService;
 
 /**
  * Provider of Quantities
@@ -44,20 +45,17 @@ import tec.uom.se.quantity.DefaultQuantityFactory;
  * @version 0.2
  */
 @SuppressWarnings("rawtypes")
-public final class QuantityFactoryProvider {
-// TODO could help SPI, align with ServiceProvider
-    private QuantityFactoryProvider() {}
-
-    private static final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();
+public final class DefaultQuantityFactoryService implements QuantityFactoryService {
+    private final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();
 
     /**
-     * return a factory Quantities from this unit
+     * return a factory for Quantities from this unit
      * @param unit the unit
      * @return the Quantities
      * @throws NullPointerException
      */
     @SuppressWarnings("unchecked")
-    public static final <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> unit){
+    public final <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> unit){
         Objects.requireNonNull(unit);
         if(!INSTANCE.containsKey(unit)) {
             synchronized (INSTANCE) {

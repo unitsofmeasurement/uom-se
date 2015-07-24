@@ -50,7 +50,7 @@ import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.spi.QuantityFactoryProvider;
+import tec.uom.se.spi.QuantityFactoryService;
 import tec.uom.se.unit.Units;
 
 import org.junit.Before;
@@ -66,7 +66,7 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		//sut = QuantityFactoryProvider.getQuantityFactory(Length.class).create(10, METRE);
+		//sut = DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10, METRE);
 		sut = Quantities.getQuantity(10, METRE);
 	}
 

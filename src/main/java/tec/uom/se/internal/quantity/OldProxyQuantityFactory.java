@@ -59,7 +59,8 @@ import tec.uom.se.unit.Units;
  * @author  <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.3.2, $Date: 2015-07-12 $
+ * @version 0.3.3, $Date: 2015-07-24 $
+ * @deprecated This is mainly for demonstration purposes, the signature is not compatible with QuantityFactory
  */
 public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implements BiFactory<Number, Unit<Q>, Q> {
 	

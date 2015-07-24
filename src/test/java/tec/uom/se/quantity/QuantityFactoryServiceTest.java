@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -40,28 +40,35 @@ import javax.measure.Quantity;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Time;
+import javax.measure.spi.Bootstrap;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tec.uom.se.spi.QuantityFactoryProvider;
+import tec.uom.se.spi.QuantityFactoryService;
 
 /**
  * @author Werner Keil
  */
-public class QuantityFactoryProviderTest {
-
+public class QuantityFactoryServiceTest {
+	static QuantityFactoryService service;
+	
+	@BeforeClass
+	public static void init() {
+		service = Bootstrap.getService(QuantityFactoryService.class);
+	}
+	
 	@Test
 	public void testLength() {
-		Quantity<Length> l =  QuantityFactoryProvider.getQuantityFactory(Length.class).create(23.5, METRE); // 23.0 km
+		Quantity<Length> l =  service.getQuantityFactory(Length.class).create(23.5, METRE); // 23.0 km
 		assertEquals(23.5d, l.getValue());
 		assertEquals(METRE, l.getUnit());
 		assertEquals("m", l.getUnit().getSymbol());
 	}
 
-
 	@Test
 	public void testMass() {
-		Quantity<Mass> m = QuantityFactoryProvider.getQuantityFactory(Mass.class).create(10, KILOGRAM); // 10 kg
+		Quantity<Mass> m = service.getQuantityFactory(Mass.class).create(10, KILOGRAM); // 10 kg
 		assertEquals(10, m.getValue());
 		assertEquals(KILOGRAM, m.getUnit());
 		assertEquals("kg", m.getUnit().getSymbol());
@@ -70,7 +77,7 @@ public class QuantityFactoryProviderTest {
 	
 	@Test
 	public void testTime() {
-		Quantity<Time> t = QuantityFactoryProvider.getQuantityFactory(Time.class).create(30, SECOND); // 30 sec
+		Quantity<Time> t = service.getQuantityFactory(Time.class).create(30, SECOND); // 30 sec
 		assertEquals(30, t.getValue());
 		assertEquals(SECOND, t.getUnit());
 		assertEquals("s", t.getUnit().getSymbol());
@@ -79,12 +86,11 @@ public class QuantityFactoryProviderTest {
 
 	@Test
 	public void testTimeDerived() {
-		Quantity<Time> t = QuantityFactoryProvider.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
+		Quantity<Time> t = service.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
 		assertEquals(40, t.getValue());
 		assertEquals(MINUTE, t.getUnit());
 //		assertEquals("min", t.getUnit().getSymbol()); TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
 		assertNull(t.getUnit().getSymbol());
 		assertEquals("40 min", t.toString());
 	}
-
 }

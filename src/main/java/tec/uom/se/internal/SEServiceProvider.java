@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.spi;
+package tec.uom.se.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,15 +40,16 @@ import javax.measure.spi.ServiceProvider;
  * {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
+ * @deprecated PriorityAwareServiceProvider is used
  */
-public class SEServiceProvider implements ServiceProvider {
+class SEServiceProvider implements ServiceProvider {
     /** List of services loaded, per class. */
     @SuppressWarnings("rawtypes")
 	private final ConcurrentHashMap<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<Class, List<Object>>();
 
     @Override
     public int getPriority() {
-        return 0;
+        return 1;
     }
 
     /**
