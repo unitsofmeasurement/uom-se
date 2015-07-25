@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -23,11 +23,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se;
+package tec.uom.se.spi;
 
 import java.io.Serializable;
 import java.time.Instant;
+
 import javax.measure.Quantity;
+
+import tec.uom.se.ComparableQuantity;
 
 /**
  * <p>
@@ -40,9 +43,9 @@ import javax.measure.Quantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.1, $Date: 2014-11-29 $
+ * @version 0.2 $Date: 2015-07-25 $
  */
-public abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
+abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 		Measurement<Q>, Serializable {
 
 

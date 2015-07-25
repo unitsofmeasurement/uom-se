@@ -27,25 +27,29 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se;
+package tec.uom.se.spi;
 
 import static org.junit.Assert.assertEquals;
+import static tec.uom.se.unit.Units.KILOGRAM;
 
-import javax.measure.quantity.Length;
+import java.time.Instant;
 
-import org.junit.Ignore;
+import javax.measure.quantity.Mass;
+
 import org.junit.Test;
 
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.quantity.Quantities;
+import tec.uom.se.spi.Measurement;
 
-public class UnitsSETest {
-	private final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
-    
-    @Test
-    @Ignore
-    public void testReturnedClass() {
-    	assertEquals("Q", String.valueOf(sut.getActualType()));
-    }
+public class MeasurementTest {
+
+	@Test
+	public void testOf() {
+		Instant instant = Instant.now();
+		Measurement<Mass> measurement = Measurement.of(
+				Quantities.getQuantity(15, KILOGRAM), instant);
+		assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
+		assertEquals(instant, measurement.getInstant());
+		assertEquals(instant.toEpochMilli(), measurement.getTimestamp());
+	}
 }
-

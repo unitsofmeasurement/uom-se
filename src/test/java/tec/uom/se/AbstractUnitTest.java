@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -30,25 +30,31 @@
 package tec.uom.se;
 
 import static org.junit.Assert.assertEquals;
-import static tec.uom.se.unit.Units.KILOGRAM;
 
-import java.time.Instant;
+import javax.measure.quantity.Length;
 
-import javax.measure.quantity.Mass;
-
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tec.uom.se.quantity.Quantities;
+import tec.uom.se.AbstractUnit;
+import tec.uom.se.unit.BaseUnit;
 
-public class MeasurementTest {
-
-	@Test
-	public void testOf() {
-		Instant instant = Instant.now();
-		Measurement<Mass> measurement = Measurement.of(
-				Quantities.getQuantity(15, KILOGRAM), instant);
-		assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
-		assertEquals(instant, measurement.getInstant());
-		assertEquals(instant.toEpochMilli(), measurement.getTimestamp());
+public class AbstractUnitTest {
+	private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+    
+	@BeforeClass
+	public static void init() {
+		sut.setName("Test");
 	}
+	
+    @Test
+    public void testName() {
+    	assertEquals("Test", sut.getName());
+    }
+	
+    @Test
+    public void testReturnedClass() {
+    	//assertEquals("Q", String.valueOf(sut.getActualType())); // TODO we hope to get better type information in future Java versions
+    	assertEquals("java.lang.reflect.TypeVariable<D>", String.valueOf(sut.getActualType()));
+    }
 }
