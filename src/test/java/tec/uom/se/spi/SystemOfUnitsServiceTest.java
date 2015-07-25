@@ -34,9 +34,7 @@ import javax.measure.spi.SystemOfUnitsService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 public class SystemOfUnitsServiceTest {
-
     private static SystemOfUnitsService service;
 
     @BeforeClass
