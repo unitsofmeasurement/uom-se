@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -48,21 +48,19 @@ import javax.measure.spi.QuantityFactory;
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:otaviojava@java.net">Otavio Santana</a>
- * @version 0.6, $Date: 2014-12-16 $
+ * @version 0.7, $Date: 2015-07-25 $
  */
 public class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityFactory<Q>{
+    private Class<Q> quantity;
 
-    private Class<Q> unit;
-
-    public DefaultQuantityFactory(Class<Q> unit) {
-        this.unit = unit;
-
+    public DefaultQuantityFactory(Class<Q> quantity) {
+        this.quantity = quantity;
     }
 
     public String toString() {
         StringBuilder string = new StringBuilder();
         string.append("tec.uom.se.DefaultQuantityFactory <");
-        string.append(unit.getName()).append('>');
+        string.append(quantity.getName()).append('>');
         return string.toString();
     }
 
@@ -70,13 +68,13 @@ public class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityF
         if(DefaultQuantityFactory.class.isInstance(obj)) {
             @SuppressWarnings("rawtypes")
             DefaultQuantityFactory other = DefaultQuantityFactory.class.cast(obj);
-            return Objects.equals(unit, other.unit);
+            return Objects.equals(quantity, other.quantity);
         }
         return false;
     }
 
     public int hashCode() {
-        return unit.hashCode();
+        return quantity.hashCode();
     }
 
     @SuppressWarnings("unchecked")
