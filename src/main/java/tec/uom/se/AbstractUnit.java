@@ -35,6 +35,7 @@ import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
 import tec.uom.se.quantity.QuantityDimension;
+import tec.uom.se.spi.DimensionalModel;
 import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.ProductUnit;
@@ -42,6 +43,7 @@ import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.unit.Units;
 
 import javax.measure.*;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
