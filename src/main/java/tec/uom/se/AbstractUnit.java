@@ -70,7 +70,7 @@ import java.lang.reflect.Type;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.1, Jul 22, 2015
+ * @version 0.7.2, Jul 26, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		Comparable<Unit<Q>>, Serializable {
@@ -85,6 +85,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	protected String name;
 
+	/**
+	 * Holds the symbol.
+	 */
+	private String symbol;
+	
 	/**
 	 * Holds the unique symbols collection (base units or alternate units).
 	 */
@@ -302,7 +307,15 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	public String getName() {
 		return name;
 	}
+	
+	public String getSymbol() {
+		return symbol;
+	}
 
+	protected void setSymbol(String s) {
+		this.symbol = s;
+	}
+	
 	@Override
 	public final UnitConverter getConverterTo(Unit<Q> that)
 			throws UnconvertibleException {

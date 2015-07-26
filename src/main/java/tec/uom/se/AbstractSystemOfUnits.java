@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * <p>An abstract base class for unit systems.</p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2015-07-01 $
+ * @version 0.4.1, $Date: 2015-07-26 $
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
     /**
@@ -106,7 +106,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
         return quantityToUnit.get(quantityType);
     }
 	
-	static class Helper {
+	protected static class Helper {
 		static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
 				Dimension dimension) {
 			if (dimension != null) {
@@ -115,5 +115,51 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
 			}
 			return null;
 		}
+		
+	    /**
+			 * Adds a new named unit to the collection.
+			 * 
+			 * @param unit the unit being added.
+			 * @param name the name of the unit.
+			 * @return <code>unit</code>.
+			 */
+			@SuppressWarnings("unchecked")
+			public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
+				if (name != null && unit instanceof AbstractUnit) {
+					AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+					aUnit.setName(name);
+					units.add(aUnit);
+					return (U) aUnit;
+				}
+				units.add(unit);
+				return unit;
+			}
+			
+		    /**
+			 * Adds a new named unit to the collection.
+			 * 
+			 * @param unit the unit being added.
+			 * @param name the name of the unit.
+			 * @param name the symbol of the unit.
+			 * @return <code>unit</code>.
+			 */
+			@SuppressWarnings("unchecked")
+			public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name, String symbol) {
+				if (name != null && symbol!= null && unit instanceof AbstractUnit) {
+					AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+					aUnit.setName(name);
+					aUnit.setSymbol(symbol);
+					units.add(aUnit);
+					return (U) aUnit;
+				}
+				if (name != null && unit instanceof AbstractUnit) {
+					AbstractUnit<?> aUnit = (AbstractUnit<?>)unit;
+					aUnit.setName(name);
+					units.add(aUnit);
+					return (U) aUnit;
+				}
+				units.add(unit);
+				return unit;
+			}
 	}
 }
