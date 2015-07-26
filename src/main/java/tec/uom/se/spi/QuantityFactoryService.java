@@ -36,6 +36,7 @@ import javax.measure.spi.QuantityFactory;
  * @author otaviojava
  * @author werner
  * @version 0.1
+ * @deprecated Move to API
  */
 public interface QuantityFactoryService {
 
