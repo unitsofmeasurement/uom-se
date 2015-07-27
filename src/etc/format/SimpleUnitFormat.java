@@ -27,7 +27,6 @@ package tec.uom.se.format;
 
 import java.io.IOException;
 import java.lang.CharSequence;
-import java.math.BigInteger;
 import java.text.FieldPosition; // FIXME get rid of those without breaking JUnits
 import java.text.ParsePosition;
 import java.util.HashMap;
@@ -449,13 +448,13 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 					result.append('+');
 					result.append(((AddConverter) cvtr).getOffset());
 				} else if (cvtr instanceof RationalConverter) {
-					BigInteger dividend = ((RationalConverter) cvtr).getDividend();
-					if (!BigInteger.ONE.equals(dividend)) {
+					double dividend = ((RationalConverter) cvtr).getDividend().doubleValue();
+					if (dividend != 1) {
 						result.append('*');
 						result.append(dividend);
 					}
-					BigInteger divisor = ((RationalConverter) cvtr).getDivisor();
-					if  (!BigInteger.ONE.equals(divisor)) {
+					double divisor = ((RationalConverter) cvtr).getDivisor().doubleValue();
+					if (divisor != 1) {
 						result.append('/');
 						result.append(divisor);
 					}
@@ -854,15 +853,13 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 		protected Unit<?> parse(CharSequence csq, int index)
 				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
+			return parse(csq, new ParsePosition(index));
 		}
 
 		@Override
 		protected Unit<?> parse(CharSequence csq, ParsePosition cursor)
 				throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
+			return parseObject(csq.toString(), cursor);
 		}
 	}
 
