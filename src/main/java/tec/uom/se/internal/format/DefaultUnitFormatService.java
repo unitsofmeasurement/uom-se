@@ -35,20 +35,25 @@ import javax.measure.spi.UnitFormatService;
 
 import tec.uom.se.format.EBNFUnitFormat;
 import tec.uom.se.format.LocalUnitFormat;
+import tec.uom.se.format.SimpleUnitFormat;
+import tec.uom.se.format.SimpleUnitFormat.Flavor;
 
 /**
  * Default format service.
  *
  * @author Werner Keil
+ * @version 0.2, July 27, 2015
  */
 public class DefaultUnitFormatService implements UnitFormatService {
 
-    private static final String DEFAULT_FORMAT = "EBNF";
+    private static final String DEFAULT_FORMAT = Flavor.Default.name();
    
     private Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
  
     public DefaultUnitFormatService() {
-        formats.put(DEFAULT_FORMAT, EBNFUnitFormat.getInstance());
+        formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
+        formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
+        formats.put("EBNF", EBNFUnitFormat.getInstance());
         formats.put("Local", LocalUnitFormat.getInstance());
     }
 

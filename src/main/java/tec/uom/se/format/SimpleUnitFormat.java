@@ -74,7 +74,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 4149424034841739785L;
+	private static final long serialVersionUID = 4149424034841739785L;
 
 	/**
 	 * Flavor of this format
@@ -919,8 +919,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			}
 			return appendable;
 		}
-
-		private static final long serialVersionUID = 1L;
 	}
 
 	/**
