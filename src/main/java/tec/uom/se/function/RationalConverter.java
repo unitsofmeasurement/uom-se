@@ -123,7 +123,7 @@ public final class RationalConverter extends AbstractConverter implements
 	 * @throws IllegalArgumentException
 	 *             if <code>dividend == divisor</code>
 	 */
-	public static final RationalConverter of(BigInteger dividend,
+	public static RationalConverter of(BigInteger dividend,
 			BigInteger divisor) {
 		return new RationalConverter(dividend, divisor);
 	}
@@ -141,7 +141,7 @@ public final class RationalConverter extends AbstractConverter implements
 	 * @throws IllegalArgumentException
 	 *             if <code>dividend == divisor</code>
 	 */
-	public static final RationalConverter of(long dividend, long divisor) {
+	public static RationalConverter of(long dividend, long divisor) {
 		return new RationalConverter(dividend, divisor);
 	}
 	
@@ -159,7 +159,7 @@ public final class RationalConverter extends AbstractConverter implements
 	 * @throws IllegalArgumentException
 	 *             if <code>dividend == divisor</code>
 	 */
-	public static final RationalConverter of(double dividend, double divisor) {
+	public static RationalConverter of(double dividend, double divisor) {
 		return new RationalConverter(BigDecimal.valueOf(dividend).toBigInteger(),
 				BigDecimal.valueOf(divisor).toBigInteger());
 	}
