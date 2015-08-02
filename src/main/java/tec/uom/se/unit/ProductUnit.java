@@ -140,7 +140,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
         if (left instanceof ProductUnit<?>)
             leftElems = ((ProductUnit<?>) left).elements;
         else
-            leftElems = new Element[]{new Element((AbstractUnit<?>) left, 1, 1)};
+            leftElems = new Element[]{new Element(left, 1, 1)};
         Element[] rightElems;
         if (right instanceof ProductUnit<?>) {
             Element[] elems = ((ProductUnit<?>) right).elements;
@@ -150,7 +150,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
                         elems[i].root);
             }
         } else
-            rightElems = new Element[]{new Element((AbstractUnit<?>) right, -1, 1)};
+            rightElems = new Element[]{new Element(right, -1, 1)};
         return getInstance(leftElems, rightElems);
     }
 
