@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.text.ParsePosition;
 
 import javax.measure.Unit;
+import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
 import tec.uom.se.AbstractUnit;
@@ -46,7 +47,7 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.5.1 ($Revision: 215 $), $Date: 2015-01-24 $
+ * @version 0.5.2, $Date: 2015-08-02 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -69,6 +70,32 @@ public abstract class AbstractUnitFormat implements UnitFormat {
      */
     public abstract Appendable format(Unit<?> unit, Appendable appendable)
             throws IOException;
+    
+    /**
+	 * Formats an object to produce a string. This is equivalent to <blockquote>
+	 * {@link #format(Unit, StringBuilder) format}<code>(unit,
+	 *         new StringBuilder()).toString();</code>
+	 * </blockquote>
+	 *
+	 * @param obj
+	 *            The object to format
+	 * @return Formatted string.
+	 * @exception IllegalArgumentException
+	 *                if the Format cannot format the given object
+	 */
+	public final String format(Unit<?> unit) {
+		if (unit instanceof AbstractUnit) {
+			return format((AbstractUnit<?>) unit, new StringBuilder())
+					.toString();
+		} else {
+			try {
+				return (this.format(unit, new StringBuilder()))
+						.toString();
+			} catch (IOException ex) {
+				throw new ParserException(ex); // Should never happen.
+			}
+		}
+	}
 
     /**
      * Parses a portion of the specified <code>CharSequence</code> from the
