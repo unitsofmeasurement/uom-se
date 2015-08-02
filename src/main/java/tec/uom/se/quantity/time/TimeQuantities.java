@@ -54,13 +54,13 @@ public final class TimeQuantities {
     private TimeQuantities() {
     }
 
-    public static final Unit<Time> MICROSECOND = new TransformedUnit<Time>(
+    public static final Unit<Time> MICROSECOND = new TransformedUnit<>(
             "μs", SECOND, MetricPrefix.MICRO.getConverter());
 
-    public static final TransformedUnit<Time> MILLISECOND = new TransformedUnit<Time>(
+    public static final TransformedUnit<Time> MILLISECOND = new TransformedUnit<>(
             "ms", SECOND, MetricPrefix.MILLI.getConverter());
 
-    public static final TransformedUnit<Time> NANOSECOND = new TransformedUnit<Time>(
+    public static final TransformedUnit<Time> NANOSECOND = new TransformedUnit<>(
             "ns", SECOND, MetricPrefix.NANO.getConverter());
 
 

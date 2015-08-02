@@ -43,7 +43,7 @@ import static org.junit.Assert.*;
  */
 public class BaseUnitTest {
 	
-	private final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+	private final AbstractUnit<Length> sut = new BaseUnit<>("m");
 
 //    public BaseUnitTest() {
 //    }

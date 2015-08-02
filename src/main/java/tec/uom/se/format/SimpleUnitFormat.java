@@ -367,12 +367,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		/**
 		 * Holds the name to unit mapping.
 		 */
-		final HashMap<String, Unit<?>> _nameToUnit = new HashMap<String, Unit<?>>();
+		final HashMap<String, Unit<?>> _nameToUnit = new HashMap<>();
 
 		/**
 		 * Holds the unit to name mapping.
 		 */
-		final HashMap<Unit<?>, String> _unitToName = new HashMap<Unit<?>, String>();
+		final HashMap<Unit<?>, String> _unitToName = new HashMap<>();
 
 		@Override
 		public void label(Unit<?> unit, String label) {
@@ -924,7 +924,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
 	 * Holds the unique symbols collection (base units or alternate units).
 	 */
-	private static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<String, Unit<?>>();
+	private static final Map<String, Unit<?>> SYMBOL_TO_UNIT = new HashMap<>();
 
 	// //////////////////////////////////////////////////////////////////////////
 	// Initializes the standard unit database for SI units.

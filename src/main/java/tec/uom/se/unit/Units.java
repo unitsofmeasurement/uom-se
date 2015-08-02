@@ -95,7 +95,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	 * Holds the dimensionless unit <code>ONE</code>.
 	 */
 	public static final Unit<Dimensionless> ONE
-			= addUnit(new ProductUnit<Dimensionless>(), Dimensionless.class);
+			= addUnit(new ProductUnit<>(), Dimensionless.class);
 	
     ////////////////
     // BASE UNITS //
@@ -159,7 +159,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * @implNote SI Base Unit
      */
     public static final Unit<Length> METRE
-            = addUnit(new BaseUnit<Length>("m", QuantityDimension.LENGTH), Length.class);
+            = addUnit(new BaseUnit<>("m", QuantityDimension.LENGTH), Length.class);
 
     /**
      * The SI base unit for amount of substance quantities (standard name <code>mol</code>).
@@ -169,7 +169,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * @implNote SI Base Unit
      */
     public static final Unit<AmountOfSubstance> MOLE
-            = addUnit(new BaseUnit<AmountOfSubstance>("mol", QuantityDimension.AMOUNT_OF_SUBSTANCE), AmountOfSubstance.class);
+            = addUnit(new BaseUnit<>("mol", QuantityDimension.AMOUNT_OF_SUBSTANCE), AmountOfSubstance.class);
 
     /**
      * The SI base unit for duration quantities (standard name <code>s</code>).
@@ -180,7 +180,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * @implNote SI Base Unit
      */
     public static final Unit<Time> SECOND
-            = addUnit(new BaseUnit<Time>("s", QuantityDimension.TIME), Time.class);
+            = addUnit(new BaseUnit<>("s", QuantityDimension.TIME), Time.class);
 
 
     ////////////////////////////////
@@ -418,21 +418,21 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The SI unit for velocity quantities (standard name <code>m/s</code>).
      */
     public static final Unit<Speed> METRES_PER_SECOND
-            = addUnit(new ProductUnit<Speed>(
+            = addUnit(new ProductUnit<>(
             METRE.divide(SECOND)), Speed.class);
 
     /**
      * The SI unit for acceleration quantities (standard name <code>m/s2</code>).
      */
     public static final Unit<Acceleration> METRES_PER_SQUARE_SECOND
-            = addUnit(new ProductUnit<Acceleration>(
+            = addUnit(new ProductUnit<>(
             METRES_PER_SECOND.divide(SECOND)), Acceleration.class);
 
     /**
      * The SI unit for area quantities (standard name <code>m2</code>).
      */
     public static final Unit<Area> SQUARE_METRE
-            = addUnit(new ProductUnit<Area>(METRE.multiply(METRE)), Area.class);
+            = addUnit(new ProductUnit<>(METRE.multiply(METRE)), Area.class);
 
     /**
      * The SI unit for volume quantities (standard name <code>m3</code>).
@@ -456,7 +456,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * A dimensionless unit accepted for use with SI units (standard name <code>%</code>).
      */
     public static final TransformedUnit<Dimensionless> PERCENT
-        = new TransformedUnit<Dimensionless>(ONE, new RationalConverter(1, 100));
+        = new TransformedUnit<>(ONE, new RationalConverter(1, 100));
 
 	//////////
 	// Time //
@@ -465,19 +465,19 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * A time unit accepted for use with SI units (standard name <code>min</code>).
      */
     public static final Unit<Time> MINUTE
-        = new TransformedUnit<Time>("min", SECOND, new RationalConverter(60, 1));
+        = new TransformedUnit<>("min", SECOND, new RationalConverter(60, 1));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>h</code>).
      */
     public static final Unit<Time> HOUR
-        = new TransformedUnit<Time>("h", SECOND, new RationalConverter(60 * 60, 1));
+        = new TransformedUnit<>("h", SECOND, new RationalConverter(60 * 60, 1));
 
     /**
      * A time unit accepted for use with SI units (standard name <code>d</code>).
      */
     public static final Unit<Time> DAY
-        = new TransformedUnit<Time>("d", SECOND, new RationalConverter(24 * 60 * 60, 1));
+        = new TransformedUnit<>("d", SECOND, new RationalConverter(24 * 60 * 60, 1));
 
 	/**
 	 * A unit of duration equal to 7 {@link #DAY} (standard name
@@ -494,13 +494,13 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * An angle unit accepted for use with SI units (standard name <code>deg</code>).
      */
     public static final Unit<Angle> DEGREE_ANGLE
-        = new TransformedUnit<Angle>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180)));
+        = new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180)));
 
     /**
      * An angle unit accepted for use with SI units (standard name <code>'</code>).
      */
     public static final Unit<Angle> MINUTE_ANGLE
-        = new TransformedUnit<Angle>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180 * 60)));
+        = new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180 * 60)));
 
     /**
      * An angle unit accepted for use with SI units (standard name <code>''</code>).
@@ -512,7 +512,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * A volume unit accepted for use with SI units (standard name <code>l</code>).
      */
     public static final Unit<Volume> LITRE
-        = new TransformedUnit<Volume>(CUBIC_METRE, new RationalConverter(1, 1000));
+        = new TransformedUnit<>(CUBIC_METRE, new RationalConverter(1, 1000));
 
     
 	/**
