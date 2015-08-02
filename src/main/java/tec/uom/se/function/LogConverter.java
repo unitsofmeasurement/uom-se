@@ -57,11 +57,11 @@ public final class LogConverter extends AbstractConverter
 	/**
      * Holds the logarithmic base.
      */
-    private double base;
+    private final double base;
     /**
      * Holds the natural logarithm of the base.
      */
-    private double logOfBase;
+    private final double logOfBase;
 
     /**
      * Returns a logarithmic converter having the specified base.

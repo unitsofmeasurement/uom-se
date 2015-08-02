@@ -29,8 +29,8 @@ import org.junit.Test;
 import tec.uom.se.quantity.Quantities;
 
 public class UnitConverterTest {
-	private Unit<Length> sourceUnit = METRE;
-	private Unit<Length> targetUnit = CENTI(METRE);
+	private final Unit<Length> sourceUnit = METRE;
+	private final Unit<Length> targetUnit = CENTI(METRE);
 	
 	@Test
 	public void testDouble() {

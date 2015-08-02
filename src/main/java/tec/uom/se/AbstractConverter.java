@@ -176,12 +176,12 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
         /**
          * Holds the first converter.
          */
-        private UnitConverter left;
+        private final UnitConverter left;
 
         /**
          * Holds the second converter.
          */
-        private UnitConverter right;
+        private final UnitConverter right;
 
         /**
          * Creates a pair converter resulting from the combined

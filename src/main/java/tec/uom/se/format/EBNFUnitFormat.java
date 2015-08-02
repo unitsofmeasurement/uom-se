@@ -255,7 +255,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	 * The symbol map used by this instance to map between
 	 * {@link org.unitsofmeasure.Unit Unit}s and <code>String</code>s, etc...
 	 */
-	private transient SymbolMap symbolMap;
+	private final transient SymbolMap symbolMap;
 
 	// ////////////////
 	// Constructors //

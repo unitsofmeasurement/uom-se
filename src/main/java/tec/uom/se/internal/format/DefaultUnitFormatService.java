@@ -48,7 +48,7 @@ public class DefaultUnitFormatService implements UnitFormatService {
 
     private static final String DEFAULT_FORMAT = Flavor.Default.name();
    
-    private Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
+    private final Map<String, UnitFormat> formats = new HashMap<String, UnitFormat>();
  
     public DefaultUnitFormatService() {
         formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());

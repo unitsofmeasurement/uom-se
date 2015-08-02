@@ -118,7 +118,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
      * DefaultQuantityFactory locale instance. If the default locale is changed after the class
      * is initialized, this instance will no longer be used.
      */
-    private static LocalUnitFormat DEFAULT_INSTANCE = new LocalUnitFormat(SymbolMap.of(
+    private static final LocalUnitFormat DEFAULT_INSTANCE = new LocalUnitFormat(SymbolMap.of(
             ResourceBundle.getBundle(LocalUnitFormat.class.getPackage().getName() + ".messages")));
     /**
      * Multiplicand character
