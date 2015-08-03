@@ -37,7 +37,7 @@ import java.util.ResourceBundle;
  *
  */
 public final class BundleToMapAdapter {
-	public final static Map<String, String> toMap(final ResourceBundle resource) {
+	public static Map<String, String> toMap(final ResourceBundle resource) {
 		Map<String, String> map = new HashMap<>();
 
 		Enumeration<String> keys = resource.getKeys();
@@ -61,7 +61,7 @@ public final class BundleToMapAdapter {
 //		return map;
 //	}
 
-	public final static Map<String, String> toMap(String resName) {
+	public static Map<String, String> toMap(String resName) {
 		return toMap(ResourceBundle.getBundle(resName));
 	}
 }
