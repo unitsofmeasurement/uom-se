@@ -51,7 +51,7 @@ import javax.measure.spi.QuantityFactory;
  * @version 0.7, $Date: 2015-07-25 $
  */
 public class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityFactory<Q>{
-    private Class<Q> quantity;
+    private final Class<Q> quantity;
 
     public DefaultQuantityFactory(Class<Q> quantity) {
         this.quantity = quantity;

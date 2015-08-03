@@ -50,9 +50,9 @@ import tec.uom.se.quantity.Quantities;
  */
 public class TimeUnitQuantity {
 
-    private TimeUnit timeUnit;
+    private final TimeUnit timeUnit;
 
-    private Integer value;
+    private final Integer value;
 
     /**
      * creates the {@link TimeUnitQuantity} using {@link TimeUnit} and {@link Integer}

@@ -768,13 +768,13 @@ public final class LocalUnitFormatParser {
             return (nextTokenIndex = nextToken.kind);
         }
     }
-    private java.util.List<int[]> expentries = new java.util.ArrayList<>();
+    private final java.util.List<int[]> expentries = new java.util.ArrayList<>();
 
     private int[] expentry;
 
     private int kind = -1;
 
-    private int[] lastTokens = new int[100];
+    private final int[] lastTokens = new int[100];
 
     private int endpos;
 

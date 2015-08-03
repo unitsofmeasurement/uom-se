@@ -48,8 +48,8 @@ import tec.uom.se.function.Nameable;
  */
 public class TimedData<T> implements Nameable, Supplier<T> {
     private final T value;
-    private long timestamp;
-    private Instant instant;
+    private final long timestamp;
+    private final Instant instant;
     private String name;
     
     /**
