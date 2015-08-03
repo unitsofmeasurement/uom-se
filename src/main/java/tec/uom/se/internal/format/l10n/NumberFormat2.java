@@ -400,11 +400,11 @@ class NumberFormat2 {
 		try {
 			parsed = new Double(newVal);
 			if (parsed.isInfinite() || parsed.isNaN())
-				parsed = new Double(0);
+				parsed = (double) 0;
 		} catch (NumberFormatException e) {
-			parsed = new Double(0);
+			parsed = (double) 0;
 		}
 
-		return isPercentage ? parsed.doubleValue() / 100 : parsed.doubleValue();
+		return isPercentage ? parsed / 100 : parsed;
 	}
 }
