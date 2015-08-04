@@ -69,11 +69,11 @@ public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
 	
 	@SuppressWarnings({ "unchecked" })
 	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
-		return new Default<Q>(q);
+		return new Default<>(q);
 	}
 	
 	@SuppressWarnings("unchecked")
 	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, Instant i) {
-		return new Default<Q>(q, i);
+		return new Default<>(q, i);
 	}
 }

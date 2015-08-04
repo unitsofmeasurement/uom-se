@@ -40,7 +40,7 @@ import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;
 
 public class AbstractUnitTest {
-	private static final AbstractUnit<Length> sut = new BaseUnit<Length>("m");
+	private static final AbstractUnit<Length> sut = new BaseUnit<>("m");
     
 	@BeforeClass
 	public static void init() {

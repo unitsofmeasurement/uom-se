@@ -43,7 +43,7 @@ public class MultiPropertyResourceBundle extends ResourceBundle {
      * A {@link Map} containing all the properties that have been merged from multiple {@link ResourceBundle} instances.
      * </p>
      */
-    private final Map<String, Object> resources = new HashMap<String, Object>();
+    private final Map<String, Object> resources = new HashMap<>();
 
     /**
      * <p>

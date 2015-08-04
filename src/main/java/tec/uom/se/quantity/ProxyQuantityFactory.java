@@ -97,7 +97,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
 	                // This exception is not documented because it should never happen if the
 	                // user don't try to trick the Java generic types system with unsafe cast.
 	                throw new ClassCastException();
-	            factory = new Default<Q>((Class<Q>)type2);
+	            factory = new Default<>((Class<Q>) type2);
 	            INSTANCES.put(type2, factory);
         	 } else {
                  factory = INSTANCES.get(type);
@@ -106,7 +106,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
                      // This exception is not documented because it should never happen if the
                      // user don't try to trick the Java generic types system with unsafe cast.
                      throw new ClassCastException();
-                 factory = new Default<Q>(type);
+                 factory = new Default<>(type);
                  INSTANCES.put(type, factory);
         	 }
          } else {
@@ -116,7 +116,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
                 // This exception is not documented because it should never happen if the
                 // user don't try to trick the Java generic types system with unsafe cast.
                 throw new ClassCastException();
-            factory = new Default<Q>(type);
+            factory = new Default<>(type);
             INSTANCES.put(type, factory);
          }
         return factory;
@@ -175,7 +175,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
             metricUnit = CLASS_TO_METRIC_UNIT.get(type);
         }
         @SuppressWarnings("rawtypes")
-		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<Class, Unit>();
+		static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
         static {
             CLASS_TO_METRIC_UNIT.put(Dimensionless.class, Units.ONE);
             CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
@@ -224,7 +224,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
 		public Quantity<Q> create(Number value, Unit<Q> unit) {
 	           //System.out.println("Type: " + type);
             return (Q) Proxy.newProxyInstance(type.getClassLoader(),
-                    new Class<?>[]{type}, new GenericHandler<Q>(value, unit));
+                    new Class<?>[]{type}, new GenericHandler<>(value, unit));
 		}
     }
 

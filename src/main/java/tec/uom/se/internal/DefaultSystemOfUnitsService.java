@@ -40,7 +40,7 @@ import tec.uom.se.unit.Units;
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 	
-	final Map<String, SystemOfUnits> souMap = new ConcurrentHashMap<String, SystemOfUnits>();
+	final Map<String, SystemOfUnits> souMap = new ConcurrentHashMap<>();
 
 	public DefaultSystemOfUnitsService() {
 		souMap.put(Units.class.getSimpleName(), Units.getInstance());
