@@ -263,8 +263,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
             } else if (name.equals("getUnit")) {
                 return unit;
             } else if (name.equals("toString")) {
-                final StringBuilder buffer = new StringBuilder();
-                return buffer.append(value).append(' ').append(unit).toString();
+                return String.valueOf(value) + ' ' + unit;
             } else if (name.equals("hashCode")) {
                 return value.hashCode() * 31 + unit.hashCode();
             } else if (name.equals("equals")) {
@@ -272,9 +271,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
                 if (!(obj instanceof AbstractQuantity))
                     return false;
                 final AbstractQuantity<Q> that = (AbstractQuantity<Q>) obj;
-                if (!unit.isCompatible((AbstractUnit<?>) that.getUnit()))
-                    return false;
-                return value.doubleValue() == (that).doubleValue(unit);
+                return unit.isCompatible((AbstractUnit<?>) that.getUnit()) && value.doubleValue() == (that).doubleValue(unit);
             } else if (name.equals("compareTo")) {
                 final AbstractQuantity<Q> that = (AbstractQuantity<Q>) args[0];
                 return Double.compare(value.doubleValue(), that.doubleValue(unit));
