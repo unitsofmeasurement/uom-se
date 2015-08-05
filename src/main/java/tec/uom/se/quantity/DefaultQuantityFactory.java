@@ -58,10 +58,7 @@ public class DefaultQuantityFactory <Q extends Quantity<Q>> implements QuantityF
     }
 
     public String toString() {
-        StringBuilder string = new StringBuilder();
-        string.append("tec.uom.se.DefaultQuantityFactory <");
-        string.append(quantity.getName()).append('>');
-        return string.toString();
+        return "tec.uom.se.DefaultQuantityFactory <" + quantity.getName() + '>';
     }
 
     public boolean equals(Object obj) {
