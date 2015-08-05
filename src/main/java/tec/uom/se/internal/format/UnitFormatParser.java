@@ -72,8 +72,7 @@ Unit<?> compoundExpr() throws TokenException {
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case COLON:
-        ;
-        break;
+          break;
       default:
         jj_la1[0] = jj_gen;
         break label_1;
@@ -95,7 +94,6 @@ Unit<?> addExpr() throws TokenException {
       n1 = numberExpr();
       sign1 = sign();
     } else {
-      ;
     }
     result = mulExpr();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -106,7 +104,6 @@ Unit<?> addExpr() throws TokenException {
       break;
     default:
       jj_la1[1] = jj_gen;
-      ;
     }
         if (n1 != null) {
             if (sign1.image.equals("-")) {
@@ -135,8 +132,7 @@ Unit<?> addExpr() throws TokenException {
       case ASTERISK:
       case MIDDLE_DOT:
       case SOLIDUS:
-        ;
-        break;
+          break;
       default:
         jj_la1[2] = jj_gen;
         break label_2;
@@ -216,7 +212,6 @@ Unit<?> addExpr() throws TokenException {
           break;
         default:
           jj_la1[6] = jj_gen;
-          ;
         }
         if (exponent != null) {
             if (exponent.pow != 1) {
@@ -239,7 +234,6 @@ Unit<?> addExpr() throws TokenException {
             break;
           default:
             jj_la1[7] = jj_gen;
-            ;
           }
           break;
         case NAT_LOG:
@@ -374,7 +368,6 @@ Token sign() throws TokenException {
           break;
         default:
           jj_la1[13] = jj_gen;
-          ;
         }
         powToken = jj_consume_token(INTEGER);
             int pow = Integer.parseInt(powToken.image);
@@ -391,7 +384,6 @@ Token sign() throws TokenException {
           break;
         default:
           jj_la1[14] = jj_gen;
-          ;
         }
         powToken = jj_consume_token(INTEGER);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -404,13 +396,11 @@ Token sign() throws TokenException {
             break;
           default:
             jj_la1[15] = jj_gen;
-            ;
           }
           rootToken = jj_consume_token(INTEGER);
           break;
         default:
           jj_la1[16] = jj_gen;
-          ;
         }
         jj_consume_token(CLOSE_PAREN);
             pow = Integer.parseInt(powToken.image);
