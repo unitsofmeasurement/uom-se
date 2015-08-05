@@ -141,7 +141,7 @@ public class MultiPropertyResourceBundle extends ResourceBundle {
      */
     @Override
     public Enumeration<String> getKeys() {
-        Vector<String> keys = new Vector<String>(this.resources.keySet());
+        Vector<String> keys = new Vector<>(this.resources.keySet());
         return keys.elements();
     }
 
