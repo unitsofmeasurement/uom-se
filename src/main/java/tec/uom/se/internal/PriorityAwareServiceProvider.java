@@ -50,13 +50,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
      */
     private final Map<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<>();
 
-    private static final Comparator<Object> SERVICE_COMPARATOR = new Comparator<Object>(){
-
-        @Override
-        public int compare(Object o1, Object o2) {
-            return PriorityAwareServiceProvider.compareServices(o1, o2);
-        }
-    };
+    private static final Comparator<Object> SERVICE_COMPARATOR = PriorityAwareServiceProvider::compareServices;
 
     /**
      * Returns a priority value of 10.
