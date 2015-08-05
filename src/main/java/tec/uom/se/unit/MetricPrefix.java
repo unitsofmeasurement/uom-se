@@ -89,7 +89,7 @@ public enum MetricPrefix implements UnitConverterSupplier {
      *
      * @param converter the associated unit converter.
      */
-    private MetricPrefix (RationalConverter converter) {
+    MetricPrefix(RationalConverter converter) {
         this.converter = converter;
     }
 

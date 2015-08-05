@@ -82,7 +82,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @author Werner
 	 *
 	 */
-	public static enum Flavor {
+	public enum Flavor {
 		Default, ASCII
 	}
 
@@ -458,7 +458,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 						result.append('/');
 						result.append(divisor);
 					}
-					;
 				} else if (cvtr instanceof MultiplyConverter) {
 					result.append('*');
 					result.append(((MultiplyConverter) cvtr).getFactor());
