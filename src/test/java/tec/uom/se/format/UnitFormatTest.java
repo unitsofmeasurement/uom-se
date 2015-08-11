@@ -1,6 +1,6 @@
 /*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -52,7 +52,6 @@ import tec.uom.se.unit.Units;
 
 import org.junit.Before;
 import org.junit.Test;
-
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
