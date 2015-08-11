@@ -1,4 +1,4 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
  *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
@@ -34,9 +34,7 @@ import static org.junit.Assert.fail;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.MetricPrefix.MEGA;
 import static tec.uom.se.unit.Units.HERTZ;
-import static tec.uom.se.unit.Units.KILOGRAM;
 import static tec.uom.se.unit.Units.METRE;
-import static tec.uom.se.unit.Units.MINUTE;
 import static tec.uom.se.unit.Units.SECOND;
 
 import java.io.IOException;
@@ -50,7 +48,6 @@ import javax.measure.quantity.Length;
 import javax.measure.quantity.Speed;
 
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.spi.QuantityFactoryService;
 import tec.uom.se.unit.Units;
 
 import org.junit.Before;

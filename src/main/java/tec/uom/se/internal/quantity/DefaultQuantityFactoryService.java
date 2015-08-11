@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -34,15 +34,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
+import javax.measure.spi.QuantityFactoryService;
 
 import tec.uom.se.quantity.DefaultQuantityFactory;
-import tec.uom.se.spi.QuantityFactoryService;
 
 /**
  * Provider of Quantities
  * @author otaviojava
  * @author werner
- * @version 0.2
+ * @version 0.3
  */
 @SuppressWarnings("rawtypes")
 public final class DefaultQuantityFactoryService implements QuantityFactoryService {

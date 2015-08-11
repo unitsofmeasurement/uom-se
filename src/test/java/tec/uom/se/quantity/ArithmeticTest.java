@@ -35,12 +35,8 @@ import static tec.uom.se.unit.Units.METRE;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
-import javax.measure.spi.QuantityFactory;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import tec.uom.se.spi.QuantityFactoryService;
 
 public class ArithmeticTest {
 

@@ -41,11 +41,10 @@ import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Time;
 import javax.measure.spi.Bootstrap;
+import javax.measure.spi.QuantityFactoryService;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import tec.uom.se.spi.QuantityFactoryService;
 
 /**
  * @author Werner Keil
