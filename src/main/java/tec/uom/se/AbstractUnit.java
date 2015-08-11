@@ -31,6 +31,7 @@ package tec.uom.se;
 
 import tec.uom.se.format.EBNFUnitFormat;
 import tec.uom.se.format.LocalUnitFormat;
+import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
@@ -44,7 +45,6 @@ import tec.uom.se.unit.Units;
 
 import javax.measure.*;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.HashMap;
@@ -210,6 +210,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	@Override
 	public String toString() {
+		return SimpleUnitFormat.getInstance().format(this);
+		/*
 		final Appendable tmp = new StringBuilder();
 		try {
 			// return UCUMFormat.getInstance(CASE_SENSITIVE).format(this,
@@ -219,7 +221,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 			throw new Error(ioException); // Should never happen.
 		} finally {
 			// if (tmp!=null) tmp.clear();
-		}
+		} */
 	}
 
 	// ///////////////////////////////////////////////////////
