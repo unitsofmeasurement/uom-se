@@ -96,6 +96,10 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 			}
 		}
 	}
+	
+	@Override
+	public void label(Unit<?> unit, String label) {
+	}
 
     /**
      * Parses a portion of the specified <code>CharSequence</code> from the
