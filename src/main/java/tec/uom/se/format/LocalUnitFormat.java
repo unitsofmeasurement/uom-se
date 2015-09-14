@@ -211,6 +211,10 @@ public class LocalUnitFormat extends AbstractUnitFormat {
         formatInternal(unit, appendable);
         return appendable;
     }
+    
+	public boolean isLocaleSensitive() {
+		return true;
+	}
 
     public Unit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
         // Parsing reads the whole character sequence from the parse position.

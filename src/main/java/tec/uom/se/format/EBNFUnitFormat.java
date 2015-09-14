@@ -167,7 +167,7 @@ import tec.uom.se.unit.Units;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-07-06 $
+ * @version 0.6.1, $Date: 2015-09-14 $
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
 
@@ -311,6 +311,10 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		return appendable;
 	}
 
+	public boolean isLocaleSensitive() {
+		return false;
+	}
+	
 	protected Unit<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException {
 		// Parsing reads the whole character sequence from the parse position.

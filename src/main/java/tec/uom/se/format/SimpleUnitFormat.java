@@ -68,7 +68,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.4.2, July 6, 2015
+ * @version 0.4.3, September 14, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -245,6 +245,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 *             identifier.
 	 */
 	public abstract void label(Unit<?> unit, String label);
+	
+	public boolean isLocaleSensitive() {
+		return false;
+	}
 
 	/**
 	 * Attaches a system-wide alias to this unit. Multiple aliases may be
