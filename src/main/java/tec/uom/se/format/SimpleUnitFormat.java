@@ -1080,6 +1080,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// ASCII.label(NonUnits.RANKINE, "degree_rankine");
 		// DEFAULT.label(NonUnits.FAHRENHEIT, "°F");
 		// ASCII.label(NonUnits.FAHRENHEIT, "degree_fahrenheit");
+		ASCII.label(Units.KILOMETRES_PER_HOUR, "kph");
 		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "kph");
 		// DEFAULT.label(NonUnits.KNOT, "kn");
 		// DEFAULT.label(NonUnits.MACH, "Mach");

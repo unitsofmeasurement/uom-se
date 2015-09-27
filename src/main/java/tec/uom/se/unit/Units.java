@@ -29,8 +29,11 @@
  */
 package tec.uom.se.unit;
 
+import static tec.uom.se.unit.MetricPrefix.*;
+
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
+import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.Nameable;
 import tec.uom.se.function.PiMultiplierConverter;
@@ -78,7 +81,7 @@ import javax.measure.spi.SystemOfUnits;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.2, July 12, 2015
+ * @version 0.6, Sep 27, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -547,4 +550,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
         INSTANCE.quantityToUnit.put(type, unit);
         return unit;
     }
+    
+	// //////////////////////////////////////////////////////////////////////////
+	// Label adjustments for Units
+	static {
+		SimpleUnitFormat.getInstance().label(KILOMETRES_PER_HOUR, "kph");
+		SimpleUnitFormat.getInstance().label(KILO(METRE), "km");
+		SimpleUnitFormat.getInstance().label(LITRE, "l");
+	}
 }
