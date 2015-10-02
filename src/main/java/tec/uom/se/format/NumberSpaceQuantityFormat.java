@@ -9,7 +9,6 @@ import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
-import tec.uom.se.AbstractUnit;
 import tec.uom.se.ComparableQuantity;
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.Units;

@@ -1,6 +1,6 @@
-/**
+/*
  *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+ *  Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -38,7 +38,6 @@ import java.text.ParsePosition;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.format.Parser;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
@@ -57,7 +56,7 @@ import tec.uom.se.ComparableQuantity;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4, $Date: 2014-11-15 $
+ * @version 0.5, $Date: 2015-10-02 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
