@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.annotation.Priority;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.UnitFormatService;
 
@@ -42,8 +43,9 @@ import tec.uom.se.format.SimpleUnitFormat.Flavor;
  * Default format service.
  *
  * @author Werner Keil
- * @version 0.2, July 27, 2015
+ * @version 0.3, October 4, 2015
  */
+@Priority(2000)
 public class DefaultUnitFormatService implements UnitFormatService {
 
     private static final String DEFAULT_FORMAT = Flavor.Default.name();
@@ -86,5 +88,4 @@ public class DefaultUnitFormatService implements UnitFormatService {
     public Set<String> getAvailableFormatNames() {
         return formats.keySet();
     }
-
 }
