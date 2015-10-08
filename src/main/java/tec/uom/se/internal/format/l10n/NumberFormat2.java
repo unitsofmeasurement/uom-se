@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright © 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -27,7 +27,6 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package tec.uom.se.internal.format.l10n;
 
 /**
