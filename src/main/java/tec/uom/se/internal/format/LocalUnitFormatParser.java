@@ -34,7 +34,6 @@ import static tec.uom.se.internal.format.UnitTokenConstants.*;
 
 import javax.measure.Unit;
 
-import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.unit.MetricPrefix;
@@ -72,7 +71,6 @@ public final class LocalUnitFormatParser {
             return result;
         }
     }
-
 
     final public Unit CompoundExpr() throws TokenException {
         throw new UnsupportedOperationException("Compound units not supported");
