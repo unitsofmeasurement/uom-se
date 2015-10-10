@@ -66,19 +66,19 @@ import javax.measure.format.UnitFormat;
  * <code>
  *        AbstractUnit.parse("m°C").equals(MetricPrefix.MILLI(Units.CELSIUS))
  *        AbstractUnit.parse("kW").equals(MetricPrefix.KILO(Units.WATT))
- *        AbstractUnit.parse("ft").equals(Units.METER.multiply(0.3048))</code>
+ *        AbstractUnit.parse("ft").equals(Units.METRE.multiply(0.3048))</code>
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.4.3, September 14, 2015
+ * @version 0.5, October 10, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4149424034841739785L;
+//	private static final long serialVersionUID = 4149424034841739785L;
 
 	/**
 	 * Flavor of this format
@@ -407,10 +407,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		public boolean isValidIdentifier(String name) {
 			if ((name == null) || (name.length() == 0))
 				return false;
-			for (int i = 0; i < name.length(); i++) {
+			/*for (int i = 0; i < name.length(); i++) {
 				if (!isUnitIdentifierPart(name.charAt(i)))
 					return false;
-			}
+			} */
+			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
+					return false;
 			return true;
 		}
 
@@ -844,7 +846,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			}
 		}
 
-		private static final long serialVersionUID = 1L;
+//		private static final long serialVersionUID = 1L;
 
 		@Override
 		public Unit<?> parse(CharSequence csq) throws ParserException {
@@ -871,9 +873,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	}
 
 	/**
-	 * This class represents the ASCIIFormat format.
+	 * This class represents the ASCII format.
 	 */
-	protected static class ASCIIFormat extends DefaultFormat {
+	protected final static class ASCIIFormat extends DefaultFormat {
 
 		@Override
 		public String nameFor(Unit<?> unit) {
@@ -926,6 +928,35 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			}
 			return appendable;
 		}
+		
+		@Override
+		public boolean isValidIdentifier(String name) {
+			if ((name == null) || (name.length() == 0))
+				return false;
+			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
+					return false;
+			return isAllASCII(name);
+			/*
+			for (int i = 0; i < name.length(); i++) {
+				if (!isAsciiCharacter(name.charAt(i)))
+				return false;
+			}
+			return true; */
+		}
+		
+		// to check if a string only contains US-ASCII characters
+		//
+		private static boolean isAllASCII(String input) {
+		    boolean isASCII = true;
+		    for (int i = 0; i < input.length(); i++) {
+		        int c = input.charAt(i);
+		        if (c > 0x7F) {
+		            isASCII = false;
+		            break;
+		        }
+		    }
+		    return isASCII;
+		}
 	}
 
 	/**
@@ -966,7 +997,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 						.getSymbol() : ((AlternateUnit<?>) si).getSymbol();
 				DEFAULT.label(u, PREFIXES[j] + symbol);
 				if (PREFIXES[j] == "µ") {
-					ASCII.label(u, "micro" + symbol);
+					ASCII.label(u, "micro"); // + symbol);
 				}
 			}
 		}
@@ -1089,6 +1120,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// DEFAULT.label(NonUnits.KNOT, "kn");
 		// DEFAULT.label(NonUnits.MACH, "Mach");
 		// DEFAULT.label(NonUnits.C, "c");
+		DEFAULT.label(Units.CUBIC_METRE, "\u33A5");
+		ASCII.label(Units.CUBIC_METRE, "m3");
 		ASCII.label(Units.LITRE, "l");
 		DEFAULT.label(Units.LITRE, "l");
 		DEFAULT.label(MetricPrefix.MICRO(Units.LITRE), "µl");
