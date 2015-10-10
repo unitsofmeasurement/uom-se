@@ -42,7 +42,6 @@ import javax.measure.UnitConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
-
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that keep {@link Number} as possible otherwise
  * converts to {@link DecimalQuantity}, this object is immutable.
@@ -53,7 +52,7 @@ import tec.uom.se.ComparableQuantity;
  * @param <Q> The type of the quantity.
  * @author otaviojava
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.3, $Date: 2014-10-10 $
+ * @version 0.9.4, $Date: 2015-10-10 $
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	implements Serializable {
@@ -85,13 +84,10 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	i
 		}
 	}
 
-
-
 	@Override
     public Number getValue() {
 		return value;
 	}
-
 
 	/**
 	 * Indicates if this measured amount is a big number, i.E. BigDecimal or

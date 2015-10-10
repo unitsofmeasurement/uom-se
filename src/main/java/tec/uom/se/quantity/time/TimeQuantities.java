@@ -37,6 +37,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalUnit;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -62,7 +63,6 @@ public final class TimeQuantities {
 
     public static final TransformedUnit<Time> NANOSECOND = new TransformedUnit<>(
             "ns", SECOND, MetricPrefix.NANO.getConverter());
-
 
     /**
      * Creates the {@link Quantity<Time>} based in the difference of the two {@link Temporal}
@@ -114,12 +114,22 @@ public final class TimeQuantities {
 
     /**
      * creates the {@link TimeUnitQuantity} using {@link TimeUnit} and {@link Integer}
-     * @param timeUnit - time to be used
      * @param value - value to be used
+     * @param timeUnit - time to be used
      */
-    public static TimeUnitQuantity getQuantity(TimeUnit timeUnit, Integer number) {
+    public static TimeUnitQuantity getQuantity(Integer number, TimeUnit timeUnit) {
         return new TimeUnitQuantity(Objects.requireNonNull(timeUnit),
                 Objects.requireNonNull(number));
+    }
+    
+    /**
+     * creates the {@link TemporalQuantity} using {@link TemporalUnit} and {@link Integer}
+     * @param value - value to be used
+     * @param timeUnit - time to be used
+     */
+    public static TemporalQuantity getQuantity(Integer number, TemporalUnit temporalUnit) {
+        return new TemporalQuantity(Objects.requireNonNull(number), 
+        		Objects.requireNonNull(temporalUnit));
     }
 
     /**
@@ -132,7 +142,4 @@ public final class TimeQuantities {
         Quantity<Time> seconds = Objects.requireNonNull(quantity).to(SECOND);
         return new TimeUnitQuantity(TimeUnit.SECONDS, seconds.getValue().intValue());
     }
-
-
-
 }

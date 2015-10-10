@@ -33,13 +33,7 @@ import static tec.uom.se.unit.Units.DAY;
 import static tec.uom.se.unit.Units.HOUR;
 import static tec.uom.se.unit.Units.MINUTE;
 import static tec.uom.se.unit.Units.SECOND;
-import static java.util.concurrent.TimeUnit.DAYS;
-import static java.util.concurrent.TimeUnit.HOURS;
-import static java.util.concurrent.TimeUnit.MICROSECONDS;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.MINUTES;
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
+import static java.time.temporal.ChronoUnit.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -49,7 +43,6 @@ import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
-import java.util.concurrent.TimeUnit;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -60,154 +53,153 @@ import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
 import tec.uom.se.quantity.time.TimeQuantities;
-import tec.uom.se.quantity.time.TimeUnitQuantity;
+import tec.uom.se.quantity.time.TemporalQuantity;
 import tec.uom.se.unit.Units;
 
 public class TimeQuantitiesTest {
 
-    @Test
-    public void ofTest() {
+	@Test
+	public void ofTest() {
+		TemporalQuantity day = TemporalQuantity.of(1, DAYS);
+		TemporalQuantity hour = TemporalQuantity.of(1, HOURS);
+		TemporalQuantity minute = TemporalQuantity.of(1, MINUTES);
+		TemporalQuantity second = TemporalQuantity.of(1, SECONDS);
+		TemporalQuantity microSecond = TemporalQuantity.of(1, MICROS);
+		TemporalQuantity milliSecond = TemporalQuantity.of(1, MILLIS);
+		TemporalQuantity nanoSecond = TemporalQuantity.of(1, NANOS);
 
-        TimeUnitQuantity day = TimeUnitQuantity.of(DAYS, 1);
-        TimeUnitQuantity hour = TimeUnitQuantity.of(HOURS, 1);
-        TimeUnitQuantity minute = TimeUnitQuantity.of(MINUTES, 1);
-        TimeUnitQuantity second = TimeUnitQuantity.of(SECONDS, 1);
-        TimeUnitQuantity microSecond = TimeUnitQuantity.of(MICROSECONDS, 1);
-        TimeUnitQuantity milliSecond = TimeUnitQuantity.of(MILLISECONDS, 1);
-        TimeUnitQuantity nanoSecond = TimeUnitQuantity.of(NANOSECONDS, 1);
+		Assert.assertEquals(DAYS, day.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), day.getValue());
 
-        Assert.assertEquals(DAYS, day.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), day.getValue());
+		Assert.assertEquals(HOURS, hour.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), hour.getValue());
 
-        Assert.assertEquals(HOURS, hour.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), hour.getValue());
+		Assert.assertEquals(MINUTES, minute.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), minute.getValue());
 
-        Assert.assertEquals(MINUTES, minute.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), minute.getValue());
+		Assert.assertEquals(SECONDS, second.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), second.getValue());
 
-        Assert.assertEquals(SECONDS, second.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), second.getValue());
+		Assert.assertEquals(MICROS, microSecond.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), microSecond.getValue());
 
-        Assert.assertEquals(MICROSECONDS, microSecond.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), microSecond.getValue());
+		Assert.assertEquals(MILLIS, milliSecond.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), milliSecond.getValue());
 
-        Assert.assertEquals(MILLISECONDS, milliSecond.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), milliSecond.getValue());
+		Assert.assertEquals(NANOS, nanoSecond.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), nanoSecond.getValue());
+	}
 
-        Assert.assertEquals(NANOSECONDS, nanoSecond.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), nanoSecond.getValue());
-    }
+	@Test
+	public void ofQuantityTest() {
+		Quantity<Time> hour = Quantities.getQuantity(1, Units.HOUR);
+		TemporalQuantity timeQuantity = TemporalQuantity.of(hour);
 
-    @Test
-    public void ofQuantityTest() {
-        Quantity<Time> hour = Quantities.getQuantity(1, Units.HOUR);
-        TimeUnitQuantity timeQuantity = TimeUnitQuantity.of(hour);
+		Assert.assertEquals(SECONDS, timeQuantity.getTemporalUnit());
+		Assert.assertEquals(SECOND, timeQuantity.toUnit());
+		Assert.assertEquals(Integer.valueOf(3600), timeQuantity.getValue());
+	}
 
-        Assert.assertEquals(TimeUnit.SECONDS, timeQuantity.getTimeUnit());
-        Assert.assertEquals(SECOND, timeQuantity.toUnit());
-        Assert.assertEquals(Integer.valueOf(3600), timeQuantity.getValue());
-    }
+	@Test
+	public void toUnitTest() {
+		TemporalQuantity day = TemporalQuantity.of(1, DAYS);
+		TemporalQuantity hour = TemporalQuantity.of(1, HOURS);
+		TemporalQuantity minute = TemporalQuantity.of(1, MINUTES);
+		TemporalQuantity second = TemporalQuantity.of(1, SECONDS);
+		TemporalQuantity microSecond = TemporalQuantity.of(1, MICROS);
+		TemporalQuantity milliSecond = TemporalQuantity.of(1, MILLIS);
+		TemporalQuantity nanoSecond = TemporalQuantity.of(1, NANOS);
 
-    @Test
-    public void toUnitTest() {
+		Assert.assertEquals(DAY, day.toUnit());
+		Assert.assertEquals(HOUR, hour.toUnit());
+		Assert.assertEquals(MINUTE, minute.toUnit());
+		Assert.assertEquals(SECOND, second.toUnit());
+		Assert.assertEquals(TimeQuantities.MICROSECOND, microSecond.toUnit());
+		Assert.assertEquals(TimeQuantities.MILLISECOND, milliSecond.toUnit());
+		Assert.assertEquals(TimeQuantities.NANOSECOND, nanoSecond.toUnit());
+	}
 
-        TimeUnitQuantity day = TimeUnitQuantity.of(DAYS, 1);
-        TimeUnitQuantity hour = TimeUnitQuantity.of(HOURS, 1);
-        TimeUnitQuantity minute = TimeUnitQuantity.of(MINUTES, 1);
-        TimeUnitQuantity second = TimeUnitQuantity.of(SECONDS, 1);
-        TimeUnitQuantity microSecond = TimeUnitQuantity.of(MICROSECONDS, 1);
-        TimeUnitQuantity milliSecond = TimeUnitQuantity.of(MILLISECONDS, 1);
-        TimeUnitQuantity nanoSecond = TimeUnitQuantity.of(NANOSECONDS, 1);
+	@Test
+	public void toQuantityTest() {
+		TemporalQuantity day = TemporalQuantity.of(1, DAYS);
+		TemporalQuantity hour = TemporalQuantity.of(1, HOURS);
+		TemporalQuantity minute = TemporalQuantity.of(1, MINUTES);
+		TemporalQuantity second = TemporalQuantity.of(1, SECONDS);
+		TemporalQuantity microSecond = TemporalQuantity.of(1, MICROS);
+		TemporalQuantity milliSecond = TemporalQuantity.of(1, MILLIS);
+		TemporalQuantity nanoSecond = TemporalQuantity.of(1, NANOS);
 
-        Assert.assertEquals(DAY, day.toUnit());
-        Assert.assertEquals(HOUR, hour.toUnit());
-        Assert.assertEquals(MINUTE, minute.toUnit());
+		verifyQuantity(day.toQuantity(), DAY, 1);
+		verifyQuantity(hour.toQuantity(), HOUR, 1);
+		verifyQuantity(minute.toQuantity(), MINUTE, 1);
+		verifyQuantity(second.toQuantity(), SECOND, 1);
+		verifyQuantity(microSecond.toQuantity(), TimeQuantities.MICROSECOND, 1);
+		verifyQuantity(milliSecond.toQuantity(), TimeQuantities.MILLISECOND, 1);
+		verifyQuantity(nanoSecond.toQuantity(), TimeQuantities.NANOSECOND, 1);
 
-        Assert.assertEquals(SECOND, second.toUnit());
+	}
 
-        Assert.assertEquals(TimeQuantities.MICROSECOND, microSecond.toUnit());
-        Assert.assertEquals(TimeQuantities.MILLISECOND, milliSecond.toUnit());
-        Assert.assertEquals(TimeQuantities.NANOSECOND, nanoSecond.toUnit());
-    }
+	@Test
+	public void convertTest() {
+		TemporalQuantity day = TemporalQuantity.of(1, DAYS);
+		TemporalQuantity hours = day.to(HOURS);
 
-    @Test
-    public void toQuanityTest() {
+		Assert.assertEquals(HOURS, hours.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(24), hours.getValue());
 
-        TimeUnitQuantity day = TimeUnitQuantity.of(DAYS, 1);
-        TimeUnitQuantity hour = TimeUnitQuantity.of(HOURS, 1);
-        TimeUnitQuantity minute = TimeUnitQuantity.of(MINUTES, 1);
-        TimeUnitQuantity second = TimeUnitQuantity.of(SECONDS, 1);
-        TimeUnitQuantity microSecond = TimeUnitQuantity.of(MICROSECONDS, 1);
-        TimeUnitQuantity milliSecond = TimeUnitQuantity.of(MILLISECONDS, 1);
-        TimeUnitQuantity nanoSecond = TimeUnitQuantity.of(NANOSECONDS, 1);
+		TemporalQuantity oneDay = hours.to(DAYS);
+		Assert.assertEquals(DAYS, oneDay.getTemporalUnit());
+		Assert.assertEquals(Integer.valueOf(1), oneDay.getValue());
+	}
 
-        verifyQuantity(day.toQuantity(), DAY, 1);
-        verifyQuantity(hour.toQuantity(), HOUR, 1);
-        verifyQuantity(minute.toQuantity(), MINUTE, 1);
-        verifyQuantity(second.toQuantity(), SECOND, 1);
-        verifyQuantity(microSecond.toQuantity(), TimeQuantities.MICROSECOND, 1);
-        verifyQuantity(milliSecond.toQuantity(), TimeQuantities.MILLISECOND, 1);
-        verifyQuantity(nanoSecond.toQuantity(), TimeQuantities.NANOSECOND, 1);
+	private void verifyQuantity(Quantity<Time> quantity, Unit<Time> unit,
+			Number number) {
+		Assert.assertEquals(unit, quantity.getUnit());
+		Assert.assertEquals(Integer.valueOf(number.intValue()),
+				Integer.valueOf(quantity.getValue().intValue()));
+	}
 
-    }
+	@Test
+	public void ofTemporalTest() {
+		LocalDate a = Year.of(2015).atMonth(Month.JANUARY).atDay(9);
+		LocalDate b = Year.of(2015).atMonth(Month.JANUARY).atDay(10);
+		Quantity<Time> time = TimeQuantities.getQuantity(a, b);
+		Assert.assertEquals(Integer.valueOf(1),
+				Integer.valueOf(time.getValue().intValue()));
+		Assert.assertEquals(Units.DAY, time.getUnit());
+	}
 
-    @Test
-    public void convertTest() {
+	@Test
+	public void ofLocalTimeTest() {
+		LocalTime a = LocalTime.of(0, 0);
+		LocalTime b = LocalTime.of(12, 0);
+		Quantity<Time> time = TimeQuantities.getQuantity(a, b);
+		Assert.assertEquals(Double.valueOf(12.0),
+				Double.valueOf(time.getValue().doubleValue()));
+		Assert.assertEquals(Units.HOUR, time.getUnit());
+	}
 
-        TimeUnitQuantity day = TimeUnitQuantity.of(DAYS, 1);
-        TimeUnitQuantity hours = day.to(TimeUnit.HOURS);
+	@Test
+	public void ofTemporalAdjustTest() {
+		LocalDate a = Year.of(2015).atMonth(Month.JANUARY).atDay(9);
 
-        Assert.assertEquals(TimeUnit.HOURS, hours.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(24), hours.getValue());
+		Quantity<Time> time = TimeQuantities.getQuantity(a,
+				() -> TemporalAdjusters.next(DayOfWeek.SUNDAY));
+		Assert.assertEquals(Integer.valueOf(2),
+				Integer.valueOf(time.getValue().intValue()));
+		Assert.assertEquals(Units.DAY, time.getUnit());
+	}
 
-        TimeUnitQuantity oneDay = hours.to(TimeUnit.DAYS);
-        Assert.assertEquals(TimeUnit.DAYS, oneDay.getTimeUnit());
-        Assert.assertEquals(Integer.valueOf(1), oneDay.getValue());
-    }
+	@Test
+	public void ofLocalTimeTemporalAdjustTest() {
+		LocalTime a = LocalTime.MIDNIGHT;
+		TemporalAdjuster temporalAdjuster = (temporal) -> temporal.plus(12L,
+				ChronoUnit.HOURS);
 
-    private void verifyQuantity(Quantity<Time> quantity, Unit<Time> unit, Number number) {
-        Assert.assertEquals(unit, quantity.getUnit());
-        Assert.assertEquals(Integer.valueOf(number.intValue()), Integer.valueOf(quantity.getValue().intValue()));
-    }
-
-    @Test
-    public void ofTemporalTest() {
-
-        LocalDate a = Year.of(2015).atMonth(Month.JANUARY).atDay(9);
-        LocalDate b = Year.of(2015).atMonth(Month.JANUARY).atDay(10);
-        Quantity<Time> time = TimeQuantities.getQuantity(a, b);
-        Assert.assertEquals(Integer.valueOf(1), Integer.valueOf(time.getValue().intValue()));
-        Assert.assertEquals(Units.DAY, time.getUnit());
-    }
-
-    @Test
-    public void ofLocalTimeTest() {
-
-        LocalTime a = LocalTime.of(0, 0);
-        LocalTime b = LocalTime.of(12, 0);
-        Quantity<Time> time = TimeQuantities.getQuantity(a, b);
-        Assert.assertEquals(Double.valueOf(12.0), Double.valueOf(time.getValue().doubleValue()));
-        Assert.assertEquals(Units.HOUR, time.getUnit());
-    }
-
-    @Test
-    public void ofTemporalAdjustTest() {
-
-        LocalDate a = Year.of(2015).atMonth(Month.JANUARY).atDay(9);
-
-        Quantity<Time> time = TimeQuantities.getQuantity(a, () -> TemporalAdjusters.next(DayOfWeek.SUNDAY));
-        Assert.assertEquals(Integer.valueOf(2), Integer.valueOf(time.getValue().intValue()));
-        Assert.assertEquals(Units.DAY, time.getUnit());
-    }
-
-    @Test
-    public void ofLocalTimeTemporalAdjustTest() {
-
-        LocalTime a = LocalTime.MIDNIGHT;
-        TemporalAdjuster temporalAdjuster = (temporal) -> temporal.plus(12L , ChronoUnit.HOURS);
-
-        Quantity<Time> time = TimeQuantities.getQuantity(a, () -> temporalAdjuster);
-        Assert.assertEquals(Integer.valueOf(12), Integer.valueOf(time.getValue().intValue()));
-        Assert.assertEquals(Units.HOUR, time.getUnit());
-    }
+		Quantity<Time> time = TimeQuantities.getQuantity(a,
+				() -> temporalAdjuster);
+		Assert.assertEquals(Integer.valueOf(12),
+				Integer.valueOf(time.getValue().intValue()));
+		Assert.assertEquals(Units.HOUR, time.getUnit());
+	}
 }
