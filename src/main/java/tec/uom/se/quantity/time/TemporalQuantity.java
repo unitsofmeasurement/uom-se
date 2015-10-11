@@ -188,8 +188,11 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 
 	@Override
 	public ComparableQuantity<Time> subtract(Quantity<Time> that) {
-		// TODO Auto-generated method stub
-		return null;
+        if (getUnit().equals(that.getUnit())) {
+            return TimeQuantities.getQuantity(value - that.getValue().intValue(), timeUnit);
+        }
+        Quantity<Time> converted = that.to(getUnit());
+        return TimeQuantities.getQuantity(value - converted.getValue().intValue(), timeUnit);
 	}
 
 	@Override
