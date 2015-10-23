@@ -84,13 +84,13 @@ import tec.uom.se.unit.Units;
  *             ...
  *         }
  *
- *         // Complex numbers measurements.
+ *         // Complex numbers quantities.
  *         public class ComplexQuantity<Q extends Quantity> extends AbstractQuantity<Q> {
  *             public Complex getValue() { ... } // Assuming Complex is a Number.
  *             ...
  *         }
  *
- *         // Specializations of complex numbers measurements.
+ *         // Specializations of complex numbers quantities.
  *         public class Current extends ComplexQuantity<ElectricCurrent> {...}
  *         public class Tension extends ComplexQuantity<ElectricPotential> {...}
  *         </code></p>
@@ -98,7 +98,7 @@ import tec.uom.se.unit.Units;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.6.4, $Date: 2015-04-19 $
+ * @version 0.6.5, $Date: 2015-10-23 $
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
@@ -107,13 +107,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	private final Unit<Q> unit;
 
 	/**
-	 * Holds a dimensionless measure of none (exact).
+	 * Holds a dimensionless quantity of none (exact).
 	 */
 	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(
 			0, Units.ONE);
 
 	/**
-	 * Holds a dimensionless measure of one (exact).
+	 * Holds a dimensionless quantity of one (exact).
 	 */
 	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, Units.ONE);
 
@@ -125,9 +125,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
     }
 
     /**
-     * Returns the measurement numeric value.
+     * Returns the numeric value of the quantity.
      *
-     * @return the measurement value.
+     * @return the quantity value.
      */
     @Override
     public abstract Number getValue();
@@ -242,7 +242,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
      *
      * <p> Similarly to the {@link BigDecimal#equals} method which consider 2.0
      *     and 2.00 as different objects because of different internal scales,
-     *     measurements such as <code>Measure.valueOf(3.0, KILOGRAM)</code>
+     *     quantities such as <code>Quantities.getQuantity(3.0, KILOGRAM)</code>
      *     <code>Quantities.getQuantity(3, KILOGRAM)</code> and
      *     <code>Quantities.getQuantity("3 kg")</code> might not be considered equals
      *     because of possible differences in their implementations.</p>
