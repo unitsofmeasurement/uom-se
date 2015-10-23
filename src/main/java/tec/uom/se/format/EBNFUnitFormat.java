@@ -171,7 +171,7 @@ import tec.uom.se.unit.Units;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, $Date: 2015-09-14 $
+ * @version 0.6.2, $Date: 2015-10-23 $
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
 
@@ -268,7 +268,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	 * Base constructor.
 	 * 
 	 */
-	public EBNFUnitFormat() {
+	EBNFUnitFormat() {
 		//this(SymbolMap.of(toMap(L10nResources.getBundle(
 				//BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
 		this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault())), 
