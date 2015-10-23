@@ -29,6 +29,8 @@
  */
 package tec.uom.se;
 
+import java.io.Serializable;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
@@ -40,7 +42,7 @@ import javax.measure.Unit;
  * @param <Q>
  */
 public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>,
-		Comparable<Quantity<Q>> {
+		Comparable<Quantity<Q>>, Serializable {
 
     /**
      * @see Quantity#add(Quantity)
