@@ -38,6 +38,7 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -415,12 +416,12 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     /**
      * Inner product element represents a rational power of a single unit.
      */
-    private final static class Element {
+    private final static class Element implements Serializable {
 
         /**
 		 *
 		 */
-//		private static final long serialVersionUID = 452938412398890507L;
+		private static final long serialVersionUID = 452938412398890507L;
 
 		/**
          * Holds the single unit.
