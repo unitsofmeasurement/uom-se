@@ -40,7 +40,7 @@ import tec.uom.se.unit.Units;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.1, July 25, 2015
+ * @version 0.2, November 3, 2015
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 	
@@ -50,7 +50,7 @@ public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
 		souMap.put(Units.class.getSimpleName(), Units.getInstance());
 	}
 	
-	public Collection<SystemOfUnits> getSystemsOfUnits() {
+	public Collection<SystemOfUnits> getAvailableSystemsOfUnits() {
 		return souMap.values();
 	}
 	
