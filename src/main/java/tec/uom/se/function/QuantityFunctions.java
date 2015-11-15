@@ -1,6 +1,6 @@
-/**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+/*
+ * Units of Measurement Implementation for Java SE
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -50,10 +50,10 @@ public final class QuantityFunctions {
      * @return
      * <p><b>Given:</b><p>
      * <code>
-     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
      * </code>
      * <p>will return: <code>day, hours, minutes, seconds</code></p>
      * @throws NullPointerException
@@ -67,10 +67,10 @@ public final class QuantityFunctions {
      * @return
      * <p><b>Given:</b><p>
      * <code>
-     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
      * </code>
      * <p>will return: <code>seconds, hours, minutes, day</code></p>
      * @throws NullPointerException
@@ -85,26 +85,27 @@ public final class QuantityFunctions {
      * @return
      * <p><b>Given:</b><p>
      * <code>
-     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
      * </code>
      * <p>will return: <code>day, hours, minutes, seconds</code></p>
      * @throws NullPointerException
      */
     public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
-        return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
+        // FIXME add null check via Optional or similar
+    	return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
     }
     /**
      * Creates a comparator to sort by name descending, ignoring the value.
      * @return
      * <p><b>Given:</b></p>
      * <code>
-     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
      * </code>
      * <p>will return: <code>seconds, minutes, hour,  day</code></p>
      * @throws NullPointerException
@@ -119,10 +120,10 @@ public final class QuantityFunctions {
      * @return
      * <p><b>Given:</b></p>
      * <code>
-     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
      * </code>
      * <p>will return: <code>seconds, minutes, hours, day</code></p>
      * @throws NullPointerException
@@ -136,10 +137,10 @@ public final class QuantityFunctions {
      * @return
      * <p><b>Given:</b></p>
      * <code>
-     * Quantity<Time> day = timeFactory.create(1, SI.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, SI.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, SI.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, SI.HOUR);<br/>
+     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
      * </code>
      * <p>will return: <code>day, hour, minute, second</code></p>
      * @throws NullPointerException

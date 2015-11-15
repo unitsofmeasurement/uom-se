@@ -1,6 +1,6 @@
-/**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+/*
+ * Units of Measurement Implementation for Java SE
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -35,14 +35,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 public class QuantitySummaryStatisticsTest {
 
     @Test
     public void shouldBeEmpty() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
-                SI.DAY);
+                Units.DAY);
         Assert.assertEquals(0L, summary.getCount());
         Assert.assertEquals(0L, summary.getMin().getValue().longValue());
         Assert.assertEquals(0L, summary.getMax().getValue().longValue());
@@ -54,7 +54,7 @@ public class QuantitySummaryStatisticsTest {
     @Test(expected = NullPointerException.class)
     public void shouldErrorWhenIsNull() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
-                SI.DAY);
+                Units.DAY);
         summary.accept(null);
     }
 
@@ -62,42 +62,42 @@ public class QuantitySummaryStatisticsTest {
     @Test
     public void shouldBeSameValueWhenOneMonetaryIsAdded() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
-                SI.DAY);
+                Units.DAY);
 
-        summary.accept(Quantities.getQuantity(10, SI.DAY));
+        summary.accept(Quantities.getQuantity(10, Units.DAY));
         Assert.assertEquals(1L, summary.getCount());
         Assert.assertEquals(10L, summary.getMin().getValue().longValue());
         Assert.assertEquals(10L, summary.getMax().getValue().longValue());
         Assert.assertEquals(10L, summary.getSum().getValue().longValue());
         Assert.assertEquals(10L, summary.getAverage().getValue().longValue());
 
-        Assert.assertEquals(240L, summary.getMin(SI.HOUR).getValue().longValue());
-        Assert.assertEquals(240L, summary.getMax(SI.HOUR).getValue().longValue());
-        Assert.assertEquals(240L, summary.getSum(SI.HOUR).getValue().longValue());
-        Assert.assertEquals(240L, summary.getAverage(SI.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getMin(Units.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getMax(Units.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getSum(Units.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getAverage(Units.HOUR).getValue().longValue());
     }
 
     @Test
     public void shouldBeSameEquivalentValueWhenisConverted() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
-                SI.DAY);
+                Units.DAY);
 
-        summary.accept(Quantities.getQuantity(10, SI.DAY));
+        summary.accept(Quantities.getQuantity(10, Units.DAY));
 
-        Assert.assertEquals(240L, summary.getMin(SI.HOUR).getValue().longValue());
-        Assert.assertEquals(240L, summary.getMax(SI.HOUR).getValue().longValue());
-        Assert.assertEquals(240L, summary.getSum(SI.HOUR).getValue().longValue());
-        Assert.assertEquals(240L, summary.getAverage(SI.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getMin(Units.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getMax(Units.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getSum(Units.HOUR).getValue().longValue());
+        Assert.assertEquals(240L, summary.getAverage(Units.HOUR).getValue().longValue());
     }
 
     @Test
     public void convertSummaryTest() {
 
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
-                SI.DAY);
+                Units.DAY);
 
-        summary.accept(Quantities.getQuantity(10, SI.DAY));
-        QuantitySummaryStatistics<Time> summaryHour = summary.to(SI.HOUR);
+        summary.accept(Quantities.getQuantity(10, Units.DAY));
+        QuantitySummaryStatistics<Time> summaryHour = summary.to(Units.HOUR);
         Assert.assertEquals(240L, summaryHour.getMin().getValue().longValue());
         Assert.assertEquals(240L, summaryHour.getMax().getValue().longValue());
         Assert.assertEquals(240L, summaryHour.getSum().getValue().longValue());
@@ -130,11 +130,11 @@ public class QuantitySummaryStatisticsTest {
 
     private QuantitySummaryStatistics<Time> createSummaryTime() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
-                SI.DAY);
+                Units.DAY);
 
-        summary.accept(Quantities.getQuantity(9, SI.DAY));
-        summary.accept(Quantities.getQuantity(48, SI.HOUR));
-        summary.accept(Quantities.getQuantity(1440, SI.MINUTE));
+        summary.accept(Quantities.getQuantity(9, Units.DAY));
+        summary.accept(Quantities.getQuantity(48, Units.HOUR));
+        summary.accept(Quantities.getQuantity(1440, Units.MINUTE));
         return summary;
     }
 

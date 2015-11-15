@@ -1,6 +1,6 @@
-/**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+/*
+ * Units of Measurement Implementation for Java SE
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -38,14 +38,15 @@ import java.util.stream.Collectors;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Time;
+import javax.measure.spi.Bootstrap;
 import javax.measure.spi.QuantityFactory;
+import javax.measure.spi.QuantityFactoryService;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.uom.se.spi.QuantityFactoryProvider;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 public class QuantityFunctionsGroupTest {
 
@@ -57,11 +58,12 @@ public class QuantityFunctionsGroupTest {
 
     @Before
     public void init() {
-        timeFactory = QuantityFactoryProvider.getQuantityFactory(Time.class);
-        minutes = timeFactory.create(BigDecimal.valueOf(15), SI.MINUTE);
-        hours = timeFactory.create(BigDecimal.valueOf(18), SI.HOUR);
-        day = timeFactory.create(BigDecimal.ONE, SI.DAY);
-        seconds = timeFactory.create(BigDecimal.valueOf(100), SI.SECOND);
+    	QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+        timeFactory = factoryService.getQuantityFactory(Time.class);
+        minutes = timeFactory.create(BigDecimal.valueOf(15), Units.MINUTE);
+        hours = timeFactory.create(BigDecimal.valueOf(18), Units.HOUR);
+        day = timeFactory.create(BigDecimal.ONE, Units.DAY);
+        seconds = timeFactory.create(BigDecimal.valueOf(100), Units.SECOND);
     }
 
 
@@ -72,10 +74,10 @@ public class QuantityFunctionsGroupTest {
                 Collectors.groupingBy(QuantityFunctions.groupByUnit()));
 
         Assert.assertEquals(4, timeMap.keySet().size());
-        Assert.assertEquals(1, timeMap.get(SI.MINUTE).size());
-        Assert.assertEquals(1, timeMap.get(SI.HOUR).size());
-        Assert.assertEquals(1, timeMap.get(SI.DAY).size());
-        Assert.assertEquals(1, timeMap.get(SI.SECOND).size());
+        Assert.assertEquals(1, timeMap.get(Units.MINUTE).size());
+        Assert.assertEquals(1, timeMap.get(Units.HOUR).size());
+        Assert.assertEquals(1, timeMap.get(Units.DAY).size());
+        Assert.assertEquals(1, timeMap.get(Units.SECOND).size());
 
     }
 
@@ -83,7 +85,7 @@ public class QuantityFunctionsGroupTest {
     public void groupBsyTest() {
         List<Quantity<Time>> times = createTimes();
         Map<Boolean, List<Quantity<Time>>> timeMap = times.stream().collect(
-                Collectors.partitioningBy(QuantityFunctions.fiterByUnit(SI.MINUTE)));
+                Collectors.partitioningBy(QuantityFunctions.fiterByUnit(Units.MINUTE)));
 
         Assert.assertEquals(2, timeMap.keySet().size());
         Assert.assertEquals(1, timeMap.get(Boolean.TRUE).size());
@@ -94,7 +96,7 @@ public class QuantityFunctionsGroupTest {
     @Test
     public void summaryTest() {
         List<Quantity<Time>> times = createTimes();
-        QuantitySummaryStatistics<Time> summary = times.stream().collect(QuantityFunctions.summarizeQuantity(SI.HOUR));
+        QuantitySummaryStatistics<Time> summary = times.stream().collect(QuantityFunctions.summarizeQuantity(Units.HOUR));
 
         Assert.assertEquals(4, summary.getCount());
         Assert.assertNotNull(summary.getAverage());

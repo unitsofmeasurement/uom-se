@@ -1,6 +1,6 @@
-/**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+/*
+ * Units of Measurement Implementation for Java SE
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -37,14 +37,15 @@ import java.util.stream.Collectors;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Time;
+import javax.measure.spi.Bootstrap;
 import javax.measure.spi.QuantityFactory;
+import javax.measure.spi.QuantityFactoryService;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.uom.se.spi.QuantityFactoryProvider;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 public class QuantityFunctionsSortTest {
 
@@ -56,11 +57,12 @@ public class QuantityFunctionsSortTest {
 
     @Before
     public void init() {
-        timeFactory = QuantityFactoryProvider.getQuantityFactory(Time.class);
-        minutes = timeFactory.create(15, SI.MINUTE);
-        hours = timeFactory.create(18, SI.HOUR);
-        day = timeFactory.create(1, SI.DAY);
-        seconds = timeFactory.create(100, SI.SECOND);
+    	QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+        timeFactory = factoryService.getQuantityFactory(Time.class);
+        minutes = timeFactory.create(15, Units.MINUTE);
+        hours = timeFactory.create(18, Units.HOUR);
+        day = timeFactory.create(1, Units.DAY);
+        seconds = timeFactory.create(100, Units.SECOND);
     }
 
     @Test
@@ -138,7 +140,7 @@ public class QuantityFunctionsSortTest {
     @Test
     public void sortNaturalAndSymbolTest() {
         List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        Quantity<Time> dayinHour = timeFactory.create(24, SI.HOUR);
+        Quantity<Time> dayinHour = timeFactory.create(24, Units.HOUR);
         times.add(dayinHour);
 
         Comparator<Quantity<Time>> sortNatural = QuantityFunctions.sortNatural();

@@ -63,12 +63,12 @@ public class SystemOfUnitsServiceTest {
     	//for (Unit<?> u : system.getUnits()) {
     		//System.out.println(u.toString());
     	//}
-    	Set<? extends Unit<?>> units = system.getUnits();
+/*    	Set<? extends Unit<?>> units = system.getUnits();
     	List list = Arrays.asList((units.toArray()));
     	Collections.sort(list);
     	for (Object o : list) {
     		System.out.println(o.toString());
-    	}
+    	}*/
     	assertEquals(42, system.getUnits().size());
     }
 }

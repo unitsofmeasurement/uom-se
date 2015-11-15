@@ -1,6 +1,6 @@
-/**
- *  Unit-API - Units of Measurement API for Java
- *  Copyright (c) 2005-2014, Jean-Marie Dautelle, Werner Keil, V2COM.
+/*
+ * Units of Measurement Implementation for Java SE
+ * Copyright (c) 2005-2015, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.
  *
@@ -36,14 +36,15 @@ import java.util.List;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Time;
+import javax.measure.spi.Bootstrap;
 import javax.measure.spi.QuantityFactory;
+import javax.measure.spi.QuantityFactoryService;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import tec.uom.se.spi.QuantityFactoryProvider;
-import tec.uom.se.unit.SI;
+import tec.uom.se.unit.Units;
 
 public class QuantityFunctionsReducerTest {
 
@@ -55,11 +56,12 @@ public class QuantityFunctionsReducerTest {
 
     @Before
     public void init() {
-        timeFactory = QuantityFactoryProvider.getQuantityFactory(Time.class);
-        minutes = timeFactory.create(15, SI.MINUTE);
-        hours = timeFactory.create(18, SI.HOUR);
-        day = timeFactory.create(1, SI.DAY);
-        seconds = timeFactory.create(100, SI.SECOND);
+    	QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+        timeFactory = factoryService.getQuantityFactory(Time.class);
+        minutes = timeFactory.create(15, Units.MINUTE);
+        hours = timeFactory.create(18, Units.HOUR);
+        day = timeFactory.create(1, Units.DAY);
+        seconds = timeFactory.create(100, Units.SECOND);
     }
 
     @Test
@@ -69,9 +71,9 @@ public class QuantityFunctionsReducerTest {
         Assert.assertEquals(seconds, quantity);
 
          List<Quantity<Time>> secondsList = Arrays.asList(
-         timeFactory.create(300, SI.SECOND),
-         timeFactory.create(130, SI.SECOND), seconds,
-         timeFactory.create(10000, SI.SECOND));
+         timeFactory.create(300, Units.SECOND),
+         timeFactory.create(130, Units.SECOND), seconds,
+         timeFactory.create(10000, Units.SECOND));
          Quantity<Time> minSeconds =
          secondsList.stream().reduce(QuantityFunctions.min()).get();
          Assert.assertEquals(seconds, minSeconds);
@@ -82,10 +84,10 @@ public class QuantityFunctionsReducerTest {
         List<Quantity<Time>> times = getTimes();
         Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.max()).get();
         Assert.assertEquals(day, quantity);
-        Quantity<Time> max = timeFactory.create(20, SI.DAY);
+        Quantity<Time> max = timeFactory.create(20, Units.DAY);
          List<Quantity<Time>> dayList = Arrays.asList(
-         timeFactory.create(3, SI.DAY),
-         timeFactory.create(5, SI.DAY),
+         timeFactory.create(3, Units.DAY),
+         timeFactory.create(5, Units.DAY),
          max);
          Quantity<Time> maxDay =
                  dayList.stream().reduce(QuantityFunctions.max()).get();
@@ -95,49 +97,49 @@ public class QuantityFunctionsReducerTest {
     @Test
     public void sumTest() {
         List<Quantity<Time>> dayList = Arrays.asList(
-        timeFactory.create(3, SI.DAY),
-        timeFactory.create(5, SI.DAY),
-        timeFactory.create(20, SI.DAY));
+        timeFactory.create(3, Units.DAY),
+        timeFactory.create(5, Units.DAY),
+        timeFactory.create(20, Units.DAY));
         Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum()).get();
         assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(28));
-        assertEquals(sumDay.getUnit(), SI.DAY);
+        assertEquals(sumDay.getUnit(), Units.DAY);
     }
 
     @Test
     public void shouldSumWhenHasDifferentTimeUnits() {
         List<Quantity<Time>> dayList = Arrays.asList(
-        timeFactory.create(48, SI.HOUR),
-        timeFactory.create(5, SI.DAY),
-        timeFactory.create(1440, SI.MINUTE));
+        timeFactory.create(48, Units.HOUR),
+        timeFactory.create(5, Units.DAY),
+        timeFactory.create(1440, Units.MINUTE));
         Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum()).get();
         assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
-        assertEquals(sumHour.getUnit(), SI.HOUR);
+        assertEquals(sumHour.getUnit(), Units.HOUR);
     }
 
     @Test
     public void sumWithConvertTest() {
 
         List<Quantity<Time>> dayList = Arrays.asList(
-        timeFactory.create(48, SI.HOUR),
-        timeFactory.create(5, SI.DAY),
-        timeFactory.create(1440, SI.MINUTE));
+        timeFactory.create(48, Units.HOUR),
+        timeFactory.create(5, Units.DAY),
+        timeFactory.create(1440, Units.MINUTE));
 
-        Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum(SI.HOUR)).get();
-        Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum(SI.DAY)).get();
-        Quantity<Time> sumMinute = dayList.stream().reduce(QuantityFunctions.sum(SI.MINUTE)).get();
-        Quantity<Time> sumSecond = dayList.stream().reduce(QuantityFunctions.sum(SI.SECOND)).get();
+        Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum(Units.HOUR)).get();
+        Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum(Units.DAY)).get();
+        Quantity<Time> sumMinute = dayList.stream().reduce(QuantityFunctions.sum(Units.MINUTE)).get();
+        Quantity<Time> sumSecond = dayList.stream().reduce(QuantityFunctions.sum(Units.SECOND)).get();
 
         assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
-        assertEquals(sumHour.getUnit(), SI.HOUR);
+        assertEquals(sumHour.getUnit(), Units.HOUR);
 
         assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(8));
-        assertEquals(sumDay.getUnit(), SI.DAY);
+        assertEquals(sumDay.getUnit(), Units.DAY);
 
         assertEquals(Double.valueOf(sumMinute.getValue().doubleValue()), Double.valueOf(11520));
-        assertEquals(sumMinute.getUnit(), SI.MINUTE);
+        assertEquals(sumMinute.getUnit(), Units.MINUTE);
 
         assertEquals(Double.valueOf(sumSecond.getValue().doubleValue()), Double.valueOf(691200));
-        assertEquals(sumSecond.getUnit(), SI.SECOND);
+        assertEquals(sumSecond.getUnit(), Units.SECOND);
     }
 
     private List<Quantity<Time>> getTimes() {
