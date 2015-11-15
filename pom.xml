@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8-SNAPSHOT</version>
+		<version>0.8</version>
 	</parent>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
@@ -33,7 +33,7 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<jsr.version>0.8-SNAPSHOT</jsr.version>
+		<jsr.version>0.8</jsr.version>
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>

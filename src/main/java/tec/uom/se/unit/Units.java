@@ -195,7 +195,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * The SI derived unit for mass quantities (standard name <code>g</code>).
      * The base unit for mass quantity is {@link #KILOGRAM}.
      */
-	public static final Unit<Mass> GRAM = KILOGRAM.divide(1000);
+	public static final Unit<Mass> GRAM = addUnit(KILOGRAM.divide(1000));
             //= new TransformedUnit(KILOGRAM, MetricPrefix.KILO.getConverter());
 
     /**
@@ -203,7 +203,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * One radian is the angle between two radii of a circle such that the
      * length of the arc between them is equal to the radius.
      */
-    public static final AlternateUnit<Angle> RADIAN
+    public static final Unit<Angle> RADIAN
             = addUnit(new AlternateUnit<Angle>(ONE, "rad"), Angle.class);
 
     /**
@@ -498,26 +498,28 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * An angle unit accepted for use with SI units (standard name <code>deg</code>).
      */
     public static final Unit<Angle> DEGREE_ANGLE
-        = new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180)));
+        = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(
+        		new RationalConverter(1, 180))));
 
     /**
      * An angle unit accepted for use with SI units (standard name <code>'</code>).
      */
     public static final Unit<Angle> MINUTE_ANGLE
-        = new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(1, 180 * 60)));
+        = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(
+        		new RationalConverter(1, 180 * 60))));
 
     /**
      * An angle unit accepted for use with SI units (standard name <code>''</code>).
      */
     public static final Unit<Angle> SECOND_ANGLE
-        = new TransformedUnit<>(RADIAN,  new PiMultiplierConverter().concatenate(new RationalConverter(1, 180 * 60 * 60)));
+        = addUnit(new TransformedUnit<>(RADIAN,  new PiMultiplierConverter().concatenate(
+        		new RationalConverter(1, 180 * 60 * 60))));
 
     /**
      * A volume unit accepted for use with SI units (standard name <code>l</code>).
      */
     public static final Unit<Volume> LITRE
-        = new TransformedUnit<>(CUBIC_METRE, new RationalConverter(1, 1000));
-
+        = addUnit(new TransformedUnit<>(CUBIC_METRE, new RationalConverter(1, 1000)));
     
 	/**
 	 * Returns the unique instance of this class.

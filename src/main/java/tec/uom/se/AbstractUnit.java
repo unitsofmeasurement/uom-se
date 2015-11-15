@@ -529,10 +529,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		if (n > 0)
 			return this.multiply(this.pow(n - 1));
 		else if (n == 0)
-			return Units.ONE;
+			return ONE;
 		else
 			// n < 0
-			return Units.ONE.divide(this.pow(-n));
+			return ONE.divide(this.pow(-n));
 	}
 
 	/**
@@ -543,9 +543,24 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 *         less than, equal to, or greater than the specified unit.
 	 */
 	public int compareTo(Unit<Q> that) {
-		return name.compareTo(that.getName())
-				+ getSymbol().compareTo(that.getSymbol());
-
+		if (name != null && getSymbol() != null) {
+			return name.compareTo(that.getName())
+					+ getSymbol().compareTo(that.getSymbol());
+		} else if (name == null) {
+			if (getSymbol() != null && that.getSymbol() != null) {
+				return getSymbol().compareTo(that.getSymbol());
+			} else {
+				return -1;
+			}
+		} else if (getSymbol() == null) {
+			if (name != null) {
+				return name.compareTo(that.getName());
+			} else {
+				return -1;
+			}
+		} else {
+			return -1;
+		}
 	}
 
 	// //////////////////////////////////////////////////////////////
