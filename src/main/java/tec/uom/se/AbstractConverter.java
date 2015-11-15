@@ -33,6 +33,7 @@ import javax.measure.UnitConverter;
 
 import tec.uom.se.function.Converter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
@@ -124,9 +125,14 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
     /**
      * This class represents the identity converter (singleton).
      */
-    private static final class Identity extends AbstractConverter {
+    private static final class Identity extends AbstractConverter implements Serializable {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -4460463244427587361L;
+
+		@Override
         public boolean isIdentity() {
             return true;
         }
@@ -171,9 +177,14 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
      * This class represents converters made up of two or more separate
      * converters (in matrix notation <code>[pair] = [left] x [right]</code>).
      */
-    public static final class Pair extends AbstractConverter {
+    public static final class Pair extends AbstractConverter implements Serializable {
 
         /**
+		 * 
+		 */
+		private static final long serialVersionUID = -123063827821728331L;
+
+		/**
          * Holds the first converter.
          */
         private final UnitConverter left;

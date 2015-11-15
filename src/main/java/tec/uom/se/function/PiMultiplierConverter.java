@@ -29,6 +29,7 @@
  */
 package tec.uom.se.function;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -43,10 +44,15 @@ import tec.uom.se.AbstractConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.1, April 22, 2014
+ * @version 0.6, November 14, 2015
  */
 public final class PiMultiplierConverter extends AbstractConverter implements
-		ValueSupplier<String> {
+		ValueSupplier<String>, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5763262154104962367L;
 
 	/**
 	 * Creates a Pi multiplier converter.

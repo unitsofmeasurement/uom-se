@@ -33,6 +33,7 @@ import javax.measure.UnitConverter;
 
 import tec.uom.se.AbstractConverter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -49,17 +50,19 @@ import java.util.function.Supplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, Dec 24, 2014
+ * @version 0.7, Nov 14, 2015
  */
 public final class RationalConverter extends AbstractConverter implements
-		ValueSupplier<Double>, Supplier<Double>, DoubleSupplier { // implements
+		ValueSupplier<Double>, Supplier<Double>, DoubleSupplier, Serializable { 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3563384008357680074L;
+
+		// implements
 																	// Immutable<Double>
 																	// {
-
-	/**
-	 *
-	 */
-	// private static final long serialVersionUID = 1L;
 
 	/**
 	 * Holds the converter dividend.

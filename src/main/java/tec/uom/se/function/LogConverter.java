@@ -29,6 +29,7 @@
  */
 package tec.uom.se.function;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -44,15 +45,15 @@ import tec.uom.se.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.2, April 3, 2014
+ * @version 0.6, November 15, 2015
  */
 public final class LogConverter extends AbstractConverter 
-	implements ValueSupplier<String> { //implements Immutable<String> {
+	implements ValueSupplier<String>, Serializable { //implements Immutable<String> {
 
     /**
 	 * 
 	 */
-//	private static final long serialVersionUID = -7584688290961460870L;
+	private static final long serialVersionUID = -7584688290961460870L;
 	
 	/**
      * Holds the logarithmic base.
