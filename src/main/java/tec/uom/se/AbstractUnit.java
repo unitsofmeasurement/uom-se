@@ -44,6 +44,7 @@ import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.unit.Units;
 
 import javax.measure.*;
+import javax.measure.quantity.Dimensionless;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -70,7 +71,7 @@ import java.lang.reflect.Type;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.2, Jul 26, 2015
+ * @version 0.7.3, Nov 15, 2015
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 		Comparable<Unit<Q>>, Serializable {
@@ -80,6 +81,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	 */
 	private static final long serialVersionUID = -4344589505537030204L;
 
+	/**
+     * Holds the dimensionless unit <code>ONE</code>.
+     */
+    public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
+	
 	/**
 	 * Holds the name.
 	 */

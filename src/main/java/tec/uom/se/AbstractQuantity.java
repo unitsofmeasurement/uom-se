@@ -43,7 +43,6 @@ import tec.uom.se.function.NaturalOrder;
 import tec.uom.se.function.UnitSupplier;
 import tec.uom.se.function.ValueSupplier;
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.unit.Units;
 
 /**
  * <p> This class represents the immutable result of a scalar measurement stated
@@ -98,11 +97,16 @@ import tec.uom.se.unit.Units;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.6.5, $Date: 2015-10-23 $
+ * @version 0.7, $Date: 2015-11-15 $
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
         ComparableQuantity<Q>, UnitSupplier<Q>, ValueSupplier<Number> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 293852425369811882L;
 
 	private final Unit<Q> unit;
 
@@ -110,12 +114,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
 	 * Holds a dimensionless quantity of none (exact).
 	 */
 	public static final Quantity<Dimensionless> NONE = Quantities.getQuantity(
-			0, Units.ONE);
+			0, AbstractUnit.ONE);
 
 	/**
 	 * Holds a dimensionless quantity of one (exact).
 	 */
-	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, Units.ONE);
+	public static final Quantity<Dimensionless> ONE = Quantities.getQuantity(1, AbstractUnit.ONE);
 
 	/**
      * constructor.

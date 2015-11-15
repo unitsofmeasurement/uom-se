@@ -81,7 +81,7 @@ import javax.measure.spi.SystemOfUnits;
  * <p> This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, Sep 27, 2015
+ * @version 0.7, Nov 15, 2015
 */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -91,11 +91,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	private static final Units INSTANCE = new Units();
 	
 	public String getName() {
-		return "Units";
+		return Units.class.getSimpleName();
 	}
 
 	/**
 	 * Holds the dimensionless unit <code>ONE</code>.
+	 * @deprecated
 	 */
 	public static final Unit<Dimensionless> ONE
 			= addUnit(new ProductUnit<>(), Dimensionless.class);
