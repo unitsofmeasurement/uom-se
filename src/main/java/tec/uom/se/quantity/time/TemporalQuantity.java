@@ -37,7 +37,9 @@ import static tec.uom.se.unit.Units.SECOND;
 import java.util.Objects;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
 
 import javax.measure.IncommensurableException;
@@ -64,6 +66,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 	
 	private final TemporalUnit timeUnit;
 	private final Integer value;
+	private final TemporalAmount amount;
 
 	/**
 	 * creates the {@link TemporalQuantity} using {@link TemporalUnit} and
@@ -77,6 +80,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 	TemporalQuantity(Integer value, TemporalUnit timeUnit) {
 		super(toUnit(timeUnit));
 		this.timeUnit = timeUnit;
+		this.amount = Duration.of(value, timeUnit);
 		this.value = value;
 	}
 
@@ -96,7 +100,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 
 	/**
 	 * Creates a {@link TemporalQuantity} based a {@link Quantity<Time>}
-	 * converted to {@link SI#SECOND}.
+	 * converted to {@link Units#SECOND}.
 	 * 
 	 * @param quantity
 	 *            - quantity to be used
@@ -108,6 +112,15 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 				ChronoUnit.SECONDS);
 	}
 
+	/**
+	 * get to {@link TemporalAmount}
+	 * 
+	 * @return the TemporalAmount
+	 */
+	public TemporalAmount getTemporalAmount() {
+		return amount;
+	}
+	
 	/**
 	 * get to {@link TemporalUnit}
 	 * 

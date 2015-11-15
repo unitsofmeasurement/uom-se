@@ -134,12 +134,23 @@ public final class TimeQuantities {
 
     /**
      * Creates a {@link TimeUnitQuantity} based a {@link Quantity<Time>} converted to
-     * {@link SI#SECOND}.
+     * {@link Units#SECOND}.
      * @param quantity - quantity to be used
      * @return the {@link TimeUnitQuantity} converted be quantity in seconds.
      */
-    public static TimeUnitQuantity getQuantity(Quantity<Time> quantity) {
+    public static TimeUnitQuantity toTimeUnitSeconds(Quantity<Time> quantity) {
         Quantity<Time> seconds = Objects.requireNonNull(quantity).to(SECOND);
         return new TimeUnitQuantity(TimeUnit.SECONDS, seconds.getValue().intValue());
+    }
+    
+    /**
+     * Creates a {@link TemporalQuantity} based a {@link Quantity<Time>} converted to
+     * {@link Units#SECOND}.
+     * @param quantity - quantity to be used
+     * @return the {@link TemporalQuantity} converted be quantity in seconds.
+     */
+    public static TemporalQuantity toTemporalSeconds(Quantity<Time> quantity) {
+        Quantity<Time> seconds = Objects.requireNonNull(quantity).to(SECOND);
+        return TemporalQuantity.of(seconds);
     }
 }
