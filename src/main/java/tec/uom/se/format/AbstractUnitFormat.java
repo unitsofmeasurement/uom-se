@@ -44,14 +44,13 @@ import tec.uom.se.AbstractUnit;
  *
  * <p> For all metric units, the 20 SI prefixes used to form decimal
  *     multiples and sub-multiples of SI units are recognized.
- *     {@link USCustomary US Customary} units are directly recognized. For example:[code]
+ *     For example:<code>
  *        Unit.valueOf("m°C").equals(Units.MILLI(Units.CELSIUS))
- *        Unit.valueOf("kW").equals(Units.KILO(Units.WATT))
- *        Unit.valueOf("ft").equals(Units.METRE.multiply(3048).divide(10000))[/code]</p>
+ *        Unit.valueOf("kW").equals(Units.KILO(Units.WATT))</code></p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:uomo@catmedia.us">Werner Keil</a>
- * @version 0.5.2, $Date: 2015-08-02 $
+ * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @version 0.6, $Date: 2015-11-19 $
  * 
  */
 public abstract class AbstractUnitFormat implements UnitFormat {
@@ -76,18 +75,18 @@ public abstract class AbstractUnitFormat implements UnitFormat {
             throws IOException;
     
     /**
-	 * Formats an object to produce a string. This is equivalent to <blockquote>
-	 * {@link #format(Unit, StringBuilder) format}<code>(unit,
-	 *         new StringBuilder()).toString();</code>
-	 * </blockquote>
-	 *
-	 * @param obj
-	 *            The object to format
-	 * @return Formatted string.
-	 * @exception IllegalArgumentException
-	 *                if the Format cannot format the given object
-	 */
-	public final String format(Unit<?> unit) {
+      * Formats an object to produce a string. This is equivalent to <blockquote>
+      * {@link #format(Unit, StringBuilder) format}<code>(unit,
+      *         new StringBuilder()).toString();</code>
+      * </blockquote>
+      *
+      * @param obj
+      *            The object to format
+      * @return Formatted string.
+      * @exception IllegalArgumentException
+      *                if the Format cannot format the given object
+      */
+     public final String format(Unit<?> unit) {
 		if (unit instanceof AbstractUnit) {
 			return format((AbstractUnit<?>) unit, new StringBuilder())
 					.toString();
@@ -99,11 +98,12 @@ public abstract class AbstractUnitFormat implements UnitFormat {
 				throw new ParserException(ex); // Should never happen.
 			}
 		}
-	}
+     }
 	
-	@Override
-	public void label(Unit<?> unit, String label) {
-	}
+     @Override
+     public void label(Unit<?> unit, String label) {
+     	// do nothing, if subclasses want to use it, override there
+     }
 
     /**
      * Parses a portion of the specified <code>CharSequence</code> from the
