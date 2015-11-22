@@ -94,7 +94,6 @@ public final class QuantityFunctions {
      * @throws NullPointerException
      */
     public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
-        // FIXME add null check via Optional or similar
     	return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
     }
     /**
@@ -204,7 +203,6 @@ public final class QuantityFunctions {
 
     /**
      * Predicate to filter to one or more units
-     * @param unit - a unit to be filtered
      * @param units - units to be filtered (optional)
      * @return A predicate to filter one or more units
      */
@@ -227,7 +225,6 @@ public final class QuantityFunctions {
 
     /**
      * Predicate to filter excluding these units
-     * @param unit - a unit to be filtered
      * @param units - units to be filtered (optional)
      * @return A predicate to filter to not be these units
      */
