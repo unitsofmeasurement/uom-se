@@ -338,7 +338,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 //			if (cursor != null)
 //				cursor.setIndex(end);
 			return result;
-		} catch (TokenException e) {
+		} catch (TokenException | TokenMgrError e) {
 //			if (cursor != null) {
 //				if (e.currentToken != null) {
 //					cursor.setErrorIndex(start + e.currentToken.endColumn);
@@ -346,9 +346,6 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 //					cursor.setErrorIndex(start);
 //				}
 //			}
-			throw new ParserException(e);
-		} catch (TokenMgrError e) {
-//			cursor.setErrorIndex(start);
 			throw new ParserException(e);
 		}
 	}
