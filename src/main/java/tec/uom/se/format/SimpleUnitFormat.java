@@ -933,10 +933,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		public boolean isValidIdentifier(String name) {
 			if ((name == null) || (name.length() == 0))
 				return false;
-			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
-					return false;
-			return isAllASCII(name);
-			/*
+			// label must not begin with a digit or mathematical operator
+			return isUnitIdentifierPart(name.charAt(0)) && isAllASCII(name);
+/*
 			for (int i = 0; i < name.length(); i++) {
 				if (!isAsciiCharacter(name.charAt(i)))
 				return false;
