@@ -689,7 +689,7 @@ Token sign() throws TokenException {
             }
           }
           jj_expentries.add(jj_expentry);
-          break jj_entries_loop;
+          break;
         }
       }
       if (pos != 0) jj_lasttokens[(jj_endpos = pos) - 1] = kind;
