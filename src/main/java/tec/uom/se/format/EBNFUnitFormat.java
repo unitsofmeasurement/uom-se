@@ -604,7 +604,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			return ADDITION_PRECEDENCE;
 		} else if (converter instanceof LogConverter) {
 			double base = ((LogConverter) converter).getBase();
-			StringBuffer expr = new StringBuffer();
+			StringBuilder expr = new StringBuilder();
 			if (base == E) {
 				expr.append("ln"); //$NON-NLS-1$
 			} else {
@@ -622,7 +622,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 				buffer.insert(0, '(');
 				buffer.append(')');
 			}
-			StringBuffer expr = new StringBuffer();
+			StringBuilder expr = new StringBuilder();
 			double base = ((ExpConverter) converter).getBase();
 			if (base == E) {
 				expr.append('e');

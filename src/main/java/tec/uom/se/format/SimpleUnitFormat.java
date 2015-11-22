@@ -439,7 +439,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 				TransformedUnit<?> tfmUnit = (TransformedUnit<?>) unit;
 				Unit<?> baseUnits = tfmUnit.toSystemUnit();
 				UnitConverter cvtr = tfmUnit.getSystemConverter();
-				StringBuffer result = new StringBuffer();
+				StringBuilder result = new StringBuilder();
 				String baseUnitName = baseUnits.toString();
 				if ((baseUnitName.indexOf('·') >= 0)
 						|| (baseUnitName.indexOf('*') >= 0)
