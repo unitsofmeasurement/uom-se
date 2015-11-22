@@ -84,7 +84,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>,
 	/**
      * Holds the dimensionless unit <code>ONE</code>.
      */
-    public static final Unit<Dimensionless> ONE = new ProductUnit<Dimensionless>();
+    public static final Unit<Dimensionless> ONE = new ProductUnit<>();
 	
 	/**
 	 * Holds the name.

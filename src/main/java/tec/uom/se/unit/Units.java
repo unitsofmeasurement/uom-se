@@ -204,7 +204,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
      * length of the arc between them is equal to the radius.
      */
     public static final Unit<Angle> RADIAN
-            = addUnit(new AlternateUnit<Angle>(ONE, "rad"), Angle.class);
+            = addUnit(new AlternateUnit<>(ONE, "rad"), Angle.class);
 
     /**
      * The SI unit for solid angle quantities (standard name <code>sr</code>).
