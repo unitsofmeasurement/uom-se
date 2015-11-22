@@ -300,8 +300,8 @@ public class UnitsTest {
 //		assertEquals("kg", UCUM.OUNCE.getSymbol());//"oz"
 		assertEquals("kg", MetricPrefix.KILO(Units.GRAM).getSymbol());
 //		assertEquals("kg", UCUM.GRAM.getSymbol()); //"g"
-//		assertEquals("kg", US.POUND.getSymbol()); //"lb"
-		assertNull(Units.GRAM.getSymbol());
+//      assertEquals("kg", US.POUND.getSymbol()); //"lb"
+//		assertNull(Units.GRAM.getSymbol());
 //		assertNull(UCUM.OUNCE.getSymbol());
 	}
 
