@@ -252,38 +252,43 @@ public abstract class OldProxyQuantityFactory<Q extends Quantity<Q>> {//implemen
         @Override
         public Object invoke(final Object proxy, final Method method, final Object[] args) {
             final String name = method.getName();
-            if (name.equals("doubleValue")) { // Most frequent.
-	          final Unit<Q> toUnit = (Unit<Q>) args[0];
-	          if ((toUnit == unit) || (toUnit.equals(unit)))
-	                return value.doubleValue(); // Returns value directly.
-                  return unit.getConverterTo(toUnit).convert(value.doubleValue());
-            } else if (name.equals("longValue")) { 
-	          final Unit<Q> toUnit = (Unit<Q>) args[0];
-	          if ((toUnit == unit) || (toUnit.equals(unit)))
-	                return value.longValue(); // Returns value directly.
-                  double doubleValue = unit.getConverterTo(toUnit).convert(value.doubleValue());
-                  if ((doubleValue < Long.MIN_VALUE) || (doubleValue > Long.MAX_VALUE))
-                      throw new ArithmeticException("Overflow: " + doubleValue + " cannot be represented as a long");
-                  return (long) doubleValue;                
-            } else if (name.equals("getValue")) {
-                 return value;
-            } else if (name.equals("getUnit")) {
-                return unit;
-            } else if (name.equals("toString")) {
-                return String.valueOf(value) + ' ' + unit;
-            } else if (name.equals("hashCode")) {
-                return value.hashCode() * 31 + unit.hashCode();
-            } else if (name.equals("equals")) {
-                final Object obj = args[0];
-                if (!(obj instanceof AbstractQuantity))
-                    return false;
-                final AbstractQuantity<Q> that = (AbstractQuantity<Q>) obj;
-                return unit.isCompatible((AbstractUnit<?>) that.getUnit()) && value.doubleValue() == (that).doubleValue(unit);
-            } else if (name.equals("compareTo")) {
-                final AbstractQuantity<Q> that = (AbstractQuantity<Q>) args[0];
-                return Double.compare(value.doubleValue(), that.doubleValue(unit));
-            } else {
-                throw new UnsupportedOperationException(name);
+            switch (name) {
+                case "doubleValue": { // Most frequent.
+                    final Unit<Q> toUnit = (Unit<Q>) args[0];
+                    if ((toUnit == unit) || (toUnit.equals(unit)))
+                        return value.doubleValue(); // Returns value directly.
+                    return unit.getConverterTo(toUnit).convert(value.doubleValue());
+                }
+                case "longValue": {
+                    final Unit<Q> toUnit = (Unit<Q>) args[0];
+                    if ((toUnit == unit) || (toUnit.equals(unit)))
+                        return value.longValue(); // Returns value directly.
+                    double doubleValue = unit.getConverterTo(toUnit).convert(value.doubleValue());
+                    if ((doubleValue < Long.MIN_VALUE) || (doubleValue > Long.MAX_VALUE))
+                        throw new ArithmeticException("Overflow: " + doubleValue + " cannot be represented as a long");
+                    return (long) doubleValue;
+                }
+                case "getValue":
+                    return value;
+                case "getUnit":
+                    return unit;
+                case "toString":
+                    return String.valueOf(value) + ' ' + unit;
+                case "hashCode":
+                    return value.hashCode() * 31 + unit.hashCode();
+                case "equals": {
+                    final Object obj = args[0];
+                    if (!(obj instanceof AbstractQuantity))
+                        return false;
+                    final AbstractQuantity<Q> that = (AbstractQuantity<Q>) obj;
+                    return unit.isCompatible((AbstractUnit<?>) that.getUnit()) && value.doubleValue() == (that).doubleValue(unit);
+                }
+                case "compareTo": {
+                    final AbstractQuantity<Q> that = (AbstractQuantity<Q>) args[0];
+                    return Double.compare(value.doubleValue(), that.doubleValue(unit));
+                }
+                default:
+                    throw new UnsupportedOperationException(name);
             }
         }
     }
