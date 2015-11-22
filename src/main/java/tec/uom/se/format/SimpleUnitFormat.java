@@ -411,9 +411,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 				if (!isUnitIdentifierPart(name.charAt(i)))
 					return false;
 			} */
-			if (!isUnitIdentifierPart(name.charAt(0))) // label must not begin with a digit or mathematical operator
-					return false;
-			return true;
+			return isUnitIdentifierPart(name.charAt(0));
 		}
 
 		static boolean isUnitIdentifierPart(char ch) {

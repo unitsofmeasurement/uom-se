@@ -476,8 +476,7 @@ Token sign() throws TokenException {
   }
 
   private boolean jj_3R_6() {
-    if (jj_scan_token(FLOATING_POINT)) return true;
-    return false;
+      return jj_scan_token(FLOATING_POINT);
   }
 
   private boolean jj_3_2() {
@@ -487,14 +486,12 @@ Token sign() throws TokenException {
     jj_scanpos = xsp;
     if (jj_scan_token(19)) return true;
     }
-    if (jj_scan_token(CARET)) return true;
-    return false;
+      return jj_scan_token(CARET);
   }
 
   private boolean jj_3_1() {
     if (jj_3R_3()) return true;
-    if (jj_3R_4()) return true;
-    return false;
+      return jj_3R_4();
   }
 
   private boolean jj_3R_4() {
@@ -508,8 +505,7 @@ Token sign() throws TokenException {
   }
 
   private boolean jj_3R_5() {
-    if (jj_scan_token(INTEGER)) return true;
-    return false;
+      return jj_scan_token(INTEGER);
   }
 
   /** Generated Token Manager. */

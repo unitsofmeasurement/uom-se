@@ -323,9 +323,7 @@ private static boolean jjCanMove_1(int hiByte, int i1, int i2, long l1, long l2)
       case 32:
          return ((jjbitVec5[i2] & l2) != 0L);
       default :
-         if ((jjbitVec2[i1] & l1) != 0L)
-            return true;
-         return false;
+         return (jjbitVec2[i1] & l1) != 0L;
    }
 }
 
