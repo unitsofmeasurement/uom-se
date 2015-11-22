@@ -29,6 +29,9 @@
  */
 package tec.uom.se.unit;
 
+import java.util.Map;
+import java.util.Objects;
+
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -36,9 +39,6 @@ import javax.measure.UnitConverter;
 
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.UnitConverterSupplier;
-
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p> This class represents the units derived from other units using
@@ -105,12 +105,13 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
 	        }
 	        this.parentUnit = abParent;
 	        this.converter = unitConverter;
+	        this.symbol = symbol;
 	//        this.symbol = symbol; //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
         } else {
         	throw new IllegalArgumentException("The parent unit: " + parentUnit + " is not an abstract unit.");
         }
     }
-        
+
     @Override
     public Dimension getDimension() {
         return parentUnit.getDimension();
@@ -125,7 +126,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     public UnitConverter getConverter() {
         return converter;
     }
-    
+
     @Override
     public AbstractUnit<Q> toSystemUnit() {
         return parentUnit.getSystemUnit();
