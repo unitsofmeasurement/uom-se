@@ -13,9 +13,8 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>0.8</version>
+		<version>0.9-SNAPSHOT</version>
 	</parent>
-	<version>0.9-SNAPSHOT</version>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
 	</scm>
@@ -266,6 +265,15 @@
 								<targetJdk>${project.build.javaVersion}</targetJdk>
 							</configuration>
 						</plugin>
+
+                        <!-- ======================================================= -->
+                        <!-- Test results -->
+                        <!-- ======================================================= -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <version>2.16</version>
+                        </plugin>
 
 						<!-- ======================================================= -->
 						<!-- Report on test results -->
