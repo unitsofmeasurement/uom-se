@@ -15,6 +15,7 @@
 		<artifactId>uom-parent</artifactId>
 		<version>0.8</version>
 	</parent>
+	<version>0.9-SNAPSHOT</version>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
 	</scm>
