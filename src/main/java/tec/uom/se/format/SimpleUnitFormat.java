@@ -31,7 +31,7 @@ package tec.uom.se.format;
 
 import java.io.IOException;
 import java.lang.CharSequence;
-import java.text.FieldPosition; // FIXME get rid of those without breaking JUnits
+import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.util.HashMap;
 import java.util.Locale;
@@ -72,7 +72,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.5, October 10, 2015
+ * @version 0.6, November 25, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -149,13 +149,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 	/**
 	 * Returns the unit format for the default locale (format used by
-	 * {@link Unit#valueOf(CharSequence) Unit.valueOf(CharSequence)} and
+	 * {@link AbstractUnit#parse(CharSequence) AbstractUnit.parse(CharSequence)} and
 	 * {@link Unit#toString() Unit.toString()}).
 	 * 
 	 * @return the default unit format (locale sensitive).
 	 */
 	public static SimpleUnitFormat getInstance() {
-		//return BaseFormat.getInstance(Locale.getDefault());
 		return getInstance(Flavor.Default);
 	}
 
@@ -234,8 +233,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 	/**
 	 * Attaches a system-wide label to the specified unit. For example: [code]
-	 * UnitFormat.getInstance().label(DAY.multiply(365), "year");
-	 * UnitFormat.getInstance().label(METER.multiply(0.3048), "ft"); [/code] If
+	 * SimpleUnitFormat.getInstance().label(DAY.multiply(365), "year");
+	 * SimpleUnitFormat.getInstance().label(METER.multiply(0.3048), "ft"); [/code] If
 	 * the specified label is already associated to an unit the previous
 	 * association is discarded or ignored.
 	 * 
@@ -258,10 +257,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * Attaches a system-wide alias to this unit. Multiple aliases may be
 	 * attached to the same unit. Aliases are used during parsing to recognize
 	 * different variants of the same unit. For example: [code]
-	 * UnitFormat.getLocaleInstance().alias(METER.multiply(0.3048), "foot");
-	 * UnitFormat.getLocaleInstance().alias(METER.multiply(0.3048), "feet");
-	 * UnitFormat.getLocaleInstance().alias(METER, "meter");
-	 * UnitFormat.getLocaleInstance().alias(METER, "metre"); [/code] If the
+	 * SimpleUnitFormat.getInstance().alias(METER.multiply(0.3048), "foot");
+	 * SimpleUnitFormat.getInstance().alias(METER.multiply(0.3048), "feet");
+	 * SimpleUnitFormat.getInstance().alias(METER, "meter");
+	 * SimpleUnitFormat.getInstance().alias(METER, "metre"); [/code] If the
 	 * specified label is already associated to an unit the previous association
 	 * is discarded or ignored.
 	 *
@@ -342,15 +341,14 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 * @return the corresponding unit or <code>null</code> if the string cannot
 	 *         be parsed.
 	 */
-	public final Unit<?> parseObject(String source, ParsePosition pos) {
-		int start = pos.getIndex();
-		try {
-			return parseProductUnit(source, pos);
-		} catch (ParserException e) {
+	public final Unit<?> parseObject(String source, ParsePosition pos) throws ParserException {
+		//int start = pos.getIndex();
+		return parseProductUnit(source, pos);
+		/*} catch (ParserException e) {
 			pos.setIndex(start);
 			pos.setErrorIndex(e.getPosition());
 			return null;
-		}
+		}*/
 	}
 
 	/**
@@ -848,8 +846,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
 		@Override
 		public Unit<?> parse(CharSequence csq) throws ParserException {
-			// TODO Auto-generated method stub
-			return null;
+			return parse(csq, 0);
 		}
 
 		@Override
