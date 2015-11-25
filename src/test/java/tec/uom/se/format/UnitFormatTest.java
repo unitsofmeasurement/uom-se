@@ -30,6 +30,7 @@
 package tec.uom.se.format;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.MetricPrefix.MEGA;
@@ -123,5 +124,31 @@ public class UnitFormatTest {
 		} catch (ParserException e) {
 			fail(e.getMessage());
 		}
+	}
+	
+	@Test
+	// TODO should this throw a ParserException or return Dimensionless as UnitFormat JavaDoc states?
+	public void testParseIrregularStringSimple() {
+		final UnitFormat format = SimpleUnitFormat.getInstance();
+		try {
+			Unit<?> u = format.parse("bl//^--1a");
+			assertNull(u);
+		} catch (ParserException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test(expected=ParserException.class)
+	public void testParseIrregularStringEBNF() {
+		final UnitFormat format = EBNFUnitFormat.getInstance();
+			Unit<?> u = format.parse("bl//^--1a");
+			//System.out.println(u);
+	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testParseIrregularStringLocal() {
+		final UnitFormat format = LocalUnitFormat.getInstance();
+			Unit<?> u = format.parse("bl//^--1a");
+			//System.out.println(u);
 	}
 }
