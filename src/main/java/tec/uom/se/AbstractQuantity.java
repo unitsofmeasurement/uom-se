@@ -97,7 +97,7 @@ import tec.uom.se.quantity.Quantities;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.7, $Date: 2015-11-15 $
+ * @version 0.8, $Date: 2015-12-23 $
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
@@ -231,13 +231,20 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
         return this.compareTo(that) == 0;
     }
 
-
-    /**
+	/**
+	 * Compares this measure to the specified Measurement quantity. The default
+	 * implementation compares the {@link AbstractQuantity#doubleValue(Unit)} of both
+	 * this measure and the specified Measurement stated in the same unit (this
+	 * measure's {@link #getUnit() unit}).
+	 *
+	 * @return a negative integer, zero, or a positive integer as this measure
+	 *         is less than, equal to, or greater than the specified Measurement
+	 *         quantity.
      * @see {@link NaturalOrder}
      */
     @Override
     public int compareTo(Quantity<Q> that) {
-        Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
+        final Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
         return comparator.compare(this, that);
     }
     /**
