@@ -34,7 +34,6 @@ import java.lang.CharSequence;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import tec.uom.se.function.AddConverter;
@@ -72,7 +71,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.6, November 25, 2015
+ * @version 0.7, December 29, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -156,16 +155,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	 */
 	public static SimpleUnitFormat getInstance() {
 		return getInstance(Flavor.Default);
-	}
-
-	/**
-	 * Returns the unit format for the specified locale.
-	 * 
-	 * @return the unit format for the specified locale.
-	 * @deprecated currently unused
-	 */
-	public static SimpleUnitFormat getInstance(Locale inLocale) {
-		return DEFAULT; // TBD: Implement Locale Format.
 	}
 
 	/**
