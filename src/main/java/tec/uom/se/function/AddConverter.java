@@ -36,6 +36,7 @@ import java.util.Objects;
 
 import javax.measure.UnitConverter;
 
+import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
 
 /**
@@ -44,7 +45,7 @@ import tec.uom.se.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 0.5.2, Sep 06, 2014
+ * @version 0.5.3, Dec 28, 2015
  */
 public final class AddConverter extends AbstractConverter implements ValueSupplier<Double>, 
  Serializable {

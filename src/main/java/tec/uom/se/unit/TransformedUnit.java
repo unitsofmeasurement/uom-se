@@ -37,8 +37,8 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
+import tec.uom.lib.common.function.UnitConverterSupplier;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.function.UnitConverterSupplier;
 
 /**
  * <p> This class represents the units derived from other units using
@@ -51,8 +51,8 @@ import tec.uom.se.function.UnitConverterSupplier;
  *     </code></p>
  *
  * <p> Transformed units have no symbol. But like any other units,
- *     they may have labels attached to them (see {@link tec.uom.se.format.SymbolMap
- *     SymbolMap}</p>
+ *     they may have labels attached to them (see {@link javax.measure.format.UnitFormat#label(Unit, String)
+ *     UnitFormat.label}</p>
  *
  * <p> Instances of this class are created through the {@link AbstractUnit#transform} method.</p>
  *
@@ -60,7 +60,7 @@ import tec.uom.se.function.UnitConverterSupplier;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.2, July 12, 2015
+ * @version 0.7, December 28, 2015
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 

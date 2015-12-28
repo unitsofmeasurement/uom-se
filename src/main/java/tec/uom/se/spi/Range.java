@@ -31,8 +31,8 @@ package tec.uom.se.spi;
 
 import java.util.Objects;
 
-import tec.uom.se.function.MaximumSupplier;
-import tec.uom.se.function.MinimumSupplier;
+import tec.uom.lib.common.function.MaximumSupplier;
+import tec.uom.lib.common.function.MinimumSupplier;
 
 /**
  * A Measurement Range is a pair of <code>T</code> items that represent a range
@@ -46,7 +46,7 @@ import tec.uom.se.function.MinimumSupplier;
  *            The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.8, May 23, 2015
+ * @version 0.8.9, December 28, 2015
  * @see <a
  *      href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html">
  *      SensorML: QuantityRange</a>

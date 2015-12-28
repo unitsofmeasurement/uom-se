@@ -31,6 +31,8 @@ package tec.uom.se.function;
 
 import javax.measure.UnitConverter;
 
+import tec.uom.lib.common.function.DoubleFactorSupplier;
+import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
 
 import java.io.Serializable;
@@ -46,7 +48,7 @@ import java.util.Objects;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, Sep 06, 2014
+ * @version 0.7, Dec 28, 2015
  */
 public final class MultiplyConverter extends AbstractConverter implements
 		ValueSupplier<Double>, DoubleFactorSupplier, Serializable {

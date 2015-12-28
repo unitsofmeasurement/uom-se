@@ -33,6 +33,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
 
 /**
@@ -43,7 +44,7 @@ import tec.uom.se.AbstractConverter;
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, November 15, 2015
+ * @version 0.7, December 28, 2015
  */
 final class PiDivisorConverter extends AbstractConverter 
 	implements ValueSupplier<String>, Serializable { //implements Immutable<String> {

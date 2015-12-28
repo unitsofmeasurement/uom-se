@@ -29,7 +29,7 @@
  */
 package tec.uom.se.unit;
 
-import tec.uom.se.function.UnitConverterSupplier;
+import tec.uom.lib.common.function.UnitConverterSupplier;
 import tec.uom.se.function.RationalConverter;
 
 import javax.measure.Quantity;
@@ -43,7 +43,7 @@ import java.math.BigInteger;
  *     system (decimal multiples and submultiples of units).
  *     For example:<pre><code>
  *     import static tec.uom.se.unit.Units.*;  // Static import.
- *     import static tec.uom.se.uit.MetricPrefix.*; // Static import.
+ *     import static tec.uom.se.unit.MetricPrefix.*; // Static import.
  *     import javax.measure.*;
  *     import javax.measure.quantity.*;
  *     ...
@@ -55,7 +55,7 @@ import java.math.BigInteger;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-04-19 $
+ * @version 0.7, $Date: 2015-12-28 $
  */
 public enum MetricPrefix implements UnitConverterSupplier {
     YOTTA(new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),

@@ -31,6 +31,7 @@ package tec.uom.se.function;
 
 import javax.measure.UnitConverter;
 
+import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
 
 import java.io.Serializable;
@@ -50,7 +51,7 @@ import java.util.function.Supplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, Nov 14, 2015
+ * @version 0.7.1, Dec 28, 2015
  */
 public final class RationalConverter extends AbstractConverter implements
 		ValueSupplier<Double>, Supplier<Double>, DoubleSupplier, Serializable { 

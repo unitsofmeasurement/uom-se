@@ -39,9 +39,9 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 
+import tec.uom.lib.common.function.UnitSupplier;
+import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.function.NaturalOrder;
-import tec.uom.se.function.UnitSupplier;
-import tec.uom.se.function.ValueSupplier;
 import tec.uom.se.quantity.Quantities;
 
 /**
@@ -97,7 +97,7 @@ import tec.uom.se.quantity.Quantities;
  * <p> All instances of this class shall be immutable.</p>
  *
  * @author  <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.8, $Date: 2015-12-23 $
+ * @version 0.8.1, $Date: 2015-12-28 $
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements
