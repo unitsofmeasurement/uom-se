@@ -29,6 +29,8 @@
  */
 package tec.uom.se.format;
 
+import static tec.uom.se.unit.MetricPrefix.*;
+
 import java.io.IOException;
 import java.lang.CharSequence;
 import java.text.FieldPosition;
@@ -36,6 +38,7 @@ import java.text.ParsePosition;
 import java.util.HashMap;
 import java.util.Map;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
@@ -71,7 +74,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.7, December 29, 2015
+ * @version 0.8, December 29, 2015
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	/**
@@ -88,53 +91,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 	public enum Flavor {
 		Default, ASCII
 	}
-
-	// TODO some should be in MetricPrefix
-	private static final MultiplyConverter E24 = new MultiplyConverter(1E24);
-
-	private static final MultiplyConverter E21 = new MultiplyConverter(1E21);
-
-	private static final RationalConverter E18 = new RationalConverter(
-			1000000000000000000L, 1);
-
-	private static final RationalConverter E15 = new RationalConverter(
-			1000000000000000L, 1);
-
-	private static final RationalConverter E12 = new RationalConverter(1000000000000L,
-			1);
-
-	private static final RationalConverter E9 = new RationalConverter(1000000000L, 1);
-
-	private static final RationalConverter E6 = new RationalConverter(1000000L, 1);
-
-	private static final RationalConverter E3 = new RationalConverter(1000L, 1);
-
-	private static final RationalConverter E2 = new RationalConverter(100L, 1);
-
-	private static final RationalConverter E1 = new RationalConverter(10L, 1);
-
-	private static final RationalConverter Em1 = new RationalConverter(1, 10L);
-
-	private static final RationalConverter Em2 = new RationalConverter(1, 100L);
-
-	private static final RationalConverter Em3 = new RationalConverter(1, 1000L);
-
-	private static final RationalConverter Em6 = new RationalConverter(1, 1000000L);
-
-	private static final RationalConverter Em9 = new RationalConverter(1, 1000000000L);
-
-	private static final RationalConverter Em12 = new RationalConverter(1,
-			1000000000000L);
-
-	private static final RationalConverter Em15 = new RationalConverter(1,
-			1000000000000000L);
-
-	private static final RationalConverter Em18 = new RationalConverter(1,
-			1000000000000000000L);
-
-	private static final MultiplyConverter Em21 = new MultiplyConverter(1E-21);
-
-	private static final MultiplyConverter Em24 = new MultiplyConverter(1E-24);
 
 	/**
 	 * Holds the standard unit format.
@@ -496,7 +452,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		@Override
 		public Unit<? extends Quantity> parseProductUnit(CharSequence csq,
 				ParsePosition pos) throws ParserException {
-			Unit result = Units.ONE;
+			Unit result = AbstractUnit.ONE;
 			int token = nextToken(csq, pos);
 			switch (token) {
 			case IDENTIFIER:
@@ -963,9 +919,14 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			"M", "k", "h", "da", "d", "c", "m", "µ", "n", "p", "f", "a", "z",
 			"y" };
 
-	private static final UnitConverter[] CONVERTERS = { E24, E21, E18, E15,
-			E12, E9, E6, E3, E2, E1, Em1, Em2, Em3, Em6, Em9, Em12, Em15, Em18,
-			Em21, Em24 };
+	// TODO we could try retrieving this dynamically in a static {} method from MetricPrefix if symbols above are also aligned
+	private static final UnitConverter[] CONVERTERS = { YOTTA.getConverter(), ZETTA.getConverter(), 
+			EXA.getConverter(), PETA.getConverter(), TERA.getConverter(), GIGA.getConverter(),
+			MEGA.getConverter(), KILO.getConverter(), HECTO.getConverter(), DEKA.getConverter(),
+			DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(), MICRO.getConverter(),
+			NANO.getConverter(), PICO.getConverter(), FEMTO.getConverter(), ATTO.getConverter(),
+			ZEPTO.getConverter(), YOCTO.getConverter()		
+	};
 
 	private static String asciiPrefix(String prefix) {
 		return prefix == "µ" ? "micro" : prefix;
@@ -987,14 +948,14 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// Special case for KILOGRAM.
 		DEFAULT.label(Units.GRAM, "g");
 		for (int i = 0; i < PREFIXES.length; i++) {
-			if (CONVERTERS[i] == E3)
+			if (CONVERTERS[i] == KILO.getConverter()) // TODO should it better be equals()?
 				continue; // kg is already defined.
 			DEFAULT.label(
-					Units.KILOGRAM.transform(CONVERTERS[i].concatenate(Em3)),
+					Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())),
 					PREFIXES[i] + "g");
 			if (PREFIXES[i] == "µ") {
 				ASCII.label(Units.KILOGRAM.transform(CONVERTERS[i]
-						.concatenate(Em3)), "microg");
+						.concatenate(MILLI.getConverter())), "microg");
 			}
 		}
 
