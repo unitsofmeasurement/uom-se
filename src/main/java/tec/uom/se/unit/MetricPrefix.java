@@ -29,6 +29,7 @@
  */
 package tec.uom.se.unit;
 
+import tec.uom.lib.common.function.SymbolSupplier;
 import tec.uom.lib.common.function.UnitConverterSupplier;
 import tec.uom.se.function.RationalConverter;
 
@@ -55,44 +56,56 @@ import java.math.BigInteger;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2015-12-28 $
+ * @version 0.8, 2015-12-29
  */
-public enum MetricPrefix implements UnitConverterSupplier {
-    YOTTA(new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),
-    ZETTA(new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),
-    EXA(new RationalConverter(BigInteger.TEN.pow(18), BigInteger.ONE)),
-    PETA(new RationalConverter(BigInteger.TEN.pow(15), BigInteger.ONE)),
-    TERA(new RationalConverter(BigInteger.TEN.pow(12), BigInteger.ONE)),
-    GIGA(new RationalConverter(BigInteger.TEN.pow(9), BigInteger.ONE)),
-    MEGA(new RationalConverter(BigInteger.TEN.pow(6), BigInteger.ONE)),
-    KILO(new RationalConverter(BigInteger.TEN.pow(3), BigInteger.ONE)),
-    HECTO(new RationalConverter(BigInteger.TEN.pow(2), BigInteger.ONE)),
-    DEKA(new RationalConverter(BigInteger.TEN.pow(1), BigInteger.ONE)),
-    DECI(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(1))),
-    CENTI(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(2))),
-    MILLI(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(3))),
-    MICRO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(6))),
-    NANO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(9))),
-    PICO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(12))),
-    FEMTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(15))),
-    ATTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(18))),
-    ZEPTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(21))),
-    YOCTO(new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(24)));
-
+public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
+    YOTTA("Y", new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),
+    ZETTA("Z", new RationalConverter(BigInteger.TEN.pow(21), BigInteger.ONE)),
+    EXA("E", new RationalConverter(BigInteger.TEN.pow(18), BigInteger.ONE)),
+    PETA("P", new RationalConverter(BigInteger.TEN.pow(15), BigInteger.ONE)),
+    TERA("T", new RationalConverter(BigInteger.TEN.pow(12), BigInteger.ONE)),
+    GIGA("G", new RationalConverter(BigInteger.TEN.pow(9), BigInteger.ONE)),
+    MEGA("M", new RationalConverter(BigInteger.TEN.pow(6), BigInteger.ONE)),
+    KILO("k", new RationalConverter(BigInteger.TEN.pow(3), BigInteger.ONE)),
+    HECTO("h", new RationalConverter(BigInteger.TEN.pow(2), BigInteger.ONE)),
+    DEKA("da", new RationalConverter(BigInteger.TEN.pow(1), BigInteger.ONE)),
+    DECI("d", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(1))),
+    CENTI("c", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(2))),
+    MILLI("m", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(3))),
+    MICRO("µ", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(6))),
+    NANO("n", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(9))),
+    PICO("p", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(12))),
+    FEMTO("f", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(15))),
+    ATTO("a", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(18))),
+    ZEPTO("z", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(21))),
+    YOCTO("y", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(24)));
+	
+	private final String symbol;
+	
     private final RationalConverter converter;
-    
-    private static final RationalConverter E3 = new RationalConverter(
-			BigInteger.TEN.pow(3), BigInteger.ONE);
 
     /**
      * Creates a new prefix.
      *
+     * @param symbol the symbol of this prefix.
      * @param converter the associated unit converter.
      */
-    MetricPrefix(RationalConverter converter) {
-        this.converter = converter;
+    MetricPrefix(String symbol, RationalConverter converter) {
+        this.symbol = symbol;
+    	this.converter = converter;
     }
 
+    /**
+     * Returns the symbol of this prefix.
+     *
+     * @return this prefix symbol, not {@code null}.
+     * 
+     * @see #toString()
+     */
+    public String getSymbol() {
+    	return symbol;
+    }
+    
     /**
      * Returns the corresponding unit converter.
      *
@@ -195,8 +208,7 @@ public enum MetricPrefix implements UnitConverterSupplier {
      * @return <code>unit.times(1e3)</code>.
      */
     public static <Q extends Quantity<Q>> Unit<Q> KILO(Unit<Q> unit) {
-        //return unit.transform(KILO.getConverter());
-    	return unit.transform(E3);
+        return unit.transform(KILO.getConverter());
     }
 
     /**
@@ -342,5 +354,4 @@ public enum MetricPrefix implements UnitConverterSupplier {
     public static <Q extends Quantity<Q>> Unit<Q> YOCTO(Unit<Q> unit) {
         return unit.transform(YOCTO.getConverter());
     }
-
 }
