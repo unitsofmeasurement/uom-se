@@ -56,7 +56,7 @@ import java.math.BigInteger;
  * @see <a href="http://en.wikipedia.org/wiki/Metric_prefix">Wikipedia: Metric Prefix</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, 2015-12-29
+ * @version 0.9, 2015-12-30
  */
 public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
     YOTTA("Y", new RationalConverter(BigInteger.TEN.pow(24), BigInteger.ONE)),
@@ -80,9 +80,24 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
     ZEPTO("z", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(21))),
     YOCTO("y", new RationalConverter(BigInteger.ONE, BigInteger.TEN.pow(24)));
 	
-	private final String symbol;
-	
-    private final RationalConverter converter;
+    /**
+     * The symbol of this prefix, as returned by {@link
+     * #getSymbol}.
+     *
+     * @serial
+     * @see #getSymbol()
+     */
+    private final String symbol;
+
+    /**
+     * The <code>UnitConverter</code> of this prefix, as returned by {@link
+     * #getConverter}.
+     *
+     * @serial
+     * @see #getConverter()
+     * @see {@link UnitConverter}
+     */
+    private final UnitConverter converter;
 
     /**
      * Creates a new prefix.
@@ -99,8 +114,6 @@ public enum MetricPrefix implements SymbolSupplier, UnitConverterSupplier {
      * Returns the symbol of this prefix.
      *
      * @return this prefix symbol, not {@code null}.
-     * 
-     * @see #toString()
      */
     public String getSymbol() {
     	return symbol;
