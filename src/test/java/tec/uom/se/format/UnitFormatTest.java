@@ -87,8 +87,7 @@ public class UnitFormatTest {
 	@Test
 	public void testFormat4() {
 		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
-//		assertEquals("km/h", kph.toString());
-		assertEquals("kph", kph.toString());
+		assertEquals("km/h", kph.toString());
 	}
 	
 	@Test

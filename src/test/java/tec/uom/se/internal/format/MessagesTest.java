@@ -45,8 +45,7 @@ public class MessagesTest {
 		ResourceBundle bundle = ResourceBundle.getBundle("tec.uom.se.internal.format.messages", locale);
 		assertNotNull(bundle);
 		String text = bundle.getString("tec.uom.se.unit.Units.KILOMETRES_PER_HOUR");
-		assertEquals("kph", text);
-		
+		assertEquals("km/h", text);
 		assertEquals(59, bundle.keySet().size());
 	}
 }

@@ -447,7 +447,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
 	/**
 	 * A unit of velocity expressing the number of international {@link #KILOMETRE
-	 * kilometres} per {@link #HOUR hour} (abbreviation <code>kph</code>).
+	 * kilometres} per {@link #HOUR hour} (abbreviation <code>km/h</code>).
 	 */
 	public static final Unit<Speed> KILOMETRES_PER_HOUR = addUnit(
 			METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
@@ -557,7 +557,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	// //////////////////////////////////////////////////////////////////////////
 	// Label adjustments for Units
 	static {
-		SimpleUnitFormat.getInstance().label(KILOMETRES_PER_HOUR, "kph");
 		SimpleUnitFormat.getInstance().label(KILO(METRE), "km");
 		SimpleUnitFormat.getInstance().label(LITRE, "l");
 	}

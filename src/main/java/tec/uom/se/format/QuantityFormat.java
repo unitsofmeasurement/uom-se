@@ -41,10 +41,9 @@ import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
+import tec.uom.lib.common.function.Parser;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
-
-
 
 /**
  * <p> This class provides the interface for formatting and parsing {@link AbstractQuantity
@@ -56,7 +55,7 @@ import tec.uom.se.ComparableQuantity;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, $Date: 2015-10-02 $
+ * @version 0.6, $Date: 2015-12-30 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {

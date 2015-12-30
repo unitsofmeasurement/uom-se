@@ -935,6 +935,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		return prefix == "µ" ? "micro" : prefix;
 	}
 
+	// Initializations
 	static {
 		for (int i = 0; i < SI_UNITS.length; i++) {
 			for (int j = 0; j < PREFIXES.length; j++) {
@@ -984,11 +985,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			ASCII.label(Units.CELSIUS.transform(CONVERTERS[i]),
 					asciiPrefix(PREFIXES[i]) + "Celsius");
 		}
-	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	// To be moved in resource bundle in future release (locale dependent).
-	static {
 		DEFAULT.label(Units.PERCENT, "%");
 		// DEFAULT.label(NonUnits.DECIBEL, "dB");
 		// DEFAULT.label(NonUnits.G, "grav");
@@ -1062,8 +1059,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		// ASCII.label(NonUnits.RANKINE, "degree_rankine");
 		// DEFAULT.label(NonUnits.FAHRENHEIT, "°F");
 		// ASCII.label(NonUnits.FAHRENHEIT, "degree_fahrenheit");
-		ASCII.label(Units.KILOMETRES_PER_HOUR, "kph");
-		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "kph");
+		ASCII.label(Units.KILOMETRES_PER_HOUR, "km/h");
+		DEFAULT.label(Units.KILOMETRES_PER_HOUR, "km/h");
 		// DEFAULT.label(NonUnits.KNOT, "kn");
 		// DEFAULT.label(NonUnits.MACH, "Mach");
 		// DEFAULT.label(NonUnits.C, "c");
