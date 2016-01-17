@@ -29,40 +29,19 @@
  */
 package tec.uom.se.format;
 
-import static java.lang.StrictMath.E; // not in CLDC 8
-import static tec.uom.se.unit.Units.*;
-
-import java.io.IOException;
-import java.io.StringReader;
-import java.math.BigInteger;
-import java.text.ParsePosition;
-import java.util.Formattable;
-import java.util.Formatter;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import javax.measure.Unit;
-import javax.measure.UnitConverter;
-import javax.measure.format.ParserException;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.AbstractConverter.Pair;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.function.AddConverter;
-import tec.uom.se.function.ExpConverter;
-import tec.uom.se.function.LogConverter;
-import tec.uom.se.function.MultiplyConverter;
-import tec.uom.se.function.RationalConverter;
-import tec.uom.se.internal.format.UnitFormatParser;
 import tec.uom.se.internal.format.TokenException;
 import tec.uom.se.internal.format.TokenMgrError;
+import tec.uom.se.internal.format.UnitFormatParser;
 import tec.uom.se.unit.AnnotatedUnit;
-import tec.uom.se.unit.BaseUnit;
-import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.unit.Units;
+
+import javax.measure.Unit;
+import javax.measure.format.ParserException;
+import java.io.IOException;
+import java.io.StringReader;
+import java.text.ParsePosition;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * <p>
@@ -198,7 +177,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	private static final EBNFUnitFormat DEFAULT_INSTANCE = new EBNFUnitFormat();
 			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
 				//	Locale.getDefault()), Locale.getDefault()));
-    
+
 
 	/**
 	 * Returns the instance for the current default locale (non-ascii characters
