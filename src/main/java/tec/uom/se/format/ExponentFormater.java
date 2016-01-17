@@ -45,7 +45,7 @@ enum ExponentFormater {
             buffer.append(MIDDLE_DOT);
         }
         final StringBuilder temp = new StringBuilder();
-        int unitPrecedence = InternalFormater.I.formatInternal(unit, temp, symbolMap);
+        int unitPrecedence = InternalFormater.INSTANCE.formatInternal(unit, temp, symbolMap);
 
         if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
             temp.insert(0, '('); //$NON-NLS-1$
