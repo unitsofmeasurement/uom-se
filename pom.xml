@@ -180,7 +180,7 @@
                     <header>src/etc/header.txt</header>
                     <properties>
                         <owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
-                        <currentYear>2015</currentYear>
+                        <currentYear>2016</currentYear>
                     </properties>
                     <excludes>
                         <exclude>**/README</exclude>
@@ -189,6 +189,10 @@
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
                         <exclude>src/etc/**</exclude>
+                        <exclude>*.css</exclude>
+                        <exclude>*.jpg</exclude>
+                        <exclude>*.png</exclude>
+                        <exclude>*.yml</exclude>
                     </excludes>
                     <headerDefinitions>
                         <headerDefinition>src/etc/headers.xml</headerDefinition>
