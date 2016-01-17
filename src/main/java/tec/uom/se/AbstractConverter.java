@@ -109,7 +109,6 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
         return converters;
     }
 
-    @Override
     /**
      * @throws IllegalArgumentException if the value is </code>null</code>.
      */
