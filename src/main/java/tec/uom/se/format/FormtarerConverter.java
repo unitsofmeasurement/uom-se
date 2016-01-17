@@ -12,7 +12,7 @@ import java.util.Formatter;
 import static java.lang.StrictMath.E;
 
 /**
- * @author otaviojava 
+ * @author otaviojava
  */
 enum FormtarerConverter {
 
@@ -44,90 +44,17 @@ enum FormtarerConverter {
         final MetricPrefix prefix = symbolMap
                 .getPrefix((AbstractConverter) converter);
         if ((prefix != null) && (unitPrecedence == InternalFormater.NOOP_PRECEDENCE)) {
-            buffer.insert(0, symbolMap.getSymbol(prefix));
-            return InternalFormater.NOOP_PRECEDENCE;
+            return noopPrecedence(buffer, symbolMap, prefix);
         } else if (converter instanceof AddConverter) {
-            if (unitPrecedence < InternalFormater.ADDITION_PRECEDENCE) {
-                buffer.insert(0, '(');
-                buffer.append(')');
-            }
-            double offset = ((AddConverter) converter).getOffset();
-            if (offset < 0) {
-                buffer.append("-"); //$NON-NLS-1$
-                offset = -offset;
-            } else if (continued) {
-                buffer.append("+"); //$NON-NLS-1$
-            }
-            long lOffset = (long) offset;
-            if (lOffset == offset) {
-                buffer.append(lOffset);
-            } else {
-                buffer.append(offset);
-            }
-            return InternalFormater.ADDITION_PRECEDENCE;
+            return additionPrecedence((AddConverter) converter, continued, unitPrecedence, buffer);
         } else if (converter instanceof LogConverter) {
-            double base = ((LogConverter) converter).getBase();
-            StringBuilder expr = new StringBuilder();
-            if (base == E) {
-                expr.append("ln"); //$NON-NLS-1$
-            } else {
-                expr.append("log"); //$NON-NLS-1$
-                if (base != 10) {
-                    expr.append((int) base);
-                }
-            }
-            expr.append("("); //$NON-NLS-1$
-            buffer.insert(0, expr);
-            buffer.append(")"); //$NON-NLS-1$
-            return InternalFormater.EXPONENT_PRECEDENCE;
+            return exponentPrecedenceLogConveter((LogConverter) converter, buffer);
         } else if (converter instanceof ExpConverter) {
-            if (unitPrecedence < InternalFormater.EXPONENT_PRECEDENCE) {
-                buffer.insert(0, '(');
-                buffer.append(')');
-            }
-            StringBuilder expr = new StringBuilder();
-            double base = ((ExpConverter) converter).getBase();
-            if (base == E) {
-                expr.append('e');
-            } else {
-                expr.append((int) base);
-            }
-            expr.append('^');
-            buffer.insert(0, expr);
-            return InternalFormater.EXPONENT_PRECEDENCE;
+            return exponentPrecedenceExpConveter((ExpConverter) converter, unitPrecedence, buffer);
         } else if (converter instanceof MultiplyConverter) {
-            if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
-                buffer.insert(0, '(');
-                buffer.append(')');
-            }
-            if (continued) {
-                buffer.append(ExponentFormater.MIDDLE_DOT);
-            }
-            double factor = ((MultiplyConverter) converter).getFactor();
-            long lFactor = (long) factor;
-            if (lFactor == factor) {
-                buffer.append(lFactor);
-            } else {
-                buffer.append(factor);
-            }
-            return InternalFormater.PRODUCT_PRECEDENCE;
+            return productPrecedence((MultiplyConverter) converter, continued, unitPrecedence, buffer);
         } else if (converter instanceof RationalConverter) {
-            if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
-                buffer.insert(0, '(');
-                buffer.append(')');
-            }
-            RationalConverter rationalConverter = (RationalConverter) converter;
-            if (rationalConverter.getDividend() != BigInteger.ONE) {
-                if (continued) {
-                    buffer.append(ExponentFormater.MIDDLE_DOT);
-                }
-                buffer.append(rationalConverter.getDividend());
-            }
-            if (rationalConverter.getDivisor() != BigInteger.ONE) {
-                buffer.append('/');
-                buffer.append(rationalConverter.getDivisor());
-            }
-            return InternalFormater.PRODUCT_PRECEDENCE;
+            return productPrecedence((RationalConverter) converter, continued, unitPrecedence, buffer);
         } else if (converter instanceof AbstractConverter.Pair) {
             AbstractConverter.Pair compound = (AbstractConverter.Pair) converter;
             if (compound.getLeft() == AbstractConverter.IDENTITY) {
@@ -157,6 +84,103 @@ enum FormtarerConverter {
                 throw new IllegalArgumentException(
                         "Unable to format, no UnitConverter given"); //$NON-NLS-1$
         }
+    }
+
+    private int productPrecedence(RationalConverter converter, boolean continued, int unitPrecedence, StringBuilder buffer) {
+        if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
+            buffer.insert(0, '(');
+            buffer.append(')');
+        }
+        RationalConverter rationalConverter = converter;
+        if (rationalConverter.getDividend() != BigInteger.ONE) {
+            if (continued) {
+                buffer.append(ExponentFormater.MIDDLE_DOT);
+            }
+            buffer.append(rationalConverter.getDividend());
+        }
+        if (rationalConverter.getDivisor() != BigInteger.ONE) {
+            buffer.append('/');
+            buffer.append(rationalConverter.getDivisor());
+        }
+        return InternalFormater.PRODUCT_PRECEDENCE;
+    }
+
+    private int productPrecedence(MultiplyConverter converter, boolean continued, int unitPrecedence, StringBuilder buffer) {
+        if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
+            buffer.insert(0, '(');
+            buffer.append(')');
+        }
+        if (continued) {
+            buffer.append(ExponentFormater.MIDDLE_DOT);
+        }
+        double factor = converter.getFactor();
+        long lFactor = (long) factor;
+        if (lFactor == factor) {
+            buffer.append(lFactor);
+        } else {
+            buffer.append(factor);
+        }
+        return InternalFormater.PRODUCT_PRECEDENCE;
+    }
+
+    private int exponentPrecedenceExpConveter(ExpConverter converter, int unitPrecedence, StringBuilder buffer) {
+        if (unitPrecedence < InternalFormater.EXPONENT_PRECEDENCE) {
+            buffer.insert(0, '(');
+            buffer.append(')');
+        }
+        StringBuilder expr = new StringBuilder();
+        double base = converter.getBase();
+        if (base == E) {
+            expr.append('e');
+        } else {
+            expr.append((int) base);
+        }
+        expr.append('^');
+        buffer.insert(0, expr);
+        return InternalFormater.EXPONENT_PRECEDENCE;
+    }
+
+    private int exponentPrecedenceLogConveter(LogConverter converter, StringBuilder buffer) {
+        double base = converter.getBase();
+        StringBuilder expr = new StringBuilder();
+        if (base == E) {
+            expr.append("ln"); //$NON-NLS-1$
+        } else {
+            expr.append("log"); //$NON-NLS-1$
+            if (base != 10) {
+                expr.append((int) base);
+            }
+        }
+        expr.append("("); //$NON-NLS-1$
+        buffer.insert(0, expr);
+        buffer.append(")"); //$NON-NLS-1$
+        return InternalFormater.EXPONENT_PRECEDENCE;
+    }
+
+    private int additionPrecedence(AddConverter converter, boolean continued, int unitPrecedence, StringBuilder buffer) {
+        if (unitPrecedence < InternalFormater.ADDITION_PRECEDENCE) {
+            buffer.insert(0, '(');
+            buffer.append(')');
+        }
+        double offset = converter.getOffset();
+        if (offset < 0) {
+            buffer.append("-"); //$NON-NLS-1$
+            offset = -offset;
+        } else if (continued) {
+            buffer.append("+"); //$NON-NLS-1$
+        }
+        long lOffset = (long) offset;
+        if (lOffset == offset) {
+            buffer.append(lOffset);
+        } else {
+            buffer.append(offset);
+        }
+        return InternalFormater.ADDITION_PRECEDENCE;
+    }
+
+    private int noopPrecedence(StringBuilder buffer, SymbolMap symbolMap, MetricPrefix prefix) {
+        buffer.insert(0, symbolMap.getSymbol(prefix));
+        return InternalFormater.NOOP_PRECEDENCE;
     }
 
     /**
