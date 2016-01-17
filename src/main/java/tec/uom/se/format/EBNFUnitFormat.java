@@ -378,19 +378,19 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		}
 		final String symbol = symbolMap.getSymbol(unit);
 		if (symbol != null) {
-			return noopPrecedence(buffer, symbol);
+			return noopPrecedenceInternal(buffer, symbol);
 		} else if (unit.getProductUnits() != null) {
-			return productPrecedence(unit, buffer);
+			return productPrecedenceInternal(unit, buffer);
 		} else if (unit instanceof BaseUnit<?>) {
-			return noopPrecedence(buffer, ((BaseUnit<?>) unit).getSymbol());
+			return noopPrecedenceInternal(buffer, ((BaseUnit<?>) unit).getSymbol());
 		} else if (unit.getSymbol() != null) { // Alternate unit.
-			return noopPrecedence(buffer, unit.getSymbol());
+			return noopPrecedenceInternal(buffer, unit.getSymbol());
 		} else { // A transformed unit or new unit type!
-			return newUnitPrecedence(unit, buffer);
+			return newUnitPrecedenceInternal(unit, buffer);
 		}
 	}
 
-	private int newUnitPrecedence(Unit<?> unit, Appendable buffer) throws IOException {
+	private int newUnitPrecedenceInternal(Unit<?> unit, Appendable buffer) throws IOException {
 		UnitConverter converter = null;
 		boolean printSeparator = false;
 		StringBuilder temp = new StringBuilder();
@@ -404,7 +404,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
                 // More special-case hackery to work around gram/kilogram
                 // incosistency
                 if (unit.equals(GRAM)) {
-                    return noopPrecedence(buffer, symbolMap.getSymbol(GRAM));
+                    return noopPrecedenceInternal(buffer, symbolMap.getSymbol(GRAM));
                 } else {
                     //parentUnit = GRAM;
                     //converter = unit.getConverterTo((Unit) KILOGRAM);
@@ -436,7 +436,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		return result;
 	}
 
-	private int productPrecedence(Unit<?> unit, Appendable buffer) throws IOException {
+	private int productPrecedenceInternal(Unit<?> unit, Appendable buffer) throws IOException {
 		Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
 		int negativeExponentCount = 0;
 		// Write positive exponents first...
@@ -474,7 +474,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		return PRODUCT_PRECEDENCE;
 	}
 
-	private int noopPrecedence(Appendable buffer, String symbol) throws IOException {
+	private int noopPrecedenceInternal(Appendable buffer, String symbol) throws IOException {
 		buffer.append(symbol);
 		return NOOP_PRECEDENCE;
 	}
