@@ -132,7 +132,7 @@ enum FormtarerConverter {
             AbstractConverter.Pair compound = (AbstractConverter.Pair) converter;
             if (compound.getLeft() == AbstractConverter.IDENTITY) {
                 return formatConverter(compound.getRight(), true,
-                        unitPrecedence, buffer);
+                        unitPrecedence, buffer, symbolMap);
             } else {
                 if (compound.getLeft() instanceof Formattable) {
                     return formatFormattable((Formattable)compound.getLeft(), unitPrecedence, buffer);
@@ -140,7 +140,7 @@ enum FormtarerConverter {
                     return formatFormattable((Formattable)compound.getRight(), unitPrecedence, buffer);
                 } else {
                     return formatConverter(compound.getLeft(), true,
-                            unitPrecedence, buffer);
+                            unitPrecedence, buffer, symbolMap);
                     // FIXME use getRight() here, too
                 }
             }
