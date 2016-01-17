@@ -378,96 +378,105 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		}
 		final String symbol = symbolMap.getSymbol(unit);
 		if (symbol != null) {
-			buffer.append(symbol);
-			return NOOP_PRECEDENCE;
+			return noopPrecedence(buffer, symbol);
 		} else if (unit.getProductUnits() != null) {
-			Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
-			int negativeExponentCount = 0;
-			// Write positive exponents first...
-			boolean start = true;
-			for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
-				int pow = e.getValue();
-				if (pow >= 0) {
-					formatExponent(e.getKey(), pow, 1, !start, buffer);
-					start = false;
-				} else {
-					negativeExponentCount += 1;
-				}
-			}
-			// ..then write negative exponents.
-			if (negativeExponentCount > 0) {
-				if (start) {
-					buffer.append('1');
-				}
-				buffer.append('/');
-				if (negativeExponentCount > 1) {
-					buffer.append('(');
-				}
-				start = true;
-				for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
-					int pow = e.getValue();
-					if (pow < 0) {
-						formatExponent(e.getKey(), -pow, 1, !start, buffer);
-						start = false;
-					}
-				}
-				if (negativeExponentCount > 1) {
-					buffer.append(')');
-				}
-			}
-			return PRODUCT_PRECEDENCE;
+			return productPrecedence(unit, buffer);
 		} else if (unit instanceof BaseUnit<?>) {
-			buffer.append(((BaseUnit<?>) unit).getSymbol());
-			return NOOP_PRECEDENCE;
+			return noopPrecedence(buffer, ((BaseUnit<?>) unit).getSymbol());
 		} else if (unit.getSymbol() != null) { // Alternate unit.
-			buffer.append(unit.getSymbol());
-			return NOOP_PRECEDENCE;
+			return noopPrecedence(buffer, unit.getSymbol());
 		} else { // A transformed unit or new unit type!
-			UnitConverter converter = null;
-			boolean printSeparator = false;
-			StringBuilder temp = new StringBuilder();
-			int unitPrecedence = NOOP_PRECEDENCE;
-			Unit<?> parentUnit = unit.getSystemUnit();
-			converter = ((AbstractUnit<?>) unit).getSystemConverter();
-			if (KILOGRAM.equals(parentUnit)) {
-				if (unit instanceof TransformedUnit<?>) {
-					//converter = ((TransformedUnit<?>) unit).getConverter();
-					
-					// More special-case hackery to work around gram/kilogram
-					// incosistency
-					if (unit.equals(GRAM)) {
-						buffer.append(symbolMap.getSymbol(GRAM));
-						return NOOP_PRECEDENCE;
-					} else {
-						//parentUnit = GRAM;
-						//converter = unit.getConverterTo((Unit) KILOGRAM);
-						converter = ((TransformedUnit) unit).getConverter();
-					}
-					//parentUnit = GRAM;
-				} else {
-					converter = unit.getConverterTo((Unit) GRAM);
-				}
-			} else if (CUBIC_METRE.equals(parentUnit)) {
-				if (converter != null) {
-					parentUnit = LITRE;
-				}
-			}
-			
-			// TODO this may need to be in an else clause, could be related to https://github.com/unitsofmeasurement/si-units/issues/4
-			if (unit instanceof TransformedUnit) {
-				TransformedUnit transUnit = (TransformedUnit) unit;
-				if (parentUnit== null) parentUnit = transUnit.getParentUnit();
-//				String x = parentUnit.toString();
-				converter = transUnit.getConverter();
-			}
-
-			unitPrecedence = formatInternal(parentUnit, temp);
-			printSeparator = !parentUnit.equals(Units.ONE);
-			int result = formatConverter(converter, printSeparator,
-					unitPrecedence, temp);
-			buffer.append(temp);
-			return result;
+			return newUnitPrecedence(unit, buffer);
 		}
+	}
+
+	private int newUnitPrecedence(Unit<?> unit, Appendable buffer) throws IOException {
+		UnitConverter converter = null;
+		boolean printSeparator = false;
+		StringBuilder temp = new StringBuilder();
+		int unitPrecedence = NOOP_PRECEDENCE;
+		Unit<?> parentUnit = unit.getSystemUnit();
+		converter = ((AbstractUnit<?>) unit).getSystemConverter();
+		if (KILOGRAM.equals(parentUnit)) {
+            if (unit instanceof TransformedUnit<?>) {
+                //converter = ((TransformedUnit<?>) unit).getConverter();
+
+                // More special-case hackery to work around gram/kilogram
+                // incosistency
+                if (unit.equals(GRAM)) {
+                    return noopPrecedence(buffer, symbolMap.getSymbol(GRAM));
+                } else {
+                    //parentUnit = GRAM;
+                    //converter = unit.getConverterTo((Unit) KILOGRAM);
+                    converter = ((TransformedUnit) unit).getConverter();
+                }
+                //parentUnit = GRAM;
+            } else {
+                converter = unit.getConverterTo((Unit) GRAM);
+            }
+        } else if (CUBIC_METRE.equals(parentUnit)) {
+            if (converter != null) {
+                parentUnit = LITRE;
+            }
+        }
+
+		// TODO this may need to be in an else clause, could be related to https://github.com/unitsofmeasurement/si-units/issues/4
+		if (unit instanceof TransformedUnit) {
+            TransformedUnit transUnit = (TransformedUnit) unit;
+            if (parentUnit== null) parentUnit = transUnit.getParentUnit();
+//				String x = parentUnit.toString();
+            converter = transUnit.getConverter();
+        }
+
+		unitPrecedence = formatInternal(parentUnit, temp);
+		printSeparator = !parentUnit.equals(Units.ONE);
+		int result = formatConverter(converter, printSeparator,
+                unitPrecedence, temp);
+		buffer.append(temp);
+		return result;
+	}
+
+	private int productPrecedence(Unit<?> unit, Appendable buffer) throws IOException {
+		Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
+		int negativeExponentCount = 0;
+		// Write positive exponents first...
+		boolean start = true;
+		for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
+            int pow = e.getValue();
+            if (pow >= 0) {
+                formatExponent(e.getKey(), pow, 1, !start, buffer);
+                start = false;
+            } else {
+                negativeExponentCount += 1;
+            }
+        }
+		// ..then write negative exponents.
+		if (negativeExponentCount > 0) {
+            if (start) {
+                buffer.append('1');
+            }
+            buffer.append('/');
+            if (negativeExponentCount > 1) {
+                buffer.append('(');
+            }
+            start = true;
+            for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
+                int pow = e.getValue();
+                if (pow < 0) {
+                    formatExponent(e.getKey(), -pow, 1, !start, buffer);
+                    start = false;
+                }
+            }
+            if (negativeExponentCount > 1) {
+                buffer.append(')');
+            }
+        }
+		return PRODUCT_PRECEDENCE;
+	}
+
+	private int noopPrecedence(Appendable buffer, String symbol) throws IOException {
+		buffer.append(symbol);
+		return NOOP_PRECEDENCE;
 	}
 
 	/**
