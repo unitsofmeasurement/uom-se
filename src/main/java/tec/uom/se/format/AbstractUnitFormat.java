@@ -54,7 +54,7 @@ import tec.uom.se.AbstractUnit;
  * @version 0.7, $Date: 2015-12-30 $
  * 
  */
-public abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSequence, Unit> {
+abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSequence, Unit> {
 
    /**
      * Returns the {@link SymbolMap} for this unit format.
