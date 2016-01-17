@@ -123,7 +123,7 @@ class FormatConverter {
         RationalConverter rationalConverter = converter;
         if (rationalConverter.getDividend() != BigInteger.ONE) {
             if (continued) {
-                buffer.append(ExponentHelper.MIDDLE_DOT);
+                buffer.append(EBNFHelper.MIDDLE_DOT);
             }
             buffer.append(rationalConverter.getDividend());
         }
@@ -140,7 +140,7 @@ class FormatConverter {
             buffer.append(')');
         }
         if (continued) {
-            buffer.append(ExponentHelper.MIDDLE_DOT);
+            buffer.append(EBNFHelper.MIDDLE_DOT);
         }
         double factor = converter.getFactor();
         long lFactor = (long) factor;

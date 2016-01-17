@@ -180,7 +180,6 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
 				//	Locale.getDefault()), Locale.getDefault()));
 
-
 	/**
 	 * Returns the instance for the current default locale (non-ascii characters
 	 * are allowed)
