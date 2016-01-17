@@ -198,9 +198,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	private static final EBNFUnitFormat DEFAULT_INSTANCE = new EBNFUnitFormat();
 			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
 				//	Locale.getDefault()), Locale.getDefault()));
-
-	private static final String LocalFormat_Pattern = "%s";
-
+    
 
 	/**
 	 * Returns the instance for the current default locale (non-ascii characters
