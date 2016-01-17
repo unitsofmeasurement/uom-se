@@ -4,7 +4,8 @@ import javax.measure.Unit;
 import java.io.IOException;
 
 /**
- * Created by otaviojava on 17/01/16.
+ * Class that has the responsability to exponent format.
+ * @author otaviojava
  */
 enum ExponentFormater {
 

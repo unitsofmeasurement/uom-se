@@ -328,7 +328,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			throws ParserException {
 		return parse(csq, 0);
 	}
-    
+
 	@Override
 	protected Unit<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException {

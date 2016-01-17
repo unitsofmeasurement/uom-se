@@ -12,7 +12,7 @@ import java.util.Formatter;
 import static java.lang.StrictMath.E;
 
 /**
- * Created by otaviojava on 17/01/16.
+ * @author otaviojava 
  */
 enum FormtarerConverter {
 

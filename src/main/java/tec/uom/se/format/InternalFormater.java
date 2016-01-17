@@ -14,7 +14,8 @@ import java.util.Map;
 import static tec.uom.se.unit.Units.*;
 
 /**
- * Created by otaviojava on 17/01/16.
+ * Class that has responsability to internal format in {@link EBNFUnitFormat}
+ * @author otaviojava
  */
 enum InternalFormater {
 
