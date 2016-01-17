@@ -64,7 +64,7 @@ enum InternalFormater {
         if (symbol != null) {
             return noopPrecedenceInternal(buffer, symbol);
         } else if (unit.getProductUnits() != null) {
-            return productPrecedenceInternal(unit, buffer);
+            return productPrecedenceInternal(unit, buffer, symbolMap);
         } else if (unit instanceof BaseUnit<?>) {
             return noopPrecedenceInternal(buffer, ((BaseUnit<?>) unit).getSymbol());
         } else if (unit.getSymbol() != null) { // Alternate unit.
@@ -155,10 +155,10 @@ enum InternalFormater {
             converter = transUnit.getConverter();
         }
 
-        unitPrecedence = formatInternal(parentUnit, temp);
+        unitPrecedence = formatInternal(parentUnit, temp, symbolMap);
         printSeparator = !parentUnit.equals(Units.ONE);
-        int result = formatConverter(converter, printSeparator,
-                unitPrecedence, temp);
+        int result = FormtarerConverter.INSTANCE.formatConverter(converter, printSeparator,
+                unitPrecedence, temp, symbolMap);
         buffer.append(temp);
         return result;
     }
