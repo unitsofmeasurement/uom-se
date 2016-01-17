@@ -33,8 +33,6 @@ import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.unit.Units;
-
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import java.io.IOException;
@@ -43,10 +41,11 @@ import java.util.Map;
 import static tec.uom.se.unit.Units.*;
 
 /**
- * Class that has responsability to internal format in {@link EBNFUnitFormat}
+ * Class that handles internals of formatting in {@link EBNFUnitFormat}
  * @author otaviojava
+ * @author keilw
  */
-enum InternalFormater {
+enum InternalFormatter {
 
     INSTANCE;
 
@@ -117,7 +116,7 @@ enum InternalFormater {
         for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
             int pow = e.getValue();
             if (pow >= 0) {
-                ExponentFormater.INSTANCE.formatExponent(e.getKey(), pow, 1, !start, buffer, symbolMap);
+                ExponentFormatter.INSTANCE.formatExponent(e.getKey(), pow, 1, !start, buffer, symbolMap);
                 start = false;
             } else {
                 negativeExponentCount += 1;
@@ -136,7 +135,7 @@ enum InternalFormater {
             for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
                 int pow = e.getValue();
                 if (pow < 0) {
-                    ExponentFormater.INSTANCE.formatExponent(e.getKey(), -pow, 1, !start, buffer, symbolMap);
+                    ExponentFormatter.INSTANCE.formatExponent(e.getKey(), -pow, 1, !start, buffer, symbolMap);
                     start = false;
                 }
             }
@@ -186,8 +185,8 @@ enum InternalFormater {
         }
 
         unitPrecedence = formatInternal(parentUnit, temp, symbolMap);
-        printSeparator = !parentUnit.equals(Units.ONE);
-        int result = FormtarerConverter.INSTANCE.formatConverter(converter, printSeparator,
+        printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+        int result = FormatConverter.INSTANCE.formatConverter(converter, printSeparator,
                 unitPrecedence, temp, symbolMap);
         buffer.append(temp);
         return result;

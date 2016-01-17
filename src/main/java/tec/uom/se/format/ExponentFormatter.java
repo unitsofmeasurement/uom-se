@@ -33,10 +33,11 @@ import javax.measure.Unit;
 import java.io.IOException;
 
 /**
- * Class that has the responsability to exponent format.
+ * Enum that defines the responsibility to format exponents.
  * @author otaviojava
+ * @author keilw
  */
-enum ExponentFormater {
+enum ExponentFormatter {
 
     INSTANCE;
 
@@ -47,7 +48,6 @@ enum ExponentFormater {
 
     /** Exponent 2 character */
     static final char EXPONENT_2 = '\u00b2'; //$NON-NLS-1$
-
 
     /**
      * Format the given unit raised to the given fractional power to the given
@@ -75,9 +75,9 @@ enum ExponentFormater {
             buffer.append(MIDDLE_DOT);
         }
         final StringBuilder temp = new StringBuilder();
-        int unitPrecedence = InternalFormater.INSTANCE.formatInternal(unit, temp, symbolMap);
+        int unitPrecedence = InternalFormatter.INSTANCE.formatInternal(unit, temp, symbolMap);
 
-        if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
+        if (unitPrecedence < InternalFormatter.PRODUCT_PRECEDENCE) {
             temp.insert(0, '('); //$NON-NLS-1$
             temp.append(')'); //$NON-NLS-1$
         }

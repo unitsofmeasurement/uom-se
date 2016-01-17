@@ -42,11 +42,12 @@ import static java.lang.StrictMath.E;
 
 /**
  * @author otaviojava
+ * @author keilw
  */
-enum FormtarerConverter {
+enum FormatConverter {
 
     INSTANCE;
-    private static final String LocalFormat_Pattern = "%s";
+    private static final String LOCAL_FORMAT_PATTERN = "%s";
 
     /**
      * Formats the given converter to the given StringBuilder and returns the
@@ -72,7 +73,7 @@ enum FormtarerConverter {
                                 int unitPrecedence, StringBuilder buffer, SymbolMap symbolMap) {
         final MetricPrefix prefix = symbolMap
                 .getPrefix((AbstractConverter) converter);
-        if ((prefix != null) && (unitPrecedence == InternalFormater.NOOP_PRECEDENCE)) {
+        if ((prefix != null) && (unitPrecedence == InternalFormatter.NOOP_PRECEDENCE)) {
             return noopPrecedence(buffer, symbolMap, prefix);
         } else if (converter instanceof AddConverter) {
             return additionPrecedence((AddConverter) converter, continued, unitPrecedence, buffer);
@@ -108,7 +109,7 @@ enum FormtarerConverter {
 //				throw new IllegalArgumentException(
 //						"Unable to format the given UnitConverter: " + converter.getClass()); //$NON-NLS-1$
                 buffer.replace(0, 1, converter.toString());
-                return InternalFormater.NOOP_PRECEDENCE;
+                return InternalFormatter.NOOP_PRECEDENCE;
             } else
                 throw new IllegalArgumentException(
                         "Unable to format, no UnitConverter given"); //$NON-NLS-1$
@@ -116,14 +117,14 @@ enum FormtarerConverter {
     }
 
     private int productPrecedence(RationalConverter converter, boolean continued, int unitPrecedence, StringBuilder buffer) {
-        if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
+        if (unitPrecedence < InternalFormatter.PRODUCT_PRECEDENCE) {
             buffer.insert(0, '(');
             buffer.append(')');
         }
         RationalConverter rationalConverter = converter;
         if (rationalConverter.getDividend() != BigInteger.ONE) {
             if (continued) {
-                buffer.append(ExponentFormater.MIDDLE_DOT);
+                buffer.append(ExponentFormatter.MIDDLE_DOT);
             }
             buffer.append(rationalConverter.getDividend());
         }
@@ -131,16 +132,16 @@ enum FormtarerConverter {
             buffer.append('/');
             buffer.append(rationalConverter.getDivisor());
         }
-        return InternalFormater.PRODUCT_PRECEDENCE;
+        return InternalFormatter.PRODUCT_PRECEDENCE;
     }
 
     private int productPrecedence(MultiplyConverter converter, boolean continued, int unitPrecedence, StringBuilder buffer) {
-        if (unitPrecedence < InternalFormater.PRODUCT_PRECEDENCE) {
+        if (unitPrecedence < InternalFormatter.PRODUCT_PRECEDENCE) {
             buffer.insert(0, '(');
             buffer.append(')');
         }
         if (continued) {
-            buffer.append(ExponentFormater.MIDDLE_DOT);
+            buffer.append(ExponentFormatter.MIDDLE_DOT);
         }
         double factor = converter.getFactor();
         long lFactor = (long) factor;
@@ -149,11 +150,11 @@ enum FormtarerConverter {
         } else {
             buffer.append(factor);
         }
-        return InternalFormater.PRODUCT_PRECEDENCE;
+        return InternalFormatter.PRODUCT_PRECEDENCE;
     }
 
     private int exponentPrecedenceExpConveter(ExpConverter converter, int unitPrecedence, StringBuilder buffer) {
-        if (unitPrecedence < InternalFormater.EXPONENT_PRECEDENCE) {
+        if (unitPrecedence < InternalFormatter.EXPONENT_PRECEDENCE) {
             buffer.insert(0, '(');
             buffer.append(')');
         }
@@ -166,7 +167,7 @@ enum FormtarerConverter {
         }
         expr.append('^');
         buffer.insert(0, expr);
-        return InternalFormater.EXPONENT_PRECEDENCE;
+        return InternalFormatter.EXPONENT_PRECEDENCE;
     }
 
     private int exponentPrecedenceLogConveter(LogConverter converter, StringBuilder buffer) {
@@ -183,11 +184,11 @@ enum FormtarerConverter {
         expr.append("("); //$NON-NLS-1$
         buffer.insert(0, expr);
         buffer.append(")"); //$NON-NLS-1$
-        return InternalFormater.EXPONENT_PRECEDENCE;
+        return InternalFormatter.EXPONENT_PRECEDENCE;
     }
 
     private int additionPrecedence(AddConverter converter, boolean continued, int unitPrecedence, StringBuilder buffer) {
-        if (unitPrecedence < InternalFormater.ADDITION_PRECEDENCE) {
+        if (unitPrecedence < InternalFormatter.ADDITION_PRECEDENCE) {
             buffer.insert(0, '(');
             buffer.append(')');
         }
@@ -204,12 +205,12 @@ enum FormtarerConverter {
         } else {
             buffer.append(offset);
         }
-        return InternalFormater.ADDITION_PRECEDENCE;
+        return InternalFormatter.ADDITION_PRECEDENCE;
     }
 
     private int noopPrecedence(StringBuilder buffer, SymbolMap symbolMap, MetricPrefix prefix) {
         buffer.insert(0, symbolMap.getSymbol(prefix));
-        return InternalFormater.NOOP_PRECEDENCE;
+        return InternalFormatter.NOOP_PRECEDENCE;
     }
 
     /**
@@ -227,7 +228,7 @@ enum FormtarerConverter {
      */
     private int formatFormattable(Formattable f, int unitPrecedence, StringBuilder buffer) {
         Formatter fmt = new Formatter();
-        fmt.format(LocalFormat_Pattern, f);
+        fmt.format(LOCAL_FORMAT_PATTERN, f);
         buffer.replace(0, 1, fmt.toString());
         fmt.close(); // XXX try Java 7 with res, but for now let's leave J6 compliant
         return unitPrecedence;

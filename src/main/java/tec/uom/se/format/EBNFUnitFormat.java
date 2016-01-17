@@ -254,7 +254,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	public Appendable format(Unit<?> unit, Appendable appendable)
 			throws IOException {
 
-        InternalFormater.INSTANCE.formatInternal(unit, appendable, symbolMap);
+        InternalFormatter.INSTANCE.formatInternal(unit, appendable, symbolMap);
 		if (unit instanceof AnnotatedUnit<?>) {
 			AnnotatedUnit<?> annotatedUnit = (AnnotatedUnit<?>) unit;
 			if (annotatedUnit.getAnnotation() != null) {
