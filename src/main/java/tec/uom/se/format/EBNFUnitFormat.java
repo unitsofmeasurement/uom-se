@@ -276,7 +276,8 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	// //////////////
 	public Appendable format(Unit<?> unit, Appendable appendable)
 			throws IOException {
-		formatInternal(unit, appendable);
+
+        InternalFormater.INSTANCE.formatInternal(unit, appendable, symbolMap);
 		if (unit instanceof AnnotatedUnit<?>) {
 			AnnotatedUnit<?> annotatedUnit = (AnnotatedUnit<?>) unit;
 			if (annotatedUnit.getAnnotation() != null) {
@@ -327,50 +328,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			throws ParserException {
 		return parse(csq, 0);
 	}
-
-	/**
-	 * Format the given unit to the given StringBuffer, then return the operator
-	 * precedence of the outermost operator in the unit expression that was
-	 * formatted. See {@link ConverterFormat} for the constants that define the
-	 * various precedence values.
-	 * 
-	 * @param unit
-	 *            the unit to be formatted
-	 * @param buffer
-	 *            the <code>StringBuffer</code> to be written to
-	 * @return the operator precedence of the outermost operator in the unit
-	 *         expression that was output
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private int formatInternal(Unit<?> unit, Appendable buffer)
-			throws IOException {
-	return InternalFormater.INSTANCE.formatInternal(unit,buffer, symbolMap);
-	}
-
-
-
-
-	/**
-	 * Formats the given <code>Formattable</code> to the given StringBuffer and returns the
-	 * given precedence of the converter's mathematical operation.
-	 * 
-	 * @param f
-	 *            the formattable to be formatted
-	 * @param unitPrecedence
-	 *            the operator precedence of the operation expressed by the unit
-	 *            being modified by the given converter.
-	 * @param buffer
-	 *            the <code>StringBuffer</code> to append to.
-	 * @return the given operator precedence
-	 */
-	private int formatFormattable(Formattable f, int unitPrecedence, StringBuilder buffer) {
-		Formatter fmt = new Formatter();
-		fmt.format(LocalFormat_Pattern, f);
-		buffer.replace(0, 1, fmt.toString());
-		fmt.close(); // XXX try Java 7 with res, but for now let's leave J6 compliant
-		return unitPrecedence;
-	}
-
+    
 	@Override
 	protected Unit<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException {
