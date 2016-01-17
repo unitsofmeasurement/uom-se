@@ -37,10 +37,7 @@ import java.io.IOException;
  * @author otaviojava
  * @author keilw
  */
-enum ExponentFormatter {
-
-    INSTANCE;
-
+class ExponentHelper {
     static final char MIDDLE_DOT = '\u00b7'; //$NON-NLS-1$
 
     /** Exponent 1 character */
@@ -68,16 +65,16 @@ enum ExponentFormatter {
      *            StringBuffer the buffer to append to. No assumptions should be
      *            made about its content.
      */
-    void formatExponent(Unit<?> unit, int pow, int root,
+    static void formatExponent(Unit<?> unit, int pow, int root,
                                 boolean continued, Appendable buffer, SymbolMap symbolMap) throws IOException {
 
         if (continued) {
             buffer.append(MIDDLE_DOT);
         }
         final StringBuilder temp = new StringBuilder();
-        int unitPrecedence = InternalFormatter.INSTANCE.formatInternal(unit, temp, symbolMap);
+        int unitPrecedence = EBNFHelper.formatInternal(unit, temp, symbolMap);
 
-        if (unitPrecedence < InternalFormatter.PRODUCT_PRECEDENCE) {
+        if (unitPrecedence < EBNFHelper.PRODUCT_PRECEDENCE) {
             temp.insert(0, '('); //$NON-NLS-1$
             temp.append(')'); //$NON-NLS-1$
         }

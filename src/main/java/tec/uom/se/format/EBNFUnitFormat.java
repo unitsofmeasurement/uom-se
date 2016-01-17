@@ -29,6 +29,7 @@
  */
 package tec.uom.se.format;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.internal.format.TokenException;
 import tec.uom.se.internal.format.TokenMgrError;
 import tec.uom.se.internal.format.UnitFormatParser;
@@ -37,6 +38,7 @@ import tec.uom.se.unit.Units;
 
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParsePosition;
@@ -151,7 +153,7 @@ import java.util.ResourceBundle;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.2, $Date: 2015-10-23 $
+ * @version 0.6.3, $Date: 2016-01-17 $
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
 
@@ -254,7 +256,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	public Appendable format(Unit<?> unit, Appendable appendable)
 			throws IOException {
 
-        InternalFormatter.INSTANCE.formatInternal(unit, appendable, symbolMap);
+        EBNFHelper.formatInternal(unit, appendable, symbolMap);
 		if (unit instanceof AnnotatedUnit<?>) {
 			AnnotatedUnit<?> annotatedUnit = (AnnotatedUnit<?>) unit;
 			if (annotatedUnit.getAnnotation() != null) {
@@ -276,7 +278,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 		int start = index; //cursor != null ? cursor.getIndex() : 0;
 		int end = csq.length();
 		if (end <= start) {
-			return Units.ONE;
+			return AbstractUnit.ONE;
 		}
 		String source = csq.subSequence(start, end).toString().trim();
 		if (source.length() == 0) {
@@ -309,7 +311,6 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	@Override
 	protected Unit<?> parse(CharSequence csq, ParsePosition cursor)
 			throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		return parse(csq);
 	}
 }

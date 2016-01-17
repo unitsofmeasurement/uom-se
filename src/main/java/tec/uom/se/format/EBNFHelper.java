@@ -41,13 +41,11 @@ import java.util.Map;
 import static tec.uom.se.unit.Units.*;
 
 /**
- * Class that handles internals of formatting in {@link EBNFUnitFormat}
+ * Helper class that handles internals of formatting in {@link EBNFUnitFormat}
  * @author otaviojava
  * @author keilw
  */
-enum InternalFormatter {
-
-    INSTANCE;
+class EBNFHelper {
 
     /** Operator precedence for the addition and subtraction operations */
     static final int ADDITION_PRECEDENCE = 0;
@@ -81,8 +79,7 @@ enum InternalFormatter {
      * @return the operator precedence of the outermost operator in the unit
      *         expression that was output
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    int formatInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap)
+    static int formatInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap)
             throws IOException {
         if (unit instanceof AnnotatedUnit<?>) {
             unit = ((AnnotatedUnit<?>) unit).getActualUnit();
@@ -103,12 +100,12 @@ enum InternalFormatter {
         }
     }
 
-    private int noopPrecedenceInternal(Appendable buffer, String symbol) throws IOException {
+    private static int noopPrecedenceInternal(Appendable buffer, String symbol) throws IOException {
         buffer.append(symbol);
         return NOOP_PRECEDENCE;
     }
 
-    private int productPrecedenceInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap) throws IOException {
+    private static int productPrecedenceInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap) throws IOException {
         Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
         int negativeExponentCount = 0;
         // Write positive exponents first...
@@ -116,7 +113,7 @@ enum InternalFormatter {
         for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
             int pow = e.getValue();
             if (pow >= 0) {
-                ExponentFormatter.INSTANCE.formatExponent(e.getKey(), pow, 1, !start, buffer, symbolMap);
+                ExponentHelper.formatExponent(e.getKey(), pow, 1, !start, buffer, symbolMap);
                 start = false;
             } else {
                 negativeExponentCount += 1;
@@ -135,7 +132,7 @@ enum InternalFormatter {
             for (Map.Entry<Unit<?>, Integer> e : productUnits.entrySet()) {
                 int pow = e.getValue();
                 if (pow < 0) {
-                    ExponentFormatter.INSTANCE.formatExponent(e.getKey(), -pow, 1, !start, buffer, symbolMap);
+                    ExponentHelper.formatExponent(e.getKey(), -pow, 1, !start, buffer, symbolMap);
                     start = false;
                 }
             }
@@ -146,7 +143,7 @@ enum InternalFormatter {
         return PRODUCT_PRECEDENCE;
     }
 
-    private int newUnitPrecedenceInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap) throws IOException {
+    private static int newUnitPrecedenceInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap) throws IOException {
         UnitConverter converter = null;
         boolean printSeparator = false;
         StringBuilder temp = new StringBuilder();
@@ -186,7 +183,7 @@ enum InternalFormatter {
 
         unitPrecedence = formatInternal(parentUnit, temp, symbolMap);
         printSeparator = !parentUnit.equals(AbstractUnit.ONE);
-        int result = FormatConverter.INSTANCE.formatConverter(converter, printSeparator,
+        int result = FormatConverter.formatConverter(converter, printSeparator,
                 unitPrecedence, temp, symbolMap);
         buffer.append(temp);
         return result;
