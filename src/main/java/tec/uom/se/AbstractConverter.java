@@ -41,11 +41,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <p> The base class for our {@link UnitConverter} physics implementations.</p>
+ * <p> The base class for our {@link UnitConverter} implementations.</p>
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, Nov 15, 2014
+ * @version 0.6, Jan 17, 2016
  */
 public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
 
@@ -110,11 +110,18 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
     }
 
     @Override
+    /**
+     * @throws IllegalArgumentException if the value is </code>null</code>.
+     */
     public Number convert(Number value) {
         if (value instanceof BigDecimal) {
         	return convert((BigDecimal)value, MathContext.DECIMAL128);
         }
-        return convert(value.doubleValue()); // TODO null check, Optional, etc.?
+        if (value != null) {
+        	return convert(value.doubleValue());
+        } else {
+        	throw new IllegalArgumentException("Value cannot be null");
+        }   
     }
 
     @Override
@@ -198,12 +205,17 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
          * Creates a pair converter resulting from the combined
          * transformation of the specified converters.
          *
-         * @param  left the left converter.
+         * @param  left the left converter, not <code>null</code>.
          * @param  right the right converter.
+         * @throws IllegalArgumentException if either the left or right converter are </code>null</code>
          */
         public Pair(UnitConverter left, UnitConverter right) {
-            this.left = left;
-            this.right = right;
+        	if (left != null && right != null) {
+        		this.left = left;
+        		this.right = right;
+        	} else {
+        		throw new IllegalArgumentException("Converters cannot be null");
+        	}
         }
 
         @Override
@@ -269,7 +281,5 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
 		public UnitConverter getRight() {
 			return right;
 		}
-
     }
-
 }
