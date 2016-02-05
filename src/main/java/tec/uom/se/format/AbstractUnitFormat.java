@@ -51,10 +51,10 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2015-12-30 $
+ * @version 0.8, $Date: 2016-02-05 $
  * 
  */
-abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSequence, Unit> {
+public abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSequence, Unit> {
 
    /**
      * Returns the {@link SymbolMap} for this unit format.
