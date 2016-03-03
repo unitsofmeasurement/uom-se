@@ -684,7 +684,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 			int start = pos.getIndex();
 			int end = start + 1;
 			while (end < length) {
-				if ("012356789+-.E".indexOf(csq.charAt(end)) < 0) {
+				if ("0123456789+-.E".indexOf(csq.charAt(end)) < 0) {
 					break;
 				}
 				end += 1;
