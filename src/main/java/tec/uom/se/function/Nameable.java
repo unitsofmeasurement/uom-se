@@ -40,6 +40,7 @@ package tec.uom.se.function;
  * 
  * @version 0.6, 2014-09-06
  * @author Werner Keil
+ * @deprecated use uom-lib-common
  */
 @FunctionalInterface
 public interface Nameable {
