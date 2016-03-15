@@ -44,6 +44,7 @@ import javax.measure.Quantity;
  * @version 0.1, $Date: 2014-11-05 $
  * @param <Q> the type of quantities supplied by this supplier
  * @see {@link Quantity}
+ * @deprecated use uom-lib-common
  */
 @FunctionalInterface
 public interface QuantitySupplier<Q extends Quantity<Q>> {
