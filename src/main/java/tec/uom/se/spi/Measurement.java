@@ -34,7 +34,8 @@ import static tec.uom.se.spi.AbstractMeasurement.Default;
 import java.time.Instant;
 
 import javax.measure.Quantity;
-import tec.uom.se.function.QuantitySupplier;
+
+import tec.uom.lib.common.function.QuantitySupplier;
 
 /**
  * A Measurement contains a {@link Quantity} and a timestamp.
@@ -47,7 +48,7 @@ import tec.uom.se.function.QuantitySupplier;
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.3
+ * @version 0.4
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
