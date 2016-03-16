@@ -29,7 +29,6 @@
  */
 package tec.uom.se.spi;
 
-import java.io.Serializable;
 import java.time.Instant;
 
 import javax.measure.Quantity;
@@ -47,19 +46,17 @@ import tec.uom.se.ComparableQuantity;
  * </p>
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2 $Date: 2015-07-25 $
+ * @version 0.3 $Date: 2015-07-25 $
  */
 abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
-		Measurement<Q>, Serializable {
-
+		Measurement<Q> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2417644773551236879L;
 
-	protected final Quantity<Q> quantity;
-	
+	private final Quantity<Q> quantity;
 	private final Instant instant;
 	
 	/**

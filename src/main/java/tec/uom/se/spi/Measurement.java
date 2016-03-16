@@ -31,6 +31,7 @@ package tec.uom.se.spi;
 
 import static tec.uom.se.spi.AbstractMeasurement.Default;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import javax.measure.Quantity;
@@ -48,11 +49,11 @@ import tec.uom.lib.common.function.QuantitySupplier;
  * 
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.4
+ * @version 0.5
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
-		Comparable<Measurement<Q>> {
+		Comparable<Measurement<Q>>, Serializable {
 
 	/**
 	 * Returns the timestamp of this {@link Measurement}.

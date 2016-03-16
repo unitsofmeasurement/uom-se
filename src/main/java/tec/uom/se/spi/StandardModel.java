@@ -29,7 +29,6 @@
  */
 package tec.uom.se.spi;
 
-
 /**
  * Provides support for <a href="http://en.wikipedia.org/wiki/Dimensional_analysis">Dimensional Analysis</a>.
  
@@ -150,12 +149,12 @@ package tec.uom.se.spi;
  * This class represents the standard model. 
  *
  * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6.1, June 9, 2015
+ * @version 0.7, March 16, 2016
  */
 class StandardModel extends DimensionalModel {
 
     /**
-     * DefaultQuantityFactory constructor.
+     * StandardModel constructor.
      */
     public StandardModel() {
     }
