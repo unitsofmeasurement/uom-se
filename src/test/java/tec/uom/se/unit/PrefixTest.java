@@ -96,7 +96,6 @@ public class PrefixTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testNano() {
 		Quantity<Mass> m1 = Quantities.getQuantity(1.0, Units.GRAM);
 		assertEquals(1d, m1.getValue());
