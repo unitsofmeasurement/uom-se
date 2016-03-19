@@ -137,4 +137,9 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
             return services;
         }
     }
+
+	@Override
+	public int compareTo(ServiceProvider o) {
+		return Integer.compare(getPriority(), o.getPriority());
+	}
 }
