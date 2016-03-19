@@ -496,7 +496,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 	 * A unit of duration equal to 7 {@link #DAY} (standard name
 	 * <code>week</code>).
 	 */
-	static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
+	public static final Unit<Time> WEEK = addUnit(DAY.multiply(7));
 
 	/**
 	 * A time unit accepted for use with SI units (standard name <code>y</code>
@@ -573,12 +573,5 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 		INSTANCE.units.add(unit);
 		INSTANCE.quantityToUnit.put(type, unit);
 		return unit;
-	}
-
-	// //////////////////////////////////////////////////////////////////////////
-	// Label adjustments for Units
-	static {
-		SimpleUnitFormat.getInstance().label(KILO(METRE), "km");
-		SimpleUnitFormat.getInstance().label(LITRE, "l");
 	}
 }
