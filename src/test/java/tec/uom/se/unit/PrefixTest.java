@@ -33,10 +33,11 @@ import static org.junit.Assert.assertEquals;
 import static tec.uom.se.unit.MetricPrefix.*;
 import static tec.uom.se.unit.Units.GRAM;
 import static tec.uom.se.unit.Units.KILOGRAM;
-
+import static tec.uom.se.unit.Units.LITRE;
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
+import javax.measure.quantity.Volume;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -59,6 +60,31 @@ public class PrefixTest {
 	}
 	
 	@Test
+	public void testMilli() {
+		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MILLI(Units.GRAM));
+		assertEquals(1d, m1.getValue());
+		assertEquals("mg", m1.getUnit().toString());
+	}
+	
+	@Test
+	public void testMilli2() {
+		Quantity<Volume> m1 = Quantities.getQuantity(10, MILLI(LITRE));
+		assertEquals(10, m1.getValue());
+		assertEquals("ml", m1.getUnit().toString());
+	}
+	
+	@Test
+	public void testMilli3() {
+		Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
+		assertEquals(1d, m1.getValue());
+		assertEquals("l", m1.getUnit().toString());
+				
+		Quantity<Volume> m2 = m1.to(MILLI(LITRE));
+		assertEquals(1000.0d, m2.getValue());
+		assertEquals("ml", m2.getUnit().toString());
+	}
+	
+	@Test
 	public void testMicro2() {
 		Quantity<Length> m1 = Quantities.getQuantity(1.0, Units.METRE);
 		assertEquals(1d, m1.getValue());
@@ -70,7 +96,6 @@ public class PrefixTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testNano() {
 		Quantity<Mass> m1 = Quantities.getQuantity(1.0, Units.GRAM);
 		assertEquals(1d, m1.getValue());

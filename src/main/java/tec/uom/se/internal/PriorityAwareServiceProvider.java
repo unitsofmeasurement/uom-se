@@ -52,6 +52,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
     /**
      * List of services loaded, per class.
      */
+    @SuppressWarnings("rawtypes")
     private final Map<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<>();
 
     private static final Comparator<Object> SERVICE_COMPARATOR = PriorityAwareServiceProvider::compareServices;
@@ -137,4 +138,9 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
             return services;
         }
     }
+
+	@Override
+	public int compareTo(ServiceProvider o) {
+		return Integer.compare(getPriority(), o.getPriority());
+	}
 }
