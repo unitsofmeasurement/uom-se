@@ -41,10 +41,12 @@ public class MessagesTest {
 	@Test
 	public void testMessageBundle() {
 		Locale locale = new Locale("en");
-		   
-		ResourceBundle bundle = ResourceBundle.getBundle("tec.uom.se.internal.format.messages", locale);
+
+		ResourceBundle bundle = ResourceBundle.getBundle(
+				"tec.uom.se.internal.format.messages", locale);
 		assertNotNull(bundle);
-		String text = bundle.getString("tec.uom.se.unit.Units.KILOMETRES_PER_HOUR");
+		String text = bundle
+				.getString("tec.uom.se.unit.Units.KILOMETRES_PER_HOUR");
 		assertEquals("km/h", text);
 		assertEquals(59, bundle.keySet().size());
 	}

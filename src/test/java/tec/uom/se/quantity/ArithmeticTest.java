@@ -42,24 +42,26 @@ public class ArithmeticTest {
 
 	private Quantity<Length> sut;
 
-//	private QuantityFactory<Length> lengthFactory;
+	// private QuantityFactory<Length> lengthFactory;
 
 	@Before
 	public void init() {
-//	    lengthFactory =  QuantityFactoryService.getQuantityFactory(Length.class);
-//		sut = lengthFactory.create(10, METRE);
+		// lengthFactory =
+		// QuantityFactoryService.getQuantityFactory(Length.class);
+		// sut = lengthFactory.create(10, METRE);
 		sut = Quantities.getQuantity(10, METRE);
 	}
 
 	@Test
 	public void testAdd() {
-//		Quantity<Length> len = lengthFactory.create(5, METRE);
+		// Quantity<Length> len = lengthFactory.create(5, METRE);
 		Quantity<Length> len = Quantities.getQuantity(5, METRE);
 
 		Quantity<Length> result = sut.add(len);
 		assertNotNull(result);
 		assertEquals(METRE, result.getUnit());
-		assertEquals(Double.valueOf(15), Double.valueOf(result.getValue().doubleValue()));
+		assertEquals(Double.valueOf(15),
+				Double.valueOf(result.getValue().doubleValue()));
 	}
 
 	@Test

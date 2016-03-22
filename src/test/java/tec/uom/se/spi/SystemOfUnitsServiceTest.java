@@ -46,29 +46,28 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SystemOfUnitsServiceTest {
-    private static SystemOfUnitsService service;
+	private static SystemOfUnitsService service;
 
-    @BeforeClass
-    public static void setUp() {
-      service = Bootstrap.getService(SystemOfUnitsService.class);
-    }
+	@BeforeClass
+	public static void setUp() {
+		service = Bootstrap.getService(SystemOfUnitsService.class);
+	}
 
-    @Test
-    public void testGetUnitSystem() {
-    	assertNotNull(service);
-    	SystemOfUnits system = service.getSystemOfUnits();
-    	assertNotNull(system);
-    	assertEquals("Units", system.getClass().getSimpleName());
-    	assertNotNull(system.getUnits());
-    	//for (Unit<?> u : system.getUnits()) {
-    		//System.out.println(u.toString());
-    	//}
-/*    	Set<? extends Unit<?>> units = system.getUnits();
-    	List list = Arrays.asList((units.toArray()));
-    	Collections.sort(list);
-    	for (Object o : list) {
-    		System.out.println(o.toString());
-    	}*/
-    	assertEquals(42, system.getUnits().size());
-    }
+	@Test
+	public void testGetUnitSystem() {
+		assertNotNull(service);
+		SystemOfUnits system = service.getSystemOfUnits();
+		assertNotNull(system);
+		assertEquals("Units", system.getClass().getSimpleName());
+		assertNotNull(system.getUnits());
+		// for (Unit<?> u : system.getUnits()) {
+		// System.out.println(u.toString());
+		// }
+		/*
+		 * Set<? extends Unit<?>> units = system.getUnits(); List list =
+		 * Arrays.asList((units.toArray())); Collections.sort(list); for (Object
+		 * o : list) { System.out.println(o.toString()); }
+		 */
+		assertEquals(42, system.getUnits().size());
+	}
 }

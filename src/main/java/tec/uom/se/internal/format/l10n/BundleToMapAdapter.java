@@ -52,18 +52,18 @@ public final class BundleToMapAdapter {
 
 		return map;
 	}
-	
-//	public final static Map<String, String> toMap(final MapResourceBundle resource) {
-//		Map<String, String> map = new HashMap<>();
-//
-//		Enumeration<String> keys = resource.getKeys();
-//		while (keys.hasMoreElements()) {
-//			String key = keys.nextElement();
-//			map.put(key, resource.getString(key));
-//		}
-//
-//		return map;
-//	}
+	// public final static Map<String, String> toMap(final MapResourceBundle
+	// resource) {
+	// Map<String, String> map = new HashMap<>();
+	//
+	// Enumeration<String> keys = resource.getKeys();
+	// while (keys.hasMoreElements()) {
+	// String key = keys.nextElement();
+	// map.put(key, resource.getString(key));
+	// }
+	//
+	// return map;
+	// }
 
 	public static Map<String, String> toMap(String resName) {
 		return toMap(ResourceBundle.getBundle(resName));

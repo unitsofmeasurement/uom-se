@@ -29,7 +29,6 @@
  */
 package tec.uom.se.format;
 
-
 /**
  * Defines different ways of formatting.
  * 

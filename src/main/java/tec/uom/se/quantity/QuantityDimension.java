@@ -52,8 +52,8 @@ import java.util.logging.Logger;
  * <p>
  * The dimension associated to any given quantity are given by the published
  * {@link DimensionService} instances. For convenience, a static method
- * {@link QuantityDimension#getInstance(Class) aggregating the results of all
- * {@link DimensionService} instances is provided.<br/>
+ * {@link QuantityDimension#getInstance(Class) aggregating the results of all {
+ * @link DimensionService} instances is provided.<br/>
  * <br/>
  * <code>
  *        QuantityDimension speedDimension
@@ -269,7 +269,6 @@ public final class QuantityDimension implements Dimension, Serializable {
 		}
 		return fundamentalDimensions;
 	}
-
 	@Override
 	public String toString() {
 		return pseudoUnit.toString();

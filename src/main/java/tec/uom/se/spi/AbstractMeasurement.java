@@ -37,8 +37,8 @@ import tec.uom.se.ComparableQuantity;
 
 /**
  * <p>
- * This class represents the immutable result of a measurement stated in
- * a known quantity.
+ * This class represents the immutable result of a measurement stated in a known
+ * quantity.
  * </p>
  * 
  * <p>
@@ -48,8 +48,9 @@ import tec.uom.se.ComparableQuantity;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.3 $Date: 2015-07-25 $
  */
-abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
-		Measurement<Q> {
+abstract class AbstractMeasurement<Q extends Quantity<Q>>
+		implements
+			Measurement<Q> {
 
 	/**
 	 * 
@@ -58,7 +59,7 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 
 	private final Quantity<Q> quantity;
 	private final Instant instant;
-	
+
 	/**
 	 * constructor.
 	 */
@@ -66,14 +67,14 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 		this.quantity = q;
 		this.instant = i;
 	}
-	
+
 	/**
 	 * constructor.
 	 */
 	protected AbstractMeasurement(Quantity<Q> q, long t) {
 		this(q, Instant.ofEpochMilli(t));
 	}
-	
+
 	/**
 	 * constructor.
 	 */
@@ -89,7 +90,7 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 	public final Quantity<Q> getQuantity() {
 		return quantity;
 	}
-	
+
 	/**
 	 * Returns the measurement instant.
 	 *
@@ -98,7 +99,7 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 	public final Instant getInstant() {
 		return instant;
 	}
-	
+
 	/**
 	 * Returns the measurement timestamp.
 	 *
@@ -107,7 +108,7 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 	public final long getTimestamp() {
 		return instant.toEpochMilli();
 	}
-	
+
 	/**
 	 * This class represents the default measurement.
 	 */
@@ -119,12 +120,12 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 		 */
 		private static final long serialVersionUID = 823899472806334856L;
 
-		@SuppressWarnings({ "unchecked" })
+		@SuppressWarnings({"unchecked"})
 		protected Default(Quantity q, Instant i) {
 			super(q, i);
 		}
-		
-		@SuppressWarnings({ "unchecked" })
+
+		@SuppressWarnings({"unchecked"})
 		protected Default(Quantity q, long t) {
 			super(q, t);
 		}
@@ -138,14 +139,15 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
 		@Override
 		public int compareTo(Object o) {
 			if (o instanceof Measurement) {
-				Measurement m = (Measurement)o;
+				Measurement m = (Measurement) o;
 				if (getQuantity() instanceof ComparableQuantity) {
 					ComparableQuantity<?> comp = (ComparableQuantity<?>) getQuantity();
-					return comp.compareTo(m.getQuantity()) + getInstant().compareTo(m.getInstant());
+					return comp.compareTo(m.getQuantity())
+							+ getInstant().compareTo(m.getInstant());
 				}
 				return 0;
 			}
-			return 0;			
+			return 0;
 		}
 	}
 }

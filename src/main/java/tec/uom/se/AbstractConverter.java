@@ -41,193 +41,208 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <p> The base class for our {@link UnitConverter} implementations.</p>
+ * <p>
+ * The base class for our {@link UnitConverter} implementations.
+ * </p>
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.6, Jan 17, 2016
  */
-public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
-
-    /**
-	 *
-	 */
-//	private static final long serialVersionUID = 5790242858468427131L;
+public abstract class AbstractConverter
+		implements
+			UnitConverter,
+			Converter<Number, Number> {
 
 	/**
-     * The ratio of the circumference of a circle to its diameter.
-     **/
-    protected static final double PI = 3.1415926535897932384626433832795;
+	 *
+	 */
+	// private static final long serialVersionUID = 5790242858468427131L;
 
-    /**
-     * Holds identity converter.
-     */
-    public static final AbstractConverter IDENTITY = new Identity();
+	/**
+	 * The ratio of the circumference of a circle to its diameter.
+	 **/
+	protected static final double PI = 3.1415926535897932384626433832795;
 
-    /**
-     * DefaultQuantityFactory constructor.
-     */
-    protected AbstractConverter() {
-    }
+	/**
+	 * Holds identity converter.
+	 */
+	public static final AbstractConverter IDENTITY = new Identity();
 
-    /**
-     * Concatenates this physics converter with another physics converter.
-     * The resulting converter is equivalent to first converting by the
-     * specified converter (right converter), and then converting by
-     * this converter (left converter).
-     *
-     * @param that the other converter.
-     * @return the concatenation of this converter with that converter.
-     */
-    public AbstractConverter concatenate(AbstractConverter that) {
-        return (that == IDENTITY) ? this : new Pair(this, that);
-    }
+	/**
+	 * DefaultQuantityFactory constructor.
+	 */
+	protected AbstractConverter() {
+	}
 
-    @Override
-    public boolean isIdentity() {
-        return false;
-    }
+	/**
+	 * Concatenates this physics converter with another physics converter. The
+	 * resulting converter is equivalent to first converting by the specified
+	 * converter (right converter), and then converting by this converter (left
+	 * converter).
+	 *
+	 * @param that
+	 *            the other converter.
+	 * @return the concatenation of this converter with that converter.
+	 */
+	public AbstractConverter concatenate(AbstractConverter that) {
+		return (that == IDENTITY) ? this : new Pair(this, that);
+	}
 
-    @Override
-    public abstract boolean equals(Object cvtr);
+	@Override
+	public boolean isIdentity() {
+		return false;
+	}
 
-    @Override
-    public abstract int hashCode();
+	@Override
+	public abstract boolean equals(Object cvtr);
 
-    @Override
-    public abstract AbstractConverter inverse();
+	@Override
+	public abstract int hashCode();
 
-    @Override
-    public UnitConverter concatenate(UnitConverter converter) {
-        return (converter == IDENTITY) ? this : new Pair(this, converter);
-    }
+	@Override
+	public abstract AbstractConverter inverse();
 
-    @Override
+	@Override
+	public UnitConverter concatenate(UnitConverter converter) {
+		return (converter == IDENTITY) ? this : new Pair(this, converter);
+	}
+
+	@Override
     public List<? extends UnitConverter> getConversionSteps() {
         List<AbstractConverter> converters = new ArrayList<>();
         converters.add(this);
         return converters;
     }
+	/**
+	 * @throws IllegalArgumentException
+	 *             if the value is </code>null</code>.
+	 */
+	public Number convert(Number value) {
+		if (value instanceof BigDecimal) {
+			return convert((BigDecimal) value, MathContext.DECIMAL128);
+		}
+		if (value != null) {
+			return convert(value.doubleValue());
+		} else {
+			throw new IllegalArgumentException("Value cannot be null");
+		}
+	}
 
-    /**
-     * @throws IllegalArgumentException if the value is </code>null</code>.
-     */
-    public Number convert(Number value) {
-        if (value instanceof BigDecimal) {
-        	return convert((BigDecimal)value, MathContext.DECIMAL128);
-        }
-        if (value != null) {
-        	return convert(value.doubleValue());
-        } else {
-        	throw new IllegalArgumentException("Value cannot be null");
-        }   
-    }
+	@Override
+	public abstract double convert(double value);
 
-    @Override
-    public abstract double convert(double value);
+	public abstract BigDecimal convert(BigDecimal value, MathContext ctx)
+			throws ArithmeticException;
 
-    public abstract BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException;
+	/**
+	 * This class represents the identity converter (singleton).
+	 */
+	private static final class Identity extends AbstractConverter
+			implements
+				Serializable {
 
-    /**
-     * This class represents the identity converter (singleton).
-     */
-    private static final class Identity extends AbstractConverter implements Serializable {
-
-        /**
+		/**
 		 * 
 		 */
 		private static final long serialVersionUID = -4460463244427587361L;
 
 		@Override
-        public boolean isIdentity() {
-            return true;
-        }
+		public boolean isIdentity() {
+			return true;
+		}
 
-        @Override
-        public Identity inverse() {
-            return this;
-        }
+		@Override
+		public Identity inverse() {
+			return this;
+		}
 
-        @Override
-        public double convert(double value) {
-            return value;
-        }
+		@Override
+		public double convert(double value) {
+			return value;
+		}
 
-        @Override
-        public BigDecimal convert(BigDecimal value, MathContext ctx) {
-            return value;
-        }
+		@Override
+		public BigDecimal convert(BigDecimal value, MathContext ctx) {
+			return value;
+		}
 
-        @Override
-        public UnitConverter concatenate(UnitConverter converter) {
-            return converter;
-        }
+		@Override
+		public UnitConverter concatenate(UnitConverter converter) {
+			return converter;
+		}
 
-        @Override
-        public boolean equals(Object cvtr) {
-            return (cvtr instanceof Identity);
-        }
+		@Override
+		public boolean equals(Object cvtr) {
+			return (cvtr instanceof Identity);
+		}
 
-        @Override
-        public int hashCode() {
-            return 0;
-        }
+		@Override
+		public int hashCode() {
+			return 0;
+		}
 
-        @Override
-        public boolean isLinear() {
-            return true;
-        }
-    }
+		@Override
+		public boolean isLinear() {
+			return true;
+		}
+	}
 
-    /**
-     * This class represents converters made up of two or more separate
-     * converters (in matrix notation <code>[pair] = [left] x [right]</code>).
-     */
-    public static final class Pair extends AbstractConverter implements Serializable {
+	/**
+	 * This class represents converters made up of two or more separate
+	 * converters (in matrix notation <code>[pair] = [left] x [right]</code>).
+	 */
+	public static final class Pair extends AbstractConverter
+			implements
+				Serializable {
 
-        /**
+		/**
 		 * 
 		 */
 		private static final long serialVersionUID = -123063827821728331L;
 
 		/**
-         * Holds the first converter.
-         */
-        private final UnitConverter left;
+		 * Holds the first converter.
+		 */
+		private final UnitConverter left;
 
-        /**
-         * Holds the second converter.
-         */
-        private final UnitConverter right;
+		/**
+		 * Holds the second converter.
+		 */
+		private final UnitConverter right;
 
-        /**
-         * Creates a pair converter resulting from the combined
-         * transformation of the specified converters.
-         *
-         * @param  left the left converter, not <code>null</code>.
-         * @param  right the right converter.
-         * @throws IllegalArgumentException if either the left or right converter are </code>null</code>
-         */
-        public Pair(UnitConverter left, UnitConverter right) {
-        	if (left != null && right != null) {
-        		this.left = left;
-        		this.right = right;
-        	} else {
-        		throw new IllegalArgumentException("Converters cannot be null");
-        	}
-        }
+		/**
+		 * Creates a pair converter resulting from the combined transformation
+		 * of the specified converters.
+		 *
+		 * @param left
+		 *            the left converter, not <code>null</code>.
+		 * @param right
+		 *            the right converter.
+		 * @throws IllegalArgumentException
+		 *             if either the left or right converter are
+		 *             </code>null</code>
+		 */
+		public Pair(UnitConverter left, UnitConverter right) {
+			if (left != null && right != null) {
+				this.left = left;
+				this.right = right;
+			} else {
+				throw new IllegalArgumentException("Converters cannot be null");
+			}
+		}
 
-        @Override
-        public boolean isLinear() {
-            return left.isLinear() && right.isLinear();
-        }
+		@Override
+		public boolean isLinear() {
+			return left.isLinear() && right.isLinear();
+		}
 
-        @Override
-        public boolean isIdentity() {
-            return false;
-        }
+		@Override
+		public boolean isIdentity() {
+			return false;
+		}
 
-        @Override
+		@Override
         public List<UnitConverter> getConversionSteps() {
             final List<UnitConverter> steps = new ArrayList<>();
             List<? extends UnitConverter> leftCompound = left.getConversionSteps();
@@ -236,42 +251,42 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
             steps.addAll(rightCompound);
             return steps;
         }
+		@Override
+		public Pair inverse() {
+			return new Pair(right.inverse(), left.inverse());
+		}
 
-        @Override
-        public Pair inverse() {
-            return new Pair(right.inverse(), left.inverse());
-        }
+		@Override
+		public double convert(double value) {
+			return left.convert(right.convert(value));
+		}
 
-        @Override
-        public double convert(double value) {
-            return left.convert(right.convert(value));
-        }
+		@Override
+		public BigDecimal convert(BigDecimal value, MathContext ctx) {
+			if (right instanceof AbstractConverter) {
+				return ((AbstractConverter) left).convert(
+						((AbstractConverter) right).convert(value, ctx), ctx);
+			}
+			return (BigDecimal) left.convert(right.convert(value));
+		}
 
-        @Override
-        public BigDecimal convert(BigDecimal value, MathContext ctx) {
-        	if (right instanceof AbstractConverter) {
-        		return ((AbstractConverter)left).convert(((AbstractConverter)right).convert(value, ctx), ctx);
-        	}
-            return (BigDecimal)left.convert(right.convert(value));
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-            	return true;
-            }
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
 			if (obj instanceof Pair) {
 				Pair that = (Pair) obj;
 				return Objects.equals(left, that.left)
 						&& Objects.equals(right, that.right);
 			}
-            return false;
-        }
+			return false;
+		}
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(left, right);
-        }
+		@Override
+		public int hashCode() {
+			return Objects.hash(left, right);
+		}
 
 		public UnitConverter getLeft() {
 			return left;
@@ -280,5 +295,5 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
 		public UnitConverter getRight() {
 			return right;
 		}
-    }
+	}
 }

@@ -63,7 +63,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 	 * 
 	 */
 	private static final long serialVersionUID = 6835738653744691425L;
-	
+
 	private final TemporalUnit timeUnit;
 	private final Integer value;
 	private final TemporalAmount amount;
@@ -120,7 +120,7 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 	public TemporalAmount getTemporalAmount() {
 		return amount;
 	}
-	
+
 	/**
 	 * get to {@link TemporalUnit}
 	 * 
@@ -166,23 +166,23 @@ public final class TemporalQuantity extends AbstractQuantity<Time> {
 		if (timeUnit instanceof ChronoUnit) {
 			ChronoUnit chronoUnit = (ChronoUnit) timeUnit;
 			switch (chronoUnit) {
-			case MICROS:
-				return TimeQuantities.MICROSECOND;
-			case MILLIS:
-				return TimeQuantities.MILLISECOND;
-			case NANOS:
-				return TimeQuantities.NANOSECOND;
-			case SECONDS:
-				return SECOND;
-			case MINUTES:
-				return MINUTE;
-			case HOURS:
-				return HOUR;
-			case DAYS:
-				return DAY;
-			default:
-				throw new IllegalArgumentException(
-						"TemporalQuantity only supports DAYS, HOURS, MICROS, MILLIS, MINUTES, NANOS, SECONDS ");
+				case MICROS :
+					return TimeQuantities.MICROSECOND;
+				case MILLIS :
+					return TimeQuantities.MILLISECOND;
+				case NANOS :
+					return TimeQuantities.NANOSECOND;
+				case SECONDS :
+					return SECOND;
+				case MINUTES :
+					return MINUTE;
+				case HOURS :
+					return HOUR;
+				case DAYS :
+					return DAY;
+				default :
+					throw new IllegalArgumentException(
+							"TemporalQuantity only supports DAYS, HOURS, MICROS, MILLIS, MINUTES, NANOS, SECONDS ");
 			}
 		} else {
 			throw new IllegalArgumentException(

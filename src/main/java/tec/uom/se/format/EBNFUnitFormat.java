@@ -164,21 +164,21 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	/**
 	 * 
 	 */
-//	private static final long serialVersionUID = 8968559300292910840L;
+	// private static final long serialVersionUID = 8968559300292910840L;
 
 	/**
 	 * Name of the resource bundle
 	 */
 	private static final String BUNDLE_NAME = "tec.uom.se.internal.format.messages"; //$NON-NLS-1$
-	//= UnitFormatParser.class.getPackage()			.getName() + ".messages"; 
+	// = UnitFormatParser.class.getPackage() .getName() + ".messages";
 
 	/**
 	 * Default locale instance. If the default locale is changed after the class
 	 * is initialized, this instance will no longer be used.
 	 */
 	private static final EBNFUnitFormat DEFAULT_INSTANCE = new EBNFUnitFormat();
-			//SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME, 
-				//	Locale.getDefault()), Locale.getDefault()));
+	// SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME,
+	// Locale.getDefault()), Locale.getDefault()));
 
 	/**
 	 * Returns the instance for the current default locale (non-ascii characters
@@ -193,10 +193,10 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	 * 
 	 * @param locale
 	 */
-//	static SimpleUnitFormat getInstance(Locale locale) {
-//		return new SimpleUnitFormat(SymbolMap.of(toMap(ResourceBundle.getBundle(
-//				BUNDLE_NAME, locale))), locale);
-//	}
+	// static SimpleUnitFormat getInstance(Locale locale) {
+	// return new SimpleUnitFormat(SymbolMap.of(toMap(ResourceBundle.getBundle(
+	// BUNDLE_NAME, locale))), locale);
+	// }
 
 	/** Returns an instance for the given symbol map. */
 	protected static EBNFUnitFormat getInstance(SymbolMap symbols, Locale locale) {
@@ -220,12 +220,12 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	 * 
 	 */
 	EBNFUnitFormat() {
-		//this(SymbolMap.of(toMap(L10nResources.getBundle(
-				//BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
-		this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault())), 
-				Locale.getDefault());
+		// this(SymbolMap.of(toMap(L10nResources.getBundle(
+		// BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
+		this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME,
+				Locale.getDefault())), Locale.getDefault());
 	}
-	
+
 	/**
 	 * Private constructor.
 	 * 
@@ -255,7 +255,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	public Appendable format(Unit<?> unit, Appendable appendable)
 			throws IOException {
 
-        EBNFHelper.formatInternal(unit, appendable, symbolMap);
+		EBNFHelper.formatInternal(unit, appendable, symbolMap);
 		if (unit instanceof AnnotatedUnit<?>) {
 			AnnotatedUnit<?> annotatedUnit = (AnnotatedUnit<?>) unit;
 			if (annotatedUnit.getAnnotation() != null) {
@@ -270,7 +270,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 	public boolean isLocaleSensitive() {
 		return false;
 	}
-	
+
 	protected Unit<?> parse(CharSequence csq, int index)
 			throws IllegalArgumentException {
 		// Parsing reads the whole character sequence from the parse position.
@@ -301,9 +301,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
 			throw new ParserException(e);
 		}
 	}
-	
-	public Unit<?> parse(CharSequence csq)
-			throws ParserException {
+	public Unit<?> parse(CharSequence csq) throws ParserException {
 		return parse(csq, 0);
 	}
 

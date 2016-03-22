@@ -43,24 +43,27 @@ import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
 /**
- * An amount of quantity, implementation of {@link ComparableQuantity} that keep {@link Number} as possible otherwise
- * converts to {@link DecimalQuantity}, this object is immutable.
+ * An amount of quantity, implementation of {@link ComparableQuantity} that keep
+ * {@link Number} as possible otherwise converts to {@link DecimalQuantity},
+ * this object is immutable.
  *
  * @see AbstractQuantity
  * @see Quantity
  * @see ComparableQuantity
- * @param <Q> The type of the quantity.
+ * @param <Q>
+ *            The type of the quantity.
  * @author otaviojava
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.9.4, $Date: 2015-10-10 $
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
-public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	implements Serializable {
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>
+		implements
+			Serializable {
 
-    private static final long serialVersionUID = 7312161895652321241L;
+	private static final long serialVersionUID = 7312161895652321241L;
 
 	private final Number value;
-
 
 	/**
 	 * Indicates if this measure is big.
@@ -74,7 +77,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	i
 	}
 
 	@Override
-    public double doubleValue(Unit<Q> unit) {
+	public double doubleValue(Unit<Q> unit) {
 		Unit<Q> myUnit = getUnit();
 		try {
 			UnitConverter converter = unit.getConverterTo(myUnit);
@@ -85,7 +88,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	i
 	}
 
 	@Override
-    public Number getValue() {
+	public Number getValue() {
 		return value;
 	}
 
@@ -97,41 +100,41 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	i
 	 *         otherwise.
 	 */
 	@Override
-    public boolean isBig() {
+	public boolean isBig() {
 		return isBig;
 	}
 
 	@Override
 	public ComparableQuantity<Q> add(Quantity<Q> that) {
-	    return toDecimalQuantity().add(that);
+		return toDecimalQuantity().add(that);
 	}
 
 	@Override
 	public ComparableQuantity<?> multiply(Quantity<?> that) {
-	    return toDecimalQuantity().multiply(that);
+		return toDecimalQuantity().multiply(that);
 	}
 
 	@Override
 	public ComparableQuantity<Q> multiply(Number that) {
-	    return toDecimalQuantity().multiply(that);
+		return toDecimalQuantity().multiply(that);
 	}
 
 	@Override
 	public ComparableQuantity<?> divide(Quantity<?> that) {
-	    return toDecimalQuantity().divide(that);
+		return toDecimalQuantity().divide(that);
 	}
 
 	@Override
 	public ComparableQuantity<Q> divide(Number that) {
-	    return toDecimalQuantity().divide(that);
+		return toDecimalQuantity().divide(that);
 	}
 
 	@Override
 	public ComparableQuantity<Q> inverse() {
 
-		return new NumberQuantity((getValue() instanceof BigDecimal ?
-				BigDecimal.ONE.divide((BigDecimal)getValue()) : 1d / getValue().doubleValue()), getUnit()
-				.inverse());
+		return new NumberQuantity((getValue() instanceof BigDecimal
+				? BigDecimal.ONE.divide((BigDecimal) getValue())
+				: 1d / getValue().doubleValue()), getUnit().inverse());
 	}
 
 	@Override
@@ -145,7 +148,6 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q>	i
 		}
 		return BigDecimal.valueOf(value.doubleValue());
 	}
-
 
 	@Override
 	public ComparableQuantity<Q> subtract(Quantity<Q> that) {

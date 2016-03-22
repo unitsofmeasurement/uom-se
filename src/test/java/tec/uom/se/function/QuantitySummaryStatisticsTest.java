@@ -39,7 +39,7 @@ import tec.uom.se.unit.Units;
 
 public class QuantitySummaryStatisticsTest {
 
-    @Test
+	@Test
     public void shouldBeEmpty() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
                 Units.DAY);
@@ -50,16 +50,14 @@ public class QuantitySummaryStatisticsTest {
         Assert.assertEquals(0L, summary.getAverage().getValue().longValue());
 
     }
-
-    @Test(expected = NullPointerException.class)
+	@Test(expected = NullPointerException.class)
     public void shouldErrorWhenIsNull() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
                 Units.DAY);
         summary.accept(null);
     }
 
-
-    @Test
+	@Test
     public void shouldBeSameValueWhenOneMonetaryIsAdded() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
                 Units.DAY);
@@ -76,8 +74,7 @@ public class QuantitySummaryStatisticsTest {
         Assert.assertEquals(240L, summary.getSum(Units.HOUR).getValue().longValue());
         Assert.assertEquals(240L, summary.getAverage(Units.HOUR).getValue().longValue());
     }
-
-    @Test
+	@Test
     public void shouldBeSameEquivalentValueWhenisConverted() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
                 Units.DAY);
@@ -89,8 +86,7 @@ public class QuantitySummaryStatisticsTest {
         Assert.assertEquals(240L, summary.getSum(Units.HOUR).getValue().longValue());
         Assert.assertEquals(240L, summary.getAverage(Units.HOUR).getValue().longValue());
     }
-
-    @Test
+	@Test
     public void convertSummaryTest() {
 
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
@@ -104,31 +100,30 @@ public class QuantitySummaryStatisticsTest {
         Assert.assertEquals(240L, summaryHour.getAverage().getValue().longValue());
 
     }
-    @Test
-    public void addTest() {
-        QuantitySummaryStatistics<Time> summary = createSummaryTime();
-        Assert.assertEquals(3L, summary.getCount());
-        Assert.assertEquals(1L, summary.getMin().getValue().longValue());
-        Assert.assertEquals(9L, summary.getMax().getValue().longValue());
-        Assert.assertEquals(12L, summary.getSum().getValue().longValue());
-        Assert.assertEquals(4L, summary.getAverage().getValue().longValue());
-    }
+	@Test
+	public void addTest() {
+		QuantitySummaryStatistics<Time> summary = createSummaryTime();
+		Assert.assertEquals(3L, summary.getCount());
+		Assert.assertEquals(1L, summary.getMin().getValue().longValue());
+		Assert.assertEquals(9L, summary.getMax().getValue().longValue());
+		Assert.assertEquals(12L, summary.getSum().getValue().longValue());
+		Assert.assertEquals(4L, summary.getAverage().getValue().longValue());
+	}
 
+	@Test
+	public void combineTest() {
+		QuantitySummaryStatistics<Time> summaryA = createSummaryTime();
+		QuantitySummaryStatistics<Time> summaryB = createSummaryTime();
+		QuantitySummaryStatistics<Time> summary = summaryA.combine(summaryB);
 
-    @Test
-    public void combineTest() {
-        QuantitySummaryStatistics<Time> summaryA = createSummaryTime();
-        QuantitySummaryStatistics<Time> summaryB = createSummaryTime();
-        QuantitySummaryStatistics<Time> summary = summaryA.combine(summaryB);
+		Assert.assertEquals(6L, summary.getCount());
+		Assert.assertEquals(1L, summary.getMin().getValue().longValue());
+		Assert.assertEquals(9L, summary.getMax().getValue().longValue());
+		Assert.assertEquals(24L, summary.getSum().getValue().longValue());
+		Assert.assertEquals(4L, summary.getAverage().getValue().longValue());
+	}
 
-        Assert.assertEquals(6L, summary.getCount());
-        Assert.assertEquals(1L, summary.getMin().getValue().longValue());
-        Assert.assertEquals(9L, summary.getMax().getValue().longValue());
-        Assert.assertEquals(24L, summary.getSum().getValue().longValue());
-        Assert.assertEquals(4L, summary.getAverage().getValue().longValue());
-    }
-
-    private QuantitySummaryStatistics<Time> createSummaryTime() {
+	private QuantitySummaryStatistics<Time> createSummaryTime() {
         QuantitySummaryStatistics<Time> summary = new QuantitySummaryStatistics<>(
                 Units.DAY);
 
@@ -137,6 +132,5 @@ public class QuantitySummaryStatisticsTest {
         summary.accept(Quantities.getQuantity(1440, Units.MINUTE));
         return summary;
     }
-
 
 }

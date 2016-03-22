@@ -45,7 +45,7 @@ import tec.uom.se.quantity.Quantities;
 public class UnitConverterTest {
 	private final Unit<Length> sourceUnit = METRE;
 	private final Unit<Length> targetUnit = CENTI(METRE);
-	
+
 	@Test
 	public void testDouble() {
 		UnitConverter converter = sourceUnit.getConverterTo(targetUnit);
@@ -56,14 +56,14 @@ public class UnitConverterTest {
 		assertEquals(400, result1, 0);
 		assertEquals(600, result2, 0);
 	}
-	
+
 	@Test
 	public void testQuantity() {
 		Quantity<Length> quantLength1 = Quantities.getQuantity(4.0, sourceUnit);
 		Quantity<Length> quantLength2 = Quantities.getQuantity(6.0, targetUnit);
 		Quantity<Length> quantResult1 = quantLength1.to(targetUnit);
 		assertNotNull(quantResult1);
-		assertEquals( 400.0, quantResult1.getValue());
+		assertEquals(400.0, quantResult1.getValue());
 		assertEquals(targetUnit, quantResult1.getUnit());
 	}
 

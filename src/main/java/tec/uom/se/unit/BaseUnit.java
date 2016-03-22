@@ -39,105 +39,115 @@ import javax.measure.UnitConverter;
 
 import java.util.Map;
 
-
 /**
- * <p> This class represents the building blocks on top of which all others
- *     physical units are created. Base units are always unscaled SI units.</p>
+ * <p>
+ * This class represents the building blocks on top of which all others physical
+ * units are created. Base units are always unscaled SI units.
+ * </p>
  * 
- * <p> When using the {@link tec.uom.se.StandardModel standard model},
- *     all seven {@link tec.uom.se.unit.tec.uom.se.system.SI SI} base units
- *     are dimensionally independent.</p>
+ * <p>
+ * When using the {@link tec.uom.se.StandardModel standard model}, all seven
+ * {@link tec.uom.se.unit.tec.uom.se.system.SI SI} base units are dimensionally
+ * independent.
+ * </p>
  *
- * @see <a href="http://en.wikipedia.org/wiki/SI_base_unit">
- *       Wikipedia: SI base unit</a>
+ * @see <a href="http://en.wikipedia.org/wiki/SI_base_unit"> Wikipedia: SI base
+ *      unit</a>
  *
- * @author  <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
+ * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.3, Oct 17, 2014
  */
 public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1721629233768215930L;
 
 	/**
-     * Holds the symbol.
-     */
-    private final String symbol;
+	 * Holds the symbol.
+	 */
+	private final String symbol;
 
-    /**
-     * Holds the base unit dimension.
-     */
-    private final Dimension dimension;
+	/**
+	 * Holds the base unit dimension.
+	 */
+	private final Dimension dimension;
 
-    /**
-     * Creates a base unit having the specified symbol and dimension.
-     *
-     * @param symbol the symbol of this base unit.
-     */
-    public BaseUnit(String symbol, Dimension dimension) {
-        this.symbol = symbol;
-        this.dimension = dimension;
-    }
-    
-    /**
-     * Creates a base unit having the specified symbol and dimension.
-     *
-     * @param symbol the symbol of this base unit.
-     */
-    public BaseUnit(String symbol) {
-        this.symbol = symbol;
-        this.dimension = QuantityDimension.NONE;
-    }
-    
-    /**
-     * Creates a base unit having the specified symbol and name.
-     *
-     * @param symbol the symbol of this base unit.
-     * @param name the name of this base unit.
-     * @throws IllegalArgumentException if the specified symbol is
-     *         associated to a different unit.
-     */
-    public BaseUnit(String symbol, String name) {
-        this(symbol);
-        this.name = name;
-    }
+	/**
+	 * Creates a base unit having the specified symbol and dimension.
+	 *
+	 * @param symbol
+	 *            the symbol of this base unit.
+	 */
+	public BaseUnit(String symbol, Dimension dimension) {
+		this.symbol = symbol;
+		this.dimension = dimension;
+	}
 
-    @Override
-    public String getSymbol() {
-        return symbol;
-    }
+	/**
+	 * Creates a base unit having the specified symbol and dimension.
+	 *
+	 * @param symbol
+	 *            the symbol of this base unit.
+	 */
+	public BaseUnit(String symbol) {
+		this.symbol = symbol;
+		this.dimension = QuantityDimension.NONE;
+	}
 
-    @Override
-    public AbstractUnit<Q> toSystemUnit() {
-        return this;
-    }
+	/**
+	 * Creates a base unit having the specified symbol and name.
+	 *
+	 * @param symbol
+	 *            the symbol of this base unit.
+	 * @param name
+	 *            the name of this base unit.
+	 * @throws IllegalArgumentException
+	 *             if the specified symbol is associated to a different unit.
+	 */
+	public BaseUnit(String symbol, String name) {
+		this(symbol);
+		this.name = name;
+	}
 
-    @Override
-    public UnitConverter getSystemConverter() throws UnsupportedOperationException {
-        return AbstractConverter.IDENTITY;
-    }
+	@Override
+	public String getSymbol() {
+		return symbol;
+	}
 
-    @Override
-    public Dimension getDimension() {
-        return dimension;
-    }
+	@Override
+	public AbstractUnit<Q> toSystemUnit() {
+		return this;
+	}
 
-    @Override
-    public final boolean equals(Object that) {
-        if (this == that) return true;
-        if (!(that instanceof BaseUnit)) return false;
-        BaseUnit<?> thatUnit = (BaseUnit<?>) that;
-        return this.symbol.equals(thatUnit.symbol) 
-                && this.dimension.equals(thatUnit.dimension);
-    }
+	@Override
+	public UnitConverter getSystemConverter()
+			throws UnsupportedOperationException {
+		return AbstractConverter.IDENTITY;
+	}
 
-    @Override
-    public final int hashCode() {
-        return symbol.hashCode();
-    }
+	@Override
+	public Dimension getDimension() {
+		return dimension;
+	}
+
+	@Override
+	public final boolean equals(Object that) {
+		if (this == that)
+			return true;
+		if (!(that instanceof BaseUnit))
+			return false;
+		BaseUnit<?> thatUnit = (BaseUnit<?>) that;
+		return this.symbol.equals(thatUnit.symbol)
+				&& this.dimension.equals(thatUnit.dimension);
+	}
+
+	@Override
+	public final int hashCode() {
+		return symbol.hashCode();
+	}
 
 	@Override
 	public Map<? extends AbstractUnit<Q>, Integer> getProductUnits() {

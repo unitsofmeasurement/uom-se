@@ -189,7 +189,6 @@ public class TimeQuantitiesTest {
 				Integer.valueOf(time.getValue().intValue()));
 		Assert.assertEquals(Units.DAY, time.getUnit());
 	}
-
 	@Test
 	public void ofLocalTimeTemporalAdjustTest() {
 		LocalTime a = LocalTime.MIDNIGHT;

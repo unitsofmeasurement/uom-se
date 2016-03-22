@@ -51,67 +51,67 @@ public class PrefixTest {
 		assertEquals(KILOGRAM.getSymbol(), KILO(GRAM).getSymbol());
 		assertEquals(KILOGRAM.toString(), KILO(GRAM).toString());
 	}
-	
+
 	@Test
 	public void testMega() {
 		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MEGA(Units.GRAM));
 		assertEquals(1d, m1.getValue());
 		assertEquals("Mg", m1.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testMilli() {
 		Quantity<Mass> m1 = Quantities.getQuantity(1.0, MILLI(Units.GRAM));
 		assertEquals(1d, m1.getValue());
 		assertEquals("mg", m1.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testMilli2() {
 		Quantity<Volume> m1 = Quantities.getQuantity(10, MILLI(LITRE));
 		assertEquals(10, m1.getValue());
 		assertEquals("ml", m1.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testMilli3() {
 		Quantity<Volume> m1 = Quantities.getQuantity(1.0, LITRE);
 		assertEquals(1d, m1.getValue());
 		assertEquals("l", m1.getUnit().toString());
-				
+
 		Quantity<Volume> m2 = m1.to(MILLI(LITRE));
 		assertEquals(1000.0d, m2.getValue());
 		assertEquals("ml", m2.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testMicro2() {
 		Quantity<Length> m1 = Quantities.getQuantity(1.0, Units.METRE);
 		assertEquals(1d, m1.getValue());
 		assertEquals("m", m1.getUnit().toString());
-				
+
 		Quantity<Length> m2 = m1.to(MICRO(Units.METRE));
 		assertEquals(1000000.0d, m2.getValue());
 		assertEquals("µm", m2.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testNano() {
 		Quantity<Mass> m1 = Quantities.getQuantity(1.0, Units.GRAM);
 		assertEquals(1d, m1.getValue());
 		assertEquals("g", m1.getUnit().toString());
-				
+
 		Quantity<Mass> m2 = m1.to(NANO(Units.GRAM));
 		assertEquals(1000000000.0d, m2.getValue());
 		assertEquals("ng", m2.getUnit().toString());
 	}
-	
+
 	@Test
 	public void testNano2() {
 		Quantity<Length> m1 = Quantities.getQuantity(1.0, Units.METRE);
 		assertEquals(1d, m1.getValue());
 		assertEquals("m", m1.getUnit().toString());
-				
+
 		Quantity<Length> m2 = m1.to(NANO(Units.METRE));
 		assertEquals(1000000000.0d, m2.getValue());
 		assertEquals("nm", m2.getUnit().toString());

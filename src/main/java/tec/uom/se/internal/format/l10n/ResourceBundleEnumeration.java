@@ -45,7 +45,7 @@ class ResourceBundleEnumeration implements Serializable, Enumeration<String> {
 	 * For serialize.
 	 */
 	private static final long serialVersionUID = -1259498757256943174L;
-	
+
 	private Set<String> set;
 	private Iterator<String> iterator;
 	private Enumeration<String> enumeration;

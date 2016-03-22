@@ -47,11 +47,14 @@ import java.util.Objects;
  * </p>
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7, Dec 28, 2015
  */
-public final class MultiplyConverter extends AbstractConverter implements
-		ValueSupplier<Double>, DoubleFactorSupplier, Serializable {
+public final class MultiplyConverter extends AbstractConverter
+		implements
+			ValueSupplier<Double>,
+			DoubleFactorSupplier,
+			Serializable {
 
 	/**
 	 * 

@@ -48,47 +48,51 @@ import org.junit.Test;
  */
 public class QuantitiesTest {
 
+	@Test
+	public void testOf() {
+		Quantity<Pressure> pressure = Quantities.getQuantity(BigDecimal.ONE,
+				PASCAL);
+		assertEquals(PASCAL, pressure.getUnit());
+	}
 
+	@Test
+	public void getQuantityTest() {
+		Quantity<Pressure> bigDecimalQuantity = Quantities.getQuantity(
+				BigDecimal.ONE, PASCAL);
+		Quantity<Pressure> bigIntegerQuantity = Quantities.getQuantity(
+				BigInteger.ONE, PASCAL);
 
-    @Test
-    public void testOf() {
-    	Quantity<Pressure> pressure = Quantities.getQuantity(BigDecimal.ONE, PASCAL);
-        assertEquals(PASCAL, pressure.getUnit());
-    }
+		Quantity<Pressure> shortQuantity = Quantities.getQuantity(
+				Short.valueOf("2"), PASCAL);
+		Quantity<Pressure> byteQuantity = Quantities.getQuantity(
+				Byte.valueOf("2"), PASCAL);
+		Quantity<Pressure> longQuantity = Quantities.getQuantity(
+				Long.valueOf("2"), PASCAL);
+		Quantity<Pressure> intQuantity = Quantities.getQuantity(
+				Integer.valueOf("2"), PASCAL);
+		Quantity<Pressure> floatQuantity = Quantities.getQuantity(
+				Float.valueOf("2"), PASCAL);
+		Quantity<Pressure> doubleQuantity = Quantities.getQuantity(
+				Double.valueOf("2"), PASCAL);
 
+		assertTrue(Short.class.isInstance(shortQuantity.getValue()));
+		assertTrue(Byte.class.isInstance(byteQuantity.getValue()));
+		assertTrue(Long.class.isInstance(longQuantity.getValue()));
+		assertTrue(Integer.class.isInstance(intQuantity.getValue()));
+		assertTrue(Float.class.isInstance(floatQuantity.getValue()));
+		assertTrue(Double.class.isInstance(doubleQuantity.getValue()));
+		assertTrue(BigDecimal.class.isInstance(bigIntegerQuantity.getValue()));
+		assertTrue(BigDecimal.class.isInstance(bigDecimalQuantity.getValue()));
 
-    @Test
-    public void getQuantityTest() {
-        Quantity<Pressure> bigDecimalQuantity = Quantities.getQuantity(BigDecimal.ONE, PASCAL);
-        Quantity<Pressure> bigIntegerQuantity = Quantities.getQuantity(BigInteger.ONE, PASCAL);
+		assertTrue(NumberQuantity.class.isInstance(shortQuantity));
+		assertTrue(NumberQuantity.class.isInstance(byteQuantity));
+		assertTrue(NumberQuantity.class.isInstance(longQuantity));
+		assertTrue(NumberQuantity.class.isInstance(intQuantity));
+		assertTrue(NumberQuantity.class.isInstance(floatQuantity));
+		assertTrue(DoubleQuantity.class.isInstance(doubleQuantity));
+		assertTrue(DecimalQuantity.class.isInstance(bigIntegerQuantity));
+		assertTrue(DecimalQuantity.class.isInstance(bigDecimalQuantity));
 
-        Quantity<Pressure> shortQuantity = Quantities.getQuantity(Short.valueOf("2"), PASCAL);
-        Quantity<Pressure> byteQuantity = Quantities.getQuantity(Byte.valueOf("2"), PASCAL);
-        Quantity<Pressure> longQuantity = Quantities.getQuantity(Long.valueOf("2"), PASCAL);
-        Quantity<Pressure> intQuantity = Quantities.getQuantity(Integer.valueOf("2"), PASCAL);
-        Quantity<Pressure> floatQuantity = Quantities.getQuantity(Float.valueOf("2"), PASCAL);
-        Quantity<Pressure> doubleQuantity = Quantities.getQuantity(Double.valueOf("2"), PASCAL);
-
-        assertTrue(Short.class.isInstance(shortQuantity.getValue()));
-        assertTrue(Byte.class.isInstance(byteQuantity.getValue()));
-        assertTrue(Long.class.isInstance(longQuantity.getValue()));
-        assertTrue(Integer.class.isInstance(intQuantity.getValue()));
-        assertTrue(Float.class.isInstance(floatQuantity.getValue()));
-        assertTrue(Double.class.isInstance(doubleQuantity.getValue()));
-        assertTrue(BigDecimal.class.isInstance(bigIntegerQuantity.getValue()));
-        assertTrue(BigDecimal.class.isInstance(bigDecimalQuantity.getValue()));
-
-
-        assertTrue(NumberQuantity.class.isInstance(shortQuantity));
-        assertTrue(NumberQuantity.class.isInstance(byteQuantity));
-        assertTrue(NumberQuantity.class.isInstance(longQuantity));
-        assertTrue(NumberQuantity.class.isInstance(intQuantity));
-        assertTrue(NumberQuantity.class.isInstance(floatQuantity));
-        assertTrue(DoubleQuantity.class.isInstance(doubleQuantity));
-        assertTrue(DecimalQuantity.class.isInstance(bigIntegerQuantity));
-        assertTrue(DecimalQuantity.class.isInstance(bigDecimalQuantity));
-
-
-    }
+	}
 
 }

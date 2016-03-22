@@ -31,14 +31,19 @@ package tec.uom.se.internal.format.l10n;
 
 /**
  * <dl>
- * <dt><b>Title: </b><dd>Decimal Format</dd>
+ * <dt><b>Title: </b>
+ * <dd>Decimal Format</dd>
  * <p>
- * <dt><b>Description: </b><dd>This is a simple number formatting/ parsing class. Besides the simple number formatting
- * it also interprets shortcuts for thousand (k) million (m) and billion (b).<p/>
- * This Number Format class was adapted from the public domain javascript class found at 
- * http://www.mredkj.com/javascript/nfdocs.html </dd>
+ * <dt><b>Description: </b>
+ * <dd>This is a simple number formatting/ parsing class. Besides the simple
+ * number formatting it also interprets shortcuts for thousand (k) million (m)
+ * and billion (b).
+ * <p/>
+ * This Number Format class was adapted from the public domain javascript class
+ * found at http://www.mredkj.com/javascript/nfdocs.html</dd>
  * <p>
  * </dl>
+ * 
  * @author <a href="mailto:jasone@greenrivercomputing.com">Jason Essington</a>
  * @version $Revision: 0.2 $
  * @deprecated use NumberFormat

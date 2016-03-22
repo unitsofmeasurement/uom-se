@@ -62,7 +62,9 @@ public class UnitFormatTest {
 
 	@Before
 	public void init() {
-		//sut = DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10, METRE);
+		// sut =
+		// DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10,
+		// METRE);
 		sut = Quantities.getQuantity(10, METRE);
 	}
 
@@ -71,7 +73,7 @@ public class UnitFormatTest {
 		Unit<Frequency> hz = HERTZ;
 		assertEquals("Hz", hz.toString());
 	}
-	
+
 	@Test
 	public void testFormat2() {
 		Unit<Frequency> mhz = MEGA(HERTZ);
@@ -83,13 +85,13 @@ public class UnitFormatTest {
 		Unit<Frequency> khz = KILO(HERTZ);
 		assertEquals("kHz", khz.toString());
 	}
-	
+
 	@Test
 	public void testFormat4() {
 		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
 		assertEquals("km/h", kph.toString());
 	}
-	
+
 	@Test
 	public void testFormatLocal() {
 		final UnitFormat format = LocalUnitFormat.getInstance();
@@ -113,7 +115,7 @@ public class UnitFormatTest {
 		assertEquals("m/s", a2.toString());
 	}
 
-	@Test(expected=UnsupportedOperationException.class)
+	@Test(expected = UnsupportedOperationException.class)
 	public void testParseLocal() {
 		final UnitFormat format = LocalUnitFormat.getInstance();
 		try {
@@ -123,24 +125,24 @@ public class UnitFormatTest {
 			fail(e.getMessage());
 		}
 	}
-	
-	@Test(expected=ParserException.class)
+
+	@Test(expected = ParserException.class)
 	public void testParseIrregularStringSimple() {
 		final UnitFormat format = SimpleUnitFormat.getInstance();
 		Unit<?> u = format.parse("bl//^--1a");
 	}
-	
-	@Test(expected=ParserException.class)
+
+	@Test(expected = ParserException.class)
 	public void testParseIrregularStringEBNF() {
 		final UnitFormat format = EBNFUnitFormat.getInstance();
-			Unit<?> u = format.parse("bl//^--1a");
-			//System.out.println(u);
+		Unit<?> u = format.parse("bl//^--1a");
+		// System.out.println(u);
 	}
-	
-	@Test(expected=UnsupportedOperationException.class)
+
+	@Test(expected = UnsupportedOperationException.class)
 	public void testParseIrregularStringLocal() {
 		final UnitFormat format = LocalUnitFormat.getInstance();
-			Unit<?> u = format.parse("bl//^--1a");
-			//System.out.println(u);
+		Unit<?> u = format.parse("bl//^--1a");
+		// System.out.println(u);
 	}
 }

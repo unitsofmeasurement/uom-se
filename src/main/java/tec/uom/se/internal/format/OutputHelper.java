@@ -31,7 +31,9 @@ package tec.uom.se.internal.format;
 
 /**
  * A static helper class, checking e.g. if some tests require optional console
- * output XXX this could have options for using a logging framework or replaced by one
+ * output XXX this could have options for using a logging framework or replaced
+ * by one
+ * 
  * @version 0.9.4, $Date: 2014-05-28 $
  * @author Werner Keil
  */

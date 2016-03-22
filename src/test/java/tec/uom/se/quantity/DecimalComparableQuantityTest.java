@@ -45,217 +45,259 @@ import tec.uom.se.unit.Units;
 
 public class DecimalComparableQuantityTest {
 
+	@Test
+	public void divideOperationsTest() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		ComparableQuantity<Time> time = Quantities.getQuantity(BigDecimal.TEN,
+				Units.SECOND);
+		ComparableQuantity<Speed> speed = metre.divide(time, Speed.class);
 
+		Assert.assertEquals(Integer.valueOf(speed.getValue().intValue()),
+				Integer.valueOf(1));
+		Assert.assertEquals(Units.METRES_PER_SECOND, speed.getUnit());
+	}
 
-    @Test
-    public void divideOperationsTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Time> time = Quantities.getQuantity(BigDecimal.TEN, Units.SECOND);
-        ComparableQuantity<Speed> speed = metre.divide(time, Speed.class);
+	@Test(expected = ClassCastException.class)
+	public void divideOperationsExceptionTest() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		ComparableQuantity<Time> time = Quantities.getQuantity(BigDecimal.TEN,
+				Units.SECOND);
+		@SuppressWarnings("unused")
+		ComparableQuantity<Area> area = metre.divide(time, Area.class);
+	}
 
-        Assert.assertEquals(Integer.valueOf(speed.getValue().intValue()), Integer.valueOf(1));
-        Assert.assertEquals(Units.METRES_PER_SECOND, speed.getUnit());
-    }
+	@Test
+	public void multiplyOperationsTest() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		ComparableQuantity<Area> area = metre.multiply(metre, Area.class);
 
-    @Test(expected = ClassCastException.class)
-    public void divideOperationsExceptionTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Time> time = Quantities.getQuantity(BigDecimal.TEN, Units.SECOND);
-        @SuppressWarnings("unused")
-        ComparableQuantity<Area> area = metre.divide(time, Area.class);
-    }
+		Assert.assertEquals(Integer.valueOf(area.getValue().intValue()),
+				Integer.valueOf(100));
+		Assert.assertEquals(Units.SQUARE_METRE, area.getUnit());
+	}
 
+	@Test(expected = ClassCastException.class)
+	public void multiplyOperationsExceptionTest() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		@SuppressWarnings("unused")
+		ComparableQuantity<Speed> speed = metre.multiply(metre, Speed.class);
+	}
 
-    @Test
-    public void multiplyOperationsTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Area> area = metre.multiply(metre, Area.class);
+	@Test
+	public void multiplyOperationsException2Test() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		@SuppressWarnings("unused")
+		Quantity<Area> speed = metre.multiply(metre).asType(Area.class);
+	}
 
-        Assert.assertEquals(Integer.valueOf(area.getValue().intValue()), Integer.valueOf(100));
-        Assert.assertEquals(Units.SQUARE_METRE, area.getUnit());
-    }
+	@Test
+	public void divideTest() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		ComparableQuantity<Length> result = metre.divide(10D);
+		Assert.assertTrue(result.getValue().intValue() == 1);
+		Assert.assertEquals(result.getUnit(), Units.METRE);
 
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.TEN,
+				Units.DAY);
+		ComparableQuantity<Time> dayResult = day.divide(BigDecimal
+				.valueOf(2.5D));
+		Assert.assertTrue(dayResult.getValue().intValue() == 4);
+		Assert.assertEquals(dayResult.getUnit(), Units.DAY);
+	}
 
-    @Test(expected = ClassCastException.class)
-    public void multiplyOperationsExceptionTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        @SuppressWarnings("unused")
-        ComparableQuantity<Speed> speed = metre.multiply(metre, Speed.class);
-    }
+	@Test
+	public void addTest() {
+		ComparableQuantity<Length> m = Quantities.getQuantity(BigDecimal.TEN,
+				Units.METRE);
+		ComparableQuantity<Length> m2 = Quantities.getQuantity(
+				BigDecimal.valueOf(12.5), Units.METRE);
+		ComparableQuantity<Length> m3 = Quantities
+				.getQuantity(2.5, Units.METRE);
+		ComparableQuantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
+		ComparableQuantity<Length> result = m.add(m2).add(m3).add(m4);
+		Assert.assertTrue(result.getValue().doubleValue() == 30.0);
+		Assert.assertEquals(result.getUnit(), Units.METRE);
+	}
 
-    @Test
-    public void multiplyOperationsException2Test() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        @SuppressWarnings("unused")
-        Quantity<Area> speed = metre.multiply(metre).asType(Area.class);
-    }
-    
-    @Test
-    public void divideTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Length> result = metre.divide(10D);
-        Assert.assertTrue(result.getValue().intValue() == 1);
-        Assert.assertEquals(result.getUnit(), Units.METRE);
+	@Test
+	public void addQuantityTest() {
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> result = day.add(hours);
+		Assert.assertTrue(result.getValue().doubleValue() == 1.5);
+		Assert.assertEquals(result.getUnit(), Units.DAY);
+	}
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.TEN, Units.DAY);
-        ComparableQuantity<Time> dayResult = day.divide(BigDecimal.valueOf(2.5D));
-        Assert.assertTrue(dayResult.getValue().intValue() == 4);
-        Assert.assertEquals(dayResult.getUnit(), Units.DAY);
-    }
+	@Test
+	public void subtractTest() {
+		ComparableQuantity<Length> m = Quantities.getQuantity(BigDecimal.TEN,
+				Units.METRE);
+		ComparableQuantity<Length> m2 = Quantities.getQuantity(12.5,
+				Units.METRE);
+		ComparableQuantity<Length> result = m.subtract(m2);
+		Assert.assertTrue(result.getValue().doubleValue() == -2.5);
+		Assert.assertEquals(result.getUnit(), Units.METRE);
+	}
 
-    @Test
-    public void addTest() {
-        ComparableQuantity<Length> m = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Length> m2 = Quantities.getQuantity(BigDecimal.valueOf(12.5), Units.METRE);
-        ComparableQuantity<Length> m3 = Quantities.getQuantity(2.5, Units.METRE);
-        ComparableQuantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
-        ComparableQuantity<Length> result = m.add(m2).add(m3).add(m4);
-        Assert.assertTrue(result.getValue().doubleValue() == 30.0);
-        Assert.assertEquals(result.getUnit(), Units.METRE);
-    }
+	@Test
+	public void subtractQuantityTest() {
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> result = day.subtract(hours);
+		Assert.assertTrue(result.getValue().doubleValue() == 0.5);
+		Assert.assertEquals(result.getUnit(), Units.DAY);
+	}
 
-    @Test
-    public void addQuantityTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> result = day.add(hours);
-        Assert.assertTrue(result.getValue().doubleValue() == 1.5);
-        Assert.assertEquals(result.getUnit(), Units.DAY);
-    }
+	@Test
+	public void multiplyTest() {
+		ComparableQuantity<Length> metre = Quantities.getQuantity(
+				BigDecimal.TEN, Units.METRE);
+		ComparableQuantity<Length> result = metre.multiply(10D);
+		Assert.assertTrue(result.getValue().intValue() == 100);
+		Assert.assertEquals(result.getUnit(), Units.METRE);
+		@SuppressWarnings("unchecked")
+		ComparableQuantity<Length> result2 = (ComparableQuantity<Length>) metre
+				.multiply(Quantities.getQuantity(BigDecimal.TEN, Units.METRE));
+		Assert.assertTrue(result2.getValue().intValue() == 100);
+	}
 
-    @Test
-    public void subtractTest() {
-        ComparableQuantity<Length> m = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Length> m2 = Quantities.getQuantity(12.5, Units.METRE);
-        ComparableQuantity<Length> result = m.subtract(m2);
-        Assert.assertTrue(result.getValue().doubleValue() == -2.5);
-        Assert.assertEquals(result.getUnit(), Units.METRE);
-    }
+	@Test
+	public void toTest() {
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hour = day.to(Units.HOUR);
+		Assert.assertEquals(hour.getValue().intValue(), 24);
+		Assert.assertEquals(hour.getUnit(), Units.HOUR);
 
-    @Test
-    public void subtractQuantityTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> result = day.subtract(hours);
-        Assert.assertTrue(result.getValue().doubleValue() == 0.5);
-        Assert.assertEquals(result.getUnit(), Units.DAY);
-    }
+		ComparableQuantity<Time> dayResult = hour.to(Units.DAY);
+		Assert.assertEquals(dayResult.getValue().intValue(), day.getValue()
+				.intValue());
+		Assert.assertEquals(dayResult.getValue().intValue(), day.getValue()
+				.intValue());
+	}
 
-    @Test
-    public void multiplyTest() {
-        ComparableQuantity<Length> metre = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-        ComparableQuantity<Length> result = metre.multiply(10D);
-        Assert.assertTrue(result.getValue().intValue() == 100);
-        Assert.assertEquals(result.getUnit(), Units.METRE);
-        @SuppressWarnings("unchecked")
-        ComparableQuantity<Length> result2 = (ComparableQuantity<Length>) metre.multiply(Quantities.getQuantity(BigDecimal.TEN, Units.METRE));
-        Assert.assertTrue(result2.getValue().intValue() == 100);
-    }
+	@Test
+	public void inverseTestLength() {
+		@SuppressWarnings("unchecked")
+		ComparableQuantity<Length> metre = (ComparableQuantity<Length>) Quantities
+				.getQuantity(BigDecimal.TEN, Units.METRE).inverse();
+		Assert.assertEquals(BigDecimal.valueOf(0.1d), metre.getValue());
+		Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
+	}
 
-    @Test
-    public void toTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hour = day.to(Units.HOUR);
-        Assert.assertEquals(hour.getValue().intValue(), 24);
-        Assert.assertEquals(hour.getUnit(), Units.HOUR);
+	@Test
+	public void inverseTestTime() {
+		ComparableQuantity<?> secInv = Quantities.getQuantity(
+				BigDecimal.valueOf(2d), Units.SECOND).inverse();
+		Assert.assertEquals(BigDecimal.valueOf(0.5d), secInv.getValue());
+		Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
+	}
 
-        ComparableQuantity<Time> dayResult = hour.to(Units.DAY);
-        Assert.assertEquals(dayResult.getValue().intValue(), day.getValue()
-                .intValue());
-        Assert.assertEquals(dayResult.getValue().intValue(), day.getValue()
-                .intValue());
-    }
+	@Test
+	public void isGreaterThanTest() {
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> minutes = Quantities.getQuantity(
+				BigDecimal.valueOf(40), Units.MINUTE);
 
-    @Test
-    public void inverseTestLength() {
-        @SuppressWarnings("unchecked")
-        ComparableQuantity<Length> metre = (ComparableQuantity<Length>) Quantities.getQuantity(BigDecimal.TEN, Units.METRE).inverse();
-        Assert.assertEquals(BigDecimal.valueOf(0.1d), metre.getValue());
-        Assert.assertEquals("1/m", String.valueOf(metre.getUnit()));
-    }
+		ComparableQuantity<Time> dayInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(24), Units.HOUR);
+		ComparableQuantity<Time> dayInMinutes = Quantities.getQuantity(
+				BigDecimal.valueOf(1440), Units.MINUTE);
 
-    @Test
-    public void inverseTestTime() {
-        ComparableQuantity<?> secInv = Quantities.getQuantity(BigDecimal.valueOf(2d), Units.SECOND).inverse();
-        Assert.assertEquals(BigDecimal.valueOf(0.5d), secInv.getValue());
-        Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
-    }
+		ComparableQuantity<Time> daysInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(48), Units.HOUR);
 
+		Assert.assertTrue(day.isGreaterThan(hours));
+		Assert.assertTrue(day.isGreaterThan(minutes));
 
-    @Test
-    public void isGreaterThanTest() {
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> minutes = Quantities.getQuantity(BigDecimal.valueOf(40), Units.MINUTE);
+		Assert.assertFalse(day.isGreaterThan(dayInHour));
+		Assert.assertFalse(day.isGreaterThan(daysInHour));
+		Assert.assertFalse(day.isGreaterThan(dayInMinutes));
 
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), Units.HOUR);
-        ComparableQuantity<Time> dayInMinutes = Quantities.getQuantity(BigDecimal.valueOf(1440), Units.MINUTE);
+	}
 
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
+	@Test
+	public void isGreaterThanOrEqualToTest() {
 
-        Assert.assertTrue(day.isGreaterThan(hours));
-        Assert.assertTrue(day.isGreaterThan(minutes));
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> dayInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(24), Units.HOUR);
+		ComparableQuantity<Time> daysInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(48), Units.HOUR);
 
-        Assert.assertFalse(day.isGreaterThan(dayInHour));
-        Assert.assertFalse(day.isGreaterThan(daysInHour));
-        Assert.assertFalse(day.isGreaterThan(dayInMinutes));
+		Assert.assertTrue(day.isGreaterThanOrEqualTo(hours));
+		Assert.assertTrue(day.isGreaterThanOrEqualTo(dayInHour));
+		Assert.assertFalse(day.isGreaterThanOrEqualTo(daysInHour));
+	}
 
+	@Test
+	public void isLessThanTest() {
 
-    }
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> dayInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(24), Units.HOUR);
+		ComparableQuantity<Time> daysInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(48), Units.HOUR);
 
-    @Test
-    public void isGreaterThanOrEqualToTest() {
+		Assert.assertFalse(day.isLessThan(day));
+		Assert.assertFalse(day.isLessThan(hours));
+		Assert.assertFalse(day.isLessThan(dayInHour));
+		Assert.assertTrue(day.isLessThan(daysInHour));
+	}
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), Units.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
+	@Test
+	public void isLessThanOrEqualToTest() {
 
-        Assert.assertTrue(day.isGreaterThanOrEqualTo(hours));
-        Assert.assertTrue(day.isGreaterThanOrEqualTo(dayInHour));
-        Assert.assertFalse(day.isGreaterThanOrEqualTo(daysInHour));
-    }
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> dayInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(24), Units.HOUR);
+		ComparableQuantity<Time> daysInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(48), Units.HOUR);
 
-    @Test
-    public void isLessThanTest(){
+		Assert.assertTrue(day.isLessThanOrEqualTo(day));
+		Assert.assertFalse(day.isLessThanOrEqualTo(hours));
+		Assert.assertTrue(day.isLessThanOrEqualTo(dayInHour));
+		Assert.assertTrue(day.isLessThanOrEqualTo(daysInHour));
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), Units.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
+	}
 
-        Assert.assertFalse(day.isLessThan(day));
-        Assert.assertFalse(day.isLessThan(hours));
-        Assert.assertFalse(day.isLessThan(dayInHour));
-        Assert.assertTrue(day.isLessThan(daysInHour));
-    }
+	@Test
+	public void isEquivalentToTest() {
 
-    @Test
-    public void isLessThanOrEqualToTest() {
+		ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE,
+				Units.DAY);
+		ComparableQuantity<Time> hours = Quantities.getQuantity(
+				BigDecimal.valueOf(12), Units.HOUR);
+		ComparableQuantity<Time> dayInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(24), Units.HOUR);
+		ComparableQuantity<Time> daysInHour = Quantities.getQuantity(
+				BigDecimal.valueOf(48), Units.HOUR);
 
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), Units.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
-
-        Assert.assertTrue(day.isLessThanOrEqualTo(day));
-        Assert.assertFalse(day.isLessThanOrEqualTo(hours));
-        Assert.assertTrue(day.isLessThanOrEqualTo(dayInHour));
-        Assert.assertTrue(day.isLessThanOrEqualTo(daysInHour));
-
-    }
-
-    @Test
-    public void isEquivalentToTest() {
-
-        ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
-        ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
-        ComparableQuantity<Time> dayInHour = Quantities.getQuantity(BigDecimal.valueOf(24), Units.HOUR);
-        ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
-
-        Assert.assertTrue(day.isLessThanOrEqualTo(day));
-        Assert.assertFalse(day.isEquivalentTo(hours));
-        Assert.assertTrue(day.isEquivalentTo(dayInHour));
-        Assert.assertFalse(day.isEquivalentTo(daysInHour));
-    }
+		Assert.assertTrue(day.isLessThanOrEqualTo(day));
+		Assert.assertFalse(day.isEquivalentTo(hours));
+		Assert.assertTrue(day.isEquivalentTo(dayInHour));
+		Assert.assertFalse(day.isEquivalentTo(daysInHour));
+	}
 }

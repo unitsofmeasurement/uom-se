@@ -53,17 +53,21 @@ import java.util.function.Supplier;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7.1, Dec 28, 2015
  */
-public final class RationalConverter extends AbstractConverter implements
-		ValueSupplier<Double>, Supplier<Double>, DoubleSupplier, Serializable { 
-	
+public final class RationalConverter extends AbstractConverter
+		implements
+			ValueSupplier<Double>,
+			Supplier<Double>,
+			DoubleSupplier,
+			Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3563384008357680074L;
 
-		// implements
-																	// Immutable<Double>
-																	// {
+	// implements
+	// Immutable<Double>
+	// {
 
 	/**
 	 * Holds the converter dividend.
@@ -127,8 +131,7 @@ public final class RationalConverter extends AbstractConverter implements
 	 * @throws IllegalArgumentException
 	 *             if <code>dividend == divisor</code>
 	 */
-	public static RationalConverter of(BigInteger dividend,
-			BigInteger divisor) {
+	public static RationalConverter of(BigInteger dividend, BigInteger divisor) {
 		return new RationalConverter(dividend, divisor);
 	}
 
@@ -148,7 +151,7 @@ public final class RationalConverter extends AbstractConverter implements
 	public static RationalConverter of(long dividend, long divisor) {
 		return new RationalConverter(dividend, divisor);
 	}
-	
+
 	/**
 	 * Convenience method equivalent to
 	 * <code>new RationalConverter(BigDecimal.valueOf(dividend).toBigInteger(), 
@@ -164,8 +167,8 @@ public final class RationalConverter extends AbstractConverter implements
 	 *             if <code>dividend == divisor</code>
 	 */
 	public static RationalConverter of(double dividend, double divisor) {
-		return new RationalConverter(BigDecimal.valueOf(dividend).toBigInteger(),
-				BigDecimal.valueOf(divisor).toBigInteger());
+		return new RationalConverter(BigDecimal.valueOf(dividend)
+				.toBigInteger(), BigDecimal.valueOf(divisor).toBigInteger());
 	}
 
 	/**
