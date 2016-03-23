@@ -110,7 +110,7 @@ public final class TimeQuantities {
    * Creates the {@link Quantity<Time>} based in the {@link Temporal} with {@link Supplier<TemporalAdjuster>}
    * 
    * @param localTimeA
-   *          @see {@link LocalTime}
+   * @see {@link LocalTime}
    * @param supplier
    *          he adjust @see {@link TemporalAdjuster}
    * @return The Quantity based in Temporal with TemporalAdjuster in {@link SI#DAY}.

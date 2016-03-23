@@ -47,6 +47,7 @@ import java.util.logging.Logger;
  * {@link java.util.ServiceLoader} to load the services required.
  *
  * @author Werner Keil
+ * @version 0.8
  */
 public class PriorityAwareServiceProvider implements ServiceProvider {
     /**
@@ -94,7 +95,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider {
         return services.get(0);
     }
 
-    public static int compareServices(Object o1, Object o2) {
+    static int compareServices(Object o1, Object o2) {
         int prio1 = 0;
         int prio2 = 0;
         Priority prio1Annot = o1.getClass().getAnnotation(Priority.class);
