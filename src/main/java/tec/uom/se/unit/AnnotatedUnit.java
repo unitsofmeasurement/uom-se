@@ -45,12 +45,11 @@ import java.util.Objects;
  * </p>
  * 
  * <p>
- * Instances of this class are created through the
- * {@link AbstractUnit#annotate(String)} method.
+ * Instances of this class are created through the {@link AbstractUnit#annotate(String)} method.
  * </p>
  *
  * @param <Q>
- *            The type of the quantity measured by this unit.
+ *          The type of the quantity measured by this unit.
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
@@ -58,96 +57,92 @@ import java.util.Objects;
  */
 public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
-	/**
+  /**
 	 * 
 	 */
-	private static final long serialVersionUID = -5676462045106887728L;
+  private static final long serialVersionUID = -5676462045106887728L;
 
-	/**
-	 * Holds the actual unit.
-	 */
-	private final AbstractUnit<Q> actualUnit;
+  /**
+   * Holds the actual unit.
+   */
+  private final AbstractUnit<Q> actualUnit;
 
-	/**
-	 * Holds the annotation.
-	 */
-	private final String annotation;
+  /**
+   * Holds the annotation.
+   */
+  private final String annotation;
 
-	/**
-	 * Creates an annotated unit equivalent to the specified unit.
-	 *
-	 * @param actualUnit
-	 *            the unit to be annotated.
-	 * @param annotation
-	 *            the annotation.
-	 * @return the annotated unit.
-	 */
-	public AnnotatedUnit(AbstractUnit<Q> actualUnit, String annotation) {
-		this.actualUnit = (actualUnit instanceof AnnotatedUnit)
-				? ((AnnotatedUnit<Q>) actualUnit).actualUnit
-				: actualUnit;
-		this.annotation = annotation;
-	}
+  /**
+   * Creates an annotated unit equivalent to the specified unit.
+   *
+   * @param actualUnit
+   *          the unit to be annotated.
+   * @param annotation
+   *          the annotation.
+   * @return the annotated unit.
+   */
+  public AnnotatedUnit(AbstractUnit<Q> actualUnit, String annotation) {
+    this.actualUnit = (actualUnit instanceof AnnotatedUnit) ? ((AnnotatedUnit<Q>) actualUnit).actualUnit : actualUnit;
+    this.annotation = annotation;
+  }
 
-	/**
-	 * Returns the actual unit of this annotated unit (never an annotated unit
-	 * itself).
-	 *
-	 * @return the actual unit.
-	 */
-	public AbstractUnit<Q> getActualUnit() {
-		return actualUnit;
-	}
+  /**
+   * Returns the actual unit of this annotated unit (never an annotated unit itself).
+   *
+   * @return the actual unit.
+   */
+  public AbstractUnit<Q> getActualUnit() {
+    return actualUnit;
+  }
 
-	/**
-	 * Returns the annotqtion of this annotated unit.
-	 *
-	 * @return the annotation.
-	 */
-	public String getAnnotation() {
-		return annotation;
-	}
+  /**
+   * Returns the annotqtion of this annotated unit.
+   *
+   * @return the annotation.
+   */
+  public String getAnnotation() {
+    return annotation;
+  }
 
-	@Override
-	public String getSymbol() {
-		return actualUnit.getSymbol();
-	}
+  @Override
+  public String getSymbol() {
+    return actualUnit.getSymbol();
+  }
 
-	@Override
-	public Map<? extends Unit<?>, Integer> getProductUnits() {
-		return actualUnit.getProductUnits();
-	}
+  @Override
+  public Map<? extends Unit<?>, Integer> getProductUnits() {
+    return actualUnit.getProductUnits();
+  }
 
-	@Override
-	public AbstractUnit<Q> toSystemUnit() {
-		return actualUnit.getSystemUnit();
-	}
+  @Override
+  public AbstractUnit<Q> toSystemUnit() {
+    return actualUnit.getSystemUnit();
+  }
 
-	@Override
-	public Dimension getDimension() {
-		return actualUnit.getDimension();
-	}
+  @Override
+  public Dimension getDimension() {
+    return actualUnit.getDimension();
+  }
 
-	@Override
-	public UnitConverter getSystemConverter() {
-		return actualUnit.getSystemConverter();
-	}
+  @Override
+  public UnitConverter getSystemConverter() {
+    return actualUnit.getSystemConverter();
+  }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(actualUnit, annotation);
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hash(actualUnit, annotation);
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof AnnotatedUnit<?>) {
-			AnnotatedUnit<?> other = (AnnotatedUnit<?>) obj;
-			return Objects.equals(actualUnit, other.actualUnit)
-					&& Objects.equals(annotation, other.annotation);
-		}
-		return false;
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof AnnotatedUnit<?>) {
+      AnnotatedUnit<?> other = (AnnotatedUnit<?>) obj;
+      return Objects.equals(actualUnit, other.actualUnit) && Objects.equals(annotation, other.annotation);
+    }
+    return false;
+  }
 }

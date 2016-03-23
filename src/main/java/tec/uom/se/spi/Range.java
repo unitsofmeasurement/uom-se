@@ -35,161 +35,148 @@ import tec.uom.lib.common.function.MaximumSupplier;
 import tec.uom.lib.common.function.MinimumSupplier;
 
 /**
- * A Measurement Range is a pair of <code>T</code> items that represent a range
- * of values.
+ * A Measurement Range is a pair of <code>T</code> items that represent a range of values.
  * <p>
- * Range limits MUST be presented in the same scale and have the same unit as
- * measured data values.<br/>
+ * Range limits MUST be presented in the same scale and have the same unit as measured data values.<br/>
  * Subclasses of Range should be immutable.
  * 
  * @param <T>
- *            The value of the range.
+ *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.8.9, December 28, 2015
- * @see <a
- *      href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html">
- *      SensorML: QuantityRange</a>
+ * @see <a href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
  */
-public abstract class Range<T>
-		implements
-			MinimumSupplier<T>,
-			MaximumSupplier<T> {
-	// TODO do we keep null for min and max to represent infinity?
-	// Java 8 Optional was evaluated, but caused conflict with the type-safe
-	// Quantity feature of this API, plus it won't work in CLDC8
-	private final T min;
-	private final T max;
-	private T res;
+public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
+  // TODO do we keep null for min and max to represent infinity?
+  // Java 8 Optional was evaluated, but caused conflict with the type-safe
+  // Quantity feature of this API, plus it won't work in CLDC8
+  private final T min;
+  private final T max;
+  private T res;
 
-	/**
-	 * Construct an instance of Range with a min, max and res value.
-	 *
-	 * @param min
-	 *            The minimum value for the measurement range.
-	 * @param max
-	 *            The maximum value for the measurement range.
-	 * @param res
-	 *            The resolution of the measurement range.
-	 */
-	protected Range(T min, T max, T res) {
-		this.min = min;
-		this.max = max;
-		this.res = res;
-	}
+  /**
+   * Construct an instance of Range with a min, max and res value.
+   *
+   * @param min
+   *          The minimum value for the measurement range.
+   * @param max
+   *          The maximum value for the measurement range.
+   * @param res
+   *          The resolution of the measurement range.
+   */
+  protected Range(T min, T max, T res) {
+    this.min = min;
+    this.max = max;
+    this.res = res;
+  }
 
-	/**
-	 * Construct an instance of Range with a min and max value.
-	 *
-	 * @param min
-	 *            The minimum value for the measurement range.
-	 * @param max
-	 *            The maximum value for the measurement range.
-	 */
-	protected Range(T min, T max) {
-		this.min = min;
-		this.max = max;
-	}
+  /**
+   * Construct an instance of Range with a min and max value.
+   *
+   * @param min
+   *          The minimum value for the measurement range.
+   * @param max
+   *          The maximum value for the measurement range.
+   */
+  protected Range(T min, T max) {
+    this.min = min;
+    this.max = max;
+  }
 
-	/**
-	 * Returns the smallest value of the range. The value is the same as that
-	 * given as the constructor parameter for the smallest value.
-	 * 
-	 * @return the minimum value
-	 */
-	public T getMinimum() {
-		return min;
-	}
+  /**
+   * Returns the smallest value of the range. The value is the same as that given as the constructor parameter for the smallest value.
+   * 
+   * @return the minimum value
+   */
+  public T getMinimum() {
+    return min;
+  }
 
-	/**
-	 * Returns the largest value of the measurement range. The value is the same
-	 * as that given as the constructor parameter for the largest value.
-	 * 
-	 * @return the maximum value
-	 */
-	public T getMaximum() {
-		return max;
-	}
+  /**
+   * Returns the largest value of the measurement range. The value is the same as that given as the constructor parameter for the largest value.
+   * 
+   * @return the maximum value
+   */
+  public T getMaximum() {
+    return max;
+  }
 
-	/**
-	 * Returns the resolution of the measurement range. The value is the same as
-	 * that given as the constructor parameter for the largest value.
-	 * 
-	 * @return resolution of the range, the value is the same as that given as
-	 *         the constructor parameter for the resolution
-	 */
-	public T getResolution() {
-		return res;
-	}
+  /**
+   * Returns the resolution of the measurement range. The value is the same as that given as the constructor parameter for the largest value.
+   * 
+   * @return resolution of the range, the value is the same as that given as the constructor parameter for the resolution
+   */
+  public T getResolution() {
+    return res;
+  }
 
-	/**
-	 * Method to easily check if {@link #getMinimum()} is not {@code null}.
-	 * 
-	 * @return {@code true} if {@link #getMinimum()} is not {@code null} .
-	 */
-	public boolean hasMinimum() {
-		return min != null;
-	}
+  /**
+   * Method to easily check if {@link #getMinimum()} is not {@code null}.
+   * 
+   * @return {@code true} if {@link #getMinimum()} is not {@code null} .
+   */
+  public boolean hasMinimum() {
+    return min != null;
+  }
 
-	/**
-	 * Method to easily check if {@link #getMaximum()} is not {@code null}.
-	 * 
-	 * @return {@code true} if {@link #getMaximum()} is not {@code null}.
-	 */
-	public boolean hasMaximum() {
-		return max != null;
-	}
+  /**
+   * Method to easily check if {@link #getMaximum()} is not {@code null}.
+   * 
+   * @return {@code true} if {@link #getMaximum()} is not {@code null}.
+   */
+  public boolean hasMaximum() {
+    return max != null;
+  }
 
-	/**
-	 * Checks whether the given <code>T</code> is within this range
-	 * 
-	 * @param t
-	 * @return true if the value is within the range
-	 */
-	public abstract boolean contains(T t);
+  /**
+   * Checks whether the given <code>T</code> is within this range
+   * 
+   * @param t
+   * @return true if the value is within the range
+   */
+  public abstract boolean contains(T t);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals()
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof Range<?>) {
-			@SuppressWarnings("unchecked")
-			final Range<T> other = (Range<T>) obj;
-			return Objects.equals(getMinimum(), other.getMinimum())
-					&& Objects.equals(getMaximum(), other.getMaximum())
-					&& Objects.equals(getResolution(), other.getResolution());
-		}
-		return false;
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals()
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof Range<?>) {
+      @SuppressWarnings("unchecked")
+      final Range<T> other = (Range<T>) obj;
+      return Objects.equals(getMinimum(), other.getMinimum()) && Objects.equals(getMaximum(), other.getMaximum())
+          && Objects.equals(getResolution(), other.getResolution());
+    }
+    return false;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return Objects.hash(min, max, res);
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(min, max, res);
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder().append("min= ")
-				.append(getMinimum()).append(", max= ").append(getMaximum());
-		if (res != null) {
-			sb.append(", res= ").append(getResolution());
-		}
-		return sb.toString();
-	}
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder().append("min= ").append(getMinimum()).append(", max= ").append(getMaximum());
+    if (res != null) {
+      sb.append(", res= ").append(getResolution());
+    }
+    return sb.toString();
+  }
 }

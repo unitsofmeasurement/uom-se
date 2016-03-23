@@ -40,38 +40,37 @@ import org.junit.Test;
 
 public class ArithmeticTest {
 
-	private Quantity<Length> sut;
+  private Quantity<Length> sut;
 
-	// private QuantityFactory<Length> lengthFactory;
+  // private QuantityFactory<Length> lengthFactory;
 
-	@Before
-	public void init() {
-		// lengthFactory =
-		// QuantityFactoryService.getQuantityFactory(Length.class);
-		// sut = lengthFactory.create(10, METRE);
-		sut = Quantities.getQuantity(10, METRE);
-	}
+  @Before
+  public void init() {
+    // lengthFactory =
+    // QuantityFactoryService.getQuantityFactory(Length.class);
+    // sut = lengthFactory.create(10, METRE);
+    sut = Quantities.getQuantity(10, METRE);
+  }
 
-	@Test
-	public void testAdd() {
-		// Quantity<Length> len = lengthFactory.create(5, METRE);
-		Quantity<Length> len = Quantities.getQuantity(5, METRE);
+  @Test
+  public void testAdd() {
+    // Quantity<Length> len = lengthFactory.create(5, METRE);
+    Quantity<Length> len = Quantities.getQuantity(5, METRE);
 
-		Quantity<Length> result = sut.add(len);
-		assertNotNull(result);
-		assertEquals(METRE, result.getUnit());
-		assertEquals(Double.valueOf(15),
-				Double.valueOf(result.getValue().doubleValue()));
-	}
+    Quantity<Length> result = sut.add(len);
+    assertNotNull(result);
+    assertEquals(METRE, result.getUnit());
+    assertEquals(Double.valueOf(15), Double.valueOf(result.getValue().doubleValue()));
+  }
 
-	@Test
-	public void testValue() {
-		assertEquals(10, sut.getValue());
-	}
+  @Test
+  public void testValue() {
+    assertEquals(10, sut.getValue());
+  }
 
-	@Test
-	public void testToString() {
-		assertEquals("10 m", sut.toString());
-	}
+  @Test
+  public void testToString() {
+    assertEquals("10 m", sut.toString());
+  }
 
 }

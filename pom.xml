@@ -108,12 +108,8 @@
 					</executions>
 				</plugin>
 
-				<plugin>
-					<groupId>net.revelc.code</groupId>
-					<artifactId>formatter-maven-plugin</artifactId>
-					<version>0.5.2</version>
-				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -246,6 +242,9 @@
 			<plugin>
 				<groupId>net.revelc.code</groupId>
 				<artifactId>formatter-maven-plugin</artifactId>
+				<configuration>
+					<configFile>${project.basedir}/src/etc/eclipse-formatter-config.xml</configFile>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>

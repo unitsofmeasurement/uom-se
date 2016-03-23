@@ -42,15 +42,13 @@ import tec.uom.se.unit.Units;
 
 public class QuantityTest {
 
-	@Test
-	public void toTest() {
-		Quantity<Time> minute = Quantities.getQuantity(BigDecimal.ONE,
-				Units.YEAR);
-		Quantity<Time> second = minute.to(Units.SECOND);
-		BigDecimal value = (BigDecimal) second.getValue();
-		value.setScale(4, RoundingMode.HALF_EVEN);
-		BigDecimal expected = BigDecimal.valueOf(31557816);
-		Assert.assertEquals(expected.setScale(4, RoundingMode.HALF_EVEN),
-				value.setScale(4, RoundingMode.HALF_EVEN));
-	}
+  @Test
+  public void toTest() {
+    Quantity<Time> minute = Quantities.getQuantity(BigDecimal.ONE, Units.YEAR);
+    Quantity<Time> second = minute.to(Units.SECOND);
+    BigDecimal value = (BigDecimal) second.getValue();
+    value.setScale(4, RoundingMode.HALF_EVEN);
+    BigDecimal expected = BigDecimal.valueOf(31557816);
+    Assert.assertEquals(expected.setScale(4, RoundingMode.HALF_EVEN), value.setScale(4, RoundingMode.HALF_EVEN));
+  }
 }

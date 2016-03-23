@@ -52,44 +52,44 @@ import tec.uom.se.format.SimpleUnitFormat.Flavor;
 @Priority(2000)
 public class DefaultUnitFormatService implements UnitFormatService {
 
-    private static final String DEFAULT_FORMAT = Flavor.Default.name();
-   
-    private final Map<String, UnitFormat> formats = new HashMap<>();
- 
-    public DefaultUnitFormatService() {
-        formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
-        formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
-        formats.put("EBNF", EBNFUnitFormat.getInstance());
-        formats.put("Local", LocalUnitFormat.getInstance());
-    }
+  private static final String DEFAULT_FORMAT = Flavor.Default.name();
 
-//    @Override
-//    public String getProviderName() {
-//        return PROVIDER_NAME;
-//    }
+  private final Map<String, UnitFormat> formats = new HashMap<>();
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * UnitFormatService#getUnitFormat(String)
-     */
-    @Override
-    public UnitFormat getUnitFormat(String formatName) {
-        Objects.requireNonNull(formatName, "Format name required");
-        return formats.get(formatName);
-    }
+  public DefaultUnitFormatService() {
+    formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
+    formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
+    formats.put("EBNF", EBNFUnitFormat.getInstance());
+    formats.put("Local", LocalUnitFormat.getInstance());
+  }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * UnitFormatService#getUnitFormat()
-     */
-    @Override
-    public UnitFormat getUnitFormat() {
-        return getUnitFormat(DEFAULT_FORMAT);
-    }
+  // @Override
+  // public String getProviderName() {
+  // return PROVIDER_NAME;
+  // }
 
-    public Set<String> getAvailableFormatNames() {
-        return formats.keySet();
-    }
+  /*
+   * (non-Javadoc)
+   * @see
+   * UnitFormatService#getUnitFormat(String)
+   */
+  @Override
+  public UnitFormat getUnitFormat(String formatName) {
+    Objects.requireNonNull(formatName, "Format name required");
+    return formats.get(formatName);
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * UnitFormatService#getUnitFormat()
+   */
+  @Override
+  public UnitFormat getUnitFormat() {
+    return getUnitFormat(DEFAULT_FORMAT);
+  }
+
+  public Set<String> getAvailableFormatNames() {
+    return formats.keySet();
+  }
 }

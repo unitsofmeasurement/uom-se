@@ -49,114 +49,100 @@ import tec.uom.se.unit.Units;
 
 public class QuantityFunctionsSortTest {
 
-	private QuantityFactory<Time> timeFactory;
-	private Quantity<Time> day;
-	private Quantity<Time> hours;
-	private Quantity<Time> minutes;
-	private Quantity<Time> seconds;
+  private QuantityFactory<Time> timeFactory;
+  private Quantity<Time> day;
+  private Quantity<Time> hours;
+  private Quantity<Time> minutes;
+  private Quantity<Time> seconds;
 
-	@Before
-	public void init() {
-		QuantityFactoryService factoryService = Bootstrap
-				.getService(QuantityFactoryService.class);
-		timeFactory = factoryService.getQuantityFactory(Time.class);
-		minutes = timeFactory.create(15, Units.MINUTE);
-		hours = timeFactory.create(18, Units.HOUR);
-		day = timeFactory.create(1, Units.DAY);
-		seconds = timeFactory.create(100, Units.SECOND);
-	}
+  @Before
+  public void init() {
+    QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+    timeFactory = factoryService.getQuantityFactory(Time.class);
+    minutes = timeFactory.create(15, Units.MINUTE);
+    hours = timeFactory.create(18, Units.HOUR);
+    day = timeFactory.create(1, Units.DAY);
+    seconds = timeFactory.create(100, Units.SECOND);
+  }
 
-	@Test
-	public void sortNumberTest() {
-		List<Quantity<Time>> times = getTimes().stream()
-				.sorted(QuantityFunctions.sortNumber())
-				.collect(Collectors.toList());
+  @Test
+  public void sortNumberTest() {
+    List<Quantity<Time>> times = getTimes().stream().sorted(QuantityFunctions.sortNumber()).collect(Collectors.toList());
 
-		Assert.assertEquals(day, times.get(0));
-		Assert.assertEquals(minutes, times.get(1));
-		Assert.assertEquals(hours, times.get(2));
-		Assert.assertEquals(seconds, times.get(3));
+    Assert.assertEquals(day, times.get(0));
+    Assert.assertEquals(minutes, times.get(1));
+    Assert.assertEquals(hours, times.get(2));
+    Assert.assertEquals(seconds, times.get(3));
 
-	}
+  }
 
-	@Test
-	public void sortNumberDescTest() {
-		List<Quantity<Time>> times = getTimes().stream()
-				.sorted(QuantityFunctions.sortNumberDesc())
-				.collect(Collectors.toList());
+  @Test
+  public void sortNumberDescTest() {
+    List<Quantity<Time>> times = getTimes().stream().sorted(QuantityFunctions.sortNumberDesc()).collect(Collectors.toList());
 
-		Assert.assertEquals(seconds, times.get(0));
-		Assert.assertEquals(hours, times.get(1));
-		Assert.assertEquals(minutes, times.get(2));
-		Assert.assertEquals(day, times.get(3));
-	}
+    Assert.assertEquals(seconds, times.get(0));
+    Assert.assertEquals(hours, times.get(1));
+    Assert.assertEquals(minutes, times.get(2));
+    Assert.assertEquals(day, times.get(3));
+  }
 
-	@Test
-	public void sortSymbolTest() {
-		List<Quantity<Time>> times = getTimes().stream()
-				.sorted(QuantityFunctions.sortSymbol())
-				.collect(Collectors.toList());
+  @Test
+  public void sortSymbolTest() {
+    List<Quantity<Time>> times = getTimes().stream().sorted(QuantityFunctions.sortSymbol()).collect(Collectors.toList());
 
-		Assert.assertEquals(day, times.get(0));
-		Assert.assertEquals(hours, times.get(1));
-		Assert.assertEquals(minutes, times.get(2));
-		Assert.assertEquals(seconds, times.get(3));
+    Assert.assertEquals(day, times.get(0));
+    Assert.assertEquals(hours, times.get(1));
+    Assert.assertEquals(minutes, times.get(2));
+    Assert.assertEquals(seconds, times.get(3));
 
-	}
+  }
 
-	@Test
-	public void sortSymbolDesctTest() {
-		List<Quantity<Time>> times = getTimes().stream()
-				.sorted(QuantityFunctions.sortSymbolDesc())
-				.collect(Collectors.toList());
-		Assert.assertEquals(seconds, times.get(0));
-		Assert.assertEquals(minutes, times.get(1));
-		Assert.assertEquals(hours, times.get(2));
-		Assert.assertEquals(day, times.get(3));
-	}
+  @Test
+  public void sortSymbolDesctTest() {
+    List<Quantity<Time>> times = getTimes().stream().sorted(QuantityFunctions.sortSymbolDesc()).collect(Collectors.toList());
+    Assert.assertEquals(seconds, times.get(0));
+    Assert.assertEquals(minutes, times.get(1));
+    Assert.assertEquals(hours, times.get(2));
+    Assert.assertEquals(day, times.get(3));
+  }
 
-	@Test
-	public void sortNaturalTest() {
-		List<Quantity<Time>> times = getTimes().stream()
-				.sorted(QuantityFunctions.sortNatural())
-				.collect(Collectors.toList());
-		Assert.assertEquals(seconds, times.get(0));
-		Assert.assertEquals(minutes, times.get(1));
-		Assert.assertEquals(hours, times.get(2));
-		Assert.assertEquals(day, times.get(3));
-	}
+  @Test
+  public void sortNaturalTest() {
+    List<Quantity<Time>> times = getTimes().stream().sorted(QuantityFunctions.sortNatural()).collect(Collectors.toList());
+    Assert.assertEquals(seconds, times.get(0));
+    Assert.assertEquals(minutes, times.get(1));
+    Assert.assertEquals(hours, times.get(2));
+    Assert.assertEquals(day, times.get(3));
+  }
 
-	@Test
-	public void sortNaturalDescTest() {
-		List<Quantity<Time>> times = getTimes().stream()
-				.sorted(QuantityFunctions.sortNaturalDesc())
-				.collect(Collectors.toList());
+  @Test
+  public void sortNaturalDescTest() {
+    List<Quantity<Time>> times = getTimes().stream().sorted(QuantityFunctions.sortNaturalDesc()).collect(Collectors.toList());
 
-		Assert.assertEquals(day, times.get(0));
-		Assert.assertEquals(hours, times.get(1));
-		Assert.assertEquals(minutes, times.get(2));
-		Assert.assertEquals(seconds, times.get(3));
-	}
+    Assert.assertEquals(day, times.get(0));
+    Assert.assertEquals(hours, times.get(1));
+    Assert.assertEquals(minutes, times.get(2));
+    Assert.assertEquals(seconds, times.get(3));
+  }
 
-	@Test
-    public void sortNaturalAndSymbolTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        Quantity<Time> dayinHour = timeFactory.create(24, Units.HOUR);
-        times.add(dayinHour);
+  @Test
+  public void sortNaturalAndSymbolTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    Quantity<Time> dayinHour = timeFactory.create(24, Units.HOUR);
+    times.add(dayinHour);
 
-        Comparator<Quantity<Time>> sortNatural = QuantityFunctions.sortNatural();
-        Comparator<Quantity<Time>> sortSymbol = QuantityFunctions.sortSymbol();
+    Comparator<Quantity<Time>> sortNatural = QuantityFunctions.sortNatural();
+    Comparator<Quantity<Time>> sortSymbol = QuantityFunctions.sortSymbol();
 
-        List<Quantity<Time>> result = times.stream()
-                .sorted(sortNatural.thenComparing(sortSymbol))
-                .collect(Collectors.toList());
-        Assert.assertEquals(seconds, result.get(0));
-        Assert.assertEquals(minutes, result.get(1));
-        Assert.assertEquals(hours, result.get(2));
-        Assert.assertEquals(day, result.get(3));
-        Assert.assertEquals(dayinHour, result.get(4));
-    }
-	private List<Quantity<Time>> getTimes() {
-		return Arrays.asList(day, hours, minutes, seconds);
-	}
+    List<Quantity<Time>> result = times.stream().sorted(sortNatural.thenComparing(sortSymbol)).collect(Collectors.toList());
+    Assert.assertEquals(seconds, result.get(0));
+    Assert.assertEquals(minutes, result.get(1));
+    Assert.assertEquals(hours, result.get(2));
+    Assert.assertEquals(day, result.get(3));
+    Assert.assertEquals(dayinHour, result.get(4));
+  }
+
+  private List<Quantity<Time>> getTimes() {
+    return Arrays.asList(day, hours, minutes, seconds);
+  }
 }

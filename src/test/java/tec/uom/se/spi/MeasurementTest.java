@@ -43,14 +43,12 @@ import tec.uom.se.spi.Measurement;
 
 public class MeasurementTest {
 
-	@Test
-	public void testOf() {
-		Instant instant = Instant.now();
-		Measurement<Mass> measurement = Measurement.of(
-				Quantities.getQuantity(15, KILOGRAM), instant);
-		assertEquals(Quantities.getQuantity(15, KILOGRAM),
-				measurement.getQuantity());
-		assertEquals(instant, measurement.getInstant());
-		assertEquals(instant.toEpochMilli(), measurement.getTimestamp());
-	}
+  @Test
+  public void testOf() {
+    Instant instant = Instant.now();
+    Measurement<Mass> measurement = Measurement.of(Quantities.getQuantity(15, KILOGRAM), instant);
+    assertEquals(Quantities.getQuantity(15, KILOGRAM), measurement.getQuantity());
+    assertEquals(instant, measurement.getInstant());
+    assertEquals(instant.toEpochMilli(), measurement.getTimestamp());
+  }
 }

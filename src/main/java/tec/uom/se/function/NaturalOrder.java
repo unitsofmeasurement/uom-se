@@ -51,17 +51,13 @@ import javax.measure.Quantity;
  *         </p>
  *         will return: seconds, minutes, hours, day
  */
-public class NaturalOrder<T extends Quantity<T>>
-		implements
-			Comparator<Quantity<T>> {
+public class NaturalOrder<T extends Quantity<T>> implements Comparator<Quantity<T>> {
 
-	@Override
-	public int compare(Quantity<T> q1, Quantity<T> q2) {
-		if (q1.getUnit().equals(q2.getUnit())) {
-			return Double.compare(q1.getValue().doubleValue(), q2.getValue()
-					.doubleValue());
-		}
-		return Double.compare(q1.getValue().doubleValue(), q2.to(q1.getUnit())
-				.getValue().doubleValue());
-	}
+  @Override
+  public int compare(Quantity<T> q1, Quantity<T> q2) {
+    if (q1.getUnit().equals(q2.getUnit())) {
+      return Double.compare(q1.getValue().doubleValue(), q2.getValue().doubleValue());
+    }
+    return Double.compare(q1.getValue().doubleValue(), q2.to(q1.getUnit()).getValue().doubleValue());
+  }
 }

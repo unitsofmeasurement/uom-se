@@ -32,25 +32,23 @@ package tec.uom.se.function;
 /**
  * Represents an operation to convert values.
  * <p>
- * This is a <a href=
- * "http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html#package.description"
- * >functional interface</a> whose functional method is {@link #convert()}.
+ * This is a <a href= "http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html#package.description" >functional interface</a>
+ * whose functional method is {@link #convert()}.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.2, 2014-11-15
  * @param <Q>
- *            The type to convert to.
- * @see <a href="http://en.wikipedia.org/wiki/Data_conversion">Wikipedia: Data
- *      Conversion</a>
+ *          The type to convert to.
+ * @see <a href="http://en.wikipedia.org/wiki/Data_conversion">Wikipedia: Data Conversion</a>
  */
 @FunctionalInterface
 public interface Converter<F, T> {
 
-	/**
-	 * Returns a F converted into a T.
-	 * 
-	 * @param from
-	 * @return the converted result.
-	 */
-	T convert(F from);
+  /**
+   * Returns a F converted into a T.
+   * 
+   * @param from
+   * @return the converted result.
+   */
+  T convert(F from);
 }
