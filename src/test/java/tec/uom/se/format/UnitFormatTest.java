@@ -29,13 +29,11 @@
  */
 package tec.uom.se.format;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.MetricPrefix.MEGA;
-import static tec.uom.se.unit.Units.HERTZ;
-import static tec.uom.se.unit.Units.METRE;
-import static tec.uom.se.unit.Units.SECOND;
+import static tec.uom.se.unit.Units.*;
 
 import java.io.IOException;
 
@@ -59,13 +57,15 @@ import org.junit.Test;
  */
 public class UnitFormatTest {
   private Quantity<Length> sut;
-
+  private UnitFormat format;
+  
   @Before
   public void init() {
     // sut =
     // DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10,
     // METRE);
     sut = Quantities.getQuantity(10, METRE);
+    format = SimpleUnitFormat.getInstance();
   }
 
   @Test
@@ -115,6 +115,40 @@ public class UnitFormatTest {
     assertEquals("m/s", a2.toString());
   }
 
+  @Test
+  public void testParseSimple1() {
+    try {
+      Unit<?> u = format.parse("min");
+      // assertEquals("min", u.getSymbol());
+      assertEquals(MINUTE, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testParseSimple2() {
+    try {
+      Unit<?> u = format.parse("m");
+      assertNotNull(u);
+      assertEquals("m", u.getSymbol());
+      assertEquals(METRE, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testParseSimple3() {
+    try {
+      Unit<?> u = format.parse("kg");
+      assertEquals("kg", u.getSymbol());
+      assertEquals(KILOGRAM, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
+  
   @Test(expected = UnsupportedOperationException.class)
   public void testParseLocal() {
     final UnitFormat format = LocalUnitFormat.getInstance();
