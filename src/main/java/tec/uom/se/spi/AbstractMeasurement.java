@@ -37,8 +37,7 @@ import tec.uom.se.ComparableQuantity;
 
 /**
  * <p>
- * This class represents the immutable result of a measurement stated in
- * a known quantity.
+ * This class represents the immutable result of a measurement stated in a known quantity.
  * </p>
  * 
  * <p>
@@ -48,104 +47,103 @@ import tec.uom.se.ComparableQuantity;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.3 $Date: 2015-07-25 $
  */
-abstract class AbstractMeasurement<Q extends Quantity<Q>> implements
-		Measurement<Q> {
+abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement<Q> {
 
-	/**
+  /**
 	 * 
 	 */
-	private static final long serialVersionUID = 2417644773551236879L;
+  private static final long serialVersionUID = 2417644773551236879L;
 
-	private final Quantity<Q> quantity;
-	private final Instant instant;
-	
-	/**
-	 * constructor.
-	 */
-	protected AbstractMeasurement(Quantity<Q> q, Instant i) {
-		this.quantity = q;
-		this.instant = i;
-	}
-	
-	/**
-	 * constructor.
-	 */
-	protected AbstractMeasurement(Quantity<Q> q, long t) {
-		this(q, Instant.ofEpochMilli(t));
-	}
-	
-	/**
-	 * constructor.
-	 */
-	protected AbstractMeasurement(Quantity<Q> q) {
-		this(q, System.currentTimeMillis());
-	}
+  private final Quantity<Q> quantity;
+  private final Instant instant;
 
-	/**
-	 * Returns the measurement quantity.
-	 *
-	 * @return the quantity.
-	 */
-	public final Quantity<Q> getQuantity() {
-		return quantity;
-	}
-	
-	/**
-	 * Returns the measurement instant.
-	 *
-	 * @return the instant.
-	 */
-	public final Instant getInstant() {
-		return instant;
-	}
-	
-	/**
-	 * Returns the measurement timestamp.
-	 *
-	 * @return the timestamp.
-	 */
-	public final long getTimestamp() {
-		return instant.toEpochMilli();
-	}
-	
-	/**
-	 * This class represents the default measurement.
-	 */
-	@SuppressWarnings("rawtypes")
-	static final class Default<Q> extends AbstractMeasurement {
+  /**
+   * constructor.
+   */
+  protected AbstractMeasurement(Quantity<Q> q, Instant i) {
+    this.quantity = q;
+    this.instant = i;
+  }
 
-		/**
+  /**
+   * constructor.
+   */
+  protected AbstractMeasurement(Quantity<Q> q, long t) {
+    this(q, Instant.ofEpochMilli(t));
+  }
+
+  /**
+   * constructor.
+   */
+  protected AbstractMeasurement(Quantity<Q> q) {
+    this(q, System.currentTimeMillis());
+  }
+
+  /**
+   * Returns the measurement quantity.
+   *
+   * @return the quantity.
+   */
+  public final Quantity<Q> getQuantity() {
+    return quantity;
+  }
+
+  /**
+   * Returns the measurement instant.
+   *
+   * @return the instant.
+   */
+  public final Instant getInstant() {
+    return instant;
+  }
+
+  /**
+   * Returns the measurement timestamp.
+   *
+   * @return the timestamp.
+   */
+  public final long getTimestamp() {
+    return instant.toEpochMilli();
+  }
+
+  /**
+   * This class represents the default measurement.
+   */
+  @SuppressWarnings("rawtypes")
+  static final class Default<Q> extends AbstractMeasurement {
+
+    /**
 		 * 
 		 */
-		private static final long serialVersionUID = 823899472806334856L;
+    private static final long serialVersionUID = 823899472806334856L;
 
-		@SuppressWarnings({ "unchecked" })
-		protected Default(Quantity q, Instant i) {
-			super(q, i);
-		}
-		
-		@SuppressWarnings({ "unchecked" })
-		protected Default(Quantity q, long t) {
-			super(q, t);
-		}
+    @SuppressWarnings({ "unchecked" })
+    protected Default(Quantity q, Instant i) {
+      super(q, i);
+    }
 
-		@SuppressWarnings("unchecked")
-		protected Default(Quantity q) {
-			super(q);
-		}
+    @SuppressWarnings({ "unchecked" })
+    protected Default(Quantity q, long t) {
+      super(q, t);
+    }
 
-		@SuppressWarnings("unchecked")
-		@Override
-		public int compareTo(Object o) {
-			if (o instanceof Measurement) {
-				Measurement m = (Measurement)o;
-				if (getQuantity() instanceof ComparableQuantity) {
-					ComparableQuantity<?> comp = (ComparableQuantity<?>) getQuantity();
-					return comp.compareTo(m.getQuantity()) + getInstant().compareTo(m.getInstant());
-				}
-				return 0;
-			}
-			return 0;			
-		}
-	}
+    @SuppressWarnings("unchecked")
+    protected Default(Quantity q) {
+      super(q);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public int compareTo(Object o) {
+      if (o instanceof Measurement) {
+        Measurement m = (Measurement) o;
+        if (getQuantity() instanceof ComparableQuantity) {
+          ComparableQuantity<?> comp = (ComparableQuantity<?>) getQuantity();
+          return comp.compareTo(m.getQuantity()) + getInstant().compareTo(m.getInstant());
+        }
+        return 0;
+      }
+      return 0;
+    }
+  }
 }

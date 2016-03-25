@@ -45,62 +45,65 @@ import tec.uom.se.format.QuantityFormat;
 
 /**
  * Singleton class for accessing {@link Quantity} instances.
+ * 
  * @author werner
  * @author otaviojava
  */
 public final class Quantities {
-	/**
-     * Private singleton constructor.
-     */
-    private Quantities() {}
-    /**
-     * Returns the
-     * {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal}
-     * measure of unknown type corresponding to the specified representation.
-     * This method can be used to parse dimensionless quantities.<br/><code>
-     *     Quantity<Dimensionless> proportion = Quantities.getQuantity("0.234").asType(Dimensionless.class);
-     * </code>
-     *
-     * <p> Note: This method handles only
-     * {@link javax.measure.unit.UnitFormat#getStandard standard} unit format
-     * (<a href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive
-     * measure formatting and parsing are handled by the {@link MeasurementFormat}
-     * class and its subclasses.</p>
-     *
-     * @param csq the decimal value and its unit (if any) separated by space(s).
-     * @return <code>QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0))</code>
-     */
-    public static ComparableQuantity<?> getQuantity(CharSequence csq) {
-        try {
-            return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
-        } catch (IllegalArgumentException | ParserException e) {
-            throw new IllegalArgumentException(e); // TODO could we handle this differently?
-        }
-    }
+  /**
+   * Private singleton constructor.
+   */
+  private Quantities() {
+  }
 
-    /**
-     * Returns the scalar measurement.
-     * When the {@link Number} was {@link BigDecimal} or {@link BigInteger} will uses {@link DecimalQuantity},
-     *  when the {@link Number} was {@link Double} will {@link DoubleQuantity} otherwise will {@link NumberQuantity}.
-     * in the specified unit.
-     * @param value the measurement value.
-     * @param unit the measurement unit.
-     * @return the corresponding <code>numeric</code> measurement.
-     * @throws NullPointerException when value or unit were null
-     */
-    public static <Q extends Quantity<Q>> ComparableQuantity<Q> getQuantity(Number value,
-            Unit<Q> unit) {
-
-        Objects.requireNonNull(value);
-        Objects.requireNonNull(unit);
-        if (Double.class.isInstance(value)) {
-            return new DoubleQuantity<>(Double.class.cast(value), unit);
-        } else if (BigDecimal.class.isInstance(value)) {
-            return new DecimalQuantity<>(BigDecimal.class.cast(value), unit);
-        } else if (BigInteger.class.isInstance(value)) {
-            return new DecimalQuantity<>(new BigDecimal(
-                    BigInteger.class.cast(value)), unit);
-        }
-        return new NumberQuantity<>(value, unit);
+  /**
+   * Returns the {@link #valueOf(java.math.BigDecimal, javax.measure.unit.Unit) decimal} measure of unknown type corresponding to the specified
+   * representation. This method can be used to parse dimensionless quantities.<br/>
+   * <code>
+   *     Quantity<Dimensionless> proportion = Quantities.getQuantity("0.234").asType(Dimensionless.class);
+   * </code>
+   *
+   * <p>
+   * Note: This method handles only {@link javax.measure.unit.UnitFormat#getStandard standard} unit format (<a
+   * href="http://unitsofmeasure.org/">UCUM</a> based). Locale-sensitive measure formatting and parsing are handled by the {@link MeasurementFormat}
+   * class and its subclasses.
+   * </p>
+   *
+   * @param csq
+   *          the decimal value and its unit (if any) separated by space(s).
+   * @return <code>QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0))</code>
+   */
+  public static ComparableQuantity<?> getQuantity(CharSequence csq) {
+    try {
+      return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
+    } catch (IllegalArgumentException | ParserException e) {
+      throw new IllegalArgumentException(e); // TODO could we handle this differently?
     }
+  }
+
+  /**
+   * Returns the scalar measurement. When the {@link Number} was {@link BigDecimal} or {@link BigInteger} will uses {@link DecimalQuantity}, when the
+   * {@link Number} was {@link Double} will {@link DoubleQuantity} otherwise will {@link NumberQuantity}. in the specified unit.
+   * 
+   * @param value
+   *          the measurement value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>numeric</code> measurement.
+   * @throws NullPointerException
+   *           when value or unit were null
+   */
+  public static <Q extends Quantity<Q>> ComparableQuantity<Q> getQuantity(Number value, Unit<Q> unit) {
+
+    Objects.requireNonNull(value);
+    Objects.requireNonNull(unit);
+    if (Double.class.isInstance(value)) {
+      return new DoubleQuantity<>(Double.class.cast(value), unit);
+    } else if (BigDecimal.class.isInstance(value)) {
+      return new DecimalQuantity<>(BigDecimal.class.cast(value), unit);
+    } else if (BigInteger.class.isInstance(value)) {
+      return new DecimalQuantity<>(new BigDecimal(BigInteger.class.cast(value)), unit);
+    }
+    return new NumberQuantity<>(value, unit);
+  }
 }

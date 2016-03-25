@@ -48,101 +48,88 @@ import tec.uom.se.unit.Units;
 
 public class QuantityFunctionsReducerTest {
 
-    private QuantityFactory<Time> timeFactory;
-    private Quantity<Time> day;
-    private Quantity<Time> hours;
-    private Quantity<Time> minutes;
-    private Quantity<Time> seconds;
+  private QuantityFactory<Time> timeFactory;
+  private Quantity<Time> day;
+  private Quantity<Time> hours;
+  private Quantity<Time> minutes;
+  private Quantity<Time> seconds;
 
-    @Before
-    public void init() {
-    	QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
-        timeFactory = factoryService.getQuantityFactory(Time.class);
-        minutes = timeFactory.create(15, Units.MINUTE);
-        hours = timeFactory.create(18, Units.HOUR);
-        day = timeFactory.create(1, Units.DAY);
-        seconds = timeFactory.create(100, Units.SECOND);
-    }
+  @Before
+  public void init() {
+    QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+    timeFactory = factoryService.getQuantityFactory(Time.class);
+    minutes = timeFactory.create(15, Units.MINUTE);
+    hours = timeFactory.create(18, Units.HOUR);
+    day = timeFactory.create(1, Units.DAY);
+    seconds = timeFactory.create(100, Units.SECOND);
+  }
 
-    @Test
-    public void minTest() {
-        List<Quantity<Time>> times = getTimes();
-        Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.min()).get();
-        Assert.assertEquals(seconds, quantity);
+  @Test
+  public void minTest() {
+    List<Quantity<Time>> times = getTimes();
+    Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.min()).get();
+    Assert.assertEquals(seconds, quantity);
 
-         List<Quantity<Time>> secondsList = Arrays.asList(
-         timeFactory.create(300, Units.SECOND),
-         timeFactory.create(130, Units.SECOND), seconds,
-         timeFactory.create(10000, Units.SECOND));
-         Quantity<Time> minSeconds =
-         secondsList.stream().reduce(QuantityFunctions.min()).get();
-         Assert.assertEquals(seconds, minSeconds);
-    }
+    List<Quantity<Time>> secondsList = Arrays.asList(timeFactory.create(300, Units.SECOND), timeFactory.create(130, Units.SECOND), seconds,
+        timeFactory.create(10000, Units.SECOND));
+    Quantity<Time> minSeconds = secondsList.stream().reduce(QuantityFunctions.min()).get();
+    Assert.assertEquals(seconds, minSeconds);
+  }
 
-    @Test
-    public void maxTest() {
-        List<Quantity<Time>> times = getTimes();
-        Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.max()).get();
-        Assert.assertEquals(day, quantity);
-        Quantity<Time> max = timeFactory.create(20, Units.DAY);
-         List<Quantity<Time>> dayList = Arrays.asList(
-         timeFactory.create(3, Units.DAY),
-         timeFactory.create(5, Units.DAY),
-         max);
-         Quantity<Time> maxDay =
-                 dayList.stream().reduce(QuantityFunctions.max()).get();
-         Assert.assertEquals(max, maxDay);
-    }
+  @Test
+  public void maxTest() {
+    List<Quantity<Time>> times = getTimes();
+    Quantity<Time> quantity = times.stream().reduce(QuantityFunctions.max()).get();
+    Assert.assertEquals(day, quantity);
+    Quantity<Time> max = timeFactory.create(20, Units.DAY);
+    List<Quantity<Time>> dayList = Arrays.asList(timeFactory.create(3, Units.DAY), timeFactory.create(5, Units.DAY), max);
+    Quantity<Time> maxDay = dayList.stream().reduce(QuantityFunctions.max()).get();
+    Assert.assertEquals(max, maxDay);
+  }
 
-    @Test
-    public void sumTest() {
-        List<Quantity<Time>> dayList = Arrays.asList(
-        timeFactory.create(3, Units.DAY),
-        timeFactory.create(5, Units.DAY),
+  @Test
+  public void sumTest() {
+    List<Quantity<Time>> dayList = Arrays.asList(timeFactory.create(3, Units.DAY), timeFactory.create(5, Units.DAY),
         timeFactory.create(20, Units.DAY));
-        Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum()).get();
-        assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(28));
-        assertEquals(sumDay.getUnit(), Units.DAY);
-    }
+    Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum()).get();
+    assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(28));
+    assertEquals(sumDay.getUnit(), Units.DAY);
+  }
 
-    @Test
-    public void shouldSumWhenHasDifferentTimeUnits() {
-        List<Quantity<Time>> dayList = Arrays.asList(
-        timeFactory.create(48, Units.HOUR),
-        timeFactory.create(5, Units.DAY),
+  @Test
+  public void shouldSumWhenHasDifferentTimeUnits() {
+    List<Quantity<Time>> dayList = Arrays.asList(timeFactory.create(48, Units.HOUR), timeFactory.create(5, Units.DAY),
         timeFactory.create(1440, Units.MINUTE));
-        Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum()).get();
-        assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
-        assertEquals(sumHour.getUnit(), Units.HOUR);
-    }
+    Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum()).get();
+    assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
+    assertEquals(sumHour.getUnit(), Units.HOUR);
+  }
 
-    @Test
-    public void sumWithConvertTest() {
+  @Test
+  public void sumWithConvertTest() {
 
-        List<Quantity<Time>> dayList = Arrays.asList(
-        timeFactory.create(48, Units.HOUR),
-        timeFactory.create(5, Units.DAY),
+    List<Quantity<Time>> dayList = Arrays.asList(timeFactory.create(48, Units.HOUR), timeFactory.create(5, Units.DAY),
         timeFactory.create(1440, Units.MINUTE));
 
-        Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum(Units.HOUR)).get();
-        Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum(Units.DAY)).get();
-        Quantity<Time> sumMinute = dayList.stream().reduce(QuantityFunctions.sum(Units.MINUTE)).get();
-        Quantity<Time> sumSecond = dayList.stream().reduce(QuantityFunctions.sum(Units.SECOND)).get();
+    Quantity<Time> sumHour = dayList.stream().reduce(QuantityFunctions.sum(Units.HOUR)).get();
+    Quantity<Time> sumDay = dayList.stream().reduce(QuantityFunctions.sum(Units.DAY)).get();
+    Quantity<Time> sumMinute = dayList.stream().reduce(QuantityFunctions.sum(Units.MINUTE)).get();
+    Quantity<Time> sumSecond = dayList.stream().reduce(QuantityFunctions.sum(Units.SECOND)).get();
 
-        assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
-        assertEquals(sumHour.getUnit(), Units.HOUR);
+    assertEquals(Double.valueOf(sumHour.getValue().doubleValue()), Double.valueOf(192));
+    assertEquals(sumHour.getUnit(), Units.HOUR);
 
-        assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(8));
-        assertEquals(sumDay.getUnit(), Units.DAY);
+    assertEquals(Double.valueOf(sumDay.getValue().doubleValue()), Double.valueOf(8));
+    assertEquals(sumDay.getUnit(), Units.DAY);
 
-        assertEquals(Double.valueOf(sumMinute.getValue().doubleValue()), Double.valueOf(11520));
-        assertEquals(sumMinute.getUnit(), Units.MINUTE);
+    assertEquals(Double.valueOf(sumMinute.getValue().doubleValue()), Double.valueOf(11520));
+    assertEquals(sumMinute.getUnit(), Units.MINUTE);
 
-        assertEquals(Double.valueOf(sumSecond.getValue().doubleValue()), Double.valueOf(691200));
-        assertEquals(sumSecond.getUnit(), Units.SECOND);
-    }
+    assertEquals(Double.valueOf(sumSecond.getValue().doubleValue()), Double.valueOf(691200));
+    assertEquals(sumSecond.getUnit(), Units.SECOND);
+  }
 
-    private List<Quantity<Time>> getTimes() {
-        return Arrays.asList(day, hours, minutes, seconds);
-    }
+  private List<Quantity<Time>> getTimes() {
+    return Arrays.asList(day, hours, minutes, seconds);
+  }
 }

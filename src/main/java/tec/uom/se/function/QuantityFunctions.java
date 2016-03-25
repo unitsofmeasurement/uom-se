@@ -43,117 +43,146 @@ import javax.measure.Unit;
 @SuppressWarnings("rawtypes")
 public final class QuantityFunctions {
 
-    private QuantityFunctions() {}
+  private QuantityFunctions() {
+  }
 
-    /**
-     * Creates a comparator to sort by number, ignoring the unit.
-     * @return
-     * <p><b>Given:</b><p>
-     * <code>
-     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
-     * </code>
-     * <p>will return: <code>day, hours, minutes, seconds</code></p>
-     * @throws NullPointerException
-     */
-    public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
+  /**
+   * Creates a comparator to sort by number, ignoring the unit.
+   * 
+   * @return <p>
+   *         <b>Given:</b>
+   *         <p>
+   *         <code>
+   * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+   * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+   * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+   * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
+   * </code>
+   *         <p>
+   *         will return: <code>day, hours, minutes, seconds</code>
+   *         </p>
+   * @throws NullPointerException
+   */
+  public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
         return (q1, q2) -> Double.compare(q1.getValue().doubleValue(), q2
                 .getValue().doubleValue());
     }
-    /**
-     * Creates a comparator to sort by number descending, ignoring the unit.
-     * @return
-     * <p><b>Given:</b><p>
-     * <code>
-     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
-     * </code>
-     * <p>will return: <code>seconds, hours, minutes, day</code></p>
-     * @throws NullPointerException
-     */
-    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumberDesc() {
-        Comparator<Quantity<Q>> sortNumber = sortNumber();
-        return sortNumber.reversed();
-    }
 
-    /**
-     * Creates a comparator to sort by name, ignoring the value.
-     * @return
-     * <p><b>Given:</b><p>
-     * <code>
-     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
-     * </code>
-     * <p>will return: <code>day, hours, minutes, seconds</code></p>
-     * @throws NullPointerException
-     */
-    public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
+  /**
+   * Creates a comparator to sort by number descending, ignoring the unit.
+   * 
+   * @return <p>
+   *         <b>Given:</b>
+   *         <p>
+   *         <code>
+   * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+   * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+   * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+   * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
+   * </code>
+   *         <p>
+   *         will return: <code>seconds, hours, minutes, day</code>
+   *         </p>
+   * @throws NullPointerException
+   */
+  public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumberDesc() {
+    Comparator<Quantity<Q>> sortNumber = sortNumber();
+    return sortNumber.reversed();
+  }
+
+  /**
+   * Creates a comparator to sort by name, ignoring the value.
+   * 
+   * @return <p>
+   *         <b>Given:</b>
+   *         <p>
+   *         <code>
+   * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+   * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+   * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+   * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
+   * </code>
+   *         <p>
+   *         will return: <code>day, hours, minutes, seconds</code>
+   *         </p>
+   * @throws NullPointerException
+   */
+  public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
     	return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
     }
-    /**
-     * Creates a comparator to sort by name descending, ignoring the value.
-     * @return
-     * <p><b>Given:</b></p>
-     * <code>
-     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
-     * </code>
-     * <p>will return: <code>seconds, minutes, hour,  day</code></p>
-     * @throws NullPointerException
-     */
-    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbolDesc() {
-        Comparator<Quantity<Q>> sortSymbol = sortSymbol();
-        return sortSymbol.reversed();
-    }
 
-    /**
-     * Creates a comparator to sort by natural order, looking to both the unit and the value.
-     * @return
-     * <p><b>Given:</b></p>
-     * <code>
-     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
-     * </code>
-     * <p>will return: <code>seconds, minutes, hours, day</code></p>
-     * @throws NullPointerException
-     */
-    @SuppressWarnings("unchecked")
-    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNatural() {
-        return new NaturalOrder();
-    }
-    /**
-     * Creates a comparator to sort by natural order descending, looking to both the unit and the value.
-     * @return
-     * <p><b>Given:</b></p>
-     * <code>
-     * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
-     * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
-     * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
-     * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
-     * </code>
-     * <p>will return: <code>day, hour, minute, second</code></p>
-     * @throws NullPointerException
-     */
-    public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNaturalDesc() {
-        Comparator<Quantity<Q>> sortNatural = sortNatural();
-        return sortNatural.reversed();
-    }
+  /**
+   * Creates a comparator to sort by name descending, ignoring the value.
+   * 
+   * @return <p>
+   *         <b>Given:</b>
+   *         </p>
+   *         <code>
+   * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+   * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+   * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+   * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
+   * </code>
+   *         <p>
+   *         will return: <code>seconds, minutes, hour,  day</code>
+   *         </p>
+   * @throws NullPointerException
+   */
+  public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbolDesc() {
+    Comparator<Quantity<Q>> sortSymbol = sortSymbol();
+    return sortSymbol.reversed();
+  }
 
-    /**
-     * Creates a BinaryOperator to calculate the minimum Quantity
-     * @return the min BinaryOperator, not null.
-     */
-    public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> min() {
+  /**
+   * Creates a comparator to sort by natural order, looking to both the unit and the value.
+   * 
+   * @return <p>
+   *         <b>Given:</b>
+   *         </p>
+   *         <code>
+   * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+   * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+   * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+   * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
+   * </code>
+   *         <p>
+   *         will return: <code>seconds, minutes, hours, day</code>
+   *         </p>
+   * @throws NullPointerException
+   */
+  @SuppressWarnings("unchecked")
+  public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNatural() {
+    return new NaturalOrder();
+  }
+
+  /**
+   * Creates a comparator to sort by natural order descending, looking to both the unit and the value.
+   * 
+   * @return <p>
+   *         <b>Given:</b>
+   *         </p>
+   *         <code>
+   * Quantity<Time> day = timeFactory.create(1, Units.DAY);<br/>
+   * Quantity<Time> hours = timeFactory.create(18, Units.HOUR);<br/>
+   * Quantity<Time> minutes = timeFactory.create(15, Units.HOUR);<br/>
+   * Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);<br/>
+   * </code>
+   *         <p>
+   *         will return: <code>day, hour, minute, second</code>
+   *         </p>
+   * @throws NullPointerException
+   */
+  public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNaturalDesc() {
+    Comparator<Quantity<Q>> sortNatural = sortNatural();
+    return sortNatural.reversed();
+  }
+
+  /**
+   * Creates a BinaryOperator to calculate the minimum Quantity
+   * 
+   * @return the min BinaryOperator, not null.
+   */
+  public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> min() {
 
         return (q1, q2) -> {
             double d1 = q1.getValue().doubleValue();
@@ -166,11 +195,12 @@ public final class QuantityFunctions {
         };
     }
 
-    /**
-     * Creates a BinaryOperator to calculate the maximum Quantity
-     * @return the max BinaryOperator, not null.
-     */
-    public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> max() {
+  /**
+   * Creates a BinaryOperator to calculate the maximum Quantity
+   * 
+   * @return the max BinaryOperator, not null.
+   */
+  public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> max() {
 
         return (q1, q2) -> {
             double d1 = q1.getValue().doubleValue();
@@ -183,30 +213,34 @@ public final class QuantityFunctions {
         };
     }
 
-    /**
-     * Creates a BinaryOperator to sum.
-     * @return the sum BinaryOperator
-     */
-    public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum() {
+  /**
+   * Creates a BinaryOperator to sum.
+   * 
+   * @return the sum BinaryOperator
+   */
+  public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum() {
         return Quantity::add;
     }
 
-    /**
-     * Creates a BinaryOperator to sum converting to unit
-     * @param unit unit to be converting
-     * @return the sum BinaryOperator converting to unit
-     */
-    public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum(Unit<Q> unit) {
+  /**
+   * Creates a BinaryOperator to sum converting to unit
+   * 
+   * @param unit
+   *          unit to be converting
+   * @return the sum BinaryOperator converting to unit
+   */
+  public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum(Unit<Q> unit) {
         return (q1, q2) -> q1.to(unit).add(q2.to(unit));
     }
 
-
-    /**
-     * Predicate to filter to one or more units
-     * @param units - units to be filtered (optional)
-     * @return A predicate to filter one or more units
-     */
-    @SafeVarargs
+  /**
+   * Predicate to filter to one or more units
+   * 
+   * @param units
+   *          - units to be filtered (optional)
+   * @return A predicate to filter one or more units
+   */
+  @SafeVarargs
     public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q>... units) {
 
         if (Objects.isNull(units) || units.length == 0) {
@@ -223,12 +257,14 @@ public final class QuantityFunctions {
         return predicate;
     }
 
-    /**
-     * Predicate to filter excluding these units
-     * @param units - units to be filtered (optional)
-     * @return A predicate to filter to not be these units
-     */
-    @SafeVarargs
+  /**
+   * Predicate to filter excluding these units
+   * 
+   * @param units
+   *          - units to be filtered (optional)
+   * @return A predicate to filter to not be these units
+   */
+  @SafeVarargs
     public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q>... units) {
         if (Objects.isNull(units) || units.length == 0) {
             return q -> true;
@@ -236,115 +272,139 @@ public final class QuantityFunctions {
        return fiterByUnit(units).negate();
     }
 
-    /**
-     * creates a Filter to greater than number, ignoring units
-     * @param value - the value to be used in Predicate
-     * @return the Predicate greater than this number, ignoring units
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThan(Number value) {
+  /**
+   * creates a Filter to greater than number, ignoring units
+   * 
+   * @param value
+   *          - the value to be used in Predicate
+   * @return the Predicate greater than this number, ignoring units
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThan(Number value) {
         return q -> q.getValue().doubleValue() > value.doubleValue();
     }
 
-    /**
-     * creates a filter to greater than the quantity measure
-     * @param quantity - the measure to be used in filter
-     * @return the Predicate greater than this measure
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThan(Quantity<Q> quantity) {
+  /**
+   * creates a filter to greater than the quantity measure
+   * 
+   * @param quantity
+   *          - the measure to be used in filter
+   * @return the Predicate greater than this measure
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThan(Quantity<Q> quantity) {
         return q -> q.to(quantity.getUnit()).getValue().doubleValue() > quantity
                 .getValue().doubleValue();
     }
 
-    /**
-     * creates a Filter to greater or equals than number, ignoring units
-     * @param value - the value to be used in Predicate
-     * @return the Predicate greater or equals than this number, ignoring units
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThanOrEqualTo(Number value) {
+  /**
+   * creates a Filter to greater or equals than number, ignoring units
+   * 
+   * @param value
+   *          - the value to be used in Predicate
+   * @return the Predicate greater or equals than this number, ignoring units
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThanOrEqualTo(Number value) {
         return q -> q.getValue().doubleValue() >= value.doubleValue();
     }
 
-    /**
-     * creates a filter to greater or equals than the quantity measure
-     * @param quantity - the measure to be used in filter
-     * @return the Predicate greater or equals than this measure
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThanOrEqualTo(Quantity<Q> quantity) {
+  /**
+   * creates a filter to greater or equals than the quantity measure
+   * 
+   * @param quantity
+   *          - the measure to be used in filter
+   * @return the Predicate greater or equals than this measure
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThanOrEqualTo(Quantity<Q> quantity) {
         return q -> q.to(quantity.getUnit()).getValue().doubleValue() >= quantity
                 .getValue().doubleValue();
     }
 
-    /**
-     * creates a Filter to lesser than number, ignoring units
-     * @param value - the value to be used in Predicate
-     * @return the Predicate greater than this number, ignoring units
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThan(Number value) {
+  /**
+   * creates a Filter to lesser than number, ignoring units
+   * 
+   * @param value
+   *          - the value to be used in Predicate
+   * @return the Predicate greater than this number, ignoring units
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThan(Number value) {
         return q -> q.getValue().doubleValue() < value.doubleValue();
     }
 
-    /**
-     * creates a filter to lesser than the quantity measure
-     * @param quantity - the measure to be used in filter
-     * @return the Predicate lesser than this measure
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThan(Quantity<Q> quantity) {
+  /**
+   * creates a filter to lesser than the quantity measure
+   * 
+   * @param quantity
+   *          - the measure to be used in filter
+   * @return the Predicate lesser than this measure
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThan(Quantity<Q> quantity) {
         return q -> q.to(quantity.getUnit()).getValue().doubleValue() < quantity
                 .getValue().doubleValue();
     }
 
-    /**
-     * creates a Filter to lesser or equals than number, ignoring units
-     * @param value - the value to be used in Predicate
-     * @return the Predicate lesser or equals than this number, ignoring units
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThanOrEqualTo(Number value) {
+  /**
+   * creates a Filter to lesser or equals than number, ignoring units
+   * 
+   * @param value
+   *          - the value to be used in Predicate
+   * @return the Predicate lesser or equals than this number, ignoring units
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThanOrEqualTo(Number value) {
         return q -> q.getValue().doubleValue() <= value.doubleValue();
     }
-    /**
-     * creates a filter to lesser or equals than the quantity measure
-     * @param quantity - the measure to be used in filter
-     * @return the Predicate lesser or equals than this measure
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThanOrEqualTo(Quantity<Q> quantity) {
+
+  /**
+   * creates a filter to lesser or equals than the quantity measure
+   * 
+   * @param quantity
+   *          - the measure to be used in filter
+   * @return the Predicate lesser or equals than this measure
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThanOrEqualTo(Quantity<Q> quantity) {
         return q -> q.to(quantity.getUnit()).getValue().doubleValue() <= quantity
                 .getValue().doubleValue();
     }
 
-    /**
-     * creates a Filter to between, lesser or equals and greater or equals, than number, ignoring units
-     * @param min - the min value to be used in Predicate
-     * @param max - the max value to be used in Predicate
-     * @return the Predicate lesser or equals than this number, ignoring units
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isBetween(Number min, Number max) {
-        Predicate<Quantity<Q>> minFilter = isGreaterThanOrEqualTo(min);
-        Predicate<Quantity<Q>> maxFilter = isLesserThanOrEqualTo(max);
-        return minFilter.and(maxFilter);
-    }
+  /**
+   * creates a Filter to between, lesser or equals and greater or equals, than number, ignoring units
+   * 
+   * @param min
+   *          - the min value to be used in Predicate
+   * @param max
+   *          - the max value to be used in Predicate
+   * @return the Predicate lesser or equals than this number, ignoring units
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isBetween(Number min, Number max) {
+    Predicate<Quantity<Q>> minFilter = isGreaterThanOrEqualTo(min);
+    Predicate<Quantity<Q>> maxFilter = isLesserThanOrEqualTo(max);
+    return minFilter.and(maxFilter);
+  }
 
-    /**
-     * creates a filter to between, lesser or equals and greater or equals, than the quantity measure
-     * @param min - the min value to be used in Predicate
-     * @param max - the max value to be used in Predicate
-     * @return the Predicate lesser or equals than this measure
-     */
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isBetween(Quantity<Q> min, Quantity<Q> max) {
-        return isGreaterThanOrEqualTo(min).and(isLesserThanOrEqualTo(max));
-    }
+  /**
+   * creates a filter to between, lesser or equals and greater or equals, than the quantity measure
+   * 
+   * @param min
+   *          - the min value to be used in Predicate
+   * @param max
+   *          - the max value to be used in Predicate
+   * @return the Predicate lesser or equals than this measure
+   */
+  public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isBetween(Quantity<Q> min, Quantity<Q> max) {
+    return isGreaterThanOrEqualTo(min).and(isLesserThanOrEqualTo(max));
+  }
 
-    /**
-     * Summary of Quantity
-     * @return the QuantitySummaryStatistics
-     */
-    public static <Q extends Quantity<Q>> Collector<Quantity<Q>, QuantitySummaryStatistics<Q>, QuantitySummaryStatistics<Q>>
+  /**
+   * Summary of Quantity
+   * 
+   * @return the QuantitySummaryStatistics
+   */
+  public static <Q extends Quantity<Q>> Collector<Quantity<Q>, QuantitySummaryStatistics<Q>, QuantitySummaryStatistics<Q>>
     summarizeQuantity(Unit<Q> unit){
         Supplier<QuantitySummaryStatistics<Q>> supplier = () -> new QuantitySummaryStatistics<>(unit);
         return Collector.of(supplier, QuantitySummaryStatistics<Q>::accept,
                 QuantitySummaryStatistics<Q>::combine);
     }
 
-    public static <Q extends Quantity<Q>> Function<Quantity<Q>,Unit<Q>> groupByUnit() {
+  public static <Q extends Quantity<Q>> Function<Quantity<Q>,Unit<Q>> groupByUnit() {
         return Quantity::getUnit;
     }
 }

@@ -41,31 +41,32 @@ import java.util.ResourceBundle;
  *
  */
 public final class BundleToMapAdapter {
-	public static Map<String, String> toMap(final ResourceBundle resource) {
-		Map<String, String> map = new HashMap<>();
+  public static Map<String, String> toMap(final ResourceBundle resource) {
+    Map<String, String> map = new HashMap<>();
 
-		Enumeration<String> keys = resource.getKeys();
-		while (keys.hasMoreElements()) {
-			String key = keys.nextElement();
-			map.put(key, resource.getString(key));
-		}
+    Enumeration<String> keys = resource.getKeys();
+    while (keys.hasMoreElements()) {
+      String key = keys.nextElement();
+      map.put(key, resource.getString(key));
+    }
 
-		return map;
-	}
-	
-//	public final static Map<String, String> toMap(final MapResourceBundle resource) {
-//		Map<String, String> map = new HashMap<>();
-//
-//		Enumeration<String> keys = resource.getKeys();
-//		while (keys.hasMoreElements()) {
-//			String key = keys.nextElement();
-//			map.put(key, resource.getString(key));
-//		}
-//
-//		return map;
-//	}
+    return map;
+  }
 
-	public static Map<String, String> toMap(String resName) {
-		return toMap(ResourceBundle.getBundle(resName));
-	}
+  // public final static Map<String, String> toMap(final MapResourceBundle
+  // resource) {
+  // Map<String, String> map = new HashMap<>();
+  //
+  // Enumeration<String> keys = resource.getKeys();
+  // while (keys.hasMoreElements()) {
+  // String key = keys.nextElement();
+  // map.put(key, resource.getString(key));
+  // }
+  //
+  // return map;
+  // }
+
+  public static Map<String, String> toMap(String resName) {
+    return toMap(ResourceBundle.getBundle(resName));
+  }
 }

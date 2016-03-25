@@ -49,183 +49,168 @@ import tec.uom.se.unit.Units;
 
 public class QuantityFunctionsFilterTest {
 
-    private QuantityFactory<Time> timeFactory;
-    private Quantity<Time> day;
-    private Quantity<Time> hours;
-    private Quantity<Time> minutes;
-    private Quantity<Time> seconds;
+  private QuantityFactory<Time> timeFactory;
+  private Quantity<Time> day;
+  private Quantity<Time> hours;
+  private Quantity<Time> minutes;
+  private Quantity<Time> seconds;
 
-    @Before
-    public void init() {
-    	QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
-        timeFactory = factoryService.getQuantityFactory(Time.class);
-        minutes = timeFactory.create(15, Units.MINUTE);
-        hours = timeFactory.create(18, Units.HOUR);
-        day = timeFactory.create(1, Units.DAY);
-        seconds = timeFactory.create(100, Units.SECOND);
-    }
+  @Before
+  public void init() {
+    QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+    timeFactory = factoryService.getQuantityFactory(Time.class);
+    minutes = timeFactory.create(15, Units.MINUTE);
+    hours = timeFactory.create(18, Units.HOUR);
+    day = timeFactory.create(1, Units.DAY);
+    seconds = timeFactory.create(100, Units.SECOND);
+  }
 
-    @Test
-    public void filterByUnitTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit(Units.HOUR)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(2), Integer.valueOf(list.size()));
-    }
+  @Test
+  public void filterByUnitTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit(Units.HOUR)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(2), Integer.valueOf(list.size()));
+  }
 
-    @Test
-    public void shouldReturnAllWhenUnitEmpty() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit()).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
-    }
+  @Test
+  public void shouldReturnAllWhenUnitEmpty() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit()).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
+  }
 
-    @Test
-    public void filterByNotUnitTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit(Units.HOUR)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
-    }
+  @Test
+  public void filterByNotUnitTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit(Units.HOUR)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  }
 
-    @Test
-    public void shouldReturnAllWhenNotUnitEmpty() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit()).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
-    }
+  @Test
+  public void shouldReturnAllWhenNotUnitEmpty() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByExcludingUnit()).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(5), Integer.valueOf(list.size()));
+  }
 
-    @Test
-    public void filterByContainsUnitsTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit(Units.HOUR, Units.MINUTE)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
-    }
+  @Test
+  public void filterByContainsUnitsTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.fiterByUnit(Units.HOUR, Units.MINUTE)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  }
 
-    @Test
-    public void isGreaterThanTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isGreaterThan(15)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  @Test
+  public void isGreaterThanTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isGreaterThan(15)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isGreaterThanQuantityTest() {
-        List<Quantity<Time>> times = new ArrayList<>();
-        times.add(timeFactory.create(30, Units.HOUR));
-        times.add(timeFactory.create(24, Units.HOUR));
-        times.add(timeFactory.create(1440, Units.MINUTE));
-        List<Quantity<Time>> list = times
-                .stream()
-                .filter(QuantityFunctions.isGreaterThan(timeFactory.create(1,
-                        Units.DAY))).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(list.size()));
+  @Test
+  public void isGreaterThanQuantityTest() {
+    List<Quantity<Time>> times = new ArrayList<>();
+    times.add(timeFactory.create(30, Units.HOUR));
+    times.add(timeFactory.create(24, Units.HOUR));
+    times.add(timeFactory.create(1440, Units.MINUTE));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isGreaterThan(timeFactory.create(1, Units.DAY))).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(1), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isGreaterThanOrEqualToTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isGreaterThanOrEqualTo(15)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(4), Integer.valueOf(list.size()));
+  @Test
+  public void isGreaterThanOrEqualToTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isGreaterThanOrEqualTo(15)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(4), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isGreaterThanOrEqualToQuantityTest() {
-        List<Quantity<Time>> times = createTimesToFilter();
-        Quantity<Time> filter = timeFactory.create(1, Units.DAY);
-        List<Quantity<Time>> list = times.stream()
-                .filter(QuantityFunctions.isGreaterThanOrEqualTo(filter))
-                .collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  @Test
+  public void isGreaterThanOrEqualToQuantityTest() {
+    List<Quantity<Time>> times = createTimesToFilter();
+    Quantity<Time> filter = timeFactory.create(1, Units.DAY);
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isGreaterThanOrEqualTo(filter)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isLesserThanTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isLesserThan(15)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(list.size()));
+  @Test
+  public void isLesserThanTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isLesserThan(15)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(1), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isLesserThanQuantityTest() {
-        List<Quantity<Time>> times = createTimesToFilter();
-        Quantity<Time> filter = timeFactory.create(1, Units.DAY);
-        List<Quantity<Time>> list = times.stream()
-                .filter(QuantityFunctions.isLesserThan(filter))
-                .collect(Collectors.toList());
-        assertEquals(Integer.valueOf(1), Integer.valueOf(list.size()));
+  @Test
+  public void isLesserThanQuantityTest() {
+    List<Quantity<Time>> times = createTimesToFilter();
+    Quantity<Time> filter = timeFactory.create(1, Units.DAY);
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isLesserThan(filter)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(1), Integer.valueOf(list.size()));
 
-    }
+  }
 
+  @Test
+  public void isLesserThanOrEqualToTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isLesserThanOrEqualTo(15)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(2), Integer.valueOf(list.size()));
 
-    @Test
-    public void isLesserThanOrEqualToTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isLesserThanOrEqualTo(15)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(2), Integer.valueOf(list.size()));
+  }
 
-    }
+  @Test
+  public void isLesserThanOrEqualToQuantityTest() {
+    List<Quantity<Time>> times = createTimesToFilter();
+    Quantity<Time> filter = timeFactory.create(1, Units.DAY);
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isLesserThanOrEqualTo(filter)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
 
+  }
 
-    @Test
-    public void isLesserThanOrEqualToQuantityTest() {
-        List<Quantity<Time>> times = createTimesToFilter();
-        Quantity<Time> filter = timeFactory.create(1, Units.DAY);
-        List<Quantity<Time>> list = times.stream()
-                .filter(QuantityFunctions.isLesserThanOrEqualTo(filter))
-                .collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  @Test
+  public void isBetweenTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isBetween(15, 30)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isBetweenTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isBetween(15, 30)).collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  @Test
+  public void isBetweenQuantityTest() {
+    List<Quantity<Time>> times = new ArrayList<>(getTimes());
+    times.add(timeFactory.create(30, Units.HOUR));
+    times.add(timeFactory.create(14, Units.HOUR));
+    times.add(timeFactory.create(10, Units.HOUR));
+    Quantity<Time> min = timeFactory.create(12, Units.HOUR);
+    Quantity<Time> max = timeFactory.create(1, Units.DAY);
+    List<Quantity<Time>> list = times.stream().filter(QuantityFunctions.isBetween(min, max)).collect(Collectors.toList());
+    assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
 
-    }
+  }
 
-    @Test
-    public void isBetweenQuantityTest() {
-        List<Quantity<Time>> times = new ArrayList<>(getTimes());
-        times.add(timeFactory.create(30, Units.HOUR));
-        times.add(timeFactory.create(14, Units.HOUR));
-        times.add(timeFactory.create(10, Units.HOUR));
-        Quantity<Time> min = timeFactory.create(12, Units.HOUR);
-        Quantity<Time> max = timeFactory.create(1, Units.DAY);
-        List<Quantity<Time>> list = times.stream()
-                .filter(QuantityFunctions.isBetween(min, max))
-                .collect(Collectors.toList());
-        assertEquals(Integer.valueOf(3), Integer.valueOf(list.size()));
+  private List<Quantity<Time>> getTimes() {
+    return Arrays.asList(day, hours, minutes, seconds);
+  }
 
-    }
-
-
-    private List<Quantity<Time>> getTimes() {
-        return Arrays.asList(day, hours, minutes, seconds);
-    }
-
-    private List<Quantity<Time>> createTimesToFilter() {
-        List<Quantity<Time>> times = new ArrayList<>();
-        times.add(timeFactory.create(30, Units.HOUR));
-        times.add(timeFactory.create(24, Units.HOUR));
-        times.add(timeFactory.create(1440, Units.MINUTE));
-        times.add(timeFactory.create(0.5, Units.DAY));
-        return times;
-    }
-
+  private List<Quantity<Time>> createTimesToFilter() {
+    List<Quantity<Time>> times = new ArrayList<>();
+    times.add(timeFactory.create(30, Units.HOUR));
+    times.add(timeFactory.create(24, Units.HOUR));
+    times.add(timeFactory.create(1440, Units.MINUTE));
+    times.add(timeFactory.create(0.5, Units.DAY));
+    return times;
+  }
 }

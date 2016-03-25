@@ -32,20 +32,16 @@
 package tec.uom.se.internal.format;
 
 /** Token Manager Error. */
-public class TokenMgrError extends Error
-{
+public class TokenMgrError extends Error {
 
   /**
-   * The Serialization identifier for this class.
-   * Increment only if the <i>serialized</i> form of the
-   * class changes.
+   * The Serialization identifier for this class. Increment only if the <i>serialized</i> form of the class changes.
    */
-	private static final long serialVersionUID = -3348968864772188432L;
-	
+  private static final long serialVersionUID = -3348968864772188432L;
+
   /*
    * Ordinals for various reasons why an Error of this type can be thrown.
    */
-
 
   /**
    * Lexical error occurred.
@@ -68,22 +64,19 @@ public class TokenMgrError extends Error
   static final int LOOP_DETECTED = 3;
 
   /**
-   * Indicates the reason why the exception is thrown. It will have
-   * one of the above 4 values.
+   * Indicates the reason why the exception is thrown. It will have one of the above 4 values.
    */
   int errorCode;
 
   /**
-   * Replaces unprintable characters by their escaped (or unicode escaped)
-   * equivalents in the given string
+   * Replaces unprintable characters by their escaped (or unicode escaped) equivalents in the given string
    */
   protected static String addEscapes(String str) {
     StringBuilder retval = new StringBuilder();
     char ch;
     for (int i = 0; i < str.length(); i++) {
-      switch (str.charAt(i))
-      {
-        case 0 :
+      switch (str.charAt(i)) {
+        case 0:
           continue;
         case '\b':
           retval.append("\\b");
@@ -122,31 +115,22 @@ public class TokenMgrError extends Error
   }
 
   /**
-   * Returns a detailed message for the Error when it is thrown by the
-   * token manager to indicate a lexical error.
-   * Parameters :
-   *    EOFSeen     : indicates if EOF caused the lexical error
-   *    curLexState : lexical state in which this error occurred
-   *    errorLine   : line number when the error occurred
-   *    errorColumn : column number when the error occurred
-   *    errorAfter  : prefix that was seen before this error occurred
-   *    curchar     : the offending character
-   * Note: You can customize the lexical error message by modifying this method.
+   * Returns a detailed message for the Error when it is thrown by the token manager to indicate a lexical error. Parameters : EOFSeen : indicates if
+   * EOF caused the lexical error curLexState : lexical state in which this error occurred errorLine : line number when the error occurred errorColumn
+   * : column number when the error occurred errorAfter : prefix that was seen before this error occurred curchar : the offending character Note: You
+   * can customize the lexical error message by modifying this method.
    */
   protected static String LexicalError(boolean EOFSeen, int errorLine, int errorColumn, String errorAfter, char curChar) {
-    return("Lexical error at line " +
-          errorLine + ", column " +
-          errorColumn + ".  Encountered: " +
-          (EOFSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int)curChar + "), ") +
-          "after : \"" + addEscapes(errorAfter) + "\"");
+    return ("Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: "
+        + (EOFSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int) curChar + "), ") + "after : \""
+        + addEscapes(errorAfter) + "\"");
   }
 
   /**
-   * You can also modify the body of this method to customize your error messages.
-   * For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not
-   * of end-users concern, so you can return something like :
+   * You can also modify the body of this method to customize your error messages. For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are
+   * not of end-users concern, so you can return something like :
    *
-   *     "Internal Error : Please file a bug report .... "
+   * "Internal Error : Please file a bug report .... "
    *
    * from this method for such cases in the release version of your parser.
    */
@@ -173,4 +157,7 @@ public class TokenMgrError extends Error
     this(LexicalError(EOFSeen, errorLine, errorColumn, errorAfter, curChar), reason);
   }
 }
-/* JavaCC - OriginalChecksum=8a6e5be586cca28053ad55584e013006 (do not edit this line) */
+/*
+ * JavaCC - OriginalChecksum=8a6e5be586cca28053ad55584e013006 (do not edit this
+ * line)
+ */

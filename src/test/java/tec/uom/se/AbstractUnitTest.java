@@ -40,21 +40,21 @@ import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;
 
 public class AbstractUnitTest {
-	private static final AbstractUnit<Length> sut = new BaseUnit<>("m");
-    
-	@BeforeClass
-	public static void init() {
-		sut.setName("Test");
-	}
-	
-    @Test
-    public void testName() {
-    	assertEquals("Test", sut.getName());
-    }
-	
-    @Test
-    public void testReturnedClass() {
-    	//assertEquals("Q", String.valueOf(sut.getActualType())); // TODO we hope to get better type information in future Java versions
-    	assertEquals("java.lang.reflect.TypeVariable<D>", String.valueOf(sut.getActualType()));
-    }
+  private static final AbstractUnit<Length> sut = new BaseUnit<>("m");
+
+  @BeforeClass
+  public static void init() {
+    sut.setName("Test");
+  }
+
+  @Test
+  public void testName() {
+    assertEquals("Test", sut.getName());
+  }
+
+  @Test
+  public void testReturnedClass() {
+    // assertEquals("Q", String.valueOf(sut.getActualType())); // TODO we hope to get better type information in future Java versions
+    assertEquals("java.lang.reflect.TypeVariable<D>", String.valueOf(sut.getActualType()));
+  }
 }

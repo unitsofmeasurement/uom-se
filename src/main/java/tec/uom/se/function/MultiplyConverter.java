@@ -42,105 +42,100 @@ import java.util.Objects;
 
 /**
  * <p>
- * This class represents a converter multiplying numeric values by a constant
- * scaling factor (<code>double</code> based).
+ * This class represents a converter multiplying numeric values by a constant scaling factor (<code>double</code> based).
  * </p>
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author  <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 0.7, Dec 28, 2015
  */
-public final class MultiplyConverter extends AbstractConverter implements
-		ValueSupplier<Double>, DoubleFactorSupplier, Serializable {
+public final class MultiplyConverter extends AbstractConverter implements ValueSupplier<Double>, DoubleFactorSupplier, Serializable {
 
-	/**
+  /**
 	 * 
 	 */
-	private static final long serialVersionUID = 6588759878444545649L;
+  private static final long serialVersionUID = 6588759878444545649L;
 
-	/**
-	 * Holds the scale factor.
-	 */
-	private double factor;
+  /**
+   * Holds the scale factor.
+   */
+  private double factor;
 
-	/**
-	 * Creates a multiply converter with the specified scale factor.
-	 * 
-	 * @param factor
-	 *            the scaling factor.
-	 * @throws IllegalArgumentException
-	 *             if coefficient is <code>1.0</code> (would result in identity
-	 *             converter)
-	 */
-	public MultiplyConverter(double factor) {
-		if (factor == 1.0)
-			throw new IllegalArgumentException(
-					"Would result in identity converter");
-		this.factor = factor;
-	}
+  /**
+   * Creates a multiply converter with the specified scale factor.
+   * 
+   * @param factor
+   *          the scaling factor.
+   * @throws IllegalArgumentException
+   *           if coefficient is <code>1.0</code> (would result in identity converter)
+   */
+  public MultiplyConverter(double factor) {
+    if (factor == 1.0)
+      throw new IllegalArgumentException("Would result in identity converter");
+    this.factor = factor;
+  }
 
-	/**
-	 * Returns the scale factor of this converter.
-	 * 
-	 * @return the scale factor.
-	 */
-	public double getFactor() {
-		return factor;
-	}
+  /**
+   * Returns the scale factor of this converter.
+   * 
+   * @return the scale factor.
+   */
+  public double getFactor() {
+    return factor;
+  }
 
-	@Override
-	public UnitConverter concatenate(UnitConverter converter) {
-		if (!(converter instanceof MultiplyConverter))
-			return super.concatenate(converter);
-		double newfactor = factor * ((MultiplyConverter) converter).factor;
-		return newfactor == 1.0 ? IDENTITY : new MultiplyConverter(newfactor);
-	}
+  @Override
+  public UnitConverter concatenate(UnitConverter converter) {
+    if (!(converter instanceof MultiplyConverter))
+      return super.concatenate(converter);
+    double newfactor = factor * ((MultiplyConverter) converter).factor;
+    return newfactor == 1.0 ? IDENTITY : new MultiplyConverter(newfactor);
+  }
 
-	@Override
-	public MultiplyConverter inverse() {
-		return new MultiplyConverter(1.0 / factor);
-	}
+  @Override
+  public MultiplyConverter inverse() {
+    return new MultiplyConverter(1.0 / factor);
+  }
 
-	@Override
-	public double convert(double value) {
-		return value * factor;
-	}
+  @Override
+  public double convert(double value) {
+    return value * factor;
+  }
 
-	@Override
-	public BigDecimal convert(BigDecimal value, MathContext ctx)
-			throws ArithmeticException {
-		return value.multiply(BigDecimal.valueOf(factor), ctx);
-	}
+  @Override
+  public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
+    return value.multiply(BigDecimal.valueOf(factor), ctx);
+  }
 
-	@Override
-	public final String toString() {
-		return "MultiplyConverter(" + factor + ")";
-	}
+  @Override
+  public final String toString() {
+    return "MultiplyConverter(" + factor + ")";
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof MultiplyConverter) {
-			MultiplyConverter that = (MultiplyConverter) obj;
-			return Objects.equals(factor, that.factor);
-		}
-		return false;
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof MultiplyConverter) {
+      MultiplyConverter that = (MultiplyConverter) obj;
+      return Objects.equals(factor, that.factor);
+    }
+    return false;
+  }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(factor);
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(factor);
+  }
 
-	@Override
-	public boolean isLinear() {
-		return true;
-	}
+  @Override
+  public boolean isLinear() {
+    return true;
+  }
 
-	@Override
-	public Double getValue() {
-		return factor;
-	}
+  @Override
+  public Double getValue() {
+    return factor;
+  }
 }

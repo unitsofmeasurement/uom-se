@@ -48,47 +48,41 @@ import tec.uom.se.unit.Units;
 @SuppressWarnings("rawtypes")
 class DefaultQuantityFormat extends QuantityFormat {
 
-    /**
+  /**
      *
      */
-    private static final long serialVersionUID = 2758248665095734058L;
+  private static final long serialVersionUID = 2758248665095734058L;
 
-    @Override
-    public Appendable format(Quantity measure, Appendable dest)
-            throws IOException {
-        Unit unit = measure.getUnit();
+  @Override
+  public Appendable format(Quantity measure, Appendable dest) throws IOException {
+    Unit unit = measure.getUnit();
 
-        dest.append(measure.getValue().toString());
-        if (measure.getUnit().equals(Units.ONE))
-            return dest;
-        dest.append(' ');
-        return LocalUnitFormat.getInstance().format(unit, dest);
+    dest.append(measure.getValue().toString());
+    if (measure.getUnit().equals(Units.ONE))
+      return dest;
+    dest.append(' ');
+    return LocalUnitFormat.getInstance().format(unit, dest);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public ComparableQuantity<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
+    int startDecimal = cursor.getIndex();
+    while ((startDecimal < csq.length()) && Character.isWhitespace(csq.charAt(startDecimal))) {
+      startDecimal++;
     }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public ComparableQuantity<?> parse(CharSequence csq, ParsePosition cursor)
-            throws ParserException {
-        int startDecimal = cursor.getIndex();
-        while ((startDecimal < csq.length())
-                && Character.isWhitespace(csq.charAt(startDecimal))) {
-            startDecimal++;
-        }
-        int endDecimal = startDecimal + 1;
-        while ((endDecimal < csq.length())
-                && !Character.isWhitespace(csq.charAt(endDecimal))) {
-            endDecimal++;
-        }
-        BigDecimal decimal = new BigDecimal(csq.subSequence(startDecimal,
-                endDecimal).toString());
-        cursor.setIndex(endDecimal + 1);
-        Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
-        return Quantities.getQuantity(decimal, unit);
+    int endDecimal = startDecimal + 1;
+    while ((endDecimal < csq.length()) && !Character.isWhitespace(csq.charAt(endDecimal))) {
+      endDecimal++;
     }
+    BigDecimal decimal = new BigDecimal(csq.subSequence(startDecimal, endDecimal).toString());
+    cursor.setIndex(endDecimal + 1);
+    Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
+    return Quantities.getQuantity(decimal, unit);
+  }
 
-    @Override
-    public ComparableQuantity<?> parse(CharSequence csq)
-            throws ParserException {
-        return parse(csq, new ParsePosition(0));
-    }
+  @Override
+  public ComparableQuantity<?> parse(CharSequence csq) throws ParserException {
+    return parse(csq, new ParsePosition(0));
+  }
 }

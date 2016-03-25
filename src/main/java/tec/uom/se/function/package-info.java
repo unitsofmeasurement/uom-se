@@ -32,3 +32,4 @@
  * >functional interfaces</a>.
  */
 package tec.uom.se.function;
+

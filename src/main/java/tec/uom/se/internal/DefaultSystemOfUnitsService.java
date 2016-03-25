@@ -43,25 +43,25 @@ import tec.uom.se.unit.Units;
  * @version 0.2, November 3, 2015
  */
 public class DefaultSystemOfUnitsService implements SystemOfUnitsService {
-	
-	final Map<String, SystemOfUnits> souMap = new ConcurrentHashMap<>();
 
-	public DefaultSystemOfUnitsService() {
-		souMap.put(Units.class.getSimpleName(), Units.getInstance());
-	}
-	
-	public Collection<SystemOfUnits> getAvailableSystemsOfUnits() {
-		return souMap.values();
-	}
-	
-	@Override
-	public SystemOfUnits getSystemOfUnits() {
-		return getSystemOfUnits(Units.class.getSimpleName());
-	}
+  final Map<String, SystemOfUnits> souMap = new ConcurrentHashMap<>();
 
-	@Override
-	public SystemOfUnits getSystemOfUnits(String name) {
-		return souMap.get(name);
-	}
+  public DefaultSystemOfUnitsService() {
+    souMap.put(Units.class.getSimpleName(), Units.getInstance());
+  }
+
+  public Collection<SystemOfUnits> getAvailableSystemsOfUnits() {
+    return souMap.values();
+  }
+
+  @Override
+  public SystemOfUnits getSystemOfUnits() {
+    return getSystemOfUnits(Units.class.getSimpleName());
+  }
+
+  @Override
+  public SystemOfUnits getSystemOfUnits(String name) {
+    return souMap.get(name);
+  }
 
 }

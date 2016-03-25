@@ -28,6 +28,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package tec.uom.se.internal.quantity;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,28 +41,31 @@ import tec.uom.se.quantity.DefaultQuantityFactory;
 
 /**
  * Provider of Quantities
+ * 
  * @author otaviojava
  * @author werner
  * @version 0.3
  */
 @SuppressWarnings("rawtypes")
 public final class DefaultQuantityFactoryService implements QuantityFactoryService {
-    private final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();
+  private final Map<Class, QuantityFactory> INSTANCE = new ConcurrentHashMap<>();
 
-    /**
-     * return a factory for Quantities from this unit
-     * @param unit the unit
-     * @return the Quantities
-     * @throws NullPointerException
-     */
-    @SuppressWarnings("unchecked")
-    public final <Q extends Quantity<Q>>  QuantityFactory<Q> getQuantityFactory(Class<Q> unit){
-        Objects.requireNonNull(unit);
-        if(!INSTANCE.containsKey(unit)) {
-            synchronized (INSTANCE) {
-                INSTANCE.put(unit, new DefaultQuantityFactory<>(unit));
-            }
-        }
-        return INSTANCE.get(unit);
+  /**
+   * return a factory for Quantities from this unit
+   * 
+   * @param unit
+   *          the unit
+   * @return the Quantities
+   * @throws NullPointerException
+   */
+  @SuppressWarnings("unchecked")
+  public final <Q extends Quantity<Q>> QuantityFactory<Q> getQuantityFactory(Class<Q> unit) {
+    Objects.requireNonNull(unit);
+    if (!INSTANCE.containsKey(unit)) {
+      synchronized (INSTANCE) {
+        INSTANCE.put(unit, new DefaultQuantityFactory<>(unit));
+      }
     }
+    return INSTANCE.get(unit);
+  }
 }

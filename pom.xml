@@ -89,7 +89,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -106,6 +106,39 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											net.revelc.code
+										</groupId>
+										<artifactId>
+											formatter-maven-plugin
+										</artifactId>
+										<versionRange>
+											[0.5.2,)
+										</versionRange>
+										<goals>
+											<goal>format</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -169,39 +202,57 @@
 					</instructions>
 				</configuration>
 			</plugin>
-			
+
 			<!-- ======================================================= -->
-            <!-- Maven License Plugin -->
-            <!-- ======================================================= -->
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <configuration>
-                    <header>src/etc/header.txt</header>
-                    <properties>
-                        <owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
-                        <currentYear>2016</currentYear>
-                    </properties>
-                    <excludes>
-                        <exclude>**/README</exclude>
-                        <exclude>**/pom.xml</exclude>
-                        <exclude>**/settings.xml</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/resources/**</exclude>
-                        <exclude>src/etc/**</exclude>
-                        <exclude>*.css</exclude>
-                        <exclude>*.jpg</exclude>
-                        <exclude>*.png</exclude>
-                        <exclude>*.yml</exclude>
-                    </excludes>
-                    <headerDefinitions>
-                        <headerDefinition>src/etc/headers.xml</headerDefinition>
-                    </headerDefinitions>
-                    <mapping>
-                        <java>JAVA_STYLE</java>
-                    </mapping>
-                </configuration>
-            </plugin>
+			<!-- Maven License Plugin -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<configuration>
+					<header>src/etc/header.txt</header>
+					<properties>
+						<owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
+						<currentYear>2016</currentYear>
+					</properties>
+					<excludes>
+						<exclude>**/README</exclude>
+						<exclude>**/pom.xml</exclude>
+						<exclude>**/settings.xml</exclude>
+						<exclude>src/test/resources/**</exclude>
+						<exclude>src/main/resources/**</exclude>
+						<exclude>src/etc/**</exclude>
+						<exclude>*.css</exclude>
+						<exclude>*.jpg</exclude>
+						<exclude>*.png</exclude>
+						<exclude>*.yml</exclude>
+					</excludes>
+					<headerDefinitions>
+						<headerDefinition>src/etc/headers.xml</headerDefinition>
+					</headerDefinitions>
+					<mapping>
+						<java>JAVA_STYLE</java>
+					</mapping>
+				</configuration>
+			</plugin>
+
+			<!-- ======================================================= -->
+			<!-- Maven Code Formatter -->
+			<!-- ======================================================= -->
+			<plugin>
+				<groupId>net.revelc.code</groupId>
+				<artifactId>formatter-maven-plugin</artifactId>
+				<configuration>
+					<configFile>${project.basedir}/src/etc/eclipse-formatter-config.xml</configFile>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<!-- ======================================================= -->
 			<!-- Maven web site -->
@@ -274,14 +325,14 @@
 							</configuration>
 						</plugin>
 
-                        <!-- ======================================================= -->
-                        <!-- Test results -->
-                        <!-- ======================================================= -->
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-plugin</artifactId>
-                            <version>2.16</version>
-                        </plugin>
+						<!-- ======================================================= -->
+						<!-- Test results -->
+						<!-- ======================================================= -->
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-surefire-plugin</artifactId>
+							<version>2.16</version>
+						</plugin>
 
 						<!-- ======================================================= -->
 						<!-- Report on test results -->
@@ -319,36 +370,36 @@
 		</plugins>
 	</build>
 
-    <!-- Additional repositories -->
-    <!-- Helps to resolve Parent POM and Snapshot artifacts -->
-    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <name>JCenter</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>bintray-release</id>
-            <name>libs-release</name>
-            <url>http://oss.jfrog.org/artifactory/libs-release</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>bintray-snapshot</id>
-            <name>libs-snapshot</name>
-            <url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
-        </repository>
-        <repository>
-            <id>geotoolkit</id>
-            <name>Geotoolkit.org project</name>
-            <url>http://maven.geotoolkit.org</url>
-        </repository>
-    </repositories>
+	<!-- Additional repositories -->
+	<!-- Helps to resolve Parent POM and Snapshot artifacts -->
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<name>JCenter</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-release</id>
+			<name>libs-release</name>
+			<url>http://oss.jfrog.org/artifactory/libs-release</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>bintray-snapshot</id>
+			<name>libs-snapshot</name>
+			<url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+		</repository>
+		<repository>
+			<id>geotoolkit</id>
+			<name>Geotoolkit.org project</name>
+			<url>http://maven.geotoolkit.org</url>
+		</repository>
+	</repositories>
 
 	<distributionManagement>
 		<repository>

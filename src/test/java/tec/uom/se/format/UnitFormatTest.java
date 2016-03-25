@@ -58,89 +58,91 @@ import org.junit.Test;
  *
  */
 public class UnitFormatTest {
-	private Quantity<Length> sut;
+  private Quantity<Length> sut;
 
-	@Before
-	public void init() {
-		//sut = DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10, METRE);
-		sut = Quantities.getQuantity(10, METRE);
-	}
+  @Before
+  public void init() {
+    // sut =
+    // DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10,
+    // METRE);
+    sut = Quantities.getQuantity(10, METRE);
+  }
 
-	@Test
-	public void testFormat() {
-		Unit<Frequency> hz = HERTZ;
-		assertEquals("Hz", hz.toString());
-	}
-	
-	@Test
-	public void testFormat2() {
-		Unit<Frequency> mhz = MEGA(HERTZ);
-		assertEquals("MHz", mhz.toString());
-	}
+  @Test
+  public void testFormat() {
+    Unit<Frequency> hz = HERTZ;
+    assertEquals("Hz", hz.toString());
+  }
 
-	@Test
-	public void testFormat3() {
-		Unit<Frequency> khz = KILO(HERTZ);
-		assertEquals("kHz", khz.toString());
-	}
-	
-	@Test
-	public void testFormat4() {
-		Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
-		assertEquals("km/h", kph.toString());
-	}
-	
-	@Test
-	public void testFormatLocal() {
-		final UnitFormat format = LocalUnitFormat.getInstance();
-		final Appendable a = new StringBuilder();
-		try {
-			format.format(METRE, a);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals(METRE, sut.getUnit());
-		assertEquals("m", a.toString());
+  @Test
+  public void testFormat2() {
+    Unit<Frequency> mhz = MEGA(HERTZ);
+    assertEquals("MHz", mhz.toString());
+  }
 
-		final Appendable a2 = new StringBuilder();
-		@SuppressWarnings("unchecked")
-		Unit<Speed> v = (Unit<Speed>) METRE.divide(SECOND);
-		try {
-			format.format(v, a2);
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
-		assertEquals("m/s", a2.toString());
-	}
+  @Test
+  public void testFormat3() {
+    Unit<Frequency> khz = KILO(HERTZ);
+    assertEquals("kHz", khz.toString());
+  }
 
-	@Test(expected=UnsupportedOperationException.class)
-	public void testParseLocal() {
-		final UnitFormat format = LocalUnitFormat.getInstance();
-		try {
-			Unit<?> u = format.parse("min");
-			assertEquals("min", u.getSymbol());
-		} catch (ParserException e) {
-			fail(e.getMessage());
-		}
-	}
-	
-	@Test(expected=ParserException.class)
-	public void testParseIrregularStringSimple() {
-		final UnitFormat format = SimpleUnitFormat.getInstance();
-		Unit<?> u = format.parse("bl//^--1a");
-	}
-	
-	@Test(expected=ParserException.class)
-	public void testParseIrregularStringEBNF() {
-		final UnitFormat format = EBNFUnitFormat.getInstance();
-			Unit<?> u = format.parse("bl//^--1a");
-			//System.out.println(u);
-	}
-	
-	@Test(expected=UnsupportedOperationException.class)
-	public void testParseIrregularStringLocal() {
-		final UnitFormat format = LocalUnitFormat.getInstance();
-			Unit<?> u = format.parse("bl//^--1a");
-			//System.out.println(u);
-	}
+  @Test
+  public void testFormat4() {
+    Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+    assertEquals("km/h", kph.toString());
+  }
+
+  @Test
+  public void testFormatLocal() {
+    final UnitFormat format = LocalUnitFormat.getInstance();
+    final Appendable a = new StringBuilder();
+    try {
+      format.format(METRE, a);
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+    assertEquals(METRE, sut.getUnit());
+    assertEquals("m", a.toString());
+
+    final Appendable a2 = new StringBuilder();
+    @SuppressWarnings("unchecked")
+    Unit<Speed> v = (Unit<Speed>) METRE.divide(SECOND);
+    try {
+      format.format(v, a2);
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+    assertEquals("m/s", a2.toString());
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void testParseLocal() {
+    final UnitFormat format = LocalUnitFormat.getInstance();
+    try {
+      Unit<?> u = format.parse("min");
+      assertEquals("min", u.getSymbol());
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
+
+  @Test(expected = ParserException.class)
+  public void testParseIrregularStringSimple() {
+    final UnitFormat format = SimpleUnitFormat.getInstance();
+    Unit<?> u = format.parse("bl//^--1a");
+  }
+
+  @Test(expected = ParserException.class)
+  public void testParseIrregularStringEBNF() {
+    final UnitFormat format = EBNFUnitFormat.getInstance();
+    Unit<?> u = format.parse("bl//^--1a");
+    // System.out.println(u);
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void testParseIrregularStringLocal() {
+    final UnitFormat format = LocalUnitFormat.getInstance();
+    Unit<?> u = format.parse("bl//^--1a");
+    // System.out.println(u);
+  }
 }

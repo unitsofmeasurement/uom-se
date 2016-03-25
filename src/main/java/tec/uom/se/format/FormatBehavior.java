@@ -29,7 +29,6 @@
  */
 package tec.uom.se.format;
 
-
 /**
  * Defines different ways of formatting.
  * 
@@ -37,16 +36,16 @@ package tec.uom.se.format;
  */
 public enum FormatBehavior {
 
-	/**
-	 * Formatting occurs in a locale-neutral way.
-	 * 
-	 */
-	LOCALE_NEUTRAL,
+  /**
+   * Formatting occurs in a locale-neutral way.
+   * 
+   */
+  LOCALE_NEUTRAL,
 
-	/**
-	 * Formatting occurs in a locale-sensitive way.
-	 * 
-	 * @see java.util.Locale
-	 */
-	LOCALE_SENSITIVE
+  /**
+   * Formatting occurs in a locale-sensitive way.
+   * 
+   * @see java.util.Locale
+   */
+  LOCALE_SENSITIVE
 }

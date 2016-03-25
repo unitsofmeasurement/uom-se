@@ -32,20 +32,18 @@
 package tec.uom.se.internal.format;
 
 /**
- * An implementation of interface CharStream, where the stream is assumed to
- * contain only ASCII characters (without unicode processing).
+ * An implementation of interface CharStream, where the stream is assumed to contain only ASCII characters (without unicode processing).
  *
  * @version 5.1, December 25, 2013
  */
 
-final class DefaultCharStream
-{
-/** Whether parser is static. */
+final class DefaultCharStream {
+  /** Whether parser is static. */
   public static final boolean staticFlag = false;
   int bufsize;
   int available;
   int tokenBegin;
-/** Position in buffer. */
+  /** Position in buffer. */
   public int bufpos = -1;
   protected int bufline[];
   protected int bufcolumn[];
@@ -63,20 +61,21 @@ final class DefaultCharStream
   protected int inBuf = 0;
   protected int tabSize = 8;
 
-  protected void setTabSize(int i) { tabSize = i; }
-  protected int getTabSize() { return tabSize; }
+  protected void setTabSize(int i) {
+    tabSize = i;
+  }
 
+  protected int getTabSize() {
+    return tabSize;
+  }
 
-  protected void ExpandBuff(boolean wrapAround)
-  {
+  protected void ExpandBuff(boolean wrapAround) {
     char[] newbuffer = new char[bufsize + 2048];
     int newbufline[] = new int[bufsize + 2048];
     int newbufcolumn[] = new int[bufsize + 2048];
 
-    try
-    {
-      if (wrapAround)
-      {
+    try {
+      if (wrapAround) {
         System.arraycopy(buffer, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
         System.arraycopy(buffer, 0, newbuffer, bufsize - tokenBegin, bufpos);
         buffer = newbuffer;
@@ -90,9 +89,7 @@ final class DefaultCharStream
         bufcolumn = newbufcolumn;
 
         maxNextCharInd = (bufpos += (bufsize - tokenBegin));
-      }
-      else
-      {
+      } else {
         System.arraycopy(buffer, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
         buffer = newbuffer;
 
@@ -104,35 +101,26 @@ final class DefaultCharStream
 
         maxNextCharInd = (bufpos -= tokenBegin);
       }
-    }
-    catch (Throwable t)
-    {
+    } catch (Throwable t) {
       throw new Error(t.getMessage());
     }
-
 
     bufsize += 2048;
     available = bufsize;
     tokenBegin = 0;
   }
 
-  protected void FillBuff() throws java.io.IOException
-  {
-    if (maxNextCharInd == available)
-    {
-      if (available == bufsize)
-      {
-        if (tokenBegin > 2048)
-        {
+  protected void FillBuff() throws java.io.IOException {
+    if (maxNextCharInd == available) {
+      if (available == bufsize) {
+        if (tokenBegin > 2048) {
           bufpos = maxNextCharInd = 0;
           available = tokenBegin;
-        }
-        else if (tokenBegin < 0)
+        } else if (tokenBegin < 0)
           bufpos = maxNextCharInd = 0;
         else
           ExpandBuff(false);
-      }
-      else if (available > tokenBegin)
+      } else if (available > tokenBegin)
         available = bufsize;
       else if ((tokenBegin - available) < 2048)
         ExpandBuff(true);
@@ -142,15 +130,12 @@ final class DefaultCharStream
 
     int i;
     try {
-      if ((i = inputStream.read(buffer, maxNextCharInd, available - maxNextCharInd)) == -1)
-      {
+      if ((i = inputStream.read(buffer, maxNextCharInd, available - maxNextCharInd)) == -1) {
         inputStream.close();
         throw new java.io.IOException();
-      }
-      else
+      } else
         maxNextCharInd += i;
-    }
-    catch(java.io.IOException e) {
+    } catch (java.io.IOException e) {
       --bufpos;
       backup(0);
       if (tokenBegin == -1)
@@ -159,9 +144,8 @@ final class DefaultCharStream
     }
   }
 
-/** Start. */
-  public char BeginToken() throws java.io.IOException
-  {
+  /** Start. */
+  public char BeginToken() throws java.io.IOException {
     tokenBegin = -1;
     char c = readChar();
     tokenBegin = bufpos;
@@ -169,39 +153,32 @@ final class DefaultCharStream
     return c;
   }
 
-  protected void UpdateLineColumn(char c)
-  {
+  protected void UpdateLineColumn(char c) {
     column++;
 
-    if (prevCharIsLF)
-    {
+    if (prevCharIsLF) {
       prevCharIsLF = false;
       line += (column = 1);
-    }
-    else if (prevCharIsCR)
-    {
+    } else if (prevCharIsCR) {
       prevCharIsCR = false;
-      if (c == '\n')
-      {
+      if (c == '\n') {
         prevCharIsLF = true;
-      }
-      else
+      } else
         line += (column = 1);
     }
 
-    switch (c)
-    {
-      case '\r' :
+    switch (c) {
+      case '\r':
         prevCharIsCR = true;
         break;
-      case '\n' :
+      case '\n':
         prevCharIsLF = true;
         break;
-      case '\t' :
+      case '\t':
         column--;
         column += (tabSize - (column % tabSize));
         break;
-      default :
+      default:
         break;
     }
 
@@ -209,11 +186,9 @@ final class DefaultCharStream
     bufcolumn[bufpos] = column;
   }
 
-/** Read a character. */
-  public char readChar() throws java.io.IOException
-  {
-    if (inBuf > 0)
-    {
+  /** Read a character. */
+  public char readChar() throws java.io.IOException {
+    if (inBuf > 0) {
       --inBuf;
 
       if (++bufpos == bufsize)
@@ -236,7 +211,6 @@ final class DefaultCharStream
    * @deprecated
    * @see #getEndColumn
    */
-
   public int getColumn() {
     return bufcolumn[bufpos];
   }
@@ -246,7 +220,6 @@ final class DefaultCharStream
    * @deprecated
    * @see #getEndLine
    */
-
   public int getLine() {
     return bufline[bufpos];
   }
@@ -258,7 +231,7 @@ final class DefaultCharStream
 
   /** Get token end line number. */
   public int getEndLine() {
-     return bufline[bufpos];
+    return bufline[bufpos];
   }
 
   /** Get token beginning column number. */
@@ -271,7 +244,7 @@ final class DefaultCharStream
     return bufline[tokenBegin];
   }
 
-/** Backup a number of characters. */
+  /** Backup a number of characters. */
   public void backup(int amount) {
 
     inBuf += amount;
@@ -280,9 +253,7 @@ final class DefaultCharStream
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.Reader dstream, int startline,
-  int startcolumn, int buffersize)
-  {
+  public DefaultCharStream(java.io.Reader dstream, int startline, int startcolumn, int buffersize) {
     inputStream = dstream;
     line = startline;
     column = startcolumn - 1;
@@ -294,28 +265,22 @@ final class DefaultCharStream
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.Reader dstream, int startline,
-                          int startcolumn)
-  {
+  public DefaultCharStream(java.io.Reader dstream, int startline, int startcolumn) {
     this(dstream, startline, startcolumn, 4096);
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.Reader dstream)
-  {
+  public DefaultCharStream(java.io.Reader dstream) {
     this(dstream, 1, 1, 4096);
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.Reader dstream, int startline,
-  int startcolumn, int buffersize)
-  {
+  public void ReInit(java.io.Reader dstream, int startline, int startcolumn, int buffersize) {
     inputStream = dstream;
     line = startline;
     column = startcolumn - 1;
 
-    if (buffer == null || buffersize != buffer.length)
-    {
+    if (buffer == null || buffersize != buffer.length) {
       available = bufsize = buffersize;
       buffer = new char[buffersize];
       bufline = new int[buffersize];
@@ -327,115 +292,95 @@ final class DefaultCharStream
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.Reader dstream, int startline,
-                     int startcolumn)
-  {
+  public void ReInit(java.io.Reader dstream, int startline, int startcolumn) {
     ReInit(dstream, startline, startcolumn, 4096);
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.Reader dstream)
-  {
+  public void ReInit(java.io.Reader dstream) {
     ReInit(dstream, 1, 1, 4096);
-  }
-  /** Constructor. */
-  public DefaultCharStream(java.io.InputStream dstream, String encoding, int startline,
-  int startcolumn, int buffersize) throws java.io.UnsupportedEncodingException
-  {
-    this(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn, buffersize);
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.InputStream dstream, int startline,
-  int startcolumn, int buffersize)
-  {
+  public DefaultCharStream(java.io.InputStream dstream, String encoding, int startline, int startcolumn, int buffersize)
+      throws java.io.UnsupportedEncodingException {
+    this(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn,
+        buffersize);
+  }
+
+  /** Constructor. */
+  public DefaultCharStream(java.io.InputStream dstream, int startline, int startcolumn, int buffersize) {
     this(new java.io.InputStreamReader(dstream), startline, startcolumn, buffersize);
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.InputStream dstream, String encoding, int startline,
-                          int startcolumn) throws java.io.UnsupportedEncodingException
-  {
+  public DefaultCharStream(java.io.InputStream dstream, String encoding, int startline, int startcolumn) throws java.io.UnsupportedEncodingException {
     this(dstream, encoding, startline, startcolumn, 4096);
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.InputStream dstream, int startline,
-                          int startcolumn)
-  {
+  public DefaultCharStream(java.io.InputStream dstream, int startline, int startcolumn) {
     this(dstream, startline, startcolumn, 4096);
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.InputStream dstream, String encoding) throws java.io.UnsupportedEncodingException
-  {
+  public DefaultCharStream(java.io.InputStream dstream, String encoding) throws java.io.UnsupportedEncodingException {
     this(dstream, encoding, 1, 1, 4096);
   }
 
   /** Constructor. */
-  public DefaultCharStream(java.io.InputStream dstream)
-  {
+  public DefaultCharStream(java.io.InputStream dstream) {
     this(dstream, 1, 1, 4096);
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream dstream, String encoding, int startline,
-                          int startcolumn, int buffersize) throws java.io.UnsupportedEncodingException
-  {
-    ReInit(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn, buffersize);
+  public void ReInit(java.io.InputStream dstream, String encoding, int startline, int startcolumn, int buffersize)
+      throws java.io.UnsupportedEncodingException {
+    ReInit(encoding == null ? new java.io.InputStreamReader(dstream) : new java.io.InputStreamReader(dstream, encoding), startline, startcolumn,
+        buffersize);
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream dstream, int startline,
-                          int startcolumn, int buffersize)
-  {
+  public void ReInit(java.io.InputStream dstream, int startline, int startcolumn, int buffersize) {
     ReInit(new java.io.InputStreamReader(dstream), startline, startcolumn, buffersize);
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream dstream, String encoding) throws java.io.UnsupportedEncodingException
-  {
+  public void ReInit(java.io.InputStream dstream, String encoding) throws java.io.UnsupportedEncodingException {
     ReInit(dstream, encoding, 1, 1, 4096);
   }
 
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream dstream)
-  {
+  public void ReInit(java.io.InputStream dstream) {
     ReInit(dstream, 1, 1, 4096);
   }
+
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream dstream, String encoding, int startline,
-                     int startcolumn) throws java.io.UnsupportedEncodingException
-  {
+  public void ReInit(java.io.InputStream dstream, String encoding, int startline, int startcolumn) throws java.io.UnsupportedEncodingException {
     ReInit(dstream, encoding, startline, startcolumn, 4096);
   }
+
   /** Reinitialise. */
-  public void ReInit(java.io.InputStream dstream, int startline,
-                     int startcolumn)
-  {
+  public void ReInit(java.io.InputStream dstream, int startline, int startcolumn) {
     ReInit(dstream, startline, startcolumn, 4096);
   }
+
   /** Get token literal value. */
-  public String GetImage()
-  {
+  public String GetImage() {
     if (bufpos >= tokenBegin)
       return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
     else
-      return new String(buffer, tokenBegin, bufsize - tokenBegin) +
-                            new String(buffer, 0, bufpos + 1);
+      return new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
   }
 
   /** Get the suffix. */
-  public char[] GetSuffix(int len)
-  {
+  public char[] GetSuffix(int len) {
     char[] ret = new char[len];
 
     if ((bufpos + 1) >= len)
       System.arraycopy(buffer, bufpos - len + 1, ret, 0, len);
-    else
-    {
-      System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0,
-                                                        len - bufpos - 1);
+    else {
+      System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0, len - bufpos - 1);
       System.arraycopy(buffer, 0, ret, len - bufpos - 1, bufpos + 1);
     }
 
@@ -443,8 +388,7 @@ final class DefaultCharStream
   }
 
   /** Reset buffer when finished. */
-  public void Done()
-  {
+  public void Done() {
     buffer = null;
     bufline = null;
     bufcolumn = null;
@@ -453,25 +397,20 @@ final class DefaultCharStream
   /**
    * Method to adjust line and column numbers for the start of a token.
    */
-  public void adjustBeginLineColumn(int newLine, int newCol)
-  {
+  public void adjustBeginLineColumn(int newLine, int newCol) {
     int start = tokenBegin;
     int len;
 
-    if (bufpos >= tokenBegin)
-    {
+    if (bufpos >= tokenBegin) {
       len = bufpos - tokenBegin + inBuf + 1;
-    }
-    else
-    {
+    } else {
       len = bufsize - tokenBegin + bufpos + 1 + inBuf;
     }
 
     int i = 0, j = 0, k = 0;
     int nextColDiff = 0, columnDiff = 0;
 
-    while (i < len && bufline[j = start % bufsize] == bufline[k = ++start % bufsize])
-    {
+    while (i < len && bufline[j = start % bufsize] == bufline[k = ++start % bufsize]) {
       bufline[j] = newLine;
       nextColDiff = columnDiff + bufcolumn[k] - bufcolumn[j];
       bufcolumn[j] = newCol + columnDiff;
@@ -479,13 +418,11 @@ final class DefaultCharStream
       i++;
     }
 
-    if (i < len)
-    {
+    if (i < len) {
       bufline[j] = newLine++;
       bufcolumn[j] = newCol + columnDiff;
 
-      while (i++ < len)
-      {
+      while (i++ < len) {
         if (bufline[j = start % bufsize] != bufline[++start % bufsize])
           bufline[j] = newLine++;
         else
@@ -498,4 +435,7 @@ final class DefaultCharStream
   }
 
 }
-/* JavaCC - OriginalChecksum=ec4e178f3ccf05ea2ca32d15e09312ca (do not edit this line) */
+/*
+ * JavaCC - OriginalChecksum=ec4e178f3ccf05ea2ca32d15e09312ca (do not edit this
+ * line)
+ */

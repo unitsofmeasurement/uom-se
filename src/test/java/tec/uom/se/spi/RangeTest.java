@@ -44,42 +44,42 @@ import tec.uom.se.quantity.QuantityRange;
 import tec.uom.se.spi.Range;
 
 public class RangeTest {
-	private Quantity<Mass> min;
-	private Quantity<Mass> max;
-	private Quantity<Mass> res;
-	@SuppressWarnings("rawtypes")
-	private Range range;
-	
-	@Before
-	public void init() {
-		min = Quantities.getQuantity(1d, KILOGRAM);
-		max = Quantities.getQuantity(10d, KILOGRAM);
-		res = Quantities.getQuantity(2d, KILOGRAM);
-		
-		range = QuantityRange.of(min, max, res);
-	}
-	
-	@Test
-	public void testGetMinimum() {
-		assertEquals(min, range.getMinimum());
-	}
+  private Quantity<Mass> min;
+  private Quantity<Mass> max;
+  private Quantity<Mass> res;
+  @SuppressWarnings("rawtypes")
+  private Range range;
 
-	@Test
-	public void testGetMaximum() {
-		assertEquals(max, range.getMaximum());
-	}
+  @Before
+  public void init() {
+    min = Quantities.getQuantity(1d, KILOGRAM);
+    max = Quantities.getQuantity(10d, KILOGRAM);
+    res = Quantities.getQuantity(2d, KILOGRAM);
 
-	@Test
-	public void testGetResolution() {
-		assertTrue(range.getClass().equals(QuantityRange.class));
-		@SuppressWarnings("unchecked")
-		QuantityRange<Mass> qr = (QuantityRange<Mass>) range;
-		assertEquals(res, qr.getResolution());
-	}
+    range = QuantityRange.of(min, max, res);
+  }
 
-	@Test
-	@Ignore
-	public void testToString() {
-		assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
-	}
+  @Test
+  public void testGetMinimum() {
+    assertEquals(min, range.getMinimum());
+  }
+
+  @Test
+  public void testGetMaximum() {
+    assertEquals(max, range.getMaximum());
+  }
+
+  @Test
+  public void testGetResolution() {
+    assertTrue(range.getClass().equals(QuantityRange.class));
+    @SuppressWarnings("unchecked")
+    QuantityRange<Mass> qr = (QuantityRange<Mass>) range;
+    assertEquals(res, qr.getResolution());
+  }
+
+  @Test
+  @Ignore
+  public void testToString() {
+    assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
+  }
 }

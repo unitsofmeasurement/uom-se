@@ -50,45 +50,46 @@ import org.junit.Test;
  * @author Werner Keil
  */
 public class QuantityFactoryServiceTest {
-	static QuantityFactoryService service;
-	
-	@BeforeClass
-	public static void init() {
-		service = Bootstrap.getService(QuantityFactoryService.class);
-	}
-	
-	@Test
-	public void testLength() {
-		Quantity<Length> l =  service.getQuantityFactory(Length.class).create(23.5, METRE); // 23.0 km
-		assertEquals(23.5d, l.getValue());
-		assertEquals(METRE, l.getUnit());
-		assertEquals("m", l.getUnit().getSymbol());
-	}
+  static QuantityFactoryService service;
 
-	@Test
-	public void testMass() {
-		Quantity<Mass> m = service.getQuantityFactory(Mass.class).create(10, KILOGRAM); // 10 kg
-		assertEquals(10, m.getValue());
-		assertEquals(KILOGRAM, m.getUnit());
-		assertEquals("kg", m.getUnit().getSymbol());
-		assertEquals("10 kg", m.toString());
-	}
-	
-	@Test
-	public void testTime() {
-		Quantity<Time> t = service.getQuantityFactory(Time.class).create(30, SECOND); // 30 sec
-		assertEquals(30, t.getValue());
-		assertEquals(SECOND, t.getUnit());
-		assertEquals("s", t.getUnit().getSymbol());
-		assertEquals("30 s", t.toString());
-	}
+  @BeforeClass
+  public static void init() {
+    service = Bootstrap.getService(QuantityFactoryService.class);
+  }
 
-	@Test
-	public void testTimeDerived() {
-		Quantity<Time> t = service.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
-		assertEquals(40, t.getValue());
-		assertEquals(MINUTE, t.getUnit());
-		assertEquals("min", t.getUnit().getSymbol()); //TODO see https://github.com/unitsofmeasurement/uom-se/issues/54
-		assertEquals("40 min", t.toString());
-	}
+  @Test
+  public void testLength() {
+    Quantity<Length> l = service.getQuantityFactory(Length.class).create(23.5, METRE); // 23.0 km
+    assertEquals(23.5d, l.getValue());
+    assertEquals(METRE, l.getUnit());
+    assertEquals("m", l.getUnit().getSymbol());
+  }
+
+  @Test
+  public void testMass() {
+    Quantity<Mass> m = service.getQuantityFactory(Mass.class).create(10, KILOGRAM); // 10 kg
+    assertEquals(10, m.getValue());
+    assertEquals(KILOGRAM, m.getUnit());
+    assertEquals("kg", m.getUnit().getSymbol());
+    assertEquals("10 kg", m.toString());
+  }
+
+  @Test
+  public void testTime() {
+    Quantity<Time> t = service.getQuantityFactory(Time.class).create(30, SECOND); // 30 sec
+    assertEquals(30, t.getValue());
+    assertEquals(SECOND, t.getUnit());
+    assertEquals("s", t.getUnit().getSymbol());
+    assertEquals("30 s", t.toString());
+  }
+
+  @Test
+  public void testTimeDerived() {
+    Quantity<Time> t = service.getQuantityFactory(Time.class).create(40, MINUTE); // 40 min
+    assertEquals(40, t.getValue());
+    assertEquals(MINUTE, t.getUnit());
+    assertEquals("min", t.getUnit().getSymbol()); // TODO see
+    // https://github.com/unitsofmeasurement/uom-se/issues/54
+    assertEquals("40 min", t.toString());
+  }
 }
