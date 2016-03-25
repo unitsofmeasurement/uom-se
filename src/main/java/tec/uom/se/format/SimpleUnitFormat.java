@@ -987,6 +987,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		}
 
 		DEFAULT.label(Units.PERCENT, "%");
+		DEFAULT.label(Units.KILOGRAM, "kg");
+		ASCII.label(Units.KILOGRAM, "kg");
+		DEFAULT.label(Units.METRE, "m");
+		ASCII.label(Units.METRE, "m");
+		DEFAULT.label(Units.SECOND, "s");
+		ASCII.label(Units.SECOND, "s");
 		// DEFAULT.label(NonUnits.DECIBEL, "dB");
 		// DEFAULT.label(NonUnits.G, "grav");
 		// DEFAULT.label(NonUnits.ATOM, "atom");
@@ -1003,7 +1009,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 		DEFAULT.label(Units.MINUTE, "min");
 		DEFAULT.label(Units.HOUR, "h");
 		DEFAULT.label(Units.DAY, "day");
-		// DEFAULT.label(Units.WEEK, "week");
+		DEFAULT.label(Units.WEEK, "week");
 		DEFAULT.label(Units.YEAR, "year");
 		// DEFAULT.label(Units.MONTH, "month");
 		// DEFAULT.label(NonUnits.DAY_SIDEREAL, "day_sidereal");
