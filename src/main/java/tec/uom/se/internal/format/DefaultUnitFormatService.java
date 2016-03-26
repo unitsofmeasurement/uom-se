@@ -54,47 +54,46 @@ import tec.uom.se.format.SimpleUnitFormat.Flavor;
  */
 @Priority(PRIO)
 public class DefaultUnitFormatService implements UnitFormatService, IntPrioritySupplier {
-    static final int PRIO = 1000;
-    
-    private static final String DEFAULT_FORMAT = Flavor.Default.name();
+  static final int PRIO = 1000;
 
-    private final Map<String, UnitFormat> formats = new HashMap<>();
+  private static final String DEFAULT_FORMAT = Flavor.Default.name();
 
-    public DefaultUnitFormatService() {
-	formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
-	formats.put(Flavor.ASCII.name(),
-		SimpleUnitFormat.getInstance(Flavor.ASCII));
-	formats.put("EBNF", EBNFUnitFormat.getInstance());
-	formats.put("Local", LocalUnitFormat.getInstance());
-    }
+  private final Map<String, UnitFormat> formats = new HashMap<>();
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see UnitFormatService#getUnitFormat(String)
-     */
-    @Override
-    public UnitFormat getUnitFormat(String formatName) {
-	Objects.requireNonNull(formatName, "Format name required");
-	return formats.get(formatName);
-    }
+  public DefaultUnitFormatService() {
+    formats.put(DEFAULT_FORMAT, SimpleUnitFormat.getInstance());
+    formats.put(Flavor.ASCII.name(), SimpleUnitFormat.getInstance(Flavor.ASCII));
+    formats.put("EBNF", EBNFUnitFormat.getInstance());
+    formats.put("Local", LocalUnitFormat.getInstance());
+  }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see UnitFormatService#getUnitFormat()
-     */
-    @Override
-    public UnitFormat getUnitFormat() {
-	return getUnitFormat(DEFAULT_FORMAT);
-    }
+  /*
+   * (non-Javadoc)
+   * 
+   * @see UnitFormatService#getUnitFormat(String)
+   */
+  @Override
+  public UnitFormat getUnitFormat(String formatName) {
+    Objects.requireNonNull(formatName, "Format name required");
+    return formats.get(formatName);
+  }
 
-    public Set<String> getAvailableFormatNames() {
-	return formats.keySet();
-    }
+  /*
+   * (non-Javadoc)
+   * 
+   * @see UnitFormatService#getUnitFormat()
+   */
+  @Override
+  public UnitFormat getUnitFormat() {
+    return getUnitFormat(DEFAULT_FORMAT);
+  }
 
-    @Override
-    public int getPriority() {
-	return PRIO;
-    }
+  public Set<String> getAvailableFormatNames() {
+    return formats.keySet();
+  }
+
+  @Override
+  public int getPriority() {
+    return PRIO;
+  }
 }

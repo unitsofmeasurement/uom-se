@@ -58,7 +58,7 @@ import org.junit.Test;
 public class UnitFormatTest {
   private Quantity<Length> sut;
   private UnitFormat format;
-  
+
   @Before
   public void init() {
     // sut =
@@ -148,7 +148,7 @@ public class UnitFormatTest {
       fail(e.getMessage());
     }
   }
-  
+
   @Test(expected = UnsupportedOperationException.class)
   public void testParseLocal() {
     final UnitFormat format = LocalUnitFormat.getInstance();
