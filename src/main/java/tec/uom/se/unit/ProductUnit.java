@@ -304,7 +304,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   @SuppressWarnings("unchecked")
   @Override
   public AbstractUnit<Q> toSystemUnit() {
-    Unit<?> systemUnit = Units.ONE;
+    Unit<?> systemUnit = AbstractUnit.ONE;
     for (Element element : elements) {
       Unit<?> unit = element.unit.getSystemUnit();
       unit = unit.pow(element.pow);
@@ -494,6 +494,31 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
      */
     public int getRoot() {
       return root;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o)
+        return true;
+      if (o == null || getClass() != o.getClass())
+        return false;
+
+      Element element = (Element) o;
+
+      if (pow != element.pow)
+        return false;
+      if (root != element.root)
+        return false;
+      return unit != null ? unit.equals(element.unit) : element.unit == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+      int result = unit != null ? unit.hashCode() : 0;
+      result = 31 * result + pow;
+      result = 31 * result + root;
+      return result;
     }
   }
 
