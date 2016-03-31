@@ -29,20 +29,20 @@
  */
 package tec.uom.se.unit;
 
-import static org.junit.Assert.assertEquals;
-import static tec.uom.se.unit.MetricPrefix.*;
-import static tec.uom.se.unit.Units.GRAM;
-import static tec.uom.se.unit.Units.KILOGRAM;
-import static tec.uom.se.unit.Units.LITRE;
+import org.junit.Test;
+import tec.uom.se.quantity.Quantities;
+
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import tec.uom.se.quantity.Quantities;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static tec.uom.se.unit.MetricPrefix.*;
+import static tec.uom.se.unit.Units.*;
 
 public class PrefixTest {
   @Test
@@ -85,6 +85,17 @@ public class PrefixTest {
   }
 
   @Test
+  public void testMilli4() {
+    Quantity<Volume> m1 = Quantities.getQuantity(1.0, MILLI(LITRE));
+    assertEquals(1d, m1.getValue());
+    assertEquals("ml", m1.getUnit().toString());
+
+    Quantity<Volume> m2 = m1.to(LITRE);
+    assertEquals(0.001d, m2.getValue());
+    assertEquals("l", m2.getUnit().toString());
+  }
+
+  @Test
   public void testMicro2() {
     Quantity<Length> m1 = Quantities.getQuantity(1.0, Units.METRE);
     assertEquals(1d, m1.getValue());
@@ -115,5 +126,12 @@ public class PrefixTest {
     Quantity<Length> m2 = m1.to(NANO(Units.METRE));
     assertEquals(1000000000.0d, m2.getValue());
     assertEquals("nm", m2.getUnit().toString());
+  }
+
+  @Test
+  public void testHashMapAccessingMap() {
+    assertThat(LITRE.toString(), is("l"));
+    assertThat(MILLI(LITRE).toString(), is("ml"));
+    assertNotNull(MILLI(GRAM).toString(), is("mg"));
   }
 }
