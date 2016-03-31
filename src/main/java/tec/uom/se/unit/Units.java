@@ -29,11 +29,9 @@
  */
 package tec.uom.se.unit;
 
-import static tec.uom.se.unit.MetricPrefix.*;
 import tec.uom.lib.common.function.Nameable;
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.PiMultiplierConverter;
 import tec.uom.se.function.RationalConverter;
@@ -415,8 +413,11 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
   /**
    * A volume unit accepted for use with SI units (standard name <code>l</code>).
+   * 
+   * @see <a href="https://en.wikipedia.org/wiki/Litre"> Wikipedia: Litre</a>
    */
-  public static final Unit<Volume> LITRE = addUnit(new TransformedUnit<>(CUBIC_METRE, new RationalConverter(1, 1000)));
+  public static final Unit<Volume> LITRE = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, new TransformedUnit<Volume>(CUBIC_METRE,
+      new RationalConverter(1, 1000)), "Litre", "l");
 
   /**
    * Returns the unique instance of this class.

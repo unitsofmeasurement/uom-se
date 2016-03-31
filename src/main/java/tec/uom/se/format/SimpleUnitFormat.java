@@ -1011,7 +1011,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     ASCII.label(MetricPrefix.MICRO(Units.LITRE), "microL");
     ASCII.label(MetricPrefix.MILLI(Units.LITRE), "mL");
     DEFAULT.label(MetricPrefix.MILLI(Units.LITRE), "ml");
-    ASCII.label(MetricPrefix.MILLI(Units.LITRE), "ml");
     ASCII.label(MetricPrefix.CENTI(Units.LITRE), "cL");
     DEFAULT.label(MetricPrefix.CENTI(Units.LITRE), "cl");
     ASCII.label(MetricPrefix.DECI(Units.LITRE), "dL");

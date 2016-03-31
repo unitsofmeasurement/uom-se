@@ -258,7 +258,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   @Override
   public final <T extends Quantity<T>> AbstractUnit<T> asType(Class<T> type) {
     Dimension typeDimension = QuantityDimension.getInstance(type);
-    if ((typeDimension != null) && (!this.getDimension().equals(typeDimension)))
+    if ((typeDimension != null) && (!typeDimension.equals(this.getDimension())))
       throw new ClassCastException("The unit: " + this + " is not compatible with quantities of type " + type);
     return (AbstractUnit<T>) this;
   }
