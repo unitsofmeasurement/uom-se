@@ -38,9 +38,9 @@ import java.util.stream.Collectors;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.quantity.Time;
-import javax.measure.spi.Bootstrap;
 import javax.measure.spi.QuantityFactory;
 import javax.measure.spi.QuantityFactoryService;
+import javax.measure.spi.ServiceProvider;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -58,7 +58,7 @@ public class QuantityFunctionsGroupTest {
 
   @Before
   public void init() {
-    QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+    QuantityFactoryService factoryService = ServiceProvider.current().getQuantityFactoryService();
     timeFactory = factoryService.getQuantityFactory(Time.class);
     minutes = timeFactory.create(BigDecimal.valueOf(15), Units.MINUTE);
     hours = timeFactory.create(BigDecimal.valueOf(18), Units.HOUR);

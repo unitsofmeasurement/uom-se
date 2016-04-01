@@ -30,7 +30,10 @@
 package tec.uom.se.internal;
 
 import javax.annotation.Priority;
+import javax.measure.spi.QuantityFactoryService;
 import javax.measure.spi.ServiceProvider;
+import javax.measure.spi.SystemOfUnitsService;
+import javax.measure.spi.UnitFormatService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,9 +51,9 @@ import java.util.logging.Logger;
  * services required.
  *
  * @author Werner Keil
- * @version 0.8
+ * @version 0.8.1
  */
-public class PriorityAwareServiceProvider implements ServiceProvider { // TODO actually PriorityAnnotationAwareServiceProvider
+public class PriorityAwareServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> { // TODO actually PriorityAnnotationAwareServiceProvider
     /**
      * List of services loaded, per class.
      */
@@ -78,8 +81,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider { // TODO a
      *            the concrete type.
      * @return the items found, never {@code null}.
      */
-    @Override
-    public <T> List<T> getServices(final Class<T> serviceType) {
+    protected <T> List<T> getServices(final Class<T> serviceType) {
 	@SuppressWarnings("unchecked")
 	List<T> found = (List<T>) servicesLoaded.get(serviceType);
 	if (found != null) {
@@ -89,8 +91,7 @@ public class PriorityAwareServiceProvider implements ServiceProvider { // TODO a
 	return loadServices(serviceType);
     }
 
-    @Override
-    public <T> T getService(Class<T> serviceType) {
+    protected <T> T getService(Class<T> serviceType) {
 	List<T> services = getServices(serviceType);
 	if (services.isEmpty()) {
 	    return null;
@@ -153,5 +154,20 @@ public class PriorityAwareServiceProvider implements ServiceProvider { // TODO a
     @Override
     public int compareTo(ServiceProvider o) {
 	return Integer.compare(getPriority(), o.getPriority());
+    }
+
+    @Override
+    public SystemOfUnitsService getSystemOfUnitsService() {
+      return getService(SystemOfUnitsService.class);
+    }
+
+    @Override
+    public UnitFormatService getUnitFormatService() {
+      return getService(UnitFormatService.class);
+    }
+
+    @Override
+    public QuantityFactoryService getQuantityFactoryService() {
+      return getService(QuantityFactoryService.class);
     }
 }

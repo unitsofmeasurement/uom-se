@@ -30,7 +30,6 @@
 package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static tec.uom.se.unit.Units.KILOGRAM;
 import static tec.uom.se.unit.Units.METRE;
 import static tec.uom.se.unit.Units.MINUTE;
@@ -40,8 +39,8 @@ import javax.measure.Quantity;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Time;
-import javax.measure.spi.Bootstrap;
 import javax.measure.spi.QuantityFactoryService;
+import javax.measure.spi.ServiceProvider;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class QuantityFactoryServiceTest {
 
   @BeforeClass
   public static void init() {
-    service = Bootstrap.getService(QuantityFactoryService.class);
+    service = ServiceProvider.current().getQuantityFactoryService();
   }
 
   @Test

@@ -36,9 +36,9 @@ import java.util.List;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Time;
-import javax.measure.spi.Bootstrap;
 import javax.measure.spi.QuantityFactory;
 import javax.measure.spi.QuantityFactoryService;
+import javax.measure.spi.ServiceProvider;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class QuantityFunctionsReducerTest {
 
   @Before
   public void init() {
-    QuantityFactoryService factoryService = Bootstrap.getService(QuantityFactoryService.class);
+    QuantityFactoryService factoryService = ServiceProvider.current().getQuantityFactoryService();
     timeFactory = factoryService.getQuantityFactory(Time.class);
     minutes = timeFactory.create(15, Units.MINUTE);
     hours = timeFactory.create(18, Units.HOUR);

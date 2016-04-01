@@ -31,10 +31,7 @@ package tec.uom.se.internal.format;
 
 import static org.junit.Assert.*;
 
-import java.util.Collection;
-import java.util.Locale;
-
-import javax.measure.spi.Bootstrap;
+import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 
 import org.junit.Test;
@@ -46,15 +43,15 @@ public class UnitFormatServiceTest {
 
   @Test
   public void testGetServices() throws Exception {
-    Collection<UnitFormatService> services = Bootstrap.getServices(UnitFormatService.class);
+    ServiceProvider[] services = ServiceProvider.available();
     assertNotNull(services);
-    assertFalse(services.isEmpty());
-    assertEquals(1, services.size());
+    // assertFalse(services.isEmpty());
+    assertEquals(1, services.length);
   }
 
   @Test
   public void testGetService() throws Exception {
-    UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
+    UnitFormatService ufs = ServiceProvider.current().getUnitFormatService();
     assertNotNull(ufs);
     assertNotNull(ufs.getUnitFormat());
     assertEquals("DefaultFormat", ufs.getUnitFormat().getClass().getSimpleName());
@@ -62,20 +59,15 @@ public class UnitFormatServiceTest {
 
   @Test
   public void testGetFormatFound() throws Exception {
-    UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
+    UnitFormatService ufs = ServiceProvider.current().getUnitFormatService();
     assertNotNull(ufs);
     assertNotNull(ufs.getUnitFormat("EBNF"));
   }
 
   @Test
   public void testGetFormatNotFound() throws Exception {
-    UnitFormatService ufs = Bootstrap.getService(UnitFormatService.class);
+    UnitFormatService ufs = ServiceProvider.current().getUnitFormatService();
     assertNotNull(ufs);
     assertNull(ufs.getUnitFormat("XYZ"));
-  }
-
-  @Test
-  public void testGetService_BadCase() throws Exception {
-    assertNull(Bootstrap.getService(Locale.class));
   }
 }
