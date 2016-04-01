@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.internal;
+package tec.uom.se.spi;
 
 import javax.annotation.Priority;
 import javax.measure.spi.QuantityFactoryService;
@@ -46,12 +46,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class implements the (default) {@link javax.measure.spi.ServiceProvider}
- * interface and hereby uses the JDK {@link java.util.ServiceLoader} to load the
- * services required.
+ * This class extends the {@link javax.measure.spi.ServiceProvider}
+ * class and hereby uses the JDK {@link java.util.ServiceLoader} to load the required
+ * services.
  *
  * @author Werner Keil
- * @version 0.8.1
+ * @version 0.8.2
  */
 public class PriorityAwareServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> { // TODO actually PriorityAnnotationAwareServiceProvider
     /**
