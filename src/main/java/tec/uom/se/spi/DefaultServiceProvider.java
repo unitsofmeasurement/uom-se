@@ -29,7 +29,7 @@
  */
 package tec.uom.se.spi;
 
-import javax.annotation.Priority;
+import javax.annotation.Priority; // TODO this should no longer be necessary
 import javax.measure.spi.QuantityFactoryService;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
@@ -51,16 +51,16 @@ import java.util.logging.Logger;
  * services.
  *
  * @author Werner Keil
- * @version 0.8.2
+ * @version 0.8.3
  */
-public class PriorityAwareServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> { // TODO actually PriorityAnnotationAwareServiceProvider
+public class DefaultServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> { // TODO actually PriorityAnnotationAwareServiceProvider
     /**
      * List of services loaded, per class.
      */
     @SuppressWarnings("rawtypes")
     private final Map<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<>();
 
-    private static final Comparator<Object> SERVICE_COMPARATOR = PriorityAwareServiceProvider::compareServices;
+    private static final Comparator<Object> SERVICE_COMPARATOR = DefaultServiceProvider::compareServices;
 
     /**
      * Returns a priority value of 10.
@@ -143,7 +143,7 @@ public class PriorityAwareServiceProvider extends ServiceProvider implements Com
 		    .unmodifiableList(previousServices != null ? previousServices
 			    : services);
 	} catch (Exception e) {
-	    Logger.getLogger(PriorityAwareServiceProvider.class.getName()).log(
+	    Logger.getLogger(DefaultServiceProvider.class.getName()).log(
 		    Level.WARNING,
 		    "Error loading services of type " + serviceType, e);
 	    Collections.sort(services, SERVICE_COMPARATOR);
