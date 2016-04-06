@@ -56,7 +56,7 @@ import tec.uom.se.ComparableQuantity;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, $Date: 2015-12-30 $
+ * @version 0.7, $Date: 2016-04-06 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
@@ -165,7 +165,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
   @Override
   public final StringBuffer format(Object obj, final StringBuffer toAppendTo, FieldPosition pos) {
     if (!(obj instanceof AbstractQuantity<?>))
-      throw new IllegalArgumentException("obj: Not an instance of Measure");
+      throw new IllegalArgumentException("obj: Not an instance of Quantity");
     if ((toAppendTo == null) || (pos == null))
       throw new NullPointerException();
     try {

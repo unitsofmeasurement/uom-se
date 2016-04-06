@@ -38,9 +38,9 @@ import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.ComparableQuantity;
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.unit.Units;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 class NumberSpaceQuantityFormat extends QuantityFormat {
@@ -54,13 +54,42 @@ class NumberSpaceQuantityFormat extends QuantityFormat {
     this.unitFormat = unitFormat;
   }
 
+  static int getFractionDigitsCount(double d) {
+    if (d >= 1) { // we only need the fraction digits
+      d = d - (long) d;
+    }
+    if (d == 0) { // nothing to count
+      return 0;
+    }
+    d *= 10; // shifts 1 digit to left
+    int count = 1;
+    while (d - (long) d != 0) { // keeps shifting until there are no more
+      // fractions
+      d *= 10;
+      count++;
+    }
+    return count;
+  }
+
   @Override
-  public Appendable format(Quantity<?> measure, Appendable dest) throws IOException {
-    dest.append(numberFormat.format(measure.getValue()));
-    if (measure.getUnit().equals(Units.ONE))
+  public Appendable format(Quantity<?> quantity, Appendable dest) throws IOException {
+    // dest.append(numberFormat.format(quantity.getValue()));
+    // if (quantity.getUnit().equals(AbstractUnit.ONE))
+    // return dest;
+    // dest.append(' ');
+    // return unitFormat.format(quantity.getUnit(), dest);
+    int fract = 0;
+    if (quantity != null && quantity.getValue() != null) {
+      fract = getFractionDigitsCount(quantity.getValue().doubleValue());
+    }
+    if (fract > 1) {
+      numberFormat.setMaximumFractionDigits(fract + 1);
+    }
+    dest.append(numberFormat.format(quantity.getValue()));
+    if (quantity.getUnit().equals(AbstractUnit.ONE))
       return dest;
     dest.append(' ');
-    return unitFormat.format(measure.getUnit(), dest);
+    return unitFormat.format(quantity.getUnit(), dest);
   }
 
   @Override
@@ -80,5 +109,4 @@ class NumberSpaceQuantityFormat extends QuantityFormat {
   }
 
   private static final long serialVersionUID = 1L;
-
 }
