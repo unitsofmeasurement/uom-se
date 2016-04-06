@@ -52,9 +52,10 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2016-02-05 $
+ * @version 0.8.1, $Date: 2016-04-06 $
  * 
  */
+@SuppressWarnings("rawtypes")
 public abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSequence, Unit> {
 
   /**
@@ -117,6 +118,20 @@ public abstract class AbstractUnitFormat implements UnitFormat, Parser<CharSeque
    *           if any problem occurs while parsing the specified character sequence (e.g. illegal syntax).
    */
   protected abstract Unit<?> parse(CharSequence csq, ParsePosition cursor) throws IllegalArgumentException;
+
+  /**
+   * Parses a portion of the specified <code>CharSequence</code> from the specified position to produce a unit. If there is no unit to parse
+   * {@link AbstractUnit#ONE} is returned.
+   *
+   * @param csq
+   *          the <code>CharSequence</code> to parse.
+   * @param index
+   *          the current parsing index.
+   * @return the unit parsed from the specified character sub-sequence.
+   * @throws IllegalArgumentException
+   *           if any problem occurs while parsing the specified character sequence (e.g. illegal syntax).
+   */
+  protected abstract Unit<?> parse(CharSequence csq, int index) throws IllegalArgumentException;
 
   /**
    * Convenience method equivalent to {@link #format(AbstractUnit, Appendable)} except it does not raise an IOException.

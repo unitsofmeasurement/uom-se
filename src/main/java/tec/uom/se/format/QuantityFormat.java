@@ -47,37 +47,37 @@ import tec.uom.se.ComparableQuantity;
 
 /**
  * <p>
- * This class provides the interface for formatting and parsing {@link AbstractQuantity measurements}.
+ * This class provides the interface for formatting and parsing {@link AbstractQuantity quantities}.
  * </p>
  *
  * <p>
- * Instances of this class should be able to format measurements stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+ * Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, $Date: 2016-04-06 $
+ * @version 0.8, $Date: 2016-04-06 $
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
 
   /**
-	 *
-	 */
+     *
+     */
   private static final long serialVersionUID = -4628006924354248662L;
+
+  /**
+   * Holds the localized format instance.
+   */
+  private static final NumberSpaceQuantityFormat LOCAL = new NumberSpaceQuantityFormat(NumberFormat.getInstance(), LocalUnitFormat.getInstance());
 
   /**
    * Holds the default format instance.
    */
-  private static final NumberSpaceQuantityFormat DEFAULT = new NumberSpaceQuantityFormat(NumberFormat.getInstance(), LocalUnitFormat.getInstance());
+  private static final DefaultQuantityFormat DEFAULT = new DefaultQuantityFormat();
 
   /**
-   * Holds the standard format instance.
-   */
-  private static final DefaultQuantityFormat STANDARD = new DefaultQuantityFormat();
-
-  /**
-   * Returns the measure format for the default locale. The default format assumes the measure is composed of a decimal number and a {@link Unit}
+   * Returns the quantity format for the default locale. The default format assumes the quantity is composed of a decimal number and a {@link Unit}
    * separated by whitespace(s).
    *
    * @return <code>MeasureFormat.getInstance(NumberFormat.getInstance(), UnitFormat.getInstance())</code>
@@ -87,7 +87,7 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
   }
 
   /**
-   * Returns the measure format using the specified number format and unit format (the number and unit are separated by one space).
+   * Returns the quantity format using the specified number format and unit format (the number and unit are separated by one space).
    *
    * @param numberFormat
    *          the number format.
@@ -112,26 +112,26 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
   public static QuantityFormat getInstance(FormatBehavior style) {
     switch (style) {
       case LOCALE_NEUTRAL:
-        return STANDARD;
-      case LOCALE_SENSITIVE:
         return DEFAULT;
+      case LOCALE_SENSITIVE:
+        return LOCAL;
       default:
         return DEFAULT;
     }
   }
 
   /**
-   * Formats the specified measure into an <code>Appendable</code>.
+   * Formats the specified quantity into an <code>Appendable</code>.
    *
-   * @param measure
-   *          the measure to format.
+   * @param quantity
+   *          the quantity to format.
    * @param dest
    *          the appendable destination.
    * @return the specified <code>Appendable</code>.
    * @throws IOException
    *           if an I/O exception occurs.
    */
-  public abstract Appendable format(Quantity<?> measure, Appendable dest) throws IOException;
+  public abstract Appendable format(Quantity<?> quantity, Appendable dest) throws IOException;
 
   /**
    * Parses a portion of the specified <code>CharSequence</code> from the specified position to produce an object. If parsing succeeds, then the index
@@ -162,6 +162,20 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
   @Override
   public abstract ComparableQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException;
 
+  /**
+   * Parses a portion of the specified <code>CharSequence</code> from the specified position to produce an object. If parsing succeeds, then the index
+   * of the <code>cursor</code> argument is updated to the index after the last character used.
+   * 
+   * @param csq
+   *          the <code>CharSequence</code> to parse.
+   * @param index
+   *          the current parsing index.
+   * @return the object parsed from the specified character sub-sequence.
+   * @throws IllegalArgumentException
+   *           if any problem occurs while parsing the specified character sequence (e.g. illegal syntax).
+   */
+  abstract ComparableQuantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException;
+
   @Override
   public final StringBuffer format(Object obj, final StringBuffer toAppendTo, FieldPosition pos) {
     if (!(obj instanceof AbstractQuantity<?>))
@@ -188,15 +202,15 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
   /**
    * Convenience method equivalent to {@link #format(AbstractQuantity, Appendable)} except it does not raise an IOException.
    *
-   * @param measure
-   *          the measure to format.
+   * @param quantity
+   *          the quantity to format.
    * @param dest
    *          the appendable destination.
    * @return the specified <code>StringBuilder</code>.
    */
-  public final StringBuilder format(AbstractQuantity<?> measure, StringBuilder dest) {
+  public final StringBuilder format(AbstractQuantity<?> quantity, StringBuilder dest) {
     try {
-      return (StringBuilder) this.format(measure, (Appendable) dest);
+      return (StringBuilder) this.format(quantity, (Appendable) dest);
     } catch (IOException ex) {
       throw new RuntimeException(ex); // Should not happen.
     }

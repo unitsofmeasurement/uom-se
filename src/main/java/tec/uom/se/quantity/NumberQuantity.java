@@ -53,7 +53,7 @@ import tec.uom.se.ComparableQuantity;
  *          The type of the quantity.
  * @author otaviojava
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.4, $Date: 2015-10-10 $
+ * @version 0.9.5, $Date: 2016-04-06 $
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
@@ -149,5 +149,18 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
 
   private DecimalQuantity<Q> toDecimalQuantity() {
     return new DecimalQuantity<>(BigDecimal.valueOf(value.doubleValue()), getUnit());
+  }
+
+  /**
+   * Returns the scalar quantity for the specified <code>double</code> stated in the specified unit.
+   *
+   * @param doubleValue
+   *          the measurement value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>double</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(double doubleValue, Unit<Q> unit) {
+    return new DoubleQuantity<Q>(doubleValue, unit);
   }
 }

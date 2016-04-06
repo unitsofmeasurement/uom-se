@@ -270,6 +270,10 @@ public class LocalUnitFormat extends AbstractUnitFormat {
     return true;
   }
 
+  protected Unit<?> parse(CharSequence csq, int index) throws ParserException {
+    return parse(csq, new ParsePosition(index));
+  }
+
   public Unit<?> parse(CharSequence csq, ParsePosition cursor) throws ParserException {
     // Parsing reads the whole character sequence from the parse position.
     int start = cursor.getIndex();

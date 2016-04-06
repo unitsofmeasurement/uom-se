@@ -37,10 +37,11 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 
+import tec.uom.se.AbstractQuantity;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.ComparableQuantity;
+import tec.uom.se.quantity.NumberQuantity;
 import tec.uom.se.quantity.Quantities;
-import tec.uom.se.unit.Units;
 
 /**
  * Holds standard implementation
@@ -58,10 +59,10 @@ class DefaultQuantityFormat extends QuantityFormat {
     Unit unit = measure.getUnit();
 
     dest.append(measure.getValue().toString());
-    if (measure.getUnit().equals(Units.ONE))
+    if (measure.getUnit().equals(AbstractUnit.ONE))
       return dest;
     dest.append(' ');
-    return LocalUnitFormat.getInstance().format(unit, dest);
+    return SimpleUnitFormat.getInstance().format(unit, dest);
   }
 
   @SuppressWarnings("unchecked")
@@ -77,8 +78,26 @@ class DefaultQuantityFormat extends QuantityFormat {
     }
     BigDecimal decimal = new BigDecimal(csq.subSequence(startDecimal, endDecimal).toString());
     cursor.setIndex(endDecimal + 1);
-    Unit unit = LocalUnitFormat.getInstance().parse(csq, cursor);
+    Unit unit = SimpleUnitFormat.getInstance().parse(csq, cursor);
     return Quantities.getQuantity(decimal, unit);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  AbstractQuantity<?> parse(CharSequence csq, int index) throws ParserException {
+    int startDecimal = index; // cursor.getIndex();
+    while ((startDecimal < csq.length()) && Character.isWhitespace(csq.charAt(startDecimal))) {
+      startDecimal++;
+    }
+    int endDecimal = startDecimal + 1;
+    while ((endDecimal < csq.length()) && !Character.isWhitespace(csq.charAt(endDecimal))) {
+      endDecimal++;
+    }
+    Double decimal = new Double(csq.subSequence(startDecimal, endDecimal).toString());
+    // cursor.setIndex(endDecimal + 1);
+    // Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
+    Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
+    return NumberQuantity.of(decimal.doubleValue(), unit);
   }
 
   @Override

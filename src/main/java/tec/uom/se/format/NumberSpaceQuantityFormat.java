@@ -104,9 +104,15 @@ class NumberSpaceQuantityFormat extends QuantityFormat {
   }
 
   @Override
+  ComparableQuantity<?> parse(CharSequence csq, int index) throws IllegalArgumentException, ParserException {
+    return parse(csq, new ParsePosition(index));
+  }
+
+  @Override
   public ComparableQuantity<?> parse(CharSequence csq) throws IllegalArgumentException, ParserException {
-    return parse(csq, new ParsePosition(0));
+    return parse(csq, 0);
   }
 
   private static final long serialVersionUID = 1L;
+
 }
