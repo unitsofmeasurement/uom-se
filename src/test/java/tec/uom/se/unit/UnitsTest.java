@@ -29,6 +29,9 @@
  */
 package tec.uom.se.unit;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -48,7 +51,6 @@ import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.TransformedUnit;
 import tec.uom.se.AbstractUnit;
 import static org.junit.Assert.*;
-import static tec.uom.se.internal.format.OutputHelper.println;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.Units.GRAM;
 import static tec.uom.se.unit.Units.METRE;
@@ -59,6 +61,8 @@ import static tec.uom.se.unit.Units.WATT;
  * @author Werner Keil
  */
 public class UnitsTest {
+  static final Logger logger = Logger.getLogger(UnitsTest.class.getName());
+
   Unit<Dimensionless> one;
 
   public UnitsTest() {
@@ -113,7 +117,7 @@ public class UnitsTest {
     UnitConverter converter = one.getConverterTo(one);
     Double result = converter.convert(factor.doubleValue());
     assertEquals(result, factor);
-    println(result.toString());
+    logger.log(Level.FINER, result.toString());
   }
 
   /**
