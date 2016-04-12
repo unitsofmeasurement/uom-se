@@ -505,11 +505,10 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
       Element element = (Element) o;
 
-      if (pow != element.pow)
+      if (pow != element.pow) {
         return false;
-      if (root != element.root)
-        return false;
-      return unit != null ? unit.equals(element.unit) : element.unit == null;
+      }
+      return root == element.root && (unit != null ? unit.equals(element.unit) : element.unit == null);
 
     }
 
