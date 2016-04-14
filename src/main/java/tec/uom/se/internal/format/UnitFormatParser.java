@@ -573,9 +573,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
   }
 
   private boolean jj_3_1() {
-    if (jj_3R_3())
-      return true;
-    return jj_3R_4();
+    return jj_3R_3() || jj_3R_4();
   }
 
   private boolean jj_3R_4() {

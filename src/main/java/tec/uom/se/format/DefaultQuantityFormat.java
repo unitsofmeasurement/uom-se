@@ -97,7 +97,7 @@ class DefaultQuantityFormat extends QuantityFormat {
     // cursor.setIndex(endDecimal + 1);
     // Unit unit = EBNFUnitFormat.getInstance().parse(csq, index);
     Unit unit = SimpleUnitFormat.getInstance().parse(csq, index);
-    return NumberQuantity.of(decimal.doubleValue(), unit);
+    return NumberQuantity.of(decimal, unit);
   }
 
   @Override
