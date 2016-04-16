@@ -72,7 +72,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.8, December 29, 2015
+ * @version 0.8.1, April 17, 2016
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
@@ -264,11 +264,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   public final Unit<?> parseObject(String source, ParsePosition pos) throws ParserException {
     // int start = pos.getIndex();
     return parseProductUnit(source, pos);
-    /*} catch (ParserException e) {
-    	pos.setIndex(start);
-    	pos.setErrorIndex(e.getPosition());
-    	return null;
-    }*/
+    /*
+     * } catch (ParserException e) { pos.setIndex(start);
+     * pos.setErrorIndex(e.getPosition()); return null; }
+     */
   }
 
   /**
@@ -322,10 +321,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     public boolean isValidIdentifier(String name) {
       if ((name == null) || (name.length() == 0))
         return false;
-      /*for (int i = 0; i < name.length(); i++) {
-      	if (!isUnitIdentifierPart(name.charAt(i)))
-      		return false;
-      } */
+      /*
+       * for (int i = 0; i < name.length(); i++) { if
+       * (!isUnitIdentifierPart(name.charAt(i))) return false; }
+       */
       return isUnitIdentifierPart(name.charAt(0));
     }
 
@@ -828,11 +827,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       // label must not begin with a digit or mathematical operator
       return isUnitIdentifierPart(name.charAt(0)) && isAllASCII(name);
       /*
-      			for (int i = 0; i < name.length(); i++) {
-      				if (!isAsciiCharacter(name.charAt(i)))
-      				return false;
-      			}
-      			return true; */
+       * for (int i = 0; i < name.length(); i++) { if
+       * (!isAsciiCharacter(name.charAt(i))) return false; } return true;
+       */
     }
 
     // to check if a string only contains US-ASCII characters
@@ -867,7 +864,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       MILLI.getSymbol(), MICRO.getSymbol(), NANO.getSymbol(), PICO.getSymbol(), FEMTO.getSymbol(), ATTO.getSymbol(), ZEPTO.getSymbol(),
       YOCTO.getSymbol() };
 
-  // TODO we could try retrieving this dynamically in a static {} method from MetricPrefix if symbols above are also aligned
+  // TODO we could try retrieving this dynamically in a static {} method from
+  // MetricPrefix if symbols above are also aligned
   private static final UnitConverter[] CONVERTERS = { YOTTA.getConverter(), ZETTA.getConverter(), EXA.getConverter(), PETA.getConverter(),
       TERA.getConverter(), GIGA.getConverter(), MEGA.getConverter(), KILO.getConverter(), HECTO.getConverter(), DEKA.getConverter(),
       DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(), MICRO.getConverter(), NANO.getConverter(), PICO.getConverter(),
@@ -893,7 +891,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     // Special case for KILOGRAM.
     DEFAULT.label(Units.GRAM, "g");
     for (int i = 0; i < PREFIXES.length; i++) {
-      if (CONVERTERS[i] == KILO.getConverter()) // TODO should it better be equals()?
+      if (CONVERTERS[i] == KILO.getConverter()) // TODO should it better
+        // be equals()?
         continue; // kg is already defined.
       DEFAULT.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), PREFIXES[i] + "g");
       if (PREFIXES[i] == "µ") {
@@ -1025,5 +1024,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     // DEFAULT.label(NonUnits.GALLON_UK, "gal");
     // DEFAULT.label(NonUnits.OUNCE_LIQUID_UK, "oz");
     // }
+    DEFAULT.label(Units.NEWTON, "N");
+    ASCII.label(Units.NEWTON, "N");
   }
 }
