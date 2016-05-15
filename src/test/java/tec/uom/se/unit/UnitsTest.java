@@ -133,7 +133,6 @@ public class UnitsTest {
    * Test method for {@link javax.measure.Unit#asType(java.lang.Class)}.
    */
   @Test
-  @Ignore
   public void testAsType() {
     one.asType(Dimensionless.class);
     try {

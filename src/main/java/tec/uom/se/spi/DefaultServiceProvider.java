@@ -37,9 +37,12 @@ import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
 import javax.measure.spi.UnitFormatService;
 
+import tec.uom.se.quantity.DefaultQuantityFactory;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -53,11 +56,9 @@ import java.util.logging.Logger;
  * services.
  *
  * @author Werner Keil
- * @version 0.8.4
+ * @version 0.8.6
  */
-public class DefaultServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> { // TODO
-																										// actually
-																										// PriorityAnnotationAwareServiceProvider
+public class DefaultServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> {
 	/**
 	 * List of services loaded, per class.
 	 */
@@ -65,6 +66,9 @@ public class DefaultServiceProvider extends ServiceProvider implements Comparabl
 	private final Map<Class, List<Object>> servicesLoaded = new ConcurrentHashMap<>();
 
 	private static final Comparator<Object> SERVICE_COMPARATOR = DefaultServiceProvider::compareServices;
+
+	@SuppressWarnings("rawtypes")
+	private final Map<Class, QuantityFactory> QUANTITY_FACTORIES = new ConcurrentHashMap<>();
 
 	/**
 	 * Returns a priority value of 10.
@@ -167,11 +171,27 @@ public class DefaultServiceProvider extends ServiceProvider implements Comparabl
 
 	@Override
 	public QuantityFactoryService getQuantityFactoryService() {
-		return getService(QuantityFactoryService.class);
+		return null; // FIXME remove after API change
 	}
 
-	// @Override
-	public <Q extends Quantity<Q>> QuantityFactory<Q> getQuantityFactory(Class<Q> quantity) {
-		return getQuantityFactoryService().getQuantityFactory(quantity);
-	}
+	 /**
+	   * Return a factory for this quantity
+	   * 
+	   * @param quantity
+	   *          the quantity type
+	   * @return the {@link QuantityFactory}
+	   * @throws NullPointerException
+	   */
+	  @Override
+	  @SuppressWarnings("unchecked")
+	  public final <Q extends Quantity<Q>> QuantityFactory<Q> getQuantityFactory(Class<Q> quantity) {
+	    if (quantity == null)
+	      throw new NullPointerException();
+	    if (!QUANTITY_FACTORIES.containsKey(quantity)) {
+	      synchronized (QUANTITY_FACTORIES) {
+	        QUANTITY_FACTORIES.put(quantity, DefaultQuantityFactory.getInstance(quantity));
+	      }
+	    }
+	    return QUANTITY_FACTORIES.get(quantity);
+	  }
 }

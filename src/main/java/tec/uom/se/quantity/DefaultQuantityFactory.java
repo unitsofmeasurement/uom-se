@@ -108,9 +108,23 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
   }
 
   @SuppressWarnings("unchecked")
-  public DefaultQuantityFactory(Class<Q> quantity) {
+  DefaultQuantityFactory(Class<Q> quantity) {
     type = quantity;
     metricUnit = CLASS_TO_METRIC_UNIT.get(type);
+  }
+
+  /**
+   * Returns the default instance for the specified quantity type.
+   *
+   * @param <Q>
+   *          The type of the quantity
+   * @param type
+   *          the quantity type
+   * @return the quantity factory for the specified type
+   */
+  @SuppressWarnings("unchecked")
+  public static <Q extends Quantity<Q>> QuantityFactory<Q> getInstance(final Class<Q> type) {
+    return new DefaultQuantityFactory(type);
   }
 
   public String toString() {

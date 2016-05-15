@@ -78,7 +78,6 @@ public class RangeTest {
   }
 
   @Test
-  @Ignore
   public void testToString() {
     assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
   }

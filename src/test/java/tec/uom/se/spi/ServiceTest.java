@@ -32,21 +32,17 @@ package tec.uom.se.spi;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
-import java.util.Locale;
-
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * Tests for services provided via {@link Bootstrap}.
+ * Tests for services provided via {@link ServiceProvider}.
  */
 public class ServiceTest {
 
   @Test
-  @Ignore
   public void testGetServices() throws Exception {
     ServiceProvider[] services = ServiceProvider.available();
     assertNotNull(services);
