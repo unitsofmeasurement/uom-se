@@ -37,7 +37,7 @@ import javax.measure.spi.UnitFormatService;
 import org.junit.Test;
 
 /**
- * Tests for services provided via {@link Bootstrap}.
+ * Tests for services provided via {@link ServiceProvider}.
  */
 public class UnitFormatServiceTest {
 
