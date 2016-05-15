@@ -47,7 +47,7 @@ import org.junit.Test;
 /**
  * @author Werner Keil
  */
-public class QuantityFactoryServiceTest {
+public class QuantityFactoryProviderTest {
   static ServiceProvider service;
 
   @BeforeClass
