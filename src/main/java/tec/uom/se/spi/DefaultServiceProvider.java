@@ -32,7 +32,6 @@ package tec.uom.se.spi;
 import javax.annotation.Priority; // TODO this should no longer be necessary
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
-import javax.measure.spi.QuantityFactoryService;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
 import javax.measure.spi.UnitFormatService;
@@ -42,7 +41,6 @@ import tec.uom.se.quantity.DefaultQuantityFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -56,7 +54,7 @@ import java.util.logging.Logger;
  * services.
  *
  * @author Werner Keil
- * @version 0.8.6
+ * @version 0.9
  */
 public class DefaultServiceProvider extends ServiceProvider implements Comparable<ServiceProvider> {
 	/**
@@ -167,11 +165,6 @@ public class DefaultServiceProvider extends ServiceProvider implements Comparabl
 	@Override
 	public UnitFormatService getUnitFormatService() {
 		return getService(UnitFormatService.class);
-	}
-
-	@Override
-	public QuantityFactoryService getQuantityFactoryService() {
-		return null; // FIXME remove after API change
 	}
 
 	 /**
