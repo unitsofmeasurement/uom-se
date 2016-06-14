@@ -31,7 +31,8 @@ package tec.uom.se.spi;
 
 import static org.junit.Assert.*;
 
-import java.util.Collection;
+import java.util.List;
+
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.UnitFormatService;
 
@@ -44,11 +45,11 @@ public class ServiceTest {
 
   @Test
   public void testGetServices() throws Exception {
-    ServiceProvider[] services = ServiceProvider.available();
+    List<ServiceProvider> services = ServiceProvider.available();
     assertNotNull(services);
-    // assertFalse(services.isEmpty());
+    assertFalse(services.isEmpty());
     // assertTrue(services.contains("service1"));
-    assertTrue(services.length > 0);
+    assertTrue(services.size() > 0);
     // assertTrue(services.contains("service2"));
     // services = Collection.class.cast(Bootstrap.getServices(Runtime.class));
     // assertNotNull(services);
