@@ -249,7 +249,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    */
   @SuppressWarnings("rawtypes")
   public Map<? extends QuantityDimension, Integer> getProductDimensions() {
-    Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getProductUnits();
+    Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getBaseUnits();
     if (pseudoUnits == null)
       return null;
     Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();

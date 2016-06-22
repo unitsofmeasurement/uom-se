@@ -67,7 +67,7 @@ import java.lang.reflect.Type;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.3, Nov 15, 2015
+ * @version 0.8, Jun 22, 2016
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
 
@@ -190,16 +190,13 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   public String toString() {
     return SimpleUnitFormat.getInstance().format(this);
     /*
-    final Appendable tmp = new StringBuilder();
-    try {
-    	// return UCUMFormat.getInstance(CASE_SENSITIVE).format(this,
-    	// tmp).toString();
-    	return LocalUnitFormat.getInstance().format(this, tmp).toString();
-    } catch (IOException ioException) {
-    	throw new Error(ioException); // Should never happen.
-    } finally {
-    	// if (tmp!=null) tmp.clear();
-    } */
+     * final Appendable tmp = new StringBuilder(); try { // return
+     * UCUMFormat.getInstance(CASE_SENSITIVE).format(this, //
+     * tmp).toString(); return LocalUnitFormat.getInstance().format(this,
+     * tmp).toString(); } catch (IOException ioException) { throw new
+     * Error(ioException); // Should never happen. } finally { // if
+     * (tmp!=null) tmp.clear(); }
+     */
   }
 
   // ///////////////////////////////////////////////////////
@@ -264,7 +261,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   @Override
-  public abstract Map<? extends Unit<?>, Integer> getProductUnits();
+  public abstract Map<? extends Unit<?>, Integer> getBaseUnits();
 
   @Override
   public abstract Dimension getDimension();
@@ -517,5 +514,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   @Override
   public abstract boolean equals(Object that);
+
+  public Map getProductUnits() {
+    throw new UnsupportedOperationException("Use getBaseUnits() instead");
+  }
 
 }

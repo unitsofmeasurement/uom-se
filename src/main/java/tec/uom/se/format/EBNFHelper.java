@@ -94,7 +94,7 @@ class EBNFHelper {
     final String symbol = symbolMap.getSymbol(unit);
     if (symbol != null) {
       return noopPrecedenceInternal(buffer, symbol);
-    } else if (unit.getProductUnits() != null) {
+    } else if (unit.getBaseUnits() != null) {
       return productPrecedenceInternal(unit, buffer, symbolMap);
     } else if (unit instanceof BaseUnit<?>) {
       return noopPrecedenceInternal(buffer, ((BaseUnit<?>) unit).getSymbol());
@@ -190,7 +190,7 @@ class EBNFHelper {
   }
 
   private static int productPrecedenceInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap) throws IOException {
-    Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
+    Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getBaseUnits();
     int negativeExponentCount = 0;
     // Write positive exponents first...
     boolean start = true;

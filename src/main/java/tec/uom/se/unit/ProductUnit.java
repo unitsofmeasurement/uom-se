@@ -260,7 +260,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   @Override
-  public Map<Unit<?>, Integer> getProductUnits() {
+  public Map<Unit<?>, Integer> getBaseUnits() {
     final Map<Unit<?>, Integer> units = new HashMap<>(); // Diamond (Java7+)
     for (int i = 0; i < getUnitCount(); i++) {
       units.put(getUnit(i), getUnitPow(i));

@@ -112,8 +112,8 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
   }
 
   @Override
-  public Map<? extends Unit<?>, Integer> getProductUnits() {
-    return parentUnit.getProductUnits();
+  public Map<? extends Unit<?>, Integer> getBaseUnits() {
+    return parentUnit.getBaseUnits();
   }
 
   @Override

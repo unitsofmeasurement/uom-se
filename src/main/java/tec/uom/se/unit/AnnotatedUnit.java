@@ -110,8 +110,8 @@ public final class AnnotatedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
   }
 
   @Override
-  public Map<? extends Unit<?>, Integer> getProductUnits() {
-    return actualUnit.getProductUnits();
+  public Map<? extends Unit<?>, Integer> getBaseUnits() {
+    return actualUnit.getBaseUnits();
   }
 
   @Override

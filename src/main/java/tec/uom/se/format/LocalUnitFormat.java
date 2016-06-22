@@ -326,8 +326,8 @@ public class LocalUnitFormat extends AbstractUnitFormat {
    * ((AnnotatedUnit) unit).getActualUnit(); } String symbol =
    * symbolMap.getSymbol((AbstractUnit<?>) unit); if (symbol != null) {
    * buffer.append(symbol); return NOOP_PRECEDENCE; } else if
-   * (unit.getProductUnits() != null) { Map<? extends Unit, Integer>
-   * productUnits = unit.getProductUnits(); int negativeExponentCount = 0; //
+   * (unit.getBaseUnits() != null) { Map<? extends Unit, Integer>
+   * productUnits = unit.getBaseUnits(); int negativeExponentCount = 0; //
    * Write positive exponents first... boolean start = true; for (Unit u :
    * productUnits.keySet()) { int pow = productUnits.get(u); if (pow >= 0) {
    * formatExponent(u, pow, 1, !start, buffer); start = false; } else {
@@ -370,8 +370,8 @@ public class LocalUnitFormat extends AbstractUnitFormat {
     if (symbol != null) {
       buffer.append(symbol);
       return NOOP_PRECEDENCE;
-    } else if (unit.getProductUnits() != null) {
-      Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getProductUnits();
+    } else if (unit.getBaseUnits() != null) {
+      Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getBaseUnits();
       int negativeExponentCount = 0;
       // Write positive exponents first...
       boolean start = true;
