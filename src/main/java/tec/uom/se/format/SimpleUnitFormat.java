@@ -72,7 +72,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.8.1, April 17, 2016
+ * @version 0.8.2, June 24, 2016
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
@@ -153,6 +153,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    * @throws IllegalArgumentException
    *           if the character sequence contains an illegal syntax.
    */
+  @SuppressWarnings("rawtypes")
   public abstract Unit<? extends Quantity> parseProductUnit(CharSequence csq, ParsePosition pos) throws ParserException;
 
   /**
@@ -166,6 +167,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    * @throws IllegalArgumentException
    *           if the character sequence does not contain a valid unit identifier.
    */
+  @SuppressWarnings("rawtypes")
   public abstract Unit<? extends Quantity> parseSingleUnit(CharSequence csq, ParsePosition pos) throws ParserException;
 
   /**
@@ -403,8 +405,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     // //////////////////////////
     // Parsing.
-
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Unit<? extends Quantity> parseSingleUnit(CharSequence csq, ParsePosition pos) throws ParserException {
       int startIndex = pos.getIndex();
       String name = readIdentifier(csq, pos);
@@ -413,7 +414,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       return unit;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public Unit<? extends Quantity> parseProductUnit(CharSequence csq, ParsePosition pos) throws ParserException {
       Unit result = AbstractUnit.ONE;
