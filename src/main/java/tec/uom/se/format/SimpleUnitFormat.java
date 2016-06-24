@@ -330,8 +330,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     static boolean isUnitIdentifierPart(char ch) {
       return Character.isLetter(ch)
-          || (!Character.isWhitespace(ch) && !Character.isDigit(ch) && (ch != '·') && (ch != '*') && (ch != '/') && (ch != '(') && (ch != ')')
-              && (ch != '[') && (ch != ']') && (ch != '¹') && (ch != '²') && (ch != '³') && (ch != '^') && (ch != '+') && (ch != '-'));
+          || (!Character.isWhitespace(ch) && !Character.isDigit(ch) && (ch != '\u00b7') && (ch != '*') && (ch != '/') && (ch != '(') && (ch != ')')
+              && (ch != '[') && (ch != ']') && (ch != '\u00b9') && (ch != '\u00b2') && (ch != '\u00b3') && (ch != '^') && (ch != '+') && (ch != '-'));
     }
 
     // Returns the name for the specified unit or null if product unit.
@@ -350,7 +350,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         UnitConverter cvtr = tfmUnit.getSystemConverter();
         StringBuilder result = new StringBuilder();
         String baseUnitName = baseUnits.toString();
-        if ((baseUnitName.indexOf('·') >= 0) || (baseUnitName.indexOf('*') >= 0) || (baseUnitName.indexOf('/') >= 0)) {
+        if ((baseUnitName.indexOf('\u00b7') >= 0) || (baseUnitName.indexOf('*') >= 0) || (baseUnitName.indexOf('/') >= 0)) {
           // We could use parentheses whenever baseUnits is an
           // instanceof ProductUnit, but most ProductUnits have
           // aliases,
@@ -524,7 +524,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
           return OPEN_PAREN;
         } else if (c == ')') {
           return CLOSE_PAREN;
-        } else if ((c == '^') || (c == '¹') || (c == '²') || (c == '³')) {
+        } else if ((c == '^') || (c == '\u00b9') || (c == '\u00b2') || (c == '\u00b3')) {
           return EXPONENT;
         } else if (c == '*') {
           char c2 = csq.charAt(pos.getIndex() + 1);
@@ -533,7 +533,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
           } else {
             return MULTIPLY;
           }
-        } else if (c == '·') {
+        } else if (c == '\u00b7') {
           return MULTIPLY;
         } else if (c == '/') {
           return DIVIDE;
@@ -575,19 +575,19 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       boolean isRoot = false;
       while (pos.getIndex() < length) {
         c = csq.charAt(pos.getIndex());
-        if (c == '¹') {
+        if (c == '\u00b9') {
           if (isRoot) {
             root = root * 10 + 1;
           } else {
             pow = pow * 10 + 1;
           }
-        } else if (c == '²') {
+        } else if (c == '\u00b2') {
           if (isRoot) {
             root = root * 10 + 2;
           } else {
             pow = pow * 10 + 2;
           }
-        } else if (c == '³') {
+        } else if (c == '\u00b3') {
           if (isRoot) {
             root = root * 10 + 3;
           } else {
@@ -682,7 +682,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         int pow = productUnit.getUnitPow(i);
         if (pow >= 0) {
           if (!start) {
-            appendable.append('·'); // Separator.
+            appendable.append('\u00b7'); // Separator.
           }
           name = nameFor(productUnit.getUnit(i));
           int root = productUnit.getUnitRoot(i);
@@ -709,7 +709,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
             name = nameFor(productUnit.getUnit(i));
             int root = productUnit.getUnitRoot(i);
             if (!start) {
-              appendable.append('·'); // Separator.
+              appendable.append('\u00b7'); // Separator.
             }
             append(appendable, name, -pow, root);
             start = false;
@@ -727,9 +727,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       if ((pow != 1) || (root != 1)) {
         // Write exponent.
         if ((pow == 2) && (root == 1)) {
-          appendable.append('²'); // Square
+          appendable.append('\u00b2'); // Square
         } else if ((pow == 3) && (root == 1)) {
-          appendable.append('³'); // Cubic
+          appendable.append('\u00b3'); // Cubic
         } else {
           // Use general exponent form.
           appendable.append('^');
