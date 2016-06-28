@@ -248,7 +248,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @return the mapping between the fundamental dimensions and their exponent.
    */
   @SuppressWarnings("rawtypes")
-  public Map<? extends QuantityDimension, Integer> getProductDimensions() {
+  public Map<? extends QuantityDimension, Integer> getBaseDimensions() {
     Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getBaseUnits();
     if (pseudoUnits == null)
       return null;
