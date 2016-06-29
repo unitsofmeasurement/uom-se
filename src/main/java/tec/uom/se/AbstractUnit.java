@@ -67,13 +67,13 @@ import java.lang.reflect.Type;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, Jun 22, 2016
+ * @version 0.9, Jun 30, 2016
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
 
   /**
-	 * 
-	 */
+   * 
+   */
   private static final long serialVersionUID = -4344589505537030204L;
 
   /**
@@ -514,9 +514,4 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   @Override
   public abstract boolean equals(Object that);
-
-  public Map getProductUnits() {
-    throw new UnsupportedOperationException("Use getBaseUnits() instead");
-  }
-
 }
