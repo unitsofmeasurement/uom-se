@@ -41,6 +41,7 @@ import javax.measure.Unit;
  * @author otaviojava
  * @author werner
  * @param <Q>
+ *          TODO probably call SEQuantity or SeQuantity (see CDI) because it combines more than just Comparable
  */
 public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, Comparable<Quantity<Q>>, Serializable {
 
