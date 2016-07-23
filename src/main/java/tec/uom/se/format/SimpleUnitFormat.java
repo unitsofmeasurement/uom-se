@@ -72,12 +72,12 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 0.8.2, June 24, 2016
+ * @version 0.9, July 24, 2016
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
-	 * 
-	 */
+     * 
+     */
   // private static final long serialVersionUID = 4149424034841739785L;
 
   /**
@@ -752,7 +752,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     @Override
     protected SymbolMap getSymbols() {
-      // TODO Auto-generated method stub
       return null;
     }
 
@@ -832,20 +831,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
        * (!isAsciiCharacter(name.charAt(i))) return false; } return true;
        */
     }
-
-    // to check if a string only contains US-ASCII characters
-    //
-    private static boolean isAllASCII(String input) {
-      boolean isASCII = true;
-      for (int i = 0; i < input.length(); i++) {
-        int c = input.charAt(i);
-        if (c > 0x7F) {
-          isASCII = false;
-          break;
-        }
-      }
-      return isASCII;
-    }
   }
 
   /**
@@ -876,13 +861,30 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     return prefix == "µ" ? "micro" : prefix;
   }
 
+  // to check if a string only contains US-ASCII characters
+  //
+  protected static boolean isAllASCII(String input) {
+    boolean isASCII = true;
+    for (int i = 0; i < input.length(); i++) {
+      int c = input.charAt(i);
+      if (c > 0x7F) {
+        isASCII = false;
+        break;
+      }
+    }
+    return isASCII;
+  }
+
   // Initializations
   static {
     for (int i = 0; i < SI_UNITS.length; i++) {
+      Unit<?> si = SI_UNITS[i];
+      String symbol = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
+      DEFAULT.label(si, symbol);
+      if (isAllASCII(symbol))
+        ASCII.label(si, symbol);
       for (int j = 0; j < PREFIXES.length; j++) {
-        Unit<?> si = SI_UNITS[i];
         Unit<?> u = si.transform(CONVERTERS[j]);
-        String symbol = (si instanceof BaseUnit) ? ((BaseUnit<?>) si).getSymbol() : ((AlternateUnit<?>) si).getSymbol();
         DEFAULT.label(u, PREFIXES[j] + symbol);
         if (PREFIXES[j] == "µ") {
           ASCII.label(u, "micro"); // + symbol);
