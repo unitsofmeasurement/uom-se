@@ -160,7 +160,7 @@ import java.util.ResourceBundle;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.1, January 20, 2015
+ * @version 0.9, August 8, 2016
  */
 public class LocalUnitFormat extends AbstractUnitFormat {
 
@@ -210,7 +210,8 @@ public class LocalUnitFormat extends AbstractUnitFormat {
    * @param locale
    */
   public static LocalUnitFormat getInstance(Locale locale) {
-    return new LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class.getName(), locale)));
+    return new LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class
+	      .getPackage().getName() + ".messages", locale)));
   }
 
   /** Returns an instance for the given symbol map. */
@@ -449,7 +450,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
       }
 
       unitPrecedence = formatInternal(parentUnit, temp);
-      printSeparator = !parentUnit.equals(Units.ONE);
+      printSeparator = !parentUnit.equals(AbstractUnit.ONE);
       int result = formatConverter(converter, printSeparator, unitPrecedence, temp);
       buffer.append(temp);
       return result;
