@@ -210,8 +210,7 @@ public class LocalUnitFormat extends AbstractUnitFormat {
    * @param locale
    */
   public static LocalUnitFormat getInstance(Locale locale) {
-    return new LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class
-	      .getPackage().getName() + ".messages", locale)));
+    return new LocalUnitFormat(SymbolMap.of(ResourceBundle.getBundle(LocalUnitFormat.class.getPackage().getName() + ".messages", locale)));
   }
 
   /** Returns an instance for the given symbol map. */

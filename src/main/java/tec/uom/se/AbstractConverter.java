@@ -47,7 +47,7 @@ import java.util.Objects;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6, Jan 17, 2016
+ * @version 1.0, August 9, 2016
  */
 public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
 

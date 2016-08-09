@@ -94,7 +94,7 @@ import tec.uom.se.quantity.Quantities;
  * </p>
  *
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 0.8.1, $Date: 2015-12-28 $
+ * @version 1.0, August 9, 2016
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements ComparableQuantity<Q>, UnitSupplier<Q>, ValueSupplier<Number> {

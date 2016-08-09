@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.4.1, $Date: 2015-07-26 $
+ * @version 1.0, August 9, 2016
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   /**
