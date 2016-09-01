@@ -167,6 +167,33 @@ JDK Integration of Unit-API / JSR 363</description>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 
+            <!-- ======================================================= -->
+            <!-- JavaDoc Attachment -->
+            <!-- ======================================================= -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<detectLinks>true</detectLinks>
+					<!-- excludePackageNames>package1</excludePackageNames -->
+					<keywords>true</keywords>
+					<linksource>true</linksource>
+					<failOnError>false</failOnError>
+					<!-- overview>${basedir}/overview.html</overview -->
+					<source>${maven.compile.sourceLevel}</source>
+					<!-- stylesheetfile>${basedir}/src/site/css/money-jdoc.css</stylesheetfile -->
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+
 			<!-- ======================================================= -->
 			<!-- JAR packaging -->
 			<!-- ======================================================= -->
