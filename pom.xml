@@ -5,7 +5,8 @@
 	<packaging>bundle</packaging>
 	<name>Units of Measurement Implementation for Java SE</name>
 	<url>https://github.com/unitsofmeasurement/uom-se</url>
-	<description>Units of Measurement Implementation for Java SE JDK Integration of Unit-API / JSR 363</description>
+	<description>Units of Measurement Implementation for Java SE
+JDK Integration of Unit-API / JSR 363</description>
 	<organization>
 		<name>Units of Measurement project</name>
 		<url>http://unitsofmeasurement.github.io</url>
@@ -13,7 +14,7 @@
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
@@ -33,8 +34,8 @@
 	<!-- Build Settings -->
 	<!-- ======================================================= -->
 	<properties>
-		<jsr.version>1.0-SNAPSHOT</jsr.version>
-		<lib.version>1.0-SNAPSHOT</lib.version>
+		<jsr.version>1.0</jsr.version>
+		<lib.version>1.0</lib.version>
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
