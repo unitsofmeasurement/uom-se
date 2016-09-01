@@ -102,7 +102,6 @@ public class ShortQuantityBaseTest {
     @SuppressWarnings("unchecked")
     Quantity<Length> result2 = (Quantity<Length>) metre.multiply(Quantities.getQuantity(10D, Units.HOUR));
     Assert.assertTrue(result2.getValue().intValue() == 100);
-
   }
 
   @Test

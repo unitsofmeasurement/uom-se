@@ -44,24 +44,24 @@ public class ShortQuantityTest {
 
   @Test
   public void divideTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<ElectricResistance>(Short.valueOf("3").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<ElectricResistance>(Short.valueOf("2").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
     Quantity<?> result = quantity1.divide(quantity2);
     assertEquals(Double.valueOf("1"), result.getValue());
   }
 
   @Test
   public void addTest() {
-    ShortQuantity quantity1 = new ShortQuantity(Short.valueOf("1").shortValue(), Units.OHM);
-    ShortQuantity quantity2 = new ShortQuantity(Short.valueOf("2").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("1").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
     assertEquals(Short.valueOf("3").intValue(), result.getValue().intValue());
   }
 
   @Test
   public void subtractTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<ElectricResistance>(Short.valueOf("1").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<ElectricResistance>(Short.valueOf("2").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("1").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
     assertEquals(Short.valueOf("1").intValue(), result.getValue().intValue());
     assertEquals(Units.OHM, result.getUnit());
@@ -69,8 +69,8 @@ public class ShortQuantityTest {
 
   @Test
   public void multiplyQuantityTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<ElectricResistance>(Short.valueOf("3").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<ElectricResistance>(Short.valueOf("2").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.OHM);
+    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
     Quantity<?> result = quantity1.multiply(quantity2);
     assertEquals(6.0, result.getValue());
   }
