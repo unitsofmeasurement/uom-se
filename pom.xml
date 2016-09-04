@@ -249,6 +249,7 @@ JDK Integration of Unit-API / JSR 363</description>
 						<exclude>src/main/resources/**</exclude>
 						<exclude>src/etc/**</exclude>
 						<exclude>*.css</exclude>
+						<exclude>*.editorconfig</exclude>
 						<exclude>*.jpg</exclude>
 						<exclude>*.png</exclude>
 						<exclude>*.yml</exclude>
