@@ -45,8 +45,6 @@ import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.unit.Units;
-
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
@@ -160,7 +158,7 @@ import java.util.ResourceBundle;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9, August 8, 2016
+ * @version 1.0, September 4, 2016
  */
 public class LocalUnitFormat extends AbstractUnitFormat {
 
@@ -279,11 +277,11 @@ public class LocalUnitFormat extends AbstractUnitFormat {
     int start = cursor.getIndex();
     int end = csq.length();
     if (end <= start) {
-      return Units.ONE;
+      return AbstractUnit.ONE;
     }
     String source = csq.subSequence(start, end).toString().trim();
     if (source.length() == 0) {
-      return Units.ONE;
+      return AbstractUnit.ONE;
     }
     try {
       LocalUnitFormatParser parser = new LocalUnitFormatParser(symbolMap, new StringReader(source));

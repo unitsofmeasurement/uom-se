@@ -267,7 +267,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
     }
     String source = csq.subSequence(start, end).toString().trim();
     if (source.length() == 0) {
-      return Units.ONE;
+      return AbstractUnit.ONE;
     }
     try {
       UnitFormatParser parser = new UnitFormatParser(symbolMap, new StringReader(source));

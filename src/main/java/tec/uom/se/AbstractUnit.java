@@ -378,9 +378,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    * @return <code>this * that</code>
    */
   public final Unit<?> multiply(AbstractUnit<?> that) {
-    if (this.equals(Units.ONE))
+    if (this.equals(ONE))
       return that;
-    if (that.equals(Units.ONE))
+    if (that.equals(ONE))
       return this;
     return ProductUnit.getProductInstance(this, that);
   }
@@ -392,9 +392,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    */
   @Override
   public final Unit<?> inverse() {
-    if (this.equals(Units.ONE))
+    if (this.equals(ONE))
       return this;
-    return ProductUnit.getQuotientInstance(Units.ONE, this);
+    return ProductUnit.getQuotientInstance(ONE, this);
   }
 
   /**
@@ -459,7 +459,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
       throw new ArithmeticException("Root's order of zero");
     else
       // n < 0
-      return Units.ONE.divide(this.root(-n));
+      return ONE.divide(this.root(-n));
   }
 
   /**

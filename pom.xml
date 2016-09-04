@@ -35,7 +35,7 @@ JDK Integration of Unit-API / JSR 363</description>
 	<!-- ======================================================= -->
 	<properties>
 		<jsr.version>1.0</jsr.version>
-		<lib.version>1.0</lib.version>
+		<lib.version>1.0.1-SNAPSHOT</lib.version>
 		<sourceEncoding>UTF-8</sourceEncoding> <!-- in Maven 3. -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${sourceEncoding}</project.reporting.outputEncoding>
@@ -183,13 +183,10 @@ JDK Integration of Unit-API / JSR 363</description>
 				</executions>
 				<configuration>
 					<detectLinks>true</detectLinks>
-					<!-- excludePackageNames>package1</excludePackageNames -->
 					<keywords>true</keywords>
 					<linksource>true</linksource>
 					<failOnError>false</failOnError>
-					<!-- overview>${basedir}/overview.html</overview -->
 					<source>${maven.compile.sourceLevel}</source>
-					<!-- stylesheetfile>${basedir}/src/site/css/money-jdoc.css</stylesheetfile -->
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
