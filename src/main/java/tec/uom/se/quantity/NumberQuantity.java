@@ -53,7 +53,7 @@ import tec.uom.se.ComparableQuantity;
  *          The type of the quantity.
  * @author otaviojava
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.9.5, $Date: 2016-04-06 $
+ * @version 1.0, $Date: 2016-10-02 $
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
@@ -63,7 +63,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   private final Number value;
 
   /**
-   * Indicates if this measure is big.
+   * Indicates if this quantity is big.
    */
   private final boolean isBig;
 
@@ -77,7 +77,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   public double doubleValue(Unit<Q> unit) {
     Unit<Q> myUnit = getUnit();
     try {
-      UnitConverter converter = unit.getConverterTo(myUnit);
+      UnitConverter converter = myUnit.getConverterTo(unit);
       return converter.convert(getValue().doubleValue());
     } catch (UnconvertibleException e) {
       throw e;
@@ -92,7 +92,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   /**
    * Indicates if this measured amount is a big number, i.E. BigDecimal or BigInteger. In all other cases this would be false.
    *
-   * @return <code>true</code> if this measure is big; <code>false</code> otherwise.
+   * @return <code>true</code> if this quantity is big; <code>false</code> otherwise.
    */
   @Override
   public boolean isBig() {

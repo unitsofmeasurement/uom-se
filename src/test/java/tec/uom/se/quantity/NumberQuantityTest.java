@@ -29,6 +29,8 @@
  */
 package tec.uom.se.quantity;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 
 import javax.measure.Quantity;
@@ -38,6 +40,7 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.uom.se.AbstractQuantity;
 import tec.uom.se.unit.Units;
 
 public class NumberQuantityTest {
@@ -114,6 +117,26 @@ public class NumberQuantityTest {
     Quantity<Time> dayResult = hour.to(Units.DAY);
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+  }
+  
+  @Test
+  public void doubleValueTest() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    double hours = day.doubleValue(Units.HOUR);
+    assertEquals(72, hours, 0);
+  }
+
+  @Test
+  public void intValueTest() {
+    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    int hours = day.intValue(Units.HOUR);
+    assertEquals(72, hours, 0);
+  }
+
+  @Test
+  public void ofTest() {
+    AbstractQuantity<Length> l = NumberQuantity.of(Short.valueOf("10").shortValue(), Units.METRE);
+    assertEquals(Double.valueOf("10.0"), l.getValue());
   }
 
   @Test
