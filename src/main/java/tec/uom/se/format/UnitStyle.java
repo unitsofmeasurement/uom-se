@@ -1,5 +1,5 @@
 /*
- * Units of Measurement Reference Implementation
+ * Units of Measurement Implementation for Java SE
  * Copyright (c) 2005-2016, Jean-Marie Dautelle, Werner Keil, V2COM.
  *
  * All rights reserved.

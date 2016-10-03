@@ -118,7 +118,7 @@ public class NumberQuantityTest {
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
   }
-  
+
   @Test
   public void doubleValueTest() {
     NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
