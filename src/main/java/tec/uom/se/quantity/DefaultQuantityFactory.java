@@ -40,13 +40,15 @@ import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
+import tec.uom.se.AbstractUnit;
+
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
  *
  * For example:<br/>
  * <code>
- *      Mass m = Quantities.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
- *      Time m = Quantities.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
+ *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Time m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * 
  * @param <Q>
@@ -56,7 +58,7 @@ import javax.measure.spi.QuantityFactory;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:otaviojava@java.net">Otavio Santana</a>
- * @version 0.7.1, $Date: 2015-09-27 $
+ * @version 1.0, $Date: 2016-10-04 $
  */
 public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
   /**
@@ -72,7 +74,7 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
   @SuppressWarnings("rawtypes")
   static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
   static {
-    CLASS_TO_METRIC_UNIT.put(Dimensionless.class, ONE);
+    CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
     CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
     CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
     CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);
@@ -122,9 +124,8 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
    *          the quantity type
    * @return the quantity factory for the specified type
    */
-  @SuppressWarnings("unchecked")
   public static <Q extends Quantity<Q>> QuantityFactory<Q> getInstance(final Class<Q> type) {
-    return new DefaultQuantityFactory(type);
+    return new DefaultQuantityFactory<Q>(type);
   }
 
   public String toString() {
@@ -144,9 +145,8 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
     return type.hashCode();
   }
 
-  @SuppressWarnings("unchecked")
   public Quantity<Q> create(Number value, Unit<Q> unit) {
-    return (Q) tec.uom.se.quantity.Quantities.getQuantity(value, unit);
+    return Quantities.getQuantity(value, unit);
   }
 
   public Unit<Q> getSystemUnit() {
