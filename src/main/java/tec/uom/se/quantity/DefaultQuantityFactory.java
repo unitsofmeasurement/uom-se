@@ -34,6 +34,8 @@ import static tec.uom.se.unit.Units.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -43,7 +45,7 @@ import javax.measure.spi.QuantityFactory;
 import tec.uom.se.AbstractUnit;
 
 /**
- * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
+ * A factory producing simple quantities instances (tuples {@link Number}/ {@link Unit}).
  *
  * For example:<br/>
  * <code>
@@ -58,9 +60,15 @@ import tec.uom.se.AbstractUnit;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:otaviojava@java.net">Otavio Santana</a>
- * @version 1.0, $Date: 2016-10-04 $
+ * @version 1.0.1, $Date: 2016-10-08 $
  */
 public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
+  static final Map<Class, QuantityFactory> INSTANCES = new HashMap<>();
+
+  static final Logger logger = Logger.getLogger(DefaultQuantityFactory.class.getName());
+
+  static final Level LOG_LEVEL = Level.FINE;
+
   /**
    * The type of the quantities created by this factory.
    */
@@ -73,6 +81,7 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
 
   @SuppressWarnings("rawtypes")
   static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
+
   static {
     CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
     CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
@@ -125,7 +134,25 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
    * @return the quantity factory for the specified type
    */
   public static <Q extends Quantity<Q>> QuantityFactory<Q> getInstance(final Class<Q> type) {
-    return new DefaultQuantityFactory<Q>(type);
+    logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
+    QuantityFactory<Q> factory;
+    if (!type.isInterface()) {
+      factory = new DefaultQuantityFactory<Q>(type);
+      // TODO use instances?
+    } else {
+      factory = INSTANCES.get(type);
+      if (factory != null)
+        return factory;
+      if (!Quantity.class.isAssignableFrom(type))
+        // This exception is not documented because it should never
+        // happen if the
+        // user don't try to trick the Java generic types system with
+        // unsafe cast.
+        throw new ClassCastException();
+      factory = new DefaultQuantityFactory<Q>(type);
+      INSTANCES.put(type, factory);
+    }
+    return factory;
   }
 
   public String toString() {
