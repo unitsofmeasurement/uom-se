@@ -38,8 +38,10 @@ import org.junit.Test;
 
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.BaseUnit;
+import tec.uom.se.unit.MetricPrefix;
+import tec.uom.se.unit.Units;
 
-public class AbstractUnitTest {
+public class AbsUnitTest {
   private static final AbstractUnit<Length> sut = new BaseUnit<>("m");
 
   @BeforeClass
@@ -56,5 +58,15 @@ public class AbstractUnitTest {
   public void testReturnedClass() {
     // assertEquals("Q", String.valueOf(sut.getActualType())); // TODO we hope to get better type information in future Java versions
     assertEquals("java.lang.reflect.TypeVariable<D>", String.valueOf(sut.getActualType()));
+  }
+
+  @Test
+  public void testParse() {
+    assertEquals(MetricPrefix.KILO(Units.WATT), AbstractUnit.parse("kW"));
+  }
+
+  @Test
+  public void testParse2() {
+    assertEquals(MetricPrefix.MILLI(Units.CELSIUS), AbstractUnit.parse("m°C"));
   }
 }

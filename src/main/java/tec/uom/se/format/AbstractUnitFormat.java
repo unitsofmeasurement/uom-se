@@ -41,18 +41,19 @@ import tec.uom.se.AbstractUnit;
 
 /**
  * <p>
- * This class provides the interface for formatting and parsing {@link AbstractUnit units}.
+ * This class provides the interface for formatting and parsing {@link Unit units}.
  * </p>
  *
  * <p>
  * For all metric units, the 20 SI prefixes used to form decimal multiples and sub-multiples of SI units are recognized. For example:<code>
- *        Unit.valueOf("m°C").equals(Units.MILLI(Units.CELSIUS))
- *        Unit.valueOf("kW").equals(Units.KILO(Units.WATT))</code>
+ *        AbstractUnit.parse("m°C").equals(MetricPrefix.MILLI(Units.CELSIUS))
+ *        AbstractUnit.parse("kW").equals(MetricPrefix.KILO(Units.WATT))</code>
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.1, $Date: 2016-04-06 $
+ * @version 1.0, $Date: 2016-10-10 $
+ * @since 1.0
  * 
  */
 @SuppressWarnings("rawtypes")

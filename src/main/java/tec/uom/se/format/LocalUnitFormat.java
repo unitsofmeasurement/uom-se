@@ -159,6 +159,7 @@ import java.util.ResourceBundle;
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 1.0, September 4, 2016
+ * @since 1.0
  */
 public class LocalUnitFormat extends AbstractUnitFormat {
 

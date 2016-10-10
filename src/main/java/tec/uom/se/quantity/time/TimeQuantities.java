@@ -50,10 +50,18 @@ import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.TransformedUnit;
 
+/**
+ * @author Otavio
+ * @author Werner
+ * @version 1.0
+ * @since 1.0
+ */
 public final class TimeQuantities {
 
   private TimeQuantities() {
   }
+
+  // Convenience constants outside the unit system (multiples are not held there)
 
   public static final Unit<Time> MICROSECOND = new TransformedUnit<>("μs", SECOND, MetricPrefix.MICRO.getConverter());
 
@@ -68,8 +76,9 @@ public final class TimeQuantities {
    *          - First parameter to range, inclusive
    * @param temporalB
    *          - second parameter to range, exclusive
-   * @return the Quantity difference based in {@link SI#DAY}.
-   * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
+   * @return the Quantity difference based in {@link Units#DAY}.
+   * @throws java.time.temporal.UnsupportedTemporalTypeException
+   *           if some temporal doesn't support {@link ChronoUnit#DAYS}
    */
   public static Quantity<Time> getQuantity(Temporal temporalA, Temporal temporalB) {
     long days = ChronoUnit.DAYS.between(temporalA, temporalB);
@@ -83,8 +92,9 @@ public final class TimeQuantities {
    *          - First parameter to range, inclusive
    * @param localTimeB
    *          - second parameter to range, exclusive
-   * @return the Quantity difference based in {@link SI#HOUR}.
-   * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
+   * @return the Quantity difference based in {@link Units#HOUR}.
+   * @throws java.time.temporal.UnsupportedTemporalTypeException
+   *           if some temporal doesn't support {@link ChronoUnit#DAYS}
    */
   public static Quantity<Time> getQuantity(LocalTime localTimeA, LocalTime localTimeB) {
     long hours = ChronoUnit.HOURS.between(localTimeA, localTimeB);
@@ -98,8 +108,9 @@ public final class TimeQuantities {
    *          - temporal
    * @param supplier
    *          the adjust @see {@link TemporalAdjuster}
-   * @return The Quantity based in Temporal with TemporalAdjuster in {@link SI#DAY}.
-   * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
+   * @return The Quantity based in Temporal with TemporalAdjuster in {@link Units#DAY}.
+   * @throws java.time.temporal.UnsupportedTemporalTypeException
+   *           if some temporal doesn't support {@link ChronoUnit#DAYS}
    */
   public static Quantity<Time> getQuantity(Temporal temporalA, Supplier<TemporalAdjuster> supplier) {
     Temporal temporalB = temporalA.with(supplier.get());
@@ -113,8 +124,9 @@ public final class TimeQuantities {
    * @see {@link LocalTime}
    * @param supplier
    *          he adjust @see {@link TemporalAdjuster}
-   * @return The Quantity based in Temporal with TemporalAdjuster in {@link SI#DAY}.
-   * @java.time.temporal.UnsupportedTemporalTypeException if some temporal doesn't support {@link ChronoUnit#DAYS}
+   * @return The Quantity based in Temporal with TemporalAdjuster in {@link Units#DAY}.
+   * @throws java.time.temporal.UnsupportedTemporalTypeException
+   *           if some temporal doesn't support {@link ChronoUnit#DAYS}
    */
   public static Quantity<Time> getQuantity(LocalTime localTimeA, Supplier<TemporalAdjuster> supplier) {
     LocalTime localTimeB = localTimeA.with(supplier.get());

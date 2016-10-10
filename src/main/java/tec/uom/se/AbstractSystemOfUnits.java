@@ -34,7 +34,15 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.spi.SystemOfUnits;
 
+import tec.uom.lib.common.function.Nameable;
+import tec.uom.se.format.SimpleUnitFormat;
+import tec.uom.se.format.UnitStyle;
+
+import static tec.uom.se.format.UnitStyle.*;
+
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -43,9 +51,10 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, August 9, 2016
+ * @version 1.0.1, October 10, 2016
+ * @since 1.0
  */
-public abstract class AbstractSystemOfUnits implements SystemOfUnits {
+public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
   /**
    * Holds the units.
    */
@@ -55,7 +64,9 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    * Holds the mapping quantity to unit.
    */
   @SuppressWarnings("rawtypes")
-  protected final Map<Class<? extends Quantity>, AbstractUnit> quantityToUnit = new HashMap<>(); // Diamond (Java 7+)
+  protected final Map<Class<? extends Quantity>, AbstractUnit> quantityToUnit = new HashMap<>();
+
+  protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
 
   /**
    * Adds a new named unit to the collection.
@@ -66,18 +77,18 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
    *          the name of the unit.
    * @return <code>unit</code>.
    */
-  @SuppressWarnings("unchecked")
-  protected <U extends Unit<?>> U addUnit(U unit, String name) {
-    if (name != null && unit instanceof AbstractUnit) {
-      AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-      aUnit.setName(name);
-      units.add(aUnit);
-      return (U) aUnit;
-    }
-    units.add(unit);
-    return unit;
-  }
-
+  /*	@SuppressWarnings("unchecked")
+  	private <U extends Unit<?>> U addUnit(U unit, String name) {
+  		if (name != null && unit instanceof AbstractUnit) {
+  			AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+  			aUnit.setName(name);
+  			units.add(aUnit);
+  			return (U) aUnit;
+  		}
+  		units.add(unit);
+  		return unit;
+  	}
+  */
   /**
    * The natural logarithm.
    **/
@@ -99,9 +110,10 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   }
 
   @Override
-    public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-        return this.getUnits().stream().filter(unit -> dimension.equals(unit.getDimension())).collect(Collectors.toSet());
-    }
+	public Set<? extends Unit<?>> getUnits(Dimension dimension) {
+		return this.getUnits().stream().filter(unit -> dimension.equals(unit.getDimension()))
+				.collect(Collectors.toSet());
+	}
 
   @SuppressWarnings("unchecked")
   @Override
@@ -110,8 +122,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
   }
 
   protected static class Helper {
-    static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, 
-				Dimension dimension) {
+    static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, Dimension dimension) {
 			if (dimension != null) {
 				return units.stream().filter(u -> dimension.equals(u.getDimension())).collect(Collectors.toSet());
 
@@ -127,9 +138,33 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      * @param name
      *          the name of the unit.
      * @return <code>unit</code>.
+     * @since 1.0
+     */
+    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
+      return addUnit(units, unit, name, NAME);
+    }
+
+    /**
+     * Adds a new named unit to the collection.
+     * 
+     * @param unit
+     *          the unit being added.
+     * @param name
+     *          the name of the unit.
+     * @param name
+     *          the symbol of the unit.
+     * @return <code>unit</code>.
+     * @since 1.0
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name) {
+    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name, String symbol) {
+      if (name != null && symbol != null && unit instanceof AbstractUnit) {
+        AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+        aUnit.setName(name);
+        aUnit.setSymbol(symbol);
+        units.add(aUnit);
+        return (U) aUnit;
+      }
       if (name != null && unit instanceof AbstractUnit) {
         AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
         aUnit.setName(name);
@@ -149,22 +184,100 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits {
      *          the name of the unit.
      * @param name
      *          the symbol of the unit.
+     * @param style
+     *          style of the unit.
      * @return <code>unit</code>.
+     * @since 1.0.1
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String name, String symbol) {
-      if (name != null && symbol != null && unit instanceof AbstractUnit) {
-        AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-        aUnit.setName(name);
-        aUnit.setSymbol(symbol);
-        units.add(aUnit);
-        return (U) aUnit;
+    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, final String name, final String symbol, UnitStyle style) {
+      switch (style) {
+        case NAME:
+        case SYMBOL:
+        case SYMBOL_AND_LABEL:
+          if (name != null && symbol != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setName(name);
+            if (SYMBOL.equals(style) || SYMBOL_AND_LABEL.equals(style)) {
+              aUnit.setSymbol(symbol);
+            }
+            if (LABEL.equals(style) || SYMBOL_AND_LABEL.equals(style)) {
+              SimpleUnitFormat.getInstance().label(unit, symbol);
+            }
+            units.add(aUnit);
+            return (U) aUnit;
+          }
+          if (name != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setName(name);
+            units.add(aUnit);
+            return (U) aUnit;
+          }
+          break;
+        default:
+          if (logger.isLoggable(Level.FINEST)) {
+            logger.log(Level.FINEST, "Unknown style " + style + "; unit " + unit + " can't be rendered with '" + symbol + "'.");
+          }
+          break;
       }
-      if (name != null && unit instanceof AbstractUnit) {
-        AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-        aUnit.setName(name);
-        units.add(aUnit);
-        return (U) aUnit;
+      if (LABEL.equals(style) || SYMBOL_AND_LABEL.equals(style)) {
+        SimpleUnitFormat.getInstance().label(unit, symbol);
+      }
+      units.add(unit);
+      return unit;
+    }
+
+    /**
+     * Adds a new labeled unit to the set.
+     * 
+     * @param units
+     *          the set to add to.
+     * 
+     * @param unit
+     *          the unit being added.
+     * @param text
+     *          the text for the unit.
+     * @param style
+     *          style of the unit.
+     * @return <code>unit</code>.
+     * @since 1.0.1
+     */
+    @SuppressWarnings("unchecked")
+    public static <U extends Unit<?>> U addUnit(Set<Unit<?>> units, U unit, String text, UnitStyle style) {
+      switch (style) {
+        case NAME:
+          if (text != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setName(text);
+            units.add(aUnit);
+            return (U) aUnit;
+          }
+          break;
+        case SYMBOL:
+          if (text != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setSymbol(text);
+            units.add(aUnit);
+            return (U) aUnit;
+          }
+          break;
+        case SYMBOL_AND_LABEL:
+          if (text != null && unit instanceof AbstractUnit) {
+            AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
+            aUnit.setSymbol(text);
+            units.add(aUnit);
+            SimpleUnitFormat.getInstance().label(aUnit, text);
+            return (U) aUnit;
+          } else { // label in any case, returning below
+            SimpleUnitFormat.getInstance().label(unit, text);
+          }
+          break;
+        case LABEL:
+          SimpleUnitFormat.getInstance().label(unit, text);
+          break;
+        default:
+          logger.log(Level.FINEST, "Unknown style " + style + "; unit " + unit + " can't be rendered with '" + text + "'.");
+          break;
       }
       units.add(unit);
       return unit;

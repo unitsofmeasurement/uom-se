@@ -35,13 +35,13 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 
 /**
- * Quantity specialized to SE platform.
+ * Quantity specialized for the Java SE platform. It extends {@link Quantity} with {@linkplain Comparable} and {@linkplain Serializable }
  * 
  * @see {@link Quantity}
  * @author otaviojava
  * @author werner
  * @param <Q>
- *          TODO probably call SEQuantity or SeQuantity (see CDI) because it combines more than just Comparable
+ * @since 1.0
  */
 public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, Comparable<Quantity<Q>>, Serializable {
 
@@ -101,7 +101,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
   <T extends Quantity<T>> ComparableQuantity<T> asType(Class<T> type) throws ClassCastException;
 
   /**
-   * Compares two instances of {@link Quantity<Q>}. Conversion of unit can happen if necessary
+   * Compares two instances of {@link Quantity <Q>}. Conversion of unit can happen if necessary
    *
    * @param that
    *          the {@code quantity<Q>} to be compared with this instance.
@@ -112,7 +112,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
   boolean isGreaterThan(Quantity<Q> that);
 
   /**
-   * Compares two instances of {@link Quantity<Q>}, doing the conversion of unit if necessary.
+   * Compares two instances of {@link Quantity <Q>}, doing the conversion of unit if necessary.
    *
    * @param that
    *          the {@code quantity<Q>} to be compared with this instance.
@@ -123,7 +123,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
   boolean isGreaterThanOrEqualTo(Quantity<Q> that);
 
   /**
-   * Compares two instances of {@link Quantity<Q>}, doing the conversion of unit if necessary.
+   * Compares two instances of {@link Quantity <Q>}, doing the conversion of unit if necessary.
    *
    * @param that
    *          the {@code quantity<Q>} to be compared with this instance.
@@ -134,7 +134,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
   boolean isLessThan(Quantity<Q> that);
 
   /**
-   * Compares two instances of {@link Quantity<Q>}, doing the conversion of unit if necessary.
+   * Compares two instances of {@link Quantity <Q>}, doing the conversion of unit if necessary.
    *
    * @param that
    *          the {@code quantity<Q>} to be compared with this instance.
@@ -145,7 +145,7 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
   boolean isLessThanOrEqualTo(Quantity<Q> that);
 
   /**
-   * Compares two instances of {@link Quantity<Q>}, doing the conversion of unit if necessary.
+   * Compares two instances of {@link Quantity <Q>}, doing the conversion of unit if necessary.
    *
    * @param that
    *          the {@code quantity<Q>} to be compared with this instance.
@@ -184,5 +184,4 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
    * @exception NullPointerException
    */
   <T extends Quantity<T>, E extends Quantity<E>> ComparableQuantity<E> multiply(Quantity<T> that, Class<E> asTypeQuantity);
-
 }

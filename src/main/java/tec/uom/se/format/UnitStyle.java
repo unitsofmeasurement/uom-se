@@ -33,6 +33,7 @@ package tec.uom.se.format;
  * Defines the different variants of unit formatting.
  * 
  * @author Werner Keil
+ * @version 1.0
  * @since 1.0.1
  */
 public enum UnitStyle {
@@ -40,29 +41,29 @@ public enum UnitStyle {
   /**
    * The unit will be rendered as its name.
    * 
-   * @see Unit#getName()
+   * @see javax.measure.Unit#getName()
    */
   NAME,
 
   /**
    * The unit will be rendered as its symbol.
    * 
-   * @see Unit#getSymbol()
+   * @see javax.measure.Unit#getSymbol()
    */
   SYMBOL,
 
   /**
    * The unit will be rendered as its label.
    * 
-   * @see UnitFormat#label()
+   * @see javax.measure.format.UnitFormat#label()
    */
   LABEL,
 
   /**
    * The unit will be rendered as its symbol and also labeled.
    * 
-   * @see Unit#getSymbol()
-   * @see UnitFormat#label()
+   * @see javax.measure.Unit#getSymbol()
+   * @see javax.measure.format.UnitFormat#label()
    */
   SYMBOL_AND_LABEL
 }

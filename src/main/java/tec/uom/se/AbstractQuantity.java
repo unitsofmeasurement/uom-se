@@ -41,6 +41,7 @@ import javax.measure.quantity.Dimensionless;
 
 import tec.uom.lib.common.function.UnitSupplier;
 import tec.uom.lib.common.function.ValueSupplier;
+import tec.uom.se.format.QuantityFormat;
 import tec.uom.se.function.NaturalOrder;
 import tec.uom.se.quantity.Quantities;
 
@@ -53,7 +54,7 @@ import tec.uom.se.quantity.Quantities;
  * To avoid any lost of precision, known exact measure (e.g. physical constants) should not be created from <code>double</code> constants but from
  * their decimal representation.<br/>
  * <code>
- *         public static final Quantity<Velocity> C = AbstractQuantity.of("299792458 m/s").asType(Velocity.class);
+ *         public static final Quantity<Velocity> C = AbstractQuantity.parse("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code>
  * </p>
@@ -61,12 +62,12 @@ import tec.uom.se.quantity.Quantities;
  * <p>
  * Measures can be converted to different units, the conversion precision is determined by the specified {@link MathContext}.<br/>
  * <code>
- *         Measurement<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
+ *         Quantity<Number, Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
  *         System.out.println(milesPerHour);
  * 
  *         > 670616629.3843951324266284896206156 [mi_i]/h
  *     </code> If no precision is specified <code>double</code> precision is assumed.<code>
- *         Measurement<Double, Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
+ *         Quantity<Double, Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
  * 
  *         > 670616629.3843951 [mi_i]/h
@@ -94,7 +95,8 @@ import tec.uom.se.quantity.Quantities;
  * </p>
  *
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 1.0, August 9, 2016
+ * @version 1.0.1, October 10, 2016
+ * @since 1.0
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractQuantity<Q extends Quantity<Q>> implements ComparableQuantity<Q>, UnitSupplier<Q>, ValueSupplier<Number> {
@@ -348,7 +350,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    * Casts this quantity to a parameterized quantity of specified nature or throw a <code>ClassCastException</code> if the dimension of the specified
    * quantity and its unit's dimension do not match. For example:<br/>
    * <code>
-   *     Quantity<Length> length = ComparableQuantity.of("2 km").asType(Length.class);
+   *     Quantity<Length> length = AbstractQuantity.parse("2 km").asType(Length.class);
    * </code>
    *
    * @param type
@@ -363,6 +365,25 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   public final <T extends Quantity<T>> ComparableQuantity<T> asType(Class<T> type) throws ClassCastException {
     this.getUnit().asType(type); // Raises ClassCastException if dimension
     // mismatches.
-    return (AbstractQuantity<T>) this;
+    return (ComparableQuantity<T>) this;
+  }
+
+  /**
+   * Returns the quantity of unknown type corresponding to the specified representation. This method can be used to parse dimensionless quantities.<br/>
+   * <code>
+   *     Quatity<Dimensionless> proportion = AbstractQuantity.parse("0.234").asType(Dimensionless.class);
+   * </code>
+   *
+   * <p>
+   * Note: This method handles only {@link SimpleUnitFormat#getStandard standard} unit format. Locale-sensitive quantity parsing is currently not
+   * supported.
+   * </p>
+   *
+   * @param csq
+   *          the decimal value and its unit (if any) separated by space(s).
+   * @return <code>QuantityFormat.getInstance().parse(csq)</code>
+   */
+  public static Quantity<?> parse(CharSequence csq) {
+    return QuantityFormat.getInstance().parse(csq);
   }
 }
