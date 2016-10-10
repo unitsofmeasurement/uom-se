@@ -29,7 +29,6 @@
  */
 package tec.uom.se.function;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -47,9 +46,10 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, Dec 28, 2015
+ * @version 1.0, Oct 10, 2016
+ * @since 1.0
  */
-public final class ExpConverter extends AbstractConverter implements ValueSupplier<String>, Serializable {
+public final class ExpConverter extends AbstractConverter implements ValueSupplier<String> {
 
   /**
 	 * 

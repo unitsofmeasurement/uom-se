@@ -35,7 +35,6 @@ import tec.uom.lib.common.function.DoubleFactorSupplier;
 import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -47,13 +46,14 @@ import java.util.Objects;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, Dec 28, 2015
+ * @version 1.0, Oct 11, 2016
+ * @since 1.0
  */
-public final class MultiplyConverter extends AbstractConverter implements ValueSupplier<Double>, DoubleFactorSupplier, Serializable {
+public final class MultiplyConverter extends AbstractConverter implements ValueSupplier<Double>, DoubleFactorSupplier {
 
   /**
-	 * 
-	 */
+   * 
+   */
   private static final long serialVersionUID = 6588759878444545649L;
 
   /**
@@ -109,7 +109,7 @@ public final class MultiplyConverter extends AbstractConverter implements ValueS
 
   @Override
   public final String toString() {
-    return "MultiplyConverter(" + factor + ")";
+    return MultiplyConverter.class.getSimpleName() + "(" + factor + ")";
   }
 
   @Override

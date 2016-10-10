@@ -46,9 +46,9 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 0.5.3, Dec 28, 2015
+ * @version 1.0, Oct 10, 2016
  */
-public final class AddConverter extends AbstractConverter implements ValueSupplier<Double>, Serializable {
+public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 
   /**
 	 * 

@@ -34,7 +34,6 @@ import javax.measure.UnitConverter;
 import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -50,18 +49,15 @@ import java.util.function.Supplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7.1, Dec 28, 2015
+ * @version 1.0, Oct 11, 2016
+ * @since 1.0
  */
-public final class RationalConverter extends AbstractConverter implements ValueSupplier<Double>, Supplier<Double>, DoubleSupplier, Serializable {
+public final class RationalConverter extends AbstractConverter implements ValueSupplier<Double>, Supplier<Double>, DoubleSupplier {
 
   /**
-	 * 
-	 */
+   * 
+   */
   private static final long serialVersionUID = 3563384008357680074L;
-
-  // implements
-  // Immutable<Double>
-  // {
 
   /**
    * Holds the converter dividend.

@@ -45,9 +45,9 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, December 28, 2015
+ * @version 1.0, October 10, 2016
  */
-public final class LogConverter extends AbstractConverter implements ValueSupplier<String>, Serializable { // implements Immutable<String> {
+public final class LogConverter extends AbstractConverter implements ValueSupplier<String> { // implements Immutable<String> {
 
   /**
 	 * 

@@ -34,8 +34,6 @@ import tec.uom.se.internal.format.TokenException;
 import tec.uom.se.internal.format.TokenMgrError;
 import tec.uom.se.internal.format.UnitFormatParser;
 import tec.uom.se.unit.AnnotatedUnit;
-import tec.uom.se.unit.Units;
-
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 
@@ -145,7 +143,8 @@ import java.util.ResourceBundle;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.6.3, $Date: 2016-01-17 $
+ * @version 1.0, $Date: 2016-11-11 $
+ * @since 1.0
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
 
@@ -154,8 +153,8 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
   // ////////////////////////////////////////////////////
 
   /**
-	 * 
-	 */
+   * 
+   */
   // private static final long serialVersionUID = 8968559300292910840L;
 
   /**

@@ -39,10 +39,11 @@ import javax.measure.Unit;
  * whose functional method is {@link #to()}.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5, 2014-11-02
+ * @version 1.0, 2016-10-11
  * @param <Q>
  *          The type to convert to.
  * @see <a href="http://en.wikipedia.org/wiki/Data_conversion">Wikipedia: Data Conversion</a>
+ * @since 1.0
  */
 @FunctionalInterface
 public interface QuantityConverter<Q extends Quantity<Q>> {

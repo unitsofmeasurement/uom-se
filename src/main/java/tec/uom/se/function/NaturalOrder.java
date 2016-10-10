@@ -53,6 +53,7 @@ import javax.measure.Quantity;
  *         Quantity<Time> seconds = timeFactory.create(100, Units.HOUR);
  *         </p>
  *         will return: seconds, minutes, hours, day
+ * @since 1.0
  */
 public class NaturalOrder<T extends Quantity<T>> implements Comparator<Quantity<T>> {
 

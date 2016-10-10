@@ -56,14 +56,16 @@ import tec.uom.se.ComparableQuantity;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, $Date: 2016-04-06 $
+ * @version 1.0, $Date: 2016-10-11 $
+ * @since 1.0
+ * 
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
 
   /**
-     *
-     */
+   *
+   */
   private static final long serialVersionUID = -4628006924354248662L;
 
   /**

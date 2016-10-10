@@ -40,6 +40,13 @@ import java.util.stream.Collector;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+/**
+ * @author Otavio
+ * @author Werner
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 @SuppressWarnings("rawtypes")
 public final class QuantityFunctions {
 
@@ -63,10 +70,9 @@ public final class QuantityFunctions {
    *         </p>
    * @throws NullPointerException
    */
-  public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
-        return (q1, q2) -> Double.compare(q1.getValue().doubleValue(), q2
-                .getValue().doubleValue());
-    }
+  public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
+		return (q1, q2) -> Double.compare(q1.getValue().doubleValue(), q2.getValue().doubleValue());
+	}
 
   /**
    * Creates a comparator to sort by number descending, ignoring the unit.
@@ -107,9 +113,9 @@ public final class QuantityFunctions {
    *         </p>
    * @throws NullPointerException
    */
-  public static  <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
-    	return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
-    }
+  public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
+		return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
+	}
 
   /**
    * Creates a comparator to sort by name descending, ignoring the value.
@@ -184,16 +190,16 @@ public final class QuantityFunctions {
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> min() {
 
-        return (q1, q2) -> {
-            double d1 = q1.getValue().doubleValue();
-            double d2 = q2.to(q1.getUnit()).getValue().doubleValue();
-            double min = Double.min(d1, d2);
-            if (min == d1) {
-                return q1;
-            }
-            return q2;
-        };
-    }
+		return (q1, q2) -> {
+			double d1 = q1.getValue().doubleValue();
+			double d2 = q2.to(q1.getUnit()).getValue().doubleValue();
+			double min = Double.min(d1, d2);
+			if (min == d1) {
+				return q1;
+			}
+			return q2;
+		};
+	}
 
   /**
    * Creates a BinaryOperator to calculate the maximum Quantity
@@ -202,16 +208,16 @@ public final class QuantityFunctions {
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> max() {
 
-        return (q1, q2) -> {
-            double d1 = q1.getValue().doubleValue();
-            double d2 = q2.to(q1.getUnit()).getValue().doubleValue();
-            double min = Double.max(d1, d2);
-            if (min == d1) {
-                return q1;
-            }
-            return q2;
-        };
-    }
+		return (q1, q2) -> {
+			double d1 = q1.getValue().doubleValue();
+			double d2 = q2.to(q1.getUnit()).getValue().doubleValue();
+			double min = Double.max(d1, d2);
+			if (min == d1) {
+				return q1;
+			}
+			return q2;
+		};
+	}
 
   /**
    * Creates a BinaryOperator to sum.
@@ -219,8 +225,8 @@ public final class QuantityFunctions {
    * @return the sum BinaryOperator
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum() {
-        return Quantity::add;
-    }
+		return Quantity::add;
+	}
 
   /**
    * Creates a BinaryOperator to sum converting to unit
@@ -230,8 +236,8 @@ public final class QuantityFunctions {
    * @return the sum BinaryOperator converting to unit
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum(Unit<Q> unit) {
-        return (q1, q2) -> q1.to(unit).add(q2.to(unit));
-    }
+		return (q1, q2) -> q1.to(unit).add(q2.to(unit));
+	}
 
   /**
    * Predicate to filter to one or more units
@@ -241,21 +247,21 @@ public final class QuantityFunctions {
    * @return A predicate to filter one or more units
    */
   @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q>... units) {
+	public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByUnit(Unit<Q>... units) {
 
-        if (Objects.isNull(units) || units.length == 0) {
-            return q -> true;
-        }
-        Predicate<Quantity<Q>> predicate = null;
-        for (Unit<Q> u : units) {
-            if (Objects.isNull(predicate)) {
-                predicate = q -> q.getUnit().equals(u);
-            } else {
-                predicate = predicate.or(q -> q.getUnit().equals(u));
-            }
-        }
-        return predicate;
-    }
+		if (Objects.isNull(units) || units.length == 0) {
+			return q -> true;
+		}
+		Predicate<Quantity<Q>> predicate = null;
+		for (Unit<Q> u : units) {
+			if (Objects.isNull(predicate)) {
+				predicate = q -> q.getUnit().equals(u);
+			} else {
+				predicate = predicate.or(q -> q.getUnit().equals(u));
+			}
+		}
+		return predicate;
+	}
 
   /**
    * Predicate to filter excluding these units
@@ -265,12 +271,12 @@ public final class QuantityFunctions {
    * @return A predicate to filter to not be these units
    */
   @SafeVarargs
-    public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q>... units) {
-        if (Objects.isNull(units) || units.length == 0) {
-            return q -> true;
-        }
-       return fiterByUnit(units).negate();
-    }
+	public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> fiterByExcludingUnit(Unit<Q>... units) {
+		if (Objects.isNull(units) || units.length == 0) {
+			return q -> true;
+		}
+		return fiterByUnit(units).negate();
+	}
 
   /**
    * creates a Filter to greater than number, ignoring units
@@ -280,8 +286,8 @@ public final class QuantityFunctions {
    * @return the Predicate greater than this number, ignoring units
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThan(Number value) {
-        return q -> q.getValue().doubleValue() > value.doubleValue();
-    }
+		return q -> q.getValue().doubleValue() > value.doubleValue();
+	}
 
   /**
    * creates a filter to greater than the quantity measure
@@ -291,9 +297,8 @@ public final class QuantityFunctions {
    * @return the Predicate greater than this measure
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThan(Quantity<Q> quantity) {
-        return q -> q.to(quantity.getUnit()).getValue().doubleValue() > quantity
-                .getValue().doubleValue();
-    }
+		return q -> q.to(quantity.getUnit()).getValue().doubleValue() > quantity.getValue().doubleValue();
+	}
 
   /**
    * creates a Filter to greater or equals than number, ignoring units
@@ -303,8 +308,8 @@ public final class QuantityFunctions {
    * @return the Predicate greater or equals than this number, ignoring units
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThanOrEqualTo(Number value) {
-        return q -> q.getValue().doubleValue() >= value.doubleValue();
-    }
+		return q -> q.getValue().doubleValue() >= value.doubleValue();
+	}
 
   /**
    * creates a filter to greater or equals than the quantity measure
@@ -314,9 +319,8 @@ public final class QuantityFunctions {
    * @return the Predicate greater or equals than this measure
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isGreaterThanOrEqualTo(Quantity<Q> quantity) {
-        return q -> q.to(quantity.getUnit()).getValue().doubleValue() >= quantity
-                .getValue().doubleValue();
-    }
+		return q -> q.to(quantity.getUnit()).getValue().doubleValue() >= quantity.getValue().doubleValue();
+	}
 
   /**
    * creates a Filter to lesser than number, ignoring units
@@ -326,8 +330,8 @@ public final class QuantityFunctions {
    * @return the Predicate greater than this number, ignoring units
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThan(Number value) {
-        return q -> q.getValue().doubleValue() < value.doubleValue();
-    }
+		return q -> q.getValue().doubleValue() < value.doubleValue();
+	}
 
   /**
    * creates a filter to lesser than the quantity measure
@@ -337,9 +341,8 @@ public final class QuantityFunctions {
    * @return the Predicate lesser than this measure
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThan(Quantity<Q> quantity) {
-        return q -> q.to(quantity.getUnit()).getValue().doubleValue() < quantity
-                .getValue().doubleValue();
-    }
+		return q -> q.to(quantity.getUnit()).getValue().doubleValue() < quantity.getValue().doubleValue();
+	}
 
   /**
    * creates a Filter to lesser or equals than number, ignoring units
@@ -349,8 +352,8 @@ public final class QuantityFunctions {
    * @return the Predicate lesser or equals than this number, ignoring units
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThanOrEqualTo(Number value) {
-        return q -> q.getValue().doubleValue() <= value.doubleValue();
-    }
+		return q -> q.getValue().doubleValue() <= value.doubleValue();
+	}
 
   /**
    * creates a filter to lesser or equals than the quantity measure
@@ -360,9 +363,8 @@ public final class QuantityFunctions {
    * @return the Predicate lesser or equals than this measure
    */
   public static <Q extends Quantity<Q>> Predicate<Quantity<Q>> isLesserThanOrEqualTo(Quantity<Q> quantity) {
-        return q -> q.to(quantity.getUnit()).getValue().doubleValue() <= quantity
-                .getValue().doubleValue();
-    }
+		return q -> q.to(quantity.getUnit()).getValue().doubleValue() <= quantity.getValue().doubleValue();
+	}
 
   /**
    * creates a Filter to between, lesser or equals and greater or equals, than number, ignoring units
@@ -397,14 +399,13 @@ public final class QuantityFunctions {
    * 
    * @return the QuantitySummaryStatistics
    */
-  public static <Q extends Quantity<Q>> Collector<Quantity<Q>, QuantitySummaryStatistics<Q>, QuantitySummaryStatistics<Q>>
-    summarizeQuantity(Unit<Q> unit){
-        Supplier<QuantitySummaryStatistics<Q>> supplier = () -> new QuantitySummaryStatistics<>(unit);
-        return Collector.of(supplier, QuantitySummaryStatistics<Q>::accept,
-                QuantitySummaryStatistics<Q>::combine);
-    }
+  public static <Q extends Quantity<Q>> Collector<Quantity<Q>, QuantitySummaryStatistics<Q>, QuantitySummaryStatistics<Q>> summarizeQuantity(
+			Unit<Q> unit) {
+		Supplier<QuantitySummaryStatistics<Q>> supplier = () -> new QuantitySummaryStatistics<>(unit);
+		return Collector.of(supplier, QuantitySummaryStatistics<Q>::accept, QuantitySummaryStatistics<Q>::combine);
+	}
 
-  public static <Q extends Quantity<Q>> Function<Quantity<Q>,Unit<Q>> groupByUnit() {
-        return Quantity::getUnit;
-    }
+  public static <Q extends Quantity<Q>> Function<Quantity<Q>, Unit<Q>> groupByUnit() {
+		return Quantity::getUnit;
+	}
 }

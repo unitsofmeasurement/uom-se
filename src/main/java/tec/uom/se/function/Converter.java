@@ -36,7 +36,8 @@ package tec.uom.se.function;
  * whose functional method is {@link #convert()}.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, 2014-11-15
+ * @version 1.0, 2016-10-11
+ * @since 1.0
  * @param <Q>
  *          The type to convert to.
  * @see <a href="http://en.wikipedia.org/wiki/Data_conversion">Wikipedia: Data Conversion</a>

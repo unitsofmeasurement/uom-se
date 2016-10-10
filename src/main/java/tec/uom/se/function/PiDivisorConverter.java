@@ -29,7 +29,6 @@
  */
 package tec.uom.se.function;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -47,13 +46,14 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, December 28, 2015
+ * @version 1.0, October 11, 2016
+ * @since 1.0
  */
-final class PiDivisorConverter extends AbstractConverter implements ValueSupplier<String>, Serializable { // implements Immutable<String> {
+final class PiDivisorConverter extends AbstractConverter implements ValueSupplier<String> {
 
   /**
-	 * 
-	 */
+   * 
+   */
   private static final long serialVersionUID = 5052794216568914141L;
 
   /**
@@ -105,5 +105,4 @@ final class PiDivisorConverter extends AbstractConverter implements ValueSupplie
   public String getValue() {
     return toString();
   }
-
 }

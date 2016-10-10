@@ -37,6 +37,13 @@ import javax.measure.Unit;
 
 import tec.uom.se.quantity.Quantities;
 
+/**
+ * @author Otavio
+ * @author Werner
+ * @version 1.0
+ * @since 1.0
+ * @param <Q>
+ */
 public class QuantitySummaryStatistics<Q extends Quantity<Q>> {
 
   private final Quantity<Q> empty;
@@ -249,7 +256,7 @@ public class QuantitySummaryStatistics<Q extends Quantity<Q>> {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
+    final StringBuilder sb = new StringBuilder();
     sb.append("[currency: ").append(empty.getUnit()).append(",");
     sb.append("count:").append(count).append(",");
     sb.append("min:").append(min).append(",");
@@ -258,5 +265,4 @@ public class QuantitySummaryStatistics<Q extends Quantity<Q>> {
     sb.append("average:").append(average).append("]");
     return sb.toString();
   }
-
 }

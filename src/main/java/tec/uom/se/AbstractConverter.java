@@ -48,13 +48,14 @@ import java.util.Objects;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @version 1.0, August 9, 2016
+ * @since 1.0
  */
-public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number> {
+public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number>, Serializable {
 
   /**
 	 *
 	 */
-  // private static final long serialVersionUID = 5790242858468427131L;
+  private static final long serialVersionUID = 5790242858468427131L;
 
   /**
    * The ratio of the circumference of a circle to its diameter.
@@ -133,7 +134,7 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
   /**
    * This class represents the identity converter (singleton).
    */
-  private static final class Identity extends AbstractConverter implements Serializable {
+  private static final class Identity extends AbstractConverter {
 
     /**
 		 * 
@@ -209,7 +210,7 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
      * @param right
      *          the right converter.
      * @throws IllegalArgumentException
-     *           if either the left or right converter are </code>null</code>
+     *           if either the left or right converter are </code> null</code>
      */
     public Pair(UnitConverter left, UnitConverter right) {
       if (left != null && right != null) {
