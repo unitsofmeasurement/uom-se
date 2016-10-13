@@ -135,7 +135,7 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement
    * This class represents the default measurement.
    */
   @SuppressWarnings("rawtypes")
-  static final class Default<Q> extends AbstractMeasurement {
+  static final class Default<Q extends Quantity<Q>> extends AbstractMeasurement<Q> {
 
     /**
 		 *
@@ -162,7 +162,8 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement
 	 * This class represents the default measurement.
 	 */
 	@SuppressWarnings("rawtypes")
-	static final class DefaultComparableQ<Q> extends AbstractMeasurement implements MeasurementComparableQ {
+	static final class DefaultComparableQ<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
+		implements MeasurementComparableQ<Q> {
 
 		//TODO: Maybe add serialVersionUID?
 
@@ -182,8 +183,8 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement
 		}
 
 		@Override
-		public ComparableQuantity getQuantity() {
-			return (ComparableQuantity) super.getQuantity();
+		public ComparableQuantity<Q> getQuantity() {
+			return (ComparableQuantity<Q>) super.getQuantity();
 		}
 	}
 }
