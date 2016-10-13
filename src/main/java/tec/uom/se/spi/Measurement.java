@@ -61,12 +61,6 @@ public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
 	 * @return a timestamp.
 	 */
 	long getTimestamp();
-	/**
-	 * Returns the measurement quantity.
-	 *
-	 * @return the quantity.
-	 */
-	Quantity<Q> getQuantity();
 
 	/**
 	 * Returns the {@linkplain Instant} as timestamp.
