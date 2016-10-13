@@ -37,45 +37,62 @@ import java.time.Instant;
 import javax.measure.Quantity;
 
 import tec.uom.lib.common.function.QuantitySupplier;
+import tec.uom.se.ComparableQuantity;
 
 /**
  * A Measurement contains a {@link Quantity} and a timestamp.
- * 
+ *
  * <p>
  * A {@code Measurement} object is used for maintaining the tuple of quantity and time-stamp.
  * The value is represented as {@linkplain Quantity}
  * and the time as {@linkplain Instant} plus <type>long</type> for backward-compatibility.
  * <p>
- * 
+ *
  * @see {@link QuantitySupplier}
  * @author werner
  * @version 0.5
  * @param <Q>
  */
-public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
-		Comparable<Measurement<Q>>, Serializable {
+public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>, Serializable {
 
 	/**
 	 * Returns the timestamp of this {@link Measurement}.
-	 * 
+	 *
 	 * @return a timestamp.
 	 */
 	long getTimestamp();
-	
+	/**
+	 * Returns the measurement quantity.
+	 *
+	 * @return the quantity.
+	 */
+	Quantity<Q> getQuantity();
+
 	/**
 	 * Returns the {@linkplain Instant} as timestamp.
-	 * 
+	 *
 	 * @return an instant.
 	 */
 	Instant getInstant();
-	
+
 	@SuppressWarnings({ "unchecked" })
 	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
 		return new Default<>(q);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, Instant i) {
 		return new Default<>(q, i);
 	}
+
+	@SuppressWarnings({ "unchecked" })
+	static <Q extends Quantity<Q>> MeasurementComparableQ<Q> of(ComparableQuantity<Q> q) {
+		return new AbstractMeasurement.DefaultComparableQ<>(q);
+	}
+
+	@SuppressWarnings("unchecked")
+	static <Q extends Quantity<Q>> MeasurementComparableQ<Q> of(ComparableQuantity<Q> q, Instant i) {
+		return new AbstractMeasurement.DefaultComparableQ<>(q, i);
+	}
+
 }
