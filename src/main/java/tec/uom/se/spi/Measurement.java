@@ -50,7 +50,7 @@ import tec.uom.se.ComparableQuantity;
  *
  * @see {@link QuantitySupplier}
  * @author werner
- * @version 0.5
+ * @version 0.6
  * @param <Q>
  */
 public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>, Serializable {
@@ -69,24 +69,20 @@ public interface Measurement<Q extends Quantity<Q>> extends QuantitySupplier<Q>,
 	 */
 	Instant getInstant();
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({ })
 	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q) {
 		return new Default<>(q);
 	}
 
-	@SuppressWarnings("unchecked")
 	static <Q extends Quantity<Q>> Measurement<Q> of(Quantity<Q> q, Instant i) {
 		return new Default<>(q, i);
 	}
 
-	@SuppressWarnings({ "unchecked" })
-	static <Q extends Quantity<Q>> MeasurementComparableQ<Q> of(ComparableQuantity<Q> q) {
-		return new AbstractMeasurement.DefaultComparableQ<>(q);
+	static <Q extends Quantity<Q>> Measurement<Q> of(ComparableQuantity<Q> q) {
+		return new AbstractMeasurement.DefaultComparable<>(q);
 	}
 
-	@SuppressWarnings("unchecked")
-	static <Q extends Quantity<Q>> MeasurementComparableQ<Q> of(ComparableQuantity<Q> q, Instant i) {
-		return new AbstractMeasurement.DefaultComparableQ<>(q, i);
+	static <Q extends Quantity<Q>> Measurement<Q> of(ComparableQuantity<Q> q, Instant i) {
+		return new AbstractMeasurement.DefaultComparable<>(q, i);
 	}
-
 }

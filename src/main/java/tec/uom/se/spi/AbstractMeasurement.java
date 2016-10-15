@@ -106,32 +106,31 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement
     return instant.toEpochMilli();
   }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
 
-		AbstractMeasurement<?> that = (AbstractMeasurement<?>) o;
+    AbstractMeasurement<?> that = (AbstractMeasurement<?>) o;
 
-		return quantity.equals(that.quantity) && instant.equals(that.instant);
-	}
+    return quantity.equals(that.quantity) && instant.equals(that.instant);
+  }
 
-	@Override
-	public int hashCode() {
-		int result = quantity.hashCode();
-		result = 31 * result + instant.hashCode();
-		return result;
-	}
+  @Override
+  public int hashCode() {
+    int result = quantity.hashCode();
+    result = 31 * result + instant.hashCode();
+    return result;
+  }
 
-	@Override
-	public String toString() {
-		return "Measurement{" +
-			"quantity=" + quantity +
-			", instant=" + instant +
-			'}';
-	}
+  @Override
+  public String toString() {
+    return "Measurement{" + "quantity=" + quantity + ", instant=" + instant + '}';
+  }
 
-	/**
+  /**
    * This class represents the default measurement.
    */
   @SuppressWarnings("rawtypes")
@@ -158,33 +157,37 @@ abstract class AbstractMeasurement<Q extends Quantity<Q>> implements Measurement
     }
   }
 
-	/**
-	 * This class represents the default measurement.
-	 */
-	@SuppressWarnings("rawtypes")
-	static final class DefaultComparableQ<Q extends Quantity<Q>> extends AbstractMeasurement<Q>
-		implements MeasurementComparableQ<Q> {
+  /**
+   * This class represents the default measurement.
+   */
+  @SuppressWarnings("rawtypes")
+  static final class DefaultComparable<Q extends Quantity<Q>> extends AbstractMeasurement<Q> {
 
-		//TODO: Maybe add serialVersionUID?
+    // TODO: Maybe add serialVersionUID?
 
-		@SuppressWarnings({ "unchecked" })
-		protected DefaultComparableQ(ComparableQuantity q, Instant i) {
-			super(q, i);
-		}
+    /**
+		 * 
+		 */
+    private static final long serialVersionUID = -175450754835481596L;
 
-		@SuppressWarnings({ "unchecked" })
-		protected DefaultComparableQ(ComparableQuantity q, long t) {
-			super(q, t);
-		}
+    @SuppressWarnings({ "unchecked" })
+    protected DefaultComparable(ComparableQuantity q, Instant i) {
+      super(q, i);
+    }
 
-		@SuppressWarnings("unchecked")
-		protected DefaultComparableQ(ComparableQuantity q) {
-			super(q);
-		}
+    @SuppressWarnings({ "unchecked" })
+    protected DefaultComparable(ComparableQuantity q, long t) {
+      super(q, t);
+    }
 
-		@Override
-		public ComparableQuantity<Q> getQuantity() {
-			return (ComparableQuantity<Q>) super.getQuantity();
-		}
-	}
+    @SuppressWarnings("unchecked")
+    protected DefaultComparable(ComparableQuantity q) {
+      super(q);
+    }
+
+    @Override
+    public ComparableQuantity<Q> getQuantity() {
+      return (ComparableQuantity<Q>) super.getQuantity();
+    }
+  }
 }
