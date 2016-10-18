@@ -41,19 +41,22 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * <p>
- * This class represents a quantity dimension (dimension of a physical quantity).
+ * This class represents a quantity dimension (dimension of a physical
+ * quantity).
  * </p>
  *
  * <p>
- * The dimension associated to any given quantity are given by the published {@link DimensionService} instances. For convenience, a static method
- * {@link QuantityDimension#getInstance(Class) aggregating the results of all
+ * The dimension associated to any given quantity are given by the published
+ * {@link DimensionService} instances. For convenience, a static method
+ * {@link QuantityDimension#of(Class) aggregating the results of all
  * 
  * @link DimensionService} instances is provided.<br/>
- * <br/>
+ *       <br/>
  *       <code>
  *        QuantityDimension speedDimension
  *            = QuantityDimension.of(Speed.class);
@@ -62,7 +65,7 @@ import java.util.logging.Logger;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.5.3, $Date: 2015-07-12 $
+ * @version 1.0, $Date: 2016-10-18 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
   private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -74,36 +77,50 @@ public final class QuantityDimension implements Dimension, Serializable {
 
   /**
    * Holds dimensionless.
+   * 
+   * @since 1.0
    */
   public static final Dimension NONE = new QuantityDimension(AbstractUnit.ONE);
 
   /**
    * Holds length dimension (L).
+   * 
+   * @since 1.0
    */
   public static final Dimension LENGTH = new QuantityDimension('L');
 
   /**
    * Holds mass dimension (M).
+   * 
+   * @since 1.0
    */
   public static final Dimension MASS = new QuantityDimension('M');
 
   /**
    * Holds time dimension (T).
+   * 
+   * @since 1.0
    */
   public static final Dimension TIME = new QuantityDimension('T');
 
   /**
    * Holds electric current dimension (I).
+   * 
+   * @since 1.0
    */
   public static final Dimension ELECTRIC_CURRENT = new QuantityDimension('I');
 
   /**
    * Holds temperature dimension (Θ).
+   * 
+   * @since 1.0
    */
   public static final Dimension TEMPERATURE = new QuantityDimension('\u0398');
 
   /**
    * Holds amount of substance dimension (N).
+   * 
+   * @since 1.0
    */
   public static final Dimension AMOUNT_OF_SUBSTANCE = new QuantityDimension('N');
 
@@ -124,13 +141,28 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @param quantityType
    *          the quantity type.
    * @return the dimension for the quantity type or <code>null</code>.
+   * @since 1.0
+   * @deprecated use of()
    */
   public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
-    // TODO: Track OSGi services and aggregate results (register custom
+    return of(quantityType);
+  }
+
+  /**
+   * Returns the dimension for the specified quantity type by aggregating the results of {@link DimensionService} or <code>null</code> if the
+   * specified quantity is unknown.
+   *
+   * @param quantityType
+   *          the quantity type.
+   * @return the dimension for the quantity type or <code>null</code>.
+   * @since 1.0.1
+   */
+  public static <Q extends Quantity<Q>> Dimension of(Class<Q> quantityType) {
+    // TODO: Track services and aggregate results (register custom
     // types)
     Unit<Q> siUnit = Units.getInstance().getUnit(quantityType);
     if (siUnit == null)
-      logger.finer("Quantity type: " + quantityType + " unknown"); // we're
+      logger.log(Level.FINER, "Quantity type: " + quantityType + " unknown"); // we're
     // logging
     // but
     // probably
@@ -138,6 +170,18 @@ public final class QuantityDimension implements Dimension, Serializable {
     // is
     // enough?
     return (siUnit != null) ? siUnit.getDimension() : null;
+  }
+
+  /**
+   * Returns the dimension for the specified symbol.
+   *
+   * @param sambol
+   *          the quantity symbol.
+   * @return the dimension for the given symbol.
+   * @since 1.0.1
+   */
+  public static Dimension parse(char symbol) {
+    return new QuantityDimension(symbol);
   }
 
   /**
@@ -149,17 +193,6 @@ public final class QuantityDimension implements Dimension, Serializable {
   @SuppressWarnings("rawtypes")
   QuantityDimension(char symbol) {
     pseudoUnit = new BaseUnit("[" + symbol + ']', NONE);
-  }
-
-  /**
-   * Returns the dimension for the specified symbol.
-   *
-   * @param sambol
-   *          the quantity symbol.
-   * @return the dimension for the given symbol.
-   */
-  static QuantityDimension getInstance(char symbol) {
-    return new QuantityDimension(symbol);
   }
 
   /**
@@ -179,9 +212,10 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @param that
    *          the dimension multiplicand.
    * @return <code>this * that</code>
+   * @since 1.0
    */
   public Dimension multiply(Dimension that) {
-    return (that instanceof QuantityDimension) ? this.multiply((QuantityDimension) that) : that.multiply(this);
+    return (that instanceof QuantityDimension) ? this.multiply((QuantityDimension) that) : this.multiply(that);
   }
 
   /**
@@ -190,6 +224,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @param that
    *          the dimension multiplicand.
    * @return <code>this * that</code>
+   * @since 1.0
    */
   public QuantityDimension multiply(QuantityDimension that) {
     return new QuantityDimension(this.pseudoUnit.multiply(that.pseudoUnit));
@@ -201,6 +236,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @param that
    *          the dimension divisor.
    * @return <code>this.multiply(that.pow(-1))</code>
+   * @since 1.0
    */
   public Dimension divide(Dimension that) {
     return this.multiply(that.pow(-1));
@@ -212,6 +248,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @param that
    *          the dimension divisor.
    * @return <code>this.multiply(that.pow(-1))</code>
+   * @since 1.0
    */
   public QuantityDimension divide(QuantityDimension that) {
     return this.multiply(that.pow(-1));
@@ -223,6 +260,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @param n
    *          the exponent.
    * @return the result of raising this dimension to the exponent.
+   * @since 1.0
    */
   public final QuantityDimension pow(int n) {
     return new QuantityDimension(this.pseudoUnit.pow(n));
@@ -236,27 +274,29 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @return the result of taking the given root of this dimension.
    * @throws ArithmeticException
    *           if <code>n == 0</code>.
+   * @since 1.0
    */
   public final QuantityDimension root(int n) {
     return new QuantityDimension(this.pseudoUnit.root(n));
   }
 
   /**
-   * Returns the fundamental dimensions and their exponent whose product is this dimension or <code>null</code> if this dimension is a fundamental
-   * dimension.
+   * Returns the fundamental (base) dimensions and their exponent whose product is this dimension or <code>null</code> if this dimension is a
+   * fundamental dimension.
    *
-   * @return the mapping between the fundamental dimensions and their exponent.
+   * @return the mapping between the base dimensions and their exponent.
+   * @since 1.0
    */
   @SuppressWarnings("rawtypes")
-  public Map<? extends QuantityDimension, Integer> getBaseDimensions() {
+  public Map<? extends Dimension, Integer> getBaseDimensions() {
     Map<? extends Unit, Integer> pseudoUnits = pseudoUnit.getBaseUnits();
     if (pseudoUnits == null)
       return null;
-    Map<QuantityDimension, Integer> fundamentalDimensions = new HashMap<>();
+    final Map<QuantityDimension, Integer> baseDimensions = new HashMap<>();
     for (Map.Entry<? extends Unit, Integer> entry : pseudoUnits.entrySet()) {
-      fundamentalDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
+      baseDimensions.put(new QuantityDimension(entry.getKey()), entry.getValue());
     }
-    return fundamentalDimensions;
+    return baseDimensions;
   }
 
   @Override
