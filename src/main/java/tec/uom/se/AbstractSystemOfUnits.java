@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, October 10, 2016
+ * @version 1.0.2, November 3, 2016
  * @since 1.0
  */
 public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
@@ -77,18 +77,12 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
    *          the name of the unit.
    * @return <code>unit</code>.
    */
-  /*	@SuppressWarnings("unchecked")
-  	private <U extends Unit<?>> U addUnit(U unit, String name) {
-  		if (name != null && unit instanceof AbstractUnit) {
-  			AbstractUnit<?> aUnit = (AbstractUnit<?>) unit;
-  			aUnit.setName(name);
-  			units.add(aUnit);
-  			return (U) aUnit;
-  		}
-  		units.add(unit);
-  		return unit;
-  	}
-  */
+  /*
+   * @SuppressWarnings("unchecked") private <U extends Unit<?>> U addUnit(U
+   * unit, String name) { if (name != null && unit instanceof AbstractUnit) {
+   * AbstractUnit<?> aUnit = (AbstractUnit<?>) unit; aUnit.setName(name);
+   * units.add(aUnit); return (U) aUnit; } units.add(unit); return unit; }
+   */
   /**
    * The natural logarithm.
    **/
@@ -110,10 +104,10 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
   }
 
   @Override
-	public Set<? extends Unit<?>> getUnits(Dimension dimension) {
-		return this.getUnits().stream().filter(unit -> dimension.equals(unit.getDimension()))
-				.collect(Collectors.toSet());
-	}
+    public Set<? extends Unit<?>> getUnits(Dimension dimension) {
+	return this.getUnits().stream().filter(unit -> dimension.equals(unit.getDimension()))
+		.collect(Collectors.toSet());
+    }
 
   @SuppressWarnings("unchecked")
   @Override
@@ -123,12 +117,12 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
 
   protected static class Helper {
     static Set<Unit<?>> getUnitsOfDimension(final Set<Unit<?>> units, Dimension dimension) {
-			if (dimension != null) {
-				return units.stream().filter(u -> dimension.equals(u.getDimension())).collect(Collectors.toSet());
+	    if (dimension != null) {
+		return units.stream().filter(u -> dimension.equals(u.getDimension())).collect(Collectors.toSet());
 
-			}
-			return null;
-		}
+	    }
+	    return null;
+	}
 
     /**
      * Adds a new named unit to the collection.
