@@ -84,7 +84,7 @@ public class UnitsTest {
   @Before
   public void setUp() throws Exception {
     // super.setUp();
-    one = Units.ONE;
+    one = AbstractUnit.ONE;
   }
 
   /*

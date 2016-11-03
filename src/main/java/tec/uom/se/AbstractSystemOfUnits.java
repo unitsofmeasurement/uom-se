@@ -64,7 +64,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
    * Holds the mapping quantity to unit.
    */
   @SuppressWarnings("rawtypes")
-  protected final Map<Class<? extends Quantity>, AbstractUnit> quantityToUnit = new HashMap<>();
+  protected final Map<Class<? extends Quantity>, Unit> quantityToUnit = new HashMap<>();
 
   protected static final Logger logger = Logger.getLogger(AbstractSystemOfUnits.class.getName());
 
@@ -117,7 +117,7 @@ public abstract class AbstractSystemOfUnits implements SystemOfUnits, Nameable {
 
   @SuppressWarnings("unchecked")
   @Override
-  public <Q extends Quantity<Q>> AbstractUnit<Q> getUnit(Class<Q> quantityType) {
+  public <Q extends Quantity<Q>> Unit<Q> getUnit(Class<Q> quantityType) {
     return quantityToUnit.get(quantityType);
   }
 

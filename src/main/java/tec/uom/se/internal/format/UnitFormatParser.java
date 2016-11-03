@@ -35,7 +35,6 @@ import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.Units;
 
 /** */
 public final class UnitFormatParser implements UnitTokenConstants {
@@ -74,7 +73,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
 
   @SuppressWarnings("unused")
   Unit<?> compoundExpr() throws TokenException {
-    Unit<?> result = Units.ONE;
+    Unit<?> result = AbstractUnit.ONE;
     result = addExpr();
     label_1: while (true) {
       switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -95,7 +94,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
 
   @SuppressWarnings("unused")
   Unit<?> addExpr() throws TokenException {
-    Unit<?> result = Units.ONE;
+    Unit<?> result = AbstractUnit.ONE;
     Number n1 = null;
     Token sign1 = null;
     Number n2 = null;
@@ -136,8 +135,8 @@ public final class UnitFormatParser implements UnitTokenConstants {
   }
 
   Unit<?> mulExpr() throws TokenException {
-    Unit<?> result = Units.ONE;
-    Unit<?> temp = Units.ONE;
+    Unit<?> result = AbstractUnit.ONE;
+    Unit<?> temp = AbstractUnit.ONE;
     result = exponentExpr();
     label_2: while (true) {
       switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {
@@ -185,7 +184,7 @@ public final class UnitFormatParser implements UnitTokenConstants {
 
   @SuppressWarnings("unused")
   Unit<?> exponentExpr() throws TokenException {
-    Unit<?> result = Units.ONE;
+    Unit<?> result = AbstractUnit.ONE;
     Exponent exponent = null;
     Token token = null;
     if (jj_2_2(2147483647)) {
@@ -287,8 +286,8 @@ public final class UnitFormatParser implements UnitTokenConstants {
   }
 
   Unit<?> atomicExpr() throws TokenException {
-    Unit<?> result = Units.ONE;
-    // Unit<?> temp = Units.ONE;
+    Unit<?> result = AbstractUnit.ONE;
+    // Unit<?> temp = AbstractUnit.ONE;
     Number n = null;
     Token token = null;
     switch ((jj_ntk == -1) ? jj_ntk() : jj_ntk) {

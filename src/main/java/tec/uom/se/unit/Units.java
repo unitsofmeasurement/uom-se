@@ -29,6 +29,7 @@
  */
 package tec.uom.se.unit;
 
+import static tec.uom.se.AbstractUnit.ONE;
 import tec.uom.lib.common.function.Nameable;
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
@@ -91,13 +92,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   public String getName() {
     return Units.class.getSimpleName();
   }
-
-  /**
-   * Holds the dimensionless unit <code>ONE</code>.
-   * 
-   * @deprecated
-   */
-  public static final Unit<Dimensionless> ONE = addUnit(new ProductUnit<>(), Dimensionless.class);
 
   // //////////////
   // BASE UNITS //
@@ -334,12 +328,26 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * The SI unit for velocity quantities (standard name <code>m/s</code>).
    */
-  public static final Unit<Speed> METRES_PER_SECOND = addUnit(new ProductUnit<>(METRE.divide(SECOND)), Speed.class);
+  public static final Unit<Speed> METRE_PER_SECOND = addUnit(new ProductUnit<>(METRE.divide(SECOND)), Speed.class);
+
+  /**
+   * Alias for METRE_PER_SECOND
+   * 
+   * @deprecated use METRE_PER_SECOND
+   */
+  public static final Unit<Speed> METRES_PER_SECOND = METRE_PER_SECOND;
 
   /**
    * The SI unit for acceleration quantities (standard name <code>m/s2</code> ).
    */
-  public static final Unit<Acceleration> METRES_PER_SQUARE_SECOND = addUnit(new ProductUnit<>(METRES_PER_SECOND.divide(SECOND)), Acceleration.class);
+  public static final Unit<Acceleration> METRE_PER_SQUARE_SECOND = addUnit(new ProductUnit<>(METRE_PER_SECOND.divide(SECOND)), Acceleration.class);
+
+  /**
+   * Alias for METRE_PER_SQUARE_SECOND
+   * 
+   * @deprecated use METRE_PER_SQUARE_SECOND
+   */
+  public static final Unit<Acceleration> METRES_PER_SQUARE_SECOND = METRE_PER_SQUARE_SECOND;
 
   /**
    * The SI unit for area quantities (standard name <code>m2</code>).
@@ -354,7 +362,14 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A unit of velocity expressing the number of international {@link #KILOMETRE kilometres} per {@link #HOUR hour} (abbreviation <code>km/h</code>).
    */
-  public static final Unit<Speed> KILOMETRES_PER_HOUR = addUnit(METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
+  public static final Unit<Speed> KILOMETRE_PER_HOUR = addUnit(METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
+
+  /**
+   * Alias for KILOMETRE_PER_HOUR
+   * 
+   * @deprecated use KILOMETRE_PER_HOUR
+   */
+  public static final Unit<Speed> KILOMETRES_PER_HOUR = KILOMETRE_PER_HOUR;
 
   // ///////////////////////////////////////////////////////////////
   // CommonUnits outside the SI that are accepted for use with the Units. //
@@ -395,6 +410,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>deg</code>).
+   * 
    * @deprecated Use from SI
    */
   public static final Unit<Angle> DEGREE_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
@@ -402,6 +418,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>'</code>).
+   * 
    * @deprecated Use from SI
    */
   public static final Unit<Angle> MINUTE_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
@@ -409,6 +426,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>''</code>).
+   * 
    * @deprecated Use from SI
    */
   public static final Unit<Angle> SECOND_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
@@ -429,6 +447,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    */
   public static SystemOfUnits getInstance() {
     return INSTANCE;
+  }
+
+  static {
+    // have to add AbstractUnit.ONE as Dimensionless, too
+    addUnit(AbstractUnit.ONE);
+    INSTANCE.quantityToUnit.put(Dimensionless.class, AbstractUnit.ONE);
   }
 
   /**

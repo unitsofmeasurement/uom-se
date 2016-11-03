@@ -34,6 +34,7 @@ import static tec.uom.se.internal.format.UnitTokenConstants.*;
 
 import javax.measure.Unit;
 
+import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.unit.MetricPrefix;
@@ -77,7 +78,7 @@ public final class LocalUnitFormatParser {
   }
 
   final public Unit AddExpr() throws TokenException {
-    Unit result = Units.ONE;
+    Unit result = AbstractUnit.ONE;
     Number n1 = null;
     Token sign1 = null;
     Number n2 = null;
@@ -116,8 +117,8 @@ public final class LocalUnitFormatParser {
   }
 
   final public Unit MulExpr() throws TokenException {
-    Unit result = Units.ONE;
-    Unit temp = Units.ONE;
+    Unit result = AbstractUnit.ONE;
+    Unit temp = AbstractUnit.ONE;
     result = ExponentExpr();
     label_2: while (true) {
       switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {
@@ -164,7 +165,7 @@ public final class LocalUnitFormatParser {
   }
 
   final public Unit ExponentExpr() throws TokenException {
-    Unit result = Units.ONE;
+    Unit result = AbstractUnit.ONE;
     Exponent exponent = null;
     Token token = null;
     if (jj_2_2(2147483647)) {
@@ -261,7 +262,7 @@ public final class LocalUnitFormatParser {
   }
 
   final public Unit AtomicExpr() throws TokenException {
-    Unit result = Units.ONE;
+    Unit result = AbstractUnit.ONE;
     Number n = null;
     Token token = null;
     switch ((nextTokenIndex == -1) ? jj_ntk() : nextTokenIndex) {

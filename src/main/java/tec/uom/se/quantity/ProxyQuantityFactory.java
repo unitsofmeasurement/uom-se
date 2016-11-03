@@ -46,7 +46,6 @@ import javax.measure.spi.QuantityFactory;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.unit.Units;
 
 /**
  * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
@@ -60,10 +59,10 @@ import tec.uom.se.unit.Units;
  * @param <Q>
  *          The type of the quantity.
  *
- * @author <a href="mailto:desruisseaux@users.sourceforge.net">Martin Desruisseaux</a>
+ * @author <a href="mailto:martin.desruisseaux@geomatys.com">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.5.21, $Date: 2015-07-12 $
+ * @version 0.6, $Date: 2016-11-03 $
  */
 abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 
@@ -189,7 +188,7 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
     @SuppressWarnings("rawtypes")
     static final HashMap<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
     static {
-      CLASS_TO_METRIC_UNIT.put(Dimensionless.class, Units.ONE);
+      CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
       CLASS_TO_METRIC_UNIT.put(ElectricCurrent.class, AMPERE);
       CLASS_TO_METRIC_UNIT.put(LuminousIntensity.class, CANDELA);
       CLASS_TO_METRIC_UNIT.put(Temperature.class, KELVIN);
