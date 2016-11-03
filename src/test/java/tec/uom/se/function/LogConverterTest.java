@@ -27,71 +27,57 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.unit;
+package tec.uom.se.function;
 
-import javax.measure.Quantity;
-import javax.measure.Unit;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
-/**
- * Inner product element represents a rational power of a single unit.
- */
-final class ElementProduct<T extends Quantity<T>> {
+public class LogConverterTest {
 
-  /**
-   * Holds the single unit.
-   */
-  final Unit<T> unit;
+  private LogConverter logConverterBase10;
 
-  /**
-   * Holds the power exponent.
-   */
-  final int pow;
-
-  /**
-   * Holds the root exponent.
-   */
-  final int root;
-
-  /**
-   * Structural constructor.
-   *
-   * @param unit
-   *          the unit.
-   * @param pow
-   *          the power exponent.
-   * @param root
-   *          the root exponent.
-   */
-  ElementProduct(Unit<T> unit, int pow, int root) {
-    this.unit = unit;
-    this.pow = pow;
-    this.root = root;
+  @Before
+  public void setUp() throws Exception {
+    logConverterBase10 = new LogConverter(10.);
   }
 
-  /**
-   * Returns this element's unit.
-   *
-   * @return the single unit.
-   */
-  public Unit<?> getUnit() {
-    return unit;
+  @Test
+  public void testBaseUnmodified() {
+    assertEquals(10., logConverterBase10.getBase(), 0.);
   }
 
-  /**
-   * Returns the power exponent. The power exponent can be negative but is always different from zero.
-   *
-   * @return the power exponent of the single unit.
-   */
-  public int getPow() {
-    return pow;
+  @Test
+  public void testEqualityOfTwoLogConverter() {
+    LogConverter logConverter = new LogConverter(10.);
+    assertTrue(logConverter.equals(logConverterBase10));
+    assertTrue(!logConverter.equals(null));
   }
 
-  /**
-   * Returns the root exponent. The root exponent is always greater than zero.
-   *
-   * @return the root exponent of the single unit.
-   */
-  public int getRoot() {
-    return root;
+  @Test
+  public void testGetValueLogConverter() {
+    LogConverter logConverter = new LogConverter(Math.E);
+    assertEquals("Log(10.0)", logConverterBase10.getValue());
+    assertEquals("ln", logConverter.getValue());
+  }
+
+  @Test
+  public void isLinearOfLogConverterTest() {
+    assertTrue(!logConverterBase10.isLinear());
+  }
+
+  @Test
+  public void convertLogTest() {
+    assertEquals(1, logConverterBase10.convert(10), 0.);
+    assertEquals(Double.NaN, logConverterBase10.convert(-10), 0.);
+    assertTrue(Double.isInfinite(logConverterBase10.convert(0)));
+  }
+
+  @Test
+  public void inverseLogTest() {
+    LogConverter logConverter = new LogConverter(Math.E);
+    assertEquals(new ExpConverter(10.), logConverterBase10.inverse());
+    assertEquals(new ExpConverter(Math.E), logConverter.inverse());
   }
 }

@@ -32,6 +32,8 @@ package tec.uom.se.function;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.AbstractConverter;
@@ -44,15 +46,17 @@ import tec.uom.se.AbstractConverter;
  * @see <a href="http://en.wikipedia.org/wiki/Pi"> Wikipedia: Pi</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, October 11, 2016
+ * @version 1.0.1, November 3, 2016
  * @since 1.0
  */
 public final class PiMultiplierConverter extends AbstractConverter implements ValueSupplier<String> {
 
   /**
-   * 
-   */
+     * 
+     */
   private static final long serialVersionUID = -5763262154104962367L;
+
+  private static final Logger logger = Logger.getLogger(PiMultiplierConverter.class.getName());
 
   /**
    * Creates a Pi multiplier converter.
@@ -102,7 +106,7 @@ public final class PiMultiplierConverter extends AbstractConverter implements Va
   /**
    * Pi calculation with Machin's formula.
    * 
-   * @see <a href="http://en.literateprograms.org/Pi_with_Machin's_formula_(Java)" >Pi with Machin's formula</a>
+   * @see <a href= "http://en.literateprograms.org/Pi_with_Machin's_formula_(Java)" >Pi with Machin's formula</a>
    * 
    */
   static final class Pi {
@@ -116,23 +120,48 @@ public final class PiMultiplierConverter extends AbstractConverter implements Va
           RoundingMode.DOWN);
     }
 
+    /*
+     * private static BigDecimal compute(int numDigits, boolean verbose) {
+     * int calcDigits = numDigits + 10;
+     * 
+     * return FOUR .multiply((FOUR.multiply(arccot(FIVE,
+     * calcDigits))).subtract(arccot(TWO_THIRTY_NINE, calcDigits)))
+     * .setScale(numDigits, RoundingMode.DOWN); }
+     */
+    /** Compute arccot via the Taylor series expansion. */
     private static BigDecimal arccot(BigDecimal x, int numDigits) {
       BigDecimal unity = BigDecimal.ONE.setScale(numDigits, RoundingMode.DOWN);
       BigDecimal sum = unity.divide(x, RoundingMode.DOWN);
       BigDecimal xpower = new BigDecimal(sum.toString());
       BigDecimal term = null;
+      int nTerms = 0;
+
+      BigDecimal nearZero = BigDecimal.ONE.scaleByPowerOfTen(-numDigits);
+      logger.log(Level.FINER, "arccot: ARGUMENT=" + x + " (nearZero=" + nearZero + ")");
       boolean add = false;
-      for (BigDecimal n = new BigDecimal("3"); term == null || !term.equals(BigDecimal.ZERO); n = n.add(TWO)) {
+      // Add one term of Taylor series each time thru loop. Stop looping
+      // when _term_
+      // gets very close to zero.
+      for (BigDecimal n = THREE; term == null || !term.equals(BigDecimal.ZERO); n = n.add(TWO)) {
+        if (term != null && term.compareTo(nearZero) < 0)
+          break;
         xpower = xpower.divide(x.pow(2), RoundingMode.DOWN);
         term = xpower.divide(n, RoundingMode.DOWN);
         sum = add ? sum.add(term) : sum.subtract(term);
         add = !add;
+        // System.out.println("arccot: xpower=" + xpower + ", term=" +
+        // term);
+        logger.log(Level.FINEST, "arccot: term=" + term);
+        nTerms++;
       }
+      logger.log(Level.FINER, "arccot: done. nTerms=" + nTerms);
       return sum;
     }
   }
 
   private static final BigDecimal TWO = new BigDecimal("2");
+
+  private static final BigDecimal THREE = new BigDecimal("3");
 
   private static final BigDecimal FOUR = new BigDecimal("4");
 

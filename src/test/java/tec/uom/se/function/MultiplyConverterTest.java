@@ -27,71 +27,65 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.unit;
+package tec.uom.se.function;
 
-import javax.measure.Quantity;
-import javax.measure.Unit;
+import static org.junit.Assert.*;
 
-/**
- * Inner product element represents a rational power of a single unit.
- */
-final class ElementProduct<T extends Quantity<T>> {
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-  /**
-   * Holds the single unit.
-   */
-  final Unit<T> unit;
+public class MultiplyConverterTest {
 
-  /**
-   * Holds the power exponent.
-   */
-  final int pow;
+  private MultiplyConverter converter;
 
-  /**
-   * Holds the root exponent.
-   */
-  final int root;
-
-  /**
-   * Structural constructor.
-   *
-   * @param unit
-   *          the unit.
-   * @param pow
-   *          the power exponent.
-   * @param root
-   *          the root exponent.
-   */
-  ElementProduct(Unit<T> unit, int pow, int root) {
-    this.unit = unit;
-    this.pow = pow;
-    this.root = root;
+  @Before
+  public void setUp() throws Exception {
+    converter = new MultiplyConverter(2);
   }
 
-  /**
-   * Returns this element's unit.
-   *
-   * @return the single unit.
-   */
-  public Unit<?> getUnit() {
-    return unit;
+  @Test
+  public void testConvertMethod() {
+    Assert.assertEquals(200, converter.convert(100), 0.1);
+    Assert.assertEquals(0, converter.convert(0), 0.0);
+    Assert.assertEquals(-200, converter.convert(-100), 0.1);
   }
 
-  /**
-   * Returns the power exponent. The power exponent can be negative but is always different from zero.
-   *
-   * @return the power exponent of the single unit.
-   */
-  public int getPow() {
-    return pow;
+  @Test
+  public void testEqualityOfTwoLogConverter() {
+    assertFalse(converter.equals(null));
+    assertEquals(new MultiplyConverter(2), converter);
   }
 
-  /**
-   * Returns the root exponent. The root exponent is always greater than zero.
-   *
-   * @return the root exponent of the single unit.
-   */
-  public int getRoot() {
-    return root;
+  @Test
+  public void testGetValuePiDivisorConverter() {
+    assertEquals(Double.valueOf(2d), converter.getValue());
+  }
+
+  @Test
+  public void isLinearOfLogConverterTest() {
+    assertTrue(converter.isLinear());
+  }
+
+  @Test
+  public void inverseTest() {
+    assertNotNull(converter.inverse());
+    assertEquals(new MultiplyConverter(0.5), converter.inverse());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void identityTest() {
+    @SuppressWarnings("unused")
+    MultiplyConverter identConverter = new MultiplyConverter(1);
+  }
+
+  @Test
+  public void valueTest() {
+    assertEquals(Double.valueOf(2), converter.getValue());
+  }
+
+  @Test
+  public void toStringTest() {
+    assertEquals("MultiplyConverter(2.0)", converter.toString());
   }
 }

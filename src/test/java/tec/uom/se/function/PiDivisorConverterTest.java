@@ -27,71 +27,42 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.unit;
+package tec.uom.se.function;
 
-import javax.measure.Quantity;
-import javax.measure.Unit;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-/**
- * Inner product element represents a rational power of a single unit.
- */
-final class ElementProduct<T extends Quantity<T>> {
+public class PiDivisorConverterTest {
 
-  /**
-   * Holds the single unit.
-   */
-  final Unit<T> unit;
+  private PiDivisorConverter converter;
 
-  /**
-   * Holds the power exponent.
-   */
-  final int pow;
-
-  /**
-   * Holds the root exponent.
-   */
-  final int root;
-
-  /**
-   * Structural constructor.
-   *
-   * @param unit
-   *          the unit.
-   * @param pow
-   *          the power exponent.
-   * @param root
-   *          the root exponent.
-   */
-  ElementProduct(Unit<T> unit, int pow, int root) {
-    this.unit = unit;
-    this.pow = pow;
-    this.root = root;
+  @Before
+  public void setUp() throws Exception {
+    converter = new PiDivisorConverter();
   }
 
-  /**
-   * Returns this element's unit.
-   *
-   * @return the single unit.
-   */
-  public Unit<?> getUnit() {
-    return unit;
+  @Test
+  public void testConvertMethod() {
+    Assert.assertEquals(1000, converter.convert(3141), 0.2);
+    Assert.assertEquals(0, converter.convert(0), 0.0);
+    Assert.assertEquals(-1000, converter.convert(-3141), 0.2);
   }
 
-  /**
-   * Returns the power exponent. The power exponent can be negative but is always different from zero.
-   *
-   * @return the power exponent of the single unit.
-   */
-  public int getPow() {
-    return pow;
+  @Test
+  public void testEqualityOfTwoLogConverter() {
+    assertTrue(!converter.equals(null));
   }
 
-  /**
-   * Returns the root exponent. The root exponent is always greater than zero.
-   *
-   * @return the root exponent of the single unit.
-   */
-  public int getRoot() {
-    return root;
+  @Test
+  public void testGetValuePiDivisorConverter() {
+    assertEquals("(1/π)", converter.getValue());
+  }
+
+  @Test
+  public void isLinearOfLogConverterTest() {
+    assertTrue(converter.isLinear());
   }
 }

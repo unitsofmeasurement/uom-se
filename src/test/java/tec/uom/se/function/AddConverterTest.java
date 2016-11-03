@@ -27,71 +27,61 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package tec.uom.se.unit;
+package tec.uom.se.function;
 
-import javax.measure.Quantity;
-import javax.measure.Unit;
+import static org.junit.Assert.*;
 
-/**
- * Inner product element represents a rational power of a single unit.
- */
-final class ElementProduct<T extends Quantity<T>> {
+import org.junit.Before;
+import org.junit.Test;
 
-  /**
-   * Holds the single unit.
-   */
-  final Unit<T> unit;
+public class AddConverterTest {
 
-  /**
-   * Holds the power exponent.
-   */
-  final int pow;
+  private AddConverter converter;
 
-  /**
-   * Holds the root exponent.
-   */
-  final int root;
-
-  /**
-   * Structural constructor.
-   *
-   * @param unit
-   *          the unit.
-   * @param pow
-   *          the power exponent.
-   * @param root
-   *          the root exponent.
-   */
-  ElementProduct(Unit<T> unit, int pow, int root) {
-    this.unit = unit;
-    this.pow = pow;
-    this.root = root;
+  @Before
+  public void setUp() throws Exception {
+    converter = new AddConverter(10);
   }
 
-  /**
-   * Returns this element's unit.
-   *
-   * @return the single unit.
-   */
-  public Unit<?> getUnit() {
-    return unit;
+  @Test
+  public void testEqualityOfTwoConverter() {
+    AddConverter addConverter = new AddConverter(10);
+    assertEquals(addConverter, converter);
+    assertNotNull(addConverter);
   }
 
-  /**
-   * Returns the power exponent. The power exponent can be negative but is always different from zero.
-   *
-   * @return the power exponent of the single unit.
-   */
-  public int getPow() {
-    return pow;
+  @Test
+  public void inverseTest() {
+    assertEquals(new AddConverter(-10), converter.inverse());
   }
 
-  /**
-   * Returns the root exponent. The root exponent is always greater than zero.
-   *
-   * @return the root exponent of the single unit.
-   */
-  public int getRoot() {
-    return root;
+  @Test
+  public void linearTest() {
+    assertFalse(converter.isLinear());
+  }
+
+  @Test
+  public void offsetTest() {
+    assertEquals(10d, converter.getOffset(), 0);
+  }
+
+  @Test
+  public void valueTest() {
+    assertEquals(Double.valueOf(10), converter.getValue());
+  }
+
+  @Test
+  public void toStringTest() {
+    assertEquals("AddConverter(10.0)", converter.toString());
+  }
+
+  @Test
+  public void identityTest() {
+    assertFalse(converter.isIdentity());
+  }
+
+  @Test
+  public void conversionStepsTest() {
+    assertNotNull(converter.getConversionSteps());
   }
 }

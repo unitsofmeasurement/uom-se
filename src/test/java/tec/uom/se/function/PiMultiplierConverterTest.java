@@ -29,80 +29,64 @@
  */
 package tec.uom.se.function;
 
+import static org.junit.Assert.*;
+
 import java.math.BigDecimal;
-import java.math.MathContext;
 
-import tec.uom.lib.common.function.ValueSupplier;
-import tec.uom.se.AbstractConverter;
+import javax.measure.Quantity;
+import javax.measure.quantity.Angle;
 
-/**
- * <p>
- * This class represents a converter dividing numeric values by π (Pi).
- * </p>
- *
- * <p>
- * This class is package private, instances are created using the {@link PiMultiplierConverter#inverse()} method.
- * </p>
- *
- * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, October 11, 2016
- * @since 1.0
- */
-final class PiDivisorConverter extends AbstractConverter implements ValueSupplier<String> {
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 5052794216568914141L;
+import tec.uom.se.quantity.Quantities;
+import tec.uom.se.unit.Units;
 
-  /**
-   * Creates a Pi multiplier converter.
-   */
-  public PiDivisorConverter() {
+public class PiMultiplierConverterTest {
+
+  private PiMultiplierConverter piMultiplierConverter;
+
+  @Before
+  public void setUp() throws Exception {
+    piMultiplierConverter = new PiMultiplierConverter();
   }
 
-  @Override
-  public double convert(double value) {
-    return value / PI;
+  @Test
+  public void testConvertMethod() {
+    Assert.assertEquals(314.15, piMultiplierConverter.convert(100), 0.1);
+    Assert.assertEquals(0, piMultiplierConverter.convert(0), 0.0);
+    Assert.assertEquals(-314.15, piMultiplierConverter.convert(-100), 0.1);
   }
 
-  @Override
-  public BigDecimal convert(BigDecimal value, MathContext ctx) throws ArithmeticException {
-    int nbrDigits = ctx.getPrecision();
-    if (nbrDigits == 0)
-      throw new ArithmeticException("Pi multiplication with unlimited precision");
-    BigDecimal pi = PiMultiplierConverter.Pi.pi(nbrDigits);
-    return value.divide(pi, ctx).scaleByPowerOfTen(nbrDigits - 1);
+  @Test
+  public void testEqualityOfTwoLogConverter() {
+    assertTrue(!piMultiplierConverter.equals(null));
   }
 
-  @Override
-  public AbstractConverter inverse() {
-    return new PiMultiplierConverter();
+  @Test
+  public void testGetValuePiDivisorConverter() {
+    assertEquals("(π)", piMultiplierConverter.getValue());
   }
 
-  @Override
-  public final String toString() {
-    return "(1/π)";
+  @Test
+  public void isLinearOfLogConverterTest() {
+    assertTrue(piMultiplierConverter.isLinear());
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    return (obj instanceof PiDivisorConverter);
+  @Test
+  public void testAngleConverter() {
+    Quantity<Angle> sut = Quantities.getQuantity(BigDecimal.ONE, Units.DEGREE_ANGLE).to(Units.RADIAN);
+    assertNotNull(sut);
+    assertEquals(Units.RADIAN, sut.getUnit());
+    assertEquals(new BigDecimal("1.745329251994329576923690768488613E-35"), sut.getValue());
   }
 
-  @Override
-  public int hashCode() {
-    return 0;
-  }
-
-  @Override
-  public boolean isLinear() {
-    return true;
-  }
-
-  @Override
-  public String getValue() {
-    return toString();
+  @Test
+  public void testAngleConverterOpposite() {
+    Quantity<Angle> sut = Quantities.getQuantity(BigDecimal.ONE, Units.RADIAN).to(Units.DEGREE_ANGLE);
+    assertNotNull(sut);
+    assertEquals(Units.DEGREE_ANGLE, sut.getUnit());
+    assertEquals(new BigDecimal("5.729577951308232087679815481410517E+34"), sut.getValue());
   }
 }
