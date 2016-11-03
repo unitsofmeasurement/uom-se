@@ -79,7 +79,7 @@ import javax.measure.spi.SystemOfUnits;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8, Mar 16, 2016
+ * @version 1.0, Nov 3, 2016
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -395,18 +395,21 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>deg</code>).
+   * @deprecated Use from SI
    */
   public static final Unit<Angle> DEGREE_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
       1, 180))));
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>'</code>).
+   * @deprecated Use from SI
    */
   public static final Unit<Angle> MINUTE_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
       1, 180 * 60))));
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>''</code>).
+   * @deprecated Use from SI
    */
   public static final Unit<Angle> SECOND_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
       1, 180 * 60 * 60))));
