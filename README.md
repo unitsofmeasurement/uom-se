@@ -12,7 +12,7 @@ Allowing the use of new features like *Lambdas* together with Units of Measureme
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se/badge.svg)](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se)
 [![Circle CI](https://circleci.com/gh/unitsofmeasurement/uom-se.svg?style=svg)](https://circleci.com/gh/unitsofmeasurement/uom-se) 
 [![License](http://img.shields.io/badge/license-BSD3-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) 
-[![Dependency Status](https://www.versioneye.com/user/projects/57711d32671894004fedd52b/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57711d32671894004fedd52b)
+[![Dependency Status](https://www.versioneye.com/user/projects/564f3e94ff016c003a000175/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/564f3e94ff016c003a000175)(https://www.versioneye.com/user/projects/57711d32671894004fedd52b)
 [![Join the chat at https://gitter.im/unitsofmeasurement/uom-se](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unitsofmeasurement/uom-se?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Planning
