@@ -44,6 +44,7 @@ JDK Integration of Unit-API / JSR 363</description>
 		<maven.compile.targetLevel>${jdkVersion}</maven.compile.targetLevel>
 		<maven.compile.sourceLevel>${jdkVersion}</maven.compile.sourceLevel>
 		<additionalparam>-Xdoclint:none</additionalparam>
+		<maven.source.version>3.0.1</maven.source.version>
 	</properties>
 
 	<dependencies>
@@ -81,7 +82,7 @@ JDK Integration of Unit-API / JSR 363</description>
 			<dependency>
 				<groupId>javax.annotation</groupId>
 				<artifactId>javax.annotation-api</artifactId>
-				<version>1.2</version>
+				<version>1.3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hamcrest</groupId>
@@ -98,7 +99,7 @@ JDK Integration of Unit-API / JSR 363</description>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>${maven.source.version}</version>
 					<executions>
 						<execution>
 							<id>attach-sources</id>
@@ -334,7 +335,7 @@ JDK Integration of Unit-API / JSR 363</description>
 								<!-- Creates links to existing javadoc-generated documentation of 
 									external referenced classes. -->
 								<links>
-									<link>http://docs.oracle.com/javase/7/docs/api/</link>
+									<link>http://docs.oracle.com/javase/8/docs/api/</link>
 								</links>
 							</configuration>
 						</plugin>
