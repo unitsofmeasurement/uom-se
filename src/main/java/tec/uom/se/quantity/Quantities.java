@@ -76,8 +76,8 @@ public final class Quantities {
   public static ComparableQuantity<?> getQuantity(CharSequence csq) {
     try {
       return QuantityFormat.getInstance(LOCALE_NEUTRAL).parse(csq, new ParsePosition(0));
-    } catch (IllegalArgumentException | ParserException e) {
-      throw new IllegalArgumentException(e); // TODO could we handle this differently?
+    } catch (ParserException e) {
+      throw new IllegalArgumentException(e.getParsedString());
     }
   }
 
