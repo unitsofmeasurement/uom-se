@@ -29,7 +29,6 @@
  */
 package tec.uom.se;
 
-import tec.uom.se.format.EBNFUnitFormat;
 import tec.uom.se.format.LocalUnitFormat;
 import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
@@ -67,7 +66,7 @@ import java.lang.reflect.Type;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, August 9, 2016
+ * @version 1.0.1, January 8, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
@@ -156,13 +155,13 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   /**
-   * Returns the physics unit represented by the specified characters as per standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
+   * Returns the abstract unit represented by the specified characters as per standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
    *
    * Locale-sensitive unit parsing should be handled using the OSGi {@link org.unitsofmeasurement.service.UnitFormatService} or for non-OSGi
    * applications the {@link LocalUnitFormat} utility class.
    *
    * <p>
-   * Note: The standard UCUM format supports dimensionless units.[code] AbstractUnit<Dimensionless> PERCENT =
+   * Note: The standard format supports dimensionless units.[code] AbstractUnit<Dimensionless> PERCENT =
    * AbstractUnit.parse("100").inverse().asType(Dimensionless.class); [/code]
    * </p>
    *
@@ -174,7 +173,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    */
   public static Unit<?> parse(CharSequence charSequence) {
     // return UCUMFormat.getInstance(CASE_INSENSITIVE).parse(charSequence);
-    return EBNFUnitFormat.getInstance().parse(charSequence);
+    // return EBNFUnitFormat.getInstance().parse(charSequence);
+    return SimpleUnitFormat.getInstance().parse(charSequence);
   }
 
   /**
