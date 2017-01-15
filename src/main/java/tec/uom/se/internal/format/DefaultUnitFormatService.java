@@ -29,14 +29,11 @@
  */
 package tec.uom.se.internal.format;
 
-import static tec.uom.se.internal.format.DefaultUnitFormatService.PRIO;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.annotation.Priority;
 import javax.measure.format.UnitFormat;
 import javax.measure.spi.UnitFormatService;
 
@@ -50,9 +47,8 @@ import tec.uom.se.format.SimpleUnitFormat.Flavor;
  * Default format service.
  *
  * @author Werner Keil
- * @version 0.4, March 23, 2016
+ * @version 0.5, January 19, 2017
  */
-@Priority(PRIO)
 public class DefaultUnitFormatService implements UnitFormatService, IntPrioritySupplier {
   static final int PRIO = 1000;
 

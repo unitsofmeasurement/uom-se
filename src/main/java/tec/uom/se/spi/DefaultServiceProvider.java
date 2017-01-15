@@ -29,7 +29,6 @@
  */
 package tec.uom.se.spi;
 
-import javax.annotation.Priority; // TODO this should no longer be necessary
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
 import javax.measure.spi.ServiceProvider;
@@ -108,14 +107,14 @@ public class DefaultServiceProvider extends ServiceProvider implements Comparabl
 	static int compareServices(Object o1, Object o2) {
 		int prio1 = 0;
 		int prio2 = 0;
-		Priority prio1Annot = o1.getClass().getAnnotation(Priority.class);
-		if (prio1Annot != null) {
-			prio1 = prio1Annot.value();
-		}
-		Priority prio2Annot = o2.getClass().getAnnotation(Priority.class);
-		if (prio2Annot != null) {
-			prio2 = prio2Annot.value();
-		}
+//		Priority prio1Annot = o1.getClass().getAnnotation(Priority.class);
+//		if (prio1Annot != null) {
+//			prio1 = prio1Annot.value();
+//		}
+//		Priority prio2Annot = o2.getClass().getAnnotation(Priority.class);
+//		if (prio2Annot != null) {
+//			prio2 = prio2Annot.value();
+//		}
 		if (prio1 < prio2) {
 			return 1;
 		}
