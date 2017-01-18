@@ -62,6 +62,6 @@ public class SystemOfUnitsServiceTest {
      * Arrays.asList((units.toArray())); Collections.sort(list); for (Object
      * o : list) { System.out.println(o.toString()); }
      */
-    assertEquals(42, system.getUnits().size());
+    assertEquals(46, system.getUnits().size());
   }
 }

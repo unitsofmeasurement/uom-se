@@ -33,7 +33,6 @@ import static tec.uom.se.AbstractUnit.ONE;
 import tec.uom.lib.common.function.Nameable;
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
-import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.PiMultiplierConverter;
 import tec.uom.se.function.RationalConverter;
@@ -379,7 +378,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A dimensionless unit accepted for use with SI units (standard name <code>%</code>).
    */
-  public static final TransformedUnit<Dimensionless> PERCENT = new TransformedUnit<>(ONE, new RationalConverter(1, 100));
+  public static final TransformedUnit<Dimensionless> PERCENT = addUnit(new TransformedUnit<>(ONE, new RationalConverter(1, 100)));
 
   // ////////
   // Time //
@@ -387,12 +386,12 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A time unit accepted for use with SI units (standard name <code>min</code>).
    */
-  public static final Unit<Time> MINUTE = new TransformedUnit<>("min", SECOND, new RationalConverter(60, 1));
+  public static final Unit<Time> MINUTE = addUnit(new TransformedUnit<>("min", SECOND, new RationalConverter(60, 1)));
 
   /**
    * A time unit accepted for use with SI units (standard name <code>h</code> ).
    */
-  public static final Unit<Time> HOUR = new TransformedUnit<>("h", SECOND, new RationalConverter(60 * 60, 1));
+  public static final Unit<Time> HOUR = addUnit(new TransformedUnit<>("h", SECOND, new RationalConverter(60 * 60, 1)));
 
   /**
    * A time unit accepted for use with SI units (standard name <code>d</code> ).

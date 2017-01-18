@@ -905,6 +905,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     }
 
     // Alias and ASCIIFormat for Ohm
+//    DEFAULT.label(Units.OHM, "Ohm");
     DEFAULT.alias(Units.OHM, "Ohm");
     ASCII.label(Units.OHM, "Ohm");
     for (int i = 0; i < PREFIXES.length; i++) {
@@ -948,7 +949,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     DEFAULT.alias(Units.DAY, "d");
     DEFAULT.label(Units.WEEK, "week");
     DEFAULT.label(Units.YEAR, "year");
-    // DEFAULT.alias(Units.YEAR, "days365");
+    DEFAULT.alias(Units.YEAR, "days365");
     // DEFAULT.label(Units.MONTH, "month");
     // DEFAULT.label(NonUnits.DAY_SIDEREAL, "day_sidereal");
     // DEFAULT.label(NonUnits.YEAR_SIDEREAL, "year_sidereal");
@@ -1003,8 +1004,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     // ASCII.label(NonUnits.RANKINE, "degree_rankine");
     // DEFAULT.label(NonUnits.FAHRENHEIT, "°F");
     // ASCII.label(NonUnits.FAHRENHEIT, "degree_fahrenheit");
-    ASCII.label(Units.KILOMETRES_PER_HOUR, "km/h");
-    DEFAULT.label(Units.KILOMETRES_PER_HOUR, "km/h");
+    ASCII.label(Units.KILOMETRE_PER_HOUR, "km/h");
+    DEFAULT.label(Units.KILOMETRE_PER_HOUR, "km/h");
     // DEFAULT.label(NonUnits.KNOT, "kn");
     // DEFAULT.label(NonUnits.MACH, "Mach");
     // DEFAULT.label(NonUnits.C, "c");
