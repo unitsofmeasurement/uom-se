@@ -945,8 +945,10 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     DEFAULT.label(Units.MINUTE, "min");
     DEFAULT.label(Units.HOUR, "h");
     DEFAULT.label(Units.DAY, "day");
+    DEFAULT.alias(Units.DAY, "d");
     DEFAULT.label(Units.WEEK, "week");
     DEFAULT.label(Units.YEAR, "year");
+    // DEFAULT.alias(Units.YEAR, "days365");
     // DEFAULT.label(Units.MONTH, "month");
     // DEFAULT.label(NonUnits.DAY_SIDEREAL, "day_sidereal");
     // DEFAULT.label(NonUnits.YEAR_SIDEREAL, "year_sidereal");

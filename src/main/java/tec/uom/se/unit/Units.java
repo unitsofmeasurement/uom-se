@@ -33,6 +33,7 @@ import static tec.uom.se.AbstractUnit.ONE;
 import tec.uom.lib.common.function.Nameable;
 import tec.uom.se.AbstractSystemOfUnits;
 import tec.uom.se.AbstractUnit;
+import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.PiMultiplierConverter;
 import tec.uom.se.function.RationalConverter;
@@ -396,7 +397,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A time unit accepted for use with SI units (standard name <code>d</code> ).
    */
-  public static final Unit<Time> DAY = new TransformedUnit<>("d", SECOND, new RationalConverter(24 * 60 * 60, 1));
+  public static final Unit<Time> DAY = addUnit(new TransformedUnit<>("d", SECOND, new RationalConverter(24 * 60 * 60, 1)), Time.class);
 
   /**
    * A unit of duration equal to 7 {@link #DAY} (standard name <code>week</code>).
