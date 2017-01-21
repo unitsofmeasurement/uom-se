@@ -54,19 +54,19 @@ import java.lang.reflect.Type;
 
 /**
  * <p>
- * The class represents units founded on the seven {@link tec.uom.se.unit.tec.uom.se.system.SI SI} base units for seven base quantities assumed to be
- * mutually independent.
+ * The class represents units founded on the seven <b>SI</b> base units for seven base quantities assumed to be mutually independent.
  * </p>
  *
  * <p>
- * For all physics units, units conversions are symmetrical: <code>u1.getConverterTo(u2).equals(u2.getConverterTo(u1).inverse())</code>. Non-physical
+ * For all physics units, unit conversions are symmetrical: <code>u1.getConverterTo(u2).equals(u2.getConverterTo(u1).inverse())</code>. Non-physical
  * units (e.g. currency units) for which conversion is not symmetrical should have their own separate class hierarchy and are considered distinct
  * (e.g. financial units), although they can always be combined with physics units (e.g. "€/Kg", "$/h").
  * </p>
  *
+ * @see <a href= "http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, January 8, 2017
+ * @version 1.0.2, January 21, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
