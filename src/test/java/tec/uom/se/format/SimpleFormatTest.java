@@ -41,7 +41,6 @@ import javax.measure.quantity.Mass;
 import javax.measure.quantity.Speed;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.uom.se.format.SimpleUnitFormat;
