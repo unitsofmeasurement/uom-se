@@ -52,7 +52,7 @@ public class DecimalComparableQuantityTest {
     ComparableQuantity<Speed> speed = metre.divide(time, Speed.class);
 
     Assert.assertEquals(Integer.valueOf(speed.getValue().intValue()), Integer.valueOf(1));
-    Assert.assertEquals(Units.METRES_PER_SECOND, speed.getUnit());
+    Assert.assertEquals(Units.METRE_PER_SECOND, speed.getUnit());
   }
 
   @Test(expected = ClassCastException.class)

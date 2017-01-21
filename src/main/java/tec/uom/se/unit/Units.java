@@ -335,7 +335,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @deprecated use METRE_PER_SECOND
    */
-  public static final Unit<Speed> METRES_PER_SECOND = METRE_PER_SECOND;
+  static final Unit<Speed> METRES_PER_SECOND = METRE_PER_SECOND;
 
   /**
    * The SI unit for acceleration quantities (standard name <code>m/s2</code> ).
@@ -347,7 +347,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @deprecated use METRE_PER_SQUARE_SECOND
    */
-  public static final Unit<Acceleration> METRES_PER_SQUARE_SECOND = METRE_PER_SQUARE_SECOND;
+  static final Unit<Acceleration> METRES_PER_SQUARE_SECOND = METRE_PER_SQUARE_SECOND;
 
   /**
    * The SI unit for area quantities (standard name <code>m2</code>).
@@ -369,7 +369,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @deprecated use KILOMETRE_PER_HOUR
    */
-  public static final Unit<Speed> KILOMETRES_PER_HOUR = KILOMETRE_PER_HOUR;
+  static final Unit<Speed> KILOMETRES_PER_HOUR = KILOMETRE_PER_HOUR;
 
   // ///////////////////////////////////////////////////////////////
   // CommonUnits outside the SI that are accepted for use with the Units. //

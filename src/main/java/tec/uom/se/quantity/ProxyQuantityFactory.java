@@ -62,7 +62,7 @@ import tec.uom.se.AbstractUnit;
  * @author <a href="mailto:martin.desruisseaux@geomatys.com">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 0.6, $Date: 2016-11-03 $
+ * @version 1.0, $Date: 2017-01-21 $
  */
 abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 
@@ -219,8 +219,8 @@ abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
       CLASS_TO_METRIC_UNIT.put(RadiationDoseAbsorbed.class, GRAY);
       CLASS_TO_METRIC_UNIT.put(RadiationDoseEffective.class, SIEVERT);
       CLASS_TO_METRIC_UNIT.put(CatalyticActivity.class, KATAL);
-      CLASS_TO_METRIC_UNIT.put(Speed.class, METRES_PER_SECOND);
-      CLASS_TO_METRIC_UNIT.put(Acceleration.class, METRES_PER_SQUARE_SECOND);
+      CLASS_TO_METRIC_UNIT.put(Speed.class, METRE_PER_SECOND);
+      CLASS_TO_METRIC_UNIT.put(Acceleration.class, METRE_PER_SQUARE_SECOND);
       CLASS_TO_METRIC_UNIT.put(Area.class, SQUARE_METRE);
       CLASS_TO_METRIC_UNIT.put(Volume.class, CUBIC_METRE);
     }

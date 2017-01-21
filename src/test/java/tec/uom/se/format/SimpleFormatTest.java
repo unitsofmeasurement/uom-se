@@ -62,7 +62,7 @@ public class SimpleFormatTest {
 
   @Test
   public void testFormat2() {
-    Unit<Speed> kph = Units.KILOMETRES_PER_HOUR;
+    Unit<Speed> kph = Units.KILOMETRE_PER_HOUR;
     String s = fmt.format(kph);
     assertEquals("km/h", s);
   }
