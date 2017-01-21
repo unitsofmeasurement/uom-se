@@ -53,8 +53,8 @@ import java.util.Objects;
 public abstract class AbstractConverter implements UnitConverter, Converter<Number, Number>, Serializable {
 
   /**
-	 *
-	 */
+   *
+   */
   private static final long serialVersionUID = 5790242858468427131L;
 
   /**
