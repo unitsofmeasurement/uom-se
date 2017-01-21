@@ -45,21 +45,20 @@ import java.util.Map;
  * </p>
  * 
  * <p>
- * When using the {@link tec.uom.se.StandardModel standard model}, all seven {@link tec.uom.se.unit.tec.uom.se.system.SI SI} base units are
- * dimensionally independent.
+ * When using the {@link tec.uom.se.spi.StandardModel standard model}, all seven <b>SI</b> base units are dimensionally independent.
  * </p>
  *
  * @see <a href="http://en.wikipedia.org/wiki/SI_base_unit"> Wikipedia: SI base unit</a>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, Oct 17, 2014
+ * @version 1.0, Jan 21, 2017
  */
 public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   /**
-	 * 
-	 */
+   * 
+   */
   private static final long serialVersionUID = 1721629233768215930L;
 
   /**
@@ -146,7 +145,7 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   @Override
   public Map<? extends AbstractUnit<Q>, Integer> getBaseUnits() {
-    // TODO Shall we return null, empty list or what?
+    // TODO Shall we return null, empty list or what (e.g. Optional in SE 8)?
     return null;
   }
 }

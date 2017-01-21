@@ -26,9 +26,8 @@
 package org.unitsofmeasurement.ri.internal.osgi;
 
 import org.unitsofmeasurement.ri.unit.system.SI;
-import org.unitsofmeasurement.ri.unit.system.UCUM;
 import javax.measure.spi.SystemOfUnitsService;
-import javax.measure.SystemOfUnits;
+import javax.measure.spi.SystemOfUnits;
 
 /**
  * SystemOfUnitsService Implementation.
