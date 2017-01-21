@@ -75,13 +75,6 @@ JDK Integration of Unit-API / JSR 363</description>
 				<artifactId>uom-lib-common</artifactId>
 				<version>${lib.version}</version>
 			</dependency>
-			<!-- 
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<version>1.3</version>
-			</dependency>
-			 -->
 			<dependency>
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest-all</artifactId>
@@ -238,7 +231,7 @@ JDK Integration of Unit-API / JSR 363</description>
 					<header>src/etc/header.txt</header>
 					<properties>
 						<owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
-						<currentYear>2016</currentYear>
+						<currentYear>2017</currentYear>
 					</properties>
 					<excludes>
 						<exclude>**/README</exclude>
