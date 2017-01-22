@@ -14,7 +14,7 @@ JDK Integration of Unit-API / JSR 363</description>
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.2</version>
 	</parent>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
@@ -427,4 +427,5 @@ JDK Integration of Unit-API / JSR 363</description>
 			<url>https://oss.jfrog.org/artifactory/oss-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<version>1.0.3</version>
 </project>
