@@ -35,6 +35,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,15 +63,15 @@ import tec.uom.se.AbstractUnit;
  * @author <a href="mailto:martin.desruisseaux@geomatys.com">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 1.0, $Date: 2017-01-21 $
+ * @version 1.0.1, $Date: 2017-02-12 $
  */
-abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
+public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 
   /**
    * Holds the current instances.
    */
   @SuppressWarnings("rawtypes")
-  private static final ConcurrentHashMap<Class, ProxyQuantityFactory> INSTANCES = new ConcurrentHashMap<>();
+  private static final Map<Class, ProxyQuantityFactory> INSTANCES = new ConcurrentHashMap<>();
 
   private static final Logger logger = Logger.getLogger(ProxyQuantityFactory.class.getName());
 

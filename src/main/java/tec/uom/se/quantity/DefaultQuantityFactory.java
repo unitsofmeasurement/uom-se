@@ -34,6 +34,7 @@ import static tec.uom.se.unit.Units.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,9 +61,10 @@ import tec.uom.se.AbstractUnit;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:otaviojava@java.net">Otavio Santana</a>
- * @version 1.0.2, $Date: 2017-01-21 $
+ * @version 1.0.3, $Date: 2017-02-12 $
  */
 public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
+  @SuppressWarnings("rawtypes")
   static final Map<Class, QuantityFactory> INSTANCES = new HashMap<>();
 
   static final Logger logger = Logger.getLogger(DefaultQuantityFactory.class.getName());
@@ -80,7 +82,7 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
   private final Unit<Q> metricUnit;
 
   @SuppressWarnings("rawtypes")
-  static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new HashMap<>();
+  static final Map<Class, Unit> CLASS_TO_METRIC_UNIT = new ConcurrentHashMap<>();
 
   static {
     CLASS_TO_METRIC_UNIT.put(Dimensionless.class, AbstractUnit.ONE);
