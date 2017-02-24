@@ -37,13 +37,17 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -62,7 +66,7 @@ import java.util.logging.Logger;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 5.3, March 20, 2014
+ * @version 1.6, February 24, 2017
  */
 @SuppressWarnings("rawtypes")
 public final class SymbolMap {
@@ -91,7 +95,6 @@ public final class SymbolMap {
    * @param rb
    *          the resource bundle.
    */
-
   private SymbolMap(ResourceBundle rb) {
     this();
     for (Enumeration<String> i = rb.getKeys(); i.hasMoreElements();) {
@@ -140,8 +143,9 @@ public final class SymbolMap {
   }
 
   /**
-   * Attaches a label to the specified unit. For example:[code] symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(NonUnits.FOOT, "ft");
-   * [/code]
+   * Attaches a label to the specified unit. For example:<br>
+   * <code> symbolMap.label(DAY.multiply(365), "year"); symbolMap.label(US.FOOT, "ft");
+   * </code>
    *
    * @param unit
    *          the unit to label.
@@ -155,8 +159,8 @@ public final class SymbolMap {
 
   /**
    * Attaches an alias to the specified unit. Multiple aliases may be attached to the same unit. Aliases are used during parsing to recognize
-   * different variants of the same unit.[code] symbolMap.alias(NonUnits.FOOT, "foot"); symbolMap.alias(NonUnits.FOOT, "feet");
-   * symbolMap.alias(Units.METER, "meter"); symbolMap.alias(Units.METER, "metre"); [/code]
+   * different variants of the same unit.<code> symbolMap.alias(US.FOOT, "foot"); symbolMap.alias(US.FOOT, "feet");
+   * symbolMap.alias(Units.METER, "meter"); symbolMap.alias(Units.METER, "metre"); </code>
    *
    * @param unit
    *          the unit to label.
@@ -168,8 +172,8 @@ public final class SymbolMap {
   }
 
   /**
-   * Attaches a label to the specified prefix. For example:[code] symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO, "µ");
-   * [/code]
+   * Attaches a label to the specified prefix. For example:<br><code> symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO, "µ");
+   * </code>
    */
   public void label(MetricPrefix prefix, String symbol) {
     symbolToPrefix.put(symbol, prefix);
@@ -207,13 +211,17 @@ public final class SymbolMap {
    * @return the corresponding prefix or <code>null</code> if none.
    */
   public MetricPrefix getPrefix(String symbol) {
-    for (String pfSymbol : symbolToPrefix.keySet()) {
-      if (symbol.startsWith(pfSymbol)) {
-        return (MetricPrefix) symbolToPrefix.get(pfSymbol);
-      }
+	final List<String> list = symbolToPrefix.keySet().stream().collect(Collectors.toList());
+	final Comparator<String> comparator = Comparator.comparing(String::length);
+	Collections.sort(list, comparator.reversed());
+
+	for (String key : list) {
+	    if (symbol.startsWith(key)) {
+		return (MetricPrefix) symbolToPrefix.get(key);
+	    }
+	}
+	return null;
     }
-    return null;
-  }
 
   /**
    * Returns the prefix for the specified converter.
@@ -250,4 +258,5 @@ public final class SymbolMap {
     sb.append(" ]");
     return sb.toString();
   }
+
 }
