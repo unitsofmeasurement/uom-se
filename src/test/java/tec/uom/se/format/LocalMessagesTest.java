@@ -37,14 +37,16 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 
 public class LocalMessagesTest {
+  private static final String BUNDLE_NAME = "tec.uom.se.format.messages";
+  private static final String KEY = "tec.uom.se.unit.Units.KILOMETRE_PER_HOUR";
 
   @Test
   public void testMessageBundle() {
     Locale locale = Locale.ENGLISH;
 
-    ResourceBundle bundle = ResourceBundle.getBundle("tec.uom.se.format.messages", locale);
+    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
     assertNotNull(bundle);
-    String text = bundle.getString("tec.uom.se.unit.Units.KILOMETRES_PER_HOUR");
+    String text = bundle.getString(KEY);
     assertEquals("km/h", text);
 
     assertEquals(60, bundle.keySet().size());
@@ -54,9 +56,9 @@ public class LocalMessagesTest {
   public void testMessageBundle_de() {
     Locale locale = new Locale("de");
 
-    ResourceBundle bundle = ResourceBundle.getBundle("tec.uom.se.format.messages", locale);
+    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
     assertNotNull(bundle);
-    String text = bundle.getString("tec.uom.se.unit.Units.KILOMETRES_PER_HOUR");
+    String text = bundle.getString(KEY);
     assertEquals("km/h", text);
   }
 
@@ -64,10 +66,9 @@ public class LocalMessagesTest {
   public void testMessageBundle_fr() {
     Locale locale = new Locale("fr");
 
-    ResourceBundle bundle = ResourceBundle.getBundle("tec.uom.se.format.messages", locale);
+    ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
     assertNotNull(bundle);
-    String text = bundle.getString("tec.uom.se.unit.Units.KILOMETRES_PER_HOUR");
+    String text = bundle.getString(KEY);
     assertEquals("km/h", text);
   }
-
 }
