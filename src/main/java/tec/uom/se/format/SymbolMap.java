@@ -51,9 +51,9 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * This class provides a set of mappings between {@link AbstractUnit physical units} and symbols (both ways), between {@link MetricPrefix prefixes}
- * and symbols (both ways), and from {@link AbstractConverter physical unit converters} to {@link MetricPrefix prefixes} (one way). No attempt is made
- * to verify the uniqueness of the mappings.
+ * This class provides a set of mappings between {@link AbstractUnit units} and symbols (both ways), between {@link MetricPrefix prefixes} and symbols
+ * (both ways), and from {@link AbstractConverter unit converters} to {@link MetricPrefix prefixes} (one way). No attempt is made to verify the
+ * uniqueness of the mappings.
  * </p>
  *
  * <p>
@@ -66,7 +66,7 @@ import java.util.stream.Collectors;
  *
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.6, February 24, 2017
+ * @version 1.7, February 25, 2017
  */
 @SuppressWarnings("rawtypes")
 public final class SymbolMap {
@@ -172,7 +172,8 @@ public final class SymbolMap {
   }
 
   /**
-   * Attaches a label to the specified prefix. For example:<br><code> symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO, "µ");
+   * Attaches a label to the specified prefix. For example:<br>
+   * <code> symbolMap.label(MetricPrefix.GIGA, "G"); symbolMap.label(MetricPrefix.MICRO, "µ");
    * </code>
    */
   public void label(MetricPrefix prefix, String symbol) {

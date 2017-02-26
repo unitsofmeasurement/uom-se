@@ -143,7 +143,7 @@ import java.util.ResourceBundle;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2016-11-11 $
+ * @version 1.0.1, $Date: 2017-02-25 $
  * @since 1.0
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
@@ -161,15 +161,11 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
    * Name of the resource bundle
    */
   private static final String BUNDLE_NAME = "tec.uom.se.internal.format.messages"; //$NON-NLS-1$
-  // = UnitFormatParser.class.getPackage() .getName() + ".messages";
 
   /**
    * Default locale instance. If the default locale is changed after the class is initialized, this instance will no longer be used.
    */
   private static final EBNFUnitFormat DEFAULT_INSTANCE = new EBNFUnitFormat();
-
-  // SymbolMap.of(toMap(L10nResources.getBundle(BUNDLE_NAME,
-  // Locale.getDefault()), Locale.getDefault()));
 
   /**
    * Returns the instance for the current default locale (non-ascii characters are allowed)
@@ -178,19 +174,9 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
     return DEFAULT_INSTANCE;
   }
 
-  /**
-   * Returns an instance for the given locale.
-   * 
-   * @param locale
-   */
-  // static SimpleUnitFormat getInstance(Locale locale) {
-  // return new SimpleUnitFormat(SymbolMap.of(toMap(ResourceBundle.getBundle(
-  // BUNDLE_NAME, locale))), locale);
-  // }
-
   /** Returns an instance for the given symbol map. */
-  protected static EBNFUnitFormat getInstance(SymbolMap symbols, Locale locale) {
-    return new EBNFUnitFormat(symbols, locale);
+  public static EBNFUnitFormat getInstance(SymbolMap symbols) {
+    return new EBNFUnitFormat(symbols);
   }
 
   // //////////////////////
@@ -209,9 +195,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
    * 
    */
   EBNFUnitFormat() {
-    // this(SymbolMap.of(toMap(L10nResources.getBundle(
-    // BUNDLE_NAME, Locale.getDefault()))), Locale.getDefault());
-    this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault())), Locale.getDefault());
+    this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault())));
   }
 
   /**
@@ -220,7 +204,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
    * @param symbols
    *          the symbol mapping.
    */
-  private EBNFUnitFormat(SymbolMap symbols, Locale loc) {
+  private EBNFUnitFormat(SymbolMap symbols) {
     symbolMap = symbols;
   }
 

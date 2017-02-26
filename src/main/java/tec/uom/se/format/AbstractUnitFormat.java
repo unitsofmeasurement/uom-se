@@ -36,7 +36,6 @@ import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
-import tec.uom.lib.common.function.Parser;
 import tec.uom.se.AbstractUnit;
 
 /**
@@ -52,7 +51,7 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, $Date: 2017-01-08 $
+ * @version 1.0.2, $Date: 2017-02-25 $
  * @since 1.0
  * 
  */
