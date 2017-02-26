@@ -59,7 +59,7 @@ class EBNFHelper {
   /** Operator precedence for the exponentiation and logarithm operations */
   static final int EXPONENT_PRECEDENCE = PRODUCT_PRECEDENCE + 2;
 
-  private static final String LOCAL_FORMAT_PATTERN = "%s";
+  // private static final String LOCAL_FORMAT_PATTERN = "%s";
 
   static final char MIDDLE_DOT = '\u00b7'; //$NON-NLS-1$
 
@@ -189,6 +189,7 @@ class EBNFHelper {
     return NOOP_PRECEDENCE;
   }
 
+  @SuppressWarnings("unchecked")
   private static int productPrecedenceInternal(Unit<?> unit, Appendable buffer, SymbolMap symbolMap) throws IOException {
     Map<Unit<?>, Integer> productUnits = (Map<Unit<?>, Integer>) unit.getBaseUnits();
     int negativeExponentCount = 0;
