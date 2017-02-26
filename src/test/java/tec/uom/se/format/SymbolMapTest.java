@@ -41,6 +41,7 @@ import org.junit.Test;
 import tec.uom.se.format.EBNFUnitFormat;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.unit.MetricPrefix;
+import tec.uom.se.unit.Units;
 
 public class SymbolMapTest {
 
@@ -71,18 +72,16 @@ public class SymbolMapTest {
     assertEquals(MetricPrefix.YOTTA, symbols.getPrefix("Yg"));
     assertEquals(MetricPrefix.ZEPTO, symbols.getPrefix("zg"));
     assertEquals(MetricPrefix.ZETTA, symbols.getPrefix("Zg"));
-
-    // this test fails
     assertEquals(MetricPrefix.DEKA, symbols.getPrefix("dag"));
   }
 
   /**
-   * This test throws an Exception javax.measure.format.ParserException: tec.uom.se.internal.format.TokenException
-   * 
-   * The reason is, that SymbolMap.getPrefix extracts DECI instead of DEKA for unit 'dag'
+   * Test if parsing 'dag' equals DEKA(GRAM)
    */
   @Test
   public void parseWithEBNFUnitFormat() {
     Unit u2 = EBNFUnitFormat.getInstance().parse("dag");
+
+    assertEquals(MetricPrefix.DEKA(Units.GRAM), u2);
   }
 }

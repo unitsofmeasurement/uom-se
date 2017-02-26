@@ -143,7 +143,7 @@ import java.util.ResourceBundle;
  * 
  * @author <a href="mailto:eric-r@northwestern.edu">Eric Russell</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, $Date: 2017-02-25 $
+ * @version 1.0.2, $Date: 2017-02-26 $
  * @since 1.0
  */
 public class EBNFUnitFormat extends AbstractUnitFormat {
@@ -153,8 +153,8 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
   // ////////////////////////////////////////////////////
 
   /**
-   * 
-   */
+     * 
+     */
   // private static final long serialVersionUID = 8968559300292910840L;
 
   /**
