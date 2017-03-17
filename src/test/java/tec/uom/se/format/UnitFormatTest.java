@@ -31,6 +31,7 @@ package tec.uom.se.format;
 
 import static org.junit.Assert.*;
 
+import static tec.uom.se.AbstractUnit.ONE;
 import static tec.uom.se.unit.MetricPrefix.KILO;
 import static tec.uom.se.unit.MetricPrefix.MEGA;
 import static tec.uom.se.unit.Units.*;
@@ -144,6 +145,26 @@ public class UnitFormatTest {
       Unit<?> u = format.parse("kg");
       assertEquals("kg", u.getSymbol());
       assertEquals(KILOGRAM, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
+  
+  @Test
+  public void testParseSimpleBlank() {
+    try {
+      Unit<?> u = format.parse("");
+      assertEquals(ONE, u);
+    } catch (ParserException e) {
+      fail(e.getMessage());
+    }
+  }
+  
+  @Test
+  public void testParseSimpleONE() {
+    try {
+      Unit<?> u = format.parse("one");
+      assertEquals(ONE, u);
     } catch (ParserException e) {
       fail(e.getMessage());
     }

@@ -72,7 +72,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 1.0.1, January 21, 2017
+ * @version 1.0.2, March 17, 2017
  * @since 1.0
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
@@ -172,12 +172,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   public abstract Unit<? extends Quantity> parseSingleUnit(CharSequence csq, ParsePosition pos) throws ParserException;
 
   /**
-   * Attaches a system-wide label to the specified unit. For example: [code] SimpleUnitFormat.getInstance().label(DAY.multiply(365), "year");
-   * SimpleUnitFormat.getInstance().label(METER.multiply(0.3048), "ft"); [/code] If the specified label is already associated to an unit the previous
+   * Attaches a system-wide label to the specified unit. For example: <code> SimpleUnitFormat.getInstance().label(DAY.multiply(365), "year");
+   * SimpleUnitFormat.getInstance().label(METER.multiply(0.3048), "ft"); </code> If the specified label is already associated to an unit the previous
    * association is discarded or ignored.
    *
    * @param unit
-   *          the unit being labelled.
+   *          the unit being labeled.
    * @param label
    *          the new label for this unit.
    * @throws IllegalArgumentException
@@ -191,9 +191,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
   /**
    * Attaches a system-wide alias to this unit. Multiple aliases may be attached to the same unit. Aliases are used during parsing to recognize
-   * different variants of the same unit. For example: [code] SimpleUnitFormat.getInstance().alias(METER.multiply(0.3048), "foot");
+   * different variants of the same unit. For example: <code> SimpleUnitFormat.getInstance().alias(METER.multiply(0.3048), "foot");
    * SimpleUnitFormat.getInstance().alias(METER.multiply(0.3048), "feet"); SimpleUnitFormat.getInstance().alias(METER, "meter");
-   * SimpleUnitFormat.getInstance().alias(METER, "metre"); [/code] If the specified label is already associated to an unit the previous association is
+   * SimpleUnitFormat.getInstance().alias(METER, "metre"); </code> If the specified label is already associated to an unit the previous association is
    * discarded or ignored.
    *
    * @param unit
