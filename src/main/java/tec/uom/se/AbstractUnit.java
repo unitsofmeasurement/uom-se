@@ -39,7 +39,6 @@ import tec.uom.se.unit.AlternateUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.ProductUnit;
 import tec.uom.se.unit.TransformedUnit;
-import tec.uom.se.unit.Units;
 
 import javax.measure.*;
 import javax.measure.quantity.Dimensionless;
@@ -77,6 +76,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Holds the dimensionless unit <code>ONE</code>.
+   * 
    * @see <a href="https://en.wikipedia.org/wiki/Natural_units#Choosing_constants_to_normalize"> Wikipedia: Natural Units - Choosing constants to
    *      normalize</a>
    * @see <a href= "http://www.av8n.com/physics/dimensionless-units.htm">Units of Dimension One</a>
