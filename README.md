@@ -23,6 +23,5 @@ Planning
 Waffle.io
 ------------
 [![Stories in Ready](https://badge.waffle.io/unitsofmeasurement/uom-se.png?label=ready&title=Ready)](https://waffle.io/unitsofmeasurement/uom-se)
-[![Stories in Progress](https://badge.waffle.io/unitsofmeasurement/uom-se.png?label=in%20progress&title=In Progress)](https://waffle.io/unitsofmeasurement/uom-se)
 
 [![Throughput Graph](https://graphs.waffle.io/unitsofmeasurement/uom-se/throughput.svg)](https://waffle.io/unitsofmeasurement/uom-se/metrics)
