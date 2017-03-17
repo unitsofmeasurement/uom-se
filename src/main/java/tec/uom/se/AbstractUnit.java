@@ -29,6 +29,7 @@
  */
 package tec.uom.se;
 
+import tec.uom.se.format.SimpleUnitFormat;
 import tec.uom.se.function.AddConverter;
 import tec.uom.se.function.MultiplyConverter;
 import tec.uom.se.function.RationalConverter;
@@ -42,7 +43,6 @@ import tec.uom.se.unit.Units;
 
 import javax.measure.*;
 import javax.measure.quantity.Dimensionless;
-import javax.measure.spi.ServiceProvider;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -77,6 +77,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Holds the dimensionless unit <code>ONE</code>.
+   * @see <a href="https://en.wikipedia.org/wiki/Natural_units#Choosing_constants_to_normalize"> Wikipedia: Natural Units - Choosing constants to
+   *      normalize</a>
+   * @see <a href= "http://www.av8n.com/physics/dimensionless-units.htm">Units of Dimension One</a>
    */
   public static final Unit<Dimensionless> ONE = new ProductUnit<>();
 
@@ -154,10 +157,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   /**
-   * Returns the abstract unit represented by the specified characters as per standard <a href="http://www.unitsofmeasure.org/">UCUM</a> format.
+   * Returns the abstract unit represented by the specified characters as per default format.
    *
-   * Locale-sensitive unit parsing should be handled using the OSGi {@link org.unitsofmeasurement.service.UnitFormatService} or for non-OSGi
-   * applications the {@link LocalUnitFormat} utility class.
+   * Locale-sensitive unit parsing could be handled using {@link LocalUnitFormat} in subclasses of AbstractUnit.
    *
    * <p>
    * Note: The standard format supports dimensionless units.<code> AbstractUnit<Dimensionless> PERCENT =
@@ -166,25 +168,25 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    *
    * @param charSequence
    *          the character sequence to parse.
-   * @return <code>UCUMFormat.getCaseSensitiveInstance().parse(csq, new ParsePosition(0))</code>
+   * @return <code>SimpleUnitFormat.getInstance().parse(csq, new ParsePosition(0))</code>
    * @throws ParserException
    *           if the specified character sequence cannot be correctly parsed (e.g. not UCUM compliant).
    */
   public static Unit<?> parse(CharSequence charSequence) {
-    return ServiceProvider.current().getUnitFormatService().getUnitFormat().parse(charSequence);
+    return SimpleUnitFormat.getInstance().parse(charSequence);
   }
 
   /**
    * Returns the standard representation of this physics unit. The string produced for a given unit is always the same; it is not affected by the
    * locale. It can be used as a canonical string representation for exchanging units, or as a key for a Hashtable, etc.
    *
-   * Locale-sensitive unit parsing should be handled using the {@link org.unitsofmeasurement.service.UnitFormat} service.
+   * Locale-sensitive unit parsing could be handled using {@link LocalUnitFormat} in subclasses of AbstractUnit.
    *
-   * @return <code>ServiceProvider.current().getUnitFormatService().getUnitFormat().format(this)</code>
+   * @return <code>SimpleUnitFormat.getInstance().format(this)</code>
    */
   @Override
   public String toString() {
-    return ServiceProvider.current().getUnitFormatService().getUnitFormat().format(this);
+    return SimpleUnitFormat.getInstance().format(this);
   }
 
   // ///////////////////////////////////////////////////////
