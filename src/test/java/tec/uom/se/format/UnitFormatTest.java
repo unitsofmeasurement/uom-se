@@ -149,7 +149,7 @@ public class UnitFormatTest {
       fail(e.getMessage());
     }
   }
-  
+
   @Test
   public void testParseSimpleBlank() {
     try {
@@ -159,7 +159,7 @@ public class UnitFormatTest {
       fail(e.getMessage());
     }
   }
-  
+
   @Test
   public void testParseSimpleONE() {
     try {
@@ -185,19 +185,5 @@ public class UnitFormatTest {
   public void testParseIrregularStringSimple() {
     final UnitFormat format = SimpleUnitFormat.getInstance();
     Unit<?> u = format.parse("bl//^--1a");
-  }
-
-  @Test(expected = ParserException.class)
-  public void testParseIrregularStringEBNF() {
-    final UnitFormat format = EBNFUnitFormat.getInstance();
-    Unit<?> u = format.parse("bl//^--1a");
-    // System.out.println(u);
-  }
-
-  @Test(expected = UnsupportedOperationException.class)
-  public void testParseIrregularStringLocal() {
-    final UnitFormat format = LocalUnitFormat.getInstance();
-    Unit<?> u = format.parse("bl//^--1a");
-    // System.out.println(u);
   }
 }
