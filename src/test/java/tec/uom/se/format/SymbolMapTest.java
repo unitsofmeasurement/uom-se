@@ -45,7 +45,7 @@ import tec.uom.se.unit.Units;
 
 public class SymbolMapTest {
 
-  private static final String BUNDLE_NAME = "tec.uom.se.internal.format.messages";
+  private static final String BUNDLE_NAME = "tec.uom.se.format.messages";
 
   /**
    * Test for all prefixes.

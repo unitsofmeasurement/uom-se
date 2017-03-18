@@ -34,46 +34,88 @@ import static org.junit.Assert.*;
 import static tec.uom.se.unit.MetricPrefix.*;
 import static tec.uom.se.unit.Units.*;
 
+import javax.measure.MeasurementException;
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import tec.uom.se.unit.Units;
 
 /**
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  *
  */
 public class EBNFFormatTest {
+  private UnitFormat format;
+
+  @Before
+  public void init() {
+    // sut =
+    // DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10,
+    // METRE);
+    format = EBNFUnitFormat.getInstance();
+  }
 
   @Test
   public void testParseKm() {
-      final UnitFormat format = EBNFUnitFormat.getInstance();
-      Unit<?> u = format.parse("km");
-      assertEquals(KILO(METRE), u);
-      assertEquals("km", u.toString());
+    Unit<?> u = format.parse("km");
+    assertEquals(KILO(METRE), u);
+    assertEquals("km", u.toString());
   }
-  
+
   @Test
-  @Ignore // TODO address https://github.com/unitsofmeasurement/uom-se/issues/145
+  public void testParseInverseM() {
+    Unit<?> u = format.parse("1/m");
+    assertEquals("1/m", u.toString());
+  }
+
+  @Test
+  public void testParseInverseKg() {
+    Unit<?> u = format.parse("1/kg");
+    assertEquals("1/kg", u.toString());
+  }
+
+  @Test
+  @Ignore
+  public void testParseInverseL() {
+    Unit<?> u = format.parse("1/l");
+    assertEquals("1/l", u.toString());
+  }
+
+  @Test
+  public void testParseInverses() {
+    for (Unit u : Units.getInstance().getUnits()) {
+      try {
+        Unit<?> v = format.parse("1/" + u.toString());
+        System.out.println(v);
+      } catch (ParserException pex) {
+        System.err.println(String.format(" %s parsing %s", pex, u));
+      }
+    }
+  }
+
+  @Test
+  @Ignore
+  // TODO address https://github.com/unitsofmeasurement/uom-se/issues/145
   public void testFormatKm() {
-      final UnitFormat format = EBNFUnitFormat.getInstance();
-      String s = format.format(KILO(METRE));
-      assertEquals("km", s);
+    String s = format.format(KILO(METRE));
+    assertEquals("km", s);
   }
-  
+
   @Test
-  @Ignore // TODO address https://github.com/unitsofmeasurement/uom-se/issues/145
+  @Ignore
+  // TODO address https://github.com/unitsofmeasurement/uom-se/issues/145
   public void testFormatm() {
-      final UnitFormat format = EBNFUnitFormat.getInstance();
-      String s = format.format(MILLI(METRE));
-      assertEquals("km", s);
+    String s = format.format(MILLI(METRE));
+    assertEquals("km", s);
   }
-    
+
   @Test(expected = ParserException.class)
   public void testParseIrregularStringEBNF() {
-    final UnitFormat format = EBNFUnitFormat.getInstance();
     Unit<?> u = format.parse("bl//^--1a");
     // System.out.println(u);
   }

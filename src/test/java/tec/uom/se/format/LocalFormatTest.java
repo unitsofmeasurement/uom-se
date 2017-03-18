@@ -59,28 +59,29 @@ import org.junit.Test;
 public class LocalFormatTest {
 
   @Test
-  @Ignore // TODO LocalUnitFormat won't parse Compound Units, EBNF does
+  @Ignore
+  // TODO LocalUnitFormat won't parse Compound Units, EBNF does
   public void testPrefixKm() {
-      final UnitFormat format = LocalUnitFormat.getInstance();
-      Unit<?> u = format.parse("km");
-      assertEquals(KILO(METRE), u);
-      assertEquals("km", u.toString());
+    final UnitFormat format = LocalUnitFormat.getInstance();
+    Unit<?> u = format.parse("km");
+    assertEquals(KILO(METRE), u);
+    assertEquals("km", u.toString());
   }
-  
+
   @Test
   public void testFormatKm() {
-      final UnitFormat format = LocalUnitFormat.getInstance();
-      String s = format.format(KILO(METRE));
-      assertEquals("km", s);
+    final UnitFormat format = LocalUnitFormat.getInstance();
+    String s = format.format(KILO(METRE));
+    assertEquals("km", s);
   }
-  
+
   @Test
   public void testFormatMm() {
-      final UnitFormat format = LocalUnitFormat.getInstance();
-      String s = format.format(MILLI(METRE));
-      assertEquals("mm", s);
+    final UnitFormat format = LocalUnitFormat.getInstance();
+    String s = format.format(MILLI(METRE));
+    assertEquals("mm", s);
   }
-    
+
   @Test(expected = UnsupportedOperationException.class)
   public void testParseIrregularStringLocal() {
     final UnitFormat format = LocalUnitFormat.getInstance();

@@ -160,7 +160,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
   /**
    * Name of the resource bundle
    */
-  private static final String BUNDLE_NAME = "tec.uom.se.internal.format.messages"; //$NON-NLS-1$
+  private static final String BUNDLE_NAME = "tec.uom.se.format.messages"; //$NON-NLS-1$
 
   /**
    * Default locale instance. If the default locale is changed after the class is initialized, this instance will no longer be used.
