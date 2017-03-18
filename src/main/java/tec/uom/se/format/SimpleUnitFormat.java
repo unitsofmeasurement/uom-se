@@ -952,6 +952,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     DEFAULT.label(MetricPrefix.DECI(Units.LITRE), "dl");
     DEFAULT.label(Units.NEWTON, "N");
     ASCII.label(Units.NEWTON, "N");
+    DEFAULT.label(Units.RADIAN, "rad");
+    ASCII.label(Units.RADIAN, "rad");
 
     DEFAULT.label(AbstractUnit.ONE, "one");
     ASCII.label(AbstractUnit.ONE, "one");

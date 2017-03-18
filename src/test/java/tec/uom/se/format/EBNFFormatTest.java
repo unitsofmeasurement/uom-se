@@ -34,7 +34,9 @@ import static org.junit.Assert.*;
 import static tec.uom.se.unit.MetricPrefix.*;
 import static tec.uom.se.unit.Units.*;
 
-import javax.measure.MeasurementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.measure.Unit;
 import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
@@ -50,13 +52,12 @@ import tec.uom.se.unit.Units;
  *
  */
 public class EBNFFormatTest {
+  private static final Logger logger = Logger.getLogger(EBNFFormatTest.class.getName());
+
   private UnitFormat format;
 
   @Before
   public void init() {
-    // sut =
-    // DefaultQuantityFactoryService.getQuantityFactory(Length.class).create(10,
-    // METRE);
     format = EBNFUnitFormat.getInstance();
   }
 
@@ -80,7 +81,6 @@ public class EBNFFormatTest {
   }
 
   @Test
-  @Ignore
   public void testParseInverseL() {
     Unit<?> u = format.parse("1/l");
     assertEquals("1/l", u.toString());
@@ -88,12 +88,12 @@ public class EBNFFormatTest {
 
   @Test
   public void testParseInverses() {
-    for (Unit u : Units.getInstance().getUnits()) {
+    for (Unit<?> u : Units.getInstance().getUnits()) {
       try {
         Unit<?> v = format.parse("1/" + u.toString());
-        System.out.println(v);
+        logger.log(Level.FINER, v.toString());
       } catch (ParserException pex) {
-        System.err.println(String.format(" %s parsing %s", pex, u));
+        logger.log(Level.WARNING, String.format(" %s parsing %s", pex, u));
       }
     }
   }
