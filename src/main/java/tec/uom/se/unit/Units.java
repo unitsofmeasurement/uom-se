@@ -80,7 +80,8 @@ import javax.measure.spi.SystemOfUnits;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, Jan 20, 2017
+ * @version 1.0.2, Mar 19, 2017
+ * @since 1.0
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {
 
@@ -364,13 +365,6 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    */
   public static final Unit<Speed> KILOMETRE_PER_HOUR = addUnit(METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
 
-  /**
-   * Alias for KILOMETRE_PER_HOUR
-   * 
-   * @deprecated use KILOMETRE_PER_HOUR
-   */
-  static final Unit<Speed> KILOMETRES_PER_HOUR = KILOMETRE_PER_HOUR;
-
   // ///////////////////////////////////////////////////////////////
   // CommonUnits outside the SI that are accepted for use with the Units. //
   // ///////////////////////////////////////////////////////////////
@@ -411,7 +405,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * An angle unit accepted for use with SI units (standard name <code>deg</code>).
    * 
-   * @deprecated Use from SI
+   * @deprecated Use from NonSI
    */
   public static final Unit<Angle> DEGREE_ANGLE = addUnit(new TransformedUnit<>(RADIAN, new PiMultiplierConverter().concatenate(new RationalConverter(
       1, 180))));
