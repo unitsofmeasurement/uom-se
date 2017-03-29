@@ -195,7 +195,7 @@ public class EBNFUnitFormat extends AbstractUnitFormat {
    * 
    */
   EBNFUnitFormat() {
-    this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault())));
+    this(SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT)));
   }
 
   /**
