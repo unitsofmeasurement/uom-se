@@ -52,7 +52,7 @@ public class SymbolMapTest {
    */
   @Test
   public void testSymbolMap() {
-    SymbolMap symbols = SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault()));
+    SymbolMap symbols = SymbolMap.of(ResourceBundle.getBundle(BUNDLE_NAME, Locale.ROOT));
     assertEquals(MetricPrefix.ATTO, symbols.getPrefix("ag"));
     assertEquals(MetricPrefix.CENTI, symbols.getPrefix("cg"));
     assertEquals(MetricPrefix.DECI, symbols.getPrefix("dg"));
