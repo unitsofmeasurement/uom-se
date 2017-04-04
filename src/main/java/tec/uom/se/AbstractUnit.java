@@ -64,14 +64,14 @@ import java.lang.reflect.Type;
  * @see <a href= "http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.4, March 17, 2017
+ * @version 1.0.5, April 4, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
 
   /**
-     * 
-     */
+   * 
+   */
   private static final long serialVersionUID = -4344589505537030204L;
 
   /**
@@ -126,8 +126,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   /**
    * Returns the unscaled {@link SI} unit from which this unit is derived.
    * 
-   * They SI unit can be be used to identify a quantity given the unit. For example:[code] static boolean isAngularVelocity(AbstractUnit<?> unit) {
-   * return unit.toSI().equals(RADIAN.divide(SECOND)); } assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true. [/code]
+   * The SI unit can be be used to identify a quantity given the unit. For example:<code> static boolean isAngularVelocity(AbstractUnit<?> unit) {
+   * return unit.toSystemUnit().equals(RADIAN.divide(SECOND)); } assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true. </code>
    *
    * @return the unscaled metric unit from which this unit is derived.
    */
@@ -143,8 +143,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Annotates the specified unit. Annotation does not change the unit semantic. Annotations are often written between curly braces behind units. For
-   * example: [code] AbstractUnit<Volume> PERCENT_VOL = Units.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
-   * Units.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless> RED_BLOOD_CELLS = Units.ONE.annotate("RBC"); // "{RBC}" [/code]
+   * example:
+   * <code> AbstractUnit<Volume> PERCENT_VOL = Units.PERCENT.annotate("vol"); // "%{vol}" AbstractUnit<Mass> KG_TOTAL =
+   * Units.KILOGRAM.annotate("total"); // "kg{total}" AbstractUnit<Dimensionless> RED_BLOOD_CELLS = Units.ONE.annotate("RBC"); // "{RBC}" </code>
    *
    * Note: Annotation of system units are not considered themselves as system units.
    *
@@ -195,8 +196,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
 
   /**
    * Returns the system unit (unscaled SI unit) from which this unit is derived. They can be be used to identify a quantity given the unit. For
-   * example:[code] static boolean isAngularVelocity(AbstractUnit<?> unit) { return unit.getSystemUnit().equals(RADIAN.divide(SECOND)); }
-   * assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true. [/code]
+   * example:<br>
+   * <code> static boolean isAngularVelocity(AbstractUnit<?> unit) {<br>&nbsp;&nbsp;return unit.getSystemUnit().equals(RADIAN.divide(SECOND));<br>}
+   * <br>assert(REVOLUTION.divide(MINUTE).isAngularVelocity()); // Returns true. </code>
    *
    * @return the unscaled metric unit from which this unit is derived.
    */
