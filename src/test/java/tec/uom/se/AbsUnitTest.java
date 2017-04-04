@@ -56,7 +56,7 @@ public class AbsUnitTest {
 
   @Test
   public void testReturnedClass() {
-    // assertEquals("Q", String.valueOf(sut.getActualType())); // TODO we hope to get better type information in future Java versions
+    // assertEquals("Q", String.valueOf(sut.getActualType())); // TODO we hope to get better type information like <Length> in future Java versions
     assertEquals("java.lang.reflect.TypeVariable<D>", String.valueOf(sut.getActualType()));
   }
 
