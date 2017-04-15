@@ -91,6 +91,7 @@ public class EBNFFormatTest {
     for (Unit<?> u : Units.getInstance().getUnits()) {
       try {
         Unit<?> v = format.parse("1/" + u.toString());
+        assertNotNull(v);
         logger.log(Level.FINER, v.toString());
       } catch (ParserException pex) {
         logger.log(Level.WARNING, String.format(" %s parsing %s", pex, u));
