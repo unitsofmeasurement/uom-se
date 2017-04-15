@@ -9,6 +9,7 @@ This implementation aims at **Java SE 8** and above.
 
 Allowing the use of new features like *Lambdas* together with Units of Measurement API
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c3727b5bc16149dca5e51b23775cfce3)](https://www.codacy.com/app/unitsofmeasurement/uom-se?utm_source=github.com&utm_medium=referral&utm_content=unitsofmeasurement/uom-se&utm_campaign=badger)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se/badge.svg)](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se)
 [![Circle CI](https://circleci.com/gh/unitsofmeasurement/uom-se.svg?style=svg)](https://circleci.com/gh/unitsofmeasurement/uom-se) 
 [![License](http://img.shields.io/badge/license-BSD3-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) 
