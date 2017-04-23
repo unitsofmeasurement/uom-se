@@ -67,7 +67,8 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.7, December 28, 2015
+ * @version 1.0, April 24, 2017
+ * @since 1.0
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
@@ -168,6 +169,12 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     return symbol;
   }
 
+  /**
+   * Returns the parent unit for this unit. The parent unit is the
+   * untransformed unit from which this unit is derived.
+   *
+   * @return the untransformed unit from which this unit is derived.
+   */
   public Unit<Q> getParentUnit() {
     return parentUnit;
   }
