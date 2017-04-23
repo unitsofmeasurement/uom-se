@@ -67,7 +67,7 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, April 24, 2017
+ * @version 1.0.1, April 24, 2017
  * @since 1.0
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
@@ -132,6 +132,11 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
     return parentUnit.getSystemConverter().concatenate(converter);
   }
 
+  /**
+   * Returns the converter to the parent unit.
+   *
+   * @return the converter to the parent unit.
+   */
   @Override
   public UnitConverter getConverter() {
     return converter;
