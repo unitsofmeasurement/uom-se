@@ -69,7 +69,7 @@ public class PrefixTest {
     assertEquals(10.0d, m2.getValue());
     assertEquals("dl", m2.getUnit().toString());
   }
-  
+
   @Test
   public void testMilli() {
     Quantity<Mass> m1 = Quantities.getQuantity(1.0, MILLI(Units.GRAM));

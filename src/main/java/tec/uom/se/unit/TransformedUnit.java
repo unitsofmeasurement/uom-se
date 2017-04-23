@@ -175,8 +175,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   }
 
   /**
-   * Returns the parent unit for this unit. The parent unit is the
-   * untransformed unit from which this unit is derived.
+   * Returns the parent unit for this unit. The parent unit is the untransformed unit from which this unit is derived.
    *
    * @return the untransformed unit from which this unit is derived.
    */
