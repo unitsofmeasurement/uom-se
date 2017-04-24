@@ -80,7 +80,7 @@ import javax.measure.spi.SystemOfUnits;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.2, Mar 19, 2017
+ * @version 1.0.3, Mar 19, 2017
  * @since 1.0
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {

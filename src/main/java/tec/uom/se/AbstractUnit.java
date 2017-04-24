@@ -64,7 +64,7 @@ import java.lang.reflect.Type;
  * @see <a href= "http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.5, April 4, 2017
+ * @version 1.0.6, April 24, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
@@ -369,7 +369,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    *          the physical unit multiplicand.
    * @return <code>this * that</code>
    */
-  public final Unit<?> multiply(AbstractUnit<?> that) {
+  protected final Unit<?> multiply(AbstractUnit<?> that) {
     if (this.equals(ONE))
       return that;
     if (that.equals(ONE))
@@ -403,7 +403,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    * @return this unit divided by the specified divisor.
    */
   @Override
-  public final AbstractUnit<Q> divide(double divisor) {
+  public final Unit<Q> divide(double divisor) {
     if (divisor == 1)
       return this;
     if (isLongValue(divisor))
@@ -430,7 +430,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    *          the physical unit divisor.
    * @return <code>this.multiply(that.inverse())</code>
    */
-  public final Unit<?> divide(AbstractUnit<?> that) {
+  protected final Unit<?> divide(AbstractUnit<?> that) {
     return this.multiply(that.inverse());
   }
 
