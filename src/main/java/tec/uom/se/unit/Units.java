@@ -226,8 +226,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * electric potential between two points on a conducting wire carrying a constant current of one ampere when the power dissipated between the points
    * is one watt. It is named after the Italian physicist Count Alessandro Volta (1745-1827).
    */
-  public static final Unit<ElectricPotential> VOLT = addUnit(new AlternateUnit<ElectricPotential>(WATT.divide(AMPERE), "V"),
-      ElectricPotential.class);
+  public static final Unit<ElectricPotential> VOLT = addUnit(new AlternateUnit<ElectricPotential>(WATT.divide(AMPERE), "V"), ElectricPotential.class);
 
   /**
    * The SI unit for capacitance (standard name <code>F</code>). One Farad is equal to the capacitance of a capacitor having an equal and opposite

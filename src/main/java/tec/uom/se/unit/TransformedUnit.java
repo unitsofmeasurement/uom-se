@@ -143,7 +143,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   }
 
   @Override
-  public AbstractUnit<Q> toSystemUnit() {
+  public Unit<Q> toSystemUnit() {
     return parentUnit.getSystemUnit();
   }
 

@@ -119,7 +119,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    * @return <code>equals(toSystemUnit())</code>
    */
   public boolean isSystemUnit() {
-    AbstractUnit<Q> si = this.toSystemUnit();
+    Unit<Q> si = this.toSystemUnit();
     return (this == si) || this.equals(si);
   }
 
@@ -131,7 +131,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    *
    * @return the unscaled metric unit from which this unit is derived.
    */
-  protected abstract AbstractUnit<Q> toSystemUnit();
+  protected abstract Unit<Q> toSystemUnit();
 
   /**
    * Returns the converter from this unit to its unscaled {@link #toSysemUnit System Unit} unit.
@@ -203,7 +203,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
    * @return the unscaled metric unit from which this unit is derived.
    */
   @Override
-  public final AbstractUnit<Q> getSystemUnit() {
+  public final Unit<Q> getSystemUnit() {
     return toSystemUnit();
   }
 
@@ -301,9 +301,9 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
     // be both physics
     // units.
     DimensionalModel model = DimensionalModel.current();
-    AbstractUnit thisSystemUnit = this.getSystemUnit();
+    Unit thisSystemUnit = this.getSystemUnit();
     UnitConverter thisToDimension = model.getDimensionalTransform(thisSystemUnit.getDimension()).concatenate(this.getSystemConverter());
-    AbstractUnit thatSystemUnit = thatAbstr.getSystemUnit();
+    Unit thatSystemUnit = thatAbstr.getSystemUnit();
     UnitConverter thatToDimension = model.getDimensionalTransform(thatSystemUnit.getDimension()).concatenate(thatAbstr.getSystemConverter());
     return thatToDimension.inverse().concatenate(thisToDimension);
   }
@@ -315,8 +315,8 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   @Override
-  public final AbstractUnit<Q> transform(UnitConverter operation) {
-    AbstractUnit<Q> systemUnit = this.getSystemUnit();
+  public final Unit<Q> transform(UnitConverter operation) {
+    Unit<Q> systemUnit = this.getSystemUnit();
     UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
     if (cvtr.equals(AbstractConverter.IDENTITY))
       return systemUnit;
@@ -324,14 +324,14 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   }
 
   @Override
-  public final AbstractUnit<Q> shift(double offset) {
+  public final Unit<Q> shift(double offset) {
     if (offset == 0)
       return this;
     return transform(new AddConverter(offset));
   }
 
   @Override
-  public final AbstractUnit<Q> multiply(double factor) {
+  public final Unit<Q> multiply(double factor) {
     if (factor == 1)
       return this;
     if (isLongValue(factor))
