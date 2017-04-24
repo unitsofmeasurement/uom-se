@@ -234,21 +234,21 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * charge of 1 coulomb on each plate and a potential difference of 1 volt between the plates. It is named after the British physicist and chemist
    * Michael Faraday (1791-1867).
    */
-  public static final AlternateUnit<ElectricCapacitance> FARAD = addUnit(new AlternateUnit<ElectricCapacitance>(COULOMB.divide(VOLT), "F"),
+  public static final Unit<ElectricCapacitance> FARAD = addUnit(new AlternateUnit<ElectricCapacitance>(COULOMB.divide(VOLT), "F"),
       ElectricCapacitance.class);
 
   /**
    * The SI unit for electric resistance (standard name <code>Ohm</code>). One Ohm is equal to the resistance of a conductor in which a current of one
    * ampere is produced by a potential of one volt across its terminals. It is named after the German physicist Georg Simon Ohm (1789-1854).
    */
-  public static final AlternateUnit<ElectricResistance> OHM = addUnit(new AlternateUnit<ElectricResistance>(VOLT.divide(AMPERE), "Ω"),
+  public static final Unit<ElectricResistance> OHM = addUnit(new AlternateUnit<ElectricResistance>(VOLT.divide(AMPERE), "Ω"),
       ElectricResistance.class);
 
   /**
    * The SI unit for electric conductance (standard name <code>S</code>). One Siemens is equal to one ampere per volt. It is named after the German
    * engineer Ernst Werner von Siemens (1816-1892).
    */
-  public static final AlternateUnit<ElectricConductance> SIEMENS = addUnit(new AlternateUnit<ElectricConductance>(AMPERE.divide(VOLT), "S"),
+  public static final Unit<ElectricConductance> SIEMENS = addUnit(new AlternateUnit<ElectricConductance>(AMPERE.divide(VOLT), "S"),
       ElectricConductance.class);
 
   /**
@@ -256,7 +256,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * produces in it an electromotive force of one volt as it is uniformly reduced to zero within one second. It is named after the German physicist
    * Wilhelm Eduard Weber (1804-1891).
    */
-  public static final AlternateUnit<MagneticFlux> WEBER = addUnit(new AlternateUnit<MagneticFlux>(VOLT.multiply(SECOND), "Wb"), MagneticFlux.class);
+  public static final Unit<MagneticFlux> WEBER = addUnit(new AlternateUnit<MagneticFlux>(VOLT.multiply(SECOND), "Wb"), MagneticFlux.class);
 
   /**
    * The alternate unit for magnetic flux density (standard name <code>T</code>). One Tesla is equal equal to one weber per square metre. It is named
@@ -328,23 +328,9 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   public static final Unit<Speed> METRE_PER_SECOND = addUnit(new ProductUnit<>(METRE.divide(SECOND)), Speed.class);
 
   /**
-   * Alias for METRE_PER_SECOND
-   * 
-   * @deprecated use METRE_PER_SECOND
-   */
-  static final Unit<Speed> METRES_PER_SECOND = METRE_PER_SECOND;
-
-  /**
    * The SI unit for acceleration quantities (standard name <code>m/s2</code> ).
    */
   public static final Unit<Acceleration> METRE_PER_SQUARE_SECOND = addUnit(new ProductUnit<>(METRE_PER_SECOND.divide(SECOND)), Acceleration.class);
-
-  /**
-   * Alias for METRE_PER_SQUARE_SECOND
-   * 
-   * @deprecated use METRE_PER_SQUARE_SECOND
-   */
-  static final Unit<Acceleration> METRES_PER_SQUARE_SECOND = METRE_PER_SQUARE_SECOND;
 
   /**
    * The SI unit for area quantities (standard name <code>m2</code>).
@@ -359,16 +345,16 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A unit of velocity expressing the number of international {@link #KILOMETRE kilometres} per {@link #HOUR hour} (abbreviation <code>km/h</code>).
    */
-  public static final Unit<Speed> KILOMETRE_PER_HOUR = addUnit(METRES_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
+  public static final Unit<Speed> KILOMETRE_PER_HOUR = addUnit(METRE_PER_SECOND.multiply(0.277778d)).asType(Speed.class);
 
   // ///////////////////////////////////////////////////////////////
-  // CommonUnits outside the SI that are accepted for use with the Units. //
+  // Common Units outside the SI that are accepted for use with the SI. //
   // ///////////////////////////////////////////////////////////////
 
   /**
    * A dimensionless unit accepted for use with SI units (standard name <code>%</code>).
    */
-  public static final TransformedUnit<Dimensionless> PERCENT = addUnit(new TransformedUnit<>(ONE, new RationalConverter(1, 100)));
+  public static final Unit<Dimensionless> PERCENT = addUnit(new TransformedUnit<>(ONE, new RationalConverter(1, 100)));
 
   // ////////
   // Time //
