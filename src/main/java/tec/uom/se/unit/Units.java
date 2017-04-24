@@ -105,7 +105,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @implNote SI Base Unit
    */
-  public static final BaseUnit<ElectricCurrent> AMPERE = addUnit(new BaseUnit<ElectricCurrent>("A", QuantityDimension.ELECTRIC_CURRENT),
+  public static final Unit<ElectricCurrent> AMPERE = addUnit(new BaseUnit<ElectricCurrent>("A", QuantityDimension.ELECTRIC_CURRENT),
       ElectricCurrent.class);
 
   /**
@@ -117,7 +117,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *
    * @implNote SI Base Unit
    */
-  public static final BaseUnit<LuminousIntensity> CANDELA = addUnit(new BaseUnit<LuminousIntensity>("cd", QuantityDimension.LUMINOUS_INTENSITY),
+  public static final Unit<LuminousIntensity> CANDELA = addUnit(new BaseUnit<LuminousIntensity>("cd", QuantityDimension.LUMINOUS_INTENSITY),
       LuminousIntensity.class);
 
   /**
@@ -126,7 +126,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * 
    * @implNote SI Base Unit
    */
-  public static final BaseUnit<Temperature> KELVIN = addUnit(new BaseUnit<Temperature>("K", QuantityDimension.TEMPERATURE), Temperature.class);
+  public static final Unit<Temperature> KELVIN = addUnit(new BaseUnit<Temperature>("K", QuantityDimension.TEMPERATURE), Temperature.class);
 
   /**
    * The SI base unit for mass quantities (standard name <code>kg</code>). It is the only SI unit with a prefix as part of its name and symbol. The
@@ -136,7 +136,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *
    * @implNote SI Base Unit
    */
-  public static final BaseUnit<Mass> KILOGRAM = addUnit(new BaseUnit<Mass>("kg", QuantityDimension.MASS), Mass.class);
+  public static final Unit<Mass> KILOGRAM = addUnit(new BaseUnit<Mass>("kg", QuantityDimension.MASS), Mass.class);
 
   /**
    * The SI base unit for length quantities (standard name <code>m</code>). One metre was redefined in 1983 as the distance traveled by light in a
@@ -182,33 +182,32 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for solid angle quantities (standard name <code>sr</code>). One steradian is the solid angle subtended at the center of a sphere by
    * an area on the surface of the sphere that is equal to the radius squared. The total solid angle of a sphere is 4*Pi steradians.
    */
-  public static final AlternateUnit<SolidAngle> STERADIAN = addUnit(new AlternateUnit<SolidAngle>(ONE, "sr"), SolidAngle.class);
+  public static final Unit<SolidAngle> STERADIAN = addUnit(new AlternateUnit<SolidAngle>(ONE, "sr"), SolidAngle.class);
 
   /**
    * The SI unit for frequency (standard name <code>Hz</code>). A unit of frequency equal to one cycle per second. After Heinrich Rudolf Hertz
    * (1857-1894), German physicist who was the first to produce radio waves artificially.
    */
-  public static final AlternateUnit<Frequency> HERTZ = addUnit(new AlternateUnit<Frequency>(ONE.divide(SECOND), "Hz"), Frequency.class);
+  public static final Unit<Frequency> HERTZ = addUnit(new AlternateUnit<Frequency>(ONE.divide(SECOND), "Hz"), Frequency.class);
 
   /**
    * The SI unit for force (standard name <code>N</code>). One newton is the force required to give a mass of 1 kilogram an Force of 1 metre per
    * second per second. It is named after the English mathematician and physicist Sir Isaac Newton (1642-1727).
    */
-  public static final AlternateUnit<Force> NEWTON = addUnit(new AlternateUnit<Force>(METRE.multiply(KILOGRAM).divide(SECOND.pow(2)), "N"),
-      Force.class);
+  public static final Unit<Force> NEWTON = addUnit(new AlternateUnit<Force>(METRE.multiply(KILOGRAM).divide(SECOND.pow(2)), "N"), Force.class);
 
   /**
    * The SI unit for pressure, stress (standard name <code>Pa</code>). One pascal is equal to one newton per square meter. It is named after the
    * French philosopher and mathematician Blaise Pascal (1623-1662).
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public static final AlternateUnit<Pressure> PASCAL = addUnit(new AlternateUnit(NEWTON.divide(METRE.pow(2)), "Pa"), Pressure.class);
+  public static final Unit<Pressure> PASCAL = addUnit(new AlternateUnit(NEWTON.divide(METRE.pow(2)), "Pa"), Pressure.class);
 
   /**
    * The SI unit for energy, work, quantity of heat (<code>J</code>). One joule is the amount of work done when an applied force of 1 newton moves
    * through a distance of 1 metre in the direction of the force. It is named after the English physicist James Prescott Joule (1818-1889).
    */
-  public static final AlternateUnit<Energy> JOULE = addUnit(new AlternateUnit<Energy>(NEWTON.multiply(METRE), "J"), Energy.class);
+  public static final Unit<Energy> JOULE = addUnit(new AlternateUnit<Energy>(NEWTON.multiply(METRE), "J"), Energy.class);
 
   /**
    * The SI unit for power, radiant, flux (standard name <code>W</code>). One watt is equal to one joule per second. It is named after the British
@@ -220,8 +219,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for electric charge, quantity of electricity (standard name <code>C</code>). One Coulomb is equal to the quantity of charge
    * transferred in one second by a steady current of one ampere. It is named after the French physicist Charles Augustin de Coulomb (1736-1806).
    */
-  public static final AlternateUnit<ElectricCharge> COULOMB = addUnit(new AlternateUnit<ElectricCharge>(SECOND.multiply(AMPERE), "C"),
-      ElectricCharge.class);
+  public static final Unit<ElectricCharge> COULOMB = addUnit(new AlternateUnit<ElectricCharge>(SECOND.multiply(AMPERE), "C"), ElectricCharge.class);
 
   /**
    * The SI unit for electric potential difference, electromotive force (standard name <code>V</code>). One Volt is equal to the difference of
@@ -264,7 +262,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The alternate unit for magnetic flux density (standard name <code>T</code>). One Tesla is equal equal to one weber per square metre. It is named
    * after the Serbian-born American electrical engineer and physicist Nikola Tesla (1856-1943).
    */
-  public static final AlternateUnit<MagneticFluxDensity> TESLA = addUnit(new AlternateUnit<MagneticFluxDensity>(WEBER.divide(METRE.pow(2)), "T"),
+  public static final Unit<MagneticFluxDensity> TESLA = addUnit(new AlternateUnit<MagneticFluxDensity>(WEBER.divide(METRE.pow(2)), "T"),
       MagneticFluxDensity.class);
 
   /**
@@ -272,7 +270,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * of one volt is produced when the current is varied at the rate of one ampere per second. It is named after the American physicist Joseph Henry
    * (1791-1878).
    */
-  public static final AlternateUnit<ElectricInductance> HENRY = addUnit(new AlternateUnit<ElectricInductance>(WEBER.divide(AMPERE), "H"),
+  public static final Unit<ElectricInductance> HENRY = addUnit(new AlternateUnit<ElectricInductance>(WEBER.divide(AMPERE), "H"),
       ElectricInductance.class);
 
   /**
@@ -280,46 +278,44 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * atmosphere of pressure) is 0 Cel, while the boiling point is 100 Cel.
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public static final TransformedUnit<Temperature> CELSIUS = addUnit(new TransformedUnit(KELVIN, new AddConverter(273.15)));
+  public static final Unit<Temperature> CELSIUS = addUnit(new TransformedUnit(KELVIN, new AddConverter(273.15)));
   // Not mapping to Temperature since temperature is mapped to Kelvin.
 
   /**
    * The SI unit for luminous flux (standard name <code>lm</code>). One Lumen is equal to the amount of light given out through a solid angle by a
    * source of one candela intensity radiating equally in all directions.
    */
-  public static final AlternateUnit<LuminousFlux> LUMEN = addUnit(new AlternateUnit<LuminousFlux>(CANDELA.multiply(STERADIAN), "lm"),
-      LuminousFlux.class);
+  public static final Unit<LuminousFlux> LUMEN = addUnit(new AlternateUnit<LuminousFlux>(CANDELA.multiply(STERADIAN), "lm"), LuminousFlux.class);
 
   /**
    * The SI unit for illuminance (standard name <code>lx</code>). One Lux is equal to one lumen per square metre.
    */
-  public static final AlternateUnit<Illuminance> LUX = addUnit(new AlternateUnit<Illuminance>(LUMEN.divide(METRE.pow(2)), "lx"), Illuminance.class);
+  public static final Unit<Illuminance> LUX = addUnit(new AlternateUnit<Illuminance>(LUMEN.divide(METRE.pow(2)), "lx"), Illuminance.class);
 
   /**
    * The SI unit for activity of a radionuclide (standard name <code>Bq</code> ). One becquerel is the radiation caused by one disintegration per
    * second. It is named after the French physicist, Antoine-Henri Becquerel (1852-1908).
    */
-  public static final AlternateUnit<Radioactivity> BECQUEREL = addUnit(new AlternateUnit<Radioactivity>(ONE.divide(SECOND), "Bq"),
-      Radioactivity.class);
+  public static final Unit<Radioactivity> BECQUEREL = addUnit(new AlternateUnit<Radioactivity>(ONE.divide(SECOND), "Bq"), Radioactivity.class);
 
   /**
    * The SI unit for absorbed dose, specific energy (imparted), kerma (standard name <code>Gy</code>). One gray is equal to the dose of one joule of
    * energy absorbed per one kilogram of matter. It is named after the British physician L. H. Gray (1905-1965).
    */
-  public static final AlternateUnit<RadiationDoseAbsorbed> GRAY = addUnit(new AlternateUnit<RadiationDoseAbsorbed>(JOULE.divide(KILOGRAM), "Gy"),
+  public static final Unit<RadiationDoseAbsorbed> GRAY = addUnit(new AlternateUnit<RadiationDoseAbsorbed>(JOULE.divide(KILOGRAM), "Gy"),
       RadiationDoseAbsorbed.class);
 
   /**
    * The SI unit for dose equivalent (standard name <code>Sv</code>). One Sievert is equal is equal to the actual dose, in grays, multiplied by a
    * "quality factor" which is larger for more dangerous forms of radiation. It is named after the Swedish physicist Rolf Sievert (1898-1966).
    */
-  public static final AlternateUnit<RadiationDoseEffective> SIEVERT = addUnit(
-      new AlternateUnit<RadiationDoseEffective>(JOULE.divide(KILOGRAM), "Sv"), RadiationDoseEffective.class);
+  public static final Unit<RadiationDoseEffective> SIEVERT = addUnit(new AlternateUnit<RadiationDoseEffective>(JOULE.divide(KILOGRAM), "Sv"),
+      RadiationDoseEffective.class);
 
   /**
    * The SI unit for catalytic activity (standard name <code>kat</code>).
    */
-  public static final AlternateUnit<CatalyticActivity> KATAL = addUnit(new AlternateUnit<CatalyticActivity>(MOLE.divide(SECOND), "kat"),
+  public static final Unit<CatalyticActivity> KATAL = addUnit(new AlternateUnit<CatalyticActivity>(MOLE.divide(SECOND), "kat"),
       CatalyticActivity.class);
 
   // ////////////////////////////
