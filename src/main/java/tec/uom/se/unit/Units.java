@@ -226,7 +226,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * electric potential between two points on a conducting wire carrying a constant current of one ampere when the power dissipated between the points
    * is one watt. It is named after the Italian physicist Count Alessandro Volta (1745-1827).
    */
-  public static final AlternateUnit<ElectricPotential> VOLT = addUnit(new AlternateUnit<ElectricPotential>(WATT.divide(AMPERE), "V"),
+  public static final Unit<ElectricPotential> VOLT = addUnit(new AlternateUnit<ElectricPotential>(WATT.divide(AMPERE), "V"),
       ElectricPotential.class);
 
   /**
@@ -340,7 +340,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * The SI unit for volume quantities (standard name <code>m3</code>).
    */
-  public static final ProductUnit<Volume> CUBIC_METRE = addUnit(new ProductUnit<Volume>(SQUARE_METRE.multiply(METRE)), Volume.class);
+  public static final Unit<Volume> CUBIC_METRE = addUnit(new ProductUnit<Volume>(SQUARE_METRE.multiply(METRE)), Volume.class);
 
   /**
    * A unit of velocity expressing the number of international {@link #KILOMETRE kilometres} per {@link #HOUR hour} (abbreviation <code>km/h</code>).
