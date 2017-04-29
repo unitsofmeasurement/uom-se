@@ -100,7 +100,6 @@ public class EBNFFormatTest {
   }
 
   @Test
-  @Ignore
   // TODO address https://github.com/unitsofmeasurement/uom-se/issues/145
   public void testFormatKm() {
     String s = format.format(KILO(METRE));
@@ -108,11 +107,10 @@ public class EBNFFormatTest {
   }
 
   @Test
-  @Ignore
   // TODO address https://github.com/unitsofmeasurement/uom-se/issues/145
   public void testFormatm() {
     String s = format.format(MILLI(METRE));
-    assertEquals("km", s);
+    assertEquals("mm", s);
   }
 
   @Test(expected = ParserException.class)

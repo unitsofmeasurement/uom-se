@@ -103,7 +103,7 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
    *           if the specified parent unit is not an {@link AbstractUnit#isSystemUnit() system unit}
    */
   public TransformedUnit(Unit<Q> parentUnit, UnitConverter unitConverter) {
-    this(parentUnit.getSymbol(), parentUnit, unitConverter);
+    this(null, parentUnit, unitConverter);
   }
 
   public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {

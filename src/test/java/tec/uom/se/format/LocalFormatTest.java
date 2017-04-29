@@ -31,24 +31,11 @@ package tec.uom.se.format;
 
 import static org.junit.Assert.*;
 
-import static tec.uom.se.AbstractUnit.ONE;
 import static tec.uom.se.unit.MetricPrefix.*;
 import static tec.uom.se.unit.Units.*;
 
-import java.io.IOException;
-
-import javax.measure.Quantity;
 import javax.measure.Unit;
-import javax.measure.format.ParserException;
 import javax.measure.format.UnitFormat;
-import javax.measure.quantity.Frequency;
-import javax.measure.quantity.Length;
-import javax.measure.quantity.Speed;
-
-import tec.uom.se.quantity.Quantities;
-import tec.uom.se.unit.Units;
-
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -60,7 +47,7 @@ public class LocalFormatTest {
 
   @Test
   @Ignore
-  // TODO LocalUnitFormat won't parse Compound Units, EBNF does
+  // TODO LocalUnitFormat won't parse Compound Units, EBNF does, also see https://github.com/unitsofmeasurement/uom-se/issues/145
   public void testPrefixKm() {
     final UnitFormat format = LocalUnitFormat.getInstance();
     Unit<?> u = format.parse("km");

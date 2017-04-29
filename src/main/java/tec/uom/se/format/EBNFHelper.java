@@ -29,6 +29,7 @@
  */
 package tec.uom.se.format;
 
+import static tec.uom.se.format.FormatConverter.formatConverter;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
@@ -61,13 +62,13 @@ class EBNFHelper {
 
   // private static final String LOCAL_FORMAT_PATTERN = "%s";
 
-  static final char MIDDLE_DOT = '\u00b7'; //$NON-NLS-1$
+  static final char MIDDLE_DOT = '\u00b7'; // $NON-NLS-1$
 
   /** Exponent 1 character */
-  private static final char EXPONENT_1 = '\u00b9'; //$NON-NLS-1$
+  private static final char EXPONENT_1 = '\u00b9'; // $NON-NLS-1$
 
   /** Exponent 2 character */
-  private static final char EXPONENT_2 = '\u00b2'; //$NON-NLS-1$
+  private static final char EXPONENT_2 = '\u00b2'; // $NON-NLS-1$
 
   /**
    * Operator precedence for a unit identifier containing no mathematical operations (i.e., consisting exclusively of an identifier and possibly a
@@ -101,7 +102,46 @@ class EBNFHelper {
     } else if (unit.getSymbol() != null) { // Alternate unit.
       return noopPrecedenceInternal(buffer, unit.getSymbol());
     } else { // A transformed unit or new unit type!
-      return newUnitPrecedenceInternal(unit, buffer, symbolMap);
+      // return newUnitPrecedenceInternal(unit, buffer, symbolMap);
+      // }
+      UnitConverter converter = null;
+      boolean printSeparator = false;
+      StringBuilder temp = new StringBuilder();
+      int unitPrecedence = NOOP_PRECEDENCE;
+      Unit<?> parentUnit = unit.getSystemUnit();
+      converter = ((AbstractUnit<?>) unit).getSystemConverter();
+      if (KILOGRAM.equals(parentUnit)) {
+        // More special-case hackery to work around gram/kilogram
+        // incosistency
+        if (unit.equals(GRAM)) {
+          buffer.append(symbolMap.getSymbol(GRAM));
+          return NOOP_PRECEDENCE;
+        }
+        parentUnit = GRAM;
+        if (unit instanceof TransformedUnit<?>) {
+          converter = ((TransformedUnit<?>) unit).getConverter();
+        } else {
+          converter = unit.getConverterTo((Unit) GRAM);
+        }
+      } else if (CUBIC_METRE.equals(parentUnit)) {
+        if (converter != null) {
+          parentUnit = LITRE;
+        }
+      }
+
+      if (unit instanceof TransformedUnit) {
+        TransformedUnit<?> transUnit = (TransformedUnit<?>) unit;
+        if (parentUnit == null)
+          parentUnit = transUnit.getParentUnit();
+        // String x = parentUnit.toString();
+        converter = transUnit.getConverter();
+      }
+
+      unitPrecedence = formatInternal(parentUnit, temp, symbolMap);
+      printSeparator = !parentUnit.equals(AbstractUnit.ONE);
+      int result = formatConverter(converter, printSeparator, unitPrecedence, temp, symbolMap);
+      buffer.append(temp);
+      return result;
     }
   }
 
@@ -129,8 +169,8 @@ class EBNFHelper {
     int unitPrecedence = EBNFHelper.formatInternal(unit, temp, symbolMap);
 
     if (unitPrecedence < EBNFHelper.PRODUCT_PRECEDENCE) {
-      temp.insert(0, '('); //$NON-NLS-1$
-      temp.append(')'); //$NON-NLS-1$
+      temp.insert(0, '('); // $NON-NLS-1$
+      temp.append(')'); // $NON-NLS-1$
     }
     buffer.append(temp);
     if ((root == 1) && (pow == 1)) {
@@ -141,46 +181,46 @@ class EBNFHelper {
         char c = powStr.charAt(i);
         switch (c) {
           case '0':
-            buffer.append('\u2070'); //$NON-NLS-1$
+            buffer.append('\u2070'); // $NON-NLS-1$
             break;
           case '1':
-            buffer.append(EXPONENT_1); //$NON-NLS-1$
+            buffer.append(EXPONENT_1); // $NON-NLS-1$
             break;
           case '2':
             buffer.append(EXPONENT_2);
             break;
           case '3':
-            buffer.append('\u00b3'); //$NON-NLS-1$
+            buffer.append('\u00b3'); // $NON-NLS-1$
             break;
           case '4':
-            buffer.append('\u2074'); //$NON-NLS-1$
+            buffer.append('\u2074'); // $NON-NLS-1$
             break;
           case '5':
-            buffer.append('\u2075'); //$NON-NLS-1$
+            buffer.append('\u2075'); // $NON-NLS-1$
             break;
           case '6':
-            buffer.append('\u2076'); //$NON-NLS-1$
+            buffer.append('\u2076'); // $NON-NLS-1$
             break;
           case '7':
-            buffer.append('\u2077'); //$NON-NLS-1$
+            buffer.append('\u2077'); // $NON-NLS-1$
             break;
           case '8':
-            buffer.append('\u2078'); //$NON-NLS-1$
+            buffer.append('\u2078'); // $NON-NLS-1$
             break;
           case '9':
-            buffer.append('\u2079'); //$NON-NLS-1$
+            buffer.append('\u2079'); // $NON-NLS-1$
             break;
         }
       }
     } else if (root == 1) {
-      buffer.append('^'); //$NON-NLS-1$
+      buffer.append('^'); // $NON-NLS-1$
       buffer.append(String.valueOf(pow));
     } else {
       buffer.append("^("); //$NON-NLS-1$
       buffer.append(String.valueOf(pow));
-      buffer.append('/'); //$NON-NLS-1$
+      buffer.append('/'); // $NON-NLS-1$
       buffer.append(String.valueOf(root));
-      buffer.append(')'); //$NON-NLS-1$
+      buffer.append(')'); // $NON-NLS-1$
     }
   }
 
