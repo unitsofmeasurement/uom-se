@@ -29,7 +29,7 @@
  */
 package tec.uom.se.format;
 
-import static tec.uom.se.format.FormatConverter.formatConverter;
+import static tec.uom.se.format.ConverterFormatter.formatConverter;
 import tec.uom.se.AbstractUnit;
 import tec.uom.se.unit.AnnotatedUnit;
 import tec.uom.se.unit.BaseUnit;
@@ -310,7 +310,7 @@ class EBNFHelper {
 
     unitPrecedence = formatInternal(parentUnit, temp, symbolMap);
     printSeparator = !parentUnit.equals(AbstractUnit.ONE);
-    int result = FormatConverter.formatConverter(converter, printSeparator, unitPrecedence, temp, symbolMap);
+    int result = ConverterFormatter.formatConverter(converter, printSeparator, unitPrecedence, temp, symbolMap);
     buffer.append(temp);
     return result;
   }
