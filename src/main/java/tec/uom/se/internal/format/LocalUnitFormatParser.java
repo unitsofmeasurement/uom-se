@@ -38,10 +38,10 @@ import tec.uom.se.AbstractUnit;
 import tec.uom.se.format.SymbolMap;
 import tec.uom.se.function.LogConverter;
 import tec.uom.se.unit.MetricPrefix;
-import tec.uom.se.unit.Units;
 
 /**
  * @deprecated use {@link UnitFormatParser}
+ * FIXME there are some details e.g. Exception handling that are different, try to resolve or keep LUFP
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public final class LocalUnitFormatParser {
