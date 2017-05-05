@@ -18,8 +18,8 @@ Allowing the use of new features like *Lambdas* together with Units of Measureme
 
 Planning
 ------------
-[![Issue Stats](http://issuestats.com/github/unitsofmeasurement/uom-se/badge/pr?style=flat)](http://issuestats.com/github/unitsofmeasurement/uom-se)
-[![Issue Stats](http://issuestats.com/github/unitsofmeasurement/uom-se/badge/issue?style=flat)](http://issuestats.com/github/unitsofmeasurement/uom-se)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/unitsofmeasurement/uom-se.svg)](http://isitmaintained.com/project/unitsofmeasurement/uom-se "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/unitsofmeasurement/uom-se.svg)](http://isitmaintained.com/project/unitsofmeasurement/uom-se "Percentage of issues still open")
 
 Waffle.io
 ------------
