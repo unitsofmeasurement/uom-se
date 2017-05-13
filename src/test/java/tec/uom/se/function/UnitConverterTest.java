@@ -37,10 +37,12 @@ import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 import javax.measure.quantity.Length;
+import javax.measure.quantity.Temperature;
 
 import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.unit.Units;
 
 public class UnitConverterTest {
   private final Unit<Length> sourceUnit = METRE;
@@ -67,4 +69,12 @@ public class UnitConverterTest {
     assertEquals(targetUnit, quantResult1.getUnit());
   }
 
+  
+  @Test
+  public void testKelvinToCelsius() {
+    Quantity<Temperature> sut = Quantities.getQuantity(273.15d, Units.KELVIN).to(Units.CELSIUS);
+    assertNotNull(sut);
+    assertEquals(Units.CELSIUS, sut.getUnit());
+    assertEquals(0d, sut.getValue());
+  }
 }
