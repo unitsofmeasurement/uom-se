@@ -62,14 +62,13 @@ public class UnitConverterTest {
   @Test
   public void testQuantity() {
     Quantity<Length> quantLength1 = Quantities.getQuantity(4.0, sourceUnit);
-    Quantity<Length> quantLength2 = Quantities.getQuantity(6.0, targetUnit);
+//    Quantity<Length> quantLength2 = Quantities.getQuantity(6.0, targetUnit);
     Quantity<Length> quantResult1 = quantLength1.to(targetUnit);
     assertNotNull(quantResult1);
     assertEquals(400.0, quantResult1.getValue());
     assertEquals(targetUnit, quantResult1.getUnit());
   }
 
-  
   @Test
   public void testKelvinToCelsius() {
     Quantity<Temperature> sut = Quantities.getQuantity(273.15d, Units.KELVIN).to(Units.CELSIUS);
