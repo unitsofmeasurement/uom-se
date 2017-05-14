@@ -77,8 +77,8 @@ import javax.measure.format.UnitFormat;
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
-   * 
-   */
+     * 
+     */
   // private static final long serialVersionUID = 4149424034841739785L;
 
   /**
@@ -338,7 +338,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     }
 
     // Returns the name for the specified unit or null if product unit.
-    public String nameFor(Unit<?> unit) {
+    protected String nameFor(Unit<?> unit) {
       // Searches label database.
       String label = _unitToName.get(unit);
       if (label != null)
@@ -349,10 +349,11 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         return ((AlternateUnit<?>) unit).getSymbol();
       if (unit instanceof TransformedUnit) {
         TransformedUnit<?> tfmUnit = (TransformedUnit<?>) unit;
-        Unit<?> baseUnits = tfmUnit.toSystemUnit();
-        UnitConverter cvtr = tfmUnit.getSystemConverter();
+        Unit<?> baseUnit = tfmUnit.getParentUnit();
+        UnitConverter cvtr = tfmUnit.getConverter(); // tfmUnit.getSystemConverter();
         StringBuilder result = new StringBuilder();
-        String baseUnitName = baseUnits.toString();
+        String baseUnitName = baseUnit.toString();
+        String prefix = prefixFor(cvtr);
         if ((baseUnitName.indexOf('\u00b7') >= 0) || (baseUnitName.indexOf('*') >= 0) || (baseUnitName.indexOf('/') >= 0)) {
           // We could use parentheses whenever baseUnits is an
           // instanceof ProductUnit, but most ProductUnits have
@@ -364,25 +365,29 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         } else {
           result.append(baseUnitName);
         }
-        if (cvtr instanceof AddConverter) {
-          result.append('+');
-          result.append(((AddConverter) cvtr).getOffset());
-        } else if (cvtr instanceof RationalConverter) {
-          double dividend = ((RationalConverter) cvtr).getDividend().doubleValue();
-          if (dividend != 1) {
+        if (prefix != null) {
+          result.insert(0, prefix);
+        } else {
+          if (cvtr instanceof AddConverter) {
+            result.append('+');
+            result.append(((AddConverter) cvtr).getOffset());
+          } else if (cvtr instanceof RationalConverter) {
+            double dividend = ((RationalConverter) cvtr).getDividend().doubleValue();
+            if (dividend != 1) {
+              result.append('*');
+              result.append(dividend);
+            }
+            double divisor = ((RationalConverter) cvtr).getDivisor().doubleValue();
+            if (divisor != 1) {
+              result.append('/');
+              result.append(divisor);
+            }
+          } else if (cvtr instanceof MultiplyConverter) {
             result.append('*');
-            result.append(dividend);
+            result.append(((MultiplyConverter) cvtr).getFactor());
+          } else { // Other converters.
+            return "[" + baseUnit + "?]";
           }
-          double divisor = ((RationalConverter) cvtr).getDivisor().doubleValue();
-          if (divisor != 1) {
-            result.append('/');
-            result.append(divisor);
-          }
-        } else if (cvtr instanceof MultiplyConverter) {
-          result.append('*');
-          result.append(((MultiplyConverter) cvtr).getFactor());
-        } else { // Other converters.
-          return "[" + baseUnits + "?]";
         }
         return result.toString();
       }
@@ -395,8 +400,18 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       return null; // Product unit.
     }
 
+    // Returns the prefix for the specified unit converter.
+    protected String prefixFor(UnitConverter converter) {
+      for (int i = 0; i < CONVERTERS.length; i++) {
+        if (CONVERTERS[i].equals(converter)) {
+          return PREFIXES[i];
+        }
+      }
+      return null; // TODO or return blank?
+    }
+
     // Returns the unit for the specified name.
-    public Unit<?> unitFor(String name) {
+    protected Unit<?> unitFor(String name) {
       Unit<?> unit = _nameToUnit.get(name);
       if (unit != null)
         return unit;
@@ -669,10 +684,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     @Override
     public Appendable format(Unit<?> unit, Appendable appendable) throws IOException {
       String name = nameFor(unit);
-      if (name != null)
+      if (name != null) {
         return appendable.append(name);
-      if (!(unit instanceof ProductUnit))
+      }
+      if (!(unit instanceof ProductUnit)) {
         throw new IllegalArgumentException("Cannot format given Object as a Unit");
+      }
 
       // Product unit.
       ProductUnit<?> productUnit = (ProductUnit<?>) unit;
@@ -772,7 +789,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   protected final static class ASCIIFormat extends DefaultFormat {
 
     @Override
-    public String nameFor(Unit<?> unit) {
+    protected String nameFor(Unit<?> unit) {
       // First search if specific ASCII name should be used.
       String name = _unitToName.get(unit);
       if (name != null)
@@ -782,7 +799,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     }
 
     @Override
-    public Unit<?> unitFor(String name) {
+    protected Unit<?> unitFor(String name) {
       // First search if specific ASCII name.
       Unit<?> unit = _nameToUnit.get(name);
       if (unit != null)

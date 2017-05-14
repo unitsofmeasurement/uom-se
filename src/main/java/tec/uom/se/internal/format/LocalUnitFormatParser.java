@@ -40,8 +40,7 @@ import tec.uom.se.function.LogConverter;
 import tec.uom.se.unit.MetricPrefix;
 
 /**
- * @deprecated use {@link UnitFormatParser}
- * FIXME there are some details e.g. Exception handling that are different, try to resolve or keep LUFP
+ * @deprecated use {@link UnitFormatParser} FIXME there are some details e.g. Exception handling that are different, try to resolve or keep LUFP
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public final class LocalUnitFormatParser {

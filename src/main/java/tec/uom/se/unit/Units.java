@@ -361,17 +361,17 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A time unit accepted for use with SI units (standard name <code>min</code>).
    */
-  public static final Unit<Time> MINUTE = addUnit(new TransformedUnit<>("min", SECOND, new RationalConverter(60, 1)));
+  public static final Unit<Time> MINUTE = addUnit(new TransformedUnit<>("min", SECOND, SECOND, new RationalConverter(60, 1)));
 
   /**
    * A time unit accepted for use with SI units (standard name <code>h</code> ).
    */
-  public static final Unit<Time> HOUR = addUnit(new TransformedUnit<>("h", SECOND, new RationalConverter(60 * 60, 1)));
+  public static final Unit<Time> HOUR = addUnit(new TransformedUnit<>("h", SECOND, SECOND, new RationalConverter(60 * 60, 1)));
 
   /**
    * A time unit accepted for use with SI units (standard name <code>d</code> ).
    */
-  public static final Unit<Time> DAY = addUnit(new TransformedUnit<>("d", SECOND, new RationalConverter(24 * 60 * 60, 1)), Time.class);
+  public static final Unit<Time> DAY = addUnit(new TransformedUnit<>("d", SECOND, SECOND, new RationalConverter(24 * 60 * 60, 1)), Time.class);
 
   /**
    * A unit of duration equal to 7 {@link #DAY} (standard name <code>week</code>).

@@ -132,7 +132,8 @@ class EBNFHelper {
       if (unit instanceof TransformedUnit) {
         TransformedUnit<?> transUnit = (TransformedUnit<?>) unit;
         if (parentUnit == null)
-          parentUnit = transUnit.getParentUnit();
+          parentUnit = transUnit.getSystemUnit();
+        // parentUnit = transUnit.getParentUnit();
         // String x = parentUnit.toString();
         converter = transUnit.getConverter();
       }

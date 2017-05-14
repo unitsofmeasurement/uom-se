@@ -67,20 +67,25 @@ import tec.uom.se.AbstractUnit;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.1, April 24, 2017
+ * @version 1.0.2, May 14, 2017
  * @since 1.0
  */
 public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> implements UnitConverterSupplier {
 
   /**
-	 *
-	 */
+     *
+     */
   private static final long serialVersionUID = 1L;
 
   /**
-   * Holds the parent unit (always a system unit).
+   * Holds the parent unit.
    */
   private final AbstractUnit<Q> parentUnit;
+
+  /**
+   * Holds the system unit).
+   */
+  private final Unit<Q> systemUnit;
 
   /**
    * Holds the converter to the parent unit.
@@ -107,11 +112,18 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   }
 
   public TransformedUnit(String symbol, Unit<Q> parentUnit, UnitConverter unitConverter) {
+    this(null, parentUnit, parentUnit.getSystemUnit(), unitConverter);
+  }
+
+  public TransformedUnit(String symbol, Unit<Q> parentUnit, Unit<Q> sysUnit, UnitConverter unitConverter) {
     if (parentUnit instanceof AbstractUnit) {
       final AbstractUnit<Q> abParent = (AbstractUnit<Q>) parentUnit;
-      if (!abParent.isSystemUnit()) {
-        throw new IllegalArgumentException("The parent unit: " + abParent + " is not a system unit");
-      }
+
+      this.systemUnit = sysUnit;
+      // if (!abParent.isSystemUnit()) {
+      // throw new IllegalArgumentException("The parent unit: " + abParent
+      // + " is not a system unit");
+      // }
       this.parentUnit = abParent;
       this.converter = unitConverter;
       this.symbol = symbol;
@@ -143,8 +155,8 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   }
 
   @Override
-  public Unit<Q> toSystemUnit() {
-    return parentUnit.getSystemUnit();
+  protected Unit<Q> toSystemUnit() {
+    return (systemUnit != null ? systemUnit : parentUnit.getSystemUnit());
   }
 
   @Override

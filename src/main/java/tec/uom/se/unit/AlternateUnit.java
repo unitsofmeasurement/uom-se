@@ -51,8 +51,8 @@ import java.util.Objects;
 public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   /**
-	 * 
-	 */
+     * 
+     */
   private static final long serialVersionUID = 4696690756456282705L;
 
   /**
@@ -132,5 +132,4 @@ public final class AlternateUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> 
     }
     return false;
   }
-
 }

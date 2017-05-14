@@ -35,6 +35,7 @@ import tec.uom.se.quantity.QuantityDimension;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import java.util.Map;
@@ -57,8 +58,8 @@ import java.util.Map;
 public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   /**
-   * 
-   */
+     * 
+     */
   private static final long serialVersionUID = 1721629233768215930L;
 
   /**
@@ -145,7 +146,8 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   @Override
   public Map<? extends AbstractUnit<Q>, Integer> getBaseUnits() {
-    // TODO Shall we return null, empty list or what (e.g. Optional in SE 8)?
+    // TODO Shall we return null, empty list or what (e.g. Optional in SE
+    // 8)?
     return null;
   }
 }

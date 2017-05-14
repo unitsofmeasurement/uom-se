@@ -63,11 +63,11 @@ public final class TimeQuantities {
 
   // Convenience constants outside the unit system (multiples are not held there)
 
-  public static final Unit<Time> MICROSECOND = new TransformedUnit<>("μs", SECOND, MetricPrefix.MICRO.getConverter());
+  public static final Unit<Time> MICROSECOND = new TransformedUnit<>("μs", SECOND, SECOND, MetricPrefix.MICRO.getConverter());
 
-  public static final TransformedUnit<Time> MILLISECOND = new TransformedUnit<>("ms", SECOND, MetricPrefix.MILLI.getConverter());
+  public static final TransformedUnit<Time> MILLISECOND = new TransformedUnit<>("ms", SECOND, SECOND, MetricPrefix.MILLI.getConverter());
 
-  public static final TransformedUnit<Time> NANOSECOND = new TransformedUnit<>("ns", SECOND, MetricPrefix.NANO.getConverter());
+  public static final TransformedUnit<Time> NANOSECOND = new TransformedUnit<>("ns", SECOND, SECOND, MetricPrefix.NANO.getConverter());
 
   /**
    * Creates the {@link Quantity<Time>} based in the difference of the two {@link Temporal}

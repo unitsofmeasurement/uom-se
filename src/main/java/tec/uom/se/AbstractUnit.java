@@ -70,14 +70,14 @@ import java.lang.reflect.Type;
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
 
   /**
-   * 
-   */
+     * 
+     */
   private static final long serialVersionUID = -4344589505537030204L;
 
   /**
    * Holds the dimensionless unit <code>ONE</code>.
    * 
-   * @see <a href="https://en.wikipedia.org/wiki/Natural_units#Choosing_constants_to_normalize"> Wikipedia: Natural Units - Choosing constants to
+   * @see <a href= "https://en.wikipedia.org/wiki/Natural_units#Choosing_constants_to_normalize"> Wikipedia: Natural Units - Choosing constants to
    *      normalize</a>
    * @see <a href= "http://www.av8n.com/physics/dimensionless-units.htm">Units of Dimension One</a>
    */
@@ -317,10 +317,17 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
   @Override
   public final Unit<Q> transform(UnitConverter operation) {
     Unit<Q> systemUnit = this.getSystemUnit();
-    UnitConverter cvtr = this.getSystemConverter().concatenate(operation);
-    if (cvtr.equals(AbstractConverter.IDENTITY))
+    UnitConverter cvtr;
+    if (this.isSystemUnit()) {
+      cvtr = this.getSystemConverter().concatenate(operation);
+    } else {
+      cvtr = operation;
+    }
+    if (cvtr.equals(AbstractConverter.IDENTITY)) {
       return systemUnit;
-    return new TransformedUnit<>(systemUnit, cvtr);
+    } else {
+      return new TransformedUnit<>(null, this, systemUnit, cvtr);
+    }
   }
 
   @Override
