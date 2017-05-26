@@ -33,6 +33,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
@@ -163,4 +164,17 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(double doubleValue, Unit<Q> unit) {
     return new DoubleQuantity<Q>(doubleValue, unit);
   }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof AbstractQuantity<?>) {
+			AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
+			return Objects.equals(getUnit(), that.getUnit()) && that.getValue().doubleValue() == value.doubleValue();
+		}
+		return false;
+	}
+
 }
