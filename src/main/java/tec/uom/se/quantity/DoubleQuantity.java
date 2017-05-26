@@ -41,6 +41,8 @@ import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
+import static tec.uom.se.quantity.NumberUtils.hasEquality;
+
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link Double} as implementation of {@link Number}, this object is
  * immutable. Note: all operations which involves {@link Number}, this implementation will convert to {@link Double}.
@@ -149,7 +151,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
 		}
 		if (obj instanceof AbstractQuantity<?>) {
 			AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
-			return Objects.equals(getUnit(), that.getUnit()) && that.getValue().doubleValue() == value;
+			return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
 		}
 		return false;
 	}

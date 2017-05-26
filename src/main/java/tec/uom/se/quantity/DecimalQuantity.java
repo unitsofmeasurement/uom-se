@@ -42,6 +42,9 @@ import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
+import static tec.uom.se.quantity.NumberUtils.hasEquality;
+import static tec.uom.se.quantity.NumberUtils.toBigDecimal;
+
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link BigDecimal} as implementation of {@link Number}, this object
  * is immutable. Note: all operations which involves {@link Number}, this implementation will convert to {@link BigDecimal}, and all operation of
@@ -138,14 +141,7 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
 		return new DecimalQuantity(value.divide(toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit().divide(that.getUnit()));
 	}
 
-	private BigDecimal toBigDecimal(Number value) {
-		if (BigDecimal.class.isInstance(value)) {
-			return BigDecimal.class.cast(value);
-		} else if (BigInteger.class.isInstance(value)) {
-			return new BigDecimal(BigInteger.class.cast(value));
-		}
-		return BigDecimal.valueOf(value.doubleValue());
-	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -154,7 +150,7 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
 		}
 		if (obj instanceof AbstractQuantity<?>) {
 			AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
-			return Objects.equals(getUnit(), that.getUnit()) && toBigDecimal(that.getValue()).compareTo(value) == 0;
+			return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
 		}
 		return false;
 	}

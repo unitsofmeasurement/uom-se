@@ -131,12 +131,12 @@ public class DecimalQuantityTest {
     Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
   }
 
-	@Test
-	public void testEquality() throws Exception {
-		Quantity<Length> value = Quantities.getQuantity(20.0, Units.METRE);
-		Quantity<Length> anotherValue = Quantities.getQuantity(20, Units.METRE);
-		Assert.assertEquals(value, anotherValue);
-	}
+  @Test
+  public void testEquality() throws Exception {
+	Quantity<Length> value = Quantities.getQuantity(BigDecimal.valueOf(10.0), Units.METRE);
+	Quantity<Length> anotherValue = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
+	Assert.assertEquals(value, anotherValue);
+ }
 
 
 }
