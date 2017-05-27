@@ -36,7 +36,7 @@ import java.util.Objects;
 /**
  * Utility class for number conversions
  */
-class NumberUtils {
+final class NumberUtils {
 
     /**
      * Converts a number to {@link BigDecimal}
