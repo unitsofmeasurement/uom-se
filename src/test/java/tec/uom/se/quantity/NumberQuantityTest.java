@@ -32,6 +32,7 @@ package tec.uom.se.quantity;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -52,12 +53,12 @@ public class NumberQuantityTest {
     Quantity<Length> metre = Quantities.getQuantity(10, Units.METRE);
     Quantity<Length> result = metre.divide(10D);
     Assert.assertTrue(result.getValue().intValue() == 1);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
+    assertEquals(result.getUnit(), Units.METRE);
 
     Quantity<Time> day = Quantities.getQuantity(10, Units.DAY);
     Quantity<Time> dayResult = day.divide(BigDecimal.valueOf(2.5D));
     Assert.assertTrue(dayResult.getValue().intValue() == 4);
-    Assert.assertEquals(dayResult.getUnit(), Units.DAY);
+    assertEquals(dayResult.getUnit(), Units.DAY);
   }
 
   @Test
@@ -68,7 +69,7 @@ public class NumberQuantityTest {
     Quantity<Length> m4 = Quantities.getQuantity(5L, Units.METRE);
     Quantity<Length> result = m.add(m2).add(m3).add(m4);
     Assert.assertTrue(result.getValue().doubleValue() == 30.0);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
+    assertEquals(result.getUnit(), Units.METRE);
   }
 
   @Test
@@ -77,7 +78,7 @@ public class NumberQuantityTest {
     Quantity<Time> hours = Quantities.getQuantity(12, Units.HOUR);
     Quantity<Time> result = day.add(hours);
     Assert.assertTrue(result.getValue().doubleValue() == 1.5);
-    Assert.assertEquals(result.getUnit(), Units.DAY);
+    assertEquals(result.getUnit(), Units.DAY);
   }
 
   @Test
@@ -86,7 +87,7 @@ public class NumberQuantityTest {
     Quantity<Length> m2 = Quantities.getQuantity(12.5, Units.METRE);
     Quantity<Length> result = m.subtract(m2);
     Assert.assertTrue(result.getValue().doubleValue() == -2.5);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
+    assertEquals(result.getUnit(), Units.METRE);
   }
 
   @Test
@@ -95,7 +96,7 @@ public class NumberQuantityTest {
     Quantity<Time> hours = Quantities.getQuantity(12, Units.HOUR);
     Quantity<Time> result = day.subtract(hours);
     Assert.assertTrue(result.getValue().doubleValue() == 0.5);
-    Assert.assertEquals(result.getUnit(), Units.DAY);
+    assertEquals(result.getUnit(), Units.DAY);
   }
 
   @Test
@@ -103,7 +104,7 @@ public class NumberQuantityTest {
     Quantity<Length> metre = Quantities.getQuantity(10, Units.METRE);
     Quantity<Length> result = metre.multiply(10D);
     Assert.assertTrue(result.getValue().intValue() == 100);
-    Assert.assertEquals(result.getUnit(), Units.METRE);
+    assertEquals(result.getUnit(), Units.METRE);
     @SuppressWarnings("unchecked")
     Quantity<Length> result2 = (Quantity<Length>) metre.multiply(Quantities.getQuantity(10, Units.METRE));
     Assert.assertTrue(result2.getValue().intValue() == 100);
@@ -114,11 +115,11 @@ public class NumberQuantityTest {
     Quantity<Time> day = Quantities.getQuantity(1, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);
     Assert.assertEquals(hour.getValue().intValue(), 24);
-    Assert.assertEquals(hour.getUnit(), Units.HOUR);
+    assertEquals(hour.getUnit(), Units.HOUR);
 
     Quantity<Time> dayResult = hour.to(Units.DAY);
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
   }
 
   @Test
@@ -152,15 +153,28 @@ public class NumberQuantityTest {
   @Test
   public void inverseTestTime() {
     Quantity<?> secInv = Quantities.getQuantity(2, Units.SECOND).inverse();
-    Assert.assertEquals(Float.valueOf(0.5F), Float.valueOf(secInv.getValue().floatValue()));
-    Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
+    assertEquals(Float.valueOf(0.5F), Float.valueOf(secInv.getValue().floatValue()));
+    assertEquals("1/s", String.valueOf(secInv.getUnit()));
   }
 
-	@Test
-	public void testEquality() throws Exception {
-		Quantity<Length> value = Quantities.getQuantity(new AtomicInteger(10), Units.METRE);
-		Quantity<Length> anotherValue = Quantities.getQuantity(new AtomicLong(10), Units.METRE);
-		Assert.assertEquals(value, anotherValue);
-	}
-
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new AtomicInteger(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new AtomicLong(10), Units.METRE);
+    assertEquals(value, anotherValue);
+  }
+  
+  @Test
+  public void testEqualityBig() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(BigInteger.valueOf(20), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(BigDecimal.valueOf(20), Units.METRE);
+    assertEquals(value, anotherValue);
+  }
+  
+  @Test(expected=NullPointerException.class)
+  public void testEqualityWithNull() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(BigInteger.valueOf(20), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(null, Units.METRE);
+    assertEquals(value, anotherValue);
+  }
 }

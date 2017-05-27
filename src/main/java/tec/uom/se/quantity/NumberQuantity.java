@@ -167,16 +167,16 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
     return new DoubleQuantity<Q>(doubleValue, unit);
   }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj instanceof AbstractQuantity<?>) {
-			AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
-			return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
-		}
-		return false;
-	}
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof AbstractQuantity<?>) {
+      AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
+    }
+    return false;
+  }
 
 }

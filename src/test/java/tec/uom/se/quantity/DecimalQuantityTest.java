@@ -133,10 +133,9 @@ public class DecimalQuantityTest {
 
   @Test
   public void testEquality() throws Exception {
-	Quantity<Length> value = Quantities.getQuantity(BigDecimal.valueOf(10.0), Units.METRE);
-	Quantity<Length> anotherValue = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
-	Assert.assertEquals(value, anotherValue);
- }
-
+    Quantity<Length> value = Quantities.getQuantity(BigDecimal.valueOf(10.0), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(BigDecimal.TEN, Units.METRE);
+    Assert.assertEquals(value, anotherValue);
+  }
 
 }

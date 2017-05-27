@@ -95,7 +95,7 @@ import tec.uom.se.quantity.Quantities;
  * </p>
  *
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 1.0.1, October 10, 2016
+ * @version 1.0.2, May 27, 2017
  * @since 1.0
  */
 @SuppressWarnings("unchecked")
@@ -235,7 +235,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   }
 
   /**
-   * Compares this measure against the specified object for <b>strict</b> equality (same unit and same amount).
+   * Compares this quantity against the specified object for <b>strict</b> equality (same unit and same amount).
    *
    * <p>
    * Similarly to the {@link BigDecimal#equals} method which consider 2.0 and 2.00 as different objects because of different internal scales,
@@ -244,7 +244,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    * </p>
    *
    * <p>
-   * To compare measures stated using different units or using different amount implementations the {@link #compareTo compareTo} or
+   * To compare quantities stated using different units or using different amount implementations the {@link #compareTo compareTo} or
    * {@link #equals(javax.measure.Quantity, double, javax.measure.unit.Unit) equals(Quantity, epsilon, epsilonUnit)} methods should be used.
    * </p>
    *
@@ -266,11 +266,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   }
 
   /**
-   * Compares this measure and the specified Measurement to the given accuracy. Measurements are considered approximately equals if their absolute
+   * Compares this quantity and the specified quantity to the given accuracy. Quantities are considered approximately equals if their absolute
    * differences when stated in the same specified unit is less than the specified epsilon.
    *
    * @param that
-   *          the Measurement to compare with.
+   *          the quantity to compare with.
    * @param epsilon
    *          the absolute error stated in epsilonUnit.
    * @param epsilonUnit
@@ -282,7 +282,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   }
 
   /**
-   * Returns the hash code for this measure.
+   * Returns the hash code for this quantity.
    *
    * @return the hash code value.
    */
@@ -294,9 +294,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   public abstract boolean isBig();
 
   /**
-   * Returns the <code>String</code> representation of this measure. The string produced for a given measure is always the same; it is not affected by
-   * locale. This means that it can be used as a canonical string representation for exchanging measure, or as a key for a Hashtable, etc.
-   * Locale-sensitive measure formatting and parsing is handled by the {@link MeasurementFormat} class and its subclasses.
+   * Returns the <code>String</code> representation of this quantity. The string produced for a given quantity is always the same; it is not affected by
+   * locale. This means that it can be used as a canonical string representation for exchanging quantity, or as a key for a Hashtable, etc.
+   * Locale-sensitive quantity formatting and parsing is handled by the {@link MeasurementFormat} class and its subclasses.
    *
    * @return <code>UnitFormat.getInternational().format(this)</code>
    */
@@ -354,8 +354,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    * </code>
    *
    * @param type
-   *          the quantity class identifying the nature of the measure.
-   * @return this measure parameterized with the specified type.
+   *          the quantity class identifying the nature of the quantity.
+   * @return this quantity parameterized with the specified type.
    * @throws ClassCastException
    *           if the dimension of this unit is different from the specified quantity dimension.
    * @throws UnsupportedOperationException
