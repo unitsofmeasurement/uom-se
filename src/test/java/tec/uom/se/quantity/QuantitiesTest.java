@@ -90,7 +90,7 @@ public class QuantitiesTest {
     assertTrue(DecimalQuantity.class.isInstance(bigDecimalQuantity));
 
   }
-  
+
   @Test
   public void toTest() {
     Quantity<Time> minute = Quantities.getQuantity(BigDecimal.ONE, Units.YEAR);

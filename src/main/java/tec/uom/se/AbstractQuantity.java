@@ -294,8 +294,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   public abstract boolean isBig();
 
   /**
-   * Returns the <code>String</code> representation of this quantity. The string produced for a given quantity is always the same; it is not affected by
-   * locale. This means that it can be used as a canonical string representation for exchanging quantity, or as a key for a Hashtable, etc.
+   * Returns the <code>String</code> representation of this quantity. The string produced for a given quantity is always the same; it is not affected
+   * by locale. This means that it can be used as a canonical string representation for exchanging quantity, or as a key for a Hashtable, etc.
    * Locale-sensitive quantity formatting and parsing is handled by the {@link MeasurementFormat} class and its subclasses.
    *
    * @return <code>UnitFormat.getInternational().format(this)</code>

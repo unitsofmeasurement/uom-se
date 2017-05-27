@@ -163,22 +163,22 @@ public class NumberQuantityTest {
     Quantity<Length> anotherValue = Quantities.getQuantity(new Long(10), Units.METRE);
     assertEquals(value, anotherValue);
   }
-  
+
   @Test
   public void testEqualityAtomic() throws Exception {
     Quantity<Length> value = Quantities.getQuantity(new AtomicInteger(10), Units.METRE);
     Quantity<Length> anotherValue = Quantities.getQuantity(new AtomicLong(10), Units.METRE);
     assertEquals(value, anotherValue);
   }
-  
+
   @Test
   public void testEqualityBig() throws Exception {
     Quantity<Length> value = Quantities.getQuantity(BigInteger.valueOf(20), Units.METRE);
     Quantity<Length> anotherValue = Quantities.getQuantity(BigDecimal.valueOf(20), Units.METRE);
     assertEquals(value, anotherValue);
   }
-  
-  @Test(expected=NullPointerException.class)
+
+  @Test(expected = NullPointerException.class)
   public void testEqualityWithNull() throws Exception {
     Quantity<Length> value = Quantities.getQuantity(BigInteger.valueOf(20), Units.METRE);
     Quantity<Length> anotherValue = Quantities.getQuantity(null, Units.METRE);
