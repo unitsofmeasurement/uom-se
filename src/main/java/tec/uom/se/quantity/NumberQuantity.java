@@ -33,6 +33,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.UnconvertibleException;
@@ -41,6 +42,8 @@ import javax.measure.UnitConverter;
 
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
+
+import static tec.uom.se.quantity.NumberUtils.hasEquality;
 
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that keep {@link Number} as possible otherwise converts to
@@ -163,4 +166,17 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(double doubleValue, Unit<Q> unit) {
     return new DoubleQuantity<Q>(doubleValue, unit);
   }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj instanceof AbstractQuantity<?>) {
+			AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
+			return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
+		}
+		return false;
+	}
+
 }

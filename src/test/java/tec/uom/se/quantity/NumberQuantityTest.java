@@ -32,6 +32,8 @@ package tec.uom.se.quantity;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
@@ -153,5 +155,12 @@ public class NumberQuantityTest {
     Assert.assertEquals(Float.valueOf(0.5F), Float.valueOf(secInv.getValue().floatValue()));
     Assert.assertEquals("1/s", String.valueOf(secInv.getUnit()));
   }
+
+	@Test
+	public void testEquality() throws Exception {
+		Quantity<Length> value = Quantities.getQuantity(new AtomicInteger(10), Units.METRE);
+		Quantity<Length> anotherValue = Quantities.getQuantity(new AtomicLong(10), Units.METRE);
+		Assert.assertEquals(value, anotherValue);
+	}
 
 }
