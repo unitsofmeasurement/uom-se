@@ -33,58 +33,61 @@ import static org.junit.Assert.assertEquals;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.uom.se.AbstractQuantity;
+import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.Units;
 
-public class ShortQuantityTest {
+public class FloatQuantityTest {
 
   @Test
   public void divideTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<ElectricResistance>(Float.valueOf(3).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<ElectricResistance>(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<?> result = quantity1.divide(quantity2);
-    assertEquals(Integer.valueOf("1"), result.getValue());
+    assertEquals(Float.valueOf(1.5f), result.getValue());
   }
 
   @Test
   public void addTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("1").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    FloatQuantity quantity1 = new FloatQuantity(Float.valueOf(1).floatValue(), Units.OHM);
+    FloatQuantity quantity2 = new FloatQuantity(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
-    assertEquals(Short.valueOf("3").intValue(), result.getValue().intValue());
+    assertEquals(Float.valueOf(3f), result.getValue());
   }
 
   @Test
   public void subtractTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("1").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<ElectricResistance>(Float.valueOf(1).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<ElectricResistance>(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
-    assertEquals(Short.valueOf("1").intValue(), result.getValue().intValue());
+    assertEquals(Float.valueOf(1), result.getValue());
     assertEquals(Units.OHM, result.getUnit());
   }
 
   @Test
   public void multiplyQuantityTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<ElectricResistance>(Float.valueOf(3).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<ElectricResistance>(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<?> result = quantity1.multiply(quantity2);
-    assertEquals(6, result.getValue());
+    assertEquals(Float.valueOf(6L), result.getValue());
   }
 
   @Test
   public void longValueTest() {
-    ShortQuantity<Time> day = new ShortQuantity<Time>(Short.valueOf("3").shortValue(), Units.DAY);
+    FloatQuantity<Time> day = new FloatQuantity<Time>(3F, Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    ShortQuantity<Time> day = new ShortQuantity<Time>(Short.valueOf("3").shortValue(), Units.DAY);
+    FloatQuantity<Time> day = new FloatQuantity<Time>(3F, Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }
@@ -93,11 +96,17 @@ public class ShortQuantityTest {
   public void toTest() {
     Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);
-    Assert.assertEquals(hour.getValue().intValue(), 24);
+    Assert.assertEquals(Double.valueOf(24), hour.getValue());
     Assert.assertEquals(hour.getUnit(), Units.HOUR);
 
     Quantity<Time> dayResult = hour.to(Units.DAY);
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    Assert.assertEquals(dayResult.getValue(), day.getValue());
+    Assert.assertEquals(dayResult.getUnit(), day.getUnit());
+  }
+
+  @Test
+  public void inverseTest() {
+    AbstractQuantity<Length> l = NumberQuantity.of(Float.valueOf(10f).floatValue(), Units.METRE);
+    assertEquals(Float.valueOf(1f / 10f), l.inverse().getValue());
   }
 }

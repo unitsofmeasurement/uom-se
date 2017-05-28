@@ -55,13 +55,14 @@ import tec.uom.se.quantity.Quantities;
  * 
  * @author otaviojava
  * @author keilw
+ * @version 1.0.1
  * @since 1.0
  */
 public final class TimeUnitQuantity extends AbstractQuantity<Time> {
 
   /**
-	 * 
-	 */
+     * 
+     */
   private static final long serialVersionUID = -5840251813363744230L;
 
   private final TimeUnit timeUnit;
@@ -193,6 +194,10 @@ public final class TimeUnitQuantity extends AbstractQuantity<Time> {
     if (TimeUnitQuantity.class.isInstance(obj)) {
       TimeUnitQuantity other = TimeUnitQuantity.class.cast(obj);
       return Objects.equals(timeUnit, other.timeUnit) && Objects.equals(value, other.value);
+    }
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
     }
     return super.equals(obj);
   }

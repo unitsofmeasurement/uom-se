@@ -141,4 +141,10 @@ public class DoubleQuantityTest {
     Assert.assertEquals(value, anotherValue);
   }
 
+  @Test
+  public void testEqualityDifferentPrimitive() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(10, Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(10.00D, Units.METRE);
+    Assert.assertEquals(value, anotherValue);
+  }
 }

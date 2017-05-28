@@ -96,7 +96,7 @@ import tec.uom.se.quantity.Quantities;
  * </p>
  *
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 1.0.2, May 27, 2017
+ * @version 1.0.3, May 28, 2017
  * @since 1.0
  */
 @SuppressWarnings("unchecked")
@@ -387,7 +387,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   public static Quantity<?> parse(CharSequence csq) {
     return QuantityFormat.getInstance().parse(csq);
   }
-  
+
   /**
    * Utility class for number comparison and equality
    */
@@ -413,8 +413,8 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
      * Check if the both value has equality number, in other words, 1 is equals to 1.0000 and 1.0.
      * 
      * If the first value is a <type>Number</type> of either <type>Double</type>, <type>Float</type>, <type>Integer</type>, <type>Long</type>,
-     * <type>Short</type> or <type>Byte</type> it is compared using the respective <code>*value()</code> method of <type>Number</type>. Otherwise it is
-     * checked, if {@link BigDecimal#compareTo(Object)} is equal to zero.
+     * <type>Short</type> or <type>Byte</type> it is compared using the respective <code>*value()</code> method of <type>Number</type>. Otherwise it
+     * is checked, if {@link BigDecimal#compareTo(Object)} is equal to zero.
      *
      * @param valueA
      *          the value a

@@ -139,7 +139,7 @@ public class NumberQuantityTest {
   @Test
   public void ofTest() {
     AbstractQuantity<Length> l = NumberQuantity.of(Short.valueOf("10").shortValue(), Units.METRE);
-    assertEquals(Double.valueOf("10.0"), l.getValue());
+    assertEquals(10, l.getValue());
   }
 
   @Test

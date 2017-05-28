@@ -154,6 +154,58 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   }
 
   /**
+   * Returns the scalar quantity for the specified <code>long</code> stated in the specified unit.
+   *
+   * @param longValue
+   *          the quantity value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>int</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(long longValue, Unit<Q> unit) {
+    return new LongQuantity<Q>(longValue, unit);
+  }
+
+  /**
+   * Returns the scalar quantity for the specified <code>int</code> stated in the specified unit.
+   *
+   * @param intValue
+   *          the quantity value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>int</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue, Unit<Q> unit) {
+    return new IntegerQuantity<Q>(intValue, unit);
+  }
+
+  /**
+   * Returns the scalar quantity for the specified <code>short</code> stated in the specified unit.
+   *
+   * @param value
+   *          the quantity value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>short</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(short value, Unit<Q> unit) {
+    return new ShortQuantity<Q>(value, unit);
+  }
+
+  /**
+   * Returns the scalar quantity for the specified <code>float</code> stated in the specified unit.
+   *
+   * @param floatValue
+   *          the measurement value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>float</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(float floatValue, Unit<Q> unit) {
+    return new FloatQuantity<Q>(floatValue, unit);
+  }
+
+  /**
    * Returns the scalar quantity for the specified <code>double</code> stated in the specified unit.
    *
    * @param doubleValue

@@ -53,6 +53,8 @@ import tec.uom.se.ComparableQuantity;
  * @see AbstractQuantity
  * @see Quantity
  * @see ComparableQuantity
+ * @version 1.0.1
+ * @since 1.0
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
@@ -138,11 +140,17 @@ final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
     return new DecimalQuantity(value.divide(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit().divide(that.getUnit()));
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see AbstractQuantity#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) {
+    if (obj == null)
+      return false;
+    if (obj == this)
       return true;
-    }
     if (obj instanceof Quantity<?>) {
       Quantity<?> that = (Quantity<?>) obj;
       return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());

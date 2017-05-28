@@ -40,32 +40,33 @@ import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
 /**
- * An amount of quantity, consisting of a short and a Unit. ShortQuantity objects are immutable.
+ * An amount of quantity, consisting of an integer and a Unit. IntegerQuantity objects are immutable.
  * 
  * @see AbstractQuantity
  * @see Quantity
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
+ * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.2, $Date: 2016-09-01 $
+ * @version 0.4, $Date: 2017-05-28 $
  * @since 1.0
  */
-final class ShortQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
+final class IntegerQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   /**
      * 
      */
-  private static final long serialVersionUID = 6325849816534488248L;
+  private static final long serialVersionUID = 1405915111744728289L;
 
-  final short value;
+  final int value;
 
-  ShortQuantity(short value, Unit<Q> unit) {
+  public IntegerQuantity(int value, Unit<Q> unit) {
     super(unit);
     this.value = value;
   }
 
   @Override
-  public Short getValue() {
+  public Integer getValue() {
     return value;
   }
 
@@ -82,62 +83,64 @@ final class ShortQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     return (long) result;
   }
 
+  public ComparableQuantity<Q> add(Quantity<Q> that) {
+    final Quantity<Q> converted = that.to(getUnit());
+    return NumberQuantity.of(value + converted.getValue().intValue(), getUnit());
+  }
+
+  public ComparableQuantity<Q> subtract(Quantity<Q> that) {
+    final Quantity<Q> converted = that.to(getUnit());
+    return NumberQuantity.of(value - converted.getValue().intValue(), getUnit());
+  }
+
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public ComparableQuantity<?> multiply(Quantity<?> that) {
+    return new IntegerQuantity(value * that.getValue().intValue(), getUnit().multiply(that.getUnit()));
+  }
+
+  public ComparableQuantity<Q> multiply(Number that) {
+    return NumberQuantity.of(value * that.intValue(), getUnit());
+  }
+
+  public ComparableQuantity<?> divide(Quantity<?> that) {
+    return NumberQuantity.of((double) value / that.getValue().doubleValue(), getUnit().divide(that.getUnit()));
+  }
+
+  @SuppressWarnings("unchecked")
+  public AbstractQuantity<Q> inverse() {
+    return (AbstractQuantity<Q>) NumberQuantity.of(1 / value, getUnit().inverse());
+  }
+
+  public ComparableQuantity<Q> divide(Number that) {
+    return NumberQuantity.of(value / that.doubleValue(), getUnit());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see AbstractQuantity#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+      return false;
+    if (obj == this)
+      return true;
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
+    }
+    return false;
+  }
+
   @Override
   public boolean isBig() {
     return false;
   }
 
   @Override
-  public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) {
-    return BigDecimal.valueOf(doubleValue(unit));
-  }
-
-  @Override
-  public ComparableQuantity<Q> add(Quantity<Q> that) {
-    final Quantity<Q> converted = that.to(getUnit());
-    return NumberQuantity.of(value + converted.getValue().shortValue(), getUnit());
-  }
-
-  @Override
-  public ComparableQuantity<Q> subtract(Quantity<Q> that) {
-    final Quantity<Q> converted = that.to(getUnit());
-    return NumberQuantity.of(value - converted.getValue().shortValue(), getUnit());
-  }
-
-  @Override
-  public ComparableQuantity<?> divide(Quantity<?> that) {
-    return NumberQuantity.of((short) value / that.getValue().shortValue(), getUnit().divide(that.getUnit()));
-  }
-
-  @Override
-  public ComparableQuantity<Q> divide(Number that) {
-    return NumberQuantity.of(value / that.shortValue(), getUnit());
-  }
-
-  @Override
-  public ComparableQuantity<?> multiply(Quantity<?> multiplier) {
-    return NumberQuantity.of(value * multiplier.getValue().shortValue(), getUnit().multiply(multiplier.getUnit()));
-  }
-
-  @Override
-  public ComparableQuantity<Q> multiply(Number multiplier) {
-    return NumberQuantity.of(value * multiplier.shortValue(), getUnit());
-  }
-
-  @Override
-  public ComparableQuantity<?> inverse() {
-    return NumberQuantity.of(1 / value, getUnit().inverse());
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (obj instanceof Quantity<?>) {
-      Quantity<?> that = (Quantity<?>) obj;
-      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
-    }
-    return false;
+  public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) throws ArithmeticException {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

@@ -30,7 +30,6 @@
 package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
-
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Time;
@@ -38,30 +37,32 @@ import javax.measure.quantity.Time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.Units;
 
-public class ShortQuantityTest {
+public class IntegerQuantityTest {
 
   @Test
   public void divideTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<ElectricResistance>(Long.valueOf(3).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<ElectricResistance>(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<?> result = quantity1.divide(quantity2);
-    assertEquals(Integer.valueOf("1"), result.getValue());
+    assertEquals(Double.valueOf(1.5d), result.getValue());
   }
 
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Test
   public void addTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("1").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    IntegerQuantity quantity1 = new IntegerQuantity(Long.valueOf(1).intValue(), Units.OHM);
+    IntegerQuantity quantity2 = new IntegerQuantity(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity1.add(quantity2);
     assertEquals(Short.valueOf("3").intValue(), result.getValue().intValue());
   }
 
   @Test
   public void subtractTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("1").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<ElectricResistance>(Long.valueOf(1).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<ElectricResistance>(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
     assertEquals(Short.valueOf("1").intValue(), result.getValue().intValue());
     assertEquals(Units.OHM, result.getUnit());
@@ -69,22 +70,22 @@ public class ShortQuantityTest {
 
   @Test
   public void multiplyQuantityTest() {
-    ShortQuantity<ElectricResistance> quantity1 = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.OHM);
-    ShortQuantity<ElectricResistance> quantity2 = new ShortQuantity<>(Short.valueOf("2").shortValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<ElectricResistance>(Long.valueOf(3).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<ElectricResistance>(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<?> result = quantity1.multiply(quantity2);
-    assertEquals(6, result.getValue());
+    assertEquals(Integer.valueOf(6), result.getValue());
   }
 
   @Test
   public void longValueTest() {
-    ShortQuantity<Time> day = new ShortQuantity<Time>(Short.valueOf("3").shortValue(), Units.DAY);
+    IntegerQuantity<Time> day = new IntegerQuantity<Time>(Integer.valueOf(3).intValue(), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    ShortQuantity<Time> day = new ShortQuantity<Time>(Short.valueOf("3").shortValue(), Units.DAY);
+    IntegerQuantity<Time> day = new IntegerQuantity<Time>(Integer.valueOf(3).intValue(), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }
