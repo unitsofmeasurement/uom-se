@@ -31,6 +31,7 @@ package tec.uom.se.quantity;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Objects;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -46,7 +47,8 @@ import tec.uom.se.ComparableQuantity;
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @param <Q>
  *          The type of the quantity.
- * @version 0.1, $Date: 2016-09-01 $
+ * @version 0.2, $Date: 2016-09-01 $
+ * @since 1.0
  */
 final class ShortQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
@@ -125,5 +127,17 @@ final class ShortQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   @Override
   public ComparableQuantity<?> inverse() {
     return NumberQuantity.of(1 / value, getUnit().inverse());
+  }
+  
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
+    }
+    return false;
   }
 }

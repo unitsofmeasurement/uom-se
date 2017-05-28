@@ -30,6 +30,7 @@
 package tec.uom.se;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Comparator;
 import java.util.Objects;
@@ -385,5 +386,60 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    */
   public static Quantity<?> parse(CharSequence csq) {
     return QuantityFormat.getInstance().parse(csq);
+  }
+  
+  /**
+   * Utility class for number comparison and equality
+   */
+  protected static final class Equalizer {
+
+    /**
+     * Converts a number to {@link BigDecimal}
+     *
+     * @param value
+     *          the value to be converted
+     * @return the value converted
+     */
+    public static BigDecimal toBigDecimal(Number value) {
+      if (BigDecimal.class.isInstance(value)) {
+        return BigDecimal.class.cast(value);
+      } else if (BigInteger.class.isInstance(value)) {
+        return new BigDecimal(BigInteger.class.cast(value));
+      }
+      return BigDecimal.valueOf(value.doubleValue());
+    }
+
+    /**
+     * Check if the both value has equality number, in other words, 1 is equals to 1.0000 and 1.0.
+     * 
+     * If the first value is a <type>Number</type> of either <type>Double</type>, <type>Float</type>, <type>Integer</type>, <type>Long</type>,
+     * <type>Short</type> or <type>Byte</type> it is compared using the respective <code>*value()</code> method of <type>Number</type>. Otherwise it is
+     * checked, if {@link BigDecimal#compareTo(Object)} is equal to zero.
+     *
+     * @param valueA
+     *          the value a
+     * @param valueB
+     *          the value B
+     * @return {@link BigDecimal#compareTo(Object)} == zero
+     */
+    public static boolean hasEquality(Number valueA, Number valueB) {
+      Objects.requireNonNull(valueA);
+      Objects.requireNonNull(valueB);
+
+      if (valueA instanceof Double) {
+        return valueA.doubleValue() == valueB.doubleValue();
+      } else if (valueA instanceof Float) {
+        return valueA.floatValue() == valueB.floatValue();
+      } else if (valueA instanceof Integer) {
+        return valueA.intValue() == valueB.intValue();
+      } else if (valueA instanceof Long) {
+        return valueA.longValue() == valueB.longValue();
+      } else if (valueA instanceof Short) {
+        return valueA.shortValue() == valueB.shortValue();
+      } else if (valueA instanceof Byte) {
+        return valueA.byteValue() == valueB.byteValue();
+      }
+      return toBigDecimal(valueA).compareTo(toBigDecimal(valueB)) == 0;
+    }
   }
 }

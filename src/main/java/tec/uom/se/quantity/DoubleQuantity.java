@@ -41,8 +41,6 @@ import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
-import static tec.uom.se.quantity.NumberUtils.hasEquality;
-
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link Double} as implementation of {@link Number}, this object is
  * immutable. Note: all operations which involves {@link Number}, this implementation will convert to {@link Double}.
@@ -53,10 +51,11 @@ import static tec.uom.se.quantity.NumberUtils.hasEquality;
  *          The type of the quantity.
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Otavio de Santana
- * @version 0.3, $Date: 2014-10-10 $
+ * @version 0.4, $Date: 2017-05-28 $
  * @see AbstractQuantity
  * @see Quantity
  * @see ComparableQuantity
+ * @since 1.0
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
@@ -151,11 +150,10 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
     if (this == obj) {
       return true;
     }
-    if (obj instanceof AbstractQuantity<?>) {
-      AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
-      return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
     }
     return false;
   }
-
 }

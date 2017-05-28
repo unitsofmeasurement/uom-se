@@ -43,8 +43,6 @@ import javax.measure.UnitConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
-import static tec.uom.se.quantity.NumberUtils.hasEquality;
-
 /**
  * An amount of quantity, implementation of {@link ComparableQuantity} that keep {@link Number} as possible otherwise converts to
  * {@link DecimalQuantity}, this object is immutable.
@@ -56,7 +54,8 @@ import static tec.uom.se.quantity.NumberUtils.hasEquality;
  *          The type of the quantity.
  * @author otaviojava
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2016-10-02 $
+ * @version 1.0.1, $Date: 2017-05-28 $
+ * @since 1.0
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
@@ -174,7 +173,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
     }
     if (obj instanceof Quantity<?>) {
       Quantity<?> that = (Quantity<?>) obj;
-      return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
+      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
     }
     return false;
   }
