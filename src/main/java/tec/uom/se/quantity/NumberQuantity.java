@@ -172,8 +172,8 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
     if (this == obj) {
       return true;
     }
-    if (obj instanceof AbstractQuantity<?>) {
-      AbstractQuantity<?> that = (AbstractQuantity<?>) obj;
+    if (obj instanceof Quantity<?>) {
+      Quantity<?> that = (Quantity<?>) obj;
       return Objects.equals(getUnit(), that.getUnit()) && hasEquality(value, that.getValue());
     }
     return false;
