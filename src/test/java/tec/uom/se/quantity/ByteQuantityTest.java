@@ -35,7 +35,6 @@ import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Time;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.unit.Units;
@@ -93,11 +92,11 @@ public class ByteQuantityTest {
   public void toTest() {
     Quantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     Quantity<Time> hour = day.to(Units.HOUR);
-    Assert.assertEquals(hour.getValue().intValue(), 24);
-    Assert.assertEquals(hour.getUnit(), Units.HOUR);
+    assertEquals(hour.getValue().intValue(), 24);
+    assertEquals(hour.getUnit(), Units.HOUR);
 
     Quantity<Time> dayResult = hour.to(Units.DAY);
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
-    Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+    assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
   }
 }
