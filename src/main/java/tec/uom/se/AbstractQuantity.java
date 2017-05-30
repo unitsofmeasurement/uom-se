@@ -55,42 +55,50 @@ import tec.uom.se.quantity.Quantities;
  * To avoid any loss of precision, known exact quantities (e.g. physical constants) should not be created from <code>double</code> constants but from
  * their decimal representation.<br/>
  * <code>
- *         public static final Quantity<Velocity> C = AbstractQuantity.parse("299792458 m/s").asType(Velocity.class);
+ *         public static final Quantity&lt;Velocity&gt; C = NumberQuantity.parse("299792458 m/s").asType(Velocity.class);
  *         // Speed of Light (exact).
  *    </code>
  * </p>
- *
+ * 
  * <p>
- * Quantities can be converted to different units, the conversion precision is determined by the specified {@link MathContext}.<br/>
+ * Quantities can be converted to different units.<br>
  * <code>
- *         Quantity<Velocity> milesPerHour = C.to(MILES_PER_HOUR, MathContext.DECIMAL128); // Use BigDecimal implementation.
+ *         Quantity&lt;Velocity&gt; milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
  *         System.out.println(milesPerHour);
  * 
- *         > 670616629.3843951324266284896206156 [mi_i]/h
- *     </code> If no precision is specified <code>double</code> precision is assumed.<code>
- *         Quantity<Velocity> milesPerHour = C.to(MILES_PER_HOUR); // Use double implementation (fast).
- *         System.out.println(milesPerHour);
- * 
- *         > 670616629.3843951 [mi_i]/h
+ *         &gt; 670616629.3843951 m/h
  *     </code>
  * </p>
- *
+ * 
  * <p>
- * Applications may sub-class {@link AbstractQuantity} for particular quantity types.<br/>
+ * Applications may sub-class {@link AbstractQuantity} for particular quantity types.<br>
  * <code>
- *         // Quantity of type Mass based on <code>double</code> primitive types. public class MassAmount extends AbstractQuantity<Mass> { private
- * final double _kilograms; // Internal SI representation. private Mass(double kilograms) { _kilograms = kilograms; } public static Mass of(double
- * value, Unit<Mass> unit) { return new Mass(unit.getConverterTo(Units.KILOGRAM).convert(value)); } public Unit<Mass> getUnit() { return
- * Units.KILOGRAM; } public Double getValue() { return _kilograms; } ... }
- *
- * // Complex numbers quantities. public class ComplexQuantity
- * <Q extends * Quantity>extends AbstractQuantity
- * <Q>{ public Complex getValue() { ... } // Assuming Complex is a Number. ... }
- *
- * // Specializations of complex numbers quantities. public class Current extends ComplexQuantity<ElectricCurrent> {...} public class Tension extends
- * ComplexQuantity<ElectricPotential> {...} </code>
+ *         // Quantity of type Mass based on double primitive types.<br>
+ * public class MassAmount extends AbstractQuantity&lt;Mass&gt; {<br>
+ * private final double kilograms; // Internal SI representation.<br>
+ * private Mass(double kg) { kilograms = kg; }<br>
+ * public static Mass of(double value, Unit&lt;Mass&gt; unit) {<br>
+ * return new Mass(unit.getConverterTo(SI.KILOGRAM).convert(value));<br>
+ * }<br>
+ * public Unit&lt;Mass&gt; getUnit() { return SI.KILOGRAM; }<br>
+ * public Double getValue() { return kilograms; }<br>
+ * ...<br>
+ * }<br>
+ * <p>
+ * // Complex numbers measurements.<br>
+ * public class ComplexQuantity
+ * &lt;Q extends Quantity&gt;extends AbstractQuantity
+ * &lt;Q&gt;{<br>
+ * public Complex getValue() { ... } // Assuming Complex is a Number.<br>
+ * ...<br>
+ * }<br>
+ * <br>
+ * // Specializations of complex numbers measurements.<br>
+ * public final class Current extends ComplexQuantity&lt;ElectricCurrent&gt; {...}<br>
+ * public final class Tension extends ComplexQuantity&lt;ElectricPotential&gt; {...} <br>
+ * </code>
  * </p>
- *
+ * 
  * <p>
  * All instances of this class shall be immutable.
  * </p>
