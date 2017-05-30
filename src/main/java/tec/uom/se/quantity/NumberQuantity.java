@@ -193,6 +193,19 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
   }
 
   /**
+   * Returns the scalar quantity for the specified <code>byte</code> stated in the specified unit.
+   *
+   * @param value
+   *          the quantity value.
+   * @param unit
+   *          the measurement unit.
+   * @return the corresponding <code>byte</code> quantity.
+   */
+  public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(byte value, Unit<Q> unit) {
+    return new ByteQuantity<Q>(value, unit);
+  }
+
+  /**
    * Returns the scalar quantity for the specified <code>float</code> stated in the specified unit.
    *
    * @param floatValue

@@ -48,7 +48,7 @@ import tec.uom.se.ComparableQuantity;
  * @param <Q>
  *          The type of the quantity.
  * @version 0.3, $Date: 2017-05-28 $
- * @since 1.0
+ * @since 1.0.7
  */
 final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
