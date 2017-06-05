@@ -159,9 +159,9 @@
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 
-            <!-- ======================================================= -->
-            <!-- JavaDoc Attachment -->
-            <!-- ======================================================= -->
+			<!-- ======================================================= -->
+			<!-- JavaDoc Attachment -->
+			<!-- ======================================================= -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -195,7 +195,8 @@
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
-							<Specification-Title>Units of Measurement Implementation for Java SE</Specification-Title>
+							<Specification-Title>Units of Measurement Implementation for Java
+								SE</Specification-Title>
 							<Specification-Version>${project.version}</Specification-Version>
 							<Specification-Vendor>${project.organization.name}</Specification-Vendor>
 							<Implementation-Vendor>Unit-API contributors</Implementation-Vendor>
@@ -227,7 +228,7 @@
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>
-					<header>src/etc/header.txt</header>
+					<header>src/main/config/header.txt</header>
 					<properties>
 						<owner>Jean-Marie Dautelle, Werner Keil, V2COM</owner>
 						<currentYear>2017</currentYear>
@@ -238,6 +239,7 @@
 						<exclude>**/settings.xml</exclude>
 						<exclude>src/test/resources/**</exclude>
 						<exclude>src/main/resources/**</exclude>
+						<exclude>src/main/config/**</exclude>
 						<exclude>src/etc/**</exclude>
 						<exclude>*.css</exclude>
 						<exclude>*.editorconfig</exclude>
@@ -246,7 +248,7 @@
 						<exclude>*.yml</exclude>
 					</excludes>
 					<headerDefinitions>
-						<headerDefinition>src/etc/headers.xml</headerDefinition>
+						<headerDefinition>src/main/config/headers.xml</headerDefinition>
 					</headerDefinitions>
 					<mapping>
 						<java>JAVA_STYLE</java>
@@ -261,7 +263,7 @@
 				<groupId>net.revelc.code</groupId>
 				<artifactId>formatter-maven-plugin</artifactId>
 				<configuration>
-					<configFile>${project.basedir}/src/etc/eclipse-formatter-config.xml</configFile>
+					<configFile>${project.basedir}/src/main/config/eclipse-formatter-config.xml</configFile>
 				</configuration>
 				<executions>
 					<execution>
@@ -380,8 +382,8 @@
 						<!-- plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>findbugs-maven-plugin</artifactId> 
 							<version>2.5.2</version> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
 							<artifactId>maven-checkstyle-plugin</artifactId> <version>2.11</version> 
-							<configuration> <configLocation>src/etc/checkstyle.xml</configLocation> </configuration> 
-							</plugin -->
+							<configuration> <configLocation>src/main/config/checkstyle.xml</configLocation> 
+							</configuration> </plugin -->
 					</reportPlugins>
 				</configuration>
 			</plugin>
@@ -430,4 +432,44 @@
 		<system>CircleCI</system>
 		<url>https://circleci.com/gh/unitsofmeasurement/uom-se</url>
 	</ciManagement>
+
+	<profiles>
+		<profile>
+			<id>p2</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.reficio</groupId>
+						<artifactId>p2-maven-plugin</artifactId>
+						<version>1.1.2-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<id>default-cli</id>
+								<configuration>
+									<artifacts>
+										<!-- specify your depencies here -->
+										<!-- groupId:artifactId:version -->
+										<artifact>
+											<id>javax.measure:unit-api:${jsr.version}</id>
+											<id>tec.uom.lib:uom-lib-common:${jsr.version}</id>
+											<!--  >id>tec.uom:uom-se:${project.version}</id -->
+											<id>tec.uom:uom-se:1.0.6</id>
+										</artifact>
+									</artifacts>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>reficio</id>
+					<url>http://repo.reficio.org/maven/</url>
+				</pluginRepository>
+			</pluginRepositories>
+
+		</profile>
+	</profiles>
 </project>
