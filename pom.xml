@@ -451,9 +451,9 @@
 										<!-- groupId:artifactId:version -->
 										<artifact>
 											<id>javax.measure:unit-api:${jsr.version}</id>
-											<id>tec.uom.lib:uom-lib-common:${jsr.version}</id>
+											<id>tec.uom.lib:uom-lib-common:${lib.version}</id>
 											<!--  >id>tec.uom:uom-se:${project.version}</id -->
-											<id>tec.uom:uom-se:1.0.6</id>
+											<id>tec.uom:uom-se:1.0.7</id>
 										</artifact>
 									</artifacts>
 								</configuration>
