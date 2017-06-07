@@ -112,7 +112,8 @@ public final class TransformedUnit<Q extends Quantity<Q>> extends AbstractUnit<Q
   /**
    * Creates a transformed unit from the specified parent unit.
    *
-   * @param symbol the symbol to use with this transformed unit.
+   * @param symbol
+   *          the symbol to use with this transformed unit.
    * @param parentUnit
    *          the parent unit from which this unit is derived.
    * @param unitConverter
