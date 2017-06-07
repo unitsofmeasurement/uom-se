@@ -158,13 +158,6 @@ public class NumberQuantityTest {
   }
 
   @Test
-  public void testEquality() throws Exception {
-    Quantity<Length> value = Quantities.getQuantity(new Double(10), Units.METRE);
-    Quantity<Length> anotherValue = Quantities.getQuantity(new Long(10), Units.METRE);
-    assertEquals(value, anotherValue);
-  }
-
-  @Test
   public void testEqualityAtomic() throws Exception {
     Quantity<Length> value = Quantities.getQuantity(new AtomicInteger(10), Units.METRE);
     Quantity<Length> anotherValue = Quantities.getQuantity(new AtomicLong(10), Units.METRE);

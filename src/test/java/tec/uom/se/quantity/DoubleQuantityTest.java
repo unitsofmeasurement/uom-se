@@ -29,6 +29,8 @@
  */
 package tec.uom.se.quantity;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -139,6 +141,13 @@ public class DoubleQuantityTest {
     Quantity<Length> value = Quantities.getQuantity(10D, Units.METRE);
     Quantity<Length> anotherValue = Quantities.getQuantity(10.00D, Units.METRE);
     Assert.assertEquals(value, anotherValue);
+  }
+
+  @Test
+  public void testEqualityFirstDouble() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new Double(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new Long(10), Units.METRE);
+    assertEquals(value, anotherValue);
   }
 
   @Test

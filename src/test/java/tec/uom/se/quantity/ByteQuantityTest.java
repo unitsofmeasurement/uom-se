@@ -33,8 +33,10 @@ import static org.junit.Assert.assertEquals;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.unit.Units;
@@ -98,5 +100,12 @@ public class ByteQuantityTest {
     Quantity<Time> dayResult = hour.to(Units.DAY);
     assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+  }
+
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(Byte.valueOf("1"), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(Byte.valueOf("1"), Units.METRE);
+    Assert.assertEquals(value, anotherValue);
   }
 }

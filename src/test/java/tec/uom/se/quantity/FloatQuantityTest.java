@@ -109,4 +109,11 @@ public class FloatQuantityTest {
     AbstractQuantity<Length> l = NumberQuantity.of(Float.valueOf(10f).floatValue(), Units.METRE);
     assertEquals(Float.valueOf(1f / 10f), l.inverse().getValue());
   }
+
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new Float(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new Float(10.0F), Units.METRE);
+    assertEquals(value, anotherValue);
+  }
 }

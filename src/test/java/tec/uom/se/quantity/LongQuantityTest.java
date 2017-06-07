@@ -32,6 +32,7 @@ package tec.uom.se.quantity;
 import static org.junit.Assert.assertEquals;
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
@@ -80,6 +81,13 @@ public class LongQuantityTest {
     LongQuantity<Time> day = new LongQuantity<Time>(Double.valueOf(3).longValue(), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
+  }
+
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new Long(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new Long(10), Units.METRE);
+    assertEquals(value, anotherValue);
   }
 
   @Test

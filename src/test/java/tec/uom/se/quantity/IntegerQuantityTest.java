@@ -32,6 +32,7 @@ package tec.uom.se.quantity;
 import static org.junit.Assert.assertEquals;
 import javax.measure.Quantity;
 import javax.measure.quantity.ElectricResistance;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
 import org.junit.Assert;
@@ -100,5 +101,12 @@ public class IntegerQuantityTest {
     Quantity<Time> dayResult = hour.to(Units.DAY);
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
     Assert.assertEquals(dayResult.getValue().intValue(), day.getValue().intValue());
+  }
+
+  @Test
+  public void testEquality() throws Exception {
+    Quantity<Length> value = Quantities.getQuantity(new Integer(10), Units.METRE);
+    Quantity<Length> anotherValue = Quantities.getQuantity(new Integer(10), Units.METRE);
+    assertEquals(value, anotherValue);
   }
 }
