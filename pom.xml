@@ -457,8 +457,7 @@
 											<id>tec.uom.lib:uom-lib-common:${lib.version}</id>
 										</artifact>
 										<artifact>
-											<!-- >id>tec.uom:uom-se:${project.version}</id -->
-											<id>tec.uom:uom-se:1.0.7</id>
+											<id>tec.uom:uom-se:${project.version}</id>
 										</artifact>
 									</artifacts>
 								</configuration>
