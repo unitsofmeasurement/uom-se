@@ -449,11 +449,15 @@
 								<configuration>
 									<artifacts>
 										<!-- specify your depencies here -->
-										<!-- groupId:artifactId:version -->
+										<!-- <id>groupId:artifactId:version</id> -->
 										<artifact>
 											<id>javax.measure:unit-api:${jsr.version}</id>
+										</artifact>
+										<artifact>
 											<id>tec.uom.lib:uom-lib-common:${lib.version}</id>
-											<!--  >id>tec.uom:uom-se:${project.version}</id -->
+										</artifact>
+										<artifact>
+											<!-- >id>tec.uom:uom-se:${project.version}</id -->
 											<id>tec.uom:uom-se:1.0.7</id>
 										</artifact>
 									</artifacts>
