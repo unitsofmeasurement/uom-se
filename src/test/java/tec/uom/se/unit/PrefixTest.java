@@ -149,5 +149,6 @@ public class PrefixTest {
   @Test
   public void testChainedOperations() {
       assertEquals(MICRO(GRAM), GRAM.divide(1000000));
+//      assertEquals(MICRO(GRAM), GRAM.divide(1000).divide(1000));
   }
 }
