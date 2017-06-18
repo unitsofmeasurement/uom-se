@@ -145,10 +145,10 @@ public class PrefixTest {
     assertThat(MILLI(LITRE).toString(), is("ml"));
     assertNotNull(MILLI(GRAM).toString(), is("mg"));
   }
-  
+
   @Test
   public void testNestedOperations() {
-      assertEquals(MICRO(GRAM), GRAM.divide(1000000));
-//      assertEquals(MICRO(GRAM), GRAM.divide(1000).divide(1000));
+    assertEquals(MICRO(GRAM), GRAM.divide(1000000));
+    // assertEquals(MICRO(GRAM), GRAM.divide(1000).divide(1000));
   }
 }
