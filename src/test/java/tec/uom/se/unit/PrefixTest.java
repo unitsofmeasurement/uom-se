@@ -29,10 +29,13 @@
  */
 package tec.uom.se.unit;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import tec.uom.se.quantity.Quantities;
 
 import javax.measure.Quantity;
+import javax.measure.Unit;
+import javax.measure.UnitConverter;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Volume;
@@ -40,9 +43,12 @@ import javax.measure.quantity.Volume;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static tec.uom.se.unit.MetricPrefix.*;
 import static tec.uom.se.unit.Units.*;
+
+import java.util.List;
 
 public class PrefixTest {
   @Test
@@ -147,8 +153,32 @@ public class PrefixTest {
   }
 
   @Test
-  public void testNestedOperations() {
+  public void testSingleOperation() {
     assertEquals(MICRO(GRAM), GRAM.divide(1000000));
-    // assertEquals(MICRO(GRAM), GRAM.divide(1000).divide(1000));
+  }
+
+  @Test
+  @Ignore("This is research for https://github.com/unitsofmeasurement/uom-se/issues/164")
+  public void testNestedOperationsShouldBeSame() {
+    Unit<Mass> m1 = MICRO(GRAM);
+    Unit<Mass> m2 = GRAM.divide(1000).divide(1000);
+    UnitConverter c1 = m1.getConverterTo(m2);
+    List steps1 = c1.getConversionSteps();
+    UnitConverter c2 = m2.getConverterTo(m1);
+    List steps2 = c2.getConversionSteps();
+    assertEquals(c1, c2);
+    assertEquals(m1, m2);
+  }
+
+  @Test
+  public void testNestedOperationsNotTheSame() {
+    Unit<Mass> m1 = MICRO(GRAM);
+    Unit<Mass> m2 = GRAM.divide(1000).divide(2000);
+    UnitConverter c1 = m1.getConverterTo(m2);
+    List steps1 = c1.getConversionSteps();
+    UnitConverter c2 = m2.getConverterTo(m1);
+    List steps2 = c2.getConversionSteps();
+    assertNotEquals(c1, c2);
+    assertNotEquals(m1, m2);
   }
 }
