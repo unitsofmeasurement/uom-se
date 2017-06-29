@@ -44,11 +44,11 @@ import tec.uom.lib.common.function.MinimumSupplier;
  *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.8.9, December 28, 2015
+ * @version 0.9, June 30, 2017
  * @see <a href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
  */
 public abstract class Range<T> implements MinimumSupplier<T>, MaximumSupplier<T> {
-  // TODO do we keep null for min and max to represent infinity?
+  // XXX do we keep null for min and max to represent infinity?
   // Java 8 Optional was evaluated, but caused conflict with the type-safe
   // Quantity feature of this API, plus it won't work in CLDC8
   private final T min;
