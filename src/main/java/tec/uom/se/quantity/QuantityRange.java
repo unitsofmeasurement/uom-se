@@ -45,15 +45,13 @@ import tec.uom.se.spi.Range;
  *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.2, December 17, 2014
+ * @version 0.3, June 30, 2017
  * @see <a href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
  */
 public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
-  private Quantity<Q> res;
 
   protected QuantityRange(Quantity<Q> min, Quantity<Q> max, Quantity<Q> resolution) {
-    super(min, max);
-    this.res = resolution;
+    super(min, max, resolution);
   }
 
   protected QuantityRange(Quantity<Q> min, Quantity<Q> max) {
@@ -77,27 +75,44 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
   }
 
   /**
+   * Returns an {@code QuantityRange} with the specified values.
+   *
+   * @param minimum
+   *          The minimum value for the measurement range.
+   * @param maximum
+   *          The maximum value for the measurement range.
+   * @return an {@code MeasurementRange} with the given values
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  public static QuantityRange of(Quantity minimum, Quantity maximum) {
+    return new QuantityRange(minimum, maximum);
+  }
+
+  /**
    * Returns the resolution of the measurement range. The value is the same as that given as the constructor parameter for the largest value.
    * 
    * @return resolution of the range, the value is the same as that given as the constructor parameter for the resolution
    */
-  public Quantity<Q> getResolution() {
-    return res;
-  }
+  // public Quantity<Q> getResolution() {
+  // return res;
+  // }
 
   /*
    * (non-Javadoc)
    * 
-   * @see tec.units.ri.util.Range#contains()
+   * @see tec.uom.se.spi.Range#contains()
    */
   @Override
   public boolean contains(Quantity<Q> q) {
-    if (q != null && q.getValue() != null) {
-      // TODO use hasMinimum() and hasMaximum() to avoid null of the
-      // range, too
-      if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() && q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
-        return true;
-      }
+    if (q != null && q.getValue() != null && q.getUnit() != null) {
+      if (hasMinimum() && hasMaximum()) {
+        if ((q.getUnit().isCompatible(getMinimum().getUnit())) && (q.getUnit().isCompatible(getMaximum().getUnit()))) {
+          if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue()
+              && q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
+            return true;
+          }
+        }
+      } // TODO other cases with only min or max
     }
     return false;
   }
@@ -129,7 +144,7 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder().append("min= ").append(getMinimum()).append(", max= ").append(getMaximum());
-    if (res != null) {
+    if (getResolution() != null) {
       sb.append(", res= ").append(getResolution());
     }
     return sb.toString();
