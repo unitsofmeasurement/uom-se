@@ -33,6 +33,7 @@ import java.util.Objects;
 
 import javax.measure.Quantity;
 
+import tec.uom.se.ComparableQuantity;
 import tec.uom.se.spi.Range;
 
 /**
@@ -45,8 +46,8 @@ import tec.uom.se.spi.Range;
  *          The value of the range.
  * 
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 0.3, June 30, 2017
- * @see <a href="http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
+ * @version 0.4, June 30, 2017
+ * @see <a href= "http://www.botts-inc.com/SensorML_1.0.1/schemaBrowser/SensorML_QuantityRange.html"> SensorML: QuantityRange</a>
  */
 public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
 
@@ -88,15 +89,6 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
     return new QuantityRange(minimum, maximum);
   }
 
-  /**
-   * Returns the resolution of the measurement range. The value is the same as that given as the constructor parameter for the largest value.
-   * 
-   * @return resolution of the range, the value is the same as that given as the constructor parameter for the resolution
-   */
-  // public Quantity<Q> getResolution() {
-  // return res;
-  // }
-
   /*
    * (non-Javadoc)
    * 
@@ -107,9 +99,12 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
     if (q != null && q.getValue() != null && q.getUnit() != null) {
       if (hasMinimum() && hasMaximum()) {
         if ((q.getUnit().isCompatible(getMinimum().getUnit())) && (q.getUnit().isCompatible(getMaximum().getUnit()))) {
-          if (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue()
-              && q.getValue().doubleValue() <= getMaximum().getValue().doubleValue()) {
-            return true;
+          if (q instanceof ComparableQuantity) {
+            final ComparableQuantity cq = (ComparableQuantity) q;
+            return (cq.isGreaterThanOrEqualTo(getMinimum()) && cq.isLessThanOrEqualTo(getMaximum()));
+          } else {
+            return (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() && q.getValue().doubleValue() <= getMaximum().getValue()
+                .doubleValue());
           }
         }
       } // TODO other cases with only min or max
