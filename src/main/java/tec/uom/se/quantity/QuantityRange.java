@@ -100,7 +100,7 @@ public class QuantityRange<Q extends Quantity<Q>> extends Range<Quantity<Q>> {
       if (hasMinimum() && hasMaximum()) {
         if ((q.getUnit().isCompatible(getMinimum().getUnit())) && (q.getUnit().isCompatible(getMaximum().getUnit()))) {
           if (q instanceof ComparableQuantity) {
-            final ComparableQuantity cq = (ComparableQuantity) q;
+            final ComparableQuantity<Q> cq = (ComparableQuantity<Q>) q;
             return (cq.isGreaterThanOrEqualTo(getMinimum()) && cq.isLessThanOrEqualTo(getMaximum()));
           } else {
             return (q.getValue().doubleValue() >= getMinimum().getValue().doubleValue() && q.getValue().doubleValue() <= getMaximum().getValue()
