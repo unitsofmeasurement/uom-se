@@ -38,12 +38,12 @@ import javax.measure.UnitConverter;
 import javax.measure.quantity.Dimensionless;
 import javax.measure.quantity.Mass;
 import javax.measure.quantity.Power;
+import javax.measure.quantity.Time;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.uom.se.AbstractConverter;
@@ -392,4 +392,10 @@ public class UnitsTest {
   public void testEquals() {
   }
 
+  @Test
+  public void testByClassTime() {
+    Unit result = Units.getInstance().getUnit(Time.class);
+    assertNotNull(result);
+    assertEquals("s", result.toString());
+  }
 }

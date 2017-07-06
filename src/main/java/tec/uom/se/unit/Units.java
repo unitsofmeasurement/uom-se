@@ -80,7 +80,7 @@ import javax.measure.spi.SystemOfUnits;
  * This class defines commonly used units.
  *
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.3, Mar 19, 2017
+ * @version 1.0.4, June 6, 2017
  * @since 1.0
  */
 public class Units extends AbstractSystemOfUnits implements Nameable {
@@ -371,7 +371,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A time unit accepted for use with SI units (standard name <code>d</code> ).
    */
-  public static final Unit<Time> DAY = addUnit(new TransformedUnit<>("d", SECOND, SECOND, new RationalConverter(24 * 60 * 60, 1)), Time.class);
+  public static final Unit<Time> DAY = addUnit(new TransformedUnit<>("d", SECOND, SECOND, new RationalConverter(24 * 60 * 60, 1)));
 
   /**
    * A unit of duration equal to 7 {@link #DAY} (standard name <code>week</code>).
