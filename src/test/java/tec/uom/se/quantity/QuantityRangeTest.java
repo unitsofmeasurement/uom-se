@@ -47,15 +47,15 @@ public class QuantityRangeTest {
   private Quantity<Mass> res;
   private QuantityRange<Mass> range;
 
-    @SuppressWarnings("unchecked")
-    @Before
-    public void init() {
-	min = Quantities.getQuantity(1d, KILOGRAM);
-	max = Quantities.getQuantity(10d, KILOGRAM);
-	res = Quantities.getQuantity(2d, KILOGRAM);
+  @SuppressWarnings("unchecked")
+  @Before
+  public void init() {
+    min = Quantities.getQuantity(1d, KILOGRAM);
+    max = Quantities.getQuantity(10d, KILOGRAM);
+    res = Quantities.getQuantity(2d, KILOGRAM);
 
-	range = QuantityRange.of(min, max, res);
-    }
+    range = QuantityRange.of(min, max, res);
+  }
 
   @Test
   public void testGetMinimum() {
@@ -77,14 +77,14 @@ public class QuantityRangeTest {
   public void testToString() {
     assertEquals("min= 1.0 kg, max= 10.0 kg, res= 2.0 kg", range.toString());
   }
-  
+
   @Test
   public void testContains() {
-      assertTrue(range.contains(Quantities.getQuantity(5d, KILOGRAM)));
+    assertTrue(range.contains(Quantities.getQuantity(5d, KILOGRAM)));
   }
-  
+
   @Test
   public void testContainsInGram() {
-      assertTrue(range.contains(Quantities.getQuantity(3000, GRAM)));
+    assertTrue(range.contains(Quantities.getQuantity(3000, GRAM)));
   }
 }
