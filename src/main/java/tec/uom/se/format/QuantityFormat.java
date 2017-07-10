@@ -47,22 +47,22 @@ import tec.uom.se.ComparableQuantity;
 
 /**
  * <p>
- * This class provides the interface for formatting and parsing {@link AbstractQuantity quantities}.
- * </p>
- *
- * <p>
- * Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+ * This class provides the interface for formatting and parsing {@link Quantity quantities}.
  * </p>
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2016-10-11 $
+ * @version 1.0.1, $Date: 2017-07-10 $
  * @since 1.0
  * 
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
-
+// TODO for later, see https://github.com/unitsofmeasurement/uom-se/issues/162
+// * <p>
+// * Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+// * </p>
+	
   /**
    *
    */
@@ -198,7 +198,6 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
     } catch (IllegalArgumentException | ParserException e) {
       return null;
     }
-
   }
 
   /**
@@ -217,5 +216,4 @@ public abstract class QuantityFormat extends Format implements Parser<CharSequen
       throw new RuntimeException(ex); // Should not happen.
     }
   }
-
 }
