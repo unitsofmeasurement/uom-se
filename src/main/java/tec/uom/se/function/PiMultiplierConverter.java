@@ -75,7 +75,7 @@ public final class PiMultiplierConverter extends AbstractConverter implements Va
     if (nbrDigits == 0)
       throw new ArithmeticException("Pi multiplication with unlimited precision");
     BigDecimal pi = Pi.pi(nbrDigits);
-    return value.multiply(pi, ctx).scaleByPowerOfTen(1 - nbrDigits);
+    return value.multiply(pi, ctx);
   }
 
   @Override
