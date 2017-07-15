@@ -73,7 +73,7 @@ final class PiDivisorConverter extends AbstractConverter implements ValueSupplie
     if (nbrDigits == 0)
       throw new ArithmeticException("Pi multiplication with unlimited precision");
     BigDecimal pi = PiMultiplierConverter.Pi.pi(nbrDigits);
-    return value.divide(pi, ctx).scaleByPowerOfTen(nbrDigits - 1);
+    return value.divide(pi, ctx);
   }
 
   @Override
