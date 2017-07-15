@@ -31,6 +31,10 @@ package tec.uom.se.function;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +53,13 @@ public class PiDivisorConverterTest {
     Assert.assertEquals(1000, converter.convert(3141), 0.2);
     Assert.assertEquals(0, converter.convert(0), 0.0);
     Assert.assertEquals(-1000, converter.convert(-3141), 0.2);
+  }
+
+  @Test
+  public void testConvertBigDecimalMethod() {
+    Assert.assertEquals(1000, converter.convert(new BigDecimal("3141"), MathContext.DECIMAL32).doubleValue(), 0.2);
+    Assert.assertEquals(0, converter.convert(BigDecimal.ZERO, MathContext.DECIMAL32).doubleValue(), 0.0);
+    Assert.assertEquals(-1000, converter.convert(new BigDecimal("-3141"), MathContext.DECIMAL32).doubleValue(), 0.2);
   }
 
   @Test
