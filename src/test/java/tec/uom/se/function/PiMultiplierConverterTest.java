@@ -32,6 +32,7 @@ package tec.uom.se.function;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Angle;
@@ -60,6 +61,13 @@ public class PiMultiplierConverterTest {
   }
 
   @Test
+  public void testConvertBigDecimalMethod() {
+    Assert.assertEquals(314.15, piMultiplierConverter.convert(new BigDecimal("100"), MathContext.DECIMAL32).doubleValue(), 0.1);
+    Assert.assertEquals(0, piMultiplierConverter.convert(BigDecimal.ZERO, MathContext.DECIMAL32).doubleValue(), 0.0);
+    Assert.assertEquals(-314.15, piMultiplierConverter.convert(new BigDecimal("-100"), MathContext.DECIMAL32).doubleValue(), 0.1);
+  }
+
+  @Test
   public void testEqualityOfTwoLogConverter() {
     assertTrue(!piMultiplierConverter.equals(null));
   }
@@ -79,7 +87,7 @@ public class PiMultiplierConverterTest {
     Quantity<Angle> sut = Quantities.getQuantity(BigDecimal.ONE, Units.DEGREE_ANGLE).to(Units.RADIAN);
     assertNotNull(sut);
     assertEquals(Units.RADIAN, sut.getUnit());
-    assertEquals(new BigDecimal("1.745329251994329576923690768488613E-35"), sut.getValue());
+    assertEquals(new BigDecimal("0.01745329251994329576923690768488613"), sut.getValue());
   }
 
   @Test
@@ -87,6 +95,6 @@ public class PiMultiplierConverterTest {
     Quantity<Angle> sut = Quantities.getQuantity(BigDecimal.ONE, Units.RADIAN).to(Units.DEGREE_ANGLE);
     assertNotNull(sut);
     assertEquals(Units.DEGREE_ANGLE, sut.getUnit());
-    assertEquals(new BigDecimal("5.729577951308232087679815481410517E+34"), sut.getValue());
+    assertEquals(new BigDecimal("57.29577951308232087679815481410517"), sut.getValue());
   }
 }
