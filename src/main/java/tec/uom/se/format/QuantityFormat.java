@@ -58,11 +58,11 @@ import tec.uom.se.ComparableQuantity;
  */
 @SuppressWarnings("rawtypes")
 public abstract class QuantityFormat extends Format implements Parser<CharSequence, ComparableQuantity> {
-// TODO for later, see https://github.com/unitsofmeasurement/uom-se/issues/162
-// * <p>
-// * Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
-// * </p>
-	
+  // TODO for later, see https://github.com/unitsofmeasurement/uom-se/issues/162
+  // * <p>
+  // * Instances of this class should be able to format quantities stated in {@link CompoundUnit}. See {@link #formatCompound formatCompound(...)}.
+  // * </p>
+
   /**
    *
    */
