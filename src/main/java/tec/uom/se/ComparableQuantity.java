@@ -153,6 +153,11 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
    * @throws NullPointerException
    *           if the quantity is null
    */
+  boolean isEquivalentOf(Quantity<Q> that);
+
+  /**
+   * @deprecated use #isEquivalentOf
+   */
   boolean isEquivalentTo(Quantity<Q> that);
 
   /**

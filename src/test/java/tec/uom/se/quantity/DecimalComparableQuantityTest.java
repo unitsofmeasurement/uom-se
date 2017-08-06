@@ -238,7 +238,7 @@ public class DecimalComparableQuantityTest {
   }
 
   @Test
-  public void isEquivalentToTest() {
+  public void isEquivalentOfTest() {
 
     ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
     ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
@@ -246,8 +246,8 @@ public class DecimalComparableQuantityTest {
     ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
 
     Assert.assertTrue(day.isLessThanOrEqualTo(day));
-    Assert.assertFalse(day.isEquivalentTo(hours));
-    Assert.assertTrue(day.isEquivalentTo(dayInHour));
-    Assert.assertFalse(day.isEquivalentTo(daysInHour));
+    Assert.assertFalse(day.isEquivalentOf(hours));
+    Assert.assertTrue(day.isEquivalentOf(dayInHour));
+    Assert.assertFalse(day.isEquivalentOf(daysInHour));
   }
 }

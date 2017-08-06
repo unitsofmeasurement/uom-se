@@ -104,7 +104,7 @@ import tec.uom.se.quantity.Quantities;
  * </p>
  *
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 1.0.5, May 31, 2017
+ * @version 1.0.6, August 7, 2017
  * @since 1.0
  */
 @SuppressWarnings("unchecked")
@@ -225,8 +225,13 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   }
 
   @Override
-  public boolean isEquivalentTo(Quantity<Q> that) {
+  public boolean isEquivalentOf(Quantity<Q> that) {
     return this.compareTo(that) == 0;
+  }
+
+  @Override
+  public boolean isEquivalentTo(Quantity<Q> that) {
+    return isEquivalentOf(that);
   }
 
   /**
