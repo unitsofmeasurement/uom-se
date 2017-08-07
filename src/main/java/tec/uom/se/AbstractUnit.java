@@ -64,14 +64,14 @@ import java.lang.reflect.Type;
  * @see <a href= "http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.6, April 24, 2017
+ * @version 1.0.7, August 7, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Comparable<Unit<Q>>, Serializable {
 
   /**
-     * 
-     */
+   * 
+   */
   private static final long serialVersionUID = -4344589505537030204L;
 
   /**
@@ -231,6 +231,12 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q>, Co
     // analysis
     // model.
     return model.getFundamentalDimension(thisDimension).equals(model.getFundamentalDimension(thatDimension));
+  }
+	
+  public boolean isEquivalentOf(Unit<Q> that) {
+	if (this.compareTo(that) == 0)
+	    return true;
+	return this.getConverterTo(that).equals(that.getConverterTo(this));
   }
 
   /**
