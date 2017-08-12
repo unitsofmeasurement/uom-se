@@ -120,7 +120,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the right unit operand.
    * @return <code>left * right</code>
    */
-  public static Unit<?> getProductInstance(Unit<?> left, Unit<?> right) {
+  public static AbstractUnit<?> getProductInstance(Unit<?> left, Unit<?> right) {
     Element[] leftElems;
     if (left instanceof ProductUnit<?>) {
       leftElems = ((ProductUnit<?>) left).elements;
@@ -145,7 +145,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the divisor unit operand.
    * @return <code>dividend / divisor</code>
    */
-  public static Unit<?> getQuotientInstance(Unit<?> left, Unit<?> right) {
+  public static AbstractUnit<?> getQuotientInstance(Unit<?> left, Unit<?> right) {
     Element[] leftElems;
     if (left instanceof ProductUnit<?>)
       leftElems = ((ProductUnit<?>) left).elements;
@@ -174,7 +174,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    * @throws ArithmeticException
    *           if <code>n == 0</code>.
    */
-  public static Unit<?> getRootInstance(Unit<?> unit, int n) {
+  public static AbstractUnit<?> getRootInstance(Unit<?> unit, int n) {
     Element[] unitElems;
     if (unit instanceof ProductUnit<?>) {
       Element[] elems = ((ProductUnit<?>) unit).elements;
@@ -360,7 +360,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    * @return the corresponding unit.
    */
   @SuppressWarnings("rawtypes")
-  private static Unit<?> getInstance(Element[] leftElems, Element[] rightElems) {
+  private static AbstractUnit<?> getInstance(Element[] leftElems, Element[] rightElems) {
 
     // Merges left elements with right elements.
     Element[] result = new Element[leftElems.length + rightElems.length];
@@ -403,8 +403,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     // Returns or creates instance.
     if (resultIndex == 0)
       return AbstractUnit.ONE;
-    else if ((resultIndex == 1) && (result[0].pow == result[0].root))
-      return result[0].unit;
+    else if ((resultIndex == 1) && (result[0].pow == result[0].root) && result[0].unit instanceof AbstractUnit<?>)
+      return (AbstractUnit<?>) (result[0].unit);
     else {
       Element[] elems = new Element[resultIndex];
       System.arraycopy(result, 0, elems, 0, resultIndex);

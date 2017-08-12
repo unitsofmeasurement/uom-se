@@ -38,6 +38,8 @@ import javax.measure.spi.UnitFormatService;
 
 import org.junit.Test;
 
+import tec.uom.se.format.SimpleUnitFormat;
+
 /**
  * Tests for services provided via {@link ServiceProvider}.
  */
@@ -61,6 +63,6 @@ public class ServiceTest {
     UnitFormatService ufs = ServiceProvider.current().getUnitFormatService();
     assertNotNull(ufs);
     assertNotNull(ufs.getUnitFormat());
-    assertEquals("DefaultFormat", ufs.getUnitFormat().getClass().getSimpleName());
+    assertTrue(SimpleUnitFormat.DefaultFormat.class.isInstance(ufs.getUnitFormat()));
   }
 }

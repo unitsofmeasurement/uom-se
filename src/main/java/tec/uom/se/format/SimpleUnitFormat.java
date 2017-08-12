@@ -94,7 +94,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   /**
    * Holds the standard unit format.
    */
-  private static final DefaultFormat DEFAULT = new DefaultFormat();
+  private static final FinalDefaultFormat DEFAULT = new FinalDefaultFormat();
 
   /**
    * Holds the ASCIIFormat unit format.
@@ -107,8 +107,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    *
    * @return the default unit format (locale sensitive).
    */
-  public static SimpleUnitFormat getInstance() {
-    return getInstance(Flavor.Default);
+  public static FinalDefaultFormat getInstance() {
+    return DEFAULT;
   }
 
   /**
@@ -287,9 +287,12 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
   }
 
   /**
-   * This class represents the standard format.
+   * This class represents the standard format. Visible only for testing and subclassing.
    */
-  protected static class DefaultFormat extends SimpleUnitFormat {
+  public static class DefaultFormat extends SimpleUnitFormat {
+
+    protected DefaultFormat() {
+    }
 
     /**
      * Holds the name to unit mapping.
@@ -765,6 +768,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
 
     @Override
     public Unit<?> parse(CharSequence csq) throws ParserException {
+      // This implementation MUST always return an AbstractUnit<?>, or else
+      // FinalDefaultInstance#parse(CharSequence) must be updated!
       return parse(csq, 0);
     }
 
@@ -780,6 +785,22 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     @Override
     protected Unit<?> parse(CharSequence csq, ParsePosition cursor) throws IllegalArgumentException {
       return parseObject(csq.toString(), cursor);
+    }
+  }
+
+  /**
+   * Wrapper around {@link #DefaultFormat} that has narrower return type, but can't be subclassed. The latter class is retained for backward
+   * compatibility with any third-party subclasses. Needs to be public so {@link AbstractUnit} can use it with narrowed return type.
+   */
+  public static final class FinalDefaultFormat extends DefaultFormat {
+
+    /** Singleton. */
+    private FinalDefaultFormat() {
+    }
+
+    @Override
+    public AbstractUnit<?> parse(CharSequence csq) throws ParserException {
+      return (AbstractUnit<?>) (super.parse(csq));
     }
   }
 
