@@ -291,9 +291,6 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
    */
   public static class DefaultFormat extends SimpleUnitFormat {
 
-    protected DefaultFormat() {
-    }
-
     /**
      * Holds the name to unit mapping.
      */
@@ -303,6 +300,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
      * Holds the unit to name mapping.
      */
     final HashMap<Unit<?>, String> _unitToName = new HashMap<>();
+
+    protected DefaultFormat() {
+    }
 
     @Override
     public void label(Unit<?> unit, String label) {

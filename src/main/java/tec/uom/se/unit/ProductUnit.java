@@ -403,12 +403,23 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     // Returns or creates instance.
     if (resultIndex == 0)
       return AbstractUnit.ONE;
-    else if ((resultIndex == 1) && (result[0].pow == result[0].root) && result[0].unit instanceof AbstractUnit<?>)
-      return (AbstractUnit<?>) (result[0].unit);
+    else if ((resultIndex == 1) && (result[0].pow == result[0].root))
+      return maybeWrap(result[0].unit);
     else {
       Element[] elems = new Element[resultIndex];
       System.arraycopy(result, 0, elems, 0, resultIndex);
       return new ProductUnit(elems);
+    }
+  }
+
+  /**
+   * Wraps the given unit in a ProductUnit if it's not already an AbstractUnit.
+   */
+  private static <Q extends Quantity<Q>> AbstractUnit<Q> maybeWrap(Unit<Q> unit) {
+    if (unit instanceof AbstractUnit<?>) {
+      return (AbstractUnit<Q>) unit;
+    } else {
+      return new ProductUnit<Q>(unit);
     }
   }
 
