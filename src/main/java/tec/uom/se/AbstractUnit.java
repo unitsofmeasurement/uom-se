@@ -80,7 +80,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
    *      normalize</a>
    * @see <a href= "http://www.av8n.com/physics/dimensionless-units.htm">Units of Dimension One</a>
    */
-  public static final Unit<Dimensionless> ONE = new ProductUnit<>();
+  public static final AbstractUnit<Dimensionless> ONE = new ProductUnit<>();
 
   /**
    * Holds the name.
