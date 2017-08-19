@@ -39,6 +39,7 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -197,7 +198,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the exponent (nn &gt; 0).
    * @return <code>unit^n</code>
    */
-  static Unit<?> getPowInstance(Unit<?> unit, int n) {
+  public static AbstractUnit<?> getPowInstance(Unit<?> unit, int n) {
     Element[] unitElems;
     if (unit instanceof ProductUnit<?>) {
       Element[] elems = ((ProductUnit<?>) unit).elements;
@@ -273,32 +274,26 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     if (this == obj) {
       return true;
     }
-    if (obj instanceof ProductUnit<?>) {
-      Element[] elems = ((ProductUnit<?>) obj).elements;
-      if (elements.length != elems.length)
-        return false;
-      for (Element element : elements) {
-        boolean unitFound = false;
-        for (Element elem : elems) {
-          if (element.unit.equals(elem.unit))
-            if ((element.pow != elem.pow) || (element.root != elem.root))
-              return false;
-            else {
-              unitFound = true;
-              break;
-            }
-        }
-        if (!unitFound)
-          return false;
-      }
-      return true;
+    if (obj instanceof ProductUnit) {
+      ProductUnit other = (ProductUnit) obj;
+      Arrays.sort(elements);
+      Arrays.sort(other.elements);
+      return Arrays.equals(elements, other.elements);
+    }
+    if (obj instanceof Unit<?>) {
+      // A wrapper ProductUnit is equal to the unit it wraps
+      return elements.length == 1 && elements[0].pow == elements[0].root && obj.equals(elements[0].unit);
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash((Object[]) elements);
+    if (elements.length == 1 && equals(elements[0])) {
+      return elements[0].hashCode();
+    }
+    Arrays.sort(elements);
+    return Arrays.hashCode(elements);
   }
 
   @SuppressWarnings("unchecked")
@@ -312,6 +307,16 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
       systemUnit = systemUnit.multiply(unit);
     }
     return (AbstractUnit<Q>) systemUnit;
+  }
+
+  @Override
+  public boolean isSystemUnit() {
+    for (Element element : elements) {
+      if (!(element.unit instanceof AbstractUnit<?> && ((AbstractUnit<?>) element.unit).isSystemUnit())) {
+        return super.isSystemUnit();
+      }
+    }
+    return true;
   }
 
   @Override
@@ -442,7 +447,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   /**
    * Inner product element represents a rational power of a single unit.
    */
-  private final static class Element implements Serializable {
+  private final static class Element implements Serializable, Comparable<Element> {
 
     /**
 		 *
@@ -523,12 +528,26 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     }
 
+    /**
+     * Arbitrary ordering, to be used only in sorting arrays for {@link ProductUnit#equals} and {@link ProductUnit#hashCode}.
+     */
+    @Override
+    public int compareTo(Element other) {
+      // hashCode() - other.hashCode() may overflow
+      long ourHash = hashCode();
+      long theirHash = other.hashCode();
+      if (ourHash < theirHash) {
+        return -1;
+      } else if (ourHash == theirHash) {
+        return 0;
+      } else {
+        return 1;
+      }
+    }
+
     @Override
     public int hashCode() {
-      int result = unit != null ? unit.hashCode() : 0;
-      result = 31 * result + pow;
-      result = 31 * result + root;
-      return result;
+      return Objects.hash(unit, ((double) pow) / root);
     }
   }
 
