@@ -198,7 +198,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the exponent (nn &gt; 0).
    * @return <code>unit^n</code>
    */
-  static AbstractUnit<?> getPowInstance(Unit<?> unit, int n) {
+  public static AbstractUnit<?> getPowInstance(Unit<?> unit, int n) {
     Element[] unitElems;
     if (unit instanceof ProductUnit<?>) {
       Element[] elems = ((ProductUnit<?>) unit).elements;
