@@ -381,7 +381,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
   /**
    * A time unit accepted for use with SI units (standard name <code>y</code> ).
    */
-  public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2525));
+  public static final Unit<Time> YEAR = addUnit(Units.DAY.multiply(365.2425));
 
   /**
    * An angle unit accepted for use with SI units (standard name <code>deg</code>).
