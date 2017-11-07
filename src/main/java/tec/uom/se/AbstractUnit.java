@@ -63,7 +63,7 @@ import java.lang.reflect.Type;
  * @see <a href= "http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.8, August 8, 2017
+ * @version 1.0.9, November 7, 2017
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableUnit<Q> {
@@ -190,7 +190,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
   }
 
   // ///////////////////////////////////////////////////////
-  // Implements org.unitsofmeasurement.Unit<Q> interface //
+  // Implements javax.measure.Unit<Q> interface //
   // ///////////////////////////////////////////////////////
 
   /**
