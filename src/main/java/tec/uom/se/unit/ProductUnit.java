@@ -59,14 +59,14 @@ import java.util.Objects;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.3, August 20, 2017
+ * @version 1.0.4, November 7, 2017
  * @since 1.0
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   /**
-	 *
-	 */
+   *
+   */
   private static final long serialVersionUID = 962983585531030093L;
 
   /**
@@ -108,9 +108,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    */
   private ProductUnit(Element[] elements) {
     this.elements = elements;
-    this.symbol = elements[0].getUnit().getSymbol(); // FIXME this should
-    // contain ALL
-    // elements
+    // this.symbol = elements[0].getUnit().getSymbol(); // FIXME this should contain ALL elements
+    this.symbol = null;
   }
 
   /**
