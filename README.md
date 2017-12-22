@@ -3,7 +3,7 @@ uom-se
 
 Units of Measurement Implementation for Java SE 8 and above
 
-JDK Integration of Unit-API / JSR 363
+JDK Integration of Unit-API / [JSR 363](https://jcp.org/en/jsr/detail?id=363)
 
 This implementation aims at **Java SE 8** and above. 
 
