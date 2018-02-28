@@ -84,7 +84,7 @@ public final class BaseUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   }
 
   /**
-   * Creates a base unit having the specified symbol and dimension.
+   * Creates a base unit having the specified symbol without a dimension.
    *
    * @param symbol
    *          the symbol of this base unit.
