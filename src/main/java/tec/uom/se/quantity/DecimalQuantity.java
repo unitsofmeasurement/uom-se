@@ -42,119 +42,132 @@ import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
 /**
- * An amount of quantity, implementation of {@link ComparableQuantity} that uses {@link BigDecimal} as implementation of {@link Number}, this object
- * is immutable. Note: all operations which involves {@link Number}, this implementation will convert to {@link BigDecimal}, and all operation of
+ * An amount of quantity, implementation of {@link ComparableQuantity} that uses
+ * {@link BigDecimal} as implementation of {@link Number}, this object is
+ * immutable. Note: all operations which involves {@link Number}, this
+ * implementation will convert to {@link BigDecimal}, and all operation of
  * BigDecimal will use {@link MathContext#DECIMAL128}.
  *
  * @param <Q>
- *          The type of the quantity.
+ *            The type of the quantity.
  * @author otaviojava
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @see AbstractQuantity
  * @see Quantity
  * @see ComparableQuantity
- * @version 1.0.1
+ * @version 1.1
  * @since 1.0
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 final class DecimalQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> implements Serializable {
 
-  private static final long serialVersionUID = 6504081836032983882L;
+	private static final long serialVersionUID = 6504081836032983882L;
 
-  private final BigDecimal value;
+	private final BigDecimal value;
 
-  public DecimalQuantity(BigDecimal value, Unit<Q> unit) {
-    super(unit);
-    this.value = value;
-  }
+	public DecimalQuantity(BigDecimal value, Unit<Q> unit) {
+		super(unit);
+		this.value = value;
+	}
 
-  @Override
-  public BigDecimal getValue() {
-    return value;
-  }
+	public DecimalQuantity(double value, Unit<Q> unit) {
+		super(unit);
+		this.value = BigDecimal.valueOf(value);
+	}
 
-  @Override
-  public double doubleValue(Unit<Q> unit) {
-    return (unit.equals(unit)) ? value.doubleValue() : unit.getConverterTo(unit).convert(value.doubleValue());
-  }
+	@Override
+	public BigDecimal getValue() {
+		return value;
+	}
 
-  @Override
-  public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) throws ArithmeticException {
-    return (super.getUnit().equals(unit)) ? value : ((AbstractConverter) unit.getConverterTo(unit)).convert(value, ctx);
-  }
+	@Override
+	public double doubleValue(Unit<Q> unit) {
+		return (getUnit().equals(unit)) ? value.doubleValue() : getUnit().getConverterTo(unit).convert(value.doubleValue());
+	}
 
-  @Override
-  public ComparableQuantity<Q> add(Quantity<Q> that) {
-    if (getUnit().equals(that.getUnit())) {
-      return Quantities.getQuantity(value.add(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit());
-    }
-    Quantity<Q> converted = that.to(getUnit());
-    return Quantities.getQuantity(value.add(Equalizer.toBigDecimal(converted.getValue())), getUnit());
-  }
+	@Override
+	public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) throws ArithmeticException {
+		return (getUnit().equals(unit)) ? value
+				: ((AbstractConverter) unit.getConverterTo(unit)).convert(value, ctx);
+	}
 
-  @Override
-  public ComparableQuantity<Q> subtract(Quantity<Q> that) {
-    if (getUnit().equals(that.getUnit())) {
-      return Quantities.getQuantity(value.subtract(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit());
-    }
-    Quantity<Q> converted = that.to(getUnit());
-    return Quantities.getQuantity(value.subtract(Equalizer.toBigDecimal(converted.getValue()), MathContext.DECIMAL128), getUnit());
-  }
+	@Override
+	public ComparableQuantity<Q> add(Quantity<Q> that) {
+		if (getUnit().equals(that.getUnit())) {
+			return Quantities.getQuantity(value.add(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128),
+					getUnit());
+		}
+		Quantity<Q> converted = that.to(getUnit());
+		return Quantities.getQuantity(value.add(Equalizer.toBigDecimal(converted.getValue())), getUnit());
+	}
 
-  @Override
-  public ComparableQuantity<?> multiply(Quantity<?> that) {
-    return new DecimalQuantity(value.multiply(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit().multiply(that.getUnit()));
-  }
+	@Override
+	public ComparableQuantity<Q> subtract(Quantity<Q> that) {
+		if (getUnit().equals(that.getUnit())) {
+			return Quantities.getQuantity(
+					value.subtract(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit());
+		}
+		Quantity<Q> converted = that.to(getUnit());
+		return Quantities.getQuantity(
+				value.subtract(Equalizer.toBigDecimal(converted.getValue()), MathContext.DECIMAL128), getUnit());
+	}
 
-  @Override
-  public ComparableQuantity<Q> multiply(Number that) {
-    return Quantities.getQuantity(value.multiply(Equalizer.toBigDecimal(that), MathContext.DECIMAL128), getUnit());
-  }
+	@Override
+	public ComparableQuantity<?> multiply(Quantity<?> that) {
+		return new DecimalQuantity(value.multiply(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128),
+				getUnit().multiply(that.getUnit()));
+	}
 
-  @Override
-  public ComparableQuantity<Q> divide(Number that) {
-    return Quantities.getQuantity(value.divide(Equalizer.toBigDecimal(that), MathContext.DECIMAL128), getUnit());
-  }
+	@Override
+	public ComparableQuantity<Q> multiply(Number that) {
+		return Quantities.getQuantity(value.multiply(Equalizer.toBigDecimal(that), MathContext.DECIMAL128), getUnit());
+	}
 
-  @Override
-  public ComparableQuantity<Q> inverse() {
-    return (ComparableQuantity<Q>) Quantities.getQuantity(BigDecimal.ONE.divide(value), getUnit().inverse());
-  }
+	@Override
+	public ComparableQuantity<Q> divide(Number that) {
+		return Quantities.getQuantity(value.divide(Equalizer.toBigDecimal(that), MathContext.DECIMAL128), getUnit());
+	}
 
-  @Override
-  protected long longValue(Unit<Q> unit) {
-    double result = doubleValue(unit);
-    if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
-      throw new ArithmeticException("Overflow (" + result + ")");
-    }
-    return (long) result;
-  }
+	@Override
+	public ComparableQuantity<Q> inverse() {
+		return (ComparableQuantity<Q>) Quantities.getQuantity(BigDecimal.ONE.divide(value), getUnit().inverse());
+	}
 
-  @Override
-  public boolean isBig() {
-    return true;
-  }
+	@Override
+	protected long longValue(Unit<Q> unit) {
+		double result = doubleValue(unit);
+		if ((result < Long.MIN_VALUE) || (result > Long.MAX_VALUE)) {
+			throw new ArithmeticException("Overflow (" + result + ")");
+		}
+		return (long) result;
+	}
 
-  @Override
-  public ComparableQuantity<?> divide(Quantity<?> that) {
-    return new DecimalQuantity(value.divide(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128), getUnit().divide(that.getUnit()));
-  }
+	@Override
+	public boolean isBig() {
+		return true;
+	}
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see AbstractQuantity#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null)
-      return false;
-    if (obj == this)
-      return true;
-    if (obj instanceof Quantity<?>) {
-      Quantity<?> that = (Quantity<?>) obj;
-      return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
-    }
-    return false;
-  }
+	@Override
+	public ComparableQuantity<?> divide(Quantity<?> that) {
+		return new DecimalQuantity(value.divide(Equalizer.toBigDecimal(that.getValue()), MathContext.DECIMAL128),
+				getUnit().divide(that.getUnit()));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see AbstractQuantity#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (obj == this)
+			return true;
+		if (obj instanceof Quantity<?>) {
+			Quantity<?> that = (Quantity<?>) obj;
+			return Objects.equals(getUnit(), that.getUnit()) && Equalizer.hasEquality(value, that.getValue());
+		}
+		return false;
+	}
 }
