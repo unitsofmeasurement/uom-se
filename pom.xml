@@ -9,12 +9,12 @@
 		<name>Units of Measurement project</name>
 		<url>http://unitsofmeasurement.github.io</url>
 	</organization>
-	<version>1.0.9-SNAPSHOT</version>
+	<version>1.0.9</version>
 	<packaging>bundle</packaging>
 	<parent>
 		<groupId>tec.uom</groupId>
 		<artifactId>uom-parent</artifactId>
-		<version>1.0.4</version>
+		<version>1.0.5</version>
 	</parent>
 	<scm>
 		<url>https://github.com/unitsofmeasurement/uom-se.git</url>
@@ -232,7 +232,7 @@
 					<header>src/main/config/header.txt</header>
 					<properties>
 						<owner>Jean-Marie Dautelle, Werner Keil, Otavio Santana</owner>
-						<currentYear>2017</currentYear>
+						<currentYear>2018</currentYear>
 					</properties>
 					<excludes>
 						<exclude>**/README</exclude>

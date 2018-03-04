@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2017, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -145,6 +145,11 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
   boolean isLessThanOrEqualTo(Quantity<Q> that);
 
   /**
+   * @deprecated use #isEquivalentTo
+   */
+  boolean isEquivalentOf(Quantity<Q> that);
+
+  /**
    * Compares two instances of {@link Quantity <Q>}, doing the conversion of unit if necessary.
    *
    * @param that
@@ -152,11 +157,6 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
    * @return {@code true} if {@code that < this}.
    * @throws NullPointerException
    *           if the quantity is null
-   */
-  boolean isEquivalentOf(Quantity<Q> that);
-
-  /**
-   * @deprecated use #isEquivalentOf
    */
   boolean isEquivalentTo(Quantity<Q> that);
 
