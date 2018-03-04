@@ -39,6 +39,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.unit.MetricPrefix;
 import tec.uom.se.unit.Units;
 
 public class IntegerQuantityTest {
@@ -109,4 +110,27 @@ public class IntegerQuantityTest {
     Quantity<Length> anotherValue = Quantities.getQuantity(new Integer(10), Units.METRE);
     assertEquals(value, anotherValue);
   }
+  
+  @Test
+  public void milliOhmTest() {
+    final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(), Units.OHM);
+    final IntegerQuantity<ElectricResistance> ONE_MILLIOHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(),
+        MetricPrefix.MILLI(Units.OHM));
+
+    assertEquals(ONE_OHM, ONE_OHM.add(ONE_MILLIOHM));
+    final IntegerQuantity<ElectricResistance> ONEOONE_MILLIOHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1001),
+        MetricPrefix.MILLI(Units.OHM));
+    assertEquals(ONEOONE_MILLIOHM, ONE_MILLIOHM.add(ONE_OHM));
+  }
+
+  @Test
+  public void yottaOhmTest() {
+    final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(), Units.OHM);
+    final IntegerQuantity<ElectricResistance> ONE_YOTTAOHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(),
+        MetricPrefix.YOTTA(Units.OHM));
+    final IntegerQuantity<ElectricResistance> INT_MIN_OHM = new IntegerQuantity<ElectricResistance>(Integer.MIN_VALUE, Units.OHM);
+
+    assertEquals(INT_MIN_OHM, ONE_OHM.add(ONE_YOTTAOHM));
+  }
+
 }
