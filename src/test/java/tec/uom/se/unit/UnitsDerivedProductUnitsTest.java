@@ -42,60 +42,53 @@ import org.junit.Test;
 import tec.uom.se.AbstractUnit;
 
 /**
- * This set of unit tests ensures that all base units have been defined and
- * registered with the correct unit.
+ * This set of unit tests ensures that all base units have been defined and registered with the correct unit.
  */
 public class UnitsDerivedProductUnitsTest {
 
-	/**
-	 * Parses a symbol, asserts that it is a base unit and that it is registered for
-	 * the provided quantity.
-	 * 
-	 * @param symbol
-	 *            The symbol to be parsed.
-	 * @param quantityClass
-	 *            The quantity class for which it is expected to be registered.
-	 */
-	private <Q extends Quantity<Q>> void parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity(
-			String symbol, Class<Q> quantityClass) {
-		AbstractUnit<?> parsedUnit = AbstractUnit.parse(symbol);
-		assertEquals(ProductUnit.class, parsedUnit.getClass());
-		assertEquals(Units.getInstance().getUnit(quantityClass), parsedUnit);
-	}
+  /**
+   * Parses a symbol, asserts that it is a base unit and that it is registered for the provided quantity.
+   * 
+   * @param symbol
+   *          The symbol to be parsed.
+   * @param quantityClass
+   *          The quantity class for which it is expected to be registered.
+   */
+  private <Q extends Quantity<Q>> void parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity(String symbol, Class<Q> quantityClass) {
+    AbstractUnit<?> parsedUnit = AbstractUnit.parse(symbol);
+    assertEquals(ProductUnit.class, parsedUnit.getClass());
+    assertEquals(Units.getInstance().getUnit(quantityClass), parsedUnit);
+  }
 
-	/**
-	 * Ensures that the symbol "m/s" can be parsed to a product unit that's
-	 * registered for the speed quantity.
-	 */
-	@Test
-	public void mustParseSymbolMPerSToTheProductUnitForSpeed() {
-		parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m/s", Speed.class);
-	}
+  /**
+   * Ensures that the symbol "m/s" can be parsed to a product unit that's registered for the speed quantity.
+   */
+  @Test
+  public void mustParseSymbolMPerSToTheProductUnitForSpeed() {
+    parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m/s", Speed.class);
+  }
 
-	/**
-	 * Ensures that the symbol "m/s^2" can be parsed to a product unit that's
-	 * registered for the acceleration quantity.
-	 */
-	@Test
-	public void mustParseSymbolMPerSquareSToTheProductUnitForAccelaration() {
-		parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m/s^2", Acceleration.class);
-	}
+  /**
+   * Ensures that the symbol "m/s^2" can be parsed to a product unit that's registered for the acceleration quantity.
+   */
+  @Test
+  public void mustParseSymbolMPerSquareSToTheProductUnitForAccelaration() {
+    parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m/s^2", Acceleration.class);
+  }
 
-	/**
-	 * Ensures that the symbol "m^2" can be parsed to a product unit that's
-	 * registered for the area quantity.
-	 */
-	@Test
-	public void mustParseSymbolSquareMToTheProductUnitForArea() {
-		parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m^2", Area.class);
-	}
+  /**
+   * Ensures that the symbol "m^2" can be parsed to a product unit that's registered for the area quantity.
+   */
+  @Test
+  public void mustParseSymbolSquareMToTheProductUnitForArea() {
+    parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m^2", Area.class);
+  }
 
-	/**
-	 * Ensures that the symbol "m^3" can be parsed to a product unit that's
-	 * registered for the volume quantity.
-	 */
-	@Test
-	public void mustParseSymbolCubicMToTheProductUnitForVolume() {
-		parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m^3", Volume.class);
-	}
+  /**
+   * Ensures that the symbol "m^3" can be parsed to a product unit that's registered for the volume quantity.
+   */
+  @Test
+  public void mustParseSymbolCubicMToTheProductUnitForVolume() {
+    parseSymbolAndAssertThatItIsTheProductUnitRegisteredForTheQuantity("m^3", Volume.class);
+  }
 }

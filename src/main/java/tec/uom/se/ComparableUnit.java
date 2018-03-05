@@ -54,12 +54,11 @@ public interface ComparableUnit<Q extends Quantity<Q>> extends Unit<Q>, Comparab
    *           if the unit is null
    */
   boolean isEquivalentTo(Unit<Q> that);
-  
+
   /**
    * @deprecated use #isEquivalentTo
    */
   boolean isEquivalentOf(Unit<Q> that);
-
 
   /**
    * Indicates if this unit belongs to the set of coherent SI units (unscaled SI units).

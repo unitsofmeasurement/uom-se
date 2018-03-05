@@ -110,7 +110,7 @@ public class IntegerQuantityTest {
     Quantity<Length> anotherValue = Quantities.getQuantity(new Integer(10), Units.METRE);
     assertEquals(value, anotherValue);
   }
-  
+
   @Test
   public void milliOhmTest() {
     final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(), Units.OHM);
