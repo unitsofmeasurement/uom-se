@@ -94,7 +94,7 @@ final class LongQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public ComparableQuantity<?> multiply(Quantity<?> that) {
-    return new LongQuantity(value * that.getValue().longValue(), getUnit());
+    return new LongQuantity(value * that.getValue().longValue(), getUnit().multiply(that.getUnit()));
   }
 
   public ComparableQuantity<Q> multiply(Number that) {

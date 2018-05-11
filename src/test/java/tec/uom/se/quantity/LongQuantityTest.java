@@ -31,6 +31,7 @@ package tec.uom.se.quantity;
 
 import static org.junit.Assert.assertEquals;
 import javax.measure.Quantity;
+import javax.measure.Unit;
 import javax.measure.quantity.ElectricResistance;
 import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
@@ -42,6 +43,13 @@ import tec.uom.se.quantity.Quantities;
 import tec.uom.se.unit.Units;
 
 public class LongQuantityTest {
+
+  private static final Unit<?> SQUARE_OHM = Units.OHM.multiply(Units.OHM);
+  private final LongQuantity<ElectricResistance> TWO_OHM = createQuantity(2L, Units.OHM);
+
+  private <Q extends Quantity<Q>> LongQuantity<Q> createQuantity(long l, Unit<Q> unit) {
+    return new LongQuantity<Q>(Long.valueOf(l).longValue(), unit);
+  }
 
   @Test
   public void divideTest() {
@@ -68,12 +76,14 @@ public class LongQuantityTest {
     assertEquals(Units.OHM, result.getUnit());
   }
 
+  /**
+   * Verifies that multiplication multiplies correctly.
+   */
   @Test
-  public void multiplyQuantityTest() {
-    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<ElectricResistance>(Long.valueOf(3).longValue(), Units.OHM);
-    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<ElectricResistance>(Long.valueOf(2).longValue(), Units.OHM);
-    Quantity<?> result = quantity1.multiply(quantity2);
-    assertEquals(Long.valueOf(6L), result.getValue());
+  public void multiplicationMultipliesCorrectlyWithSameUnitsWithoutMultiples() {
+    Quantity<?> actual = TWO_OHM.multiply(TWO_OHM);
+    LongQuantity<?> expected = createQuantity(4L, SQUARE_OHM);
+    assertEquals(expected, actual);
   }
 
   @Test
