@@ -1,11 +1,11 @@
 uom-se
 ============
 
-Units of Measurement Implementation for Java SE 8 and above
+Units of Measurement Implementation for Java SE 8
 
 JDK Integration of Unit-API / [JSR 363](https://jcp.org/en/jsr/detail?id=363)
 
-This implementation aims at **Java SE 8** and above. 
+This implementation aims at **Java SE 8**. 
 
 Allowing the use of new features like *Lambdas* together with Units of Measurement API
 
