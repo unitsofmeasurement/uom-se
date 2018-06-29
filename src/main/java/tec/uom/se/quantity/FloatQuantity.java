@@ -54,8 +54,8 @@ import tec.uom.se.ComparableQuantity;
 final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   /**
-     * 
-     */
+    * 
+    */
   private static final long serialVersionUID = 5992028803791009345L;
 
   final float value;
@@ -99,7 +99,7 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   public ComparableQuantity<Q> multiply(Number that) {
-    return NumberQuantity.of(value * that.floatValue(), getUnit().multiply(that.doubleValue()));
+    return NumberQuantity.of(value * that.floatValue(), getUnit());
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
