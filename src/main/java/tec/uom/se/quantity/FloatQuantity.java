@@ -48,7 +48,7 @@ import tec.uom.se.ComparableQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.4, $Date: 2017-05-28 $
+ * @version 0.5, $Date: 2018-06-29 $
  * @since 1.0.7
  */
 final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
