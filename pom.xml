@@ -235,6 +235,7 @@
 						<currentYear>2018</currentYear>
 					</properties>
 					<excludes>
+						<exclude>.circleci/**</exclude>
 						<exclude>**/README</exclude>
 						<exclude>**/pom.xml</exclude>
 						<exclude>**/settings.xml</exclude>
