@@ -36,6 +36,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,15 +46,16 @@ import javax.measure.Unit;
 import javax.measure.quantity.*;
 import javax.measure.spi.QuantityFactory;
 
-import tec.uom.se.AbstractQuantity;
 import tec.uom.se.AbstractUnit;
 
 /**
- * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}).
+ * A factory producing simple quantities instances (tuples {@link Number}/{@link Unit}). This implementation of {@link QuantityFactory} uses the
+ * DynamicProxy features of Java reflection API.<br>
+ * <br>
  *
- * For example:<br/>
+ * For example:<br>
  * <code>
- *      Quantity<Mass> m = ProxyQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
+ *      Quantity<Mass> m = ProxyQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br>
  *      Quantity<Time> t = ProxyQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
  * 
@@ -63,7 +65,8 @@ import tec.uom.se.AbstractUnit;
  * @author <a href="mailto:martin.desruisseaux@geomatys.com">Martin Desruisseaux</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
- * @version 1.0.1, $Date: 2017-02-12 $
+ * @version 1.2, $Date: 2018-07-04 $
+ * @since 1.0
  */
 public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements QuantityFactory<Q> {
 
@@ -78,6 +81,26 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
   private static final Level LOG_LEVEL = Level.FINE;
 
   /**
+   * Tries to find a type among the interfaces a type implements that can be assigned to Quantity.
+   * 
+   * @param type
+   *          The type
+   * @return
+   */
+  private static <Q extends Quantity<Q>> Class<?> findQuantityAssignableInterface(final Class<Q> type) {
+    for (Class<?> anInterface : type.getInterfaces()) {
+      if (isQuantityAssignable(anInterface)) {
+        return anInterface;
+      }
+    }
+    return null;
+  }
+
+  private static boolean isQuantityAssignable(Class<?> anInterface) {
+    return Quantity.class.isAssignableFrom(anInterface);
+  }
+
+  /**
    * Returns the default instance for the specified quantity type.
    *
    * @param <Q>
@@ -88,46 +111,37 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
    */
   @SuppressWarnings("unchecked")
   public static <Q extends Quantity<Q>> ProxyQuantityFactory<Q> getInstance(final Class<Q> type) {
-
-    logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
-    ProxyQuantityFactory<Q> factory;
-    if (!type.isInterface()) {
-      if (type != null && type.getInterfaces() != null & type.getInterfaces().length > 0) {
-        logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
-        Class<?> type2 = type.getInterfaces()[0];
-
-        factory = INSTANCES.get(type2);
-        if (factory != null)
-          return factory;
-        if (!AbstractQuantity.class.isAssignableFrom(type2))
-          // This exception is not documented because it should never happen if the
-          // user don't try to trick the Java generic types system with unsafe cast.
-          throw new ClassCastException();
-        factory = new Default<>((Class<Q>) type2);
-        INSTANCES.put(type2, factory);
-      } else {
-        factory = INSTANCES.get(type);
-        if (factory != null)
-          return factory;
-        if (!AbstractQuantity.class.isAssignableFrom(type))
-          // This exception is not documented because it should never happen if the
-          // user don't try to trick the Java generic types system with unsafe cast.
-          throw new ClassCastException();
-        factory = new Default<>(type);
-        INSTANCES.put(type, factory);
-      }
-    } else {
-      factory = INSTANCES.get(type);
-      if (factory != null)
-        return factory;
-      if (!Quantity.class.isAssignableFrom(type))
-        // This exception is not documented because it should never happen if the
-        // user don't try to trick the Java generic types system with unsafe cast.
-        throw new ClassCastException();
-      factory = new Default<>(type);
-      INSTANCES.put(type, factory);
+    if (type == null) {
+      throw new NullPointerException();
     }
+    logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
+    if (!type.isInterface() && type.getInterfaces().length > 0) {
+      logger.log(LOG_LEVEL, "Type0: " + type.getInterfaces()[0]);
+      Class<?> type2 = findQuantityAssignableInterface(type);
+      return returnOrCreateFactoryForQuantityAssignableType((Class<Q>) type2);
+    } else {
+      return returnOrCreateFactoryForQuantityAssignableType(type);
+    }
+  }
+
+  private static <Q extends Quantity<Q>> ProxyQuantityFactory<Q> returnOrCreateFactoryForQuantityAssignableType(final Class<Q> type) {
+    @SuppressWarnings("unchecked")
+    ProxyQuantityFactory<Q> factory = INSTANCES.get(type);
+    if (factory != null) {
+      return factory;
+    }
+    throwClassCastExceptionIfNotQuantityAssignable(type);
+    factory = new Default<>(type);
+    INSTANCES.put(type, factory);
     return factory;
+  }
+
+  private static <Q extends Quantity<Q>> void throwClassCastExceptionIfNotQuantityAssignable(final Class<?> type) {
+    if (!isQuantityAssignable(type)) {
+      // This exception is not documented because it should never happen if the
+      // user doesn't try to trick the Java generic types system with unsafe cast.
+      throw new ClassCastException();
+    }
   }
 
   /**
@@ -141,10 +155,7 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
    *          the quantity factory
    */
   protected static <Q extends Quantity<Q>> void setInstance(final Class<Q> type, ProxyQuantityFactory<Q> factory) {
-    if (!AbstractQuantity.class.isAssignableFrom(type))
-      // This exception is not documented because it should never happen if the
-      // user don't try to trick the Java generic types system with unsafe cast.
-      throw new ClassCastException();
+    throwClassCastExceptionIfNotQuantityAssignable(type);
     INSTANCES.put(type, factory);
   }
 
@@ -197,10 +208,10 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
       CLASS_TO_METRIC_UNIT.put(Length.class, METRE);
       CLASS_TO_METRIC_UNIT.put(AmountOfSubstance.class, MOLE);
       CLASS_TO_METRIC_UNIT.put(Time.class, SECOND);
-      // CLASS_TO_METRIC_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
+      // CLASS_TO_SYSTEM_UNIT.put(MagnetomotiveForce.class, AMPERE_TURN);
       CLASS_TO_METRIC_UNIT.put(Angle.class, RADIAN);
       CLASS_TO_METRIC_UNIT.put(SolidAngle.class, STERADIAN);
-      // CLASS_TO_METRIC_UNIT.put(Information.class, BIT);
+      // CLASS_TO_SYSTEM_UNIT.put(Information.class, BIT);
       CLASS_TO_METRIC_UNIT.put(Frequency.class, HERTZ);
       CLASS_TO_METRIC_UNIT.put(Force.class, NEWTON);
       CLASS_TO_METRIC_UNIT.put(Pressure.class, PASCAL);
@@ -234,7 +245,6 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
     @SuppressWarnings("unchecked")
     @Override
     public Quantity<Q> create(Number value, Unit<Q> unit) {
-      // System.out.println("Type: " + type);
       return (Q) Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] { type }, new GenericHandler<>(value, unit));
     }
   }
@@ -257,21 +267,6 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
     public Object invoke(final Object proxy, final Method method, final Object[] args) {
       final String name = method.getName();
       switch (name) {
-        case "doubleValue": { // Most frequent.
-          final Unit<Q> toUnit = (Unit<Q>) args[0];
-          if ((toUnit == unit) || (toUnit.equals(unit)))
-            return value.doubleValue(); // Returns value directly.
-          return unit.getConverterTo(toUnit).convert(value.doubleValue());
-        }
-        case "longValue": {
-          final Unit<Q> toUnit = (Unit<Q>) args[0];
-          if ((toUnit == unit) || (toUnit.equals(unit)))
-            return value.longValue(); // Returns value directly.
-          double doubleValue = unit.getConverterTo(toUnit).convert(value.doubleValue());
-          if ((doubleValue < Long.MIN_VALUE) || (doubleValue > Long.MAX_VALUE))
-            throw new ArithmeticException("Overflow: " + doubleValue + " cannot be represented as a long");
-          return (long) doubleValue;
-        }
         case "getValue":
           return value;
         case "getUnit":
@@ -279,17 +274,15 @@ public abstract class ProxyQuantityFactory<Q extends Quantity<Q>> implements Qua
         case "toString":
           return String.valueOf(value) + ' ' + unit;
         case "hashCode":
-          return value.hashCode() * 31 + unit.hashCode();
+          return Objects.hash(value, unit);
         case "equals": {
           final Object obj = args[0];
-          if (!(obj instanceof AbstractQuantity))
+          if (!(obj instanceof Quantity)) {
             return false;
-          final AbstractQuantity<Q> that = (AbstractQuantity<Q>) obj;
-          return unit.isCompatible((AbstractUnit<?>) that.getUnit()) && value.doubleValue() == (that).doubleValue(unit);
-        }
-        case "compareTo": {
-          final AbstractQuantity<Q> that = (AbstractQuantity<Q>) args[0];
-          return Double.compare(value.doubleValue(), that.doubleValue(unit));
+          }
+          final Quantity<Q> that = (Quantity<Q>) obj;
+          return unit.isCompatible((AbstractUnit<?>) that.getUnit())
+              && value.doubleValue() == that.getUnit().getConverterTo(unit).convert(that.getValue()).doubleValue();
         }
         default:
           throw new UnsupportedOperationException(name);
