@@ -179,11 +179,11 @@ public class ProxyQuantityFactoryTest {
   }
 
   /**
-   * Verifies that a quantity isn't equal to null.
+   * Verifies that a quantity isn't null.
    */
   @Test
-  public void testQuantityIsNotEqualToNull() {
-    assertFalse(testQuantity.equals(null));
+  public void testQuantityIsNotNull() {
+    assertNotNull(testQuantity);
   }
 
   /**
