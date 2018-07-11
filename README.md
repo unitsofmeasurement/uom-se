@@ -12,6 +12,7 @@ Allowing the use of new features like *Lambdas* together with Units of Measureme
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se/badge.svg)](https://maven-badges.herokuapp.com/maven-central/tec.uom/uom-se)
 [![Circle CI](https://circleci.com/gh/unitsofmeasurement/uom-se.svg?style=svg)](https://circleci.com/gh/unitsofmeasurement/uom-se)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c3727b5bc16149dca5e51b23775cfce3)](https://www.codacy.com/app/unitsofmeasurement/uom-se?utm_source=github.com&utm_medium=referral&utm_content=unitsofmeasurement/uom-se&utm_campaign=badger) 
+[![Stability: Maintenance](https://masterminds.github.io/stability/maintenance.svg)](https://masterminds.github.io/stability/maintenance.html)
 [![License](http://img.shields.io/badge/license-BSD3-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) 
 [![Join the chat at https://gitter.im/unitsofmeasurement/uom-se](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unitsofmeasurement/uom-se?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
