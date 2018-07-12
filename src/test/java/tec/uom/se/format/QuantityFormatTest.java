@@ -35,6 +35,7 @@ import static tec.uom.se.unit.MetricPrefix.MEGA;
 import static tec.uom.se.unit.Units.*;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 import javax.measure.Quantity;
 import javax.measure.Unit;
@@ -53,7 +54,8 @@ import org.junit.Test;
  *
  */
 public class QuantityFormatTest {
-  private Quantity<Length> sut;
+  @SuppressWarnings("unused")
+private Quantity<Length> sut;
   private QuantityFormat format;
 
   @Before
@@ -111,5 +113,20 @@ public class QuantityFormatTest {
     } catch (ParserException e) {
       fail(e.getMessage());
     }
+  }
+
+  @Test
+  public void testParseCustom1() {
+    QuantityFormat format1 = QuantityFormat.getInstance(DecimalFormat.getInstance(), SimpleUnitFormat.getInstance());
+    Quantity<?> parsed1 = format1.parse("1 m");
+    assertEquals(1L, parsed1.getValue());
+    assertEquals(METRE, parsed1.getUnit());
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testParseCustom2() {
+	    QuantityFormat format1 = QuantityFormat.getInstance(DecimalFormat.getInstance(), SimpleUnitFormat.getInstance());
+	    @SuppressWarnings("unused")
+		Quantity<?> parsed1 = format1.parse("1");
   }
 }

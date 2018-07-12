@@ -44,6 +44,7 @@ import tec.uom.se.quantity.Quantities;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 class NumberSpaceQuantityFormat extends QuantityFormat {
+  private static final String SEPARATOR = " ";
 
   private final NumberFormat numberFormat;
 
@@ -88,19 +89,22 @@ class NumberSpaceQuantityFormat extends QuantityFormat {
     dest.append(numberFormat.format(quantity.getValue()));
     if (quantity.getUnit().equals(AbstractUnit.ONE))
       return dest;
-    dest.append(' ');
+    dest.append(SEPARATOR);
     return unitFormat.format(quantity.getUnit(), dest);
   }
 
   @Override
   public ComparableQuantity<?> parse(CharSequence csq, ParsePosition cursor) throws IllegalArgumentException, ParserException {
-    String str = csq.toString();
-    Number number = numberFormat.parse(str, cursor);
+    final String str = csq.toString();
+    final Number number = numberFormat.parse(str, cursor);
     if (number == null)
       throw new IllegalArgumentException("Number cannot be parsed");
-
-    Unit unit = unitFormat.parse(csq);
-    return Quantities.getQuantity(number.longValue(), unit);
+    final String[] parts = str.split(SEPARATOR);
+    if (parts.length < 2) {
+      throw new IllegalArgumentException("No Unit found");
+    }
+    final Unit unit = unitFormat.parse(parts[1]);
+    return Quantities.getQuantity(number, unit);
   }
 
   @Override
