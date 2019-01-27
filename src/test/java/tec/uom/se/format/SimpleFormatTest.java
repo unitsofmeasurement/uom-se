@@ -41,6 +41,7 @@ import javax.measure.quantity.Mass;
 import javax.measure.quantity.Speed;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tec.uom.se.format.SimpleUnitFormat;
@@ -106,5 +107,16 @@ public class SimpleFormatTest {
     Unit<Frequency> hz = KILO(HERTZ);
     String s = fmt.format(hz);
     assertEquals("kHz", s);
+  }
+  
+  @Test
+  @Ignore("https://github.com/unitsofmeasurement/uom-se/issues/issues/201")
+  public void testRoundtripDemo() {
+      String unit = "µmol*m^-2*446.2";
+      SimpleUnitFormat format = SimpleUnitFormat.getInstance();
+      Unit<?> parsed = format.parse(unit);
+      String formatted = format.format(parsed);
+      System.out.println("Formatted version: " + formatted);
+      Unit<?> parsed2 = format.parse(formatted);
   }
 }
