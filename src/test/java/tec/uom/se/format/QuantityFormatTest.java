@@ -55,7 +55,7 @@ import org.junit.Test;
  */
 public class QuantityFormatTest {
   @SuppressWarnings("unused")
-private Quantity<Length> sut;
+  private Quantity<Length> sut;
   private QuantityFormat format;
 
   @Before
@@ -122,11 +122,11 @@ private Quantity<Length> sut;
     assertEquals(1L, parsed1.getValue());
     assertEquals(METRE, parsed1.getUnit());
   }
-  
+
   @Test(expected = IllegalArgumentException.class)
   public void testParseCustom2() {
-	    QuantityFormat format1 = QuantityFormat.getInstance(DecimalFormat.getInstance(), SimpleUnitFormat.getInstance());
-	    @SuppressWarnings("unused")
-		Quantity<?> parsed1 = format1.parse("1");
+    QuantityFormat format1 = QuantityFormat.getInstance(DecimalFormat.getInstance(), SimpleUnitFormat.getInstance());
+    @SuppressWarnings("unused")
+    Quantity<?> parsed1 = format1.parse("1");
   }
 }
