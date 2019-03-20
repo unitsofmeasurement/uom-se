@@ -21,8 +21,3 @@ Planning
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/unitsofmeasurement/uom-se.svg)](http://isitmaintained.com/project/unitsofmeasurement/uom-se "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/unitsofmeasurement/uom-se.svg)](http://isitmaintained.com/project/unitsofmeasurement/uom-se "Percentage of issues still open")
 
-Waffle.io
-------------
-[![Stories in Ready](https://badge.waffle.io/unitsofmeasurement/uom-se.png?label=ready&title=Ready)](https://waffle.io/unitsofmeasurement/uom-se)
-
-[![Throughput Graph](https://graphs.waffle.io/unitsofmeasurement/uom-se/throughput.svg)](https://waffle.io/unitsofmeasurement/uom-se/metrics)
