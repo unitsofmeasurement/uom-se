@@ -72,7 +72,7 @@ import javax.measure.format.UnitFormat;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author Eric Russell
- * @version 1.0.3, June 7, 2017
+ * @version 1.1, April 14, 2019
  * @since 1.0
  */
 public abstract class SimpleUnitFormat extends AbstractUnitFormat {
@@ -896,9 +896,15 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       DECI.getConverter(), CENTI.getConverter(), MILLI.getConverter(), MICRO.getConverter(), NANO.getConverter(), PICO.getConverter(),
       FEMTO.getConverter(), ATTO.getConverter(), ZEPTO.getConverter(), YOCTO.getConverter() };
 
+  private static final String MU = "\u03bc";
+  
   private static String asciiPrefix(String prefix) {
-    return prefix == "µ" ? "micro" : prefix;
+    return "µ".equals(prefix) ? "micro" : prefix;
   }
+  
+  private static String asciiSymbol(String s) {
+      return "Ω".equals(s) ? "Ohm" : s;
+   }
 
   // to check if a string only contains US-ASCII characters
   //
@@ -925,8 +931,9 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       for (int j = 0; j < PREFIXES.length; j++) {
         Unit<?> u = si.transform(CONVERTERS[j]);
         DEFAULT.label(u, PREFIXES[j] + symbol);
-        if (PREFIXES[j] == "µ") {
-          ASCII.label(u, "micro"); // + symbol);
+        if ("µ".equals(PREFIXES[j])) {
+          DEFAULT.alias(u, MU + symbol);
+          ASCII.label(u, "micro" + asciiSymbol(symbol));
         }
       }
     }
@@ -937,11 +944,17 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         // be equals()?
         continue; // kg is already defined.
       DEFAULT.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), PREFIXES[i] + "g");
-      if (PREFIXES[i] == "µ") {
-        ASCII.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), "microg");
+      if ("µ".equals(PREFIXES[i])) {
+          DEFAULT.label(MICRO(Units.GRAM), "µg");
+          ASCII.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), "microg");
       }
     }
 
+    // Hack, somehow µg is not found.
+    SYMBOL_TO_UNIT.put(MICRO.getSymbol() + "g", MICRO(Units.GRAM));
+    SYMBOL_TO_UNIT.put("μg", MICRO(Units.GRAM));
+    SYMBOL_TO_UNIT.put(MU + "g", MICRO(Units.GRAM));
+    
     // Alias and ASCIIFormat for Ohm
     DEFAULT.alias(Units.OHM, "Ohm");
     ASCII.label(Units.OHM, "Ohm");

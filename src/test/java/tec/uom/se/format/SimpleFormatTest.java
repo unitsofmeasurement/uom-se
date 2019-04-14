@@ -34,6 +34,7 @@ import static tec.uom.se.unit.MetricPrefix.*;
 import static tec.uom.se.unit.Units.GRAM;
 import static tec.uom.se.unit.Units.HERTZ;
 import static tec.uom.se.unit.Units.KILOGRAM;
+import static tec.uom.se.unit.Units.METRE;
 
 import javax.measure.Unit;
 import javax.measure.quantity.Frequency;
@@ -53,70 +54,88 @@ import tec.uom.se.unit.Units;
  */
 public class SimpleFormatTest {
 
-  private SimpleUnitFormat fmt;
+  private SimpleUnitFormat format;
 
   @Before
   public void init() {
-    fmt = SimpleUnitFormat.getInstance();
+    format = SimpleUnitFormat.getInstance();
   }
 
   @Test
   public void testFormat2() {
     Unit<Speed> kph = Units.KILOMETRE_PER_HOUR;
-    String s = fmt.format(kph);
+    String s = format.format(kph);
     assertEquals("km/h", s);
   }
 
   @Test
   public void testKilo() {
     Unit<Mass> m = KILOGRAM;
-    String s = fmt.format(m);
+    String s = format.format(m);
     assertEquals("kg", s);
   }
 
   @Test
   public void testKilo2() {
     Unit<Mass> m = KILO(GRAM);
-    String s = fmt.format(m);
+    String s = format.format(m);
     assertEquals("kg", s);
   }
 
   @Test
   public void testMilli() {
     Unit<Mass> m = MILLI(GRAM);
-    String s = fmt.format(m);
+    String s = format.format(m);
     assertEquals("mg", s);
   }
 
   @Test
   public void testNano() {
     Unit<Mass> m = NANO(GRAM);
-    String s = fmt.format(m);
+    String s = format.format(m);
     assertEquals("ng", s);
   }
 
   @Test
   public void testFormatHz2() {
     Unit<Frequency> hz = MEGA(HERTZ);
-    String s = fmt.format(hz);
+    String s = format.format(hz);
     assertEquals("MHz", s);
   }
 
   @Test
   public void testFormatHz3() {
     Unit<Frequency> hz = KILO(HERTZ);
-    String s = fmt.format(hz);
+    String s = format.format(hz);
     assertEquals("kHz", s);
+  }
+  
+  @Test
+  public void testParseMicro() {
+    Unit<?> u = format.parse("μm");
+    assertEquals(MICRO(METRE), u);
+  }
+  
+  @Test
+  public void testParseMicroAlias() {
+    Unit<?> u = format.parse("\u03bcm");
+    assertEquals(MICRO(METRE), u);
+  }
+  
+  @Test
+  public void testParseMicro2() {
+    Unit<?> u = format.parse("μg");
+    assertEquals(MICRO(GRAM), u);
   }
   
   @Test
   @Ignore("https://github.com/unitsofmeasurement/uom-se/issues/issues/201")
   public void testRoundtripDemo() {
       String unit = "µmol*m^-2*446.2";
-      SimpleUnitFormat format = SimpleUnitFormat.getInstance();
-      Unit<?> parsed = format.parse(unit);
-      String formatted = format.format(parsed);
+      SimpleUnitFormat format1 = SimpleUnitFormat.getInstance();
+      Unit<?> parsed = format1.parse(unit);
+      String formatted = format1.format(parsed);
       System.out.println("Formatted version: " + formatted);
-      Unit<?> parsed2 = format.parse(formatted);
+      Unit<?> parsed2 = format1.parse(formatted);
   }
 }
