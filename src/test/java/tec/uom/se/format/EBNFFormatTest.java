@@ -118,15 +118,15 @@ public class EBNFFormatTest {
     Unit<?> u = format.parse("bl//^--1a");
     // System.out.println(u);
   }
-  
+
   @Test
   @Ignore("https://github.com/unitsofmeasurement/uom-se/issues/issues/201")
   public void testRoundtripDemo() {
-      String unit = "µmol*m^-2*446.2";
-      Unit<?> parsed = format.parse(unit);
-      String formatted = format.format(parsed);
-      System.out.println("Formatted version: " + formatted);
-      Unit<?> parsed2 = format.parse(formatted);
+    String unit = "µmol*m^-2*446.2";
+    Unit<?> parsed = format.parse(unit);
+    String formatted = format.format(parsed);
+    System.out.println("Formatted version: " + formatted);
+    Unit<?> parsed2 = format.parse(formatted);
   }
 
 }

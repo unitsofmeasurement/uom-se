@@ -897,14 +897,14 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
       FEMTO.getConverter(), ATTO.getConverter(), ZEPTO.getConverter(), YOCTO.getConverter() };
 
   private static final String MU = "\u03bc";
-  
+
   private static String asciiPrefix(String prefix) {
     return "µ".equals(prefix) ? "micro" : prefix;
   }
-  
+
   private static String asciiSymbol(String s) {
-      return "Ω".equals(s) ? "Ohm" : s;
-   }
+    return "Ω".equals(s) ? "Ohm" : s;
+  }
 
   // to check if a string only contains US-ASCII characters
   //
@@ -945,8 +945,8 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
         continue; // kg is already defined.
       DEFAULT.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), PREFIXES[i] + "g");
       if ("µ".equals(PREFIXES[i])) {
-          DEFAULT.label(MICRO(Units.GRAM), "µg");
-          ASCII.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), "microg");
+        DEFAULT.label(MICRO(Units.GRAM), "µg");
+        ASCII.label(Units.KILOGRAM.transform(CONVERTERS[i].concatenate(MILLI.getConverter())), "microg");
       }
     }
 
@@ -954,7 +954,7 @@ public abstract class SimpleUnitFormat extends AbstractUnitFormat {
     SYMBOL_TO_UNIT.put(MICRO.getSymbol() + "g", MICRO(Units.GRAM));
     SYMBOL_TO_UNIT.put("μg", MICRO(Units.GRAM));
     SYMBOL_TO_UNIT.put(MU + "g", MICRO(Units.GRAM));
-    
+
     // Alias and ASCIIFormat for Ohm
     DEFAULT.alias(Units.OHM, "Ohm");
     ASCII.label(Units.OHM, "Ohm");

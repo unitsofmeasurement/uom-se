@@ -109,33 +109,33 @@ public class SimpleFormatTest {
     String s = format.format(hz);
     assertEquals("kHz", s);
   }
-  
+
   @Test
   public void testParseMicro() {
     Unit<?> u = format.parse("μm");
     assertEquals(MICRO(METRE), u);
   }
-  
+
   @Test
   public void testParseMicroAlias() {
     Unit<?> u = format.parse("\u03bcm");
     assertEquals(MICRO(METRE), u);
   }
-  
+
   @Test
   public void testParseMicro2() {
     Unit<?> u = format.parse("μg");
     assertEquals(MICRO(GRAM), u);
   }
-  
+
   @Test
   @Ignore("https://github.com/unitsofmeasurement/uom-se/issues/issues/201")
   public void testRoundtripDemo() {
-      String unit = "µmol*m^-2*446.2";
-      SimpleUnitFormat format1 = SimpleUnitFormat.getInstance();
-      Unit<?> parsed = format1.parse(unit);
-      String formatted = format1.format(parsed);
-      System.out.println("Formatted version: " + formatted);
-      Unit<?> parsed2 = format1.parse(formatted);
+    String unit = "µmol*m^-2*446.2";
+    SimpleUnitFormat format1 = SimpleUnitFormat.getInstance();
+    Unit<?> parsed = format1.parse(unit);
+    String formatted = format1.format(parsed);
+    System.out.println("Formatted version: " + formatted);
+    Unit<?> parsed2 = format1.parse(formatted);
   }
 }

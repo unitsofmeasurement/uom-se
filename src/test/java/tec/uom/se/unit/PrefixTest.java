@@ -181,7 +181,7 @@ public class PrefixTest {
     assertNotEquals(c1, c2);
     assertNotEquals(m1, m2);
   }
-  
+
   @Test
   public void testMicro() {
     assertEquals("\u00b5g", MICRO(GRAM).toString());
