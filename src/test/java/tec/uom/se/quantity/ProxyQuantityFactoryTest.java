@@ -49,7 +49,7 @@ public class ProxyQuantityFactoryTest {
   private final Quantity<QuantityInterface> testQuantity = createTestQuantity(testQuantityValue, testQuantityUnit);
   private static final int testQuantityValue = 1;
   private static final String testQuantitySymbol = "Q";
-  private static final Unit<QuantityInterface> testQuantityUnit = new BaseUnit<QuantityInterface>(testQuantitySymbol, QuantityDimension.NONE);
+  private static final Unit<QuantityInterface> testQuantityUnit = new BaseUnit<>(testQuantitySymbol, QuantityDimension.NONE);
 
   /**
    * Local quantity interface to test the instance methods on.

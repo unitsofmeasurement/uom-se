@@ -78,14 +78,14 @@ public class ShortQuantityTest {
 
   @Test
   public void longValueTest() {
-    ShortQuantity<Time> day = new ShortQuantity<Time>(Short.valueOf("3").shortValue(), Units.DAY);
+    ShortQuantity<Time> day = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    ShortQuantity<Time> day = new ShortQuantity<Time>(Short.valueOf("3").shortValue(), Units.DAY);
+    ShortQuantity<Time> day = new ShortQuantity<>(Short.valueOf("3").shortValue(), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }

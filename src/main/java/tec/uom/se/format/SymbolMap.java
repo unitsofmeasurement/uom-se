@@ -214,7 +214,7 @@ public final class SymbolMap {
   public MetricPrefix getPrefix(String symbol) {
 	final List<String> list = symbolToPrefix.keySet().stream().collect(Collectors.toList());
 	final Comparator<String> comparator = Comparator.comparing(String::length);
-	Collections.sort(list, comparator.reversed());
+	list.sort(comparator.reversed());
 
 	for (String key : list) {
 	    if (symbol.startsWith(key)) {

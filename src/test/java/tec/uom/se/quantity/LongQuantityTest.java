@@ -48,13 +48,13 @@ public class LongQuantityTest {
   private final LongQuantity<ElectricResistance> TWO_OHM = createQuantity(2L, Units.OHM);
 
   private <Q extends Quantity<Q>> LongQuantity<Q> createQuantity(long l, Unit<Q> unit) {
-    return new LongQuantity<Q>(Long.valueOf(l).longValue(), unit);
+    return new LongQuantity<>(Long.valueOf(l).longValue(), unit);
   }
 
   @Test
   public void divideTest() {
-    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<ElectricResistance>(Long.valueOf(3).longValue(), Units.OHM);
-    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<ElectricResistance>(Long.valueOf(2).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<>(Long.valueOf(3).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<>(Long.valueOf(2).longValue(), Units.OHM);
     Quantity<?> result = quantity1.divide(quantity2);
     assertEquals(Double.valueOf(1.5d), result.getValue());
   }
@@ -69,8 +69,8 @@ public class LongQuantityTest {
 
   @Test
   public void subtractTest() {
-    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<ElectricResistance>(Long.valueOf(1).longValue(), Units.OHM);
-    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<ElectricResistance>(Long.valueOf(2).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity1 = new LongQuantity<>(Long.valueOf(1).longValue(), Units.OHM);
+    LongQuantity<ElectricResistance> quantity2 = new LongQuantity<>(Long.valueOf(2).longValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
     assertEquals(Short.valueOf("1").longValue(), result.getValue().longValue());
     assertEquals(Units.OHM, result.getUnit());
@@ -88,7 +88,7 @@ public class LongQuantityTest {
 
   @Test
   public void longValueTest() {
-    LongQuantity<Time> day = new LongQuantity<Time>(Double.valueOf(3).longValue(), Units.DAY);
+    LongQuantity<Time> day = new LongQuantity<>(Double.valueOf(3).longValue(), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }

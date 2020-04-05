@@ -29,14 +29,13 @@
  */
 package tec.uom.se.spi;
 
+import tec.uom.se.quantity.DefaultQuantityFactory;
+
 import javax.measure.Quantity;
 import javax.measure.spi.QuantityFactory;
 import javax.measure.spi.ServiceProvider;
 import javax.measure.spi.SystemOfUnitsService;
 import javax.measure.spi.UnitFormatService;
-
-import tec.uom.se.quantity.DefaultQuantityFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -139,14 +138,14 @@ public class DefaultServiceProvider extends ServiceProvider implements Comparabl
 			for (T t : ServiceLoader.load(serviceType)) {
 				services.add(t);
 			}
-			Collections.sort(services, SERVICE_COMPARATOR);
+			services.sort(SERVICE_COMPARATOR);
 			@SuppressWarnings("unchecked")
 			final List<T> previousServices = (List<T>) servicesLoaded.putIfAbsent(serviceType, (List<Object>) services);
 			return Collections.unmodifiableList(previousServices != null ? previousServices : services);
 		} catch (Exception e) {
 			Logger.getLogger(DefaultServiceProvider.class.getName()).log(Level.WARNING,
 					"Error loading services of type " + serviceType, e);
-			Collections.sort(services, SERVICE_COMPARATOR);
+			services.sort(SERVICE_COMPARATOR);
 			return services;
 		}
 	}
@@ -168,7 +167,7 @@ public class DefaultServiceProvider extends ServiceProvider implements Comparabl
 
 	 /**
 	   * Return a factory for this quantity
-	   * 
+	   *
 	   * @param quantity
 	   *          the quantity type
 	   * @return the {@link QuantityFactory}

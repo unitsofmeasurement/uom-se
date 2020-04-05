@@ -47,8 +47,8 @@ public class FloatQuantityTest {
 
   @Test
   public void divideTest() {
-    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<ElectricResistance>(Float.valueOf(3).floatValue(), Units.OHM);
-    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<ElectricResistance>(Float.valueOf(2).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<>(Float.valueOf(3).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<>(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<?> result = quantity1.divide(quantity2);
     assertEquals(Float.valueOf(1.5f), result.getValue());
   }
@@ -63,8 +63,8 @@ public class FloatQuantityTest {
 
   @Test
   public void subtractTest() {
-    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<ElectricResistance>(Float.valueOf(1).floatValue(), Units.OHM);
-    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<ElectricResistance>(Float.valueOf(2).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<>(Float.valueOf(1).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<>(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
     assertEquals(Float.valueOf(1), result.getValue());
     assertEquals(Units.OHM, result.getUnit());
@@ -72,22 +72,22 @@ public class FloatQuantityTest {
 
   @Test
   public void multiplyQuantityTest() {
-    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<ElectricResistance>(Float.valueOf(3).floatValue(), Units.OHM);
-    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<ElectricResistance>(Float.valueOf(2).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity1 = new FloatQuantity<>(Float.valueOf(3).floatValue(), Units.OHM);
+    FloatQuantity<ElectricResistance> quantity2 = new FloatQuantity<>(Float.valueOf(2).floatValue(), Units.OHM);
     Quantity<?> result = quantity1.multiply(quantity2);
     assertEquals(Float.valueOf(6L), result.getValue());
   }
 
   @Test
   public void longValueTest() {
-    FloatQuantity<Time> day = new FloatQuantity<Time>(3F, Units.DAY);
+    FloatQuantity<Time> day = new FloatQuantity<>(3F, Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    FloatQuantity<Time> day = new FloatQuantity<Time>(3F, Units.DAY);
+    FloatQuantity<Time> day = new FloatQuantity<>(3F, Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }

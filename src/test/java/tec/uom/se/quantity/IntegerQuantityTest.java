@@ -46,8 +46,8 @@ public class IntegerQuantityTest {
 
   @Test
   public void divideTest() {
-    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<ElectricResistance>(Long.valueOf(3).intValue(), Units.OHM);
-    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<ElectricResistance>(Long.valueOf(2).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<>(Long.valueOf(3).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<>(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<?> result = quantity1.divide(quantity2);
     assertEquals(Double.valueOf(1.5d), result.getValue());
   }
@@ -63,8 +63,8 @@ public class IntegerQuantityTest {
 
   @Test
   public void subtractTest() {
-    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<ElectricResistance>(Long.valueOf(1).intValue(), Units.OHM);
-    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<ElectricResistance>(Long.valueOf(2).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<>(Long.valueOf(1).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<>(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<ElectricResistance> result = quantity2.subtract(quantity1);
     assertEquals(Short.valueOf("1").intValue(), result.getValue().intValue());
     assertEquals(Units.OHM, result.getUnit());
@@ -72,22 +72,22 @@ public class IntegerQuantityTest {
 
   @Test
   public void multiplyQuantityTest() {
-    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<ElectricResistance>(Long.valueOf(3).intValue(), Units.OHM);
-    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<ElectricResistance>(Long.valueOf(2).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity1 = new IntegerQuantity<>(Long.valueOf(3).intValue(), Units.OHM);
+    IntegerQuantity<ElectricResistance> quantity2 = new IntegerQuantity<>(Long.valueOf(2).intValue(), Units.OHM);
     Quantity<?> result = quantity1.multiply(quantity2);
     assertEquals(Integer.valueOf(6), result.getValue());
   }
 
   @Test
   public void longValueTest() {
-    IntegerQuantity<Time> day = new IntegerQuantity<Time>(Integer.valueOf(3).intValue(), Units.DAY);
+    IntegerQuantity<Time> day = new IntegerQuantity<>(Integer.valueOf(3).intValue(), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    IntegerQuantity<Time> day = new IntegerQuantity<Time>(Integer.valueOf(3).intValue(), Units.DAY);
+    IntegerQuantity<Time> day = new IntegerQuantity<>(Integer.valueOf(3).intValue(), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }
@@ -113,22 +113,22 @@ public class IntegerQuantityTest {
 
   @Test
   public void milliOhmTest() {
-    final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(), Units.OHM);
-    final IntegerQuantity<ElectricResistance> ONE_MILLIOHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(),
-        MetricPrefix.MILLI(Units.OHM));
+    final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<>(Integer.valueOf(1).intValue(), Units.OHM);
+    final IntegerQuantity<ElectricResistance> ONE_MILLIOHM = new IntegerQuantity<>(Integer.valueOf(1).intValue(),
+			MetricPrefix.MILLI(Units.OHM));
 
     assertEquals(ONE_OHM, ONE_OHM.add(ONE_MILLIOHM));
-    final IntegerQuantity<ElectricResistance> ONEOONE_MILLIOHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1001),
-        MetricPrefix.MILLI(Units.OHM));
+    final IntegerQuantity<ElectricResistance> ONEOONE_MILLIOHM = new IntegerQuantity<>(Integer.valueOf(1001),
+			MetricPrefix.MILLI(Units.OHM));
     assertEquals(ONEOONE_MILLIOHM, ONE_MILLIOHM.add(ONE_OHM));
   }
 
   @Test
   public void yottaOhmTest() {
-    final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(), Units.OHM);
-    final IntegerQuantity<ElectricResistance> ONE_YOTTAOHM = new IntegerQuantity<ElectricResistance>(Integer.valueOf(1).intValue(),
-        MetricPrefix.YOTTA(Units.OHM));
-    final IntegerQuantity<ElectricResistance> INT_MIN_OHM = new IntegerQuantity<ElectricResistance>(Integer.MIN_VALUE, Units.OHM);
+    final IntegerQuantity<ElectricResistance> ONE_OHM = new IntegerQuantity<>(Integer.valueOf(1).intValue(), Units.OHM);
+    final IntegerQuantity<ElectricResistance> ONE_YOTTAOHM = new IntegerQuantity<>(Integer.valueOf(1).intValue(),
+			MetricPrefix.YOTTA(Units.OHM));
+    final IntegerQuantity<ElectricResistance> INT_MIN_OHM = new IntegerQuantity<>(Integer.MIN_VALUE, Units.OHM);
 
     assertEquals(INT_MIN_OHM, ONE_OHM.add(ONE_YOTTAOHM));
   }

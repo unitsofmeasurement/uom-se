@@ -124,14 +124,14 @@ public class NumberQuantityTest {
 
   @Test
   public void doubleValueTest() {
-    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    NumberQuantity<Time> day = new NumberQuantity<>(Double.valueOf(3), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72, hours, 0);
   }
 
   @Test
   public void intValueTest() {
-    NumberQuantity<Time> day = new NumberQuantity<Time>(Double.valueOf(3), Units.DAY);
+    NumberQuantity<Time> day = new NumberQuantity<>(Double.valueOf(3), Units.DAY);
     int hours = day.intValue(Units.HOUR);
     assertEquals(72, hours, 0);
   }
