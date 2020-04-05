@@ -105,8 +105,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *
    * @implNote SI Base Unit
    */
-  public static final Unit<ElectricCurrent> AMPERE = addUnit(new BaseUnit<>("A", QuantityDimension.ELECTRIC_CURRENT),
-      ElectricCurrent.class);
+  public static final Unit<ElectricCurrent> AMPERE = addUnit(new BaseUnit<>("A", QuantityDimension.ELECTRIC_CURRENT), ElectricCurrent.class);
 
   /**
    * The SI base unit for luminous intensity quantities (standard name <code>cd</code>). The candela is the luminous intensity, in a given direction,
@@ -117,8 +116,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    *
    * @implNote SI Base Unit
    */
-  public static final Unit<LuminousIntensity> CANDELA = addUnit(new BaseUnit<>("cd", QuantityDimension.LUMINOUS_INTENSITY),
-      LuminousIntensity.class);
+  public static final Unit<LuminousIntensity> CANDELA = addUnit(new BaseUnit<>("cd", QuantityDimension.LUMINOUS_INTENSITY), LuminousIntensity.class);
 
   /**
    * The SI base unit for thermodynamic temperature quantities (standard name <code>K</code>). The kelvin is the 1/273.16th of the thermodynamic
@@ -233,22 +231,19 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * charge of 1 coulomb on each plate and a potential difference of 1 volt between the plates. It is named after the British physicist and chemist
    * Michael Faraday (1791-1867).
    */
-  public static final Unit<ElectricCapacitance> FARAD = addUnit(new AlternateUnit<>(COULOMB.divide(VOLT), "F"),
-      ElectricCapacitance.class);
+  public static final Unit<ElectricCapacitance> FARAD = addUnit(new AlternateUnit<>(COULOMB.divide(VOLT), "F"), ElectricCapacitance.class);
 
   /**
    * The SI unit for electric resistance (standard name <code>Ohm</code>). One Ohm is equal to the resistance of a conductor in which a current of one
    * ampere is produced by a potential of one volt across its terminals. It is named after the German physicist Georg Simon Ohm (1789-1854).
    */
-  public static final Unit<ElectricResistance> OHM = addUnit(new AlternateUnit<>(VOLT.divide(AMPERE), "Ω"),
-      ElectricResistance.class);
+  public static final Unit<ElectricResistance> OHM = addUnit(new AlternateUnit<>(VOLT.divide(AMPERE), "Ω"), ElectricResistance.class);
 
   /**
    * The SI unit for electric conductance (standard name <code>S</code>). One Siemens is equal to one ampere per volt. It is named after the German
    * engineer Ernst Werner von Siemens (1816-1892).
    */
-  public static final Unit<ElectricConductance> SIEMENS = addUnit(new AlternateUnit<>(AMPERE.divide(VOLT), "S"),
-      ElectricConductance.class);
+  public static final Unit<ElectricConductance> SIEMENS = addUnit(new AlternateUnit<>(AMPERE.divide(VOLT), "S"), ElectricConductance.class);
 
   /**
    * The SI unit for magnetic flux (standard name <code>Wb</code>). One Weber is equal to the magnetic flux that in linking a circuit of one turn
@@ -261,16 +256,14 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The alternate unit for magnetic flux density (standard name <code>T</code>). One Tesla is equal equal to one weber per square metre. It is named
    * after the Serbian-born American electrical engineer and physicist Nikola Tesla (1856-1943).
    */
-  public static final Unit<MagneticFluxDensity> TESLA = addUnit(new AlternateUnit<>(WEBER.divide(METRE.pow(2)), "T"),
-      MagneticFluxDensity.class);
+  public static final Unit<MagneticFluxDensity> TESLA = addUnit(new AlternateUnit<>(WEBER.divide(METRE.pow(2)), "T"), MagneticFluxDensity.class);
 
   /**
    * The alternate unit for inductance (standard name <code>H</code>). One Henry is equal to the inductance for which an induced electromotive force
    * of one volt is produced when the current is varied at the rate of one ampere per second. It is named after the American physicist Joseph Henry
    * (1791-1878).
    */
-  public static final Unit<ElectricInductance> HENRY = addUnit(new AlternateUnit<>(WEBER.divide(AMPERE), "H"),
-      ElectricInductance.class);
+  public static final Unit<ElectricInductance> HENRY = addUnit(new AlternateUnit<>(WEBER.divide(AMPERE), "H"), ElectricInductance.class);
 
   /**
    * The SI unit for Celsius temperature (standard name <code>Cel</code>). This is a unit of temperature such as the freezing point of water (at one
@@ -301,21 +294,18 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * The SI unit for absorbed dose, specific energy (imparted), kerma (standard name <code>Gy</code>). One gray is equal to the dose of one joule of
    * energy absorbed per one kilogram of matter. It is named after the British physician L. H. Gray (1905-1965).
    */
-  public static final Unit<RadiationDoseAbsorbed> GRAY = addUnit(new AlternateUnit<>(JOULE.divide(KILOGRAM), "Gy"),
-      RadiationDoseAbsorbed.class);
+  public static final Unit<RadiationDoseAbsorbed> GRAY = addUnit(new AlternateUnit<>(JOULE.divide(KILOGRAM), "Gy"), RadiationDoseAbsorbed.class);
 
   /**
    * The SI unit for dose equivalent (standard name <code>Sv</code>). One Sievert is equal is equal to the actual dose, in grays, multiplied by a
    * "quality factor" which is larger for more dangerous forms of radiation. It is named after the Swedish physicist Rolf Sievert (1898-1966).
    */
-  public static final Unit<RadiationDoseEffective> SIEVERT = addUnit(new AlternateUnit<>(JOULE.divide(KILOGRAM), "Sv"),
-      RadiationDoseEffective.class);
+  public static final Unit<RadiationDoseEffective> SIEVERT = addUnit(new AlternateUnit<>(JOULE.divide(KILOGRAM), "Sv"), RadiationDoseEffective.class);
 
   /**
    * The SI unit for catalytic activity (standard name <code>kat</code>).
    */
-  public static final Unit<CatalyticActivity> KATAL = addUnit(new AlternateUnit<>(MOLE.divide(SECOND), "kat"),
-      CatalyticActivity.class);
+  public static final Unit<CatalyticActivity> KATAL = addUnit(new AlternateUnit<>(MOLE.divide(SECOND), "kat"), CatalyticActivity.class);
 
   // ////////////////////////////
   // SI DERIVED PRODUCT UNITS //
@@ -413,7 +403,7 @@ public class Units extends AbstractSystemOfUnits implements Nameable {
    * @see <a href="https://en.wikipedia.org/wiki/Litre"> Wikipedia: Litre</a>
    */
   public static final Unit<Volume> LITRE = AbstractSystemOfUnits.Helper.addUnit(INSTANCE.units, new TransformedUnit<>(CUBIC_METRE,
-		  new RationalConverter(1, 1000)), "Litre", "l");
+      new RationalConverter(1, 1000)), "Litre", "l");
 
   /**
    * Returns the unique instance of this class.
