@@ -55,7 +55,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a comparator to sort by number, ignoring the unit.
-   * 
+   *
    * @return <p>
    *         <b>Given:</b>
    *         <p>
@@ -71,12 +71,12 @@ public final class QuantityFunctions {
    * @throws NullPointerException
    */
   public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortNumber() {
-		return (q1, q2) -> Double.compare(q1.getValue().doubleValue(), q2.getValue().doubleValue());
+		return Comparator.comparingDouble(q -> q.getValue().doubleValue());
 	}
 
   /**
    * Creates a comparator to sort by number descending, ignoring the unit.
-   * 
+   *
    * @return <p>
    *         <b>Given:</b>
    *         <p>
@@ -98,7 +98,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a comparator to sort by name, ignoring the value.
-   * 
+   *
    * @return <p>
    *         <b>Given:</b>
    *         <p>
@@ -114,12 +114,12 @@ public final class QuantityFunctions {
    * @throws NullPointerException
    */
   public static <Q extends Quantity<Q>> Comparator<Quantity<Q>> sortSymbol() {
-		return (q1, q2) -> q1.getUnit().getSymbol().compareTo(q2.getUnit().getSymbol());
+		return Comparator.comparing(q -> q.getUnit().getSymbol());
 	}
 
   /**
    * Creates a comparator to sort by name descending, ignoring the value.
-   * 
+   *
    * @return <p>
    *         <b>Given:</b>
    *         </p>
@@ -141,7 +141,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a comparator to sort by natural order, looking to both the unit and the value.
-   * 
+   *
    * @return <p>
    *         <b>Given:</b>
    *         </p>
@@ -163,7 +163,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a comparator to sort by natural order descending, looking to both the unit and the value.
-   * 
+   *
    * @return <p>
    *         <b>Given:</b>
    *         </p>
@@ -185,7 +185,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a BinaryOperator to calculate the minimum Quantity
-   * 
+   *
    * @return the min BinaryOperator, not null.
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> min() {
@@ -203,7 +203,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a BinaryOperator to calculate the maximum Quantity
-   * 
+   *
    * @return the max BinaryOperator, not null.
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> max() {
@@ -221,7 +221,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a BinaryOperator to sum.
-   * 
+   *
    * @return the sum BinaryOperator
    */
   public static <Q extends Quantity<Q>> BinaryOperator<Quantity<Q>> sum() {
@@ -230,7 +230,7 @@ public final class QuantityFunctions {
 
   /**
    * Creates a BinaryOperator to sum converting to unit
-   * 
+   *
    * @param unit
    *          unit to be converting
    * @return the sum BinaryOperator converting to unit
@@ -241,7 +241,7 @@ public final class QuantityFunctions {
 
   /**
    * Predicate to filter to one or more units
-   * 
+   *
    * @param units
    *          - units to be filtered (optional)
    * @return A predicate to filter one or more units
@@ -265,7 +265,7 @@ public final class QuantityFunctions {
 
   /**
    * Predicate to filter excluding these units
-   * 
+   *
    * @param units
    *          - units to be filtered (optional)
    * @return A predicate to filter to not be these units
@@ -280,7 +280,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a Filter to greater than number, ignoring units
-   * 
+   *
    * @param value
    *          - the value to be used in Predicate
    * @return the Predicate greater than this number, ignoring units
@@ -291,7 +291,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a filter to greater than the quantity measure
-   * 
+   *
    * @param quantity
    *          - the measure to be used in filter
    * @return the Predicate greater than this measure
@@ -302,7 +302,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a Filter to greater or equals than number, ignoring units
-   * 
+   *
    * @param value
    *          - the value to be used in Predicate
    * @return the Predicate greater or equals than this number, ignoring units
@@ -313,7 +313,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a filter to greater or equals than the quantity measure
-   * 
+   *
    * @param quantity
    *          - the measure to be used in filter
    * @return the Predicate greater or equals than this measure
@@ -324,7 +324,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a Filter to lesser than number, ignoring units
-   * 
+   *
    * @param value
    *          - the value to be used in Predicate
    * @return the Predicate greater than this number, ignoring units
@@ -335,7 +335,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a filter to lesser than the quantity measure
-   * 
+   *
    * @param quantity
    *          - the measure to be used in filter
    * @return the Predicate lesser than this measure
@@ -346,7 +346,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a Filter to lesser or equals than number, ignoring units
-   * 
+   *
    * @param value
    *          - the value to be used in Predicate
    * @return the Predicate lesser or equals than this number, ignoring units
@@ -357,7 +357,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a filter to lesser or equals than the quantity measure
-   * 
+   *
    * @param quantity
    *          - the measure to be used in filter
    * @return the Predicate lesser or equals than this measure
@@ -368,7 +368,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a Filter to between, lesser or equals and greater or equals, than number, ignoring units
-   * 
+   *
    * @param min
    *          - the min value to be used in Predicate
    * @param max
@@ -383,7 +383,7 @@ public final class QuantityFunctions {
 
   /**
    * creates a filter to between, lesser or equals and greater or equals, than the quantity measure
-   * 
+   *
    * @param min
    *          - the min value to be used in Predicate
    * @param max
@@ -396,7 +396,7 @@ public final class QuantityFunctions {
 
   /**
    * Summary of Quantity
-   * 
+   *
    * @return the QuantitySummaryStatistics
    */
   public static <Q extends Quantity<Q>> Collector<Quantity<Q>, QuantitySummaryStatistics<Q>, QuantitySummaryStatistics<Q>> summarizeQuantity(
