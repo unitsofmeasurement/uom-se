@@ -53,7 +53,7 @@ import tec.uom.se.AbstractUnit;
  *      Mass m = DefaultQuantityFactory.getInstance(Mass.class).create(23.0, KILOGRAM); // 23.0 kg<br/>
  *      Time m = DefaultQuantityFactory.getInstance(Time.class).create(124, MILLI(SECOND)); // 124 ms
  * </code>
- * 
+ *
  * @param <Q>
  *          The type of the quantity.
  *
@@ -139,7 +139,7 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
     logger.log(LOG_LEVEL, "Type: " + type + ": " + type.isInterface());
     QuantityFactory<Q> factory;
     if (!type.isInterface()) {
-      factory = new DefaultQuantityFactory<Q>(type);
+      factory = new DefaultQuantityFactory<>(type);
       // TODO use instances?
     } else {
       factory = INSTANCES.get(type);
@@ -151,7 +151,7 @@ public class DefaultQuantityFactory<Q extends Quantity<Q>> implements QuantityFa
         // user don't try to trick the Java generic types system with
         // unsafe cast.
         throw new ClassCastException();
-      factory = new DefaultQuantityFactory<Q>(type);
+      factory = new DefaultQuantityFactory<>(type);
       INSTANCES.put(type, factory);
     }
     return factory;

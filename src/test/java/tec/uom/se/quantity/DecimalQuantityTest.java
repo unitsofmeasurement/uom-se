@@ -142,14 +142,14 @@ public class DecimalQuantityTest {
 
   @Test
   public void longValueTest() {
-    final DecimalQuantity<Time> day = new DecimalQuantity<Time>(Double.valueOf(3), Units.DAY);
+    final DecimalQuantity<Time> day = new DecimalQuantity<>(Double.valueOf(3), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    DecimalQuantity<Time> day = new DecimalQuantity<Time>(Double.valueOf(3), Units.DAY);
+    DecimalQuantity<Time> day = new DecimalQuantity<>(Double.valueOf(3), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }

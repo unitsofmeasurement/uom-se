@@ -78,14 +78,14 @@ public class ByteQuantityTest {
 
   @Test
   public void longValueTest() {
-    ByteQuantity<Time> day = new ByteQuantity<Time>(Byte.valueOf("3").byteValue(), Units.DAY);
+    ByteQuantity<Time> day = new ByteQuantity<>(Byte.valueOf("3").byteValue(), Units.DAY);
     long hours = day.longValue(Units.HOUR);
     assertEquals(72L, hours);
   }
 
   @Test
   public void doubleValueTest() {
-    ByteQuantity<Time> day = new ByteQuantity<Time>(Byte.valueOf("3").byteValue(), Units.DAY);
+    ByteQuantity<Time> day = new ByteQuantity<>(Byte.valueOf("3").byteValue(), Units.DAY);
     double hours = day.doubleValue(Units.HOUR);
     assertEquals(72D, hours, 0);
   }

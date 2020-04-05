@@ -424,7 +424,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     if (unit instanceof AbstractUnit<?>) {
       return (AbstractUnit<Q>) unit;
     } else {
-      return new ProductUnit<Q>(unit);
+      return new ProductUnit<>(unit);
     }
   }
 

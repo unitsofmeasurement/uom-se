@@ -163,7 +163,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
    * @return the corresponding <code>int</code> quantity.
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(long longValue, Unit<Q> unit) {
-    return new LongQuantity<Q>(longValue, unit);
+    return new LongQuantity<>(longValue, unit);
   }
 
   /**
@@ -176,7 +176,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
    * @return the corresponding <code>int</code> quantity.
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(int intValue, Unit<Q> unit) {
-    return new IntegerQuantity<Q>(intValue, unit);
+    return new IntegerQuantity<>(intValue, unit);
   }
 
   /**
@@ -189,7 +189,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
    * @return the corresponding <code>short</code> quantity.
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(short value, Unit<Q> unit) {
-    return new ShortQuantity<Q>(value, unit);
+    return new ShortQuantity<>(value, unit);
   }
 
   /**
@@ -202,7 +202,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
    * @return the corresponding <code>byte</code> quantity.
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(byte value, Unit<Q> unit) {
-    return new ByteQuantity<Q>(value, unit);
+    return new ByteQuantity<>(value, unit);
   }
 
   /**
@@ -215,7 +215,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
    * @return the corresponding <code>float</code> quantity.
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(float floatValue, Unit<Q> unit) {
-    return new FloatQuantity<Q>(floatValue, unit);
+    return new FloatQuantity<>(floatValue, unit);
   }
 
   /**
@@ -228,7 +228,7 @@ public class NumberQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> i
    * @return the corresponding <code>double</code> quantity.
    */
   public static <Q extends Quantity<Q>> AbstractQuantity<Q> of(double doubleValue, Unit<Q> unit) {
-    return new DoubleQuantity<Q>(doubleValue, unit);
+    return new DoubleQuantity<>(doubleValue, unit);
   }
 
   @Override
