@@ -97,7 +97,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    */
   public ProductUnit(Unit<?> productUnit) {
     this.symbol = productUnit.getSymbol();
-    this.elements = ((ProductUnit<?>) productUnit).elements;
+    this.elements = copyAndSort(((ProductUnit<?>) productUnit).elements);
   }
 
   /**
@@ -107,7 +107,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the product elements.
    */
   private ProductUnit(Element[] elements) {
-    this.elements = elements;
+    this.elements = copyAndSort(elements);
     // this.symbol = elements[0].getUnit().getSymbol(); // FIXME this should contain ALL elements
     this.symbol = null;
   }
@@ -276,8 +276,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
     if (obj instanceof ProductUnit) {
       ProductUnit other = (ProductUnit) obj;
-      Arrays.sort(elements);
-      Arrays.sort(other.elements);
       return Arrays.equals(elements, other.elements);
     }
     if (obj instanceof Unit<?>) {
@@ -289,10 +287,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
   @Override
   public int hashCode() {
-    if (elements.length == 1 && equals(elements[0])) {
-      return elements[0].hashCode();
-    }
-    Arrays.sort(elements);
     return Arrays.hashCode(elements);
   }
 
@@ -442,6 +436,16 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
       return m;
     else
       return gcd(n, m % n);
+  }
+
+  // -- returns a defensive sorted copy
+  private Element[] copyAndSort(Element[] elements) {
+    if (elements == null || elements.length <= 1) {
+      return elements;
+    }
+    final Element[] elementsSorted = Arrays.copyOf(elements, elements.length);
+    Arrays.sort(elementsSorted);
+    return elementsSorted;
   }
 
   /**
