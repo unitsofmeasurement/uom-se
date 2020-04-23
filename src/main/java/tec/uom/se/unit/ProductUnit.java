@@ -29,20 +29,21 @@
  */
 package tec.uom.se.unit;
 
-import tec.uom.se.AbstractConverter;
-import tec.uom.se.AbstractUnit;
-import tec.uom.se.quantity.QuantityDimension;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 import javax.measure.Dimension;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import tec.uom.se.AbstractConverter;
+import tec.uom.se.AbstractUnit;
+import tec.uom.se.quantity.QuantityDimension;
 
 /**
  * <p>
@@ -59,7 +60,8 @@ import java.util.Objects;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.4, November 7, 2017
+ * @author Andi Huber
+ * @version 1.0.5, April 22, 2020
  * @since 1.0
  */
 public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
@@ -97,7 +99,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    */
   public ProductUnit(Unit<?> productUnit) {
     this.symbol = productUnit.getSymbol();
-    this.elements = copyAndSort(((ProductUnit<?>) productUnit).elements);
+    this.elements = ((ProductUnit<?>) productUnit).elements;
   }
 
   /**
@@ -107,7 +109,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
    *          the product elements.
    */
   private ProductUnit(Element[] elements) {
-    this.elements = copyAndSort(elements);
+    this.elements = elements;
     // this.symbol = elements[0].getUnit().getSymbol(); // FIXME this should contain ALL elements
     this.symbol = null;
   }
@@ -275,8 +277,8 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
       return true;
     }
     if (obj instanceof ProductUnit) {
-      ProductUnit other = (ProductUnit) obj;
-      return Arrays.equals(elements, other.elements);
+      ProductUnit<?> other = (ProductUnit<?>) obj;
+      return ElementUtil.arrayEqualsArbitraryOrder(this.elements, other.elements);
     }
     if (obj instanceof Unit<?>) {
       // A wrapper ProductUnit is equal to the unit it wraps
@@ -284,11 +286,18 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     }
     return false;
   }
-
+  
+  // thread safe cache for the expensive hashCode calculation 
+  private transient Lazy<Integer> hashCode = new Lazy<>(this::calculateHashCode); 
+  private int calculateHashCode() {
+      return Objects.hash((Object[]) ElementUtil.copyAndSort(elements));
+  }
+  
   @Override
   public int hashCode() {
-    return Arrays.hashCode(elements);
+      return hashCode.get(); // lazy and thread-safe
   }
+
 
   @SuppressWarnings("unchecked")
   @Override
@@ -318,7 +327,7 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
     UnitConverter converter = AbstractConverter.IDENTITY;
     for (Element e : elements) {
       if (e.unit instanceof AbstractUnit) {
-        UnitConverter cvtr = ((AbstractUnit) e.unit).getSystemConverter();
+        UnitConverter cvtr = ((AbstractUnit<?>) e.unit).getSystemConverter();
         if (!(cvtr.isLinear()))
           throw new UnsupportedOperationException(e.unit + " is non-linear, cannot convert");
         if (e.root != 1)
@@ -438,20 +447,10 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
       return gcd(n, m % n);
   }
 
-  // -- returns a defensive sorted copy
-  private Element[] copyAndSort(Element[] elements) {
-    if (elements == null || elements.length <= 1) {
-      return elements;
-    }
-    final Element[] elementsSorted = Arrays.copyOf(elements, elements.length);
-    Arrays.sort(elementsSorted);
-    return elementsSorted;
-  }
-
   /**
    * Inner product element represents a rational power of a single unit.
    */
-  private final static class Element implements Serializable, Comparable<Element> {
+  private final static class Element implements Serializable {
 
     /**
 		 *
@@ -532,23 +531,6 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
 
     }
 
-    /**
-     * Arbitrary ordering, to be used only in sorting arrays for {@link ProductUnit#equals} and {@link ProductUnit#hashCode}.
-     */
-    @Override
-    public int compareTo(Element other) {
-      // hashCode() - other.hashCode() may overflow
-      long ourHash = hashCode();
-      long theirHash = other.hashCode();
-      if (ourHash < theirHash) {
-        return -1;
-      } else if (ourHash == theirHash) {
-        return 0;
-      } else {
-        return 1;
-      }
-    }
-
     @Override
     public int hashCode() {
       return Objects.hash(unit, ((double) pow) / root);
@@ -559,4 +541,80 @@ public final class ProductUnit<Q extends Quantity<Q>> extends AbstractUnit<Q> {
   public String getSymbol() {
     return symbol;
   }
+  
+  // Element specific algorithms provided locally to this class
+  private final static class ElementUtil {
+      
+      // -- returns a defensive sorted copy, unless size <= 1 
+      private static Element[] copyAndSort(final Element[] elements) {
+          if (elements == null || elements.length <= 1) {
+              return elements;
+          }
+          final Element[] elementsSorted = Arrays.copyOf(elements, elements.length);
+          Arrays.sort(elementsSorted, ElementUtil::compare);
+          return elementsSorted;
+      }
+      
+      private static int compare(final Element e0, final Element e1) {
+          final Unit<?> sysUnit0 = e0.getUnit().getSystemUnit();
+          final Unit<?> sysUnit1 = e1.getUnit().getSystemUnit();
+          final String symbol0 = sysUnit0.getSymbol();
+          final String symbol1 = sysUnit1.getSymbol();
+          
+          if (symbol0 != null && symbol1 != null) {
+              return symbol0.compareTo(symbol1);
+          } else {
+              return sysUnit0.toString().compareTo(sysUnit1.toString());
+          }
+      }
+      
+      // optimized for the fact, that can only return true, if for each element in e0 there exist a single match in e1
+      private static boolean arrayEqualsArbitraryOrder(final Element[] e0, final Element[] e1) {
+          if (e0.length != e1.length) {
+              return false;
+          }
+          for (Element left : e0) {
+              boolean unitFound = false;
+              for (Element right : e1) {
+                  if (left.unit.equals(right.unit)) {
+                      if (left.pow != right.pow || left.root != right.root) {
+                          return false;
+                      } else {
+                          unitFound = true;
+                          break;
+                      }
+                  }
+              }
+              if (!unitFound) {
+                  return false;
+              }
+          }
+          return true;
+      }
+      
+  }
+  
+  // Holder of an instance of type T, supporting the <em>compute-if-absent</em> idiom in a thread-safe manner.
+  private static class Lazy<T> {
+
+      private final Supplier<? extends T> supplier;
+      private T value;
+      private boolean memoized;
+
+      public Lazy(Supplier<? extends T> supplier) {
+          this.supplier = Objects.requireNonNull(supplier, "supplier is required");
+      }
+
+      public T get() {
+          synchronized (this) {
+              if(memoized) {
+                  return value;
+              }
+              memoized = true;
+              return value = supplier.get();    
+          }
+      }
+
+  }
+  
 }
