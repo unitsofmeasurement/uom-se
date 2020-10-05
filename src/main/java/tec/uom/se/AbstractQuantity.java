@@ -226,12 +226,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
 
   @Override
   public boolean isEquivalentOf(Quantity<Q> that) {
-    return this.compareTo(that) == 0;
+	  return isEquivalentTo(that);
   }
 
   @Override
   public boolean isEquivalentTo(Quantity<Q> that) {
-    return isEquivalentOf(that);
+	return this.compareTo(that) == 0;    
   }
 
   /**
