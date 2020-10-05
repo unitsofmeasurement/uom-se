@@ -244,8 +244,14 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    */
   @Override
   public int compareTo(Quantity<Q> that) {
-    final Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
-    return comparator.compare(this, that);
+    boolean uCom = ((ComparableUnit)this.getUnit()).isEquivalentTo(that.getUnit());
+	  if (getUnit().getConverterTo(getUnit().getSystemUnit()).equals(
+    		that.getUnit().getConverterTo(that.getUnit().getSystemUnit()))) {
+    	return 0;
+    } else {
+	  final Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
+	  return comparator.compare(this, that);
+    }
   }
 
   /**
