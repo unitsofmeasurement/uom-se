@@ -86,11 +86,6 @@ public abstract class AbstractConverter implements UnitConverter, Converter<Numb
   }
 
   @Override
-  public boolean isIdentity() {
-    return false;
-  }
-
-  @Override
   public abstract boolean equals(Object cvtr);
 
   @Override

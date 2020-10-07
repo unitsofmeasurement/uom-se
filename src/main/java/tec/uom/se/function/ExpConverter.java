@@ -46,7 +46,7 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, Oct 10, 2016
+ * @version 1.1, Oct 7, 2020
  * @since 1.0
  */
 public final class ExpConverter extends AbstractConverter implements ValueSupplier<String> {
@@ -137,5 +137,10 @@ public final class ExpConverter extends AbstractConverter implements ValueSuppli
   @Override
   public String getValue() {
     return toString();
+  }
+
+  @Override
+  public boolean isIdentity() {
+    return false;
   }
 }

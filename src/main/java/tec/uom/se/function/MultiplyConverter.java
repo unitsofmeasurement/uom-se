@@ -38,6 +38,7 @@ import tec.uom.se.AbstractConverter;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
+import java.util.function.DoubleSupplier;
 
 /**
  * <p>
@@ -46,10 +47,10 @@ import java.util.Objects;
  * 
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, Oct 11, 2016
+ * @version 1.1, Oct 8, 2020
  * @since 1.0
  */
-public final class MultiplyConverter extends AbstractConverter implements ValueSupplier<Double>, DoubleFactorSupplier {
+public final class MultiplyConverter extends AbstractConverter implements ValueSupplier<Double>, DoubleFactorSupplier, DoubleSupplier {
 
   /**
    * 
@@ -136,6 +137,16 @@ public final class MultiplyConverter extends AbstractConverter implements ValueS
 
   @Override
   public Double getValue() {
+    return factor;
+  }
+
+  @Override
+  public boolean isIdentity() {
+    return factor == 1.0;
+  }
+
+  @Override
+  public double getAsDouble() {
     return factor;
   }
 }

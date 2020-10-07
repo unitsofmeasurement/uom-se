@@ -105,4 +105,9 @@ final class PiDivisorConverter extends AbstractConverter implements ValueSupplie
   public String getValue() {
     return toString();
   }
+
+  @Override
+  public boolean isIdentity() {
+    return false;
+  }
 }

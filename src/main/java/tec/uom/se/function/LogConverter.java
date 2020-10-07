@@ -29,7 +29,6 @@
  */
 package tec.uom.se.function;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -45,7 +44,7 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, October 10, 2016
+ * @version 1.1, October 7, 2020
  */
 public final class LogConverter extends AbstractConverter implements ValueSupplier<String> { // implements Immutable<String> {
 
@@ -134,5 +133,10 @@ public final class LogConverter extends AbstractConverter implements ValueSuppli
   @Override
   public String getValue() {
     return toString();
+  }
+
+  @Override
+  public boolean isIdentity() {
+    return false;
   }
 }

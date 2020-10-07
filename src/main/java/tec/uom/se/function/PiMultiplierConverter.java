@@ -103,6 +103,11 @@ public final class PiMultiplierConverter extends AbstractConverter implements Va
     return true;
   }
 
+  @Override
+  public boolean isIdentity() {
+    return false;
+  }
+
   /**
    * Pi calculation with Machin's formula.
    * 

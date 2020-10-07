@@ -49,7 +49,7 @@ import java.util.function.Supplier;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, Oct 11, 2016
+ * @version 1.1, Oct 7, 2020
  * @since 1.0
  */
 public final class RationalConverter extends AbstractConverter implements ValueSupplier<Double>, Supplier<Double>, DoubleSupplier {
@@ -251,5 +251,10 @@ public final class RationalConverter extends AbstractConverter implements ValueS
   @Override
   public Double get() {
     return getValue();
+  }
+
+  @Override
+  public boolean isIdentity() {
+    return BigDecimal.ONE.equals(new BigDecimal(dividend).divide(new BigDecimal(divisor)));
   }
 }

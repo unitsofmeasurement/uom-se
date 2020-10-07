@@ -45,6 +45,7 @@ import tec.uom.lib.common.function.ValueSupplier;
 import tec.uom.se.format.QuantityFormat;
 import tec.uom.se.function.NaturalOrder;
 import tec.uom.se.quantity.Quantities;
+import tec.uom.se.spi.NumberComparator;
 
 /**
  * <p>
@@ -226,12 +227,12 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
 
   @Override
   public boolean isEquivalentOf(Quantity<Q> that) {
-	  return isEquivalentTo(that);
+    return isEquivalentTo(that);
   }
 
   @Override
   public boolean isEquivalentTo(Quantity<Q> that) {
-	return this.compareTo(that) == 0;    
+    return this.compareTo(that) == 0;
   }
 
   /**
@@ -244,13 +245,14 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
    */
   @Override
   public int compareTo(Quantity<Q> that) {
-    boolean uCom = ((ComparableUnit)this.getUnit()).isEquivalentTo(that.getUnit());
-	  if (getUnit().getConverterTo(getUnit().getSystemUnit()).equals(
-    		that.getUnit().getConverterTo(that.getUnit().getSystemUnit()))) {
-    	return 0;
+    final boolean uCom = ((ComparableUnit) this.getUnit()).isEquivalentTo(that.getUnit());
+    if (uCom) // .equals(
+    // that.getUnit().getConverterTo(that.getUnit().getSystemUnit())))
+    {
+      return NumberComparator.getInstance().compare(getValue(), that.getValue());
     } else {
-	  final Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
-	  return comparator.compare(this, that);
+      final Comparator<Quantity<Q>> comparator = new NaturalOrder<>();
+      return comparator.compare(this, that);
     }
   }
 

@@ -29,7 +29,6 @@
  */
 package tec.uom.se.function;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
@@ -46,7 +45,7 @@ import tec.uom.se.AbstractConverter;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author Werner Keil
- * @version 1.0, Oct 10, 2016
+ * @version 1.1, Oct 7, 2020
  */
 public final class AddConverter extends AbstractConverter implements ValueSupplier<Double> {
 
@@ -135,6 +134,11 @@ public final class AddConverter extends AbstractConverter implements ValueSuppli
 
   public Double getValue() {
     return offset;
+  }
+
+  @Override
+  public boolean isIdentity() {
+    return offset == 0;
   }
 
 }

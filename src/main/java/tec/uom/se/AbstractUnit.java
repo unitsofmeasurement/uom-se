@@ -46,6 +46,7 @@ import javax.measure.quantity.Dimensionless;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.DoubleSupplier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -235,13 +236,23 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
   public boolean isEquivalentTo(Unit<Q> that) {
     if (this.compareTo(that) == 0)
       return true;
-    if (this.getConverterTo(that).equals(that.getConverterTo(this))) 
-    	return true;    
+    if (this.getConverterTo(that).equals(that.getConverterTo(this)))
+      return true;
     final UnitConverter sCon1 = this.getSystemConverter();
     @SuppressWarnings("rawtypes")
-	final UnitConverter sCon2 = ((AbstractUnit)that).getSystemConverter();
+    final UnitConverter sCon2 = ((AbstractUnit) that).getSystemConverter();
     if (sCon1.equals(sCon2))
-    	return true;
+      return true;
+    if (sCon1 instanceof DoubleSupplier && sCon2 instanceof DoubleSupplier) {
+      final double dfact1 = ((DoubleSupplier) sCon1).getAsDouble();
+      final double dfact2 = ((DoubleSupplier) sCon2).getAsDouble();
+      final double THRESHOLD = .0001;
+
+      if (Math.abs(dfact1 - dfact2) < THRESHOLD)
+        return true;
+      else
+        return false;
+    }
     return false;
   }
 

@@ -42,10 +42,10 @@ import tec.uom.se.unit.Units;
 public class CompQuantityTest {
 
   @Test
-  @Ignore("see https://github.com/unitsofmeasurement/uom-se/issues/212")
+  // @Ignore("see https://github.com/unitsofmeasurement/uom-se/issues/212")
   public void testIsEquivalent() {
-      ComparableQuantity quantity = Quantities.getQuantity("100 km/h");
-      Quantity speedFromInt = Quantities.getQuantity(100, Units.KILOMETRE_PER_HOUR);
-      assertTrue(quantity.isEquivalentTo(speedFromInt));
+    ComparableQuantity quantity = Quantities.getQuantity("100 km/h");
+    Quantity speedFromInt = Quantities.getQuantity(100, Units.KILOMETRE_PER_HOUR);
+    assertTrue(quantity.isEquivalentTo(speedFromInt));
   }
 }

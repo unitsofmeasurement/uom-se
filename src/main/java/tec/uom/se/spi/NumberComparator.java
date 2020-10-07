@@ -35,7 +35,7 @@ import static java.lang.Character.isSpaceChar;
 import java.util.Comparator;
 
 // TODO move this to uom-lib-common
-class NumberComparator implements Comparator<Object> {
+public class NumberComparator implements Comparator<Object> {
 
   private NumberComparator() {
     // Singleton
