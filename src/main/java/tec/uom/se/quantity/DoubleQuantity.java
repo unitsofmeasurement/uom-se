@@ -81,10 +81,7 @@ final class DoubleQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> im
 
   @Override
   public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) throws ArithmeticException {
-    BigDecimal decimal = BigDecimal.valueOf(value); // TODO check value if
-    // it is a BD, otherwise
-    // use different
-    // converter
+    BigDecimal decimal = BigDecimal.valueOf(value);
     return (super.getUnit().equals(unit)) ? decimal : ((AbstractConverter) super.getUnit().getConverterTo(unit)).convert(decimal, ctx);
   }
 
