@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -64,7 +64,7 @@ import java.lang.reflect.Type;
  * @see <a href= "http://en.wikipedia.org/wiki/International_System_of_Units">Wikipedia: International System of Units</a>
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0.10, March 4, 2018
+ * @version 2.0, October 9, 2020
  * @since 1.0
  */
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableUnit<Q> {
@@ -254,10 +254,6 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements ComparableU
         return false;
     }
     return false;
-  }
-
-  public boolean isEquivalentOf(Unit<Q> that) {
-    return isEquivalentTo(that);
   }
 
   /**

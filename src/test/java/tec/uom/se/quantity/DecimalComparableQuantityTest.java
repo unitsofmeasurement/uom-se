@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -238,7 +238,7 @@ public class DecimalComparableQuantityTest {
   }
 
   @Test
-  public void isEquivalentOfTest() {
+  public void isEquivalentToTest() {
 
     ComparableQuantity<Time> day = Quantities.getQuantity(BigDecimal.ONE, Units.DAY);
     ComparableQuantity<Time> hours = Quantities.getQuantity(BigDecimal.valueOf(12), Units.HOUR);
@@ -246,8 +246,8 @@ public class DecimalComparableQuantityTest {
     ComparableQuantity<Time> daysInHour = Quantities.getQuantity(BigDecimal.valueOf(48), Units.HOUR);
 
     Assert.assertTrue(day.isLessThanOrEqualTo(day));
-    Assert.assertFalse(day.isEquivalentOf(hours));
-    Assert.assertTrue(day.isEquivalentOf(dayInHour));
-    Assert.assertFalse(day.isEquivalentOf(daysInHour));
+    Assert.assertFalse(day.isEquivalentTo(hours));
+    Assert.assertTrue(day.isEquivalentTo(dayInHour));
+    Assert.assertFalse(day.isEquivalentTo(daysInHour));
   }
 }

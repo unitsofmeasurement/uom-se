@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -105,7 +105,7 @@ import tec.uom.se.spi.NumberComparator;
  * </p>
  *
  * @author <a href="mailto:werner@uom.technology">Werner Keil</a>
- * @version 1.0.6, August 7, 2017
+ * @version 1.1, October 9, 2020
  * @since 1.0
  */
 @SuppressWarnings("unchecked")
@@ -223,11 +223,6 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Compara
   @Override
   public boolean isLessThanOrEqualTo(Quantity<Q> that) {
     return this.compareTo(that) <= 0;
-  }
-
-  @Override
-  public boolean isEquivalentOf(Quantity<Q> that) {
-    return isEquivalentTo(that);
   }
 
   @Override

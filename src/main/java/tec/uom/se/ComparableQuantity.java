@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -41,6 +41,7 @@ import javax.measure.Unit;
  * @author otaviojava
  * @author werner
  * @param <Q>
+ * @version 1.1
  * @since 1.0
  */
 public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, Comparable<Quantity<Q>>, Serializable {
@@ -143,11 +144,6 @@ public interface ComparableQuantity<Q extends Quantity<Q>> extends Quantity<Q>, 
    *           if the quantity is null
    */
   boolean isLessThanOrEqualTo(Quantity<Q> that);
-
-  /**
-   * @deprecated use #isEquivalentTo
-   */
-  boolean isEquivalentOf(Quantity<Q> that);
 
   /**
    * Compares two instances of {@link Quantity <Q>}, doing the conversion of unit if necessary.

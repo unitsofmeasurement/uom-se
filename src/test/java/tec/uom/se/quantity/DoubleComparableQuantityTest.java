@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -222,15 +222,15 @@ public class DoubleComparableQuantityTest {
   }
 
   @Test
-  public void isEquivalentOfTest() {
+  public void isEquivalentToTest() {
     ComparableQuantity<Time> day = Quantities.getQuantity(1D, Units.DAY);
     ComparableQuantity<Time> hours = Quantities.getQuantity(12D, Units.HOUR);
     ComparableQuantity<Time> dayInHour = Quantities.getQuantity(24D, Units.HOUR);
     ComparableQuantity<Time> daysInHour = Quantities.getQuantity(46D, Units.HOUR);
 
-    Assert.assertTrue(day.isEquivalentOf(day));
-    Assert.assertFalse(day.isEquivalentOf(hours));
-    Assert.assertTrue(day.isEquivalentOf(dayInHour));
-    Assert.assertFalse(day.isEquivalentOf(daysInHour));
+    Assert.assertTrue(day.isEquivalentTo(day));
+    Assert.assertFalse(day.isEquivalentTo(hours));
+    Assert.assertTrue(day.isEquivalentTo(dayInHour));
+    Assert.assertFalse(day.isEquivalentTo(daysInHour));
   }
 }

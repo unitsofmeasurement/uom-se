@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2018, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -40,6 +40,7 @@ import javax.measure.Unit;
  * @see {@link Unit}
  * @author werner
  * @param <Q>
+ * @version 1.1
  * @since 1.0.9
  */
 public interface ComparableUnit<Q extends Quantity<Q>> extends Unit<Q>, Comparable<Unit<Q>>, Serializable {
@@ -54,11 +55,6 @@ public interface ComparableUnit<Q extends Quantity<Q>> extends Unit<Q>, Comparab
    *           if the unit is null
    */
   boolean isEquivalentTo(Unit<Q> that);
-
-  /**
-   * @deprecated use #isEquivalentTo
-   */
-  boolean isEquivalentOf(Unit<Q> that);
 
   /**
    * Indicates if this unit belongs to the set of coherent SI units (unscaled SI units).
