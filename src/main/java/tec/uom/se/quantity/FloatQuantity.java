@@ -36,6 +36,7 @@ import java.util.Objects;
 import javax.measure.Quantity;
 import javax.measure.Unit;
 
+import tec.uom.se.AbstractConverter;
 import tec.uom.se.AbstractQuantity;
 import tec.uom.se.ComparableQuantity;
 
@@ -48,7 +49,7 @@ import tec.uom.se.ComparableQuantity;
  * @author Otavio de Santana
  * @param <Q>
  *          The type of the quantity.
- * @version 0.5, $Date: 2018-06-29 $
+ * @version 1.0, $Date: 2020-10-09 $
  * @since 1.0.7
  */
 final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
@@ -83,18 +84,18 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
     return (long) result;
   }
 
-  public Quantity<Q> add(ComparableQuantity<Q> that) {
+  public ComparableQuantity<Q> add(Quantity<Q> that) {
     final Quantity<Q> converted = that.to(getUnit());
     return NumberQuantity.of(value + converted.getValue().floatValue(), getUnit());
   }
 
-  public ComparableQuantity<Q> subtract(ComparableQuantity<Q> that) {
+  public ComparableQuantity<Q> subtract(Quantity<Q> that) {
     final Quantity<Q> converted = that.to(getUnit());
     return NumberQuantity.of(value - converted.getValue().floatValue(), getUnit());
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public ComparableQuantity<?> multiply(ComparableQuantity<?> that) {
+  public ComparableQuantity<?> multiply(Quantity<?> that) {
     return new FloatQuantity(value * that.getValue().floatValue(), getUnit().multiply(that.getUnit()));
   }
 
@@ -103,7 +104,7 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public ComparableQuantity<?> divide(ComparableQuantity<?> that) {
+  public ComparableQuantity<?> divide(Quantity<?> that) {
     return new FloatQuantity(value / that.getValue().floatValue(), getUnit().divide(that.getUnit()));
   }
 
@@ -135,36 +136,14 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
   }
 
   @Override
-  public ComparableQuantity<Q> add(Quantity<Q> that) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public ComparableQuantity<Q> subtract(Quantity<Q> that) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public ComparableQuantity<?> divide(Quantity<?> that) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public ComparableQuantity<?> multiply(Quantity<?> multiplier) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public boolean isBig() {
     return false;
   }
 
   @Override
   public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) throws ArithmeticException {
-    return BigDecimal.valueOf(value);
+	  final BigDecimal decimal = BigDecimal.valueOf(value);
+	  return (super.getUnit().equals(unit)) ? decimal : 
+		((AbstractConverter) super.getUnit().getConverterTo(unit)).convert(decimal, ctx);
   }
 }
