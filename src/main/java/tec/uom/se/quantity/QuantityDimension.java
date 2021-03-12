@@ -65,14 +65,13 @@ import java.util.logging.Logger;
  *
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
- * @version 1.0, $Date: 2016-10-18 $
+ * @author  Andi Huber
+ * @version 1.1, $Date: 2021-03-12 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
   private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
 
-  /**
-	 * 
-	 */
+  /** */
   private static final long serialVersionUID = 123289037718650030L;
 
   /**
@@ -149,7 +148,8 @@ public final class QuantityDimension implements Dimension, Serializable {
   }
 
   /**
-   * Returns the dimension for the specified quantity type by aggregating the results of {@link DimensionService} or <code>null</code> if the
+   * Returns the dimension for the specified quantity type by aggregating the results from the 
+   * default {@link javax.measure.spi.SystemOfUnits SystemOfUnits} or <code>null</code> if the
    * specified quantity is unknown.
    *
    * @param quantityType
@@ -158,17 +158,9 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @since 1.0.1
    */
   public static <Q extends Quantity<Q>> Dimension of(Class<Q> quantityType) {
-    // TODO: Track services and aggregate results (register custom
-    // types)
     Unit<Q> siUnit = Units.getInstance().getUnit(quantityType);
     if (siUnit == null)
-      logger.log(Level.FINER, "Quantity type: " + quantityType + " unknown"); // we're
-    // logging
-    // but
-    // probably
-    // FINER
-    // is
-    // enough?
+      logger.log(Level.FINER, "Quantity type: " + quantityType + " unknown");
     return (siUnit != null) ? siUnit.getDimension() : null;
   }
 
@@ -215,7 +207,9 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @since 1.0
    */
   public Dimension multiply(Dimension that) {
-    return (that instanceof QuantityDimension) ? this.multiply((QuantityDimension) that) : this.multiply(that);
+    return (that instanceof QuantityDimension) ?
+    		this.multiply((QuantityDimension) that) :
+    		that.multiply(this);
   }
 
   /**
