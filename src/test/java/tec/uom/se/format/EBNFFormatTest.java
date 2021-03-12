@@ -126,7 +126,7 @@ public class EBNFFormatTest {
     Unit<?> parsed = format.parse(unit);
     String formatted = format.format(parsed);
     System.out.println("Formatted version: " + formatted);
-    Unit<?> parsed2 = format.parse(formatted);
+    @SuppressWarnings("unused")
+	Unit<?> parsed2 = format.parse(formatted);
   }
-
 }
