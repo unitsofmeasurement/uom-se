@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2021, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -148,9 +148,8 @@ public final class QuantityDimension implements Dimension, Serializable {
   }
 
   /**
-   * Returns the dimension for the specified quantity type by aggregating the results from the 
-   * default {@link javax.measure.spi.SystemOfUnits SystemOfUnits} or <code>null</code> if the
-   * specified quantity is unknown.
+   * Returns the dimension for the specified quantity type by aggregating the results from the default {@link javax.measure.spi.SystemOfUnits
+   * SystemOfUnits} or <code>null</code> if the specified quantity is unknown.
    *
    * @param quantityType
    *          the quantity type.
@@ -207,9 +206,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @since 1.0
    */
   public Dimension multiply(Dimension that) {
-    return (that instanceof QuantityDimension) ?
-    		this.multiply((QuantityDimension) that) :
-    		that.multiply(this);
+    return (that instanceof QuantityDimension) ? this.multiply((QuantityDimension) that) : that.multiply(this);
   }
 
   /**

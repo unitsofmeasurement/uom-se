@@ -234,7 +234,7 @@
 					<header>src/main/config/header.txt</header>
 					<properties>
 						<owner>Jean-Marie Dautelle, Werner Keil, Otavio Santana</owner>
-						<currentYear>2020</currentYear>
+						<currentYear>2021</currentYear>
 					</properties>
 					<excludes>
 						<exclude>.circleci/**</exclude>

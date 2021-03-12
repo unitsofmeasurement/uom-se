@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2021, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -142,8 +142,7 @@ final class FloatQuantity<Q extends Quantity<Q>> extends AbstractQuantity<Q> {
 
   @Override
   public BigDecimal decimalValue(Unit<Q> unit, MathContext ctx) throws ArithmeticException {
-	  final BigDecimal decimal = BigDecimal.valueOf(value);
-	  return (super.getUnit().equals(unit)) ? decimal : 
-		((AbstractConverter) super.getUnit().getConverterTo(unit)).convert(decimal, ctx);
+    final BigDecimal decimal = BigDecimal.valueOf(value);
+    return (super.getUnit().equals(unit)) ? decimal : ((AbstractConverter) super.getUnit().getConverterTo(unit)).convert(decimal, ctx);
   }
 }

@@ -1,6 +1,6 @@
 /*
  * Units of Measurement Implementation for Java SE
- * Copyright (c) 2005-2020, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
+ * Copyright (c) 2005-2021, Jean-Marie Dautelle, Werner Keil, Otavio Santana.
  *
  * All rights reserved.
  *
@@ -127,6 +127,6 @@ public class EBNFFormatTest {
     String formatted = format.format(parsed);
     System.out.println("Formatted version: " + formatted);
     @SuppressWarnings("unused")
-	Unit<?> parsed2 = format.parse(formatted);
+    Unit<?> parsed2 = format.parse(formatted);
   }
 }
