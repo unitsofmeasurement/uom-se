@@ -66,7 +66,7 @@ import java.util.logging.Logger;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  Andi Huber
- * @version 1.1, $Date: 2021-03-12 $
+ * @version 1.2, $Date: 2021-03-12 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
   private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -132,20 +132,6 @@ public final class QuantityDimension implements Dimension, Serializable {
    * Holds the pseudo unit associated to this dimension.
    */
   private final Unit<?> pseudoUnit;
-
-  /**
-   * Returns the dimension for the specified quantity type by aggregating the results of {@link DimensionService} or <code>null</code> if the
-   * specified quantity is unknown.
-   *
-   * @param quantityType
-   *          the quantity type.
-   * @return the dimension for the quantity type or <code>null</code>.
-   * @since 1.0
-   * @deprecated use of()
-   */
-  public static <Q extends Quantity<Q>> Dimension getInstance(Class<Q> quantityType) {
-    return of(quantityType);
-  }
 
   /**
    * Returns the dimension for the specified quantity type by aggregating the results from the default {@link javax.measure.spi.SystemOfUnits
@@ -217,7 +203,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @return <code>this * that</code>
    * @since 1.0
    */
-  public QuantityDimension multiply(QuantityDimension that) {
+  private QuantityDimension multiply(QuantityDimension that) {
     return new QuantityDimension(this.pseudoUnit.multiply(that.pseudoUnit));
   }
 
@@ -230,7 +216,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @since 1.0
    */
   public Dimension divide(Dimension that) {
-    return this.multiply(that.pow(-1));
+    return (that instanceof QuantityDimension) ? this.divide((QuantityDimension) that) : that.divide(this).pow(-1);
   }
 
   /**
@@ -241,7 +227,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    * @return <code>this.multiply(that.pow(-1))</code>
    * @since 1.0
    */
-  public QuantityDimension divide(QuantityDimension that) {
+  private QuantityDimension divide(QuantityDimension that) {
     return this.multiply(that.pow(-1));
   }
 
