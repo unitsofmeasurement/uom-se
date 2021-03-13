@@ -66,7 +66,7 @@ import java.util.logging.Logger;
  * @author <a href="mailto:jean-marie@dautelle.com">Jean-Marie Dautelle</a>
  * @author <a href="mailto:units@catmedia.us">Werner Keil</a>
  * @author  Andi Huber
- * @version 1.2, $Date: 2021-03-12 $
+ * @version 1.3, $Date: 2021-03-13 $
  */
 public final class QuantityDimension implements Dimension, Serializable {
   private static final Logger logger = Logger.getLogger(QuantityDimension.class.getName());
@@ -212,7 +212,7 @@ public final class QuantityDimension implements Dimension, Serializable {
    *
    * @param that
    *          the dimension divisor.
-   * @return <code>this.multiply(that.pow(-1))</code>
+   * @return <code>this / that</code>
    * @since 1.0
    */
   public Dimension divide(Dimension that) {
